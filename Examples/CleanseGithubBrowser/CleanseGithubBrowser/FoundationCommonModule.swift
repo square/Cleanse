@@ -1,0 +1,18 @@
+//
+//  FoundationCommonModule.swift
+//  CleanseGithubBrowser
+//
+//  Created by Mike Lewis on 6/12/16.
+//  Copyright © 2016 Square, Inc. All rights reserved.
+//
+
+import Foundation
+import Cleanse
+
+/// Module that configures common bindings from the `Foundation` framework
+struct FoundationCommonModule : Module {
+    func configure<B : Binder>(binder binder: B) {
+        // Make NSProcessInfo available.
+        binder.bind().to(factory: NSProcessInfo.processInfo)
+    }
+}

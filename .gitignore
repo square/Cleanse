@@ -1,0 +1,62 @@
+#Ignore the Mac OS X .DS_Store files
+.DS_Store
+.LSOverride
+
+#Ignore user-specific settings
+*.mode1v3
+*.mode2v3
+*.pbxuser
+*.perspectivev3
+xcuserdata
+
+#Ignore textmate build errors
+*.tm_build_errors
+
+#Ignore temp nibs and swap files
+*.swp
+*~.nib
+
+#Ignore the build, since we don't want archived builds
+build
+
+.gitattributes
+
+#Probably don't want to check in xcuserdata
+xcuserdata/
+
+*.orig
+.idea
+
+#Ignore the token from the asset update script
+*.LastAssetUpdate_*
+
+env/
+
+.build_env/
+
+*.pyc
+
+# Instruments' output during UI Automation test
+traces
+instrumentscli*.trace
+
+git-cmp
+
+TestResults/*
+*/TestResults/*
+
+Gemfile.lock
+.*.sw?
+.sw?
+
+DerivedCache_DerivedData/
+DerivedCache/
+.build/
+
+
+# Not sure if we want to commit Jazzy docs yet
+/docs/
+
+Carthage/
+
+*.xcscmblueprint
