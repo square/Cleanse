@@ -5,7 +5,11 @@ xcode_project: Cleanse.xcodeproj
 xcode_scheme: Cleanse
 xcode_sdk: iphonesimulator9.3
 
-before_install: rvm use $RVM_RUBY_VERSION
+before_install:
+  - brew update
+  - brew outdated xctool || brew upgrade xctool
+  - rvm use $RVM_RUBY_VERSION
+
 install: bundle install -j4 --path ../travis_bundle_dir --without documentation test development
 after_success: bundle exec slather
   
