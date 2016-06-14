@@ -3,6 +3,9 @@ Cleanse - Swift Dependency Injection
 
 .. image:: Documentation/cleanse_logo_small.png
   :align: right
+
+.. image:: https://travis-ci.org/square/Cleanse.svg?branch=master
+    :target: https://travis-ci.org/square/Cleanse
   
 Cleanse is a `dependency injection`_ framework for Swift. It is designed from the ground-up with *developer experience*
 in mind. It takes inspiration from both `Dagger`_ and `Guice`_.
