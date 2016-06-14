@@ -1,0 +1,7 @@
+coverage_service: coveralls
+xcodeproj: Cleanse.xcodeproj
+scheme: Cleanse
+ignore:
+  - Cleanse/PropertyInjectionArities.swift
+  - Cleanse/BinderArities.swift
+
