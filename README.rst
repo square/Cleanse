@@ -309,7 +309,7 @@ Say one wanted to indicate a URL type, perhaps the base URL for the API endpoint
         typealias Element = NSURL
     }
 
-Then one may be able to request a ``TaggedProvider`` of the tag type with the following expressipn:
+Then one may be able to request a ``TaggedProvider`` of this special URL by using the type:
 
 .. code-block:: swift
 
