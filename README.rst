@@ -36,7 +36,7 @@ Cleanse should be able to be configured with `Carthage`_. One should be able to 
 
 Using `Swift Package Manager`_
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Cleanse can be used with `Swift Package Manager`_. The following a defition that can be added to the dependencies
+Cleanse can be used with `Swift Package Manager`_. The following a definition that can be added to the dependencies
 of a ``Project`` declaration.
 
 .. code-block:: swift

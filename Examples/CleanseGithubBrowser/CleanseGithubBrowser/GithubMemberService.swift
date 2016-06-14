@@ -39,7 +39,6 @@ struct GithubMembersServiceImpl : GithubMembersService {
                     $0.map(GithubMember.fromJSON)
                 })
         }
-
     }
 }
 
