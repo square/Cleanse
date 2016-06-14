@@ -45,7 +45,6 @@ git-cmp
 TestResults/*
 */TestResults/*
 
-Gemfile.lock
 .*.sw?
 .sw?
 
