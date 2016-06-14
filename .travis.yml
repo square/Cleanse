@@ -6,6 +6,6 @@ xcode_scheme: Cleanse
 xcode_sdk: iphonesimulator9.3
 
 before_install: rvm use $RVM_RUBY_VERSION
-install: bundle install --without=documentation --path ../travis_bundle_dir
+install: bundle install --without=documentation --path ../travis_bundle_dir --without development test
 after_success: slather
   
