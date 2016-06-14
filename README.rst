@@ -8,7 +8,7 @@ Cleanse - Swift Dependency Injection
 .. image:: https://travis-ci.org/square/Cleanse.svg?branch=master
   :target: https://travis-ci.org/square/Cleanse
 
-.. image:: https://coveralls.io/repos/github/square/Cleanse/badge.svg?branch=master
+.. image:: https://coveralls.io/repos/github/square/Cleanse/badge.svg?branch=master&asdf
   :target: https://coveralls.io/github/square/Cleanse?branch=master
 
   
