@@ -636,9 +636,9 @@ This registers a binding of E to the factory function which takes one argument.
       let dependencyProvider1: Provider<P1> =
           binder.getProvider(P1.self, requiredFor: Element.self)
 
-      // Create a Provider of E. This will call the factory
+      // Create a Provider of Element. This will call the factory
       // method with the providers
-      let elementProvider: Provider<E> = Provider {
+      let elementProvider: Provider<Element> = Provider {
           factory(dependencyProvider1.get())
       }
 
