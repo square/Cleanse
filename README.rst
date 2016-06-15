@@ -254,7 +254,7 @@ modules to satisfy them.
 
 As previously mentioned, it may be worth taking a look at our `example app`_ to see a more full-featured example.
 
-.. _example app: https://github.com/square/Cleanse/tree/github-initial-version/Examples/CleanseGithubBrowser
+.. _example app: https://github.com/square/Cleanse/tree/master/Examples/CleanseGithubBrowser
 
 Core Concepts & Data Types
 --------------------------
