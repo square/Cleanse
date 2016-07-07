@@ -21,3 +21,12 @@ public struct _Unscoped : Scope {
 /// This is similar to the javax.inject.Singleton in java
 public struct Singleton : Scope {
 }
+
+
+extension Scope {
+
+    // Returns our metatype if we're not `_Unscoped`
+    static var scopeOrNil: Scope.Type? {
+        return _Unscoped.self == self ? nil : self
+    }
+}

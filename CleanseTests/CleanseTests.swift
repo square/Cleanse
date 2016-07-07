@@ -146,7 +146,7 @@ class CleanseTests: XCTestCase {
     
     func test_SimpleInject() {
         
-        let binder = Graph()
+        let binder = Graph(scope: Singleton.self)
         
         binder.install(module: GrillModule())
         

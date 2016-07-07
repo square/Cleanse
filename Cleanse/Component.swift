@@ -29,7 +29,7 @@ public extension RootComponent {
     /// Builds the component and returns the root object.
     /// - throws: `CleanseError` if the component fails validation.
     public func build() throws -> Root {
-        let graph = Graph()
+        let graph = Graph(scope: Self.Scope.scopeOrNil)
         
         let p = graph.provider(Root.self)
 

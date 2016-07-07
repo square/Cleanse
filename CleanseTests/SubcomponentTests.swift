@@ -29,24 +29,48 @@ class SubcomponentTests: XCTestCase {
     func testSubcomponents() {
         let app = try! AppComponent().build()
 
-        let user1root1 = app.loggedInComponentFactory.make("user-1")
-        let user1root2 = app.loggedInComponentFactory.make("user-1")
-        let user2root1 = app.loggedInComponentFactory.make("user-2")
+        let user1root1 = app.loggedInComponentFactory.build("user-1")
+        let user1root2 = app.loggedInComponentFactory.build("user-1")
+        let user2root1 = app.loggedInComponentFactory.build("user-2")
 
         XCTAssertEqual(user1root1.userProvider.get().name, "User One")
+        XCTAssertEqual(user2root1.userProvider.get().name, "User Two")
+        XCTAssertTrue(user1root1.userProvider.get() === user1root1.userProvider.get(), "The user should be scoped and always return the same value")
+        XCTAssertFalse(user1root1.userProvider.get() === user1root2.userProvider.get(), "Different instances of the same component should return different objects")
     }
+
+    func testSubcomponentsWithMultibindings() {
+        let app = try! AppComponent().build()
+
+        XCTAssertEqual(
+            app.allLoggedOutStrings.get().sorted(),
+            ["A", "B", "C"]
+        )
+
+        XCTAssertEqual(
+            app.loggedInComponentFactory.build("user-1").allLoggedInStrings.get().sorted(),
+            ["A", "B", "C", "D", "E", "F"],
+            "Subcomponents should be additive to collection bindings"
+        )
+    }
+    
 
     class App : Scoped {
         typealias Scope = Singleton
 
         let loggedInComponentFactory: SubcomponentFactory<LoggedInComponent>
 
-        public init(loggedInComponentFactory: SubcomponentFactory<LoggedInComponent>) {
+        let allLoggedOutStrings: Provider<[String]>
+
+        public init(
+            loggedInComponentFactory: SubcomponentFactory<LoggedInComponent>,
+            allLoggedOutStrings: Provider<[String]>) {
             self.loggedInComponentFactory = loggedInComponentFactory
+            self.allLoggedOutStrings = allLoggedOutStrings
         }
 
         func nameOfUser(userID: String) -> String? {
-            return loggedInComponentFactory.make(userID).userProvider.get().name
+            return loggedInComponentFactory.build(userID).userProvider.get().name
         }
     }
 
@@ -61,6 +85,21 @@ class SubcomponentTests: XCTestCase {
             binder.install(module: UserServiceModule())
 
             binder.install(dependency: LoggedInComponent())
+
+            binder
+                .bind(String.self)
+                .intoCollection()
+                .to(value: "A")
+
+            binder
+                .bind(String.self)
+                .intoCollection()
+                .to(value: "B")
+
+            binder
+                .bind(String.self)
+                .intoCollection()
+                .to(value: "C")
         }
     }
 
@@ -69,6 +108,7 @@ class SubcomponentTests: XCTestCase {
 
     struct LoggedInRoot {
         var userProvider: Provider<User>
+        var allLoggedInStrings: Provider<[String]>
     }
 
     struct LoggedInComponent : Subcomponent {
@@ -78,8 +118,22 @@ class SubcomponentTests: XCTestCase {
 
         func configure<B : Binder>(binder binder: B) {
             binder.bind().to(factory: User.init)
-
             binder.bind().to(factory: LoggedInRoot.init)
+
+            binder
+                .bind(String.self)
+                .intoCollection()
+                .to(value: "D")
+
+            binder
+                .bind(String.self)
+                .intoCollection()
+                .to(value: "E")
+
+            binder
+                .bind(String.self)
+                .intoCollection()
+                .to(value: "F")
         }
     }
 
@@ -123,7 +177,7 @@ struct UserServiceImpl : UserService, Scoped {
     func getNameForUser(userID userID: String) -> String? {
         switch userID {
         case "user-1": return "User One"
-        case "user-1": return "User Two"
+        case "user-2": return "User Two"
         default: return nil
         }
     }

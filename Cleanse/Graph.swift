@@ -42,13 +42,13 @@ class Graph : Binder {
     private var finalizables = [Finalizable]()
     
     private var parent: Graph?
+
+    private let scope: Scope.Type?
     
-    init(parent: Graph?=nil) {
+    init(scope: Scope.Type?, parent: Graph?=nil) {
+        self.scope = scope
         self.parent = parent
     }
-    
-    // For validation and debugging
-//    private var providerVariantInfo = Dictionary<RequirementKey, Pro>
     
     var finalized = false
     
@@ -72,9 +72,15 @@ class Graph : Binder {
 
     func _internalBind(binding binding: RawProviderBinding) {
 
-        let scopedProvider = binding.isSingleton
-            ? scopeProvider(provider: binding.provider)
-            : binding.provider
+        let scopedProvider: AnyProvider
+
+        if let scope = binding.scope {
+            // TODO: Improve error handling
+            precondition(scope == self.scope, "Can only bind things with same scope.")
+            scopedProvider = scopeProvider(provider: binding.provider)
+        } else {
+            scopedProvider = binding.provider
+        }
         
         if binding.isCollectionProvider {
             addCollectionProvider(provider: scopedProvider, mergeFunc: binding.collectionMergeFunc!)
@@ -136,7 +142,7 @@ class Graph : Binder {
     
         if collectionProviders[collectionProviderKey] == nil {
             finalizables.append(AnonymousFinalizable {
-                let collectionProviders = self.collectionProviders[collectionProviderKey]!
+                let collectionProviders = self.gatherAllCollectionProviders(key: collectionProviderKey)
                 
                 let aggregatedProvider = provider.dynamicType.makeNew {
                     let values = collectionProviders.map { $0.getAny() }
@@ -151,7 +157,22 @@ class Graph : Binder {
         
         collectionProviders[collectionProviderKey]!.append(provider)
     }
-    
+
+    private func gatherAllCollectionProviders(key key: CollectionProvidersKey) -> [AnyProvider] {
+        var collectionProviders = self.collectionProviders[key]!
+
+        var curGraph: Graph = self
+        while let graph = curGraph.parent {
+
+            if let graphCollectionProviders = graph.collectionProviders[key] {
+                collectionProviders += graphCollectionProviders
+            }
+
+            curGraph = graph
+        }
+
+        return collectionProviders
+    }
     /// Wraps a provider in a scope if necessary
     private func scopeProvider(provider provider: AnyProvider) -> AnyProvider {
             let scopedProviderCls = ScopedProvider(rawProvider: provider)
@@ -268,26 +289,19 @@ class Graph : Binder {
             .to { [weak self] in
                 let `self` = self!
                 return SubcomponentFactory { seed in
-                    let subgraph = Graph(parent: self)
-
-                    // bind the seed element
-//                    subgraph
-//                        .bind(S.Seed.self)
-//                        .to(value: seed)
-//
+                    let subgraph = Graph(scope: S.Scope.scopeOrNil, parent: self)
 
                     // If the seeds a provider we need to bind it differently
                     if let seed = seed as? AnyProvider {
                         subgraph._internalBind(binding: RawProviderBinding(
-                            isSingleton: false,
+                            scope: nil,
                             provider: seed,
                             collectionMergeFunc:  nil,
                             componentOrSubcomponentProvider: nil
                         ))
-
                     } else {
                         subgraph._internalBind(binding: RawProviderBinding(
-                            isSingleton: false,
+                            scope: nil,
                             provider: Provider(value: seed),
                             collectionMergeFunc:  nil,
                             componentOrSubcomponentProvider: nil

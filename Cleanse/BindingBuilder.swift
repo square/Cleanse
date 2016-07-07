@@ -93,7 +93,7 @@ extension BindingBuilder where MaybeScope == _Unscoped {
     }
 
     @warn_unused_result
-    public func inScope<S: Scope>(_ scope: S.Type) -> ScopedBindingDecorator<Self, S> {
+    public func scoped<S: Scope>(`in` scope: S.Type) -> ScopedBindingDecorator<Self, S> {
         return self.with()
     }
 }
@@ -133,9 +133,20 @@ extension BindingBuilder {
         } else {
             componentOrSubcomponentProvider = nil
         }
-        
+
+        let scope: Scope.Type?
+
+        // If we explicitely declared our scope (e.g. `scopedIn(
+        if let declaredScope = MaybeScope.scopeOrNil {
+            scope = declaredScope
+        } else if let scopedElementType = FinalProvider.Element.self as? _AnyScoped.Type {
+            scope = scopedElementType._scopeType
+        } else {
+            scope = nil
+        }
+
         let rpb = RawProviderBinding(
-            isSingleton: MaybeScope.self == Singleton.self,
+            scope: scope,
             provider: mappedProvider as! AnyProvider,
             collectionMergeFunc: anyCollectionMergeFunc,
             componentOrSubcomponentProvider: componentOrSubcomponentProvider

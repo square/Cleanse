@@ -11,7 +11,7 @@ import Foundation
 
 /// Constains information about what needs to be registered
 public struct RawProviderBinding {
-    let isSingleton: Bool
+    let scope: Scope.Type?
     
     /// This is the provider. The key of this is what will be provided.
     let provider: AnyProvider

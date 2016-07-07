@@ -24,7 +24,7 @@ class DebuggingTests: XCTestCase {
     
     func testGraphDebugDescription() {
         // The graph's description should list providers. This may be useful for deubgging. This test is also to exercise code coverage of description methods
-        let g = Graph()
+        let g = Graph(scope: Singleton.self)
         
         // TODO: make it more descriptive
         

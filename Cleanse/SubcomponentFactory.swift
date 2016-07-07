@@ -12,7 +12,7 @@ import Foundation
 public protocol SubcomponentFactoryProtocol {
     associatedtype SubcomponentElement: Cleanse.Subcomponent
 
-    func make(seed: SubcomponentElement.Seed) -> SubcomponentElement.Root
+    func build(seed: SubcomponentElement.Seed) -> SubcomponentElement.Root
 }
 
 /// Instantiates a subcomponent and returns its root object.
@@ -20,7 +20,7 @@ public struct SubcomponentFactory<S: Subcomponent> : SubcomponentFactoryProtocol
     public typealias SubcomponentElement = S
     private let factoryFunction: (seed: SubcomponentElement.Seed) -> S.Root
 
-    public func make(seed: SubcomponentElement.Seed) -> SubcomponentElement.Root {
+    public func build(seed: SubcomponentElement.Seed) -> SubcomponentElement.Root {
         return factoryFunction(seed: seed)
     }
 
@@ -33,8 +33,8 @@ extension SubcomponentFactoryProtocol where SubcomponentElement.Seed: ProviderPr
 
     /// Convenience initializer to construct subcomponents which have seeds of Provider types such as `TaggedProvider`s.
 
-    public func make(seed: SubcomponentElement.Seed.Element) -> SubcomponentElement.Root {
-        return make(SubcomponentElement.Seed.init(value: seed))
+    public func build(seed: SubcomponentElement.Seed.Element) -> SubcomponentElement.Root {
+        return build(SubcomponentElement.Seed.init(value: seed))
     }
 
 }
