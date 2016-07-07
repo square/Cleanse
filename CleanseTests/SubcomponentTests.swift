@@ -32,6 +32,8 @@ class SubcomponentTests: XCTestCase {
         let user1root1 = app.loggedInComponentFactory.make("user-1")
         let user1root2 = app.loggedInComponentFactory.make("user-1")
         let user2root1 = app.loggedInComponentFactory.make("user-2")
+
+        XCTAssertEqual(user1root1.userProvider.get().name, "User One")
     }
 
     class App : Scoped {
