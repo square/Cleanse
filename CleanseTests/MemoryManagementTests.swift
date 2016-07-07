@@ -16,7 +16,7 @@ import XCTest
 class MemoryManagementTests: XCTestCase {
     
     
-    struct Component : Cleanse.Component {
+    struct RootComponent : Cleanse.RootComponent {
         typealias Root = MemoryManagementTests.Root
         
         func configure<B : Binder>(binder binder: B) {
@@ -94,7 +94,7 @@ class MemoryManagementTests: XCTestCase {
         weak var s2: Single2? = nil
         
         autoreleasepool {
-            let root = try! Component().build()
+            let root = try! RootComponent().build()
             s1 = root.single1
             s2 = root.single2
             
@@ -123,7 +123,7 @@ class MemoryManagementTests: XCTestCase {
         weak var s2: Single2? = nil
         
         autoreleasepool {
-            let root = try! Component().build()
+            let root = try! RootComponent().build()
             s1 = root.single1
             s2 = root.single2
             
@@ -152,7 +152,7 @@ class MemoryManagementTests: XCTestCase {
         weak var s3p: SingleCollectionElement? = nil
         
         autoreleasepool {
-            let root = try! Component().build()
+            let root = try! RootComponent().build()
             let c = root.collection.sorted { $0.value < $1.value }
             
             s1 = c[0]

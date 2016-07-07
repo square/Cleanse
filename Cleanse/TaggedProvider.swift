@@ -46,10 +46,3 @@ extension TaggedProvider : ProviderConvertible {
         return Provider(getter: self.getter)
     }
 }
-
-extension TaggedProvider : ProxyFactoryInitializable {
-    static func makeProxyObject<F : ProxyFactory>(proxyFactory proxyFactory: F) -> TaggedProvider<Tag> {
-        return TaggedProvider { proxyFactory.of() }
-    }
-}
-

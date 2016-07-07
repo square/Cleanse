@@ -19,7 +19,7 @@ import Foundation
  */
 public protocol OverrideModule : Module {
     /// This is the component that we override
-    associatedtype Overrides: Component
+    associatedtype Overrides: RootComponent
     
     /// `OverrideModule`s need to be constructed without arguments to make valdiation easy. Since they
     init()

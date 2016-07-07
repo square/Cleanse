@@ -1,5 +1,5 @@
 //
-//  Component.swift
+//  RootComponent.swift
 //  Cleanse
 //
 //  Created by Mike Lewis on 5/2/16.
@@ -10,15 +10,22 @@ import Foundation
 
 /// Used to detect if things being bound are a component.
 /// Un-typed base protocol of component. Probably shouldn't be used directly
-public protocol _AnyComponent : _AnyBaseComponent {
+public protocol _AnyRootComponent : _AnyBaseComponent {
 }
 
-public protocol Component : Module, _BaseComponent, _AnyComponent {
+
+/// RootComponent has been renamed to RootComponent
+@available(*, deprecated, renamed="RootComponent")
+public typealias Component = RootComponent
+
+public protocol RootComponent : Module, _BaseComponent, _AnyRootComponent {
     /// This should be set to the root type of object that is created.
     associatedtype Root
+
+    associatedtype Scope = Singleton
 }
 
-public extension Component {
+public extension RootComponent {
     /// Builds the component and returns the root object.
     /// - throws: `CleanseError` if the component fails validation.
     public func build() throws -> Root {
@@ -34,11 +41,3 @@ public extension Component {
     }
 }
 
-
-
-public extension Component {
-    /// Default implementation. Helps with type-erasure
-    public static var _internalRootType: Any.Type {
-        return Root.self
-    }
-}

@@ -19,7 +19,7 @@ public struct RawProviderBinding {
     /// Input is actually `[Element]` where `Element: Collection`
     let collectionMergeFunc: Optional<[Any] -> Any>
     
-    /// Component being bound
+    /// RootComponent being bound
     let componentOrSubcomponentProvider: AnyProvider?
 }
 

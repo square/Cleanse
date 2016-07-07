@@ -23,7 +23,6 @@
 		F61B15141CD15E6F00A42C01 /* LegacyKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61B15131CD15E6F00A42C01 /* LegacyKey.swift */; };
 		F62C69F51CD8481200137422 /* ComponentVisitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62C69F41CD8481200137422 /* ComponentVisitor.swift */; };
 		F62C69F91CD86B9500137422 /* Provider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62C69F81CD86B9500137422 /* Provider.swift */; };
-		F62C69FB1CD86D7100137422 /* ProxyInitializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62C69FA1CD86D7100137422 /* ProxyInitializable.swift */; };
 		F62C69FD1CD8927400137422 /* CanonicalRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62C69FC1CD8927400137422 /* CanonicalRepresentable.swift */; };
 		F62C69FF1CD897D200137422 /* TaggedProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62C69FE1CD897D200137422 /* TaggedProvider.swift */; };
 		F62C6A061CD919A100137422 /* OverrideModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62C6A051CD919A100137422 /* OverrideModule.swift */; };
@@ -35,6 +34,14 @@
 		F6615D231CD026890079DE8D /* ProviderProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6615D221CD026890079DE8D /* ProviderProvider.swift */; };
 		F662D7F41CCFCB0200A1D022 /* Graph.swift in Sources */ = {isa = PBXBuildFile; fileRef = F662D7F31CCFCB0200A1D022 /* Graph.swift */; };
 		F664505B1CCEBA9800955A9D /* Lock.swift in Sources */ = {isa = PBXBuildFile; fileRef = F664505A1CCEBA9800955A9D /* Lock.swift */; };
+		F6760C551D2DED32009C6F8A /* Subcomponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6760C541D2DED32009C6F8A /* Subcomponent.swift */; };
+		F6760C571D2DEDAA009C6F8A /* SubcomponentFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6760C561D2DEDAA009C6F8A /* SubcomponentFactory.swift */; };
+		F6760C591D2DEFFC009C6F8A /* Configurable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6760C581D2DEFFC009C6F8A /* Configurable.swift */; };
+		F6760C5C1D2DF67F009C6F8A /* Finalizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6760C5B1D2DF67F009C6F8A /* Finalizable.swift */; };
+		F6760C5E1D2DF698009C6F8A /* ScopedProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6760C5D1D2DF698009C6F8A /* ScopedProvider.swift */; };
+		F6760C601D2DF9BA009C6F8A /* Scoped.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6760C5F1D2DF9BA009C6F8A /* Scoped.swift */; };
+		F6760C621D2DFA1E009C6F8A /* ScopedTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6760C611D2DFA1E009C6F8A /* ScopedTests.swift */; };
+		F6760C641D2E0B6A009C6F8A /* ComponentFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6760C631D2E0B6A009C6F8A /* ComponentFactory.swift */; };
 		F69A20621CD1941D00B954F8 /* CombinedHashable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69A205F1CD1941D00B954F8 /* CombinedHashable.swift */; };
 		F69D1A971CDDAFF7009132B4 /* CollectionBindingBuilderDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69D1A961CDDAFF7009132B4 /* CollectionBindingBuilderDecorator.swift */; };
 		F69D1A991CDDB874009132B4 /* ScopedProviderDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69D1A981CDDB874009132B4 /* ScopedProviderDecorator.swift */; };
@@ -57,9 +64,7 @@
 		F6B387901CE18BB2001CBC4F /* BaseBindingBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B3878F1CE18BB2001CBC4F /* BaseBindingBuilder.swift */; };
 		F6B387921CE18CB1001CBC4F /* BindingBuilderDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B387911CE18CB1001CBC4F /* BindingBuilderDecorator.swift */; };
 		F6B387951CE18E53001CBC4F /* SingularCollectionBindingBuilderDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B387941CE18E53001CBC4F /* SingularCollectionBindingBuilderDecorator.swift */; };
-		F6B387991CE19B7B001CBC4F /* ComponentBindingBuilderDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B387981CE19B7B001CBC4F /* ComponentBindingBuilderDecorator.swift */; };
-		F6B3879B1CE1A03C001CBC4F /* ComponentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62C69EE1CD7F42B00137422 /* ComponentTests.swift */; };
-		F6ECA4351CE1A8D3000F0C3F /* OverrideComponentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62C6A071CD91AFC00137422 /* OverrideComponentTests.swift */; };
+		F6B3879B1CE1A03C001CBC4F /* SubcomponentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62C69EE1CD7F42B00137422 /* SubcomponentTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,14 +92,12 @@
 		F611913B1CD34F1E00686C0C /* StressTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StressTests.swift; sourceTree = "<group>"; };
 		F61B15111CD1596400A42C01 /* LegacyObjectGraph.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LegacyObjectGraph.swift; sourceTree = "<group>"; };
 		F61B15131CD15E6F00A42C01 /* LegacyKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LegacyKey.swift; sourceTree = "<group>"; };
-		F62C69EE1CD7F42B00137422 /* ComponentTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComponentTests.swift; sourceTree = "<group>"; };
+		F62C69EE1CD7F42B00137422 /* SubcomponentTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubcomponentTests.swift; sourceTree = "<group>"; };
 		F62C69F41CD8481200137422 /* ComponentVisitor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComponentVisitor.swift; sourceTree = "<group>"; };
 		F62C69F81CD86B9500137422 /* Provider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Provider.swift; sourceTree = "<group>"; };
-		F62C69FA1CD86D7100137422 /* ProxyInitializable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProxyInitializable.swift; sourceTree = "<group>"; };
 		F62C69FC1CD8927400137422 /* CanonicalRepresentable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CanonicalRepresentable.swift; sourceTree = "<group>"; };
 		F62C69FE1CD897D200137422 /* TaggedProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaggedProvider.swift; sourceTree = "<group>"; };
 		F62C6A051CD919A100137422 /* OverrideModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverrideModule.swift; sourceTree = "<group>"; };
-		F62C6A071CD91AFC00137422 /* OverrideComponentTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverrideComponentTests.swift; sourceTree = "<group>"; };
 		F63EF7951CD2F8430016306D /* SourceLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SourceLocation.swift; sourceTree = "<group>"; };
 		F6445E2C1CDB425E00036515 /* BaseComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseComponent.swift; sourceTree = "<group>"; };
 		F65642C91CCEFB6D00C927E6 /* Binder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Binder.swift; sourceTree = "<group>"; };
@@ -104,6 +107,14 @@
 		F6615D2C1CD05D9B0079DE8D /* GeneratePropertyInjectionArities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneratePropertyInjectionArities.swift; sourceTree = "<group>"; };
 		F662D7F31CCFCB0200A1D022 /* Graph.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Graph.swift; sourceTree = "<group>"; };
 		F664505A1CCEBA9800955A9D /* Lock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Lock.swift; sourceTree = "<group>"; };
+		F6760C541D2DED32009C6F8A /* Subcomponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Subcomponent.swift; sourceTree = "<group>"; };
+		F6760C561D2DEDAA009C6F8A /* SubcomponentFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubcomponentFactory.swift; sourceTree = "<group>"; };
+		F6760C581D2DEFFC009C6F8A /* Configurable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Configurable.swift; sourceTree = "<group>"; };
+		F6760C5B1D2DF67F009C6F8A /* Finalizable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Finalizable.swift; sourceTree = "<group>"; };
+		F6760C5D1D2DF698009C6F8A /* ScopedProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScopedProvider.swift; sourceTree = "<group>"; };
+		F6760C5F1D2DF9BA009C6F8A /* Scoped.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Scoped.swift; sourceTree = "<group>"; };
+		F6760C611D2DFA1E009C6F8A /* ScopedTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScopedTests.swift; sourceTree = "<group>"; };
+		F6760C631D2E0B6A009C6F8A /* ComponentFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComponentFactory.swift; sourceTree = "<group>"; };
 		F69A205F1CD1941D00B954F8 /* CombinedHashable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CombinedHashable.swift; sourceTree = "<group>"; };
 		F69D1A961CDDAFF7009132B4 /* CollectionBindingBuilderDecorator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionBindingBuilderDecorator.swift; sourceTree = "<group>"; };
 		F69D1A981CDDB874009132B4 /* ScopedProviderDecorator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScopedProviderDecorator.swift; sourceTree = "<group>"; };
@@ -130,7 +141,6 @@
 		F6B3878F1CE18BB2001CBC4F /* BaseBindingBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseBindingBuilder.swift; sourceTree = "<group>"; };
 		F6B387911CE18CB1001CBC4F /* BindingBuilderDecorator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BindingBuilderDecorator.swift; sourceTree = "<group>"; };
 		F6B387941CE18E53001CBC4F /* SingularCollectionBindingBuilderDecorator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingularCollectionBindingBuilderDecorator.swift; sourceTree = "<group>"; };
-		F6B387981CE19B7B001CBC4F /* ComponentBindingBuilderDecorator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComponentBindingBuilderDecorator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -170,7 +180,11 @@
 				F62C6A001CD90F6B00137422 /* Binder */,
 				F61191371CD329F500686C0C /* Tags.swift */,
 				F61191391CD3331400686C0C /* Module.swift */,
+				F6760C581D2DEFFC009C6F8A /* Configurable.swift */,
+				F6760C651D2E0B6D009C6F8A /* ComponentBase */,
 				F6AB45161CD9E8B40021AF36 /* Components */,
+				F6760C531D2DED20009C6F8A /* Subcomponents */,
+				F6760C5A1D2DF577009C6F8A /* Scopes */,
 				F62C6A011CD9122600137422 /* Providers */,
 				F62C69FC1CD8927400137422 /* CanonicalRepresentable.swift */,
 			);
@@ -209,11 +223,11 @@
 			children = (
 				F69D1A951CDDAFDD009132B4 /* BindingBuilder */,
 				F6B387931CE18E37001CBC4F /* Collection Binding */,
-				F6B387971CE19A64001CBC4F /* Component Binding */,
 				F6615D221CD026890079DE8D /* ProviderProvider.swift */,
 				F61133C61CD7B64C00069972 /* Installer.swift */,
 				F65642C91CCEFB6D00C927E6 /* Binder.swift */,
 				F69D1AA41CDDEF67009132B4 /* RawProviderBinding.swift */,
+				F6760C5B1D2DF67F009C6F8A /* Finalizable.swift */,
 			);
 			name = Binder;
 			sourceTree = "<group>";
@@ -254,6 +268,35 @@
 				F61191331CD3005400686C0C /* Errors.swift */,
 			);
 			name = Debugging;
+			sourceTree = "<group>";
+		};
+		F6760C531D2DED20009C6F8A /* Subcomponents */ = {
+			isa = PBXGroup;
+			children = (
+				F6760C541D2DED32009C6F8A /* Subcomponent.swift */,
+				F6760C561D2DEDAA009C6F8A /* SubcomponentFactory.swift */,
+				F6760C631D2E0B6A009C6F8A /* ComponentFactory.swift */,
+			);
+			name = Subcomponents;
+			sourceTree = "<group>";
+		};
+		F6760C5A1D2DF577009C6F8A /* Scopes */ = {
+			isa = PBXGroup;
+			children = (
+				F6A660F21CCB1B6B004DD6E3 /* Scope.swift */,
+				F6760C5D1D2DF698009C6F8A /* ScopedProvider.swift */,
+				F6760C5F1D2DF9BA009C6F8A /* Scoped.swift */,
+			);
+			name = Scopes;
+			sourceTree = "<group>";
+		};
+		F6760C651D2E0B6D009C6F8A /* ComponentBase */ = {
+			isa = PBXGroup;
+			children = (
+				F6445E2C1CDB425E00036515 /* BaseComponent.swift */,
+				F61133C81CD7C98B00069972 /* ModuleComponent.swift */,
+			);
+			name = ComponentBase;
 			sourceTree = "<group>";
 		};
 		F69D1A951CDDAFDD009132B4 /* BindingBuilder */ = {
@@ -313,12 +356,12 @@
 				F61191351CD30B3300686C0C /* ErrorTest.swift */,
 				F611913B1CD34F1E00686C0C /* StressTests.swift */,
 				F61133C01CD7B36600069972 /* MemoryManagementTests.swift */,
-				F62C69EE1CD7F42B00137422 /* ComponentTests.swift */,
-				F62C6A071CD91AFC00137422 /* OverrideComponentTests.swift */,
+				F62C69EE1CD7F42B00137422 /* SubcomponentTests.swift */,
 				F6AB45141CD9D1F90021AF36 /* NoopVisitor.swift */,
 				F6A82B7C1CE2858B007C3A32 /* LegacyObjectGraphTests.swift */,
 				F6A82B7E1CE2E299007C3A32 /* CanonicalRepresentableTests.swift */,
 				F6A82B801CE2F182007C3A32 /* DebuggingTests.swift */,
+				F6760C611D2DFA1E009C6F8A /* ScopedTests.swift */,
 			);
 			path = CleanseTests;
 			sourceTree = "<group>";
@@ -326,11 +369,8 @@
 		F6AB45161CD9E8B40021AF36 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				F6445E2C1CDB425E00036515 /* BaseComponent.swift */,
-				F61133C81CD7C98B00069972 /* ModuleComponent.swift */,
 				F62C69F41CD8481200137422 /* ComponentVisitor.swift */,
 				F61133C41CD7B5A900069972 /* Component.swift */,
-				F6A660F21CCB1B6B004DD6E3 /* Scope.swift */,
 			);
 			name = Components;
 			sourceTree = "<group>";
@@ -342,15 +382,6 @@
 				F6B387941CE18E53001CBC4F /* SingularCollectionBindingBuilderDecorator.swift */,
 			);
 			name = "Collection Binding";
-			sourceTree = "<group>";
-		};
-		F6B387971CE19A64001CBC4F /* Component Binding */ = {
-			isa = PBXGroup;
-			children = (
-				F62C69FA1CD86D7100137422 /* ProxyInitializable.swift */,
-				F6B387981CE19B7B001CBC4F /* ComponentBindingBuilderDecorator.swift */,
-			);
-			name = "Component Binding";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -468,12 +499,13 @@
 				F61191381CD329F500686C0C /* Tags.swift in Sources */,
 				F62C69FF1CD897D200137422 /* TaggedProvider.swift in Sources */,
 				F611913A1CD3331400686C0C /* Module.swift in Sources */,
+				F6760C5E1D2DF698009C6F8A /* ScopedProvider.swift in Sources */,
 				F61133C71CD7B64C00069972 /* Installer.swift in Sources */,
 				F69D1A971CDDAFF7009132B4 /* CollectionBindingBuilderDecorator.swift in Sources */,
 				F6A4D0DD1CD983130070EBB9 /* ComposedComponentExtension.swift in Sources */,
 				F6445E2D1CDB425E00036515 /* BaseComponent.swift in Sources */,
-				F6B387991CE19B7B001CBC4F /* ComponentBindingBuilderDecorator.swift in Sources */,
 				F69D1A991CDDB874009132B4 /* ScopedProviderDecorator.swift in Sources */,
+				F6760C601D2DF9BA009C6F8A /* Scoped.swift in Sources */,
 				F61133BC1CD41D8A00069972 /* Swift3Compat.swift in Sources */,
 				F69A20621CD1941D00B954F8 /* CombinedHashable.swift in Sources */,
 				F6615D1F1CD025650079DE8D /* PropertyInjection.swift in Sources */,
@@ -482,15 +514,19 @@
 				F61B15141CD15E6F00A42C01 /* LegacyKey.swift in Sources */,
 				F69D1A9D1CDDD5A3009132B4 /* TaggedBindingBuilderDecorator.swift in Sources */,
 				F6B387921CE18CB1001CBC4F /* BindingBuilderDecorator.swift in Sources */,
+				F6760C571D2DEDAA009C6F8A /* SubcomponentFactory.swift in Sources */,
+				F6760C5C1D2DF67F009C6F8A /* Finalizable.swift in Sources */,
 				F65642CA1CCEFB6D00C927E6 /* Binder.swift in Sources */,
 				F62C69F51CD8481200137422 /* ComponentVisitor.swift in Sources */,
+				F6760C591D2DEFFC009C6F8A /* Configurable.swift in Sources */,
 				F69D1AA51CDDEF67009132B4 /* RawProviderBinding.swift in Sources */,
 				F61133C51CD7B5A900069972 /* Component.swift in Sources */,
 				F69D1A9B1CDDBC53009132B4 /* BindingBuilder.swift in Sources */,
+				F6760C551D2DED32009C6F8A /* Subcomponent.swift in Sources */,
 				F6A660ED1CCB0B81004DD6E3 /* DelegatedHashable.swift in Sources */,
 				F6A4D0DB1CD982B10070EBB9 /* OverriddenComponent.swift in Sources */,
 				F69D1AA31CDDE6A5009132B4 /* PropertyInjectionArities.swift in Sources */,
-				F62C69FB1CD86D7100137422 /* ProxyInitializable.swift in Sources */,
+				F6760C641D2E0B6A009C6F8A /* ComponentFactory.swift in Sources */,
 				F61133C91CD7C98B00069972 /* ModuleComponent.swift in Sources */,
 				F62C69F91CD86B9500137422 /* Provider.swift in Sources */,
 				F61191341CD3005400686C0C /* Errors.swift in Sources */,
@@ -512,11 +548,11 @@
 				F6A82B811CE2F182007C3A32 /* DebuggingTests.swift in Sources */,
 				F6A660DA1CCB07C3004DD6E3 /* CleanseTests.swift in Sources */,
 				F6A82B7D1CE2858B007C3A32 /* LegacyObjectGraphTests.swift in Sources */,
+				F6760C621D2DFA1E009C6F8A /* ScopedTests.swift in Sources */,
 				F61191361CD30B3300686C0C /* ErrorTest.swift in Sources */,
 				F6AB45151CD9D1F90021AF36 /* NoopVisitor.swift in Sources */,
 				F611913C1CD34F1E00686C0C /* StressTests.swift in Sources */,
-				F6ECA4351CE1A8D3000F0C3F /* OverrideComponentTests.swift in Sources */,
-				F6B3879B1CE1A03C001CBC4F /* ComponentTests.swift in Sources */,
+				F6B3879B1CE1A03C001CBC4F /* SubcomponentTests.swift in Sources */,
 				F61133C11CD7B36600069972 /* MemoryManagementTests.swift in Sources */,
 				F6A82B7F1CE2E299007C3A32 /* CanonicalRepresentableTests.swift in Sources */,
 			);

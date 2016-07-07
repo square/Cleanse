@@ -30,7 +30,7 @@ class CanonicalRepresentableTests: XCTestCase {
         #endif
     }
         
-    struct TestComponent : Cleanse.Component {
+    struct TestComponent : Cleanse.RootComponent {
         typealias Root = TestRoot
         
         func configure<B : Binder>(binder binder: B) {

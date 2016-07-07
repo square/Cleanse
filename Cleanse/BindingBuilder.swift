@@ -13,7 +13,7 @@ public protocol BindingBuilder {
     
     // NOTE: When adding a new associated type here, you MUST make it cascade to the wrapped in BindingBuilderDecorator.swift
     
-    associatedtype MaybeScope : _Scope = _Unscoped
+    associatedtype MaybeScope : Scope = _Unscoped
     associatedtype _Binder : Binder
     
     // What is returned in the to functions
@@ -91,6 +91,11 @@ extension BindingBuilder where MaybeScope == _Unscoped {
     public func asSingleton() -> ScopedBindingDecorator<Self, Singleton> {
         return self.with()
     }
+
+    @warn_unused_result
+    public func inScope<S: Scope>(_ scope: S.Type) -> ScopedBindingDecorator<Self, S> {
+        return self.with()
+    }
 }
 
 /// Terminating functions
@@ -103,7 +108,10 @@ extension BindingBuilder {
              provider: P) {
         
         let mappedProvider = FinalProvider(other: provider.asProvider().map(transform: Self.mapElement))
-        
+
+        let typeErasedProvider: AnyProvider
+
+
         let isCollectionBinding = CollectionOrUnique.isCollectionBinding
         
         let anyCollectionMergeFunc: Optional<[Any] -> Any>
@@ -134,26 +142,6 @@ extension BindingBuilder {
         )
         
         binder._internalBind(binding: rpb)
-
-        
-        /// If we're a component, we need to create a binding to the component. This is only used for overrides
-        if let component = MaybeComponentOrSubcomponent.self as? _AnyComponent.Type
-                where
-                Input.self == MaybeComponentOrSubcomponent.self
-                && FinalProvider.self == Provider<FinalProvider.Element>.self {
-            /// Used to differentiate components that are bound w/ tags
-            
-            // If the root object is a provider, map it to the provider instead
-            
-            let componentRPB = RawProviderBinding(
-                isSingleton: MaybeScope.self == Singleton.self,
-                provider: componentOrSubcomponentProvider!,
-                collectionMergeFunc: nil,
-                componentOrSubcomponentProvider: nil
-            )
-            
-            binder._internalBind(binding: componentRPB)
-        }
     }
     
     

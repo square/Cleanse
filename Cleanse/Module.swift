@@ -16,7 +16,7 @@ import Foundation
  
  This is the same for modules in Cleanse, if not even moreso since "configure" may be called more than once to validate the object graph.
  */
-public protocol Module {
+public protocol Module : Configurable {
     /// This is where configuring providers occurs.
-    func configure<B: Binder>(binder binder: B)
+    func configure<B: Binder>(binder binder: B) // Re-declared to provide more specific description
 }

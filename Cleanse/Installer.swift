@@ -14,10 +14,12 @@ public protocol Installer : class {
     /**
      Installs a module as a dependnecy of the caller
      
-     - parameter module: Module to install as a dependency of the caller (usually a `Module` or `Component`).
+     - parameter module: Module to install as a dependency of the caller (usually a `Module` or `RootComponent`).
      */
     func install<M: Module>(module module: M)
-    
+
+    func install<S: Subcomponent>(dependency dependency: S)
+
     /// This is used internally to support override modules
     func _internalWithOverrides(@noescape closure closure: () -> ())
 }

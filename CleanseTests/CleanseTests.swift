@@ -76,7 +76,7 @@ struct RootAPI {
     let somethingUsingTheAPI: SomethingThatDoesAnAPICall
 }
 
-struct APIComponent : Component {
+struct APIComponent : RootComponent {
     typealias Root = RootAPI
     
     func configure<B : Binder>(binder binder: B) {
@@ -130,7 +130,7 @@ struct BurgerIndex : Tag {
 
 
 
-struct SimpleModule : Component {
+struct SimpleModule : RootComponent {
     typealias Root = Int
     func configure<B : Binder>(binder binder: B) {
         binder.bind().to(value: 3)

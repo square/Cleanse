@@ -43,7 +43,7 @@ public extension ProviderProtocol {
 }
 
 
-protocol AnyProvider : AnyProxyFactoryInitializable {
+protocol AnyProvider {
     static var providesType: Any.Type { get }
     var instanceProvidesType: Any.Type { get }
     
@@ -151,12 +151,6 @@ extension ProviderProtocol where Self: AnyProvider {
 extension Provider : ProviderConvertible {
     public func asProvider() -> Provider<Element> {
         return self
-    }
-}
-
-extension Provider : ProxyFactoryInitializable {    
-    static func makeProxyObject<F : ProxyFactory>(proxyFactory proxyFactory: F) -> Provider<Element> {
-        return Provider { proxyFactory.of() }
     }
 }
 

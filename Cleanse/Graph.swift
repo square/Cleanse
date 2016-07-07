@@ -41,7 +41,7 @@ class Graph : Binder {
     
     private var finalizables = [Finalizable]()
     
-    private weak var parent: Graph?
+    private var parent: Graph?
     
     init(parent: Graph?=nil) {
         self.parent = parent
@@ -251,19 +251,61 @@ class Graph : Binder {
         for (k,v) in self.futureProviders {
             v.resolve(actualProvider: getRegisteredProvider(key: k)!)
         }
-        
-        /// We need to keep the providers around if we want to support the legacy object graph or support subgraphs
 
-        //        self.providers.removeAll()
-    
         self.futureProviders.removeAll()
         
         finalized = true
     }
-    
+
     func install<M: Module>(module module: M) {
         module.configure(binder:self)
     }
+
+
+    func install<S: Subcomponent>(dependency dependency: S) {
+        // TODO: validate subcomponents
+        bind(SubcomponentFactory<S>.self)
+            .to { [weak self] in
+                let `self` = self!
+                return SubcomponentFactory { seed in
+                    let subgraph = Graph(parent: self)
+
+                    // bind the seed element
+//                    subgraph
+//                        .bind(S.Seed.self)
+//                        .to(value: seed)
+//
+
+                    // If the seeds a provider we need to bind it differently
+                    if let seed = seed as? AnyProvider {
+                        subgraph._internalBind(binding: RawProviderBinding(
+                            isSingleton: false,
+                            provider: seed,
+                            collectionMergeFunc:  nil,
+                            componentOrSubcomponentProvider: nil
+                        ))
+
+                    } else {
+                        subgraph._internalBind(binding: RawProviderBinding(
+                            isSingleton: false,
+                            provider: Provider(value: seed),
+                            collectionMergeFunc:  nil,
+                            componentOrSubcomponentProvider: nil
+                        ))
+                    }
+
+                    let rootProvider = subgraph.provider(S.Root.self)
+
+                    dependency.configure(binder: subgraph)
+
+                    try! subgraph.finalize()
+
+                    return rootProvider.get()
+                }
+            }
+    }
+
+
     
     // For use in finalize. Gets our provider, or recurses up to the parent's
     private func getRegisteredProvider(key key: RequirementKey) -> AnyProvider? {

@@ -9,7 +9,7 @@
 import Foundation
 
 /// Simple component to make testing easy. Probably should not use this in a standard app.
-public struct ModuleComponent<M: Module, RO> : Component {
+public struct ModuleComponent<M: Module, RO> : RootComponent {
     private let module: M
     
     public typealias Root = RO

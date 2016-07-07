@@ -9,10 +9,10 @@
 import Foundation
 
 
-/// Generic component that composes an existing component and an `OverrideModule` to make a new `Component` with the same `Root` as the overridden one 
+/// Generic component that composes an existing component and an `OverrideModule` to make a new `RootComponent` with the same `Root` as the overridden one 
 ///
 /// - Note: `Override` API is subject to change. Probably should not depend on this
-public struct OverriddenComponent<C: Component, Overrides : OverrideModule> : Component, _BaseComponent {
+public struct OverriddenComponent<C: RootComponent, Overrides : OverrideModule> : RootComponent, _BaseComponent {
     public typealias Root = C.Root
     
     let componentProvider: Provider<C>
@@ -32,7 +32,7 @@ public struct OverriddenComponent<C: Component, Overrides : OverrideModule> : Co
     }
 }
 
-extension Component {
+extension RootComponent {
     /**
      This is to be used on the outer-most component when getting the root object
      
@@ -46,18 +46,3 @@ extension Component {
         return { $0.get().withOverrides(overrideModule: overrideModuleType.init()) }
     }
 }
-
-
-extension Binder {
-    /// This is how components should be overridden.
-    public func overrideComponent<M: OverrideModule>(withModule module: M.Type,
-                                  file: StaticString=#file,
-                                  line: Int=#line,
-                                  function: StaticString=#function) {
-        
-        let factory = M.Overrides.withOverrides(overrideModule: module)
-        
-        bindComponent(OverriddenComponent<M.Overrides, M>.self).to(file: file, line: line, function: function, factory: factory)
-    }
-}
-

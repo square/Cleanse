@@ -8,9 +8,9 @@
 
 import Foundation
 
-public protocol _AnyBaseComponent : Module {
-    static var _internalRootType: Any.Type { get }
+public protocol _AnyBaseComponent : Configurable {
 }
+
 
 /// Base protocol for both Components and Subcomponenents
 
@@ -18,4 +18,5 @@ public protocol _BaseComponent : _AnyBaseComponent {
     /// This should be set to the root type of object that is created.
     associatedtype Root
 
+    associatedtype Scope: Cleanse.Scope
 }
