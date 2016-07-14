@@ -15,8 +15,13 @@ public protocol _AnyRootComponent : _AnyBaseComponent {
 
 
 /// RootComponent has been renamed to RootComponent
-@available(*, deprecated, renamed="RootComponent")
-public typealias Component = RootComponent
+#if swift(>=3.0)
+    @available(*, deprecated, renamed:"RootComponent")
+    public typealias Component = RootComponent
+#else
+    @available(*, deprecated, renamed="RootComponent")
+    public typealias Component = RootComponent
+#endif
 
 public protocol RootComponent : Module, _BaseComponent, _AnyRootComponent {
     /// This should be set to the root type of object that is created.
