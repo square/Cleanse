@@ -33,7 +33,7 @@ class CanonicalRepresentableTests: XCTestCase {
     struct TestComponent : Cleanse.RootComponent {
         typealias Root = TestRoot
         
-        func configure<B : Binder>(binder binder: B) {
+        static func configure<B : Binder>(binder binder: B) {
             binder.bind().to(factory: TestRoot.init)
             
             binder.bind(String.self).to(value: "Hey!")
@@ -41,8 +41,8 @@ class CanonicalRepresentableTests: XCTestCase {
     }
     
     func testCanonicalRepresentable() {
-        let root = try! TestComponent().build()
-        
+        let root = try! ComponentFactory.of(TestComponent.self).build()
+
         XCTAssertEqual(root.normal, "Hey!")
         XCTAssertEqual(root.implicitelyUnboxedOptional, "Hey!")
         XCTAssertEqual(root.optional, "Hey!")

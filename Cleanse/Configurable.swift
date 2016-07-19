@@ -10,5 +10,5 @@ import Foundation
 
 /// Base protocol for Components and Models. It allows for shared installation, but disambguates function call
 public protocol Configurable {
-    func configure<B: Binder>(binder binder: B)
+    static func configure<B: Binder>(binder binder: B)
 }

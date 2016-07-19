@@ -39,11 +39,12 @@ protocol ComponentVisitor : Binder {
     
     /// Have to implement this to have a return value for a provider. Default implementation explodes
     func resolveProvider<Element>(_ type: Element.Type, requiredBy: Any.Type?) -> Provider<Element>
-    func enterModule<M: Module>(module module: M)
-    func leaveModule<M: Module>(module module: M)
+    
+    func enterModule<M: Module>(module module: M.Type)
+    func leaveModule<M: Module>(module module: M.Type)
 
-    func enterSubcomponent<S: Subcomponent>(dependency dependency: S)
-    func leaveSubcomponent<S: Subcomponent>(dependency dependency: S)
+    func enterComponent<C: Component>(dependency dependency: C.Type)
+    func leaveComponent<C: Component>(dependency dependency: C.Type)
 
     func enterProvider(binding binding: RawProviderBinding)
     func leaveProvider(binding binding: RawProviderBinding)
@@ -52,10 +53,10 @@ protocol ComponentVisitor : Binder {
 }
 
 extension ComponentVisitor {
-    func enterModule<M : Module>(module module: M) {
+    func enterModule<M : Module>(module module: M.Type) {
     }
     
-    func leaveModule<M : Module>(module module: M) {
+    func leaveModule<M : Module>(module module: M.Type) {
     }
     
     func enterProvider(binding binding: RawProviderBinding) {
@@ -64,21 +65,21 @@ extension ComponentVisitor {
     func leaveProvider(binding binding: RawProviderBinding) {
     }
 
-    func enterSubcomponent<S: Subcomponent>(dependency dependency: S) {
+    func enterComponent<C: Component>(dependency dependency: C.Type) {
     }
 
-    func leaveSubcomponent<S: Subcomponent>(dependency dependency: S) {
+    func leaveComponent<C: Component>(dependency dependency: C.Type) {
     }
 
     func visitRequirement(requirement requirement: Any.Type, binding: RawProviderBinding) {
     }
 }
 
-extension Subcomponent {
-    private func doComponentVisit<V: ComponentVisitor>(visitor visitor: V) {
-        visitor.enterSubcomponent(dependency: self)
+extension Component {
+    private static func doComponentVisit<V: ComponentVisitor>(visitor visitor: V) {
+        visitor.enterComponent(dependency: self)
         configure(binder: visitor)
-        visitor.leaveSubcomponent(dependency: self)
+        visitor.leaveComponent(dependency: self)
     }
 }
 
@@ -97,16 +98,16 @@ extension ComponentVisitor {
     }
 
     
-    func install<M : Module>(module module: M) {
+    func install<M : Module>(module module: M.Type) {
         enterModule(module: module)
         module.configure(binder: self)
         leaveModule(module: module)
     }
 
-    func install<S : Subcomponent>(dependency dependency: S) {
-        enterSubcomponent(dependency: dependency)
+    func install<C : Cleanse.Component>(dependency dependency: C.Type) {
+        enterComponent(dependency: dependency)
         dependency.configure(binder: self)
-        leaveSubcomponent(dependency: dependency)
+        leaveComponent(dependency: dependency)
     }
 
     func _internalProvider<Element>(_ type: Element.Type, debugInfo: ProviderRequestDebugInfo?) -> Provider<Element> {

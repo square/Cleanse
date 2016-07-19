@@ -16,7 +16,14 @@ import XCTest
 
 
 class ErrorTests: XCTestCase {
-    
+
+    struct PropertyInjectionWithMissingDependenciesComponent : RootComponent {
+        typealias Root = PropertyInjector<ErrorTests>
+
+        static func configure<B : Binder>(binder binder: B) {
+            binder.install(module: ModuleWithMissingDependencies.self)
+        }
+    }
     
     var structWithDeps: StructWithDependencies!
     
@@ -36,7 +43,7 @@ Missing provider of type TaggedProvider<GTag>
          
 */
         do {
-            try ModuleWithMissingDependencies().buildAsComponentAndInjectPropertiesInto(targetInstance: self)
+            try ComponentFactory.of(PropertyInjectionWithMissingDependenciesComponent)
             
             XCTFail("Should not succeed")
         } catch let e as MultiError {
@@ -85,7 +92,7 @@ Missing provider of type TaggedProvider<GTag>
     }
     
     struct ModuleWithMissingDependencies : Module {
-        func configure<B : Binder>(binder binder: B) {
+        static func configure<B : Binder>(binder binder: B) {
             binder.bind().to(factory: StructWithDependencies.init)
             binder.bind().to(factory: StructWithDependencies2.init)
             

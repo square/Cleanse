@@ -27,7 +27,7 @@ func nextCount() -> Int {
 class SubcomponentTests: XCTestCase {
 
     func testSubcomponents() {
-        let app = try! AppComponent().build()
+        let app = try! ComponentFactory.of(AppComponent.self).build()
 
         let user1root1 = app.loggedInComponentFactory.build("user-1")
         let user1root2 = app.loggedInComponentFactory.build("user-1")
@@ -40,7 +40,7 @@ class SubcomponentTests: XCTestCase {
     }
 
     func testSubcomponentsWithMultibindings() {
-        let app = try! AppComponent().build()
+        let app = try! ComponentFactory.of(AppComponent.self).build()
 
         XCTAssertEqual(
             app.allLoggedOutStrings.get().sorted(),
@@ -58,12 +58,12 @@ class SubcomponentTests: XCTestCase {
     class App : Scoped {
         typealias Scope = Singleton
 
-        let loggedInComponentFactory: SubcomponentFactory<LoggedInComponent>
+        let loggedInComponentFactory: ComponentFactory<LoggedInComponent>
 
         let allLoggedOutStrings: Provider<[String]>
 
         public init(
-            loggedInComponentFactory: SubcomponentFactory<LoggedInComponent>,
+            loggedInComponentFactory: ComponentFactory<LoggedInComponent>,
             allLoggedOutStrings: Provider<[String]>) {
             self.loggedInComponentFactory = loggedInComponentFactory
             self.allLoggedOutStrings = allLoggedOutStrings
@@ -77,14 +77,14 @@ class SubcomponentTests: XCTestCase {
     struct AppComponent : RootComponent {
         public typealias Root = App
 
-        func configure<B : Binder>(binder binder: B) {
+        static func configure<B : Binder>(binder binder: B) {
             binder
                 .bind(App.self)
                 .to(factory: App.init)
 
-            binder.install(module: UserServiceModule())
+            binder.install(module: UserServiceModule.self)
 
-            binder.install(dependency: LoggedInComponent())
+            binder.install(dependency: LoggedInComponent.self)
 
             binder
                 .bind(String.self)
@@ -111,12 +111,12 @@ class SubcomponentTests: XCTestCase {
         var allLoggedInStrings: Provider<[String]>
     }
 
-    struct LoggedInComponent : Subcomponent {
+    struct LoggedInComponent : Component {
         typealias Root = LoggedInRoot
         typealias Seed = TaggedProvider<UserID>  // Our seed is the UserID
         typealias Scope = UserScoped
 
-        func configure<B : Binder>(binder binder: B) {
+        static func configure<B : Binder>(binder binder: B) {
             binder.bind().to(factory: User.init)
             binder.bind().to(factory: LoggedInRoot.init)
 
@@ -160,7 +160,7 @@ class SubcomponentTests: XCTestCase {
     }
 
     struct UserServiceModule : Module {
-        func configure<B : Binder>(binder binder: B) {
+        static func configure<B : Binder>(binder binder: B) {
             binder
                 .bind(UserService.self)
                 .to(factory: UserServiceImpl.init)

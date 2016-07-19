@@ -1,5 +1,5 @@
 //
-//  SubcomponentFactory.swift
+//  ComponentFactory.swift
 //  Cleanse
 //
 //  Created by Mike Lewis on 7/6/16.
@@ -8,33 +8,33 @@
 
 import Foundation
 
-/// Useful for extensions on `SubcomponentFactory` that also require
-public protocol SubcomponentFactoryProtocol {
-    associatedtype SubcomponentElement: Cleanse.Subcomponent
+/// Useful for extensions on `ComponentFactory` that also require
+public protocol ComponentFactoryProtocol {
+    associatedtype ComponentElement: Cleanse.Component
 
-    func build(seed: SubcomponentElement.Seed) -> SubcomponentElement.Root
+    func build(seed: ComponentElement.Seed) -> ComponentElement.Root
 }
 
 /// Instantiates a subcomponent and returns its root object.
-public struct SubcomponentFactory<S: Subcomponent> : SubcomponentFactoryProtocol {
-    public typealias SubcomponentElement = S
-    private let factoryFunction: (seed: SubcomponentElement.Seed) -> S.Root
+public struct ComponentFactory<C: Component> : ComponentFactoryProtocol {
+    public typealias ComponentElement = C
+    private let factoryFunction: (seed: ComponentElement.Seed) -> C.Root
 
-    public func build(seed: SubcomponentElement.Seed) -> SubcomponentElement.Root {
+    public func build(seed: ComponentElement.Seed) -> ComponentElement.Root {
         return factoryFunction(seed: seed)
     }
 
-    init(factoryFunction: (seed: SubcomponentElement.Seed) -> S.Root) {
+    init(factoryFunction: (seed: ComponentElement.Seed) -> C.Root) {
         self.factoryFunction = factoryFunction
     }
 }
 
-extension SubcomponentFactoryProtocol where SubcomponentElement.Seed: ProviderProtocol {
+extension ComponentFactoryProtocol where ComponentElement.Seed: ProviderProtocol {
 
     /// Convenience initializer to construct subcomponents which have seeds of Provider types such as `TaggedProvider`s.
 
-    public func build(seed: SubcomponentElement.Seed.Element) -> SubcomponentElement.Root {
-        return build(SubcomponentElement.Seed.init(value: seed))
+    public func build(seed: ComponentElement.Seed.Element) -> ComponentElement.Root {
+        return build(ComponentElement.Seed.init(value: seed))
     }
 
 }

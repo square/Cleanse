@@ -19,11 +19,11 @@ class MemoryManagementTests: XCTestCase {
     struct RootComponent : Cleanse.RootComponent {
         typealias Root = MemoryManagementTests.Root
         
-        func configure<B : Binder>(binder binder: B) {
+        static func configure<B : Binder>(binder binder: B) {
             
             binder.bind().to(factory: Root.init)
             
-            binder.install(module: Module())
+            binder.install(module: Module.self)
         }
     }
     
@@ -78,7 +78,7 @@ class MemoryManagementTests: XCTestCase {
     }
 
     struct Module : Cleanse.Module {
-        func configure<B : Binder>(binder binder: B) {
+        static func configure<B : Binder>(binder binder: B) {
             binder.bind().asSingleton().to(factory: Single1.init)
             binder.bind().asSingleton().to(factory: Single2.init)
             binder.bind().asSingleton().to(factory: SingleStruct1.init)
@@ -94,7 +94,7 @@ class MemoryManagementTests: XCTestCase {
         weak var s2: Single2? = nil
         
         autoreleasepool {
-            let root = try! RootComponent().build()
+            let root = try! ComponentFactory.of(RootComponent.self).build()
             s1 = root.single1
             s2 = root.single2
             
@@ -123,7 +123,7 @@ class MemoryManagementTests: XCTestCase {
         weak var s2: Single2? = nil
         
         autoreleasepool {
-            let root = try! RootComponent().build()
+            let root = try! ComponentFactory.of(RootComponent.self).build()
             s1 = root.single1
             s2 = root.single2
             
@@ -152,7 +152,8 @@ class MemoryManagementTests: XCTestCase {
         weak var s3p: SingleCollectionElement? = nil
         
         autoreleasepool {
-            let root = try! RootComponent().build()
+            let root = try! ComponentFactory.of(RootComponent.self).build()
+
             let c = root.collection.sorted { $0.value < $1.value }
             
             s1 = c[0]

@@ -14,30 +14,20 @@ public protocol _AnyRootComponent : _AnyBaseComponent {
 }
 
 
-/// RootComponent has been renamed to RootComponent
-@available(*, deprecated, renamed="RootComponent")
-public typealias Component = RootComponent
-
-public protocol RootComponent : Module, _BaseComponent, _AnyRootComponent {
-    /// This should be set to the root type of object that is created.
-    associatedtype Root
-
+public protocol RootComponent : Component, _AnyRootComponent {
     associatedtype Scope = Singleton
 }
 
-public extension RootComponent {
-    /// Builds the component and returns the root object.
-    /// - throws: `CleanseError` if the component fails validation.
-    public func build() throws -> Root {
-        let graph = Graph(scope: Self.Scope.scopeOrNil)
+public extension ComponentFactoryProtocol {
+    public static func of(_ componentType: ComponentElement.Type) throws -> ComponentFactory<ComponentElement>  {
+        let graph = Graph(scope: nil)
+
+        let p = graph.provider(ComponentFactory<ComponentElement>.self)
+
+        graph.install(dependency: ComponentElement.self)
         
-        let p = graph.provider(Root.self)
-
-        graph.install(module: self)
-
         try graph.finalize()
-        
+
         return p.get()
     }
 }
-

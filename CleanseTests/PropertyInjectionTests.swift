@@ -47,7 +47,7 @@ class PropertyInjectionTests: XCTestCase {
     
     
     struct PropertyInjectionModule : Module {
-        func configure<B : Binder>(binder binder: B) {
+        static func configure<B : Binder>(binder binder: B) {
             binder
                 .bind()
                 .tagged(with:  BTag.self)
@@ -92,7 +92,7 @@ class PropertyInjectionTests: XCTestCase {
                 .to(injector: PropertyInjectionTests.injectProperties)
         }
         
-        func injectPropertiesIntoC(target target: CClass, superInjector: PropertyInjector<BClass>, cString: TaggedProvider<CTag>) {
+        static func injectPropertiesIntoC(target target: CClass, superInjector: PropertyInjector<BClass>, cString: TaggedProvider<CTag>) {
             superInjector.injectProperties(into: target)
             target.a = "I overrode you"
             target.c = cString
@@ -112,10 +112,17 @@ class PropertyInjectionTests: XCTestCase {
     var propAInjector: PropertyInjector<AClass>!
     var propBInjector: PropertyInjector<BClass>!
     var propCInjector: PropertyInjector<CClass>!
-    
+
+    struct PropertyInjectionComponent : RootComponent {
+        typealias Root = PropertyInjector<PropertyInjectionTests>
+
+        static func configure<B : Binder>(binder binder: B) {
+            binder.install(module: PropertyInjectionModule.self)
+        }
+    }
+
     func testPropertyInject() {
-        try! PropertyInjectionModule()
-            .asComponent(rootObjectType: PropertyInjector<PropertyInjectionTests>.self)
+        try! ComponentFactory.of(PropertyInjectionComponent.self)
             .build()
             .injectProperties(into: self)
         

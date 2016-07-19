@@ -126,14 +126,6 @@ extension BindingBuilder {
             anyCollectionMergeFunc = nil
         }
         
-        let componentOrSubcomponentProvider: AnyProvider?
-        
-        if MaybeComponentOrSubcomponent.self is _AnyBaseComponent.Type && Input.self == MaybeComponentOrSubcomponent.self {
-            componentOrSubcomponentProvider = provider.asProvider()
-        } else {
-            componentOrSubcomponentProvider = nil
-        }
-
         let scope: Scope.Type?
 
         // If we explicitely declared our scope (e.g. `scopedIn(
@@ -148,8 +140,7 @@ extension BindingBuilder {
         let rpb = RawProviderBinding(
             scope: scope,
             provider: mappedProvider as! AnyProvider,
-            collectionMergeFunc: anyCollectionMergeFunc,
-            componentOrSubcomponentProvider: componentOrSubcomponentProvider
+            collectionMergeFunc: anyCollectionMergeFunc
         )
         
         binder._internalBind(binding: rpb)

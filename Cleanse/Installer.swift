@@ -16,9 +16,9 @@ public protocol Installer : class {
      
      - parameter module: Module to install as a dependency of the caller (usually a `Module` or `RootComponent`).
      */
-    func install<M: Module>(module module: M)
+    func install<M: Module>(module module: M.Type)
 
-    func install<S: Subcomponent>(dependency dependency: S)
+    func install<C: Component>(dependency dependency: C.Type)
 
     /// This is used internally to support override modules
     func _internalWithOverrides(@noescape closure closure: () -> ())

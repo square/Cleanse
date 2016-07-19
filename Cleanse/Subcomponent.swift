@@ -1,5 +1,5 @@
 //
-//  Subcomponent.swift
+//  Component.swift
 //  Cleanse
 //
 //  Created by Mike Lewis on 7/6/16.
@@ -9,10 +9,13 @@
 import Foundation
 
 
-public protocol Subcomponent : _BaseComponent {
-    /// This is the binding required to construct a new subcomponent
-    associatedtype Seed = Void
-
-    /// Subcomponents can have custom scopes associated with them.
+public protocol Component : _BaseComponent {
+    ///  can have custom scopes associated with them.
     associatedtype Scope = _Unscoped
 }
+
+
+/// Subcomponents have been renamed to Components
+@available(*, deprecated, renamed="Component")
+public typealias Subcomponent = Component
+

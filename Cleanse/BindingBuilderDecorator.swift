@@ -24,8 +24,6 @@ public protocol BindingBuilderDecorator : BindingBuilder {
     
     associatedtype CollectionOrUnique: _CollectionOrUniqueBindingBase = Wrapped.CollectionOrUnique
     
-    associatedtype MaybeComponentOrSubcomponent: Any = Wrapped.MaybeComponentOrSubcomponent
-    
     static var collectionMergeFunc: Optional<[FinalProvider.Element] -> FinalProvider.Element> { get }
 }
 

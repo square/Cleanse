@@ -16,7 +16,7 @@ import XCTest
 class DebuggingTests: XCTestCase {
     
     struct FooModule : Module {
-        func configure<B : Binder>(binder binder: B) {
+        static func configure<B : Binder>(binder binder: B) {
             binder.bind().to(value: 3)
             binder.bind().to(value: "Imma string")
         }
@@ -28,7 +28,7 @@ class DebuggingTests: XCTestCase {
         
         // TODO: make it more descriptive
         
-        g.install(module: FooModule())
+        g.install(module: FooModule.self)
         
         try! g.finalize()
         

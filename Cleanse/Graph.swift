@@ -278,17 +278,17 @@ class Graph : Binder {
         finalized = true
     }
 
-    func install<M: Module>(module module: M) {
-        module.configure(binder:self)
+    func install<M: Module>(module module: M.Type) {
+        module.configure(binder: self)
     }
 
 
-    func install<S: Subcomponent>(dependency dependency: S) {
+    func install<S: Component>(dependency dependency: S.Type) {
         // TODO: validate subcomponents
-        bind(SubcomponentFactory<S>.self)
+        bind(ComponentFactory<S>.self)
             .to { [weak self] in
                 let `self` = self!
-                return SubcomponentFactory { seed in
+                return ComponentFactory { seed in
                     let subgraph = Graph(scope: S.Scope.scopeOrNil, parent: self)
 
                     // If the seeds a provider we need to bind it differently
@@ -296,15 +296,13 @@ class Graph : Binder {
                         subgraph._internalBind(binding: RawProviderBinding(
                             scope: nil,
                             provider: seed,
-                            collectionMergeFunc:  nil,
-                            componentOrSubcomponentProvider: nil
+                            collectionMergeFunc:  nil
                         ))
                     } else {
                         subgraph._internalBind(binding: RawProviderBinding(
                             scope: nil,
                             provider: Provider(value: seed),
-                            collectionMergeFunc:  nil,
-                            componentOrSubcomponentProvider: nil
+                            collectionMergeFunc:  nil
                         ))
                     }
 

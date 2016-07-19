@@ -70,7 +70,7 @@ class LegacyObjectGraphTests: XCTestCase {
     }
     
     struct SimpleLegacyModule : Module {
-        func configure<B : Binder>(binder binder: B) {
+        static func configure<B : Binder>(binder binder: B) {
             binder
                 .bind()
                 .tagged(with: String1.self)
@@ -86,8 +86,8 @@ class LegacyObjectGraphTests: XCTestCase {
     }
 
     struct PropertyInjectionLegacyModuleBase : Module {
-        func configure<B : Binder>(binder binder: B) {
-            binder.install(module: SimpleLegacyModule())
+        static func configure<B : Binder>(binder binder: B) {
+            binder.install(module: SimpleLegacyModule.self)
             
             binder
                 .bind()
@@ -122,8 +122,8 @@ class LegacyObjectGraphTests: XCTestCase {
     
     
     struct PropertyInjectionLegacyModule : Module {
-        func configure<B : Binder>(binder binder: B) {
-            binder.install(module: PropertyInjectionLegacyModuleBase())
+        static func configure<B : Binder>(binder binder: B) {
+            binder.install(module: PropertyInjectionLegacyModuleBase.self)
             
             binder
                 .bindPropertyInjectionOf(MoreFreeBeer.self)
@@ -132,29 +132,29 @@ class LegacyObjectGraphTests: XCTestCase {
     }
     
     struct PropertyInjectionLegacyModuleOverridingString2 : Module {
-        func configure<B : Binder>(binder binder: B) {
-            binder.install(module: PropertyInjectionLegacyModuleBase())
+        static func configure<B : Binder>(binder binder: B) {
+            binder.install(module: PropertyInjectionLegacyModuleBase.self)
                         
             binder
                 .bindPropertyInjectionOf(MoreFreeBeer.self)
                 .to(injector: MoreFreeBeer.injectPropertiesWithSuper_OverridingString2WithString3)
         }
     }
-    
+
     func testLegacyObjectGraph() {
-        let objectGraph = try! SimpleLegacyModule().asComponent(rootObjectType: LegacyObjectGraph.self).build()
+        let objectGraph = try! ComponentFactory.of(ModuleComponent<SimpleLegacyModule, LegacyObjectGraph>.self).build()
         XCTAssertEqual(objectGraph.objectForClass(NSString.self, withName: "String1") as! NSString as String, "String 1")
     }
     
     
     func testLegacyObjectGraph_Provider() {
-        let objectGraph = try! SimpleLegacyModule().asComponent(rootObjectType: LegacyObjectGraph.self).build()
+        let objectGraph = try! ComponentFactory.of(ModuleComponent<SimpleLegacyModule, LegacyObjectGraph>.self).build()
         XCTAssertEqual((objectGraph.providerForClass(Foo.self)() as! Foo).string1, "String 1")
     }
     
     func testLegacyObjectGraph_PropertyInjection() {
-        let objectGraph = try! PropertyInjectionLegacyModule().asComponent(rootObjectType: LegacyObjectGraph.self).build()
-        
+        let objectGraph = try! ComponentFactory.of(ModuleComponent<PropertyInjectionLegacyModule, LegacyObjectGraph>.self).build()
+
         let moreFreeBeer = MoreFreeBeer()
         objectGraph.injectPropertiesIntoObject(moreFreeBeer)
         
@@ -165,8 +165,8 @@ class LegacyObjectGraphTests: XCTestCase {
     }
     
     func testLegacyObjectGraph_PropertyInjection_Injected() {
-        let objectGraph = try! PropertyInjectionLegacyModule().asComponent(rootObjectType: LegacyObjectGraph.self).build()
-        
+        let objectGraph = try! ComponentFactory.of(ModuleComponent<PropertyInjectionLegacyModule, LegacyObjectGraph>.self).build()
+
         let moreFreeBeer = objectGraph.objectForClass(MoreFreeBeer.self) as! MoreFreeBeer
         
         XCTAssertEqual(moreFreeBeer.string1, "String 1")
@@ -175,8 +175,8 @@ class LegacyObjectGraphTests: XCTestCase {
     }
     
     func testLegacyObjectGraph_PropertyInjection_OverridingString2() {
-        let objectGraph = try! PropertyInjectionLegacyModuleOverridingString2().asComponent(rootObjectType: LegacyObjectGraph.self).build()
-        
+        let objectGraph = try! ComponentFactory.of(ModuleComponent<PropertyInjectionLegacyModuleOverridingString2, LegacyObjectGraph>.self).build()
+
         let moreFreeBeer = objectGraph.objectForClass(MoreFreeBeer.self) as! MoreFreeBeer
         
         XCTAssertEqual(moreFreeBeer.string1, "String 1")
