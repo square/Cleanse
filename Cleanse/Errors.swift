@@ -49,6 +49,15 @@ public struct MultiError : CleanseError {
     }
 }
 
+
+private func canonicalDisplayType(_ t: Any.Type) -> Any.Type {
+        if let t = t as? _AnyStandardProvider.Type {
+            return t.providesType
+        }
+
+        return t
+}
+
 /// Error used to indicate that a provider requirement is unmet.
 public struct MissingProvider : CleanseError {
     /// The types that depend on the requested type
@@ -66,7 +75,7 @@ public struct MissingProvider : CleanseError {
     }
     
     public var description: String {
-        var message = "*** \(requestedType) *** binding missing"
+        var message = "*** \(canonicalDisplayType(requestedType)) *** binding missing"
         
         for r in requests {
             var didNewLine = false
@@ -82,7 +91,7 @@ public struct MissingProvider : CleanseError {
             
             if let providerRequiredFor = r.providerRequiredFor {
                 maybeDoNewLine()
-                message += " required by \(providerRequiredFor)"
+                message += " required by \(canonicalDisplayType(providerRequiredFor))"
             }
 
             if let sourceLocation = r.sourceLocation {
@@ -92,8 +101,6 @@ public struct MissingProvider : CleanseError {
                 
                 message += " at \(trimmedSourceLocation)"
             }
-            
-
         }
         
 

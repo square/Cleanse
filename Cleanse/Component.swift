@@ -19,7 +19,14 @@ public protocol RootComponent : Component, _AnyRootComponent {
 }
 
 public extension ComponentFactoryProtocol {
-    public static func of(_ componentType: ComponentElement.Type) throws -> ComponentFactory<ComponentElement>  {
+    public static func of(_ componentType: ComponentElement.Type, validate: Bool = true) throws -> ComponentFactory<ComponentElement>  {
+
+        if validate {
+            let validator = SatisfiedDependenciesValidationVisitor()
+            validator.install(dependency: ComponentElement.self)
+            try validator.finalize()
+        }
+        
         let graph = Graph(scope: nil)
 
         let p = graph.provider(ComponentFactory<ComponentElement>.self)
@@ -29,5 +36,14 @@ public extension ComponentFactoryProtocol {
         try graph.finalize()
 
         return p.get()
+    }
+}
+
+
+
+extension Component {
+    // Returns true if we're a RootComponents
+    static var isRootComponent: Bool {
+        return self is _AnyRootComponent.Type
     }
 }

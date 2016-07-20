@@ -9,7 +9,7 @@
 import Foundation
 
 class VisitorState<V: ComponentVisitor> {
-    private var enqueuedRequirementFutures = [Any.Type]()
+    private var enqueuedRequirementFutures = [AnyProvider.Type]()
     /// These are for errors that make it impossible to traverse the module hierarchy
     private var accumulatedErrors  = [CleanseError]()
     
@@ -49,7 +49,7 @@ protocol ComponentVisitor : Binder {
     func enterProvider(binding binding: RawProviderBinding)
     func leaveProvider(binding binding: RawProviderBinding)
     
-    func visitRequirement(requirement requirement: Any.Type, binding: RawProviderBinding)
+    func visitRequirement(requirement requirement: AnyProvider.Type, binding: RawProviderBinding)
 }
 
 extension ComponentVisitor {
@@ -71,15 +71,7 @@ extension ComponentVisitor {
     func leaveComponent<C: Component>(dependency dependency: C.Type) {
     }
 
-    func visitRequirement(requirement requirement: Any.Type, binding: RawProviderBinding) {
-    }
-}
-
-extension Component {
-    private static func doComponentVisit<V: ComponentVisitor>(visitor visitor: V) {
-        visitor.enterComponent(dependency: self)
-        configure(binder: visitor)
-        visitor.leaveComponent(dependency: self)
+    func visitRequirement(requirement requirement: AnyProvider.Type, binding: RawProviderBinding) {
     }
 }
 
@@ -88,7 +80,7 @@ extension ComponentVisitor {
         enterProvider(binding: binding)
         
         let requirements = visitorState.enqueuedRequirementFutures
-        defer { visitorState.enqueuedRequirementFutures.removeAll() }
+        visitorState.enqueuedRequirementFutures.removeAll()
         
         for requirement in requirements {
             visitRequirement(requirement: requirement, binding: binding)
@@ -105,13 +97,42 @@ extension ComponentVisitor {
     }
 
     func install<C : Cleanse.Component>(dependency dependency: C.Type) {
+        bind(ComponentFactory<C>.self).to { () -> ComponentFactory<C> in
+            preconditionFailure("Should not ever evaluate"); _ = Void()
+        }
+
         enterComponent(dependency: dependency)
+
+        // If the seed isn't void
+        if C.Seed.self != Void.self {
+            if let seed = C.Seed.self as? AnyProvider.Type {
+                _internalBind(binding: RawProviderBinding(
+                    scope: nil,
+                    provider: seed.makeNew { preconditionFailure(); _ = Void() },
+                    collectionMergeFunc:  nil,
+                    sourceLocation: nil
+                    ))
+            } else {
+                _internalBind(binding: RawProviderBinding(
+                    scope: nil,
+                    provider: Provider<C.Seed> { preconditionFailure(); _ = Void() },
+                    collectionMergeFunc:  nil,
+                    sourceLocation: nil
+                    ))
+            }
+
+        }
+
         dependency.configure(binder: self)
         leaveComponent(dependency: dependency)
     }
 
     func _internalProvider<Element>(_ type: Element.Type, debugInfo: ProviderRequestDebugInfo?) -> Provider<Element> {
-        visitorState.enqueuedRequirementFutures.append(Element.self)
+        if let type = type as? AnyProvider.Type {
+            visitorState.enqueuedRequirementFutures.append(type)
+        } else {
+            visitorState.enqueuedRequirementFutures.append(Provider<Element>.self)
+        }
         
         return resolveProvider(Element.self, requiredBy: debugInfo?.providerRequiredFor)
     }

@@ -60,9 +60,8 @@ protocol AnyProvider {
     /// If we're Provider<Provider<Element>> flatten to just be Provider<Element>.
     func flatten<Element>(_ type: Element.Type) -> Provider<Element>
     
-    
-//    /// For collection support.
-//    static func mergeAny(providerResults: [AnyProvider]) -> AnyProvider
+
+    static var anyProviderToClosureType: AnyProvider.Type { get }
 }
 
 extension AnyProvider {

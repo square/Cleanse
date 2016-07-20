@@ -234,13 +234,7 @@ class Graph : Binder {
         }
         
         // We may also need to add a provider of ourselves. This is needed for subcomponents.
-        
-        let graphKey = RequirementKey(Provider<Graph>.self)
-        if self.requirements[graphKey] != nil && self.providers[graphKey] == nil {
-            self.providers[graphKey] = Provider<Graph> { [weak self] in self! }
-        }
-        
-        
+
         #if SUPPORT_LEGACY_OBJECT_GRAPH
             let legacyObjectGraphKey = RequirementKey(Provider<LegacyObjectGraph>.self)
                 
@@ -296,13 +290,15 @@ class Graph : Binder {
                         subgraph._internalBind(binding: RawProviderBinding(
                             scope: nil,
                             provider: seed,
-                            collectionMergeFunc:  nil
+                            collectionMergeFunc:  nil,
+                            sourceLocation: nil
                         ))
                     } else {
                         subgraph._internalBind(binding: RawProviderBinding(
                             scope: nil,
                             provider: Provider(value: seed),
-                            collectionMergeFunc:  nil
+                            collectionMergeFunc:  nil,
+                            sourceLocation: nil
                         ))
                     }
 

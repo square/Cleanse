@@ -43,7 +43,7 @@ Missing provider of type TaggedProvider<GTag>
          
 */
         do {
-            try ComponentFactory.of(PropertyInjectionWithMissingDependenciesComponent)
+            _ = try ComponentFactory.of(PropertyInjectionWithMissingDependenciesComponent)
             
             XCTFail("Should not succeed")
         } catch let e as MultiError {
@@ -52,7 +52,7 @@ Missing provider of type TaggedProvider<GTag>
             Assert(message, contains: "*** TaggedProvider<FTag> *** binding missing")
             Assert(message, contains: "*** TaggedProvider<GTag> *** binding missing")
             Assert(message, contains: "*** CheeseBannana *** binding missing")
-            Assert(message, contains: "required by Provider<StructWithDependencies> at ")
+            Assert(message, contains: "required by StructWithDependencies at ")
             Assert(message, contains: "ErrorTest.swift:")
         } catch let e {
             XCTFail("Unexpected Error \(e)")

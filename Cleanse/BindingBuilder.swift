@@ -72,7 +72,10 @@ extension Binder {
 public protocol _StandardProvider : ProviderProtocol {
 }
 
-extension Provider : _StandardProvider {
+protocol _AnyStandardProvider : AnyProvider {
+}
+
+extension Provider : _StandardProvider, _AnyStandardProvider {
 }
 
 /// MARK: Building steps
@@ -140,7 +143,8 @@ extension BindingBuilder {
         let rpb = RawProviderBinding(
             scope: scope,
             provider: mappedProvider as! AnyProvider,
-            collectionMergeFunc: anyCollectionMergeFunc
+            collectionMergeFunc: anyCollectionMergeFunc,
+            sourceLocation: SourceLocation(file: file, line: line, function: function)
         )
         
         binder._internalBind(binding: rpb)
