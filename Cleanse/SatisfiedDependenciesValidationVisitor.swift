@@ -41,7 +41,7 @@ private struct ProviderKey : TypeKeyProtocol {
     }
 
     init(_ type: AnyProvider.Type) {
-        self.ctype = type as! AnyProvider.Type
+        self.ctype = type
     }
 }
 
