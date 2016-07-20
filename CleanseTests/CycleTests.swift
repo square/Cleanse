@@ -66,7 +66,7 @@ class CycleTests: XCTestCase {
             XCTFail("Should not succeed")
         } catch let e as DependencyCycle {
             let message = e.description
-            Assert(message, contains: "*** AA *** Dependency Cycle Detected")
+            Assert(message, contains: "Dependency Cycle Detected")
             Assert(message, contains: "required by AA at CleanseTests/CycleTests.swift")
             Assert(message, contains: "required by BB at CleanseTests/CycleTests.swift")
         } catch let e {
