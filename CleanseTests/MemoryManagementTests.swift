@@ -15,7 +15,6 @@ import XCTest
 
 class MemoryManagementTests: XCTestCase {
     
-    
     struct RootComponent : Cleanse.RootComponent {
         typealias Root = MemoryManagementTests.Root
         
@@ -26,7 +25,6 @@ class MemoryManagementTests: XCTestCase {
             binder.install(module: Module.self)
         }
     }
-    
     
     struct Root {
         let single1: Single1
@@ -40,9 +38,9 @@ class MemoryManagementTests: XCTestCase {
     }
     
     class Single1 {
-        var weakSingle2: Provider<Single2>!
+        var weakSingle2: WeakProvider<Single2>!
         
-        init(weakSingle2: Provider<Single2>) {
+        init(weakSingle2: WeakProvider<Single2>) {
             self.weakSingle2 = weakSingle2
         }
     }
@@ -101,7 +99,7 @@ class MemoryManagementTests: XCTestCase {
             XCTAssertNotNil(s1?.weakSingle2.get())
             XCTAssertNotNil(s2?.single1)
             
-            let weaks2 = s1!.weakSingle2.get()
+            let weaks2 = s1!.weakSingle2.get()!
             XCTAssertNotNil(weaks2)
             
             XCTAssertEqual(root.ssProvider().value, root.ss.value)
@@ -130,7 +128,7 @@ class MemoryManagementTests: XCTestCase {
             XCTAssertNotNil(s1?.weakSingle2.get())
             XCTAssertNotNil(s2?.single1)
             
-            let weaks2 = s1!.weakSingle2.get()
+            let weaks2 = s1!.weakSingle2.get()!
             XCTAssertNotNil(weaks2)
             
             if let s2 = s2 {

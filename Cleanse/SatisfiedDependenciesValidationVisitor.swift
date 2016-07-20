@@ -45,9 +45,21 @@ private struct ProviderKey : TypeKeyProtocol {
     }
 }
 
-private struct ProviderInfo {
+private class ProviderInfo : DelegatedHashable, CustomStringConvertible {
     let rawBinding: RawProviderBinding
     var requirements: Set<ProviderKey> = []
+
+    init(rawBinding: RawProviderBinding) {
+        self.rawBinding = rawBinding
+    }
+
+    var hashable: ObjectIdentifier {
+        return ObjectIdentifier(self)
+    }
+
+    private var description: String {
+        return "ProviderInfo for \(rawBinding.provider.dynamicType)"
+    }
 }
 
 private class ComponentInfo {
@@ -63,6 +75,8 @@ private class ComponentInfo {
 
     var providerAliases = [ProviderKey: ProviderKey]()
 
+    private var cycleCheckedProviders = Set<ProviderInfo>()
+
     init(scope: Scope.Type?, seed: Any.Type, isRootComponent: Bool, parent: ComponentInfo?) {
         self.isRootComponent = isRootComponent
         self.scope = scope
@@ -76,24 +90,98 @@ private class ComponentInfo {
         }
     }
 
-    private func validate(provider provider:  ProviderInfo, inout errors: [CleanseError]) {
-        for r in provider.requirements {
-            validate(requirement: r, provider: provider, errors: &errors)
+    private func validate(provider providerInfo:  ProviderInfo, inout errors: [CleanseError]) {
+        for r in providerInfo.requirements {
+            validate(requirement: r, providerInfo: providerInfo, errors: &errors)
+        }
+
+        do {
+            try validateCycles(providerKey: ProviderKey(providerInfo.rawBinding.provider.dynamicType), providerInfo: providerInfo)
+        } catch let e as CleanseError {
+            errors.append(e)
+        } catch {
+            preconditionFailure("Unexpected Error")
         }
     }
-    
-    private func validate(requirement requirement: ProviderKey, provider:  ProviderInfo, inout errors: [CleanseError]) {
-        if !doesHaveRequirement(requirement) {
+
+    // Once we find one cycle, stop (hence throwing instead of appending to a list of errors)
+    private func validateCycles(providerKey providerKey: ProviderKey, providerInfo:  ProviderInfo) throws {
+
+        var providerStack = [(ProviderKey, ProviderInfo)]()
+        var providersInStack = Set<ProviderInfo>()
+
+        try self.validateCycles(
+            providerKey: providerKey,
+            providerInfo: providerInfo,
+            providerStack: &providerStack,
+            providersInStack: &providersInStack
+        )
+    }
+
+    private func validateCycles(providerKey providerKey: ProviderKey, providerInfo:  ProviderInfo, inout providerStack: [(ProviderKey, ProviderInfo)], inout providersInStack: Set<ProviderInfo>) throws {
+        if cycleCheckedProviders.contains(providerInfo) {
+            return
+        }
+
+        defer {
+            cycleCheckedProviders.insert(providerInfo)
+        }
+
+        guard !providersInStack.contains(providerInfo) else {
+            let providerStack = providerStack.suffixFrom(providerStack.indexOf { $1 == providerInfo }!) + [(providerKey, providerInfo)]
+
+            var debugInfos = [ProviderRequestDebugInfo]()
+
+            var lastRequirement: Any.Type? = nil
+
+            for (key, providerInfo) in providerStack {
+                debugInfos.append(
+                    ProviderRequestDebugInfo(
+                        requestedType: key.ctype,
+                        providerRequiredFor: lastRequirement,
+                        sourceLocation: providerInfo.rawBinding.sourceLocation
+                    )
+                )
+
+                lastRequirement = providerInfo.rawBinding.provider.dynamicType
+            }
+
+            throw DependencyCycle(requirementStack: debugInfos)
+        }
+
+        providerStack.append((providerKey, providerInfo))
+        precondition(!providersInStack.contains(providerInfo))
+        providersInStack.insert(providerInfo)
+
+        defer {
+            providerStack.popLast()
+            providersInStack.remove(providerInfo)
+        }
+
+        for (key, d) in providerInfo.requirements.flatMap({ key in self.getProviderInfo(key).map { (key, $0) } }) {
+            if key.ctype is AnyWeakProvider.Type {
+                continue
+            }
+
+
+            try validateCycles(providerKey: key, providerInfo: d, providerStack: &providerStack, providersInStack: &providersInStack  )
+        }
+    }
+
+    private func validate(requirement requirement: ProviderKey, providerInfo:  ProviderInfo, inout errors: [CleanseError]) {
+        guard doesHaveRequirement(requirement) else {
 
             errors.append(
                 MissingProvider(requests: [
                     ProviderRequestDebugInfo(
                         requestedType: requirement.type,
-                        providerRequiredFor:provider.rawBinding.provider.dynamicType,
-                        sourceLocation: provider.rawBinding.sourceLocation
-                    )
-                    ]
-                ))
+                        providerRequiredFor:providerInfo.rawBinding.provider.dynamicType,
+                        sourceLocation: providerInfo.rawBinding.sourceLocation
+                    )]
+                )
+            )
+
+            return
         }
     }
 
@@ -129,7 +217,6 @@ private class ComponentInfo {
         return !getProviderInfo(key).isEmpty
     }
 
-
     private func maybeResolveCanonical(keyType keyType: Any.Type) -> [ProviderInfo] {
         if let keyType = keyType as? AnyProvider.Type {
             return maybeResolveCanonical(keyType: keyType.providesType)
@@ -138,7 +225,6 @@ private class ComponentInfo {
         guard let keyType = keyType as? AnyCanonicalRepresentable.Type else {
             return []
         }
-
 
         if let canonicalProviders = providers[ProviderKey(keyType.canonicalProviderType)] {
             return canonicalProviders
@@ -182,7 +268,7 @@ final class SatisfiedDependenciesValidationVisitor : ComponentVisitor {
 
     func enterProvider(binding binding: RawProviderBinding) {
         precondition(currentProvider == nil)
-        currentProvider = ProviderInfo(rawBinding: binding, requirements: [])
+        currentProvider = ProviderInfo(rawBinding: binding)
     }
 
     

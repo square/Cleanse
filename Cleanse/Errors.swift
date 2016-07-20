@@ -109,3 +109,50 @@ public struct MissingProvider : CleanseError {
 }
 
 
+
+/// Error used to indicate that there is an unbroken dependency cycle
+public struct DependencyCycle : CleanseError {
+    /// The types that depend on the requested type
+    let requirementStack: [ProviderRequestDebugInfo]
+
+    /// The type that was requested
+    var requestedType: Any.Type {
+        return requirementStack[0].requestedType
+    }
+
+    init(requirementStack: [ProviderRequestDebugInfo]) {
+        precondition(!requirementStack.isEmpty)
+        self.requirementStack = requirementStack
+    }
+
+    public var description: String {
+        var message = "*** \(canonicalDisplayType(requestedType)) *** Dependency Cycle Detected"
+
+        for r in requirementStack {
+            var didNewLine = false
+
+            func maybeDoNewLine() {
+                if didNewLine {
+                    return
+                }
+
+                didNewLine = true
+                message += "\n  ->"
+            }
+            maybeDoNewLine()
+            message += " required by \(canonicalDisplayType(r.requestedType))"
+
+            if let sourceLocation = r.sourceLocation {
+                maybeDoNewLine()
+
+                let trimmedSourceLocation = String(sourceLocation).components(separatedBy: "/").suffix(2).joined(separator: "/")
+
+                message += " at \(trimmedSourceLocation)"
+            }
+        }
+
+
+        return message
+    }
+}
+

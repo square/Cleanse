@@ -94,8 +94,14 @@ class Graph : Binder {
         guard let type = type as? AnyProvider.Type else {
             return findOrCreateFutureProvider(type: Provider<Element>.self, debugInfo: debugInfo).flatten(Element.self)
         }
-        
-        let key: RequirementKey = .init(type)
+
+        let key: RequirementKey
+
+        if let type = type as? AnyWeakProvider.Type {
+            key = .init(type.standardProviderType)
+        } else {
+            key = .init(type)
+        }
         
         let futureProvider: FutureProvider
         
@@ -106,10 +112,16 @@ class Graph : Binder {
             self.futureProviders[key] = futureProvider
         }
 
-        
         requirements[key] = (requirements[key] ?? []) + [debugInfo]
+
+        if type is AnyWeakProvider.Type {
+            return Provider(value: type.makeNew(getter: { [weak futureProvider] in
+                 futureProvider?.getAny()
+            }) as! Element)
+        } else {
+            return Provider(value: type.makeNew(getter: { futureProvider.getAny() }) as! Element)
+        }
         
-        return Provider(value: type.makeNew(getter: { futureProvider.getAny() }) as! Element)
     }
 
     private func addProvider(provider provider: AnyProvider) {
