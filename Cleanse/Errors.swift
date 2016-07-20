@@ -129,28 +129,14 @@ public struct DependencyCycle : CleanseError {
         var message = "*** \(canonicalDisplayType(requestedType)) *** Dependency Cycle Detected"
 
         for r in requirementStack {
-            var didNewLine = false
-
-            func maybeDoNewLine() {
-                if didNewLine {
-                    return
-                }
-
-                didNewLine = true
-                message += "\n  ->"
-            }
-            maybeDoNewLine()
-            message += " required by \(canonicalDisplayType(r.requestedType))"
+            message += "\n  -> required by \(canonicalDisplayType(r.requestedType))"
 
             if let sourceLocation = r.sourceLocation {
-                maybeDoNewLine()
-
                 let trimmedSourceLocation = String(sourceLocation).components(separatedBy: "/").suffix(2).joined(separator: "/")
 
                 message += " at \(trimmedSourceLocation)"
             }
         }
-
 
         return message
     }
