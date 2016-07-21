@@ -55,4 +55,41 @@ class CanonicalRepresentableTests: XCTestCase {
 
         #endif
     }
+
+    // verifies #26
+    func testUnboxProtocol() {
+        let bar = try! BarComponent().build()
+        XCTAssertNotNil(bar.foo)
+    }
+
+
+    struct Foo : FooProto {
+    }
+
+    struct Bar {
+        var foo : FooProto?
+        init(foo: FooProto?) {
+            self.foo = foo
+        }
+    }
+
+    struct BarComponent : Cleanse.Component {
+        typealias Root = Bar
+
+        func configure<B : Binder>(binder binder: B) {
+            binder
+                .bind(Bar.self)
+                .to(factory: Bar.init)
+
+            binder
+                .bind(FooProto.self)
+                .to(factory: Foo.init)
+        }
+    }
+
 }
+
+
+protocol FooProto {
+}
+
