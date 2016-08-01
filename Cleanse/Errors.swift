@@ -20,7 +20,6 @@ public protocol CleanseError : ErrorProtocol, CustomStringConvertible {
 
 
 public struct ProviderRequestDebugInfo {
-    
     /// This is what was passed to the first argument of
     let requestedType: Any.Type
     
@@ -48,7 +47,6 @@ public struct MultiError : CleanseError {
         return result
     }
 }
-
 
 private func canonicalDisplayType(_ t: Any.Type) -> Any.Type {
         if let t = t as? _AnyStandardProvider.Type {
@@ -137,8 +135,41 @@ public struct DependencyCycle : CleanseError {
                 message += " at \(trimmedSourceLocation)"
             }
         }
+        
+        return message
+    }
+}
+
+/// Error used to indicate that a binding was created for the wrong scope
+public struct InvalidBindingScope : CleanseError {
+    /// Where the request was bound
+    let requirement: ProviderRequestDebugInfo
+
+    let attemptedScope: Scope.Type
+    let expectedScope: Scope.Type?
+
+    /// The type that was requested
+    var requestedType: Any.Type {
+        return requirement.requestedType
+    }
+
+    public var description: String {
+        var message = "*** \(canonicalDisplayType(requestedType)) *** Invalid Scope Usage"
 
         return message
+    }
+}
+
+
+/// Error used to indicate that two components contain each other that have the same scope
+public struct InvalidScopeNesting : CleanseError {
+    let scope: Scope.Type
+
+    let innerComponent: Any.Type
+    let outerComponent: Any.Type
+
+    public var description: String {
+        return "Component (\(outerComponent)) contains subcomponent (\(innerComponent)) with same scope (\(scope))"
     }
 }
 

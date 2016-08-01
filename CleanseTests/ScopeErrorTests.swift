@@ -125,7 +125,7 @@ class ScopeErrorTests: XCTestCase {
         typealias Root = String
 
         static func configure<B : Binder>(binder binder: B) {
-            binder.install(dependency: InvalidInnerComponent.self)
+            binder.install(dependency: InvalidInnerComponentWithSameScope.self)
 
             binder.bind().to { ($0 as ComponentFactory<InvalidInnerComponentWithSameScope>).build() }
         }
@@ -148,7 +148,7 @@ class ScopeErrorTests: XCTestCase {
             try ComponentFactory.of(ComponentWithInvalidInnerComponentWithSameScope.self)
             XCTFail("Should not get here")
         } catch let e {
-            Assert((e as! CleanseError).description, contains: "Invalid Scope")
+            Assert((e as! CleanseError).description, contains: "with same scope (Scope1)")
         }
     }
 }

@@ -1,5 +1,5 @@
 //
-//  SatisfiedDependenciesValidationVisitor.swift
+//  ValidationVisitor.swift
 //  Cleanse
 //
 //  Created by Mike Lewis on 7/19/16.
@@ -66,6 +66,7 @@ private class ComponentInfo {
     let scope: Scope.Type?
     let seed: Any.Type
     let isRootComponent: Bool
+    let componentType: Any.Type?
 
     weak var parent: ComponentInfo?
 
@@ -77,20 +78,52 @@ private class ComponentInfo {
 
     private var cycleCheckedProviders = Set<ProviderInfo>()
 
-    init(scope: Scope.Type?, seed: Any.Type, isRootComponent: Bool, parent: ComponentInfo?) {
+    init(scope: Scope.Type?, seed: Any.Type, isRootComponent: Bool, parent: ComponentInfo?, componentType: Any.Type?) {
         self.isRootComponent = isRootComponent
         self.scope = scope
         self.seed = seed
         self.parent = parent
+        self.componentType = componentType
     }
 
     private func validate(inout errors: [CleanseError]) {
+        validateNestedScopes(&errors)
+
         for p in providers.values.flatten() {
             validate(provider: p, errors: &errors)
         }
     }
 
+    private func validateNestedScopes(inout errors: [CleanseError]) {
+        if scope == nil {
+            return
+        }
+
+        for var current = parent; current != nil; current = current?.parent {
+            let current = current!
+            if current.scope == scope {
+                errors.append(InvalidScopeNesting(scope: scope!, innerComponent: self.componentType!, outerComponent: current.componentType!))
+            }
+        }
+    }
+
     private func validate(provider providerInfo:  ProviderInfo, inout errors: [CleanseError]) {
+
+        guard isScopeValid(providerInfo) else {
+            errors.append(
+                InvalidBindingScope(
+                    requirement: ProviderRequestDebugInfo(
+                        requestedType: providerInfo.rawBinding.provider.dynamicType,
+                        providerRequiredFor: providerInfo.rawBinding.provider.dynamicType,
+                        sourceLocation: providerInfo.rawBinding.sourceLocation
+                    ),
+                    attemptedScope: providerInfo.rawBinding.scope!,
+                    expectedScope: self.scope)
+            )
+            return
+        }
+
+
         for r in providerInfo.requirements {
             validate(requirement: r, providerInfo: providerInfo, errors: &errors)
         }
@@ -185,6 +218,15 @@ private class ComponentInfo {
         }
     }
 
+
+    private func isScopeValid(providerInfo:  ProviderInfo) -> Bool {
+        guard let requestedScope = providerInfo.rawBinding.scope else {
+            return true
+        }
+
+        return requestedScope == self.scope
+    }
+
     private func getProviderInfo(key: ProviderKey) -> [ProviderInfo] {
         let key = providerAliases[key] ?? key
 
@@ -238,8 +280,8 @@ private class ComponentInfo {
 
 
 /// Verifies that all our dependencies are satisfied
-final class SatisfiedDependenciesValidationVisitor : ComponentVisitor {
-    var visitorState = VisitorState<SatisfiedDependenciesValidationVisitor>()
+final class ValidationVisitor : ComponentVisitor {
+    var visitorState = VisitorState<ValidationVisitor>()
 
     private var rootComponent: ComponentInfo
     private var currentComponent: ComponentInfo
@@ -249,11 +291,23 @@ final class SatisfiedDependenciesValidationVisitor : ComponentVisitor {
     private var currentProvider: ProviderInfo?
 
     init() {
-        rootComponent = ComponentInfo(scope: nil, seed: Void.self, isRootComponent: true, parent: nil)
+        rootComponent = ComponentInfo(
+            scope: nil,
+            seed: Void.self,
+            isRootComponent: true,
+            parent: nil,
+            componentType: nil
+        )
         currentComponent = rootComponent
     }
     func enterComponent<C : Component>(dependency dependency: C.Type) {
-        let component = ComponentInfo(scope: C.Scope.scopeOrNil, seed: C.Seed.self, isRootComponent: C.isRootComponent, parent: currentComponent)
+        let component = ComponentInfo(
+            scope: C.Scope.scopeOrNil,
+            seed: C.Seed.self,
+            isRootComponent: C.isRootComponent,
+            parent: currentComponent,
+            componentType: dependency
+        )
 
         components.append(component)
 

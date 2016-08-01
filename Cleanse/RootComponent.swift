@@ -22,7 +22,7 @@ public extension ComponentFactoryProtocol {
     public static func of(_ componentType: ComponentElement.Type, validate: Bool = true) throws -> ComponentFactory<ComponentElement>  {
 
         if validate {
-            let validator = SatisfiedDependenciesValidationVisitor()
+            let validator = ValidationVisitor()
             validator.install(dependency: ComponentElement.self)
             try validator.finalize()
         }

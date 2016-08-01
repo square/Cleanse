@@ -65,7 +65,7 @@
 		F6B387921CE18CB1001CBC4F /* BindingBuilderDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B387911CE18CB1001CBC4F /* BindingBuilderDecorator.swift */; };
 		F6B387951CE18E53001CBC4F /* SingularCollectionBindingBuilderDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B387941CE18E53001CBC4F /* SingularCollectionBindingBuilderDecorator.swift */; };
 		F6B3879B1CE1A03C001CBC4F /* ComponentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62C69EE1CD7F42B00137422 /* ComponentTests.swift */; };
-		F6D589EF1D3ED57900B99F7D /* SatisfiedDependenciesValidationVisitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6D589EE1D3ED57900B99F7D /* SatisfiedDependenciesValidationVisitor.swift */; };
+		F6D589EF1D3ED57900B99F7D /* ValidationVisitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6D589EE1D3ED57900B99F7D /* ValidationVisitor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -142,7 +142,7 @@
 		F6B3878F1CE18BB2001CBC4F /* BaseBindingBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseBindingBuilder.swift; sourceTree = "<group>"; };
 		F6B387911CE18CB1001CBC4F /* BindingBuilderDecorator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BindingBuilderDecorator.swift; sourceTree = "<group>"; };
 		F6B387941CE18E53001CBC4F /* SingularCollectionBindingBuilderDecorator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingularCollectionBindingBuilderDecorator.swift; sourceTree = "<group>"; };
-		F6D589EE1D3ED57900B99F7D /* SatisfiedDependenciesValidationVisitor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SatisfiedDependenciesValidationVisitor.swift; sourceTree = "<group>"; };
+		F6D589EE1D3ED57900B99F7D /* ValidationVisitor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidationVisitor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -382,7 +382,7 @@
 		F6D589ED1D3ED55100B99F7D /* Validations */ = {
 			isa = PBXGroup;
 			children = (
-				F6D589EE1D3ED57900B99F7D /* SatisfiedDependenciesValidationVisitor.swift */,
+				F6D589EE1D3ED57900B99F7D /* ValidationVisitor.swift */,
 			);
 			name = Validations;
 			sourceTree = "<group>";
@@ -498,7 +498,7 @@
 				F6615D231CD026890079DE8D /* ProviderProvider.swift in Sources */,
 				F6A660F31CCB1B6B004DD6E3 /* Scope.swift in Sources */,
 				F6B387951CE18E53001CBC4F /* SingularCollectionBindingBuilderDecorator.swift in Sources */,
-				F6D589EF1D3ED57900B99F7D /* SatisfiedDependenciesValidationVisitor.swift in Sources */,
+				F6D589EF1D3ED57900B99F7D /* ValidationVisitor.swift in Sources */,
 				F62C6A061CD919A100137422 /* OverrideModule.swift in Sources */,
 				F61191381CD329F500686C0C /* Tags.swift in Sources */,
 				F62C69FF1CD897D200137422 /* TaggedProvider.swift in Sources */,
