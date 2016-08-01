@@ -27,5 +27,4 @@ public extension Module {
     public static func asPropertyInjectorComponent<Element: AnyObject>(targetClass targetClass: Element.Type) -> ModuleComponent<Self, PropertyInjector<Element>>.Type {
         return ModuleComponent.self
     }
-
 }

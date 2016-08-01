@@ -24,7 +24,7 @@ func nextCount() -> Int {
 
 
 
-class SubcomponentTests: XCTestCase {
+class ComponentTests: XCTestCase {
 
     func testSubcomponents() {
         let app = try! ComponentFactory.of(AppComponent.self).build()
@@ -167,6 +167,7 @@ class SubcomponentTests: XCTestCase {
         }
     }
 }
+
 protocol UserService {
     func getNameForUser(userID userID: String) -> String?
 }
