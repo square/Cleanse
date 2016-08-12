@@ -108,7 +108,6 @@ private class ComponentInfo {
     }
 
     private func validate(provider providerInfo:  ProviderInfo, inout errors: [CleanseError]) {
-
         guard isScopeValid(providerInfo) else {
             errors.append(
                 InvalidBindingScope(
@@ -202,8 +201,13 @@ private class ComponentInfo {
     }
 
     private func validate(requirement requirement: ProviderKey, providerInfo:  ProviderInfo, inout errors: [CleanseError]) {
-        guard doesHaveRequirement(requirement) else {
+        #if SUPPORT_LEGACY_OBJECT_GRAPH
+            if requirement == ProviderKey(Provider<LegacyObjectGraph>.self) {
+                return
+            }
+        #endif
 
+        guard doesHaveRequirement(requirement) else {
             errors.append(
                 MissingProvider(requests: [
                     ProviderRequestDebugInfo(
@@ -344,11 +348,15 @@ final class ValidationVisitor : ComponentVisitor {
         self.currentProvider  = nil
     }
 
-    public func finalize() throws {
+    func finalize() throws {
         var errors = [CleanseError]()
 
         for c in components {
             c.validate(&errors)
+        }
+
+        errors.sortInPlace {
+            return $0.0.description < $0.1.description
         }
 
         switch errors.count {
