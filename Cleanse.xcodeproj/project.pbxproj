@@ -343,17 +343,17 @@
 		F6A660D81CCB07C3004DD6E3 /* CleanseTests */ = {
 			isa = PBXGroup;
 			children = (
-				F6A660D91CCB07C3004DD6E3 /* CleanseTests.swift */,
-				F6A660DB1CCB07C3004DD6E3 /* Info.plist */,
-				F6615D1C1CD00FC10079DE8D /* PropertyInjectionTests.swift */,
-				F61191351CD30B3300686C0C /* ErrorTest.swift */,
-				F61133C01CD7B36600069972 /* MemoryManagementTests.swift */,
-				F62C69EE1CD7F42B00137422 /* ComponentTests.swift */,
-				F6AB45141CD9D1F90021AF36 /* NoopVisitor.swift */,
-				F6A82B7C1CE2858B007C3A32 /* LegacyObjectGraphTests.swift */,
 				F6A82B7E1CE2E299007C3A32 /* CanonicalRepresentableTests.swift */,
-				F6A82B801CE2F182007C3A32 /* DebuggingTests.swift */,
+				F6A660D91CCB07C3004DD6E3 /* CleanseTests.swift */,
+				F62C69EE1CD7F42B00137422 /* ComponentTests.swift */,
 				F624D2951D4023D900C36F98 /* CycleTests.swift */,
+				F6A82B801CE2F182007C3A32 /* DebuggingTests.swift */,
+				F61191351CD30B3300686C0C /* ErrorTest.swift */,
+				F6A660DB1CCB07C3004DD6E3 /* Info.plist */,
+				F6A82B7C1CE2858B007C3A32 /* LegacyObjectGraphTests.swift */,
+				F61133C01CD7B36600069972 /* MemoryManagementTests.swift */,
+				F6AB45141CD9D1F90021AF36 /* NoopVisitor.swift */,
+				F6615D1C1CD00FC10079DE8D /* PropertyInjectionTests.swift */,
 				F64BFCE41D4FCAF000F15E79 /* ScopeErrorTests.swift */,
 			);
 			path = CleanseTests;
