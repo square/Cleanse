@@ -36,15 +36,15 @@ public struct MultiError : CleanseError {
     public let errors: [CleanseError]
     
     public var description: String {
-        var result = "Multiple Errors"
+        var result = "\nMultiple Errors"
         
         let cnt = errors.count
         
         for (i, e) in errors.enumerated() {
             result += "\nerror \(i+1)/\(cnt):\n\(e.description)"
         }
-        
-        return result
+
+        return result + "\n"
     }
 }
 
