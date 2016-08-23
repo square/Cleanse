@@ -127,10 +127,14 @@ class Graph : Binder {
     private func addProvider(provider provider: AnyProvider) {
         /// If Tag is a _VoidTag, then we want to add it as a provider without the tagged type
         let key = RequirementKey(provider.dynamicType)
-        
-        precondition(inOverridesMode || providers[key] == nil)
+
+        if !inOverridesMode {
+            if let existingKey = providers[key] {
+                fatalError("Already bound at \(existingKey.instanceProvidesType)")
+            }
+        }
+
         providers[key] = provider
-        
         
         if let getterProvider = provider.anyGetterProvider {
             providers[RequirementKey(getterProvider.dynamicType)] = getterProvider
