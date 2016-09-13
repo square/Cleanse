@@ -104,11 +104,11 @@ class Graph : Binder {
         }
         
         let futureProvider: FutureProvider
-        
+
         if let existing = self.futureProviders[key] {
             futureProvider = existing
         } else {
-            futureProvider = FutureProvider(providesType: type.providesType)
+            futureProvider = FutureProvider(providesType: ((type as? AnyWeakProvider.Type)?.standardProviderType.providesType ?? type.providesType))
             self.futureProviders[key] = futureProvider
         }
 
