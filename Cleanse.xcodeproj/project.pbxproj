@@ -130,7 +130,7 @@
 		F6A660CD1CCB07C2004DD6E3 /* Cleanse.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Cleanse.h; sourceTree = "<group>"; };
 		F6A660CF1CCB07C2004DD6E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F6A660D41CCB07C3004DD6E3 /* CleanseTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CleanseTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		F6A660D91CCB07C3004DD6E3 /* CleanseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleanseTests.swift; sourceTree = "<group>"; };
+		F6A660D91CCB07C3004DD6E3 /* CleanseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = CleanseTests.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		F6A660DB1CCB07C3004DD6E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F6A660EC1CCB0B81004DD6E3 /* DelegatedHashable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DelegatedHashable.swift; sourceTree = "<group>"; };
 		F6A660F01CCB1B31004DD6E3 /* GenerateBinderArities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenerateBinderArities.swift; sourceTree = "<group>"; };

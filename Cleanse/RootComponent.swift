@@ -18,7 +18,7 @@ public protocol RootComponent : Component, _AnyRootComponent {
     associatedtype Scope = Singleton
 }
 
-public extension ComponentFactoryProtocol {
+public extension ComponentFactoryProtocol where ComponentElement : RootComponent {
     public static func of(_ componentType: ComponentElement.Type, validate: Bool = true) throws -> ComponentFactory<ComponentElement>  {
 
         if validate {

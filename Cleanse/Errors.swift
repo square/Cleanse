@@ -154,7 +154,15 @@ public struct InvalidBindingScope : CleanseError {
     }
 
     public var description: String {
-        var message = "*** \(canonicalDisplayType(requestedType)) *** Invalid Scope Usage"
+        var message = "*** \(canonicalDisplayType(requestedType)) *** Invalid Scope Usage. Expected to be in scope \(expectedScope.debugDescription ?? "????") but was in \(attemptedScope) instead"
+
+        if let sourceLocation = requirement.sourceLocation {
+            let trimmedSourceLocation = String(sourceLocation).components(separatedBy: "/").suffix(2).joined(separator: "/")
+
+            message += " at \(trimmedSourceLocation)"
+        }
+
+        message += "."
 
         return message
     }
