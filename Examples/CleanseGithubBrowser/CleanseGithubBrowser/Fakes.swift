@@ -13,7 +13,7 @@ import Cleanse
 
 /// Configure the services to be implemented by fakes
 struct FakeGithubServiceModule : Module {
-    func configure<B : Binder>(binder binder: B) {
+    static func configure<B : Binder>(binder binder: B) {
         /// Make it so when a GithubMembersService is requested, one gets a FakeGithubMembersService
         binder
             .bind(GithubMembersService.self)

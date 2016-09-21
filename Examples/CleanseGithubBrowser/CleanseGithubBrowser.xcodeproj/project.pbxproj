@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		884618AF1D9324AD0001ADEB /* AppComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 884618AE1D9324AD0001ADEB /* AppComponent.swift */; };
 		F69184B31D0DF28A00125872 /* GithubMemberService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69184B21D0DF28A00125872 /* GithubMemberService.swift */; };
 		F69184B61D0DF2CA00125872 /* GithubRepositoriesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69184B51D0DF2CA00125872 /* GithubRepositoriesService.swift */; };
 		F69184BB1D0DF3DD00125872 /* NetworkModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69184BA1D0DF3DD00125872 /* NetworkModule.swift */; };
@@ -93,6 +94,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		884618AE1D9324AD0001ADEB /* AppComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppComponent.swift; sourceTree = "<group>"; };
 		F69184B21D0DF28A00125872 /* GithubMemberService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GithubMemberService.swift; sourceTree = "<group>"; };
 		F69184B51D0DF2CA00125872 /* GithubRepositoriesService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GithubRepositoriesService.swift; sourceTree = "<group>"; };
 		F69184BA1D0DF3DD00125872 /* NetworkModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkModule.swift; sourceTree = "<group>"; };
@@ -229,6 +231,7 @@
 				F6C9F3631D0BD01700877D0B /* Assets.xcassets */,
 				F6C9F3651D0BD01700877D0B /* LaunchScreen.storyboard */,
 				F6C9F3681D0BD01700877D0B /* Info.plist */,
+				884618AE1D9324AD0001ADEB /* AppComponent.swift */,
 				F6C9F35C1D0BD01700877D0B /* AppDelegate.swift */,
 				F6E8782D1D0BD6D7006F3FAB /* RootViewController.swift */,
 				F69184D41D0F221600125872 /* Pages */,
@@ -436,6 +439,7 @@
 				F69184D01D0E33F600125872 /* FakeModeSettings.swift in Sources */,
 				F69184B31D0DF28A00125872 /* GithubMemberService.swift in Sources */,
 				F6E878301D0BD911006F3FAB /* SettingsPage.swift in Sources */,
+				884618AF1D9324AD0001ADEB /* AppComponent.swift in Sources */,
 				F6E878321D0D1120006F3FAB /* RepositoriesPage.swift in Sources */,
 				F69184BD1D0DF5DC00125872 /* ErrorOptional.swift in Sources */,
 				F6E878381D0DD11A006F3FAB /* SplitViewController.swift in Sources */,
@@ -539,6 +543,7 @@
 				OTHER_SWIFT_FLAGS = "-DDEBUG $(inherited)";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 2.3;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -578,6 +583,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_SWIFT_FLAGS = "";
 				SDKROOT = iphoneos;
+				SWIFT_VERSION = 2.3;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};

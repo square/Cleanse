@@ -15,7 +15,7 @@ extension NSURLSession {
 
         let url = baseURL.URLByAppendingPathComponent(pathComponents.joined(separator: "/"))
 
-        return jsonTask(url: url, resultHandler: resultHandler)
+        return jsonTask(url: url!, resultHandler: resultHandler)
     }
 
     private func jsonTask(url url: NSURL, resultHandler: ErrorOptional<AnyObject> -> ()) -> NSURLSessionDataTask {
@@ -48,9 +48,9 @@ extension NSURLSession {
         var url = baseURL.URLByAppendingPathComponent(pathComponents.joined(separator: "/"))
 
         if let query = query {
-            url = NSURL(string: url.absoluteString + "?" + query)!
+            url = NSURL(string: url!.absoluteString! + "?" + query)!
         }
 
-        return jsonTask(url: url) { resultHandler($0.map { $0 as! [[String: AnyObject]] }) }
+        return jsonTask(url: url!) { resultHandler($0.map { $0 as! [[String: AnyObject]] }) }
     }
 }

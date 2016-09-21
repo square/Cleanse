@@ -5,7 +5,7 @@ import Cleanse
 
 /// A module that configures a tab page on the root view controller as well as on the settings page
 struct MembersModule : Cleanse.Module {
-    func configure<B : Binder>(binder binder: B) {
+    static func configure<B : Binder>(binder binder: B) {
         // Make MembersSettingsSplitViewController available for injection
         binder
             .bind()

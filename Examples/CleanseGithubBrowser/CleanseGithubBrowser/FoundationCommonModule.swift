@@ -11,7 +11,7 @@ import Cleanse
 
 /// Module that configures common bindings from the `Foundation` framework
 struct FoundationCommonModule : Module {
-    func configure<B : Binder>(binder binder: B) {
+    static func configure<B : Binder>(binder binder: B) {
         // Make NSProcessInfo available.
         binder.bind().to(factory: NSProcessInfo.processInfo)
     }

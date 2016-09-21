@@ -11,7 +11,7 @@ import Cleanse
 
 /// Wires up NSURLSession and friends
 struct NetworkModule : Module {
-    func configure<B : Binder>(binder binder: B) {
+    static func configure<B : Binder>(binder binder: B) {
 
         binder
             .bind()
