@@ -26,7 +26,6 @@
 		F62C69F91CD86B9500137422 /* Provider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62C69F81CD86B9500137422 /* Provider.swift */; };
 		F62C69FD1CD8927400137422 /* CanonicalRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62C69FC1CD8927400137422 /* CanonicalRepresentable.swift */; };
 		F62C69FF1CD897D200137422 /* TaggedProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62C69FE1CD897D200137422 /* TaggedProvider.swift */; };
-		F62C6A061CD919A100137422 /* OverrideModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62C6A051CD919A100137422 /* OverrideModule.swift */; };
 		F63EF7961CD2F8430016306D /* SourceLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63EF7951CD2F8430016306D /* SourceLocation.swift */; };
 		F6445E2D1CDB425E00036515 /* BaseComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6445E2C1CDB425E00036515 /* BaseComponent.swift */; };
 		F64BFCE51D4FCAF000F15E79 /* ScopeErrorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F64BFCE41D4FCAF000F15E79 /* ScopeErrorTests.swift */; };
@@ -50,8 +49,6 @@
 		F69D1AA01CDDE229009132B4 /* BinderArities.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69D1A9E1CDDE229009132B4 /* BinderArities.swift */; };
 		F69D1AA31CDDE6A5009132B4 /* PropertyInjectionArities.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69D1AA21CDDE6A5009132B4 /* PropertyInjectionArities.swift */; };
 		F69D1AA51CDDEF67009132B4 /* RawProviderBinding.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69D1AA41CDDEF67009132B4 /* RawProviderBinding.swift */; };
-		F6A4D0DB1CD982B10070EBB9 /* OverriddenComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A4D0DA1CD982B10070EBB9 /* OverriddenComponent.swift */; };
-		F6A4D0DD1CD983130070EBB9 /* ComposedComponentExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A4D0DC1CD983130070EBB9 /* ComposedComponentExtension.swift */; };
 		F6A660CE1CCB07C2004DD6E3 /* Cleanse.h in Headers */ = {isa = PBXBuildFile; fileRef = F6A660CD1CCB07C2004DD6E3 /* Cleanse.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F6A660D51CCB07C3004DD6E3 /* Cleanse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6A660CA1CCB07C2004DD6E3 /* Cleanse.framework */; };
 		F6A660DA1CCB07C3004DD6E3 /* CleanseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A660D91CCB07C3004DD6E3 /* CleanseTests.swift */; };
@@ -99,7 +96,6 @@
 		F62C69F81CD86B9500137422 /* Provider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Provider.swift; sourceTree = "<group>"; };
 		F62C69FC1CD8927400137422 /* CanonicalRepresentable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CanonicalRepresentable.swift; sourceTree = "<group>"; };
 		F62C69FE1CD897D200137422 /* TaggedProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaggedProvider.swift; sourceTree = "<group>"; };
-		F62C6A051CD919A100137422 /* OverrideModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverrideModule.swift; sourceTree = "<group>"; };
 		F63EF7951CD2F8430016306D /* SourceLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SourceLocation.swift; sourceTree = "<group>"; };
 		F6445E2C1CDB425E00036515 /* BaseComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseComponent.swift; sourceTree = "<group>"; };
 		F64BFCE41D4FCAF000F15E79 /* ScopeErrorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScopeErrorTests.swift; sourceTree = "<group>"; };
@@ -124,8 +120,6 @@
 		F69D1A9E1CDDE229009132B4 /* BinderArities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinderArities.swift; sourceTree = "<group>"; };
 		F69D1AA21CDDE6A5009132B4 /* PropertyInjectionArities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropertyInjectionArities.swift; sourceTree = "<group>"; };
 		F69D1AA41CDDEF67009132B4 /* RawProviderBinding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RawProviderBinding.swift; sourceTree = "<group>"; };
-		F6A4D0DA1CD982B10070EBB9 /* OverriddenComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverriddenComponent.swift; sourceTree = "<group>"; };
-		F6A4D0DC1CD983130070EBB9 /* ComposedComponentExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComposedComponentExtension.swift; sourceTree = "<group>"; };
 		F6A660CA1CCB07C2004DD6E3 /* Cleanse.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Cleanse.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6A660CD1CCB07C2004DD6E3 /* Cleanse.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Cleanse.h; sourceTree = "<group>"; };
 		F6A660CF1CCB07C2004DD6E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -244,16 +238,6 @@
 			name = Providers;
 			sourceTree = "<group>";
 		};
-		F62C6A041CD9199000137422 /* Overrides */ = {
-			isa = PBXGroup;
-			children = (
-				F62C6A051CD919A100137422 /* OverrideModule.swift */,
-				F6A4D0DA1CD982B10070EBB9 /* OverriddenComponent.swift */,
-				F6A4D0DC1CD983130070EBB9 /* ComposedComponentExtension.swift */,
-			);
-			name = Overrides;
-			sourceTree = "<group>";
-		};
 		F63EF75E1CD2CD460016306D /* PropertyInjection */ = {
 			isa = PBXGroup;
 			children = (
@@ -335,7 +319,6 @@
 				F611913D1CD3DF9C00686C0C /* Code Generation */,
 				F61133BD1CD41E8B00069972 /* Compat */,
 				F69D1A9E1CDDE229009132B4 /* BinderArities.swift */,
-				F62C6A041CD9199000137422 /* Overrides */,
 			);
 			path = Cleanse;
 			sourceTree = "<group>";
@@ -499,14 +482,12 @@
 				F6A660F31CCB1B6B004DD6E3 /* Scope.swift in Sources */,
 				F6B387951CE18E53001CBC4F /* SingularCollectionBindingBuilderDecorator.swift in Sources */,
 				F6D589EF1D3ED57900B99F7D /* ValidationVisitor.swift in Sources */,
-				F62C6A061CD919A100137422 /* OverrideModule.swift in Sources */,
 				F61191381CD329F500686C0C /* Tags.swift in Sources */,
 				F62C69FF1CD897D200137422 /* TaggedProvider.swift in Sources */,
 				F611913A1CD3331400686C0C /* Module.swift in Sources */,
 				F6760C5E1D2DF698009C6F8A /* ScopedProvider.swift in Sources */,
 				F61133C71CD7B64C00069972 /* Installer.swift in Sources */,
 				F69D1A971CDDAFF7009132B4 /* CollectionBindingBuilderDecorator.swift in Sources */,
-				F6A4D0DD1CD983130070EBB9 /* ComposedComponentExtension.swift in Sources */,
 				F6445E2D1CDB425E00036515 /* BaseComponent.swift in Sources */,
 				F69D1A991CDDB874009132B4 /* ScopedBindingDecorator.swift in Sources */,
 				F6760C601D2DF9BA009C6F8A /* Scoped.swift in Sources */,
@@ -528,7 +509,6 @@
 				F69D1A9B1CDDBC53009132B4 /* BindingBuilder.swift in Sources */,
 				F6760C551D2DED32009C6F8A /* Component.swift in Sources */,
 				F6A660ED1CCB0B81004DD6E3 /* DelegatedHashable.swift in Sources */,
-				F6A4D0DB1CD982B10070EBB9 /* OverriddenComponent.swift in Sources */,
 				F69D1AA31CDDE6A5009132B4 /* PropertyInjectionArities.swift in Sources */,
 				F61133C91CD7C98B00069972 /* ModuleComponent.swift in Sources */,
 				F62C69F91CD86B9500137422 /* Provider.swift in Sources */,

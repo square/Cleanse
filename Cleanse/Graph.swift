@@ -33,7 +33,7 @@ class Graph : Binder {
     private var futureProviders = Dictionary<RequirementKey, FutureProvider>()
 
     
-    /// Keyeed by type of value
+    /// Keyed by type of value
     private var providers = Dictionary<RequirementKey, AnyProvider>()
     
     /// Values of outer array are values that contain () -> Type
@@ -49,27 +49,9 @@ class Graph : Binder {
         self.scope = scope
         self.parent = parent
     }
-    
+
     var finalized = false
     
-    /// Hack to
-    private var inOverridesMode = false
-    
-    func withOverrides(@noescape closure closure: () -> ()) {
-        precondition(!finalized, "Can only call this before finalizing")
-        
-        let oldModeMode = inOverridesMode
-        defer { inOverridesMode = oldModeMode }
-        
-        inOverridesMode = true
-        
-        closure()
-    }
-    
-    func _internalWithOverrides(@noescape closure closure: () -> ()) {
-        withOverrides(closure: closure)
-    }
-
     func _internalBind(binding binding: RawProviderBinding) {
 
         let scopedProvider: AnyProvider
@@ -88,8 +70,7 @@ class Graph : Binder {
             addProvider(provider: scopedProvider)
         }
     }
-    
-    
+
     private func findOrCreateFutureProvider<Element>(type type: Element.Type, debugInfo: ProviderRequestDebugInfo) -> Provider<Element> {
         guard let type = type as? AnyProvider.Type else {
             return findOrCreateFutureProvider(type: Provider<Element>.self, debugInfo: debugInfo).flatten(Element.self)
@@ -128,14 +109,11 @@ class Graph : Binder {
         /// If Tag is a _VoidTag, then we want to add it as a provider without the tagged type
         let key = RequirementKey(provider.dynamicType)
 
-        if !inOverridesMode {
-            if let existingKey = providers[key] {
-                fatalError("Already bound at \(existingKey.instanceProvidesType)")
-            }
+        if let existingKey = providers[key] {
+            fatalError("Key for \(existingKey.instanceProvidesType) has already been provided.")
         }
 
         providers[key] = provider
-        
         if let getterProvider = provider.anyGetterProvider {
             providers[RequirementKey(getterProvider.dynamicType)] = getterProvider
         }
@@ -343,14 +321,13 @@ class Graph : Binder {
     private var legacyKeyToKey = Dictionary<LegacyKey, AnyProvider.Type>()
     private var legacyPropertyInjectors = Dictionary<RequirementKey, AnyObject -> ()>()
     
+    /// Hack for Legacy Injection
     private func maybeAddLegacyProviders(provider provider: AnyProvider) {
-        /// Hack for Legacy Injection
-        
         let tag = (provider as? AnyTaggedProvider)?.dynamicType.tag
         
         if provider.instanceProvidesType is AnyClass || provider.instanceProvidesType == String.self {
             let legacyKey = LegacyKey(cls: provider.instanceProvidesType, name: tag?.legacyName)
-            precondition(inOverridesMode || legacyKeyToKey[legacyKey] == nil)
+            precondition(legacyKeyToKey[legacyKey] == nil)
             legacyKeyToKey[legacyKey] = provider.dynamicType
         }
         
