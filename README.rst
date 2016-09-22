@@ -90,7 +90,7 @@ Let's start by defining the Root ``Component``:
       // When we call AppComponent().build() it will return the Root type if successful
       typealias Root = PropertyInjector<AppDelegate>
 
-      func configure<B : Binder>(binder binder: B) {
+      static func configure<B : Binder>(binder binder: B) {
           // Will fill out contents later
       }
     }
@@ -102,7 +102,7 @@ Now, in our App Delegate we should add:
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Build our component, and make the property injector
-        let propertyInjector = try! Component().build()
+        let propertyInjector = try! ComponentFactory.of(Component.self).build()
 
          // Now inject the properties into ourselves
         propertyInjector.injectProperties(into: self)
@@ -112,7 +112,7 @@ Now, in our App Delegate we should add:
         return true
     }
 
-Now, if we ran the app as is, it would blow up. We haven't told cleanse how to make a `PropertyInjector<AppDelegate>`,
+Now, if we ran the app as is, it would blow up. We haven't told Cleanse how to make a `PropertyInjector<AppDelegate>`,
 so let's do that. For the simplest app delegates, we need to populate just one property:
 
 .. code-block:: swift
@@ -135,7 +135,7 @@ And add the following to ``AppDelegate.Component.configure``
 
 .. code-block:: swift
 
-    func configure<B : Binder>(binder binder: B) {
+    static func configure<B : Binder>(binder binder: B) {
           binder
             .bindPropertyInjectionOf(AppDelegate.self)
             .to(injector: AppDelegate.injectProperties)
@@ -160,7 +160,7 @@ Let's define a module that creates our main window. The following will declare `
 
   extension UIWindow {
     struct Module : Cleanse.Module {
-      public func configure<B : Binder>(binder binder: B) {
+      public static func configure<B : Binder>(binder binder: B) {
         binder
           .bind(UIWindow.self)
           .asSingleton()
@@ -177,7 +177,7 @@ and in our ``AppDelegate.Component.configure`` method we want to install this mo
 
 .. code-block:: swift
 
-  binder.install(module: UIWindow.Module())
+  binder.install(module: UIWindow.Module.self)
 
 We have satisfied the dependency for our App Delegate (``UIWindow``), but we have a new dependency,
 ``TaggedProvider<UIViewController.Root>``. The ``TaggedProvider<UIViewController.Root>`` represents a "special" view
@@ -224,7 +224,7 @@ And we'll want to make a module to configure it:
   extension RootViewController {
     /// Configures RootViewController
     struct Module : Cleanse.Module {
-      func configure<B : Binder>(binder binder: B) {
+      static func configure<B : Binder>(binder binder: B) {
         // Configures the RootViewController to be provided by the initializer
         binder
           .bind()
@@ -244,7 +244,7 @@ and in our ``AppDelegate.Component.configure`` method we want to install this mo
 
 .. code-block:: swift
 
-  binder.install(module: RootViewController.Module())
+  binder.install(module: RootViewController.Module.self)
 
 
 Now, all of our dependencies should be satisfied and the app should launch successfully.
@@ -368,7 +368,7 @@ The ``Module`` protocol has a single method, ``configure(binder:)``, and is is d
 .. code-block:: swift
 
     protocol Module {
-        func configure<B : Binder>(binder: B)
+        static func configure<B : Binder>(binder: B)
     }
 
 Examples
@@ -382,7 +382,7 @@ Providing the Base API URL
 .. code-block:: swift
 
     struct PrimaryAPIURLModule : Module {
-      func configure<B : Binder>(binder binder: B) {
+      static func configure<B : Binder>(binder binder: B) {
         binder
           .bind(NSURL.self)
           .tagged(with: PrimaryAPIURL.self)
@@ -408,7 +408,7 @@ Consuming the Primary API URL (e.g. "https://connect.squareup.com/v2/")
             self.primaryURL = primaryURL.get()
         }
         struct Module : Cleanse.Module {
-            func configure<B : Binder>(binder binder: B) {
+            static func configure<B : Binder>(binder binder: B) {
                 binder
                     .bind(SomethingThatDoesAnAPICall.self)
                     .to(factory: SomethingThatDoesAnAPICall.init)
@@ -456,10 +456,10 @@ Defining a component
 
     struct APIComponent : Component {
         typealias Root = RootAPI
-        func configure<B : Binder>(binder binder: B) {
+        static func configure<B : Binder>(binder binder: B) {
             // "install" the modules that create the component
-            binder.install(module: PrimaryAPIURLModule())
-            binder.install(module: SomethingThatDoesAnAPICall.Module())
+            binder.install(module: PrimaryAPIURLModule.self)
+            binder.install(module: SomethingThatDoesAnAPICall.Module.self)
             // bind our root Object
             binder
                 .bind(RootAPI.self)
@@ -471,7 +471,7 @@ Using the component
 """""""""""""""""""
 .. code-block:: swift
 
-    let root = try! APIComponent().build()
+    let root = try! ComponentFactory.of(APIComponent.self).build()
     root.somethingUsingTheAPI.doSomethingFun()
 
 Binder
@@ -484,7 +484,7 @@ One passes it an instance of a module to be installed.  It is used like:
 
 .. code-block:: swift
 
-  binder.install(module: PrimaryAPIURLModule())
+  binder.install(module: PrimaryAPIURLModule.self)
 
 It essentially tells the binder to call ``configure(binder:)`` on ``PrimaryAPIURLModule``.
 
