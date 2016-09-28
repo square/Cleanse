@@ -23,7 +23,6 @@ func nextCount() -> Int {
 }
 
 
-
 class ComponentTests: XCTestCase {
 
     func testSubcomponents() {
@@ -54,7 +53,6 @@ class ComponentTests: XCTestCase {
         )
     }
     
-
     class App : Scoped {
         typealias Scope = Singleton
 

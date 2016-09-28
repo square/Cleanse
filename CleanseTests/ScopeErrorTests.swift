@@ -118,8 +118,6 @@ class ScopeErrorTests: XCTestCase {
         }
     }
 
-
-
     struct ComponentWithInvalidInnerComponentWithSameScope : RootComponent {
         typealias Scope = Scope1
         typealias Root = String
@@ -148,7 +146,7 @@ class ScopeErrorTests: XCTestCase {
             try ComponentFactory.of(ComponentWithInvalidInnerComponentWithSameScope.self)
             XCTFail("Should not get here")
         } catch let e {
-            Assert((e as! CleanseError).description, contains: "with same scope (Scope1)")
+            Assert((e as! CleanseError).description, contains: "with the same scope: (Scope1)")
         }
     }
 }

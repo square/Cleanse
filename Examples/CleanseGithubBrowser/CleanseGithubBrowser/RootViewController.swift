@@ -44,7 +44,7 @@ class RootViewController : UITabBarController {
 
     /// Configures RootViewController
     struct Module : Cleanse.Module {
-        func configure<B : Binder>(binder binder: B) {
+        static func configure<B : Binder>(binder binder: B) {
             binder
                 .bind(RootViewController.self)
                 .to(factory: RootViewController.init)

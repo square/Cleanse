@@ -11,23 +11,21 @@ import Cleanse
 
 /// Wires up common definitions shared across services as well as installing the services's modules
 struct GithubServicesModule : Module {
-    func configure<B : Binder>(binder binder: B) {
-        binder.install(module: GithubMembersServiceModule())
-        binder.install(module: GithubRepositoriesServiceModule())
+    static func configure<B : Binder>(binder binder: B) {
+        binder.install(module: GithubMembersServiceModule.self)
+        binder.install(module: GithubRepositoriesServiceModule.self)
     }
 }
-
-
-
 
 struct GithubBaseURL : Tag {
     typealias Element = NSURL
 }
 
-/// Represents the github user name we want to query
+/// Represents the github user name we want to query.
 struct GithubUserName : Tag {
     typealias Element = String
 }
+
 struct GithubOrganizationName : Tag {
     typealias Element = String
 }

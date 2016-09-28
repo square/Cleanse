@@ -13,9 +13,3 @@ public protocol Component : _BaseComponent {
     ///  can have custom scopes associated with them.
     associatedtype Scope = _Unscoped
 }
-
-
-/// Subcomponents have been renamed to Components
-@available(*, deprecated, renamed="Component")
-public typealias Subcomponent = Component
-

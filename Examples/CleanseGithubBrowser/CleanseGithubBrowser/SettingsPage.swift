@@ -67,12 +67,9 @@ class SettingsSplitViewController : SplitViewController {
 
     /// Module that adds SettingsSplitViewController & friends
     struct Module : Cleanse.Module {
-        func configure<B : Binder>(binder binder: B) {
-
+        static func configure<B : Binder>(binder binder: B) {
             binder.bind().to(factory: SettingsSplitViewController.init)
-
             binder.bind().to(factory: MasterViewController.init)
-
 
             // Bind an empty list to Settings in case there aren't any.
             binder

@@ -11,8 +11,7 @@ import Cleanse
 import UIKit
 
 struct FakeModeSettingsModule : Cleanse.Module {
-    func configure<B : Binder>(binder binder: B) {
-
+    static func configure<B : Binder>(binder binder: B) {
         binder.bind().to(factory: FakeModeSettingsSplitViewController.init)
         binder.bind().to(factory: FakeModeCell.init)
 
@@ -27,17 +26,12 @@ struct FakeModeSettingsModule : Cleanse.Module {
     }
 }
 
-
-
 class FakeModeSettingsSplitViewController : TableViewController {
     private let cells: [UITableViewCell]
 
     init(fakeModeCell: FakeModeCell) {
-
         self.cells = [fakeModeCell]
-
         super.init()
-
         self.title = "Fake Mode Settings"
     }
 
@@ -60,7 +54,6 @@ class FakeModeCell : UITableViewCell {
         super.init(style: .Default, reuseIdentifier: nil)
 
         `switch`.on = processInfo.environment["USE_FAKES"] == "YES"
-
         `switch`.addTarget(self, action: #selector(valueChanged), forControlEvents: .TouchUpInside)
 
         textLabel?.text = "Fake Mode Enabled"
@@ -76,11 +69,9 @@ class FakeModeCell : UITableViewCell {
 
     @objc private func valueChanged() {
         let textValue = `switch`.on ? "YES" : "NO"
-
         setenv("USE_FAKES", textValue, 1)
 
-        // This is kinda bad, but since fake mode is a hack anywas...
-
+        // This is kinda bad, but since fake mode is a hack anyways...
         (UIApplication.sharedApplication().delegate! as! AppDelegate).resetApplication()
     }
 }

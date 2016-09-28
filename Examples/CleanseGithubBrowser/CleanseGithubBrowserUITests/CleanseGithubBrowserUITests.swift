@@ -36,7 +36,6 @@ class CleanseGithubBrowserUITests: XCTestCase {
         XCTAssertTrue(app.tables.cells.staticTexts["cleanse"].hittable)
     }
 
-
     func testMembers() {
         app.tabBars.buttons["Members"].tap()
 

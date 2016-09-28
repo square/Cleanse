@@ -46,7 +46,7 @@ struct GithubRepositoriesServiceImpl : GithubRepositoriesService {
 
 /// Wires up GithubRepositoriesService to its implementation
 struct GithubRepositoriesServiceModule : Module {
-    func configure<B : Binder>(binder binder: B) {
+    static func configure<B : Binder>(binder binder: B) {
         binder
             .bind(GithubRepositoriesService.self)
             .to(factory: GithubRepositoriesServiceImpl.init)

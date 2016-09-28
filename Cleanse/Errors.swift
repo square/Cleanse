@@ -177,7 +177,7 @@ public struct InvalidScopeNesting : CleanseError {
     let outerComponent: Any.Type
 
     public var description: String {
-        return "Component (\(outerComponent)) contains subcomponent (\(innerComponent)) with same scope (\(scope))"
+        return "Component (\(outerComponent)) contains a component (\(innerComponent)) with the same scope: (\(scope))"
     }
 }
 

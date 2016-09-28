@@ -9,12 +9,12 @@
 import UIKit
 import Cleanse
 
-/// This is where we're going to define Tags and configure common UIKit bindings
+/// Define common UIKit bindings.
 
 extension UIScreen {
     /// This is a simple module that binds UIScreen.mainScreen() to UIScreen
     public struct Module : Cleanse.Module {
-        public func configure<B : Binder>(binder binder: B) {
+        public static func configure<B : Binder>(binder binder: B) {
             binder
                 .bind()
                 .to(factory: UIScreen.mainScreen)
@@ -26,7 +26,7 @@ extension UIWindow {
     /// This is the module that configures how we build our main window. It ias assumed when one requests
     /// injection of an un-tagged UIWindow, we will be giving them the "main" or "key" window.
     public struct Module : Cleanse.Module {
-        public func configure<B : Binder>(binder binder: B) {
+        public static func configure<B : Binder>(binder binder: B) {
             binder
                 .bind(UIWindow.self)
                 .asSingleton()
@@ -48,10 +48,9 @@ extension UIViewController {
 
 
 public struct UIKitCommonModule : Module {
-    public func configure<B : Binder>(binder binder: B) {
+    public static func configure<B : Binder>(binder binder: B) {
         // Install our common modules for UIScreen and UIWindow
-        
-        binder.install(module: UIScreen.Module())
-        binder.install(module: UIWindow.Module())
+        binder.install(module: UIScreen.Module.self)
+        binder.install(module: UIWindow.Module.self)
     }
 }
