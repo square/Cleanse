@@ -6,6 +6,8 @@
 //  Copyright © 2016 Square, Inc. All rights reserved.
 //
 
+import Foundation
+
 private var weakProviderAssociatedObjectKey = 0
 
 class ScopedProvider {
