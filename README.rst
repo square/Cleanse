@@ -70,7 +70,7 @@ one must import it.
 
   import Cleanse
 
-Defining a Component and Root Type
+Defining a RootComponent and its Root type
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Cleanse will build a graph of objects, however, when we build the object graph, we only get one type back, which we
 call a "Root". In a Cocoa Touch application, our root object is logically the App Delegate, however we don't control
@@ -86,7 +86,7 @@ Let's start by defining the Root ``Component``:
 .. code-block:: swift
 
   extension AppDelegate {
-    struct Component : Cleanse.Component {
+    struct Component : Cleanse.RootComponent {
       // When we call AppComponent().build() it will return the Root type if successful
       typealias Root = PropertyInjector<AppDelegate>
 
@@ -102,7 +102,7 @@ Now, in our App Delegate we should add:
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Build our component, and make the property injector
-        let propertyInjector = try! ComponentFactory.of(Component.self).build()
+        let propertyInjector = try! ComponentFactory.of(AppDelegate.Component.self).build()
 
          // Now inject the properties into ourselves
         propertyInjector.injectProperties(into: self)
@@ -163,7 +163,7 @@ Let's define a module that creates our main window. The following will declare `
       public static func configure<B : Binder>(binder binder: B) {
         binder
           .bind(UIWindow.self)
-          .asSingleton()
+          .scoped(in: Singleton.self)
           .to { (rootViewController: TaggedProvider<UIViewController.Root>) in
             let window = UIWindow(frame: UIScreen.mainScreen().bounds)
             window.rootViewController = rootViewController.get()
@@ -416,34 +416,14 @@ Consuming the Primary API URL (e.g. "https://connect.squareup.com/v2/")
         }
     }
 
-Root Component
+Components/RootComponents
 ``````````````
-Unlike Guice and Dagger1, there is no ObjectGraph/Injector object that one can pull arbitrary instances out of.
 
-Cleanse has a concept of a ``Component``. A ``Component`` is essentially a ``Module``, but with an `associated type`_
-named ``Root``. The ``Root`` asosociated type in a component is the *Root* of the object graph. An instance of ``Root``
-is what's returned when a ``Component`` is constructed. It also may be referred to as an "entry point",
-
-The component protocol is defined as:
-
-.. code-block:: swift
-
-    public protocol Component : Module {
-        associatedtype Root
-    }
-
-The outermost component of an object graph (e.g. the Root component), is built by the ``build()`` method.
-This is defined as the following protocol extension:
-
-.. code-block:: swift
-
-    public extension Component {
-        /// Builds the component and returns the root object.
-        public func build() throws -> Self.Root
-    }
-
-Examples
+WIP
 ~~~~~~~~
+
+.. image:: Documentation/Components.png
+  :align: right
 
 Defining a component
 """"""""""""""""""""
@@ -454,7 +434,7 @@ Defining a component
         let somethingUsingTheAPI: SomethingThatDoesAnAPICall
     }
 
-    struct APIComponent : Component {
+    struct APIComponent : RootComponent {
         typealias Root = RootAPI
         static func configure<B : Binder>(binder binder: B) {
             // "install" the modules that create the component
@@ -467,7 +447,7 @@ Defining a component
         }
     }
 
-Using the component
+Using the RootComponent
 """""""""""""""""""
 .. code-block:: swift
 
@@ -513,7 +493,7 @@ process of configuring a binding through code completion. A simplified grammar f
   binder
     .bind([Element.self])                // Bind Step
    [.tagged(with: Tag_For_Element.self)] // Tag step
-   [.asSingleton()]                      // Scope step
+   [.scoped(in: Scope_Type.self)]        // Scope step
    {.to(provider:) |                     // Terminating step
     .to(factory:)  |
     .to(value:)}
@@ -536,17 +516,45 @@ Scope Step (Optional)
 ~~~~~~~~~~~~~~~~~~~~~
 
 By default, whenever an object is requested, Cleanse constructs a new one.
-If `.asSingleton()` is specified, Cleanse will memoize and return the same instance in the scope of the ``Component``
-it was configured in.
+If an object is *scoped*, Cleanse will memoize and return the same instance in
+the scope of the ``Component`` it was configured in.
 
-In the future we may want to allow a class conforming to protocol (possibly named ``Singleton``) to indicate that it
-should be bound as a singleton. It is tracked by `this issue`_
+A binding can be *scoped* one of two ways. The first is using ``.scoped(in:
+Component_Scope.self)`` operator when declaring a binding
 
-.. _this issue: https://github.com/square/Cleanse/issues/3
+.. note::
+
+  ``.asSingleton()`` binding step is equivilant to ``scoped(in:
+  Cleanse.Singleton.self)``. ``Cleanse.Singleton`` is the default scope for
+  ``RootComponent``s
+
+The second way a binding can be scoped is if the element being bound (e.g.
+the argument inside the ```bind()`` method) conforms to a ``Scoped`` protocol.
+An example of this would be:
+
+.. code-block:: swift
+
+  class RootViewController : UIViewController, Scoped {
+    typealias Scope = Cleanse.Singleton
+  }
+
+one can also use conforming to a protocol to indicate a scope.
+The following is equivalent to the prior example, but may be preferred for
+readability and code reuse.
+
+.. code-block:: swift
+
+  protocol SingletonScoped : Cleanse.Scoped {
+    associatedtype Scope = Cleanse.Singleton
+  }
+
+  class RootViewController : UIViewController, SingletonScoped {
+  }
+
+
 
 Terminating Step
 ~~~~~~~~~~~~~~~~
-
 To finish configuring a binding, one *must* invoke one of the terminating methods on ``BindingBuilder``.
 There are multiple methods that are considered terminating steps. The common ones are described below.
 
@@ -612,7 +620,7 @@ This registers a binding of E to the factory function which takes one argument.
 
   .. code-block:: swift
 
-     (topping: Topping) -> Hamburger
+     (Topping) -> Hamburger
 
   So when configuring its creation in a module, calling
 
@@ -692,7 +700,7 @@ but with the addition of one step: calling ``.intoCollection()`` in the builder 
     .intoCollection()	// indicates that we are providing an
                       // element or elements into Array<Element>**
    [.tagged(with: Tag_For_Element.self)]   // Tag step
-   [.asSingleton()]                        // Scope step
+   [.scoped(in: Scope_Type.self)]          // Scope step
    {.to(provider:) |                       // Terminating step
     .to(factory:)  |
     .to(value:)}
@@ -820,8 +828,8 @@ Overrides                           Supported
 Objective-C Compatibility layer     Supported (Experimental)
 Property Injection [#pinj]_         Supported
 Type Qualifiers                     Supported via `Type Tags`_
-`Assisted Injection`_ [#assinj]_    TBD
-`Subcomponents`_                    TBD
+`Assisted Injection`_ [#assinj]_    Supported via components with non-void seed
+`Subcomponents`_                    Supported as `Component`
 =================================== =================================
 
 .. [#assinj] Assisted Injection will probably take the form of `Subcomponents`_ that can have arguments.
@@ -839,7 +847,9 @@ support fast failure. It currently supports fast failing for some of the more co
 =================================== =================================
 Missing Providers                   Supported [#f1]_
 Duplicate Bindings                  Supported [#f2]_
-Cycle Detection                     TBD (very important to add soon)
+Cycle Detection                     Supported
+Binding in incorrect scope          Supported
+Nesting components in incorrect scope  Supported
 =================================== =================================
 
 .. [#f1] When a provider is missing, errors present line numbers, etc. where the provider was required. Cleanse
