@@ -11,19 +11,8 @@ import Foundation
 class VisitorState<V: ComponentVisitor> {
     private var enqueuedRequirementFutures = [AnyProvider.Type]()
     /// These are for errors that make it impossible to traverse the module hierarchy
-    private var inOverridesMode = false
-    
-    private var proxyObjectProviders = Dictionary<ProxyTypeKey, AnyProvider>()
-    
-    init() {
-    }
-}
 
-private struct ProxyTypeKey : TypeKeyProtocol {
-    let type: Any.Type
-    
-    init(_ type: Any.Type) {
-        self.type = type
+    init() {
     }
 }
 
@@ -127,15 +116,11 @@ extension ComponentVisitor {
         } else {
             visitorState.enqueuedRequirementFutures.append(Provider<Element>.self)
         }
-        
+
         return resolveProvider(Element.self, requiredBy: debugInfo?.providerRequiredFor)
     }
     
     func resolveProvider<Element>(_ type: Element.Type, requiredBy: Any.Type?) -> Provider<Element> {
-        if let existingProxy = visitorState.proxyObjectProviders[ProxyTypeKey(type)]?.asCheckedProvider(type) {
-            return existingProxy
-        }
-
         return Provider {
             preconditionFailure("Cannot call synthesized provider. Invalid requested type: \(Element.self). Depended on by \(requiredBy!)"); _ = ()
         }
