@@ -9,13 +9,8 @@
 import Foundation
 
 
-#if !swift(>=3.0)
-    public typealias ErrorProtocol = ErrorType
-#endif
-
-
 /// All errors emitted by Cleanse implement this protocol
-public protocol CleanseError : ErrorProtocol, CustomStringConvertible {
+public protocol CleanseError : Error, CustomStringConvertible {
 }
 
 
@@ -95,7 +90,7 @@ public struct MissingProvider : CleanseError {
             if let sourceLocation = r.sourceLocation {
                 maybeDoNewLine()
                 
-                let trimmedSourceLocation = String(sourceLocation).components(separatedBy: "/").suffix(2).joined(separator: "/")
+                let trimmedSourceLocation = String(describing: sourceLocation).components(separatedBy: "/").suffix(2).joined(separator: "/")
                 
                 message += " at \(trimmedSourceLocation)"
             }
@@ -130,7 +125,7 @@ public struct DependencyCycle : CleanseError {
             message += "\n  -> required by \(canonicalDisplayType(r.requestedType))"
 
             if let sourceLocation = r.sourceLocation {
-                let trimmedSourceLocation = String(sourceLocation).components(separatedBy: "/").suffix(2).joined(separator: "/")
+                let trimmedSourceLocation = String(describing: sourceLocation).components(separatedBy: "/").suffix(2).joined(separator: "/")
 
                 message += " at \(trimmedSourceLocation)"
             }
@@ -157,7 +152,7 @@ public struct InvalidBindingScope : CleanseError {
         var message = "*** \(canonicalDisplayType(requestedType)) *** Invalid Scope Usage. Expected to be in scope \(expectedScope.debugDescription ?? "????") but was in \(attemptedScope) instead"
 
         if let sourceLocation = requirement.sourceLocation {
-            let trimmedSourceLocation = String(sourceLocation).components(separatedBy: "/").suffix(2).joined(separator: "/")
+            let trimmedSourceLocation = String(describing: sourceLocation).components(separatedBy: "/").suffix(2).joined(separator: "/")
 
             message += " at \(trimmedSourceLocation)"
         }

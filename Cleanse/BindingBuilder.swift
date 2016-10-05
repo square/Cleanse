@@ -29,9 +29,9 @@ public protocol BindingBuilder {
     
     
     var binder: _Binder { get }
-    static func mapElement(input input: Input) -> FinalProvider.Element
+    static func mapElement(input: Input) -> FinalProvider.Element
     
-    static var collectionMergeFunc: Optional<[FinalProvider.Element] -> FinalProvider.Element> { get }
+    static var collectionMergeFunc: Optional<([FinalProvider.Element]) -> FinalProvider.Element> { get }
 }
 
 /// Extended to represent if we're a collection binding or unique binding
@@ -54,7 +54,7 @@ public struct _UniqueBinding : _CollectionOrUniqueBindingBase {
 
 
 extension BindingBuilder {
-    func with<Decorator: BindingBuilderDecorator where Decorator.Wrapped == Self>(decorator: Decorator.Type=Decorator.self) -> Decorator {
+    func with<Decorator: BindingBuilderDecorator where Decorator.Wrapped == Self>(_ decorator: Decorator.Type=Decorator.self) -> Decorator {
         return Decorator(wrapped: self)
     }
 }
@@ -96,7 +96,7 @@ extension BindingBuilder where MaybeScope == _Unscoped {
     }
 
     @warn_unused_result
-    public func scoped<S: Scope>(`in` scope: S.Type) -> ScopedBindingDecorator<Self, S> {
+    public func scoped<S: Scope>(in scope: S.Type) -> ScopedBindingDecorator<Self, S> {
         return self.with()
     }
 }
@@ -105,7 +105,7 @@ extension BindingBuilder where MaybeScope == _Unscoped {
 
 extension BindingBuilder {
     public func to(
-        file file: StaticString=#file,
+        file: StaticString=#file,
              line: Int=#line,
              function: StaticString=#function,
              provider: Provider<Input>) {
@@ -117,9 +117,9 @@ extension BindingBuilder {
 
         let isCollectionBinding = CollectionOrUnique.isCollectionBinding
         
-        let anyCollectionMergeFunc: Optional<[Any] -> Any>
+        let anyCollectionMergeFunc: Optional<([Any]) -> Any>
         
-        if let mergeFunc = self.dynamicType.collectionMergeFunc {
+        if let mergeFunc = type(of: self).collectionMergeFunc {
             precondition(isCollectionBinding)
             anyCollectionMergeFunc = { inputs in
                 return mergeFunc(inputs.map { $0 as! FinalProvider.Element })
@@ -152,7 +152,7 @@ extension BindingBuilder {
     
     
     public func to(
-        value value: Input,
+        value: Input,
               file: StaticString=#file,
               line: Int=#line,
               function: StaticString=#function
@@ -167,11 +167,12 @@ extension BindingBuilder {
      This is the 0th arity `to(factory:)` function. This finishes the binding process.
      */
     public func to(
-        file file: StaticString=#file,
+        file: StaticString=#file,
              line: Int=#line,
              function: StaticString=#function,
-             factory: () -> Input) {
+             factory: @escaping () -> Input) {
         
         to(file: file, line: line, function: function, provider: Provider(getter: factory))
     }
 }
+

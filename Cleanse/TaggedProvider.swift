@@ -13,7 +13,7 @@ public struct TaggedProvider<Tag: Cleanse.Tag> : ProviderProtocol {
 
     let getter: () -> Element
     
-    public init(getter: () -> Element) {
+    public init(getter: @escaping () -> Element) {
         self.getter = getter
     }
 
@@ -27,7 +27,7 @@ protocol AnyTaggedProvider : AnyProvider {
 }
 
 extension TaggedProvider : AnyTaggedProvider {
-    static func makeNew(getter getter: () -> Any) -> AnyProvider {
+    static func makeNew(getter: @escaping () -> Any) -> AnyProvider {
         return TaggedProvider(getter: { getter() as! Element })
     }
     

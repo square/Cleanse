@@ -9,7 +9,7 @@
 import Foundation
 
 class VisitorState<V: ComponentVisitor> {
-    private var enqueuedRequirementFutures = [AnyProvider.Type]()
+    fileprivate var enqueuedRequirementFutures = [AnyProvider.Type]()
     /// These are for errors that make it impossible to traverse the module hierarchy
 
     init() {
@@ -23,43 +23,43 @@ protocol ComponentVisitor : Binder {
     /// Have to implement this to have a return value for a provider. Default implementation explodes
     func resolveProvider<Element>(_ type: Element.Type, requiredBy: Any.Type?) -> Provider<Element>
     
-    func enterModule<M: Module>(module module: M.Type)
-    func leaveModule<M: Module>(module module: M.Type)
+    func enterModule<M: Module>(module: M.Type)
+    func leaveModule<M: Module>(module: M.Type)
 
-    func enterComponent<C: Component>(dependency dependency: C.Type)
-    func leaveComponent<C: Component>(dependency dependency: C.Type)
+    func enterComponent<C: Component>(dependency: C.Type)
+    func leaveComponent<C: Component>(dependency: C.Type)
 
-    func enterProvider(binding binding: RawProviderBinding)
-    func leaveProvider(binding binding: RawProviderBinding)
+    func enterProvider(binding: RawProviderBinding)
+    func leaveProvider(binding: RawProviderBinding)
     
-    func visitRequirement(requirement requirement: AnyProvider.Type, binding: RawProviderBinding)
+    func visitRequirement(requirement: AnyProvider.Type, binding: RawProviderBinding)
 }
 
 extension ComponentVisitor {
-    func enterModule<M : Module>(module module: M.Type) {
+    func enterModule<M : Module>(module: M.Type) {
     }
     
-    func leaveModule<M : Module>(module module: M.Type) {
+    func leaveModule<M : Module>(module: M.Type) {
     }
     
-    func enterProvider(binding binding: RawProviderBinding) {
+    func enterProvider(binding: RawProviderBinding) {
     }
     
-    func leaveProvider(binding binding: RawProviderBinding) {
+    func leaveProvider(binding: RawProviderBinding) {
     }
 
-    func enterComponent<C: Component>(dependency dependency: C.Type) {
+    func enterComponent<C: Component>(dependency: C.Type) {
     }
 
-    func leaveComponent<C: Component>(dependency dependency: C.Type) {
+    func leaveComponent<C: Component>(dependency: C.Type) {
     }
 
-    func visitRequirement(requirement requirement: AnyProvider.Type, binding: RawProviderBinding) {
+    func visitRequirement(requirement: AnyProvider.Type, binding: RawProviderBinding) {
     }
 }
 
 extension ComponentVisitor {
-     func _internalBind(binding binding: RawProviderBinding) {
+     func _internalBind(binding: RawProviderBinding) {
         enterProvider(binding: binding)
         
         let requirements = visitorState.enqueuedRequirementFutures
@@ -73,13 +73,13 @@ extension ComponentVisitor {
     }
 
     
-    func install<M : Module>(module module: M.Type) {
+    func install<M : Module>(module: M.Type) {
         enterModule(module: module)
         module.configure(binder: self)
         leaveModule(module: module)
     }
 
-    func install<C : Cleanse.Component>(dependency dependency: C.Type) {
+    func install<C : Cleanse.Component>(dependency: C.Type) {
         bind(ComponentFactory<C>.self).to { () -> ComponentFactory<C> in
             preconditionFailure("Should not ever evaluate"); _ = Void()
         }

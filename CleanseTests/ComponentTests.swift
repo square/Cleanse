@@ -67,7 +67,7 @@ class ComponentTests: XCTestCase {
             self.allLoggedOutStrings = allLoggedOutStrings
         }
 
-        func nameOfUser(userID: String) -> String? {
+        func nameOfUser(_ userID: String) -> String? {
             return loggedInComponentFactory.build(userID).userProvider.get().name
         }
     }
@@ -75,7 +75,7 @@ class ComponentTests: XCTestCase {
     struct AppComponent : RootComponent {
         public typealias Root = App
 
-        static func configure<B : Binder>(binder binder: B) {
+        static func configure<B : Binder>(binder: B) {
             binder
                 .bind(App.self)
                 .to(factory: App.init)
@@ -114,7 +114,7 @@ class ComponentTests: XCTestCase {
         typealias Seed = TaggedProvider<UserID>  // Our seed is the UserID
         typealias Scope = UserScoped
 
-        static func configure<B : Binder>(binder binder: B) {
+        static func configure<B : Binder>(binder: B) {
             binder.bind().to(factory: User.init)
             binder.bind().to(factory: LoggedInRoot.init)
 
@@ -158,7 +158,7 @@ class ComponentTests: XCTestCase {
     }
 
     struct UserServiceModule : Module {
-        static func configure<B : Binder>(binder binder: B) {
+        static func configure<B : Binder>(binder: B) {
             binder
                 .bind(UserService.self)
                 .to(factory: UserServiceImpl.init)
@@ -167,13 +167,13 @@ class ComponentTests: XCTestCase {
 }
 
 protocol UserService {
-    func getNameForUser(userID userID: String) -> String?
+    func getNameForUser(userID: String) -> String?
 }
 
 struct UserServiceImpl : UserService, Scoped {
     typealias Scope = Singleton
 
-    func getNameForUser(userID userID: String) -> String? {
+    func getNameForUser(userID: String) -> String? {
         switch userID {
         case "user-1": return "User One"
         case "user-2": return "User Two"

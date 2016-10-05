@@ -18,7 +18,7 @@ class ComponentVisitorTests: XCTestCase {
         typealias Root = RR
         typealias Seed = String
 
-        static func configure<B : Binder>(binder binder: B) {
+        static func configure<B : Binder>(binder: B) {
             binder.install(dependency: Component1.self)
             binder.install(dependency: Component2.self)
 
@@ -38,7 +38,7 @@ class ComponentVisitorTests: XCTestCase {
     struct Component1 : Cleanse.Component {
         typealias Root = R1
 
-        static func configure<B : Binder>(binder binder: B) {
+        static func configure<B : Binder>(binder: B) {
             binder.bind().to(factory: R1.init)
         }
     }
@@ -47,7 +47,7 @@ class ComponentVisitorTests: XCTestCase {
         typealias Root = R2
         typealias Seed = String
 
-        static func configure<B : Binder>(binder binder: B) {
+        static func configure<B : Binder>(binder: B) {
             binder.bind().to(factory: R2.init)
         }
     }

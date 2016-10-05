@@ -17,7 +17,7 @@ public struct RawProviderBinding {
     let provider: AnyProvider
 
     /// Input is actually `[Element]` where `Element: Collection`
-    let collectionMergeFunc: Optional<[Any] -> Any>
+    let collectionMergeFunc: Optional<([Any]) -> Any>
 
     let sourceLocation: SourceLocation?
 }

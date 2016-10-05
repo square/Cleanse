@@ -14,7 +14,7 @@ import Foundation
 extension Binder {
     /// First step in creating a property injector.
     @warn_unused_result
-    public func bindPropertyInjectionOf<Element: AnyObject>(_ `class`: Element.Type=Element.self) -> PropertyInjectorBindingBuilder<Self, Element> {
+    public func bindPropertyInjectionOf<Element: AnyObject>(_ class: Element.Type=Element.self) -> PropertyInjectorBindingBuilder<Self, Element> {
         return PropertyInjectorBindingBuilder(binder: self)
     }
 }
@@ -40,9 +40,9 @@ extension PropertyInjectorBindingBuilderProtocol {
 
 /// This is the builder used to bind a property injection. This is constructed by calling `Binder.bindPropertyInjectionOf`
 public struct PropertyInjectorBindingBuilder<B: Binder, Element: AnyObject> : PropertyInjectorBindingBuilderProtocol {
-    private let binder: B
+    fileprivate let binder: B
     
-    private init(binder: B) {
+    fileprivate init(binder: B) {
         self.binder = binder
     }
     
@@ -54,7 +54,7 @@ public struct PropertyInjectorBindingBuilder<B: Binder, Element: AnyObject> : Pr
 
 extension PropertyInjectorBindingBuilderProtocol {
     /// This is where the injection happens    
-    func innerTo(propertyInjector propertyInjector: Element -> (),
+    func innerTo(propertyInjector: @escaping (Element) -> (),
                  file: StaticString,
                  line: Int,
                  function: StaticString) {
@@ -62,7 +62,7 @@ extension PropertyInjectorBindingBuilderProtocol {
         let realBuilder = toPropertyInjectorBindingBuilder()
         let binder = realBuilder.binder
         
-        typealias Injector = Element -> ()
+        typealias Injector = (Element) -> ()
         
         binder
             .bind()

@@ -11,11 +11,11 @@ import Foundation
 /// These are helpers to make it so we can use a swift-3 compatible API
 
 #if !swift(>=3.0)
-    extension CollectionType {
+    extension Collection {
         /// Backwards-compatible swift 2.2 shim
         @warn_unused_result
-        func enumerated() -> EnumerateSequence<Self> {
-            return self.enumerate()
+        func enumerated() -> EnumeratedSequence<Self> {
+            return self.enumerated()
         }
     }
     
@@ -23,17 +23,17 @@ import Foundation
         /// Backwards-compatible swift 2.2 shim
         @warn_unused_result
         func components(separatedBy separator: String) -> [String] {
-            return self.componentsSeparatedByString(separator)
+            return self.components(separatedBy: separator)
         }
     }
     
     
-    extension SequenceType where Generator.Element == String {
+    extension Sequence where Iterator.Element == String {
         
         /// Backwards-compatible swift 2.2 shim
         @warn_unused_result
-        public func joined(separator separator: String) -> String {
-            return self.joinWithSeparator(separator)
+        public func joined(separator: String) -> String {
+            return self.joined(separator: separator)
         }
     }
     
@@ -47,9 +47,9 @@ import Foundation
     
     extension Array {
         func reversed() -> ReverseRandomAccessCollection<Array> {
-            return self.reverse()
+            return self.reversed()
         }
     }
     
-    public typealias RangeReplaceableCollection = RangeReplaceableCollectionType
+    public typealias RangeReplaceableCollection = Swift.RangeReplaceableCollection
 #endif

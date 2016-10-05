@@ -13,13 +13,13 @@ import XCTest
 
 
 enum Cheese {
-    case American
-    case Cheddar
+    case american
+    case cheddar
 }
 
 enum Roll {
-    case Ciabatta
-    case Kaiser
+    case ciabatta
+    case kaiser
 }
 
 struct Burger {
@@ -35,7 +35,7 @@ struct Grill {
 }
 
 struct GrillModule : Module {
-    static func configure<B : Binder>(binder binder: B) {
+    static func configure<B : Binder>(binder: B) {
         binder.install(module: BurgerModule.self)
         
         binder.bind().to(factory: Grill.init)
@@ -43,27 +43,27 @@ struct GrillModule : Module {
 }
 
 struct BaseURLTag : Tag {
-    typealias Element = NSURL
+    typealias Element = URL
 }
 
 /// Provides the base URL to the rest of the app
 struct BaseURLModule : Module {
-    static func configure<B : Binder>(binder binder: B) {
+    static func configure<B : Binder>(binder: B) {
         binder
-            .bind(NSURL.self)
+            .bind(URL.self)
             .tagged(with: BaseURLTag.self)
-            .to(value: NSURL(string: "https://api.squareup.com")!)
+            .to(value: URL(string: "https://api.squareup.com")!)
     }
 }
 
 class SomethingThatDoesAnAPICall {
-    let baseURL: NSURL
+    let baseURL: URL
     init(baseURL: TaggedProvider<BaseURLTag>) {
         self.baseURL = baseURL.get()
     }
     
     struct Module : Cleanse.Module {
-        static func configure<B : Binder>(binder binder: B) {
+        static func configure<B : Binder>(binder: B) {
             binder
                 .bind(SomethingThatDoesAnAPICall.self)
                 .to(factory: SomethingThatDoesAnAPICall.init)
@@ -79,7 +79,7 @@ struct RootAPI {
 struct APIComponent : RootComponent {
     typealias Root = RootAPI
     
-    static func configure<B : Binder>(binder binder: B) {
+    static func configure<B : Binder>(binder: B) {
         // "install" the modules that create the component
         binder.install(module: BaseURLModule.self)
         binder.install(module: SomethingThatDoesAnAPICall.Module.self)
@@ -92,10 +92,10 @@ struct APIComponent : RootComponent {
 }
 
 struct BurgerModule : Module {
-    static func configure<B : Binder>(binder binder: B) {
+    static func configure<B : Binder>(binder: B) {
         binder.bind().to(factory: Burger.init)
-        binder.bind().to { return Cheese.Cheddar }
-        binder.bind().to { Roll.Ciabatta }
+        binder.bind().to { return Cheese.cheddar }
+        binder.bind().to { Roll.ciabatta }
         
         var singletonCountTest = 1
         binder
@@ -132,7 +132,7 @@ struct BurgerIndex : Tag {
 
 struct SimpleModule : RootComponent {
     typealias Root = Int
-    static func configure<B : Binder>(binder binder: B) {
+    static func configure<B : Binder>(binder: B) {
         binder.bind().to(value: 3)
     }
 }
@@ -177,7 +177,7 @@ class CleanseTests: XCTestCase {
     }
 
     struct CollectionBuilderBindingModule : Module {
-        static func configure<B : Binder>(binder binder: B) {
+        static func configure<B : Binder>(binder: B) {
             
             binder
                 .bind()
@@ -219,7 +219,7 @@ class CleanseTests: XCTestCase {
     struct CollectionBuilderBindingTestComponent : RootComponent {
         typealias Root = ProviderResults
 
-        static func configure<B : Binder>(binder binder: B) {
+        static func configure<B : Binder>(binder: B) {
             binder.install(module: CollectionBuilderBindingModule.self)
         }
     }

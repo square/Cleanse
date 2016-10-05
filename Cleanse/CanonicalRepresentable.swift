@@ -10,13 +10,13 @@ import Foundation
 
 protocol AnyCanonicalRepresentable {
     static var canonicalProviderType: AnyProvider.Type { get }
-    static func transformFromCanonicalAnyCanonical(canonicalProvider canonicalProvider: AnyProvider) -> AnyProvider
+    static func transformFromCanonicalAnyCanonical(canonicalProvider: AnyProvider) -> AnyProvider
 }
 
 protocol CanonicalRepresentable : AnyCanonicalRepresentable {
     associatedtype Canonical
     
-    static func transformFromCanonicalCanonical(canonical canonical: Canonical) -> Self
+    static func transformFromCanonicalCanonical(canonical: Canonical) -> Self
 }
 
 extension CanonicalRepresentable {
@@ -24,7 +24,7 @@ extension CanonicalRepresentable {
         return Provider<Canonical>.self
     }
     
-    static func transformFromCanonicalAnyCanonical(canonicalProvider canonicalProvider: AnyProvider) -> AnyProvider {
+    static func transformFromCanonicalAnyCanonical(canonicalProvider: AnyProvider) -> AnyProvider {
         let typedProvider = canonicalProvider.asCheckedProvider(Canonical.self)
         return typedProvider.map(transform: Self.transformFromCanonicalCanonical)
     }
@@ -33,7 +33,7 @@ extension CanonicalRepresentable {
 extension ImplicitlyUnwrappedOptional : CanonicalRepresentable {
     typealias Canonical = Wrapped
 
-    static func transformFromCanonicalCanonical(canonical canonical: Wrapped) -> ImplicitlyUnwrappedOptional {
+    static func transformFromCanonicalCanonical(canonical: Wrapped) -> ImplicitlyUnwrappedOptional {
         return canonical
     }
 }
@@ -41,7 +41,7 @@ extension ImplicitlyUnwrappedOptional : CanonicalRepresentable {
 extension Optional : CanonicalRepresentable {
     typealias Canonical = Wrapped
     
-    static func transformFromCanonicalCanonical(canonical canonical: Wrapped) -> Optional {
+    static func transformFromCanonicalCanonical(canonical: Wrapped) -> Optional {
         return canonical
     }
 }

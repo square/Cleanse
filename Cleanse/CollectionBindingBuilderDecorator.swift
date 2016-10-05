@@ -20,12 +20,12 @@ public struct CollectionBindingBuilderDecorator<Wrapped: BindingBuilder  where W
         self.wrapped = wrapped
     }
     
-    public static func mapElement(input input: Input) -> FinalProvider.Element {
+    public static func mapElement(input: Input) -> FinalProvider.Element {
         return input.map(Wrapped.mapElement)
     }
     
-    public static var collectionMergeFunc: Optional<[FinalProvider.Element] -> FinalProvider.Element> {
-        return { Array($0.flatten()) }
+    public static var collectionMergeFunc: Optional<([FinalProvider.Element]) -> FinalProvider.Element> {
+        return { Array($0.joined()) }
     }
 }
 

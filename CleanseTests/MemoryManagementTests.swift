@@ -18,7 +18,7 @@ class MemoryManagementTests: XCTestCase {
     struct MemoryManagementTestsComponent : Cleanse.RootComponent {
         typealias Root = MemoryManagementTests.Root
         
-        static func configure<B : Binder>(binder binder: B) {
+        static func configure<B : Binder>(binder: B) {
             
             binder.bind().to(factory: Root.init)
             
@@ -53,14 +53,14 @@ class MemoryManagementTests: XCTestCase {
         let single2: Single2
         
         init(single2: Single2) {
-            self.dynamicType.counter += 1
-            self.value = self.dynamicType.counter
+            type(of: self).counter += 1
+            self.value = type(of: self).counter
             self.single2 = single2
         }
     }
     
     class Single2 {
-        private let single1: Single1
+        fileprivate let single1: Single1
         init(single1: Single1) {
             self.single1 = single1
         }
@@ -76,7 +76,7 @@ class MemoryManagementTests: XCTestCase {
     }
 
     struct Module : Cleanse.Module {
-        static func configure<B : Binder>(binder binder: B) {
+        static func configure<B : Binder>(binder: B) {
             binder.bind().asSingleton().to(factory: Single1.init)
             binder.bind().asSingleton().to(factory: Single2.init)
             binder.bind().asSingleton().to(factory: SingleStruct1.init)
@@ -190,9 +190,9 @@ class MemoryManagementTests: XCTestCase {
 
 #if !swift(>=3.0)
     
-    extension CollectionType {
-        func sorted(@noescape isOrderedBefore: (Self.Generator.Element, Self.Generator.Element) -> Bool) -> [Self.Generator.Element] {
-            return self.sort(isOrderedBefore)
+    extension Collection {
+        func sorted(@noescape _ isOrderedBefore: (Self.Iterator.Element, Self.Iterator.Element) -> Bool) -> [Self.Iterator.Element] {
+            return self.sorted(by: isOrderedBefore)
         }
     }
 

@@ -23,12 +23,12 @@ public struct SingularCollectionBindingBuilderDecorator<Wrapped: BindingBuilder
         self.wrapped = wrapped
     }
     
-    public static func mapElement(input input: Wrapped.Input) -> FinalProvider.Element {
+    public static func mapElement(input: Wrapped.Input) -> FinalProvider.Element {
         return [Wrapped.mapElement(input: input)]
     }
     
-    public static var collectionMergeFunc: Optional<[FinalProvider.Element] -> FinalProvider.Element> {
-        return { Array($0.flatten()) }
+    public static var collectionMergeFunc: Optional<([FinalProvider.Element]) -> FinalProvider.Element> {
+        return { Array($0.joined()) }
     }
 }
 

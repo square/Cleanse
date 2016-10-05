@@ -16,7 +16,7 @@ import XCTest
 class DebuggingTests: XCTestCase {
     
     struct FooModule : Module {
-        static func configure<B : Binder>(binder binder: B) {
+        static func configure<B : Binder>(binder: B) {
             binder.bind().to(value: 3)
             binder.bind().to(value: "Imma string")
         }
@@ -36,12 +36,12 @@ class DebuggingTests: XCTestCase {
         
         Assert(description, contains: "Provider<String>")
         Assert(description, contains: "Provider<Int>")
-        Assert(description, contains: "Provider<() -> Int>")
-        Assert(description, contains: "Provider<() -> String>")
+        Assert(description, contains: "Provider<(()) -> Int>")
+        Assert(description, contains: "Provider<(()) -> String>")
     }
 }
 
 
-func Assert(@autoclosure _ entireString: () throws -> String, @autoclosure contains expectedContents: () throws -> String, file: StaticString = #file, line: UInt = #line) {
+func Assert(_ entireString: @autoclosure () throws -> String, contains expectedContents: @autoclosure () throws -> String, file: StaticString = #file, line: UInt = #line) {
     XCTAssertTrue(try entireString().contains(expectedContents()), "Expected \(try! entireString()) to contain \(try! expectedContents())", file: file, line: line)
 }

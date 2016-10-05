@@ -11,7 +11,7 @@ import Foundation
 #if SUPPORT_LEGACY_OBJECT_GRAPH
 
 typealias LegacyProviderProvider = (AnyClass, String?) -> () -> AnyObject
-typealias LegacyPropertyInjectorProvider = AnyClass -> AnyObject -> ()
+typealias LegacyPropertyInjectorProvider = (AnyClass) -> (AnyObject) -> ()
 
 /// Protocol with base method for LegacyObjectGraph
 public protocol LegacyObjectGraphProtocol {
@@ -64,7 +64,7 @@ public protocol LegacyObjectGraphProtocol {
     
     /// Injects properties into an injectable class marked with ST_INJECT(). These properties must be declared in the base interface
     @objc public func injectPropertiesIntoObject(object: AnyObject) {
-        graph.legacyPropertyInjector(cls: object.dynamicType)(object)
+        graph.legacyPropertyInjector(cls: type(of: object))(object)
     }
 }
 

@@ -18,6 +18,6 @@ import Foundation
  */
 public protocol Module : Configurable {
     /// This is where configuring providers occurs.
-    static func configure<B: Binder>(binder binder: B) // Re-declared to provide more specific description
+    static func configure<B: Binder>(binder: B) // Re-declared to provide more specific description
 }
 

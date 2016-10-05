@@ -11,9 +11,9 @@ import Foundation
 public struct WeakProvider<E: AnyObject> : ProviderProtocol {
     public typealias Element = E?
 
-    private let getter: () -> Element
+    fileprivate let getter: () -> Element
 
-    public init(getter: () -> Element) {
+    public init(getter: @escaping () -> Element) {
         self.getter = getter
     }
 
@@ -28,7 +28,7 @@ protocol AnyWeakProvider : AnyProvider {
 }
 
 extension WeakProvider : AnyProvider, AnyWeakProvider {
-    static func makeNew(getter getter: () -> Any) -> AnyProvider {
+    static func makeNew(getter: @escaping () -> Any) -> AnyProvider {
         return WeakProvider(getter: {
             getter() as? E
         })

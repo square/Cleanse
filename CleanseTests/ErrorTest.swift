@@ -20,7 +20,7 @@ class ErrorTests: XCTestCase {
     struct PropertyInjectionWithMissingDependenciesComponent : RootComponent {
         typealias Root = PropertyInjector<ErrorTests>
 
-        static func configure<B : Binder>(binder binder: B) {
+        static func configure<B : Binder>(binder: B) {
             binder.install(module: ModuleWithMissingDependencies.self)
         }
     }
@@ -43,7 +43,7 @@ Missing provider of type TaggedProvider<GTag>
          
 */
         do {
-            _ = try ComponentFactory.of(PropertyInjectionWithMissingDependenciesComponent)
+            _ = try ComponentFactory.of(PropertyInjectionWithMissingDependenciesComponent.self)
             
             XCTFail("Should not succeed")
         } catch let e as MultiError {
@@ -92,7 +92,7 @@ Missing provider of type TaggedProvider<GTag>
     }
     
     struct ModuleWithMissingDependencies : Module {
-        static func configure<B : Binder>(binder binder: B) {
+        static func configure<B : Binder>(binder: B) {
             binder.bind().to(factory: StructWithDependencies.init)
             binder.bind().to(factory: StructWithDependencies2.init)
             
@@ -115,8 +115,8 @@ Missing provider of type TaggedProvider<GTag>
     
     extension String {
         @warn_unused_result
-        func contains(other: String) -> Bool {
-            return self.containsString(other)
+        func contains(_ other: String) -> Bool {
+            return self.contains(other)
         }
     }
     

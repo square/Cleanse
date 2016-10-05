@@ -24,7 +24,7 @@ class ScopeErrorTests: XCTestCase {
         typealias Scope = Scope1
         typealias Root = String
 
-        static func configure<B : Binder>(binder binder: B) {
+        static func configure<B : Binder>(binder: B) {
             binder
                 .bind(String.self)
                 .scoped(in: Scope2.self)
@@ -45,7 +45,7 @@ class ScopeErrorTests: XCTestCase {
         typealias Scope = Scope1
         typealias Root = String
 
-        static func configure<B : Binder>(binder binder: B) {
+        static func configure<B : Binder>(binder: B) {
             binder
                 .bind(String.self)
                 .asSingleton()
@@ -70,7 +70,7 @@ class ScopeErrorTests: XCTestCase {
         typealias Scope = Scope1
         typealias Root = String
 
-        static func configure<B : Binder>(binder binder: B) {
+        static func configure<B : Binder>(binder: B) {
             binder
                 .bind(SomeScopedStruct.self)
                 .to(value: SomeScopedStruct())
@@ -90,7 +90,7 @@ class ScopeErrorTests: XCTestCase {
         typealias Scope = Scope1
         typealias Root = String
 
-        static func configure<B : Binder>(binder binder: B) {
+        static func configure<B : Binder>(binder: B) {
             binder.install(dependency: InvalidInnerComponent.self)
 
             binder.bind().to { ($0 as ComponentFactory<InvalidInnerComponent>).build() }
@@ -101,7 +101,7 @@ class ScopeErrorTests: XCTestCase {
         typealias Scope = Scope2
         typealias Root = String
 
-        static func configure<B : Binder>(binder binder: B) {
+        static func configure<B : Binder>(binder: B) {
             binder
                 .bind(String.self)
                 .scoped(in: Scope1.self)
@@ -122,7 +122,7 @@ class ScopeErrorTests: XCTestCase {
         typealias Scope = Scope1
         typealias Root = String
 
-        static func configure<B : Binder>(binder binder: B) {
+        static func configure<B : Binder>(binder: B) {
             binder.install(dependency: InvalidInnerComponentWithSameScope.self)
 
             binder.bind().to { ($0 as ComponentFactory<InvalidInnerComponentWithSameScope>).build() }
@@ -133,7 +133,7 @@ class ScopeErrorTests: XCTestCase {
         typealias Scope = Scope1
         typealias Root = String
 
-        static func configure<B : Binder>(binder binder: B) {
+        static func configure<B : Binder>(binder: B) {
             binder
                 .bind(String.self)
                 .scoped(in: Scope1.self)
