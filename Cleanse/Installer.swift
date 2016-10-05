@@ -19,7 +19,4 @@ public protocol Installer : class {
     func install<M: Module>(module module: M.Type)
 
     func install<C: Component>(dependency dependency: C.Type)
-
-    /// This is used internally to support override modules
-    func _internalWithOverrides(@noescape closure closure: () -> ())
 }

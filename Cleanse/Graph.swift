@@ -52,24 +52,6 @@ class Graph : Binder {
     
     var finalized = false
     
-    /// Hack to
-    private var inOverridesMode = false
-    
-    func withOverrides(@noescape closure closure: () -> ()) {
-        precondition(!finalized, "Can only call this before finalizing")
-        
-        let oldModeMode = inOverridesMode
-        defer { inOverridesMode = oldModeMode }
-        
-        inOverridesMode = true
-        
-        closure()
-    }
-    
-    func _internalWithOverrides(@noescape closure closure: () -> ()) {
-        withOverrides(closure: closure)
-    }
-
     func _internalBind(binding binding: RawProviderBinding) {
 
         let scopedProvider: AnyProvider
@@ -128,10 +110,8 @@ class Graph : Binder {
         /// If Tag is a _VoidTag, then we want to add it as a provider without the tagged type
         let key = RequirementKey(provider.dynamicType)
 
-        if !inOverridesMode {
-            if let existingKey = providers[key] {
-                fatalError("Already bound at \(existingKey.instanceProvidesType)")
-            }
+        if let existingKey = providers[key] {
+            fatalError("Already bound at \(existingKey.instanceProvidesType)")
         }
 
         providers[key] = provider
@@ -350,7 +330,7 @@ class Graph : Binder {
         
         if provider.instanceProvidesType is AnyClass || provider.instanceProvidesType == String.self {
             let legacyKey = LegacyKey(cls: provider.instanceProvidesType, name: tag?.legacyName)
-            precondition(inOverridesMode || legacyKeyToKey[legacyKey] == nil)
+            precondition(legacyKeyToKey[legacyKey] == nil)
             legacyKeyToKey[legacyKey] = provider.dynamicType
         }
         

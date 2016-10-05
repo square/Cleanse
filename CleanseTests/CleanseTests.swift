@@ -215,10 +215,17 @@ class CleanseTests: XCTestCase {
     struct ProviderResults {
         let taggedIntCollection1: TaggedProvider<MyIntTag>
     }
-    
+
+    struct CollectionBuilderBindingTestComponent : RootComponent {
+        typealias Root = ProviderResults
+
+        static func configure<B : Binder>(binder binder: B) {
+            binder.install(module: CollectionBuilderBindingModule.self)
+        }
+    }
+
     func test_CollectionBuilderBinding() {
-        let results = try! ComponentFactory.of(ModuleComponent<CollectionBuilderBindingModule, ProviderResults>.self).build()
-        
+        let results = try! ComponentFactory.of(CollectionBuilderBindingTestComponent.self).build()
         XCTAssertEqual(results.taggedIntCollection1.get().sorted(), [1,2,3,8,9,10,11])
     }
 }

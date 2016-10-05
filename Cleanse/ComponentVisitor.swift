@@ -11,17 +11,11 @@ import Foundation
 class VisitorState<V: ComponentVisitor> {
     private var enqueuedRequirementFutures = [AnyProvider.Type]()
     /// These are for errors that make it impossible to traverse the module hierarchy
-    private var accumulatedErrors  = [CleanseError]()
-    
     private var inOverridesMode = false
     
     private var proxyObjectProviders = Dictionary<ProxyTypeKey, AnyProvider>()
     
     init() {
-    }
-    
-    private func appendError<Element: CleanseError>(error error: Element) {
-        self.accumulatedErrors.append(error)
     }
 }
 
@@ -145,14 +139,5 @@ extension ComponentVisitor {
         return Provider {
             preconditionFailure("Cannot call synthesized provider. Invalid requested type: \(Element.self). Depended on by \(requiredBy!)"); _ = ()
         }
-    }
-    
-    func _internalWithOverrides(@noescape closure closure: () -> ()) {
-        let oldModeMode = visitorState.inOverridesMode
-        defer { visitorState.inOverridesMode = oldModeMode }
-        
-        visitorState.inOverridesMode = true
-        
-        closure()
     }
 }

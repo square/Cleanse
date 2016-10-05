@@ -40,9 +40,3 @@ extension TaggedProvider : AnyTaggedProvider {
         return Tag.self
     }
 }
-
-extension TaggedProvider : ProviderConvertible {
-    public func asProvider() -> Provider<Element> {
-        return Provider(getter: self.getter)
-    }
-}

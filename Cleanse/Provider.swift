@@ -8,14 +8,6 @@
 
 import Foundation
 
-
-
-public protocol ProviderConvertible {
-    associatedtype Element
-    
-    func asProvider() -> Provider<Element>
-}
-
 /**
  Protocol for providers. The canonical implementation is `Provider`, but `TaggedProvider` exists as well.
  */
@@ -144,18 +136,5 @@ extension ProviderProtocol where Self: AnyProvider {
         
         let getter = self.get
         return Provider { (getter() as! AnyProvider).asCheckedProvider(CheckedE.self).get() }
-    }
-}
-
-extension Provider : ProviderConvertible {
-    public func asProvider() -> Provider<Element> {
-        return self
-    }
-}
-
-extension ProviderProtocol {
-    /// Providers can always be proxy objects
-    static var isActuallyProxyObject: Bool {
-        return true
     }
 }

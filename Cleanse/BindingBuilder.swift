@@ -104,13 +104,13 @@ extension BindingBuilder where MaybeScope == _Unscoped {
 /// Terminating functions
 
 extension BindingBuilder {
-    public func to<P: ProviderConvertible where P.Element == Input>(
+    public func to(
         file file: StaticString=#file,
              line: Int=#line,
              function: StaticString=#function,
-             provider: P) {
+             provider: Provider<Input>) {
         
-        let mappedProvider = FinalProvider(other: provider.asProvider().map(transform: Self.mapElement))
+        let mappedProvider = FinalProvider(other: provider.map(transform: Self.mapElement))
 
         let typeErasedProvider: AnyProvider
 
