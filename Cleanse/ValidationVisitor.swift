@@ -21,18 +21,6 @@ extension AnyProvider where Self: ProviderProtocol {
     }
 }
 
-private struct ComponentKey : TypeKeyProtocol {
-    let ctype: _AnyBaseComponent.Type
-
-    var type: Any.Type {
-        return ctype
-    }
-
-    init<C: Component>(_ type: C.Type) {
-        self.ctype = type
-    }
-}
-
 private struct ProviderKey : TypeKeyProtocol {
     let ctype: AnyProvider.Type
 
