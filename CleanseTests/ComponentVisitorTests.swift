@@ -16,6 +16,7 @@ class ComponentVisitorTests: XCTestCase {
 
     struct RootComponent : Cleanse.RootComponent {
         typealias Root = RR
+        typealias Seed = String
 
         static func configure<B : Binder>(binder binder: B) {
             binder.install(dependency: Component1.self)
@@ -23,7 +24,9 @@ class ComponentVisitorTests: XCTestCase {
 
             binder
                 .bind(RR.self)
-                .to(factory: RR.init)
+                .to { (cf1: ComponentFactory<Component1>, cf2: ComponentFactory<Component2>, s: String) in
+                    return RR(r1: cf1.build(), r2: cf2.build(s))
+            }
         }
     }
 
@@ -36,15 +39,16 @@ class ComponentVisitorTests: XCTestCase {
         typealias Root = R1
 
         static func configure<B : Binder>(binder binder: B) {
-            binder.bind().to(value: R1.init)
+            binder.bind().to(factory: R1.init)
         }
     }
 
     struct Component2 : Cleanse.Component {
         typealias Root = R2
+        typealias Seed = String
 
         static func configure<B : Binder>(binder binder: B) {
-            binder.bind().to(value: R2.init)
+            binder.bind().to(factory: R2.init)
         }
     }
     
@@ -52,6 +56,7 @@ class ComponentVisitorTests: XCTestCase {
     }
     
     struct R2 {
+        let foo: String
     }
 
     final class NoopVisitor : ComponentVisitor {
@@ -63,5 +68,10 @@ class ComponentVisitorTests: XCTestCase {
             NoopVisitor()
         v.install(dependency: RootComponent.self)
     }
-    
+
+    func testNoopComponentVisitorValidate() {
+        let root = try! ComponentFactory.of(RootComponent.self).build("Hi!")
+
+        XCTAssertEqual(root.r2.foo, "Hi!")
+    }
 }
