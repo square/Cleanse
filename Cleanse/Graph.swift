@@ -130,13 +130,10 @@ class Graph : Binder {
     
     /// Add provider for elements of a collection
     private func addCollectionProvider(provider provider: AnyProvider, mergeFunc: [Any] -> Any) {
-        let key: RequirementKey
         let collectionProviderKey: CollectionProvidersKey
         
-        key = .init(provider.dynamicType)
         collectionProviderKey = .init(provider.dynamicType)
         
-    
         if collectionProviders[collectionProviderKey] == nil {
             finalizables.append(AnonymousFinalizable {
                 let collectionProviders = self.gatherAllCollectionProviders(key: collectionProviderKey)
@@ -178,11 +175,9 @@ class Graph : Binder {
     }
 
     @warn_unused_result
-    func _internalProvider<Element>(_ type: Element.Type, debugInfo: ProviderRequestDebugInfo?) -> Provider<Element> {
+    func _internalProvider<Element>(type: Element.Type, debugInfo: ProviderRequestDebugInfo?) -> Provider<Element> {
         precondition(!finalized, "Cannot call \(#function) after finalize is called")
-        
-        let key = RequirementKey(type)
-        
+
         let newRequirements = debugInfo ?? ProviderRequestDebugInfo(requestedType: type, providerRequiredFor: nil, sourceLocation: nil)
 
         let futureProvider = self.findOrCreateFutureProvider(type: type, debugInfo: newRequirements)

@@ -46,11 +46,11 @@ protocol AnyProvider {
     
     static func makeNew(getter getter: () -> Any) -> AnyProvider
 
-    func asCheckedProvider<Element>(_ type: Element.Type) -> Provider<Element>
+    func asCheckedProvider<Element>(type: Element.Type) -> Provider<Element>
     
     
     /// If we're Provider<Provider<Element>> flatten to just be Provider<Element>.
-    func flatten<Element>(_ type: Element.Type) -> Provider<Element>
+    func flatten<Element>(type: Element.Type) -> Provider<Element>
     
 
     static var anyProviderToClosureType: AnyProvider.Type { get }
@@ -58,7 +58,7 @@ protocol AnyProvider {
 
 extension AnyProvider {
     /// Tries to go from untyped `AnyProvider` to original provider
-    func asCheckedProvider<Element>(_ type: Element.Type) -> Provider<Element> {
+    func asCheckedProvider<Element>(type: Element.Type) -> Provider<Element> {
         precondition(Element.self == instanceProvidesType, "When converting to a checked provider, requested type \(type) is not equal to actual type \(instanceProvidesType)")
         let anyProvider = getAny
         return Provider { anyProvider() as! Element }
@@ -128,11 +128,11 @@ extension ProviderProtocol where Self: AnyProvider {
         return get()
     }
     
-    func flatten<CheckedE>(_ type: CheckedE.Type) -> Provider<CheckedE> {
+    func flatten<CheckedE>(type: CheckedE.Type) -> Provider<CheckedE> {
         precondition(Element.self is AnyProvider.Type, "Can only call flatten on Provider<Provider<Element>>")
         precondition((Element.self as! AnyProvider.Type).providesType == CheckedE.self, "CheckedE must be Element.Element")
         
-        let e = Element.self as! AnyProvider.Type
+        _ = Element.self as! AnyProvider.Type
         
         let getter = self.get
         return Provider { (getter() as! AnyProvider).asCheckedProvider(CheckedE.self).get() }

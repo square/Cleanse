@@ -21,7 +21,7 @@ protocol ComponentVisitor : Binder {
     var visitorState: VisitorState<Self> { get set }
     
     /// Have to implement this to have a return value for a provider. Default implementation explodes
-    func resolveProvider<Element>(_ type: Element.Type, requiredBy: Any.Type?) -> Provider<Element>
+    func resolveProvider<Element>(type: Element.Type, requiredBy: Any.Type?) -> Provider<Element>
     
     func enterModule<M: Module>(module module: M.Type)
     func leaveModule<M: Module>(module module: M.Type)
@@ -112,7 +112,7 @@ extension ComponentVisitor {
         leaveComponent(dependency: dependency)
     }
 
-    func _internalProvider<Element>(_ type: Element.Type, debugInfo: ProviderRequestDebugInfo?) -> Provider<Element> {
+    func _internalProvider<Element>(type: Element.Type, debugInfo: ProviderRequestDebugInfo?) -> Provider<Element> {
         if let type = type as? AnyProvider.Type {
             visitorState.enqueuedRequirementFutures.append(type)
         } else {
@@ -122,7 +122,7 @@ extension ComponentVisitor {
         return resolveProvider(Element.self, requiredBy: debugInfo?.providerRequiredFor)
     }
     
-    func resolveProvider<Element>(_ type: Element.Type, requiredBy: Any.Type?) -> Provider<Element> {
+    func resolveProvider<Element>(type: Element.Type, requiredBy: Any.Type?) -> Provider<Element> {
         return Provider {
             preconditionFailure("Cannot call synthesized provider. Invalid requested type: \(Element.self). Depended on by \(requiredBy!)"); _ = ()
         }

@@ -28,7 +28,7 @@ class DebuggingTests: XCTestCase {
         
         // TODO: make it more descriptive
         
-        g.install(module: FooModule.self)
+        g.include(module: FooModule.self)
         
         try! g.finalize()
         
@@ -41,7 +41,6 @@ class DebuggingTests: XCTestCase {
     }
 }
 
-
-func Assert(@autoclosure _ entireString: () throws -> String, @autoclosure contains expectedContents: () throws -> String, file: StaticString = #file, line: UInt = #line) {
+func Assert(@autoclosure entireString: () throws -> String, @autoclosure contains expectedContents: () throws -> String, file: StaticString = #file, line: UInt = #line) {
     XCTAssertTrue(try entireString().contains(expectedContents()), "Expected \(try! entireString()) to contain \(try! expectedContents())", file: file, line: line)
 }

@@ -26,10 +26,10 @@ class ReceiptBindingTests: XCTestCase {
 }
 
 private struct UserServiceComponent<_UserServiceModule: UserServiceModule> : RootComponent {
-    public typealias Root = UserService
+    private typealias Root = UserService
 
     static func configure<B : Binder>(binder binder: B) {
-        binder.install(module: _UserServiceModule.self)
+        binder.include(module: _UserServiceModule.self)
     }
 
     private static func configureRoot(binder bind: ReceiptBinder<Root>) -> BindingReceipt<Root> {

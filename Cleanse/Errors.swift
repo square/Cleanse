@@ -48,7 +48,7 @@ public struct MultiError : CleanseError {
     }
 }
 
-private func canonicalDisplayType(_ t: Any.Type) -> Any.Type {
+private func canonicalDisplayType(t: Any.Type) -> Any.Type {
         if let t = t as? _AnyStandardProvider.Type {
             return t.providesType
         }

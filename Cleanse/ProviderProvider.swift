@@ -14,14 +14,14 @@ import Foundation
  */
 public protocol ProviderProvider : class {
     /// Raw inner function to request a provider. One should call standard provider methods instead
-    func _internalProvider<Element>(_ type: Element.Type, debugInfo: ProviderRequestDebugInfo?) -> Provider<Element>
+    func _internalProvider<Element>(type: Element.Type, debugInfo: ProviderRequestDebugInfo?) -> Provider<Element>
 }
 
 extension ProviderProvider {
     /// - parameter providerRequiredFor: Only used for debugging
     /// - returns: the provider used to obtain instances for the key
     func provider<Element>(
-        _ type: Element.Type,
+        type: Element.Type,
         file: StaticString=#file,
         line: Int=#line,
         function: StaticString=#function,

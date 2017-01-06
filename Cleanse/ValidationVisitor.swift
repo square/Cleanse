@@ -87,11 +87,14 @@ private class ComponentInfo {
             return
         }
 
-        for var current = parent; current != nil; current = current?.parent {
-            let current = current!
-            if current.scope == scope {
-                errors.append(InvalidScopeNesting(scope: scope!, innerComponent: self.componentType!, outerComponent: current.componentType!))
+        var current = parent
+        while current != nil {
+            if let current = current {
+                if current.scope == scope {
+                    errors.append(InvalidScopeNesting(scope: scope!, innerComponent: self.componentType!, outerComponent: current.componentType!))
+                }
             }
+            current = current?.parent
         }
     }
 
@@ -237,9 +240,6 @@ private class ComponentInfo {
 
 
     private func getCurrentProviderInfo(key: ProviderKey) -> [ProviderInfo] {
-        let keyType = key.type
-        let providerKey: ProviderKey
-
         if let current = self.providers[key] where !current.isEmpty {
             return current
         }

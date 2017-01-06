@@ -55,7 +55,7 @@ extension BindingBuilder {
 extension Binder {
     /// Standard entry point to bind something
     @warn_unused_result
-    public func bind<Element>(_ type: Element.Type = Element.self) -> BaseBindingBuilder<Element, Self> {
+    public func bind<Element>(type: Element.Type = Element.self) -> BaseBindingBuilder<Element, Self> {
         return BaseBindingBuilder(binder: self)
     }
 }
@@ -136,9 +136,6 @@ extension BindingBuilder {
              provider: Provider<Input>) -> BindingReceipt<Input> {
         
         let mappedProvider = FinalProvider(other: provider.map(transform: Self.mapElement))
-
-        let typeErasedProvider: AnyProvider
-
 
         let isCollectionBinding = CollectionOrUnique.isCollectionBinding
         

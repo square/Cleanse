@@ -19,7 +19,7 @@ public protocol RootComponent : Component, _AnyRootComponent {
 }
 
 public extension ComponentFactoryProtocol where ComponentElement : RootComponent {
-    public static func of(_ componentType: ComponentElement.Type, validate: Bool = true) throws -> ComponentFactory<ComponentElement>  {
+    public static func of(componentType: ComponentElement.Type, validate: Bool = true) throws -> ComponentFactory<ComponentElement>  {
 
         if validate {
             let validator = ValidationVisitor()

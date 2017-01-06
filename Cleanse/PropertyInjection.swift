@@ -14,7 +14,7 @@ import Foundation
 extension Binder {
     /// First step in creating a property injector.
     @warn_unused_result
-    public func bindPropertyInjectionOf<Element: AnyObject>(_ `class`: Element.Type=Element.self) -> PropertyInjectorBindingBuilder<Self, Element> {
+    public func bindPropertyInjectionOf<Element: AnyObject>(`class`: Element.Type=Element.self) -> PropertyInjectorBindingBuilder<Self, Element> {
         return PropertyInjectorBindingBuilder(binder: self)
     }
 }
