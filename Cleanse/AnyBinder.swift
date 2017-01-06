@@ -23,7 +23,7 @@ public class AnyBinder : Binder {
         self.internalBind(binding)
     }
 
-    public func install<M : Module>(module module: M.Type) {
+    public func include<M : Module>(module module: M.Type) {
         return underlying.install(module: module)
     }
 

@@ -15,13 +15,13 @@ struct AppComponent<ServicesModule: GithubServicesModule> : Cleanse.RootComponen
     typealias Scope = Singleton
 
     static func configure<B : Binder>(binder binder: B) {
-        binder.install(module: CoreAppModule.self)
+        binder.include(module: CoreAppModule.self)
 
-        binder.install(module: ServicesModule.self)
+        binder.include(module: ServicesModule.self)
 
         #if DEBUG
 
-        binder.install(module: FakeModeSettingsModule.self)
+        binder.include(module: FakeModeSettingsModule.self)
 
         #endif
 
@@ -43,15 +43,15 @@ struct CoreAppModule : Cleanse.Module {
             .to(value: "square")
 
         // Bind common dependencies.
-        binder.install(module: FoundationCommonModule.self)
-        binder.install(module: UIKitCommonModule.self)
+        binder.include(module: FoundationCommonModule.self)
+        binder.include(module: UIKitCommonModule.self)
 
         // This will wire up our root view controller.
-        binder.install(module: RootViewController.Module.self)
-        binder.install(module: SettingsSplitViewController.Module.self)
+        binder.include(module: RootViewController.Module.self)
+        binder.include(module: SettingsSplitViewController.Module.self)
 
-        binder.install(module: RepositoriesModule.self)
-        binder.install(module: MembersModule.self)
+        binder.include(module: RepositoriesModule.self)
+        binder.include(module: MembersModule.self)
     }
 
     static func configureAppDelegateInjector(binder bind: PropertyInjectionReceiptBinder<AppDelegate>) -> BindingReceipt<PropertyInjector<AppDelegate>> {

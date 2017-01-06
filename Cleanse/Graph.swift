@@ -32,7 +32,6 @@ class Graph : Binder {
     
     private var futureProviders = Dictionary<RequirementKey, FutureProvider>()
 
-    
     /// Keyeed by type of value
     private var providers = Dictionary<RequirementKey, AnyProvider>()
     
@@ -44,6 +43,8 @@ class Graph : Binder {
     private var parent: Graph?
 
     private let scope: Scope.Type?
+
+    private var seenModules = Set<SeenModuleKey>()
     
     init(scope: Scope.Type?, parent: Graph?=nil) {
         self.scope = scope
@@ -268,10 +269,14 @@ class Graph : Binder {
         finalized = true
     }
 
-    func install<M: Module>(module module: M.Type) {
+    func include<M: Module>(module module: M.Type) {
+        let key = SeenModuleKey(module)
+        guard !seenModules.contains(key) else {
+            return
+        }
         module.configure(binder: self)
+        seenModules.insert(key)
     }
-
 
     func install<S: Component>(dependency dependency: S.Type) {
         // TODO: validate subcomponents
@@ -421,6 +426,17 @@ private struct RequirementKey : TypeKeyProtocol {
     
     let type: TT.Type
     
+    init(_ type: TT.Type) {
+        self.type = type
+    }
+}
+
+
+private struct SeenModuleKey : TypeKeyProtocol {
+    typealias TT = Any
+
+    let type: TT.Type
+
     init(_ type: TT.Type) {
         self.type = type
     }

@@ -69,6 +69,7 @@
 		F6FA73581E202AB30038D8F8 /* AnyBinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6FA73571E202AB30038D8F8 /* AnyBinder.swift */; };
 		F6FA735A1E2032F90038D8F8 /* ReceiptBindingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6FA73591E2032F90038D8F8 /* ReceiptBindingTests.swift */; };
 		F6FA735C1E203D0B0038D8F8 /* PropertyInjectionReceiptBinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6FA735B1E203D0B0038D8F8 /* PropertyInjectionReceiptBinder.swift */; };
+		F6FA73611E2056D80038D8F8 /* DuplicateModulesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6FA73601E2056D80038D8F8 /* DuplicateModulesTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -149,6 +150,7 @@
 		F6FA73571E202AB30038D8F8 /* AnyBinder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnyBinder.swift; sourceTree = "<group>"; };
 		F6FA73591E2032F90038D8F8 /* ReceiptBindingTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReceiptBindingTests.swift; sourceTree = "<group>"; };
 		F6FA735B1E203D0B0038D8F8 /* PropertyInjectionReceiptBinder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropertyInjectionReceiptBinder.swift; sourceTree = "<group>"; };
+		F6FA73601E2056D80038D8F8 /* DuplicateModulesTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DuplicateModulesTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -364,6 +366,7 @@
 				F64BFCE41D4FCAF000F15E79 /* ScopeErrorTests.swift */,
 				F6B3DDD91DA4903F00730E5D /* ComponentVisitorTests.swift */,
 				F6FA73591E2032F90038D8F8 /* ReceiptBindingTests.swift */,
+				F6FA73601E2056D80038D8F8 /* DuplicateModulesTests.swift */,
 			);
 			path = CleanseTests;
 			sourceTree = "<group>";
@@ -571,6 +574,7 @@
 				F61133C11CD7B36600069972 /* MemoryManagementTests.swift in Sources */,
 				F6A82B7F1CE2E299007C3A32 /* CanonicalRepresentableTests.swift in Sources */,
 				F64BFCE51D4FCAF000F15E79 /* ScopeErrorTests.swift in Sources */,
+				F6FA73611E2056D80038D8F8 /* DuplicateModulesTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
