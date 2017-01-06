@@ -9,26 +9,18 @@
 import Foundation
 
 
-public protocol BindingBuilder {
-    
+public protocol BindingBuilder : BindToable {
     // NOTE: When adding a new associated type here, you MUST make it cascade to the wrapped in BindingBuilderDecorator.swift
-    
     associatedtype MaybeScope : Scope = _Unscoped
-    associatedtype _Binder : Binder
     
     // What is returned in the to functions
     associatedtype Input = FinalProvider.Element
     
-
     // This is what get exposed to get injected
     associatedtype FinalProvider: ProviderProtocol
     
-    associatedtype MaybeComponentOrSubcomponent: Any = Void
-    
     associatedtype CollectionOrUnique: _CollectionOrUniqueBindingBase = _UniqueBinding
     
-    
-    var binder: _Binder { get }
     static func mapElement(input input: Input) -> FinalProvider.Element
     
     static var collectionMergeFunc: Optional<[FinalProvider.Element] -> FinalProvider.Element> { get }
@@ -44,7 +36,6 @@ public struct _CollectionBinding : _CollectionOrUniqueBindingBase {
         return true
     }
 }
-
 
 public struct _UniqueBinding : _CollectionOrUniqueBindingBase {
     public static var isCollectionBinding: Bool {
@@ -80,8 +71,7 @@ extension Provider : _StandardProvider, _AnyStandardProvider {
 
 /// MARK: Building steps
 
-extension BindingBuilder where FinalProvider: _StandardProvider, Self.MaybeScope == _Unscoped
-/*, Self.MaybeComponentOrSubcomponent == Void*/ /* Tagging must happen before typing */{
+extension BindingBuilder where FinalProvider: _StandardProvider, Self.MaybeScope == _Unscoped {
     /// Qualifies the provider being registered with a tag.
     @warn_unused_result
     public func tagged<Tag: Cleanse.Tag where Tag.Element == FinalProvider.Element>(with tag: Tag.Type) -> TaggedBindingBuilderDecorator<Self, Tag> {
@@ -101,14 +91,49 @@ extension BindingBuilder where MaybeScope == _Unscoped {
     }
 }
 
-/// Terminating functions
 
-extension BindingBuilder {
+extension BindToable {
     public func to(
         file file: StaticString=#file,
              line: Int=#line,
              function: StaticString=#function,
-             provider: Provider<Input>) {
+             provider: Provider<Input>) -> BindingReceipt<Input> {
+        return _innerTo(file: file, line: line, function: function, provider: provider)
+    }
+
+    public func to(
+        value value: Input,
+              file: StaticString=#file,
+              line: Int=#line,
+              function: StaticString=#function
+        ) -> BindingReceipt<Input> {
+        return _innerTo(file: file, line: line, function: function, provider: Provider(value: value))
+    }
+
+    /**
+     This is the 0th arity `to(factory:)` function. This finishes the binding process.
+     */
+    public func to(
+        file file: StaticString=#file,
+             line: Int=#line,
+             function: StaticString=#function,
+             factory: () -> Input) -> BindingReceipt<Input> {
+
+        return _innerTo(file: file, line: line, function: function, provider: Provider(getter: factory))
+    }
+}
+/// Terminating functions
+
+extension BindingBuilder {
+    public var _finalProviderType: Any.Type {
+        return FinalProvider.self
+    }
+
+    public func _innerTo(
+        file file: StaticString=#file,
+             line: Int=#line,
+             function: StaticString=#function,
+             provider: Provider<Input>) -> BindingReceipt<Input> {
         
         let mappedProvider = FinalProvider(other: provider.map(transform: Self.mapElement))
 
@@ -148,30 +173,7 @@ extension BindingBuilder {
         )
         
         binder._internalBind(binding: rpb)
-    }
-    
-    
-    public func to(
-        value value: Input,
-              file: StaticString=#file,
-              line: Int=#line,
-              function: StaticString=#function
-        ) {
-        to(file: file, line: line, function: function, provider: Provider(value: value))
-    }
-}
 
-
-extension BindingBuilder {
-    /**
-     This is the 0th arity `to(factory:)` function. This finishes the binding process.
-     */
-    public func to(
-        file file: StaticString=#file,
-             line: Int=#line,
-             function: StaticString=#function,
-             factory: () -> Input) {
-        
-        to(file: file, line: line, function: function, provider: Provider(getter: factory))
+        return BindingReceipt()
     }
 }

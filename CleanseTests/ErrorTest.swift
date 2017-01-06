@@ -23,6 +23,10 @@ class ErrorTests: XCTestCase {
         static func configure<B : Binder>(binder binder: B) {
             binder.install(module: ModuleWithMissingDependencies.self)
         }
+
+        static func configureRoot(binder bind: ReceiptBinder<Root>) -> BindingReceipt<Root> {
+            return bind.propertyInjector(configuredWith: ModuleWithMissingDependencies.configureInjector)
+        }
     }
     
     var structWithDeps: StructWithDependencies!
@@ -99,12 +103,12 @@ Missing provider of type TaggedProvider<GTag>
             binder.bind().tagged(with:  ATag.self).to(value: "AAA")
             binder.bind().tagged(with:  BTag.self).to(value: "BBB")
             binder.bind().tagged(with:  CTag.self).to(value: "CCC")
-            
-            binder
-                .bindPropertyInjectionOf(ErrorTests.self)
-                .to { (target: ErrorTests, arg1: StructWithDependencies) in
+        }
+
+        static func configureInjector(binder bind: PropertyInjectionReceiptBinder<ErrorTests>) -> BindingReceipt<PropertyInjector<ErrorTests>> {
+            return bind.to { (target: ErrorTests, arg1: StructWithDependencies) in
                     target.structWithDeps = arg1
-                }
+            }
         }
     }
     

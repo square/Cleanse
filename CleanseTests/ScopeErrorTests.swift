@@ -22,13 +22,17 @@ class ScopeErrorTests: XCTestCase {
 
     struct ComponentWithInvalidScope1 : RootComponent {
         typealias Scope = Scope1
-        typealias Root = String
+        typealias Root = Void
 
         static func configure<B : Binder>(binder binder: B) {
             binder
                 .bind(String.self)
                 .scoped(in: Scope2.self)
                 .to(value: "fail")
+        }
+
+        static func configureRoot(binder bind: ReceiptBinder<Root>) -> BindingReceipt<Root> {
+            return bind.to(value: Void())
         }
     }
 
@@ -43,13 +47,17 @@ class ScopeErrorTests: XCTestCase {
 
     struct ComponentWithInvalidScope2 : RootComponent {
         typealias Scope = Scope1
-        typealias Root = String
+        typealias Root = Void
 
         static func configure<B : Binder>(binder binder: B) {
             binder
                 .bind(String.self)
                 .asSingleton()
                 .to(value: "fail")
+        }
+
+        static func configureRoot(binder bind: ReceiptBinder<Root>) -> BindingReceipt<Root> {
+            return bind.to(value: Void())
         }
     }
 
@@ -75,6 +83,10 @@ class ScopeErrorTests: XCTestCase {
                 .bind(SomeScopedStruct.self)
                 .to(value: SomeScopedStruct())
         }
+
+        static func configureRoot(binder bind: ReceiptBinder<Root>) -> BindingReceipt<Root> {
+            return bind.to(value: "Omg")
+        }
     }
 
     func testBoundInWrongScope_viaScoped() {
@@ -95,17 +107,25 @@ class ScopeErrorTests: XCTestCase {
 
             binder.bind().to { ($0 as ComponentFactory<InvalidInnerComponent>).build() }
         }
+
+        static func configureRoot(binder bind: ReceiptBinder<Root>) -> BindingReceipt<Root> {
+            return bind.to(value: "Omg")
+        }
     }
 
     struct InvalidInnerComponent : Component {
         typealias Scope = Scope2
-        typealias Root = String
+        typealias Root = Void
 
         static func configure<B : Binder>(binder binder: B) {
             binder
                 .bind(String.self)
                 .scoped(in: Scope1.self)
                 .to(value: "fail")
+        }
+
+        static func configureRoot(binder bind: ReceiptBinder<Root>) -> BindingReceipt<Root> {
+            return bind.to(value: Void())
         }
     }
 
@@ -127,17 +147,25 @@ class ScopeErrorTests: XCTestCase {
 
             binder.bind().to { ($0 as ComponentFactory<InvalidInnerComponentWithSameScope>).build() }
         }
+
+        static func configureRoot(binder bind: ReceiptBinder<Root>) -> BindingReceipt<Root> {
+            return bind.to(value: "Omg")
+        }
     }
 
     struct InvalidInnerComponentWithSameScope : Component {
         typealias Scope = Scope1
-        typealias Root = String
+        typealias Root = Void
 
         static func configure<B : Binder>(binder binder: B) {
             binder
                 .bind(String.self)
                 .scoped(in: Scope1.self)
                 .to(value: "fail")
+        }
+
+        static func configureRoot(binder bind: ReceiptBinder<Root>) -> BindingReceipt<Root> {
+            return bind.to(value: Void())
         }
     }
 

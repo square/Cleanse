@@ -276,7 +276,7 @@ class Graph : Binder {
     func install<S: Component>(dependency dependency: S.Type) {
         // TODO: validate subcomponents
         bind(ComponentFactory<S>.self)
-            .to { [weak self] in
+            .to(factory: { [weak self] in
                 let `self` = self!
                 return ComponentFactory { seed in
                     let subgraph = Graph(scope: S.Scope.scopeOrNil, parent: self)
@@ -301,12 +301,13 @@ class Graph : Binder {
                     let rootProvider = subgraph.provider(S.Root.self)
 
                     dependency.configure(binder: subgraph)
+                    subgraph.bind(S.Root.self).configured(with: S.configureRoot)
 
                     try! subgraph.finalize()
 
                     return rootProvider.get()
                 }
-            }
+            })
     }
 
 

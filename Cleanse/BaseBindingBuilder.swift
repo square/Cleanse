@@ -11,7 +11,8 @@ import Foundation
 public struct BaseBindingBuilder<Element, B: Binder> : BindingBuilder {
     public typealias FinalProvider = Provider<Element>
     public typealias Input = Element
-    public let binder: B
+    public typealias _Binder = B
+    public let binder: _Binder
     public static func mapElement(input input: Input) -> FinalProvider.Element {
         return input
     }

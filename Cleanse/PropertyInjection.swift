@@ -42,7 +42,7 @@ extension PropertyInjectorBindingBuilderProtocol {
 public struct PropertyInjectorBindingBuilder<B: Binder, Element: AnyObject> : PropertyInjectorBindingBuilderProtocol {
     private let binder: B
     
-    private init(binder: B) {
+    init(binder: B) {
         self.binder = binder
     }
     
@@ -57,14 +57,14 @@ extension PropertyInjectorBindingBuilderProtocol {
     func innerTo(propertyInjector propertyInjector: Element -> (),
                  file: StaticString,
                  line: Int,
-                 function: StaticString) {
+                 function: StaticString) -> BindingReceipt<PropertyInjector<Element>> {
         
         let realBuilder = toPropertyInjectorBindingBuilder()
         let binder = realBuilder.binder
         
         typealias Injector = Element -> ()
         
-        binder
+        return binder
             .bind()
             .to(value: PropertyInjector(injectionClosure: propertyInjector), file: file, line: line, function: function)
     }

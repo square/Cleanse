@@ -86,12 +86,13 @@ class PropertyInjectionTests: XCTestCase {
                 // We also can take to as (Element, arg1, ..., argN). This is convenient for helper methdos or for closures
                 .to(injector: self.injectPropertiesIntoC)
             
-            
-            binder
-                .bindPropertyInjectionOf(PropertyInjectionTests.self)
-                .to(injector: PropertyInjectionTests.injectProperties)
         }
-        
+
+        static func configurePropertyInjector(binder bind: PropertyInjectionReceiptBinder<PropertyInjectionTests>) -> BindingReceipt<PropertyInjector<PropertyInjectionTests>> {
+            return bind.to(injector: PropertyInjectionTests.injectProperties)
+
+        }
+
         static func injectPropertiesIntoC(target target: CClass, superInjector: PropertyInjector<BClass>, cString: TaggedProvider<CTag>) {
             superInjector.injectProperties(into: target)
             target.a = "I overrode you"
@@ -118,6 +119,10 @@ class PropertyInjectionTests: XCTestCase {
 
         static func configure<B : Binder>(binder binder: B) {
             binder.install(module: PropertyInjectionModule.self)
+        }
+
+        static func configureRoot(binder bind: ReceiptBinder<Root>) -> BindingReceipt<Root> {
+            return bind.propertyInjector(configuredWith: PropertyInjectionModule.configurePropertyInjector)
         }
     }
 
