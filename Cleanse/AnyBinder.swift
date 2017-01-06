@@ -24,7 +24,7 @@ public class AnyBinder : Binder {
     }
 
     public func include<M : Module>(module: M.Type) {
-        return underlying.install(module: module)
+        return underlying.include(module: module)
     }
 
     public func install<C : Component>(dependency: C.Type) {

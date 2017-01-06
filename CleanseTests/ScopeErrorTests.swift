@@ -38,7 +38,7 @@ class ScopeErrorTests: XCTestCase {
 
     func testBoundInWrongScope() {
         do {
-            try ComponentFactory.of(ComponentWithInvalidScope1.self)
+            _ = try ComponentFactory.of(ComponentWithInvalidScope1.self)
             XCTFail("Should not get here")
         } catch let e {
             Assert((e as! CleanseError).description, contains: "Invalid Scope")
@@ -63,7 +63,7 @@ class ScopeErrorTests: XCTestCase {
 
     func testBoundInWrongScope_2() {
         do {
-            try ComponentFactory.of(ComponentWithInvalidScope2.self)
+            _ = try ComponentFactory.of(ComponentWithInvalidScope2.self)
             XCTFail("Should not get here")
         } catch let e {
             Assert((e as! CleanseError).description, contains: "Invalid Scope")
@@ -91,7 +91,7 @@ class ScopeErrorTests: XCTestCase {
 
     func testBoundInWrongScope_viaScoped() {
         do {
-            try ComponentFactory.of(ComponentWithInvalidScope_ViaScoped.self)
+            _ = try ComponentFactory.of(ComponentWithInvalidScope_ViaScoped.self)
             XCTFail("Should not get here")
         } catch let e {
             Assert((e as! CleanseError).description, contains: "Invalid Scope")
@@ -131,7 +131,7 @@ class ScopeErrorTests: XCTestCase {
 
     func testBoundInWrongScope_nestedSubcomponents() {
         do {
-            try ComponentFactory.of(ComponentWithInvalidInnerComponent.self)
+            _ = try ComponentFactory.of(ComponentWithInvalidInnerComponent.self)
             XCTFail("Should not get here")
         } catch let e {
             Assert((e as! CleanseError).description, contains: "Invalid Scope")
@@ -171,7 +171,7 @@ class ScopeErrorTests: XCTestCase {
 
     func testNestedDuplicateScopes() {
         do {
-            try ComponentFactory.of(ComponentWithInvalidInnerComponentWithSameScope.self)
+            _ = try ComponentFactory.of(ComponentWithInvalidInnerComponentWithSameScope.self)
             XCTFail("Should not get here")
         } catch let e {
             Assert((e as! CleanseError).description, contains: "with the same scope: (Scope1)")

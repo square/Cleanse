@@ -130,13 +130,10 @@ class Graph : Binder {
     
     /// Add provider for elements of a collection
     private func addCollectionProvider(provider: AnyProvider, mergeFunc: @escaping ([Any]) -> Any) {
-        let key: RequirementKey
         let collectionProviderKey: CollectionProvidersKey
         
-        key = .init(type(of: provider))
         collectionProviderKey = .init(type(of: provider))
         
-    
         if collectionProviders[collectionProviderKey] == nil {
             finalizables.append(AnonymousFinalizable {
                 let collectionProviders = self.gatherAllCollectionProviders(key: collectionProviderKey)
@@ -180,9 +177,7 @@ class Graph : Binder {
     
     func _internalProvider<Element>(_ type: Element.Type, debugInfo: ProviderRequestDebugInfo?) -> Provider<Element> {
         precondition(!finalized, "Cannot call \(#function) after finalize is called")
-        
-        let key = RequirementKey(type)
-        
+
         let newRequirements = debugInfo ?? ProviderRequestDebugInfo(requestedType: type, providerRequiredFor: nil, sourceLocation: nil)
 
         let futureProvider = self.findOrCreateFutureProvider(type: type, debugInfo: newRequirements)
@@ -366,11 +361,11 @@ class Graph : Binder {
         }
         
         if name == nil {
-            return rawProvider.map { $0 as! AnyObject }
+            return rawProvider.map { $0 as AnyObject }
         }
         
         return rawProvider
-            .map { $0 as! AnyObject }
+            .map { $0 as AnyObject }
     }
     
     func legacyPropertyInjector(cls: AnyObject.Type) -> (AnyObject) -> ()  {

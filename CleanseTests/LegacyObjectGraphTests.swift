@@ -87,7 +87,7 @@ class LegacyObjectGraphTests: XCTestCase {
 
     struct PropertyInjectionLegacyModuleBase : Module {
         static func configure<B : Binder>(binder: B) {
-            binder.install(module: SimpleLegacyModule.self)
+            binder.include(module: SimpleLegacyModule.self)
             
             binder
                 .bind()
@@ -121,7 +121,7 @@ class LegacyObjectGraphTests: XCTestCase {
     
     struct PropertyInjectionLegacyModule : Module {
         static func configure<B : Binder>(binder: B) {
-            binder.install(module: PropertyInjectionLegacyModuleBase.self)
+            binder.include(module: PropertyInjectionLegacyModuleBase.self)
             
             binder
                 .bindPropertyInjectionOf(MoreFreeBeer.self)
@@ -131,7 +131,7 @@ class LegacyObjectGraphTests: XCTestCase {
     
     struct PropertyInjectionLegacyModuleOverridingString2 : Module {
         static func configure<B : Binder>(binder: B) {
-            binder.install(module: PropertyInjectionLegacyModuleBase.self)
+            binder.include(module: PropertyInjectionLegacyModuleBase.self)
                         
             binder
                 .bindPropertyInjectionOf(MoreFreeBeer.self)
@@ -143,7 +143,7 @@ class LegacyObjectGraphTests: XCTestCase {
         typealias Root = LegacyObjectGraph
 
         static func configure<B : Binder>(binder: B) {
-            binder.install(module: SimpleLegacyModule.self)
+            binder.include(module: SimpleLegacyModule.self)
         }
     }
 
@@ -163,7 +163,7 @@ class LegacyObjectGraphTests: XCTestCase {
         typealias Root = LegacyObjectGraph
 
         static func configure<B : Binder>(binder: B) {
-            binder.install(module: PropertyInjectionLegacyModule.self)
+            binder.include(module: PropertyInjectionLegacyModule.self)
         }
     }
     
@@ -195,7 +195,7 @@ class LegacyObjectGraphTests: XCTestCase {
         typealias Root = LegacyObjectGraph
 
         static func configure<B : Binder>(binder: B) {
-            binder.install(module: PropertyInjectionLegacyModuleOverridingString2.self)
+            binder.include(module: PropertyInjectionLegacyModuleOverridingString2.self)
         }
     }
     func testLegacyObjectGraph_PropertyInjection_OverridingString2() {

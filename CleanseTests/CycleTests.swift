@@ -77,6 +77,6 @@ class CycleTests: XCTestCase {
     }
 
     func testWeakCyclesOK() {
-        try! ComponentFactory.of(GoodComponent.self)
+        _ = try! ComponentFactory.of(GoodComponent.self)
     }
 }

@@ -13,7 +13,6 @@ import Foundation
 /// It depends on the objective-c runtime and should be considered supplementary at best
 extension Binder {
     /// First step in creating a property injector.
-    @warn_unused_result
     public func bindPropertyInjectionOf<Element: AnyObject>(_ class: Element.Type=Element.self) -> PropertyInjectorBindingBuilder<Self, Element> {
         return PropertyInjectorBindingBuilder(binder: self)
     }

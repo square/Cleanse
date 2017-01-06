@@ -9,7 +9,7 @@
 import Foundation
 
 
-public struct CollectionBindingBuilderDecorator<Wrapped: BindingBuilder  where Wrapped.CollectionOrUnique == _UniqueBinding, Wrapped.FinalProvider: _StandardProvider, Wrapped.MaybeScope == _Unscoped> : BindingBuilderDecorator {
+public struct CollectionBindingBuilderDecorator<Wrapped: BindingBuilder> : BindingBuilderDecorator  where Wrapped.CollectionOrUnique == _UniqueBinding, Wrapped.FinalProvider: _StandardProvider, Wrapped.MaybeScope == _Unscoped {
     public typealias FinalProvider = Provider<[Wrapped.FinalProvider.Element]>
     public typealias Input = [Wrapped.Input]
     public typealias CollectionOrUnique = _CollectionBinding
@@ -31,7 +31,6 @@ public struct CollectionBindingBuilderDecorator<Wrapped: BindingBuilder  where W
 
 public extension BindingBuilder where CollectionOrUnique == _UniqueBinding, FinalProvider: _StandardProvider, MaybeScope == _Unscoped {
     /// If makes it bind Element to [Element]
-    @warn_unused_result
     public func intoCollection() -> CollectionBindingBuilderDecorator<Self> {
         return with()
     }

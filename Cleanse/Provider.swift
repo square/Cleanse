@@ -132,7 +132,7 @@ extension ProviderProtocol where Self: AnyProvider {
         precondition(Element.self is AnyProvider.Type, "Can only call flatten on Provider<Provider<Element>>")
         precondition((Element.self as! AnyProvider.Type).providesType == CheckedE.self, "CheckedE must be Element.Element")
         
-        let e = Element.self as! AnyProvider.Type
+        _ = Element.self as! AnyProvider.Type
         
         let getter = self.get
         return Provider { (getter() as! AnyProvider).asCheckedProvider(CheckedE.self).get() }

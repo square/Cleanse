@@ -87,8 +87,6 @@ private class ComponentInfo {
             return
         }
 
-        var current = parent
-
         var loopCurrent = parent
         while let current = loopCurrent {
             if current.scope == scope {
@@ -177,7 +175,7 @@ private class ComponentInfo {
         providersInStack.insert(providerInfo)
 
         defer {
-            providerStack.popLast()
+            _ = providerStack.popLast()
             providersInStack.remove(providerInfo)
         }
 
@@ -240,9 +238,6 @@ private class ComponentInfo {
 
 
     fileprivate func getCurrentProviderInfo(_ key: ProviderKey) -> [ProviderInfo] {
-        let keyType = key.type
-        let providerKey: ProviderKey
-
         if let current = self.providers[key] , !current.isEmpty {
             return current
         }

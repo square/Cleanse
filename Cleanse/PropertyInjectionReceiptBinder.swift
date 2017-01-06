@@ -14,7 +14,7 @@ public struct PropertyInjectionReceiptBinder<E: AnyObject> : PropertyInjectorBin
 
     public let binder: AnyBinder
 
-    init<BB: PropertyInjectorBindingBuilderProtocol where BB.Element == Element>(_ underlyingBindingBuilder: BB) {
+    init<BB: PropertyInjectorBindingBuilderProtocol>(_ underlyingBindingBuilder: BB) where BB.Element == Element {
         self.binder = AnyBinder(binder: underlyingBindingBuilder.binder)
     }
 

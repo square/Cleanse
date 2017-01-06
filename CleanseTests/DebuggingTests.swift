@@ -28,7 +28,7 @@ class DebuggingTests: XCTestCase {
         
         // TODO: make it more descriptive
         
-        g.install(module: FooModule.self)
+        g.include(module: FooModule.self)
         
         try! g.finalize()
         

@@ -60,7 +60,7 @@ class ComponentTests: XCTestCase {
 
         let allLoggedOutStrings: Provider<[String]>
 
-        public init(
+        fileprivate init(
             loggedInComponentFactory: ComponentFactory<LoggedInComponent>,
             allLoggedOutStrings: Provider<[String]>) {
             self.loggedInComponentFactory = loggedInComponentFactory
@@ -73,10 +73,10 @@ class ComponentTests: XCTestCase {
     }
 
     private struct AppComponent : RootComponent {
-        public typealias Root = App
+        fileprivate typealias Root = App
 
         static func configure<B : Binder>(binder: B) {
-            binder.install(module: UserServiceModule.self)
+            binder.include(module: UserServiceModule.self)
 
             binder.install(dependency: LoggedInComponent.self)
 
@@ -144,7 +144,7 @@ class ComponentTests: XCTestCase {
     }
 
     private class User : Scoped {
-        public typealias Scope = UserScoped
+        fileprivate typealias Scope = UserScoped
 
         let id: String
 

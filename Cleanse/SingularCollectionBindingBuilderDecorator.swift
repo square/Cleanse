@@ -8,12 +8,12 @@
 
 import Foundation
 
-public struct SingularCollectionBindingBuilderDecorator<Wrapped: BindingBuilder
-                                                        where
-                                                        Wrapped.CollectionOrUnique == _UniqueBinding,
-                                                        Wrapped.FinalProvider: _StandardProvider,
-                                                        Wrapped.MaybeScope == _Unscoped
-                                                        > : BindingBuilderDecorator {
+public struct SingularCollectionBindingBuilderDecorator<Wrapped: BindingBuilder> : BindingBuilderDecorator
+    where
+    Wrapped.CollectionOrUnique == _UniqueBinding,
+    Wrapped.FinalProvider: _StandardProvider,
+    Wrapped.MaybeScope == _Unscoped
+{
     public typealias FinalProvider = Provider<[Wrapped.FinalProvider.Element]>
     public typealias CollectionOrUnique = _CollectionBinding
     
@@ -35,7 +35,6 @@ public struct SingularCollectionBindingBuilderDecorator<Wrapped: BindingBuilder
 
 public extension BindingBuilder where CollectionOrUnique == _UniqueBinding, FinalProvider: _StandardProvider, MaybeScope == _Unscoped {
     /// If makes it bind `Element` to `[Element]`
-    @warn_unused_result
     public func intoCollection() -> SingularCollectionBindingBuilderDecorator<Self> {
         return with()
     }

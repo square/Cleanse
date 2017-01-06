@@ -21,7 +21,7 @@ class ErrorTests: XCTestCase {
         typealias Root = PropertyInjector<ErrorTests>
 
         static func configure<B : Binder>(binder: B) {
-            binder.install(module: ModuleWithMissingDependencies.self)
+            binder.include(module: ModuleWithMissingDependencies.self)
         }
 
         static func configureRoot(binder bind: ReceiptBinder<Root>) -> BindingReceipt<Root> {

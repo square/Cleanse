@@ -118,7 +118,7 @@ class PropertyInjectionTests: XCTestCase {
         typealias Root = PropertyInjector<PropertyInjectionTests>
 
         static func configure<B : Binder>(binder: B) {
-            binder.install(module: PropertyInjectionModule.self)
+            binder.include(module: PropertyInjectionModule.self)
         }
 
         static func configureRoot(binder bind: ReceiptBinder<Root>) -> BindingReceipt<Root> {

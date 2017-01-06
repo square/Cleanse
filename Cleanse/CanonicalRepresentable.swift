@@ -51,7 +51,7 @@ extension Optional : CanonicalRepresentable {
     extension NSString : CanonicalRepresentable {
         public typealias Canonical = String
         
-        class func transformFromCanonicalCanonical(canonical canonical: String) -> Self {
+        class func transformFromCanonicalCanonical(canonical: String) -> Self {
             return .init(string: canonical)
         }
     }

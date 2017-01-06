@@ -13,7 +13,7 @@ public protocol BindToable {
     associatedtype _Binder : Cleanse.Binder
 
     func _innerTo(
-        file file: StaticString,
+        file: StaticString,
         line: Int,
         function: StaticString,
         provider: Provider<Input>) -> BindingReceipt<Input>

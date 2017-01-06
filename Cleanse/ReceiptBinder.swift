@@ -31,6 +31,7 @@ public struct ReceiptBinder<Element> : BindToable {
 }
 
 public extension BindToable {
+    @discardableResult
     public func configured(with configurationFunction: (ReceiptBinder<Input>) -> BindingReceipt<Input>) -> BindingReceipt<Input> {
         return configurationFunction(ReceiptBinder(self))
     }

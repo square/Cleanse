@@ -19,7 +19,7 @@ class MemoryManagementTests: XCTestCase {
         typealias Root = MemoryManagementTests.Root
         
         static func configure<B : Binder>(binder: B) {
-            binder.install(module: Module.self)
+            binder.include(module: Module.self)
         }
 
         static func configureRoot(binder bind: ReceiptBinder<Root>) -> BindingReceipt<Root> {

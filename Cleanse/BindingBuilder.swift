@@ -92,7 +92,7 @@ extension BindingBuilder where MaybeScope == _Unscoped {
 
 
 extension BindToable {
-    public func to(
+    @discardableResult public func to(
         file: StaticString=#file,
              line: Int=#line,
              function: StaticString=#function,
@@ -100,7 +100,7 @@ extension BindToable {
         return _innerTo(file: file, line: line, function: function, provider: provider)
     }
 
-    public func to(
+    @discardableResult public func to(
         value: Input,
               file: StaticString=#file,
               line: Int=#line,
@@ -112,7 +112,7 @@ extension BindToable {
     /**
      This is the 0th arity `to(factory:)` function. This finishes the binding process.
      */
-    public func to(
+    @discardableResult public func to(
         file: StaticString=#file,
              line: Int=#line,
              function: StaticString=#function,
@@ -135,9 +135,6 @@ extension BindingBuilder {
              provider: Provider<Input>) -> BindingReceipt<Input> {
         
         let mappedProvider = FinalProvider(other: provider.map(transform: Self.mapElement))
-
-        let typeErasedProvider: AnyProvider
-
 
         let isCollectionBinding = CollectionOrUnique.isCollectionBinding
         
