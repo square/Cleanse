@@ -16,7 +16,15 @@ public protocol Installer : class {
      
      - parameter module: Module to install as a dependency of the caller (usually a `Module` or `RootComponent`).
      */
-    func install<M: Module>(module: M.Type)
+    func include<M: Module>(module: M.Type)
 
     func install<C: Component>(dependency: C.Type)
+}
+
+
+public extension Installer {
+    @available(*, deprecated, renamed: "include")
+    func install<M: Module>(module: M.Type) {
+        return include(module: module)
+    }
 }

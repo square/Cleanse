@@ -83,11 +83,10 @@ struct APIComponent : RootComponent {
         // "install" the modules that create the component
         binder.install(module: BaseURLModule.self)
         binder.install(module: SomethingThatDoesAnAPICall.Module.self)
-        
-        // bind our root Object
-        binder
-            .bind(RootAPI.self)
-            .to(factory: RootAPI.init)
+    }
+
+    static func configureRoot(binder bind: ReceiptBinder<Root>) -> BindingReceipt<Root> {
+        return bind.to(factory: Root.init)
     }
 }
 
@@ -133,7 +132,10 @@ struct BurgerIndex : Tag {
 struct SimpleModule : RootComponent {
     typealias Root = Int
     static func configure<B : Binder>(binder: B) {
-        binder.bind().to(value: 3)
+    }
+
+    static func configureRoot(binder bind: ReceiptBinder<Root>) -> BindingReceipt<Root> {
+        return bind.to(value: 3)
     }
 }
 
@@ -206,9 +208,6 @@ class CleanseTests: XCTestCase {
                 .bind(FunStruct.self)
                 .intoCollection()
                 .to(value: [9,10,11].map { FunStruct(i: $0) })
-            
-            
-            binder.bind().to(factory: ProviderResults.init)
         }
     }
     
@@ -221,6 +220,10 @@ class CleanseTests: XCTestCase {
 
         static func configure<B : Binder>(binder: B) {
             binder.install(module: CollectionBuilderBindingModule.self)
+        }
+
+        static func configureRoot(binder bind: ReceiptBinder<Root>) -> BindingReceipt<Root> {
+            return bind.to(factory: Root.init)
         }
     }
 

@@ -14,10 +14,10 @@ import XCTest
 @testable import Cleanse
 
 
-var counter = 0
+private var counter = 0
 
 /// Useful for singletons
-func nextCount() -> Int {
+private func nextCount() -> Int {
     counter += 1
     return counter
 }
@@ -53,7 +53,7 @@ class ComponentTests: XCTestCase {
         )
     }
     
-    class App : Scoped {
+    private class App : Scoped {
         typealias Scope = Singleton
 
         let loggedInComponentFactory: ComponentFactory<LoggedInComponent>
@@ -72,14 +72,10 @@ class ComponentTests: XCTestCase {
         }
     }
 
-    struct AppComponent : RootComponent {
+    private struct AppComponent : RootComponent {
         public typealias Root = App
 
         static func configure<B : Binder>(binder: B) {
-            binder
-                .bind(App.self)
-                .to(factory: App.init)
-
             binder.install(module: UserServiceModule.self)
 
             binder.install(dependency: LoggedInComponent.self)
@@ -99,24 +95,27 @@ class ComponentTests: XCTestCase {
                 .intoCollection()
                 .to(value: "C")
         }
+
+        static func configureRoot(binder bind: ReceiptBinder<Root>) -> BindingReceipt<Root> {
+            return bind.to(factory: Root.init)
+        }
     }
 
-    struct UserScoped : Scope {
+    private struct UserScoped : Scope {
     }
 
-    struct LoggedInRoot {
+    private struct LoggedInRoot {
         var userProvider: Provider<User>
         var allLoggedInStrings: Provider<[String]>
     }
 
-    struct LoggedInComponent : Component {
+    private struct LoggedInComponent : Component {
         typealias Root = LoggedInRoot
         typealias Seed = TaggedProvider<UserID>  // Our seed is the UserID
         typealias Scope = UserScoped
 
         static func configure<B : Binder>(binder: B) {
             binder.bind().to(factory: User.init)
-            binder.bind().to(factory: LoggedInRoot.init)
 
             binder
                 .bind(String.self)
@@ -133,14 +132,18 @@ class ComponentTests: XCTestCase {
                 .intoCollection()
                 .to(value: "F")
         }
+
+        static func configureRoot(binder bind: ReceiptBinder<Root>) -> BindingReceipt<Root> {
+            return bind.to(factory: Root.init)
+        }
     }
 
     /// This represents the UserID of a
-    struct UserID : Tag {
+    private struct UserID : Tag {
         typealias Element = String
     }
 
-    class User : Scoped {
+    private class User : Scoped {
         public typealias Scope = UserScoped
 
         let id: String
@@ -157,7 +160,7 @@ class ComponentTests: XCTestCase {
         }
     }
 
-    struct UserServiceModule : Module {
+    private struct UserServiceModule : Module {
         static func configure<B : Binder>(binder: B) {
             binder
                 .bind(UserService.self)
@@ -166,11 +169,11 @@ class ComponentTests: XCTestCase {
     }
 }
 
-protocol UserService {
+private protocol UserService {
     func getNameForUser(userID: String) -> String?
 }
 
-struct UserServiceImpl : UserService, Scoped {
+private struct UserServiceImpl : UserService, Scoped {
     typealias Scope = Singleton
 
     func getNameForUser(userID: String) -> String? {

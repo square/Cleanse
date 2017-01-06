@@ -79,4 +79,12 @@ extension _AnyTag {
     }
 }
 
+
+/// LegacyObjectGraphs just appear, so we can have a default implementation
+public extension Component where Root == LegacyObjectGraph {
+    public static func configureRoot(binder bind: ReceiptBinder<Root>) -> BindingReceipt<Root> {
+        return BindingReceipt()
+    }
+}
+
 #endif

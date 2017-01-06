@@ -9,7 +9,7 @@
 import Foundation
 
 
-protocol PropertyInjectorProtocol  {
+public protocol PropertyInjectorProtocol  {
     associatedtype Element: AnyObject
     func injectProperties(into instance: Element)
 }

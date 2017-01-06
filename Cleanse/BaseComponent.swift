@@ -20,4 +20,6 @@ public protocol _BaseComponent : _AnyBaseComponent {
     associatedtype Root
 
     associatedtype Scope: Cleanse.Scope
+
+    static func configureRoot(binder bind: ReceiptBinder<Root>) -> BindingReceipt<Root>
 }

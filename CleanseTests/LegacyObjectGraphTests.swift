@@ -97,9 +97,7 @@ class LegacyObjectGraphTests: XCTestCase {
             
             binder
                 .bindPropertyInjectionOf(FreeBeer.self)
-                .to(injector: FreeBeer.injectProperties)
-            
-            
+                .to(injector: FreeBeer.injectProperties)            
             
             binder
                 .bind(FreeBeer.self)

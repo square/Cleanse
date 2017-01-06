@@ -27,7 +27,7 @@ struct InternalBindInfo<BP_: BindingBuilder> : _InternalBindInfoProtocol {
 }
 
 /// This is what is passed to `Module.configure` methods.It should be called to configure bindings.
-public protocol Binder : class,  Installer, ProviderProvider {
+public protocol Binder :  Installer, ProviderProvider {
     /// Authoritative bind function.
     func _internalBind(binding: RawProviderBinding)
 }

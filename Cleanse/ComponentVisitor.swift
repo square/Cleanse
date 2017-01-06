@@ -73,7 +73,7 @@ extension ComponentVisitor {
     }
 
     
-    func install<M : Module>(module: M.Type) {
+    func include<M : Module>(module: M.Type) {
         enterModule(module: module)
         module.configure(binder: self)
         leaveModule(module: module)
@@ -107,6 +107,8 @@ extension ComponentVisitor {
         }
 
         dependency.configure(binder: self)
+        bind(C.Root.self).configured(with: C.configureRoot)
+
         leaveComponent(dependency: dependency)
     }
 

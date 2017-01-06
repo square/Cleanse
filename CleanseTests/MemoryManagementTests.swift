@@ -19,13 +19,14 @@ class MemoryManagementTests: XCTestCase {
         typealias Root = MemoryManagementTests.Root
         
         static func configure<B : Binder>(binder: B) {
-            
-            binder.bind().to(factory: Root.init)
-            
             binder.install(module: Module.self)
         }
+
+        static func configureRoot(binder bind: ReceiptBinder<Root>) -> BindingReceipt<Root> {
+            return bind.to(factory: Root.init)
+        }
     }
-    
+
     struct Root {
         let single1: Single1
         let single2: Single2

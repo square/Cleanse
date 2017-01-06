@@ -21,11 +21,11 @@ class ComponentVisitorTests: XCTestCase {
         static func configure<B : Binder>(binder: B) {
             binder.install(dependency: Component1.self)
             binder.install(dependency: Component2.self)
+        }
 
-            binder
-                .bind(RR.self)
-                .to { (cf1: ComponentFactory<Component1>, cf2: ComponentFactory<Component2>, s: String) in
-                    return RR(r1: cf1.build(), r2: cf2.build(s))
+        static func configureRoot(binder bind: ReceiptBinder<Root>) -> BindingReceipt<Root> {
+            return bind.to { (cf1: ComponentFactory<Component1>, cf2: ComponentFactory<Component2>, s: String) in
+                return RR(r1: cf1.build(), r2: cf2.build(s))
             }
         }
     }
@@ -39,7 +39,10 @@ class ComponentVisitorTests: XCTestCase {
         typealias Root = R1
 
         static func configure<B : Binder>(binder: B) {
-            binder.bind().to(factory: R1.init)
+        }
+
+        static func configureRoot(binder bind: ReceiptBinder<Root>) -> BindingReceipt<Root> {
+            return bind.to(factory: Root.init)
         }
     }
 
@@ -48,10 +51,13 @@ class ComponentVisitorTests: XCTestCase {
         typealias Seed = String
 
         static func configure<B : Binder>(binder: B) {
-            binder.bind().to(factory: R2.init)
+        }
+
+        static func configureRoot(binder bind: ReceiptBinder<Root>) -> BindingReceipt<Root> {
+            return bind.to(factory: Root.init)
         }
     }
-    
+
     struct R1 {
     }
     
