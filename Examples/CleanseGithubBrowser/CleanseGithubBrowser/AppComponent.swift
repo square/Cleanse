@@ -8,40 +8,34 @@
 
 import Cleanse
 
-struct ReleaseAppComponent : Cleanse.RootComponent {
+
+
+struct AppComponent<ServicesModule: GithubServicesModule> : Cleanse.RootComponent {
     typealias Root = PropertyInjector<AppDelegate>
     typealias Scope = Singleton
 
     static func configure<B : Binder>(binder binder: B) {
         binder.install(module: CoreAppModule.self)
 
-        binder.install(module: GithubServicesModule.self)
-        binder.install(module: NetworkModule.self)
-    }
-}
+        binder.install(module: ServicesModule.self)
 
-#if DEBUG
+        #if DEBUG
 
-struct FakeAppComponent : Cleanse.RootComponent {
-    typealias Root = PropertyInjector<AppDelegate>
-    typealias Scope = Singleton
-
-    static func configure<B : Binder>(binder binder: B) {
-        binder.install(module: CoreAppModule.self)
-
-        binder.install(module: FakeGithubServiceModule.self)
         binder.install(module: FakeModeSettingsModule.self)
+
+        #endif
+
+        binder.bind().configured(with: ServicesModule.configureGithubMembersService)
+        binder.bind().configured(with: ServicesModule.configureRepositoriesMembersService)
+    }
+
+    static func configureRoot(binder bind: ReceiptBinder<Root>) -> BindingReceipt<Root> {
+        return bind.propertyInjector(configuredWith: CoreAppModule.configureAppDelegateInjector)
     }
 }
-
-#endif
 
 struct CoreAppModule : Cleanse.Module {
     static func configure<B : Binder>(binder binder: B) {
-        binder
-            .bindPropertyInjectionOf(AppDelegate.self)
-            .to(injector: AppDelegate.injectProperties)
-
         // We want to make it so the app uses "square" as the github user.
         binder
             .bind()
@@ -58,5 +52,9 @@ struct CoreAppModule : Cleanse.Module {
 
         binder.install(module: RepositoriesModule.self)
         binder.install(module: MembersModule.self)
+    }
+
+    static func configureAppDelegateInjector(binder bind: PropertyInjectionReceiptBinder<AppDelegate>) -> BindingReceipt<PropertyInjector<AppDelegate>> {
+        return bind.to(injector: AppDelegate.injectProperties)
     }
 }

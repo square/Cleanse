@@ -9,6 +9,10 @@
 import UIKit
 import Cleanse
 
+
+typealias ReleaseAppComponent = AppComponent<RealeaseGithubServicesModule>
+typealias FakeAppComponent = AppComponent<FakeGithubServicesModule>
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
