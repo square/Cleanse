@@ -14,7 +14,6 @@ import XCTest
 @testable import Cleanse
 
 class CycleTests: XCTestCase {
-
     class AA {
         init(b: BB) {
 
@@ -41,7 +40,6 @@ class CycleTests: XCTestCase {
 
     class AA_OK {
         init(b: BB_OK) {
-
         }
     }
 
