@@ -4,27 +4,20 @@
 
   },
   "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
-    "C29DD0E89C17000393FD71820E9E7C86451DD28A" : 0,
     "7F4664FA65AADBC384859AD71F1C93E5320699FF" : 9223372036854775807,
-    "68EDA75FC77F318B0BF9BAED4D569D9555E8E0D3" : 9223372036854775807,
-    "FA78EFA588CAAA527A39EFF7FEB4200B880E2491" : 0
+    "FA78EFA588CAAA527A39EFF7FEB4200B880E2491" : 0,
+    "C29DD0E89C17000393FD71820E9E7C86451DD28A" : 0
   },
   "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "85D0171F-7EAD-4682-B2C2-5BBDC5C235DD",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
-    "C29DD0E89C17000393FD71820E9E7C86451DD28A" : "..\/..\/..\/..",
     "7F4664FA65AADBC384859AD71F1C93E5320699FF" : "..\/..",
-    "68EDA75FC77F318B0BF9BAED4D569D9555E8E0D3" : "..",
-    "FA78EFA588CAAA527A39EFF7FEB4200B880E2491" : "Cleanse\/"
+    "FA78EFA588CAAA527A39EFF7FEB4200B880E2491" : "Cleanse\/",
+    "C29DD0E89C17000393FD71820E9E7C86451DD28A" : ".."
   },
   "DVTSourceControlWorkspaceBlueprintNameKey" : "Cleanse",
   "DVTSourceControlWorkspaceBlueprintVersion" : 204,
   "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "Cleanse.xcodeproj",
   "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
-    {
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "ssh:\/\/git.corp.squareup.com\/ml\/UITestRunner.git",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "68EDA75FC77F318B0BF9BAED4D569D9555E8E0D3"
-    },
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "ssh:\/\/git.corp.squareup.com\/ml\/snapshottestbinaries.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",

@@ -41,12 +41,3 @@ struct GithubMembersServiceImpl : GithubMembersService {
         }
     }
 }
-
-/// Hooks up GithubMembersService to its implementation
-public struct GithubMembersServiceModule : Module {
-    public static func configure<B : Binder>(binder binder: B) {
-        binder
-            .bind(GithubMembersService.self)
-            .to(factory: GithubMembersServiceImpl.init)
-    }
-}

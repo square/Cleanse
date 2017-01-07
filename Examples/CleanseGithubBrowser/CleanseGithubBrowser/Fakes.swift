@@ -12,19 +12,25 @@ import Cleanse
 /// Contains fake implementations of the services that use the network
 
 /// Configure the services to be implemented by fakes
-struct FakeGithubServiceModule : Module {
+struct FakeGithubServicesModule : GithubServicesModule {
     static func configure<B : Binder>(binder binder: B) {
-        /// Make it so when a GithubMembersService is requested, one gets a FakeGithubMembersService
         binder
-            .bind(GithubMembersService.self)
+            .bind()
             .asSingleton()
             .to(factory: FakeGithubMembersService.init)
 
-        /// Make it so when a GithubRepositoriesService is requested, one gets a FakeGithubRepositoriesService
         binder
-            .bind(GithubRepositoriesService.self)
+            .bind()
             .asSingleton()
             .to(factory: FakeGithubRepositoriesService.init)
+    }
+
+    static func configureGithubMembersService(binder bind: ReceiptBinder<GithubMembersService>) -> BindingReceipt<GithubMembersService> {
+        return bind.to { $0 as FakeGithubMembersService }
+    }
+
+    static func configureRepositoriesMembersService(binder bind: ReceiptBinder<GithubRepositoriesService>) -> BindingReceipt<GithubRepositoriesService> {
+        return bind.to { $0 as FakeGithubRepositoriesService }
     }
 }
 

@@ -50,7 +50,7 @@ extension UIViewController {
 public struct UIKitCommonModule : Module {
     public static func configure<B : Binder>(binder binder: B) {
         // Install our common modules for UIScreen and UIWindow
-        binder.install(module: UIScreen.Module.self)
-        binder.install(module: UIWindow.Module.self)
+        binder.include(module: UIScreen.Module.self)
+        binder.include(module: UIWindow.Module.self)
     }
 }

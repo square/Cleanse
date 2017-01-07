@@ -32,7 +32,6 @@ class Graph : Binder {
     
     private var futureProviders = Dictionary<RequirementKey, FutureProvider>()
 
-    
     /// Keyeed by type of value
     private var providers = Dictionary<RequirementKey, AnyProvider>()
     
@@ -44,6 +43,8 @@ class Graph : Binder {
     private var parent: Graph?
 
     private let scope: Scope.Type?
+
+    private var seenModules = Set<SeenModuleKey>()
     
     init(scope: Scope.Type?, parent: Graph?=nil) {
         self.scope = scope
@@ -129,13 +130,10 @@ class Graph : Binder {
     
     /// Add provider for elements of a collection
     private func addCollectionProvider(provider provider: AnyProvider, mergeFunc: [Any] -> Any) {
-        let key: RequirementKey
         let collectionProviderKey: CollectionProvidersKey
         
-        key = .init(provider.dynamicType)
         collectionProviderKey = .init(provider.dynamicType)
         
-    
         if collectionProviders[collectionProviderKey] == nil {
             finalizables.append(AnonymousFinalizable {
                 let collectionProviders = self.gatherAllCollectionProviders(key: collectionProviderKey)
@@ -177,11 +175,9 @@ class Graph : Binder {
     }
 
     @warn_unused_result
-    func _internalProvider<Element>(_ type: Element.Type, debugInfo: ProviderRequestDebugInfo?) -> Provider<Element> {
+    func _internalProvider<Element>(type: Element.Type, debugInfo: ProviderRequestDebugInfo?) -> Provider<Element> {
         precondition(!finalized, "Cannot call \(#function) after finalize is called")
-        
-        let key = RequirementKey(type)
-        
+
         let newRequirements = debugInfo ?? ProviderRequestDebugInfo(requestedType: type, providerRequiredFor: nil, sourceLocation: nil)
 
         let futureProvider = self.findOrCreateFutureProvider(type: type, debugInfo: newRequirements)
@@ -268,15 +264,19 @@ class Graph : Binder {
         finalized = true
     }
 
-    func install<M: Module>(module module: M.Type) {
+    func include<M: Module>(module module: M.Type) {
+        let key = SeenModuleKey(module)
+        guard !seenModules.contains(key) else {
+            return
+        }
         module.configure(binder: self)
+        seenModules.insert(key)
     }
-
 
     func install<S: Component>(dependency dependency: S.Type) {
         // TODO: validate subcomponents
         bind(ComponentFactory<S>.self)
-            .to { [weak self] in
+            .to(factory: { [weak self] in
                 let `self` = self!
                 return ComponentFactory { seed in
                     let subgraph = Graph(scope: S.Scope.scopeOrNil, parent: self)
@@ -301,12 +301,13 @@ class Graph : Binder {
                     let rootProvider = subgraph.provider(S.Root.self)
 
                     dependency.configure(binder: subgraph)
+                    subgraph.bind(S.Root.self).configured(with: S.configureRoot)
 
                     try! subgraph.finalize()
 
                     return rootProvider.get()
                 }
-            }
+            })
     }
 
 
@@ -420,6 +421,17 @@ private struct RequirementKey : TypeKeyProtocol {
     
     let type: TT.Type
     
+    init(_ type: TT.Type) {
+        self.type = type
+    }
+}
+
+
+private struct SeenModuleKey : TypeKeyProtocol {
+    typealias TT = Any
+
+    let type: TT.Type
+
     init(_ type: TT.Type) {
         self.type = type
     }

@@ -36,7 +36,7 @@ struct Grill {
 
 struct GrillModule : Module {
     static func configure<B : Binder>(binder binder: B) {
-        binder.install(module: BurgerModule.self)
+        binder.include(module: BurgerModule.self)
         
         binder.bind().to(factory: Grill.init)
     }
@@ -81,13 +81,12 @@ struct APIComponent : RootComponent {
     
     static func configure<B : Binder>(binder binder: B) {
         // "install" the modules that create the component
-        binder.install(module: BaseURLModule.self)
-        binder.install(module: SomethingThatDoesAnAPICall.Module.self)
-        
-        // bind our root Object
-        binder
-            .bind(RootAPI.self)
-            .to(factory: RootAPI.init)
+        binder.include(module: BaseURLModule.self)
+        binder.include(module: SomethingThatDoesAnAPICall.Module.self)
+    }
+
+    static func configureRoot(binder bind: ReceiptBinder<Root>) -> BindingReceipt<Root> {
+        return bind.to(factory: Root.init)
     }
 }
 
@@ -133,7 +132,10 @@ struct BurgerIndex : Tag {
 struct SimpleModule : RootComponent {
     typealias Root = Int
     static func configure<B : Binder>(binder binder: B) {
-        binder.bind().to(value: 3)
+    }
+
+    static func configureRoot(binder bind: ReceiptBinder<Root>) -> BindingReceipt<Root> {
+        return bind.to(value: 3)
     }
 }
 
@@ -148,7 +150,7 @@ class CleanseTests: XCTestCase {
         
         let binder = Graph(scope: Singleton.self)
         
-        binder.install(module: GrillModule.self)
+        binder.include(module: GrillModule.self)
         
         let p = binder.provider(Grill.self)
         
@@ -206,9 +208,6 @@ class CleanseTests: XCTestCase {
                 .bind(FunStruct.self)
                 .intoCollection()
                 .to(value: [9,10,11].map { FunStruct(i: $0) })
-            
-            
-            binder.bind().to(factory: ProviderResults.init)
         }
     }
     
@@ -220,7 +219,11 @@ class CleanseTests: XCTestCase {
         typealias Root = ProviderResults
 
         static func configure<B : Binder>(binder binder: B) {
-            binder.install(module: CollectionBuilderBindingModule.self)
+            binder.include(module: CollectionBuilderBindingModule.self)
+        }
+
+        static func configureRoot(binder bind: ReceiptBinder<Root>) -> BindingReceipt<Root> {
+            return bind.to(factory: Root.init)
         }
     }
 

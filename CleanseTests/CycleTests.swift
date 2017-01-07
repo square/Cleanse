@@ -14,7 +14,6 @@ import XCTest
 @testable import Cleanse
 
 class CycleTests: XCTestCase {
-
     class AA {
         init(b: BB) {
 
@@ -31,17 +30,16 @@ class CycleTests: XCTestCase {
         typealias  Root = AA
 
         static func configure<B : Binder>(binder binder: B) {
-
-            binder.bind(AA.self).asSingleton().to(factory: AA.init)
             binder.bind(BB.self).asSingleton().to(factory: BB.init)
+        }
+
+        static func configureRoot(binder bind: ReceiptBinder<Root>) -> BindingReceipt<Root> {
+            return bind.to(factory: Root.init)
         }
     }
 
-
-
     class AA_OK {
         init(b: BB_OK) {
-
         }
     }
 
@@ -51,11 +49,13 @@ class CycleTests: XCTestCase {
     }
 
     struct GoodComponent : RootComponent {
-        typealias  Root = AA
+        typealias  Root = AA_OK
+
+        static func configureRoot(binder bind: ReceiptBinder<Root>) -> BindingReceipt<Root> {
+            return bind.to(factory: Root.init)
+        }
 
         static func configure<B : Binder>(binder binder: B) {
-
-            binder.bind().asSingleton().to(factory: AA_OK.init)
             binder.bind().asSingleton().to(factory: BB_OK.init)
         }
     }
