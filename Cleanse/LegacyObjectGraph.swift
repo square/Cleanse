@@ -31,7 +31,7 @@ public protocol LegacyObjectGraphProtocol {
     }
     
     /// Convenience method equivalent to `providerForClass(cls: cls, withName: nil)()`
-    @objc public func objectForClass(cls: AnyClass) -> AnyObject {
+    @objc(objectForClass:) public func objectForClass(cls: AnyClass) -> AnyObject {
         #if swift(>=3.0)
             return objectForClass(cls: cls, withName: nil)
         #else
@@ -41,7 +41,7 @@ public protocol LegacyObjectGraphProtocol {
     }
     
     /// Convenience method equivalent to `providerForClass(cls: cls, withName: nil)`
-    @objc public func providerForClass(cls: AnyClass) -> () -> AnyObject {
+    @objc(providerForClass:) public func providerForClass(cls: AnyClass) -> () -> AnyObject {
         #if swift(>=3.0)
             return providerForClass(cls: cls, withName: nil)
         #else
@@ -50,7 +50,7 @@ public protocol LegacyObjectGraphProtocol {
     }
     
     /// Convenience method equivalent to `providerForClass(cls: cls, withName: name)()`
-    @objc public func objectForClass(cls: AnyClass, withName name: String?) -> AnyObject {
+    @objc(objectForClass:withName:) public func objectForClass(cls: AnyClass, withName name: String?) -> AnyObject {
         #if swift(>=3.0)
             return providerForClass(cls: cls, withName: name)()
         #else
@@ -63,7 +63,7 @@ public protocol LegacyObjectGraphProtocol {
     }
     
     /// Injects properties into an injectable class marked with ST_INJECT(). These properties must be declared in the base interface
-    @objc public func injectPropertiesIntoObject(object: AnyObject) {
+    @objc(injectPropertiesIntoObject:) public func injectPropertiesIntoObject(object: AnyObject) {
         graph.legacyPropertyInjector(cls: type(of: object))(object)
     }
 }
