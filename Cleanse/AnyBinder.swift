@@ -11,4 +11,13 @@ import Foundation
 /// Type erased binder
 public struct AnyBinder : BinderBase, WrappedBinder {
     let binder: BinderBase
+
+    init(binder: BinderBase) {
+        // Optimization to reduce nesting of wrapped binders
+        if let binder = binder as? WrappedBinder {
+            self.binder = binder.binder
+        } else {
+            self.binder = binder
+        }
+    }
 }
