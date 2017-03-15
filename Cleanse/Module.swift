@@ -16,8 +16,8 @@ import Foundation
  
  This is the same for modules in Cleanse, if not even moreso since "configure" may be called more than once to validate the object graph.
  */
-public protocol Module : Configurable {
-    /// This is where configuring providers occurs.
-    static func configure<B: Binder>(binder: B) // Re-declared to provide more specific description
-}
+public protocol Module {
+    associatedtype Scope: Cleanse._ScopeBase = Unscoped
 
+    static func configure(binder: Binder<Self.Scope>)
+}

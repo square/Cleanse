@@ -11,7 +11,7 @@ import Foundation
 
 public protocol BindingBuilder : BindToable {
     // NOTE: When adding a new associated type here, you MUST make it cascade to the wrapped in BindingBuilderDecorator.swift
-    associatedtype MaybeScope : Scope = _Unscoped
+    associatedtype MaybeScope : _ScopeBase = Unscoped
     
     // What is returned in the to functions
     associatedtype Input = FinalProvider.Element
@@ -52,7 +52,7 @@ extension BindingBuilder {
 
 /// MARK: Binding creation
 
-extension Binder {
+extension BinderBase {
     /// Standard entry point to bind something
     public func bind<Element>(_ type: Element.Type = Element.self) -> BaseBindingBuilder<Element, Self> {
         return BaseBindingBuilder(binder: self)
@@ -70,7 +70,7 @@ extension Provider : _StandardProvider, _AnyStandardProvider {
 
 /// MARK: Building steps
 
-extension BindingBuilder where FinalProvider: _StandardProvider, Self.MaybeScope == _Unscoped {
+extension BindingBuilder where FinalProvider: _StandardProvider, Self.MaybeScope == Unscoped {
     /// Qualifies the provider being registered with a tag.
 
     public func tagged<Tag: Cleanse.Tag>(with tag: Tag.Type) -> TaggedBindingBuilderDecorator<Self, Tag> where Tag.Element == FinalProvider.Element {
@@ -78,28 +78,21 @@ extension BindingBuilder where FinalProvider: _StandardProvider, Self.MaybeScope
     }
 }
 
-extension BindingBuilder where MaybeScope == _Unscoped {
-    
-    public func asSingleton() -> ScopedBindingDecorator<Self, Singleton> {
-        return self.with()
+extension BindingBuilder where MaybeScope == Unscoped {
+    @available(*, unavailable, renamed: "scoped()")
+    public func asSingleton() -> ScopedBindingDecorator<Self, Unscoped> {
+        preconditionFailure()
     }
 
-    
+
+    @available(*, unavailable, renamed: "scoped()")
     public func scoped<S: Scope>(`in` scope: S.Type) -> ScopedBindingDecorator<Self, S> {
-        return self.with()
+        preconditionFailure()
     }
 }
 
 
 extension BindToable {
-    @discardableResult public func to(
-        file: StaticString=#file,
-             line: Int=#line,
-             function: StaticString=#function,
-             provider: Provider<Input>) -> BindingReceipt<Input> {
-        return _innerTo(file: file, line: line, function: function, provider: provider)
-    }
-
     @discardableResult public func to(
         value: Input,
               file: StaticString=#file,
@@ -155,8 +148,6 @@ extension BindingBuilder {
         // If we explicitely declared our scope (e.g. `scopedIn(
         if let declaredScope = MaybeScope.scopeOrNil {
             scope = declaredScope
-        } else if let scopedElementType = FinalProvider.Element.self as? _AnyScoped.Type {
-            scope = scopedElementType._scopeType
         } else {
             scope = nil
         }

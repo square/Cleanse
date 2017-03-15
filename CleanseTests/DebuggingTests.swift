@@ -13,10 +13,13 @@ import XCTest
 
 @testable import Cleanse
 
+struct Singleton : Scope {
+}
+
 class DebuggingTests: XCTestCase {
     
     struct FooModule : Module {
-        static func configure<B : Binder>(binder: B) {
+        static func configure(binder: UnscopedBinder) {
             binder.bind().to(value: 3)
             binder.bind().to(value: "Imma string")
         }

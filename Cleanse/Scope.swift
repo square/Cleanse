@@ -10,23 +10,22 @@ import Foundation
 
 // Type erased version of Scope
 
-/// Currently there are only two scopes, `_Unscoped` and `Singleton`.
-public protocol Scope {
+public protocol _ScopeBase {
+}
+
+
+/// Currently there are only two scopes, `Unscoped` and `Singleton`.
+public protocol Scope : _ScopeBase {
 }
 
 /// This a special scope that means its not scoped
-public struct _Unscoped : Scope {
+public struct Unscoped : _ScopeBase {
 }
 
-/// This is similar to the javax.inject.Singleton in java
-public struct Singleton : Scope {
-}
+extension _ScopeBase {
 
-
-extension Scope {
-
-    // Returns our metatype if we're not `_Unscoped`
+    // Returns our metatype if we're not `Unscoped`
     static var scopeOrNil: Scope.Type? {
-        return _Unscoped.self == self ? nil : self
+        return self as? Scope.Type
     }
 }

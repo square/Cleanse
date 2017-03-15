@@ -70,7 +70,7 @@ class LegacyObjectGraphTests: XCTestCase {
     }
     
     struct SimpleLegacyModule : Module {
-        static func configure<B : Binder>(binder: B) {
+        static func configure(binder: UnscopedBinder) {
             binder
                 .bind()
                 .tagged(with: String1.self)
@@ -86,7 +86,7 @@ class LegacyObjectGraphTests: XCTestCase {
     }
 
     struct PropertyInjectionLegacyModuleBase : Module {
-        static func configure<B : Binder>(binder: B) {
+        static func configure(binder: UnscopedBinder) {
             binder.include(module: SimpleLegacyModule.self)
             
             binder
@@ -120,7 +120,7 @@ class LegacyObjectGraphTests: XCTestCase {
     
     
     struct PropertyInjectionLegacyModule : Module {
-        static func configure<B : Binder>(binder: B) {
+        static func configure(binder: UnscopedBinder) {
             binder.include(module: PropertyInjectionLegacyModuleBase.self)
             
             binder
@@ -130,7 +130,7 @@ class LegacyObjectGraphTests: XCTestCase {
     }
     
     struct PropertyInjectionLegacyModuleOverridingString2 : Module {
-        static func configure<B : Binder>(binder: B) {
+        static func configure(binder: UnscopedBinder) {
             binder.include(module: PropertyInjectionLegacyModuleBase.self)
                         
             binder
@@ -142,7 +142,7 @@ class LegacyObjectGraphTests: XCTestCase {
     struct SimpleLegacyComponent : RootComponent {
         typealias Root = LegacyObjectGraph
 
-        static func configure<B : Binder>(binder: B) {
+        static func configure(binder: UnscopedBinder) {
             binder.include(module: SimpleLegacyModule.self)
         }
     }
@@ -162,7 +162,7 @@ class LegacyObjectGraphTests: XCTestCase {
     struct PropertyInjectionComponent : RootComponent {
         typealias Root = LegacyObjectGraph
 
-        static func configure<B : Binder>(binder: B) {
+        static func configure(binder: UnscopedBinder) {
             binder.include(module: PropertyInjectionLegacyModule.self)
         }
     }
@@ -194,7 +194,7 @@ class LegacyObjectGraphTests: XCTestCase {
     struct PropertyInjectionLegacyComponentOverridingString2 : RootComponent {
         typealias Root = LegacyObjectGraph
 
-        static func configure<B : Binder>(binder: B) {
+        static func configure(binder: UnscopedBinder) {
             binder.include(module: PropertyInjectionLegacyModuleOverridingString2.self)
         }
     }

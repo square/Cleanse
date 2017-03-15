@@ -28,10 +28,10 @@ class CycleTests: XCTestCase {
     }
 
     struct BadComponent : RootComponent {
-        typealias  Root = AA
+        typealias Root = AA
 
-        static func configure<B : Binder>(binder: B) {
-            binder.bind(BB.self).asSingleton().to(factory: BB.init)
+        static func configure(binder: Binder<Singleton>) {
+            binder.bind(BB.self).scoped().to(factory: BB.init)
         }
 
         static func configureRoot(binder bind: ReceiptBinder<Root>) -> BindingReceipt<Root> {
@@ -57,8 +57,8 @@ class CycleTests: XCTestCase {
             return bind.to(factory: Root.init)
         }
 
-        static func configure<B : Binder>(binder: B) {
-            binder.bind().asSingleton().to(factory: BB_OK.init)
+        static func configure(binder: Binder<Singleton>) {
+            binder.bind().scoped().to(factory: BB_OK.init)
         }
     }
 

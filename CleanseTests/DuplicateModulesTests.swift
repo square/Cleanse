@@ -31,20 +31,20 @@ private struct S3 : Tag {
 }
 
 private struct M1 : Module {
-    fileprivate static func configure<B : Binder>(binder: B) {
+    fileprivate static func configure(binder: UnscopedBinder) {
         binder.bind().tagged(with: S1.self).to(value: "s1")
         binder.include(module: M3.self)
     }
 }
 private struct M2 : Module {
-    fileprivate static func configure<B : Binder>(binder: B) {
+    fileprivate static func configure(binder: UnscopedBinder) {
         binder.bind().tagged(with: S2.self).to(value: "s2")
         binder.include(module: M3.self)
     }
 }
 
 private struct M3 : Module {
-    fileprivate static func configure<B : Binder>(binder: B) {
+    fileprivate static func configure(binder: UnscopedBinder) {
         binder.bind().tagged(with: S3.self).to(value: "s3")
     }
 }
@@ -52,7 +52,7 @@ private struct M3 : Module {
 private struct DuplicateModuleComponent : RootComponent {
     typealias Root = DupeRoot
 
-    fileprivate static func configure<B : Binder>(binder: B) {
+    fileprivate static func configure(binder: UnscopedBinder) {
         binder.include(module: M1.self)
         binder.include(module: M2.self)
     }
@@ -61,8 +61,6 @@ private struct DuplicateModuleComponent : RootComponent {
         return bind.to(factory: DupeRoot.init)
     }
 }
-
-
 
 /// Resolves https://github.com/square/Cleanse/issues/37
 class DuplicateModulesTests: XCTestCase {

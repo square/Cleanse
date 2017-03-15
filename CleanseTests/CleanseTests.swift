@@ -9,9 +9,6 @@
 import XCTest
 @testable import Cleanse
 
-
-
-
 enum Cheese {
     case american
     case cheddar
@@ -35,7 +32,7 @@ struct Grill {
 }
 
 struct GrillModule : Module {
-    static func configure<B : Binder>(binder: B) {
+    static func configure(binder: Binder<Singleton>) {
         binder.include(module: BurgerModule.self)
         
         binder.bind().to(factory: Grill.init)
@@ -48,7 +45,7 @@ struct BaseURLTag : Tag {
 
 /// Provides the base URL to the rest of the app
 struct BaseURLModule : Module {
-    static func configure<B : Binder>(binder: B) {
+    static func configure(binder: UnscopedBinder) {
         binder
             .bind(URL.self)
             .tagged(with: BaseURLTag.self)
@@ -63,7 +60,7 @@ class SomethingThatDoesAnAPICall {
     }
     
     struct Module : Cleanse.Module {
-        static func configure<B : Binder>(binder: B) {
+        static func configure(binder: UnscopedBinder) {
             binder
                 .bind(SomethingThatDoesAnAPICall.self)
                 .to(factory: SomethingThatDoesAnAPICall.init)
@@ -79,7 +76,7 @@ struct RootAPI {
 struct APIComponent : RootComponent {
     typealias Root = RootAPI
     
-    static func configure<B : Binder>(binder: B) {
+    static func configure(binder: UnscopedBinder) {
         // "install" the modules that create the component
         binder.include(module: BaseURLModule.self)
         binder.include(module: SomethingThatDoesAnAPICall.Module.self)
@@ -91,7 +88,7 @@ struct APIComponent : RootComponent {
 }
 
 struct BurgerModule : Module {
-    static func configure<B : Binder>(binder: B) {
+    static func configure(binder: Binder<Singleton>) {
         binder.bind().to(factory: Burger.init)
         binder.bind().to { return Cheese.cheddar }
         binder.bind().to { Roll.ciabatta }
@@ -100,7 +97,7 @@ struct BurgerModule : Module {
         binder
             .bind(Int.self)
             .tagged(with:  SlicesOfCheese.self)
-            .asSingleton()
+            .scoped()
             .to {
                 defer { singletonCountTest += 1 }
                 return singletonCountTest
@@ -127,11 +124,9 @@ struct BurgerIndex : Tag {
     typealias Element = Int
 }
 
-
-
 struct SimpleModule : RootComponent {
     typealias Root = Int
-    static func configure<B : Binder>(binder: B) {
+    static func configure(binder: UnscopedBinder) {
     }
 
     static func configureRoot(binder bind: ReceiptBinder<Root>) -> BindingReceipt<Root> {
@@ -179,7 +174,7 @@ class CleanseTests: XCTestCase {
     }
 
     struct CollectionBuilderBindingModule : Module {
-        static func configure<B : Binder>(binder: B) {
+        static func configure(binder: UnscopedBinder) {
             
             binder
                 .bind()
@@ -218,7 +213,7 @@ class CleanseTests: XCTestCase {
     struct CollectionBuilderBindingTestComponent : RootComponent {
         typealias Root = ProviderResults
 
-        static func configure<B : Binder>(binder: B) {
+        static func configure(binder: UnscopedBinder) {
             binder.include(module: CollectionBuilderBindingModule.self)
         }
 

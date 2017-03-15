@@ -12,7 +12,7 @@ public struct SingularCollectionBindingBuilderDecorator<Wrapped: BindingBuilder>
     where
     Wrapped.CollectionOrUnique == _UniqueBinding,
     Wrapped.FinalProvider: _StandardProvider,
-    Wrapped.MaybeScope == _Unscoped
+    Wrapped.MaybeScope == Unscoped
 {
     public typealias FinalProvider = Provider<[Wrapped.FinalProvider.Element]>
     public typealias CollectionOrUnique = _CollectionBinding
@@ -33,7 +33,7 @@ public struct SingularCollectionBindingBuilderDecorator<Wrapped: BindingBuilder>
 }
 
 
-public extension BindingBuilder where CollectionOrUnique == _UniqueBinding, FinalProvider: _StandardProvider, MaybeScope == _Unscoped {
+public extension BindingBuilder where CollectionOrUnique == _UniqueBinding, FinalProvider: _StandardProvider, MaybeScope == Unscoped {
     /// If makes it bind `Element` to `[Element]`
     public func intoCollection() -> SingularCollectionBindingBuilderDecorator<Self> {
         return with()

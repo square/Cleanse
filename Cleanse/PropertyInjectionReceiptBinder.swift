@@ -23,12 +23,6 @@ public struct PropertyInjectionReceiptBinder<E: AnyObject> : PropertyInjectorBin
     }
 }
 
-public extension Binder {
-    public func bindPropertyInjection<Element: AnyObject>(configuredWith configurationFunction: (PropertyInjectionReceiptBinder<Element>) -> BindingReceipt<PropertyInjector<Element>>) -> BindingReceipt<PropertyInjector<Element>> {
-        return configurationFunction(PropertyInjectionReceiptBinder(bindPropertyInjectionOf(Element.self)))
-    }
-}
-
 public extension BindToable where Input: PropertyInjectorProtocol {
     public func propertyInjector(configuredWith configurationFunction: (PropertyInjectionReceiptBinder<Input.Element>) -> BindingReceipt<PropertyInjector<Input.Element>>) -> BindingReceipt<PropertyInjector<Input.Element>> {
         return configurationFunction(PropertyInjectionReceiptBinder(PropertyInjectorBindingBuilder(binder: self.binder)))
