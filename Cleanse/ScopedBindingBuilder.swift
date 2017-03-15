@@ -10,7 +10,7 @@ import Foundation
 
 extension BindingBuilder where Binder: BinderType, MaybeScope == Unscoped, Binder.Scope: Scope {
     // Declares binding as scoped. Also known as singletons in some contexts
-    public func scoped() -> ScopedBindingDecorator<Self, Binder.Scope> {
+    public func sharedInScope() -> ScopedBindingDecorator<Self, Binder.Scope> {
         return self.with()
     }
 }

@@ -27,7 +27,7 @@ class ScopeErrorTests: XCTestCase {
         static func configure(binder: Binder<Scope1>) {
             binder
                 .bind(String.self)
-                .scoped()
+                .sharedInScope()
                 .to(value: "fail")
         }
 
@@ -60,7 +60,7 @@ class ScopeErrorTests: XCTestCase {
         static func configure(binder: Binder<Scope1>) {
             binder
                 .bind(String.self)
-                .scoped()
+                .sharedInScope()
                 .to(value: "fail")
         }
 

@@ -31,7 +31,7 @@ class CycleTests: XCTestCase {
         typealias Root = AA
 
         static func configure(binder: Binder<Singleton>) {
-            binder.bind(BB.self).scoped().to(factory: BB.init)
+            binder.bind(BB.self).sharedInScope().to(factory: BB.init)
         }
 
         static func configureRoot(binder bind: ReceiptBinder<Root>) -> BindingReceipt<Root> {
@@ -58,7 +58,7 @@ class CycleTests: XCTestCase {
         }
 
         static func configure(binder: Binder<Singleton>) {
-            binder.bind().scoped().to(factory: BB_OK.init)
+            binder.bind().sharedInScope().to(factory: BB_OK.init)
         }
     }
 
