@@ -112,7 +112,7 @@ class ComponentTests: XCTestCase {
         typealias Seed = TaggedProvider<UserID>  // Our seed is the UserID
 
         static func configure(binder: Binder<UserScoped>) {
-            binder.bind().scoped().to(factory: User.init)
+            binder.bind().sharedInScope().to(factory: User.init)
 
             binder
                 .bind(String.self)
@@ -160,7 +160,7 @@ class ComponentTests: XCTestCase {
         static func configure(binder: Binder<Singleton>) {
             binder
                 .bind(UserService.self)
-                .scoped()
+                .sharedInScope()
                 .to(factory: UserServiceImpl.init)
         }
     }

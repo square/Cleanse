@@ -70,7 +70,7 @@ private struct DevelopmentUserService : UserService {
 
 private struct ProductionUserServiceModule : UserServiceModule {
     fileprivate static func configure(binder: Binder<Singleton>) {
-        binder.bind().scoped().to(factory: ProductionUserService.init)
+        binder.bind().sharedInScope().to(factory: ProductionUserService.init)
     }
 
     fileprivate static func configureUserService(binder bind: ReceiptBinder<UserService>) -> BindingReceipt<UserService> {
@@ -81,7 +81,7 @@ private struct ProductionUserServiceModule : UserServiceModule {
 
 private struct DevelopmentUserServiceModule : UserServiceModule {
     fileprivate static func configure(binder: Binder<Singleton>) {
-        binder.bind().scoped().to(factory: DevelopmentUserService.init)
+        binder.bind().sharedInScope().to(factory: DevelopmentUserService.init)
     }
 
     fileprivate static func configureUserService(binder bind: ReceiptBinder<UserService>) -> BindingReceipt<UserService> {

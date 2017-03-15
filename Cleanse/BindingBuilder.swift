@@ -79,13 +79,13 @@ extension BindingBuilder where FinalProvider: _StandardProvider, Self.MaybeScope
 }
 
 extension BindingBuilder where MaybeScope == Unscoped {
-    @available(*, unavailable, renamed: "scoped()")
+    @available(*, unavailable, renamed: "sharedInScope()")
     public func asSingleton() -> ScopedBindingDecorator<Self, Unscoped> {
         preconditionFailure()
     }
 
 
-    @available(*, unavailable, renamed: "scoped()")
+    @available(*, unavailable, renamed: "sharedInScope()")
     public func scoped<S: Scope>(`in` scope: S.Type) -> ScopedBindingDecorator<Self, S> {
         preconditionFailure()
     }

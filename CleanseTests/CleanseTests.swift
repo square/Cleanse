@@ -97,7 +97,7 @@ struct BurgerModule : Module {
         binder
             .bind(Int.self)
             .tagged(with:  SlicesOfCheese.self)
-            .scoped()
+            .sharedInScope()
             .to {
                 defer { singletonCountTest += 1 }
                 return singletonCountTest
