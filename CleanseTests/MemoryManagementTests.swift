@@ -18,7 +18,7 @@ class MemoryManagementTests: XCTestCase {
     struct MemoryManagementTestsComponent : Cleanse.RootComponent {
         typealias Root = MemoryManagementTests.Root
         
-        static func configure<B : Binder>(binder: B) {
+        static func configure(binder: Binder<Singleton>) {
             binder.include(module: Module.self)
         }
 
@@ -77,14 +77,14 @@ class MemoryManagementTests: XCTestCase {
     }
 
     struct Module : Cleanse.Module {
-        static func configure<B : Binder>(binder: B) {
-            binder.bind().asSingleton().to(factory: Single1.init)
-            binder.bind().asSingleton().to(factory: Single2.init)
-            binder.bind().asSingleton().to(factory: SingleStruct1.init)
+        static func configure(binder: Binder<Singleton>) {
+            binder.bind().scoped().to(factory: Single1.init)
+            binder.bind().scoped().to(factory: Single2.init)
+            binder.bind().scoped().to(factory: SingleStruct1.init)
             
-            binder.bind().intoCollection().asSingleton().to { SingleCollectionElement(value: 3) }
-            binder.bind().intoCollection().asSingleton().to { SingleCollectionElement(value: 4) }
-            binder.bind().intoCollection().asSingleton().to { SingleCollectionElement(value: 5) }
+            binder.bind().intoCollection().scoped().to { SingleCollectionElement(value: 3) }
+            binder.bind().intoCollection().scoped().to { SingleCollectionElement(value: 4) }
+            binder.bind().intoCollection().scoped().to { SingleCollectionElement(value: 5) }
         }
     }
     

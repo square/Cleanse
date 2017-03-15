@@ -101,8 +101,6 @@ public struct MissingProvider : CleanseError {
     }
 }
 
-
-
 /// Error used to indicate that there is an unbroken dependency cycle
 public struct DependencyCycle : CleanseError {
     /// The types that depend on the requested type
@@ -134,35 +132,6 @@ public struct DependencyCycle : CleanseError {
         return message
     }
 }
-
-/// Error used to indicate that a binding was created for the wrong scope
-public struct InvalidBindingScope : CleanseError {
-    /// Where the request was bound
-    let requirement: ProviderRequestDebugInfo
-
-    let attemptedScope: Scope.Type
-    let expectedScope: Scope.Type?
-
-    /// The type that was requested
-    var requestedType: Any.Type {
-        return requirement.requestedType
-    }
-
-    public var description: String {
-        var message = "*** \(canonicalDisplayType(requestedType)) *** Invalid Scope Usage. Expected to be in scope \(expectedScope.debugDescription) but was in \(attemptedScope) instead"
-
-        if let sourceLocation = requirement.sourceLocation {
-            let trimmedSourceLocation = String(describing: sourceLocation).components(separatedBy: "/").suffix(2).joined(separator: "/")
-
-            message += " at \(trimmedSourceLocation)"
-        }
-
-        message += "."
-
-        return message
-    }
-}
-
 
 /// Error used to indicate that two components contain each other that have the same scope
 public struct InvalidScopeNesting : CleanseError {

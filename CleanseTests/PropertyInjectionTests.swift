@@ -47,7 +47,7 @@ class PropertyInjectionTests: XCTestCase {
     
     
     struct PropertyInjectionModule : Module {
-        static func configure<B : Binder>(binder: B) {
+        static func configure(binder: UnscopedBinder) {
             binder
                 .bind()
                 .tagged(with:  BTag.self)
@@ -117,7 +117,7 @@ class PropertyInjectionTests: XCTestCase {
     struct PropertyInjectionComponent : RootComponent {
         typealias Root = PropertyInjector<PropertyInjectionTests>
 
-        static func configure<B : Binder>(binder: B) {
+        static func configure(binder: UnscopedBinder) {
             binder.include(module: PropertyInjectionModule.self)
         }
 

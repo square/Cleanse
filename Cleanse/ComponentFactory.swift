@@ -9,12 +9,12 @@
 import Foundation
 
 public protocol ComponentFactoryProtocol {
-    associatedtype ComponentElement: Cleanse.Component
+    associatedtype ComponentElement: Cleanse.ComponentBase
 
     func build(_ seed: ComponentElement.Seed) -> ComponentElement.Root
 }
 
-public struct ComponentFactory<C: Component> : ComponentFactoryProtocol {
+public struct ComponentFactory<C: ComponentBase> : ComponentFactoryProtocol {
     public typealias ComponentElement = C
     fileprivate let factoryFunction: (_ seed: ComponentElement.Seed) -> C.Root
 

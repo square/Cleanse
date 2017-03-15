@@ -11,7 +11,7 @@ import Foundation
 
 public struct ReceiptBinder<Element> : BindToable {
     public typealias Input = Element
-    public typealias _Binder = AnyBinder
+    public typealias Binder = AnyBinder
 
     private let innerTo: (_ file: StaticString, _ line: Int, _ function: StaticString, _ provider: Provider<Input>) -> BindingReceipt<Input>
     public let binder: AnyBinder

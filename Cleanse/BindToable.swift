@@ -10,7 +10,7 @@ import Foundation
 
 public protocol BindToable {
     associatedtype Input
-    associatedtype _Binder : Cleanse.Binder
+    associatedtype Binder : BinderBase
 
     func _innerTo(
         file: StaticString,
@@ -20,5 +20,5 @@ public protocol BindToable {
 
     var _finalProviderType: Any.Type { get }
 
-    var binder: _Binder { get }
+    var binder: Binder { get }
 }

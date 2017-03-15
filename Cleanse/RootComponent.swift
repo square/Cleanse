@@ -8,14 +8,8 @@
 
 import Foundation
 
-/// Used to detect if things being bound are a component.
-/// Un-typed base protocol of component. Probably shouldn't be used directly
-public protocol _AnyRootComponent : _AnyBaseComponent {
-}
 
-
-public protocol RootComponent : Component, _AnyRootComponent {
-    associatedtype Scope = Singleton
+public protocol RootComponent : ComponentBase {
 }
 
 public extension ComponentFactoryProtocol where ComponentElement : RootComponent {
@@ -36,14 +30,5 @@ public extension ComponentFactoryProtocol where ComponentElement : RootComponent
         try graph.finalize()
 
         return p.get()
-    }
-}
-
-
-
-extension Component {
-    // Returns true if we're a RootComponents
-    static var isRootComponent: Bool {
-        return self is _AnyRootComponent.Type
     }
 }
