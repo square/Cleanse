@@ -20,6 +20,10 @@ public struct TaggedProvider<Tag: Cleanse.Tag> : ProviderProtocol {
     public func get() -> Element {
         return getter()
     }
+
+    public func asProvider() -> Provider<Element> {
+        return Provider(getter: getter)
+    }
 }
 
 protocol AnyTaggedProvider : AnyProvider {
