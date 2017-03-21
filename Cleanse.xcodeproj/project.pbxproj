@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		88A8D19B1E81D52A00F15A75 /* TaggedProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A8D19A1E81D52A00F15A75 /* TaggedProviderTests.swift */; };
 		F61133BC1CD41D8A00069972 /* Swift3Compat.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61133BB1CD41D8A00069972 /* Swift3Compat.swift */; };
 		F61133BF1CD41EE600069972 /* TypeKeyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61133BE1CD41EE600069972 /* TypeKeyProtocol.swift */; };
 		F61133C11CD7B36600069972 /* MemoryManagementTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61133C01CD7B36600069972 /* MemoryManagementTests.swift */; };
@@ -83,6 +84,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		88A8D19A1E81D52A00F15A75 /* TaggedProviderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaggedProviderTests.swift; sourceTree = "<group>"; };
 		F61133BB1CD41D8A00069972 /* Swift3Compat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Swift3Compat.swift; sourceTree = "<group>"; };
 		F61133BE1CD41EE600069972 /* TypeKeyProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypeKeyProtocol.swift; sourceTree = "<group>"; };
 		F61133C01CD7B36600069972 /* MemoryManagementTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryManagementTests.swift; sourceTree = "<group>"; };
@@ -355,18 +357,19 @@
 				F6A82B7E1CE2E299007C3A32 /* CanonicalRepresentableTests.swift */,
 				F6A660D91CCB07C3004DD6E3 /* CleanseTests.swift */,
 				F62C69EE1CD7F42B00137422 /* ComponentTests.swift */,
+				F6B3DDD91DA4903F00730E5D /* ComponentVisitorTests.swift */,
 				F624D2951D4023D900C36F98 /* CycleTests.swift */,
 				F6A82B801CE2F182007C3A32 /* DebuggingTests.swift */,
+				F6FA73601E2056D80038D8F8 /* DuplicateModulesTests.swift */,
 				F61191351CD30B3300686C0C /* ErrorTest.swift */,
 				F6A660DB1CCB07C3004DD6E3 /* Info.plist */,
 				F6A82B7C1CE2858B007C3A32 /* LegacyObjectGraphTests.swift */,
 				F61133C01CD7B36600069972 /* MemoryManagementTests.swift */,
 				F6AB45141CD9D1F90021AF36 /* NoopVisitor.swift */,
 				F6615D1C1CD00FC10079DE8D /* PropertyInjectionTests.swift */,
-				F64BFCE41D4FCAF000F15E79 /* ScopeErrorTests.swift */,
-				F6B3DDD91DA4903F00730E5D /* ComponentVisitorTests.swift */,
 				F6FA73591E2032F90038D8F8 /* ReceiptBindingTests.swift */,
-				F6FA73601E2056D80038D8F8 /* DuplicateModulesTests.swift */,
+				F64BFCE41D4FCAF000F15E79 /* ScopeErrorTests.swift */,
+				88A8D19A1E81D52A00F15A75 /* TaggedProviderTests.swift */,
 			);
 			path = CleanseTests;
 			sourceTree = "<group>";
@@ -564,6 +567,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F6B3DDDA1DA4903F00730E5D /* ComponentVisitorTests.swift in Sources */,
+				88A8D19B1E81D52A00F15A75 /* TaggedProviderTests.swift in Sources */,
 				F624D2961D4023D900C36F98 /* CycleTests.swift in Sources */,
 				F6615D1D1CD00FC10079DE8D /* PropertyInjectionTests.swift in Sources */,
 				F6A82B811CE2F182007C3A32 /* DebuggingTests.swift in Sources */,
