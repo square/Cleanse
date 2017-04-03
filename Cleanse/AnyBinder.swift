@@ -10,5 +10,9 @@ import Foundation
 
 /// Type erased binder
 public struct AnyBinder : BinderBase, WrappedBinder {
-    let binder: BinderBase
+    public let binder: BinderBase
+
+    public init(binder: BinderBase) {
+        self.binder = binder
+    }
 }

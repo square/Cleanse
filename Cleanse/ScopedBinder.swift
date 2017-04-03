@@ -15,9 +15,13 @@ public protocol BinderType : BinderBase {
 }
 
 public struct Binder<S: Cleanse._ScopeBase> : BinderType, WrappedBinder {
-    let binder: BinderBase
+    public let binder: BinderBase
 
     public typealias Scope = S
+
+    public init(binder: BinderBase) {
+        self.binder = binder
+    }
 }
 
 extension BinderType {
