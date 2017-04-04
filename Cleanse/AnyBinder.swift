@@ -13,6 +13,11 @@ public struct AnyBinder : BinderBase, WrappedBinder {
     public let binder: BinderBase
 
     public init(binder: BinderBase) {
-        self.binder = binder
+        // Optimization to reduce nesting of wrapped binders
+        if let binder = binder as? WrappedBinder {
+            self.binder = binder.binder
+        } else {
+            self.binder = binder
+        }
     }
 }

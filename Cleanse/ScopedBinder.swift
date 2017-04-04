@@ -20,7 +20,12 @@ public struct Binder<S: Cleanse._ScopeBase> : BinderType, WrappedBinder {
     public typealias Scope = S
 
     public init(binder: BinderBase) {
-        self.binder = binder
+        // Optimization to reduce nesting of wrapped binders
+        if let binder = binder as? WrappedBinder {
+            self.binder = binder.binder
+        } else {
+            self.binder = binder
+        }
     }
 }
 

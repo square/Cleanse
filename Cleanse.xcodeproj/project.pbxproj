@@ -30,7 +30,7 @@
 		F64383E61E78D590006FD59E /* WrappedBinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F64383E51E78D590006FD59E /* WrappedBinder.swift */; };
 		F64383EA1E78D605006FD59E /* ScopedBinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F64383E91E78D605006FD59E /* ScopedBinder.swift */; };
 		F64383EC1E78D860006FD59E /* ScopedBindingBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F64383EB1E78D860006FD59E /* ScopedBindingBuilder.swift */; };
-		F6445E2D1CDB425E00036515 /* BaseComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6445E2C1CDB425E00036515 /* BaseComponent.swift */; };
+		F6445E2D1CDB425E00036515 /* ComponentBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6445E2C1CDB425E00036515 /* ComponentBase.swift */; };
 		F64BFCE51D4FCAF000F15E79 /* ScopeErrorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F64BFCE41D4FCAF000F15E79 /* ScopeErrorTests.swift */; };
 		F65642CA1CCEFB6D00C927E6 /* Binder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65642C91CCEFB6D00C927E6 /* Binder.swift */; };
 		F6615D1D1CD00FC10079DE8D /* PropertyInjectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6615D1C1CD00FC10079DE8D /* PropertyInjectionTests.swift */; };
@@ -109,7 +109,7 @@
 		F64383E51E78D590006FD59E /* WrappedBinder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WrappedBinder.swift; sourceTree = "<group>"; };
 		F64383E91E78D605006FD59E /* ScopedBinder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScopedBinder.swift; sourceTree = "<group>"; };
 		F64383EB1E78D860006FD59E /* ScopedBindingBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScopedBindingBuilder.swift; sourceTree = "<group>"; };
-		F6445E2C1CDB425E00036515 /* BaseComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseComponent.swift; sourceTree = "<group>"; };
+		F6445E2C1CDB425E00036515 /* ComponentBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComponentBase.swift; sourceTree = "<group>"; };
 		F64BFCE41D4FCAF000F15E79 /* ScopeErrorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScopeErrorTests.swift; sourceTree = "<group>"; };
 		F65642C91CCEFB6D00C927E6 /* Binder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Binder.swift; sourceTree = "<group>"; };
 		F6615D1C1CD00FC10079DE8D /* PropertyInjectionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropertyInjectionTests.swift; sourceTree = "<group>"; };
@@ -302,7 +302,7 @@
 		F6760C651D2E0B6D009C6F8A /* ComponentBase */ = {
 			isa = PBXGroup;
 			children = (
-				F6445E2C1CDB425E00036515 /* BaseComponent.swift */,
+				F6445E2C1CDB425E00036515 /* ComponentBase.swift */,
 			);
 			name = ComponentBase;
 			sourceTree = "<group>";
@@ -530,7 +530,7 @@
 				F6760C5E1D2DF698009C6F8A /* ScopedProvider.swift in Sources */,
 				F61133C71CD7B64C00069972 /* Installer.swift in Sources */,
 				F69D1A971CDDAFF7009132B4 /* CollectionBindingBuilderDecorator.swift in Sources */,
-				F6445E2D1CDB425E00036515 /* BaseComponent.swift in Sources */,
+				F6445E2D1CDB425E00036515 /* ComponentBase.swift in Sources */,
 				F69D1A991CDDB874009132B4 /* ScopedBindingDecorator.swift in Sources */,
 				F64383EC1E78D860006FD59E /* ScopedBindingBuilder.swift in Sources */,
 				F64383E21E78C78D006FD59E /* ScopedModule.swift in Sources */,
