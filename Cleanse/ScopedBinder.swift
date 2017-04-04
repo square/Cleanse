@@ -15,9 +15,9 @@ public protocol BinderType : BinderBase {
 }
 
 public struct Binder<S: Cleanse._ScopeBase> : BinderType, WrappedBinder {
-    let binder: BinderBase
+    public let binder: BinderBase
 
-    init(binder: BinderBase) {
+    public init(binder: BinderBase) {
         // Optimization to reduce nesting of wrapped binders
         if let binder = binder as? WrappedBinder {
             self.binder = binder.binder
