@@ -9,7 +9,7 @@
 import Foundation
 
 /// Makes it easy to wrap binders w/ each other
-protocol WrappedBinder : BinderBase {
+public protocol WrappedBinder : BinderBase {
     var binder: BinderBase { get }
     init(binder: BinderBase)
 }
