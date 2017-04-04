@@ -8,11 +8,11 @@
 
 import Foundation
 
-public struct BaseBindingBuilder<Element, B: Binder> : BindingBuilder {
+public struct BaseBindingBuilder<Element, B: BinderBase> : BindingBuilder {
     public typealias FinalProvider = Provider<Element>
     public typealias Input = Element
-    public typealias _Binder = B
-    public let binder: _Binder
+    public typealias Binder = B
+    public let binder: B
     public static func mapElement(input: Input) -> FinalProvider.Element {
         return input
     }

@@ -27,7 +27,7 @@ private class FutureProvider {
 }
 
 /// Contents of an object graph. Also the "Binder" object
-class Graph : Binder {
+class Graph : BinderBase {
     fileprivate var requirements = Dictionary<RequirementKey, [ProviderRequestDebugInfo]>()
     
     fileprivate var futureProviders = Dictionary<RequirementKey, FutureProvider>()
@@ -269,17 +269,17 @@ class Graph : Binder {
         guard !seenModules.contains(key) else {
             return
         }
-        module.configure(binder: self)
+        module.configure(binder: .init(binder: self))
         seenModules.insert(key)
     }
 
-    func install<S: Component>(dependency: S.Type) {
+    private func install<C: ComponentBase>(componentBase dependency: C.Type) {
         // TODO: validate subcomponents
-        bind(ComponentFactory<S>.self)
+        self.bind(ComponentFactory<C>.self)
             .to(factory: { [weak self] in
                 let `self` = self!
                 return ComponentFactory { seed in
-                    let subgraph = Graph(scope: S.Scope.scopeOrNil, parent: self)
+                    let subgraph = Graph(scope: C.Scope.scopeOrNil, parent: self)
 
                     // If the seeds a provider we need to bind it differently
                     if let seed = seed as? AnyProvider {
@@ -298,10 +298,10 @@ class Graph : Binder {
                         ))
                     }
 
-                    let rootProvider = subgraph.provider(S.Root.self)
+                    let rootProvider = subgraph.provider(C.Root.self)
 
-                    dependency.configure(binder: subgraph)
-                    subgraph.bind(S.Root.self).configured(with: S.configureRoot)
+                    dependency.configure(binder: .init(binder: subgraph))
+                    subgraph.bind(C.Root.self).configured(with: C.configureRoot)
 
                     try! subgraph.finalize()
 
@@ -311,6 +311,13 @@ class Graph : Binder {
     }
 
 
+    func install<C : RootComponent>(dependency: C.Type) {
+        install(componentBase: dependency)
+    }
+
+    func install<C : Component>(dependency: C.Type) {
+        install(componentBase: dependency)
+    }
     
     // For use in finalize. Gets our provider, or recurses up to the parent's
     private func getRegisteredProvider(key: RequirementKey) -> AnyProvider? {

@@ -53,17 +53,15 @@ class ComponentTests: XCTestCase {
         )
     }
     
-    private class App : Scoped {
-        typealias Scope = Singleton
-
+    private class App {
         let loggedInComponentFactory: ComponentFactory<LoggedInComponent>
 
         let allLoggedOutStrings: Provider<[String]>
 
         fileprivate init(
-            loggedInComponentFactory: ComponentFactory<LoggedInComponent>,
+            loggedInComponentFactory: Provider<ComponentFactory<LoggedInComponent>>,
             allLoggedOutStrings: Provider<[String]>) {
-            self.loggedInComponentFactory = loggedInComponentFactory
+            self.loggedInComponentFactory = loggedInComponentFactory.get()
             self.allLoggedOutStrings = allLoggedOutStrings
         }
 
@@ -75,7 +73,7 @@ class ComponentTests: XCTestCase {
     private struct AppComponent : RootComponent {
         fileprivate typealias Root = App
 
-        static func configure<B : Binder>(binder: B) {
+        static func configure(binder: Binder<Singleton>) {
             binder.include(module: UserServiceModule.self)
 
             binder.install(dependency: LoggedInComponent.self)
@@ -112,10 +110,9 @@ class ComponentTests: XCTestCase {
     private struct LoggedInComponent : Component {
         typealias Root = LoggedInRoot
         typealias Seed = TaggedProvider<UserID>  // Our seed is the UserID
-        typealias Scope = UserScoped
 
-        static func configure<B : Binder>(binder: B) {
-            binder.bind().to(factory: User.init)
+        static func configure(binder: Binder<UserScoped>) {
+            binder.bind().sharedInScope().to(factory: User.init)
 
             binder
                 .bind(String.self)
@@ -143,8 +140,7 @@ class ComponentTests: XCTestCase {
         typealias Element = String
     }
 
-    private class User : Scoped {
-        fileprivate typealias Scope = UserScoped
+    private class User {
 
         let id: String
 
@@ -161,9 +157,10 @@ class ComponentTests: XCTestCase {
     }
 
     private struct UserServiceModule : Module {
-        static func configure<B : Binder>(binder: B) {
+        static func configure(binder: Binder<Singleton>) {
             binder
                 .bind(UserService.self)
+                .sharedInScope()
                 .to(factory: UserServiceImpl.init)
         }
     }
@@ -173,7 +170,7 @@ private protocol UserService {
     func getNameForUser(userID: String) -> String?
 }
 
-private struct UserServiceImpl : UserService, Scoped {
+private struct UserServiceImpl : UserService {
     typealias Scope = Singleton
 
     func getNameForUser(userID: String) -> String? {

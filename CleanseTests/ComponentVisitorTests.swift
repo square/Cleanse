@@ -18,7 +18,8 @@ class ComponentVisitorTests: XCTestCase {
         typealias Root = RR
         typealias Seed = String
 
-        static func configure<B : Binder>(binder: B) {
+    
+        static func configure(binder: UnscopedBinder) {
             binder.install(dependency: Component1.self)
             binder.install(dependency: Component2.self)
         }
@@ -35,10 +36,10 @@ class ComponentVisitorTests: XCTestCase {
         let r2: R2
     }
 
-    struct Component1 : Cleanse.Component {
+    struct Component1 : Cleanse.RootComponent {
         typealias Root = R1
 
-        static func configure<B : Binder>(binder: B) {
+        static func configure(binder: UnscopedBinder) {
         }
 
         static func configureRoot(binder bind: ReceiptBinder<Root>) -> BindingReceipt<Root> {
@@ -46,11 +47,11 @@ class ComponentVisitorTests: XCTestCase {
         }
     }
 
-    struct Component2 : Cleanse.Component {
+    struct Component2 : Cleanse.RootComponent {
         typealias Root = R2
         typealias Seed = String
 
-        static func configure<B : Binder>(binder: B) {
+        static func configure(binder: UnscopedBinder) {
         }
 
         static func configureRoot(binder bind: ReceiptBinder<Root>) -> BindingReceipt<Root> {
@@ -65,7 +66,7 @@ class ComponentVisitorTests: XCTestCase {
         let foo: String
     }
 
-    final class NoopVisitor : ComponentVisitor {
+    final class NoopVisitor : SimpleComponentVisitor {
         var visitorState: VisitorState<NoopVisitor> = .init()
     }
 

@@ -25,10 +25,10 @@ class ReceiptBindingTests: XCTestCase {
     }
 }
 
-private struct UserServiceComponent<_UserServiceModule: UserServiceModule> : RootComponent {
+private struct UserServiceComponent<_UserServiceModule: UserServiceModule> : RootComponent where _UserServiceModule.Scope == Singleton {
     fileprivate typealias Root = UserService
 
-    static func configure<B : Binder>(binder: B) {
+    static func configure(binder: Binder<Singleton>) {
         binder.include(module: _UserServiceModule.self)
     }
 
@@ -45,7 +45,7 @@ private protocol UserService {
     func getNameForUser(userID: String) -> String?
 }
 
-private struct ProductionUserService : UserService, Scoped {
+private struct ProductionUserService : UserService {
     typealias Scope = Singleton
 
     func getNameForUser(userID: String) -> String? {
@@ -57,9 +57,7 @@ private struct ProductionUserService : UserService, Scoped {
     }
 }
 
-private struct DevelopmentUserService : UserService, Scoped {
-    typealias Scope = Singleton
-
+private struct DevelopmentUserService : UserService {
     func getNameForUser(userID: String) -> String? {
         switch userID {
         case "user-1": return "Development User One"
@@ -71,8 +69,8 @@ private struct DevelopmentUserService : UserService, Scoped {
 
 
 private struct ProductionUserServiceModule : UserServiceModule {
-    fileprivate static func configure<B : Binder>(binder: B) {
-        binder.bind().to(factory: ProductionUserService.init)
+    fileprivate static func configure(binder: Binder<Singleton>) {
+        binder.bind().sharedInScope().to(factory: ProductionUserService.init)
     }
 
     fileprivate static func configureUserService(binder bind: ReceiptBinder<UserService>) -> BindingReceipt<UserService> {
@@ -82,8 +80,8 @@ private struct ProductionUserServiceModule : UserServiceModule {
 
 
 private struct DevelopmentUserServiceModule : UserServiceModule {
-    fileprivate static func configure<B : Binder>(binder: B) {
-        binder.bind().to(factory: DevelopmentUserService.init)
+    fileprivate static func configure(binder: Binder<Singleton>) {
+        binder.bind().sharedInScope().to(factory: DevelopmentUserService.init)
     }
 
     fileprivate static func configureUserService(binder bind: ReceiptBinder<UserService>) -> BindingReceipt<UserService> {

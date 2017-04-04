@@ -8,8 +8,6 @@
 
 import Foundation
 
-
-
 import XCTest
 
 @testable import Cleanse
@@ -33,7 +31,7 @@ class CanonicalRepresentableTests: XCTestCase {
     struct TestComponent : Cleanse.RootComponent {
         typealias Root = TestRoot
         
-        static func configure<B : Binder>(binder: B) {
+        static func configure(binder: UnscopedBinder) {
             binder.bind(String.self).to(value: "Hey!")
         }
 

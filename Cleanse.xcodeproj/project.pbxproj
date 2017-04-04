@@ -27,7 +27,11 @@
 		F62C69FD1CD8927400137422 /* CanonicalRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62C69FC1CD8927400137422 /* CanonicalRepresentable.swift */; };
 		F62C69FF1CD897D200137422 /* TaggedProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62C69FE1CD897D200137422 /* TaggedProvider.swift */; };
 		F63EF7961CD2F8430016306D /* SourceLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63EF7951CD2F8430016306D /* SourceLocation.swift */; };
-		F6445E2D1CDB425E00036515 /* BaseComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6445E2C1CDB425E00036515 /* BaseComponent.swift */; };
+		F64383E21E78C78D006FD59E /* ScopedModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = F64383E11E78C78D006FD59E /* ScopedModule.swift */; };
+		F64383E61E78D590006FD59E /* WrappedBinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F64383E51E78D590006FD59E /* WrappedBinder.swift */; };
+		F64383EA1E78D605006FD59E /* ScopedBinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F64383E91E78D605006FD59E /* ScopedBinder.swift */; };
+		F64383EC1E78D860006FD59E /* ScopedBindingBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F64383EB1E78D860006FD59E /* ScopedBindingBuilder.swift */; };
+		F6445E2D1CDB425E00036515 /* ComponentBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6445E2C1CDB425E00036515 /* ComponentBase.swift */; };
 		F64BFCE51D4FCAF000F15E79 /* ScopeErrorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F64BFCE41D4FCAF000F15E79 /* ScopeErrorTests.swift */; };
 		F65642CA1CCEFB6D00C927E6 /* Binder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65642C91CCEFB6D00C927E6 /* Binder.swift */; };
 		F6615D1D1CD00FC10079DE8D /* PropertyInjectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6615D1C1CD00FC10079DE8D /* PropertyInjectionTests.swift */; };
@@ -37,10 +41,8 @@
 		F664505B1CCEBA9800955A9D /* Lock.swift in Sources */ = {isa = PBXBuildFile; fileRef = F664505A1CCEBA9800955A9D /* Lock.swift */; };
 		F6760C551D2DED32009C6F8A /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6760C541D2DED32009C6F8A /* Component.swift */; };
 		F6760C571D2DEDAA009C6F8A /* ComponentFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6760C561D2DEDAA009C6F8A /* ComponentFactory.swift */; };
-		F6760C591D2DEFFC009C6F8A /* Configurable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6760C581D2DEFFC009C6F8A /* Configurable.swift */; };
 		F6760C5C1D2DF67F009C6F8A /* Finalizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6760C5B1D2DF67F009C6F8A /* Finalizable.swift */; };
 		F6760C5E1D2DF698009C6F8A /* ScopedProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6760C5D1D2DF698009C6F8A /* ScopedProvider.swift */; };
-		F6760C601D2DF9BA009C6F8A /* Scoped.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6760C5F1D2DF9BA009C6F8A /* Scoped.swift */; };
 		F69A20621CD1941D00B954F8 /* CombinedHashable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69A205F1CD1941D00B954F8 /* CombinedHashable.swift */; };
 		F69D1A971CDDAFF7009132B4 /* CollectionBindingBuilderDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69D1A961CDDAFF7009132B4 /* CollectionBindingBuilderDecorator.swift */; };
 		F69D1A991CDDB874009132B4 /* ScopedBindingDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69D1A981CDDB874009132B4 /* ScopedBindingDecorator.swift */; };
@@ -105,7 +107,11 @@
 		F62C69FC1CD8927400137422 /* CanonicalRepresentable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CanonicalRepresentable.swift; sourceTree = "<group>"; };
 		F62C69FE1CD897D200137422 /* TaggedProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaggedProvider.swift; sourceTree = "<group>"; };
 		F63EF7951CD2F8430016306D /* SourceLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SourceLocation.swift; sourceTree = "<group>"; };
-		F6445E2C1CDB425E00036515 /* BaseComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseComponent.swift; sourceTree = "<group>"; };
+		F64383E11E78C78D006FD59E /* ScopedModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScopedModule.swift; sourceTree = "<group>"; };
+		F64383E51E78D590006FD59E /* WrappedBinder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WrappedBinder.swift; sourceTree = "<group>"; };
+		F64383E91E78D605006FD59E /* ScopedBinder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScopedBinder.swift; sourceTree = "<group>"; };
+		F64383EB1E78D860006FD59E /* ScopedBindingBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScopedBindingBuilder.swift; sourceTree = "<group>"; };
+		F6445E2C1CDB425E00036515 /* ComponentBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComponentBase.swift; sourceTree = "<group>"; };
 		F64BFCE41D4FCAF000F15E79 /* ScopeErrorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScopeErrorTests.swift; sourceTree = "<group>"; };
 		F65642C91CCEFB6D00C927E6 /* Binder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Binder.swift; sourceTree = "<group>"; };
 		F6615D1C1CD00FC10079DE8D /* PropertyInjectionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropertyInjectionTests.swift; sourceTree = "<group>"; };
@@ -116,10 +122,8 @@
 		F664505A1CCEBA9800955A9D /* Lock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Lock.swift; sourceTree = "<group>"; };
 		F6760C541D2DED32009C6F8A /* Component.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Component.swift; sourceTree = "<group>"; };
 		F6760C561D2DEDAA009C6F8A /* ComponentFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComponentFactory.swift; sourceTree = "<group>"; };
-		F6760C581D2DEFFC009C6F8A /* Configurable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Configurable.swift; sourceTree = "<group>"; };
 		F6760C5B1D2DF67F009C6F8A /* Finalizable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Finalizable.swift; sourceTree = "<group>"; };
 		F6760C5D1D2DF698009C6F8A /* ScopedProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScopedProvider.swift; sourceTree = "<group>"; };
-		F6760C5F1D2DF9BA009C6F8A /* Scoped.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Scoped.swift; sourceTree = "<group>"; };
 		F69A205F1CD1941D00B954F8 /* CombinedHashable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CombinedHashable.swift; sourceTree = "<group>"; };
 		F69D1A961CDDAFF7009132B4 /* CollectionBindingBuilderDecorator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionBindingBuilderDecorator.swift; sourceTree = "<group>"; };
 		F69D1A981CDDB874009132B4 /* ScopedBindingDecorator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScopedBindingDecorator.swift; sourceTree = "<group>"; };
@@ -193,13 +197,13 @@
 				F64DB3501E2020CA008358AC /* ReceiptBinder */,
 				F61191371CD329F500686C0C /* Tags.swift */,
 				F61191391CD3331400686C0C /* Module.swift */,
-				F6760C581D2DEFFC009C6F8A /* Configurable.swift */,
 				F6760C651D2E0B6D009C6F8A /* ComponentBase */,
 				F6D589ED1D3ED55100B99F7D /* Validations */,
 				F6AB45161CD9E8B40021AF36 /* Components */,
 				F6760C5A1D2DF577009C6F8A /* Scopes */,
 				F62C6A011CD9122600137422 /* Providers */,
 				F62C69FC1CD8927400137422 /* CanonicalRepresentable.swift */,
+				F64383E11E78C78D006FD59E /* ScopedModule.swift */,
 			);
 			name = Core;
 			sourceTree = "<group>";
@@ -242,6 +246,7 @@
 				F69D1AA41CDDEF67009132B4 /* RawProviderBinding.swift */,
 				F6760C5B1D2DF67F009C6F8A /* Finalizable.swift */,
 				F6FA73571E202AB30038D8F8 /* AnyBinder.swift */,
+				F64383E51E78D590006FD59E /* WrappedBinder.swift */,
 			);
 			name = Binder;
 			sourceTree = "<group>";
@@ -290,7 +295,8 @@
 			children = (
 				F6A660F21CCB1B6B004DD6E3 /* Scope.swift */,
 				F6760C5D1D2DF698009C6F8A /* ScopedProvider.swift */,
-				F6760C5F1D2DF9BA009C6F8A /* Scoped.swift */,
+				F64383E91E78D605006FD59E /* ScopedBinder.swift */,
+				F64383EB1E78D860006FD59E /* ScopedBindingBuilder.swift */,
 			);
 			name = Scopes;
 			sourceTree = "<group>";
@@ -298,7 +304,7 @@
 		F6760C651D2E0B6D009C6F8A /* ComponentBase */ = {
 			isa = PBXGroup;
 			children = (
-				F6445E2C1CDB425E00036515 /* BaseComponent.swift */,
+				F6445E2C1CDB425E00036515 /* ComponentBase.swift */,
 			);
 			name = ComponentBase;
 			sourceTree = "<group>";
@@ -515,6 +521,7 @@
 				F6615D231CD026890079DE8D /* ProviderProvider.swift in Sources */,
 				F6FA73561E2027D60038D8F8 /* BindToable.swift in Sources */,
 				F6A660F31CCB1B6B004DD6E3 /* Scope.swift in Sources */,
+				F64383EA1E78D605006FD59E /* ScopedBinder.swift in Sources */,
 				F6FA73541E2027590038D8F8 /* ReceiptBinder.swift in Sources */,
 				F6B387951CE18E53001CBC4F /* SingularCollectionBindingBuilderDecorator.swift in Sources */,
 				F6D589EF1D3ED57900B99F7D /* ValidationVisitor.swift in Sources */,
@@ -526,9 +533,10 @@
 				F6760C5E1D2DF698009C6F8A /* ScopedProvider.swift in Sources */,
 				F61133C71CD7B64C00069972 /* Installer.swift in Sources */,
 				F69D1A971CDDAFF7009132B4 /* CollectionBindingBuilderDecorator.swift in Sources */,
-				F6445E2D1CDB425E00036515 /* BaseComponent.swift in Sources */,
+				F6445E2D1CDB425E00036515 /* ComponentBase.swift in Sources */,
 				F69D1A991CDDB874009132B4 /* ScopedBindingDecorator.swift in Sources */,
-				F6760C601D2DF9BA009C6F8A /* Scoped.swift in Sources */,
+				F64383EC1E78D860006FD59E /* ScopedBindingBuilder.swift in Sources */,
+				F64383E21E78C78D006FD59E /* ScopedModule.swift in Sources */,
 				F61133BC1CD41D8A00069972 /* Swift3Compat.swift in Sources */,
 				F69A20621CD1941D00B954F8 /* CombinedHashable.swift in Sources */,
 				F6615D1F1CD025650079DE8D /* PropertyInjection.swift in Sources */,
@@ -541,7 +549,6 @@
 				F6760C5C1D2DF67F009C6F8A /* Finalizable.swift in Sources */,
 				F65642CA1CCEFB6D00C927E6 /* Binder.swift in Sources */,
 				F62C69F51CD8481200137422 /* ComponentVisitor.swift in Sources */,
-				F6760C591D2DEFFC009C6F8A /* Configurable.swift in Sources */,
 				F69D1AA51CDDEF67009132B4 /* RawProviderBinding.swift in Sources */,
 				F61133C51CD7B5A900069972 /* RootComponent.swift in Sources */,
 				F69D1A9B1CDDBC53009132B4 /* BindingBuilder.swift in Sources */,
@@ -551,6 +558,7 @@
 				F62C69F91CD86B9500137422 /* Provider.swift in Sources */,
 				F61191341CD3005400686C0C /* Errors.swift in Sources */,
 				F61B15121CD1596400A42C01 /* LegacyObjectGraph.swift in Sources */,
+				F64383E61E78D590006FD59E /* WrappedBinder.swift in Sources */,
 				F664505B1CCEBA9800955A9D /* Lock.swift in Sources */,
 				F662D7F41CCFCB0200A1D022 /* Graph.swift in Sources */,
 				F69D1AA01CDDE229009132B4 /* BinderArities.swift in Sources */,

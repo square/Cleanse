@@ -17,9 +17,9 @@ public protocol BindingBuilderDecorator : BindingBuilder {
     
     /// Support for collection binding. Users probably don't have to worry about this. Also they have default implementations
     /// TODO: Move elsewhere perhaps
-    associatedtype MaybeScope : Scope = Wrapped.MaybeScope
+    associatedtype MaybeScope : _ScopeBase = Wrapped.MaybeScope
     associatedtype Input = Wrapped.Input
-    associatedtype _Binder: Binder = Wrapped._Binder
+    associatedtype Binder: Cleanse.BinderBase = Wrapped.Binder
     associatedtype FinalProvider : ProviderProtocol = Wrapped.FinalProvider
     
     associatedtype CollectionOrUnique: _CollectionOrUniqueBindingBase = Wrapped.CollectionOrUnique
@@ -38,8 +38,8 @@ extension BindingBuilderDecorator where FinalProvider.Element == Wrapped.FinalPr
     }
 }
 
-extension BindingBuilderDecorator where _Binder == Wrapped._Binder {
-    public var binder: _Binder {
+extension BindingBuilderDecorator where Self.Binder == Wrapped.Binder {
+    public var binder: Self.Binder {
         return wrapped.binder
     }
 }

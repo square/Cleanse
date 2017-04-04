@@ -97,21 +97,6 @@ private class ComponentInfo {
     }
 
     fileprivate func validate(provider providerInfo:  ProviderInfo, errors: inout [CleanseError]) {
-        guard isScopeValid(providerInfo) else {
-            errors.append(
-                InvalidBindingScope(
-                    requirement: ProviderRequestDebugInfo(
-                        requestedType: type(of: providerInfo.rawBinding.provider),
-                        providerRequiredFor: type(of: providerInfo.rawBinding.provider),
-                        sourceLocation: providerInfo.rawBinding.sourceLocation
-                    ),
-                    attemptedScope: providerInfo.rawBinding.scope!,
-                    expectedScope: self.scope)
-            )
-            return
-        }
-
-
         for r in providerInfo.requirements {
             validate(requirement: r, providerInfo: providerInfo, errors: &errors)
         }
@@ -211,15 +196,6 @@ private class ComponentInfo {
         }
     }
 
-
-    fileprivate func isScopeValid(_ providerInfo:  ProviderInfo) -> Bool {
-        guard let requestedScope = providerInfo.rawBinding.scope else {
-            return true
-        }
-
-        return requestedScope == self.scope
-    }
-
     fileprivate func getProviderInfo(_ key: ProviderKey) -> [ProviderInfo] {
         let key = providerAliases[key] ?? key
 
@@ -290,11 +266,29 @@ final class ValidationVisitor : ComponentVisitor {
         )
         currentComponent = rootComponent
     }
+    
     func enterComponent<C : Component>(dependency: C.Type) {
+        enterComponentBase(isRoot: false, dependency: dependency)
+    }
+
+    func leaveComponent<C : Component>(dependency: C.Type) {
+        leaveComponentBase()
+    }
+
+    func enterRootComponent<C : RootComponent>(dependency: C.Type) {
+        enterComponentBase(isRoot: true, dependency: dependency)
+    }
+
+    func leaveRootComponent<C : RootComponent>(dependency: C.Type) {
+        leaveComponentBase()
+    }
+
+
+    private func enterComponentBase<C : Cleanse.ComponentBase>(isRoot: Bool, dependency: C.Type) {
         let component = ComponentInfo(
             scope: C.Scope.scopeOrNil,
             seed: C.Seed.self,
-            isRootComponent: C.isRootComponent,
+            isRootComponent: isRoot,
             parent: currentComponent,
             componentType: dependency
         )
@@ -305,10 +299,9 @@ final class ValidationVisitor : ComponentVisitor {
         currentComponent = component
     }
 
-    func leaveComponent<C : Component>(dependency: C.Type) {
+    private func leaveComponentBase() {
         currentComponent = currentComponent.parent!
     }
-
 
     func enterProvider(binding: RawProviderBinding) {
         precondition(currentProvider == nil)
@@ -332,6 +325,12 @@ final class ValidationVisitor : ComponentVisitor {
         currentComponent.providerAliases[ProviderKey(type(of: binding.provider).anyProviderToClosureType)] = pkey
 
         self.currentProvider  = nil
+    }
+
+    func enterModule<M : Module>(module: M.Type) {
+    }
+
+    func leaveModule<M : Module>(module: M.Type) {
     }
 
     func finalize() throws {

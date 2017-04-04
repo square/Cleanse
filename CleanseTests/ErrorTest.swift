@@ -13,14 +13,12 @@ import XCTest
 
 @testable import Cleanse
 
-
-
 class ErrorTests: XCTestCase {
 
     struct PropertyInjectionWithMissingDependenciesComponent : RootComponent {
         typealias Root = PropertyInjector<ErrorTests>
 
-        static func configure<B : Binder>(binder: B) {
+        static func configure(binder: UnscopedBinder) {
             binder.include(module: ModuleWithMissingDependencies.self)
         }
 
@@ -96,7 +94,7 @@ Missing provider of type TaggedProvider<GTag>
     }
     
     struct ModuleWithMissingDependencies : Module {
-        static func configure<B : Binder>(binder: B) {
+        static func configure(binder: UnscopedBinder) {
             binder.bind().to(factory: StructWithDependencies.init)
             binder.bind().to(factory: StructWithDependencies2.init)
             
