@@ -18,7 +18,7 @@ protocol GithubServicesModule : Module {
 
 /// Wires up common definitions shared across services as well as installing the services's modules
 struct RealeaseGithubServicesModule : GithubServicesModule {
-    static func configure<B : Binder>(binder binder: B) {
+    static func configure(binder: SingletonBinder) {
         binder.include(module: NetworkModule.self)
     }
 
@@ -32,7 +32,7 @@ struct RealeaseGithubServicesModule : GithubServicesModule {
 }
 
 struct GithubBaseURL : Tag {
-    typealias Element = NSURL
+    typealias Element = URL
 }
 
 /// Represents the github user name we want to query.

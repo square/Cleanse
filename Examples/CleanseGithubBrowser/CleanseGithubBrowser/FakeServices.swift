@@ -1,5 +1,5 @@
 //
-//  Fakes.swift
+//  FakeServices.swift
 //  CleanseGithubBrowser
 //
 //  Created by Mike Lewis on 6/12/16.
@@ -13,15 +13,15 @@ import Cleanse
 
 /// Configure the services to be implemented by fakes
 struct FakeGithubServicesModule : GithubServicesModule {
-    static func configure<B : Binder>(binder binder: B) {
+    static func configure(binder: SingletonBinder) {
         binder
             .bind()
-            .asSingleton()
+            .sharedInScope()
             .to(factory: FakeGithubMembersService.init)
 
         binder
             .bind()
-            .asSingleton()
+            .sharedInScope()
             .to(factory: FakeGithubRepositoriesService.init)
     }
 
@@ -36,23 +36,23 @@ struct FakeGithubServicesModule : GithubServicesModule {
 
 
 struct FakeGithubMembersService : GithubMembersService {
-    func list(handler: ErrorOptional<[GithubMember]> -> ()) {
-        dispatch_async(dispatch_get_main_queue()) { 
+    func list(handler: @escaping (ErrorOptional<[GithubMember]>) -> ()) {
+        DispatchQueue.main.async() { 
             handler(.init([
                 GithubMember(login: "abrons"),
                 GithubMember(login: "mikelikespie"),
+                GithubMember(login: "holmes"),
             ]))
         }
     }
 }
 
-
 struct FakeGithubRepositoriesService : GithubRepositoriesService {
-    func list(handler: ErrorOptional<[GithubRepository]> -> ()) {
-        dispatch_async(dispatch_get_main_queue()) {
+    func list(_ handler: @escaping (ErrorOptional<[GithubRepository]>) -> ()) {
+        DispatchQueue.main.async() {
             handler(.init([
                 GithubRepository(name: "okhttp", watchersCount: 11_917),
-                GithubRepository(name: "cleanse", watchersCount: 0),
+                GithubRepository(name: "cleanse", watchersCount: 42)
             ]))
         }
     }

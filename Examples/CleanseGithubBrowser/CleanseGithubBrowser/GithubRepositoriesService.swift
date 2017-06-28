@@ -13,7 +13,7 @@ struct GithubRepository {
     let name: String
     let watchersCount: Int
 
-    static func fromJSON(json: [String: AnyObject]) -> GithubRepository {
+    static func fromJSON(_ json: [String: AnyObject]) -> GithubRepository {
         return .init(
             name: json["name"] as! String,
             watchersCount: json["watchers_count"] as! Int
@@ -23,16 +23,16 @@ struct GithubRepository {
 
 /// Service that lists repositories for the current user
 protocol GithubRepositoriesService {
-    func list(handler: ErrorOptional<[GithubRepository]> -> ())
+    func list(_ handler: @escaping (ErrorOptional<[GithubRepository]>) -> ())
 }
 
 struct GithubRepositoriesServiceImpl : GithubRepositoriesService {
     let githubURL: TaggedProvider<GithubBaseURL>
     let githubOrganizationName: TaggedProvider<GithubOrganizationName>
 
-    let urlSession: NSURLSession
+    let urlSession: URLSession
 
-    func list(handler: ErrorOptional<[GithubRepository]> -> ()) {
+    func list(_ handler: @escaping (ErrorOptional<[GithubRepository]>) -> ()) {
         urlSession.jsonListTask(
             baseURL: githubURL.get(),
             pathComponents: "users", githubOrganizationName.get(), "repos",
