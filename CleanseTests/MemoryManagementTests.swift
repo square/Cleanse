@@ -187,14 +187,3 @@ class MemoryManagementTests: XCTestCase {
         XCTAssertNil(s3p, "Should be released")
     }
 }
-
-
-#if !swift(>=3.0)
-    
-    extension Collection {
-        func sorted(@noescape _ isOrderedBefore: (Self.Iterator.Element, Self.Iterator.Element) -> Bool) -> [Self.Iterator.Element] {
-            return self.sorted(by: isOrderedBefore)
-        }
-    }
-
-#endif

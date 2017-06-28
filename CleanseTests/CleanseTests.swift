@@ -227,15 +227,3 @@ class CleanseTests: XCTestCase {
         XCTAssertEqual(results.taggedIntCollection1.get().sorted(), [1,2,3,8,9,10,11])
     }
 }
-
-
-#if !swift(>=3)
-    
-extension RangeReplaceableCollection where Generator.Element: Comparable {
-    @warn_unused_result
-    func sorted() -> [Self.Generator.Element] {
-        return self.sort()
-    }
-}
-
-#endif

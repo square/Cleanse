@@ -32,30 +32,17 @@ public protocol LegacyObjectGraphProtocol {
     
     /// Convenience method equivalent to `providerForClass(cls: cls, withName: nil)()`
     @objc(objectForClass:) public func objectForClass(cls: AnyClass) -> AnyObject {
-        #if swift(>=3.0)
-            return objectForClass(cls: cls, withName: nil)
-        #else
-            return objectForClass(cls, withName: nil)
-        #endif
-
+        return objectForClass(cls: cls, withName: nil)
     }
     
     /// Convenience method equivalent to `providerForClass(cls: cls, withName: nil)`
     @objc(providerForClass:) public func providerForClass(cls: AnyClass) -> () -> AnyObject {
-        #if swift(>=3.0)
-            return providerForClass(cls: cls, withName: nil)
-        #else
-            return providerForClass(cls, withName: nil)
-        #endif
+        return providerForClass(cls: cls, withName: nil)
     }
     
     /// Convenience method equivalent to `providerForClass(cls: cls, withName: name)()`
     @objc(objectForClass:withName:) public func objectForClass(cls: AnyClass, withName name: String?) -> AnyObject {
-        #if swift(>=3.0)
-            return providerForClass(cls: cls, withName: name)()
-        #else
-            return providerForClass(cls, withName: name)()
-        #endif
+        return providerForClass(cls: cls, withName: name)()
     }
     
     @objc public func providerForClass(cls: AnyClass, withName name: String?) -> () -> AnyObject {
@@ -71,11 +58,7 @@ public protocol LegacyObjectGraphProtocol {
 extension _AnyTag {
     /// This is a hack to be compatible with legacy names
     static var legacyName: String? {
-        #if swift(>=3.0)
-            return "\(self)".components(separatedBy: ".").suffix(from: 0).joined(separator: ".")
-        #else
-            return "\(self)".componentsSeparatedByString(".").suffixFrom(0).joinWithSeparator(".")
-        #endif
+        return "\(self)".components(separatedBy: ".").suffix(from: 0).joined(separator: ".")
     }
 }
 
