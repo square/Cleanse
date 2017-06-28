@@ -99,7 +99,7 @@ class Graph : BinderBase {
 
         if type is AnyWeakProvider.Type {
             return Provider(value: type.makeNew(getter: { [weak futureProvider] in
-                 futureProvider?.getAny()
+                 futureProvider?.getAny() as Any
             }) as! Element)
         } else {
             return Provider(value: type.makeNew(getter: { futureProvider.getAny() }) as! Element)
@@ -364,7 +364,7 @@ class Graph : BinderBase {
                 let canonicalProvider = self.providers[RequirementKey(providerKey)] {
             rawProvider = canonicalCls.transformFromCanonicalAnyCanonical(canonicalProvider: canonicalProvider)
         } else {
-            preconditionFailure("Could not find legacy provider for \(cls) named \(name)")
+            preconditionFailure("Could not find legacy provider for \(cls) named \(String(describing: name))")
         }
         
         if name == nil {
