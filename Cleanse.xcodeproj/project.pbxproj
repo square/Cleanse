@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		88A8D19B1E81D52A00F15A75 /* TaggedProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A8D19A1E81D52A00F15A75 /* TaggedProviderTests.swift */; };
-		F61133BC1CD41D8A00069972 /* Swift3Compat.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61133BB1CD41D8A00069972 /* Swift3Compat.swift */; };
 		F61133BF1CD41EE600069972 /* TypeKeyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61133BE1CD41EE600069972 /* TypeKeyProtocol.swift */; };
 		F61133C11CD7B36600069972 /* MemoryManagementTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61133C01CD7B36600069972 /* MemoryManagementTests.swift */; };
 		F61133C51CD7B5A900069972 /* RootComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61133C41CD7B5A900069972 /* RootComponent.swift */; };
@@ -87,7 +86,6 @@
 
 /* Begin PBXFileReference section */
 		88A8D19A1E81D52A00F15A75 /* TaggedProviderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaggedProviderTests.swift; sourceTree = "<group>"; };
-		F61133BB1CD41D8A00069972 /* Swift3Compat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Swift3Compat.swift; sourceTree = "<group>"; };
 		F61133BE1CD41EE600069972 /* TypeKeyProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypeKeyProtocol.swift; sourceTree = "<group>"; };
 		F61133C01CD7B36600069972 /* MemoryManagementTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryManagementTests.swift; sourceTree = "<group>"; };
 		F61133C41CD7B5A900069972 /* RootComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootComponent.swift; sourceTree = "<group>"; };
@@ -192,28 +190,20 @@
 		F61133BA1CD414E200069972 /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				F662D7F31CCFCB0200A1D022 /* Graph.swift */,
 				F62C6A001CD90F6B00137422 /* Binder */,
-				F64DB3501E2020CA008358AC /* ReceiptBinder */,
-				F61191371CD329F500686C0C /* Tags.swift */,
-				F61191391CD3331400686C0C /* Module.swift */,
 				F6760C651D2E0B6D009C6F8A /* ComponentBase */,
-				F6D589ED1D3ED55100B99F7D /* Validations */,
 				F6AB45161CD9E8B40021AF36 /* Components */,
-				F6760C5A1D2DF577009C6F8A /* Scopes */,
 				F62C6A011CD9122600137422 /* Providers */,
+				F64DB3501E2020CA008358AC /* ReceiptBinder */,
+				F6760C5A1D2DF577009C6F8A /* Scopes */,
+				F6D589ED1D3ED55100B99F7D /* Validations */,
 				F62C69FC1CD8927400137422 /* CanonicalRepresentable.swift */,
+				F662D7F31CCFCB0200A1D022 /* Graph.swift */,
+				F61191391CD3331400686C0C /* Module.swift */,
 				F64383E11E78C78D006FD59E /* ScopedModule.swift */,
+				F61191371CD329F500686C0C /* Tags.swift */,
 			);
 			name = Core;
-			sourceTree = "<group>";
-		};
-		F61133BD1CD41E8B00069972 /* Compat */ = {
-			isa = PBXGroup;
-			children = (
-				F61133BB1CD41D8A00069972 /* Swift3Compat.swift */,
-			);
-			name = Compat;
 			sourceTree = "<group>";
 		};
 		F611913D1CD3DF9C00686C0C /* Code Generation */ = {
@@ -229,8 +219,8 @@
 		F61B15101CD1588300A42C01 /* Legacy */ = {
 			isa = PBXGroup;
 			children = (
-				F61B15111CD1596400A42C01 /* LegacyObjectGraph.swift */,
 				F61B15131CD15E6F00A42C01 /* LegacyKey.swift */,
+				F61B15111CD1596400A42C01 /* LegacyObjectGraph.swift */,
 			);
 			name = Legacy;
 			sourceTree = "<group>";
@@ -264,9 +254,9 @@
 		F63EF75E1CD2CD460016306D /* PropertyInjection */ = {
 			isa = PBXGroup;
 			children = (
+				F6615D1E1CD025650079DE8D /* PropertyInjection.swift */,
 				F69D1AA21CDDE6A5009132B4 /* PropertyInjectionArities.swift */,
 				F61190C21CD40AFD000B5719 /* PropertyInjector.swift */,
-				F6615D1E1CD025650079DE8D /* PropertyInjection.swift */,
 			);
 			name = PropertyInjection;
 			sourceTree = "<group>";
@@ -274,8 +264,8 @@
 		F63EF7941CD2F8160016306D /* Debugging */ = {
 			isa = PBXGroup;
 			children = (
-				F63EF7951CD2F8430016306D /* SourceLocation.swift */,
 				F61191331CD3005400686C0C /* Errors.swift */,
+				F63EF7951CD2F8430016306D /* SourceLocation.swift */,
 			);
 			name = Debugging;
 			sourceTree = "<group>";
@@ -294,9 +284,9 @@
 			isa = PBXGroup;
 			children = (
 				F6A660F21CCB1B6B004DD6E3 /* Scope.swift */,
-				F6760C5D1D2DF698009C6F8A /* ScopedProvider.swift */,
 				F64383E91E78D605006FD59E /* ScopedBinder.swift */,
 				F64383EB1E78D860006FD59E /* ScopedBindingBuilder.swift */,
+				F6760C5D1D2DF698009C6F8A /* ScopedProvider.swift */,
 			);
 			name = Scopes;
 			sourceTree = "<group>";
@@ -344,15 +334,14 @@
 		F6A660CC1CCB07C2004DD6E3 /* Cleanse */ = {
 			isa = PBXGroup;
 			children = (
+				F611913D1CD3DF9C00686C0C /* Code Generation */,
+				F61133BA1CD414E200069972 /* Core */,
+				F63EF7941CD2F8160016306D /* Debugging */,
+				F61B15101CD1588300A42C01 /* Legacy */,
+				F63EF75E1CD2CD460016306D /* PropertyInjection */,
+				F61133B91CD414D500069972 /* Util */,
 				F6A660CD1CCB07C2004DD6E3 /* Cleanse.h */,
 				F6A660CF1CCB07C2004DD6E3 /* Info.plist */,
-				F61133BA1CD414E200069972 /* Core */,
-				F61133B91CD414D500069972 /* Util */,
-				F63EF7941CD2F8160016306D /* Debugging */,
-				F63EF75E1CD2CD460016306D /* PropertyInjection */,
-				F61B15101CD1588300A42C01 /* Legacy */,
-				F611913D1CD3DF9C00686C0C /* Code Generation */,
-				F61133BD1CD41E8B00069972 /* Compat */,
 			);
 			path = Cleanse;
 			sourceTree = "<group>";
@@ -383,10 +372,10 @@
 		F6AB45161CD9E8B40021AF36 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				F61133C41CD7B5A900069972 /* RootComponent.swift */,
-				F62C69F41CD8481200137422 /* ComponentVisitor.swift */,
 				F6760C541D2DED32009C6F8A /* Component.swift */,
 				F6760C561D2DEDAA009C6F8A /* ComponentFactory.swift */,
+				F62C69F41CD8481200137422 /* ComponentVisitor.swift */,
+				F61133C41CD7B5A900069972 /* RootComponent.swift */,
 			);
 			name = Components;
 			sourceTree = "<group>";
@@ -537,7 +526,6 @@
 				F69D1A991CDDB874009132B4 /* ScopedBindingDecorator.swift in Sources */,
 				F64383EC1E78D860006FD59E /* ScopedBindingBuilder.swift in Sources */,
 				F64383E21E78C78D006FD59E /* ScopedModule.swift in Sources */,
-				F61133BC1CD41D8A00069972 /* Swift3Compat.swift in Sources */,
 				F69A20621CD1941D00B954F8 /* CombinedHashable.swift in Sources */,
 				F6615D1F1CD025650079DE8D /* PropertyInjection.swift in Sources */,
 				F61133BF1CD41EE600069972 /* TypeKeyProtocol.swift in Sources */,
