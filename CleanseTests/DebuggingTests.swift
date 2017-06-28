@@ -6,18 +6,14 @@
 //  Copyright © 2016 Square, Inc. All rights reserved.
 //
 
-import Foundation
-
-
-import XCTest
-
 @testable import Cleanse
+import Foundation
+import XCTest
 
 struct Singleton : Scope {
 }
 
 class DebuggingTests: XCTestCase {
-    
     struct FooModule : Module {
         static func configure(binder: UnscopedBinder) {
             binder.bind().to(value: 3)
@@ -30,21 +26,18 @@ class DebuggingTests: XCTestCase {
         let g = Graph(scope: Singleton.self)
         
         // TODO: make it more descriptive
-        
         g.include(module: FooModule.self)
         
         try! g.finalize()
-        
         let description = g.debugDescription
         
         Assert(description, contains: "Provider<String>")
         Assert(description, contains: "Provider<Int>")
-        Assert(description, contains: "Provider<(()) -> Int>")
-        Assert(description, contains: "Provider<(()) -> String>")
+        Assert(description, contains: "Provider<() -> Int>")
+        Assert(description, contains: "Provider<() -> String>")
     }
 }
 
-
 func Assert(_ entireString: @autoclosure () throws -> String, contains expectedContents: @autoclosure () throws -> String, file: StaticString = #file, line: UInt = #line) {
-    XCTAssertTrue(try entireString().contains(expectedContents()), "Expected \(try! entireString()) to contain \(try! expectedContents())", file: file, line: line)
+    XCTAssertTrue(try entireString().contains(expectedContents()), "Expected \(try! entireString())\nto contain \(try! expectedContents())", file: file, line: line)
 }
