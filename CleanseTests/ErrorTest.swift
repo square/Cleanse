@@ -112,14 +112,3 @@ Missing provider of type TaggedProvider<GTag>
     
     // TODO: once cycle validation is added, add support for that
 }
-
-#if !swift(>=3)
-    
-    extension String {
-        @warn_unused_result
-        func contains(_ other: String) -> Bool {
-            return self.contains(other)
-        }
-    }
-    
-#endif

@@ -11,7 +11,7 @@ Cleanse - Swift Dependency Injection
 .. image:: https://coveralls.io/repos/github/square/Cleanse/badge.svg?branch=master&asdf
   :target: https://coveralls.io/github/square/Cleanse?branch=master
 
-  
+
 Cleanse is a `dependency injection`_ framework for Swift. It is designed from the ground-up with *developer experience*
 in mind. It takes inspiration from both `Dagger`_ and `Guice`_.
 
@@ -855,6 +855,13 @@ Nesting components in incorrect scope  Supported
 .. [#f1] When a provider is missing, errors present line numbers, etc. where the provider was required. Cleanse
         will also collect all errors before failing
 .. [#f2] Duplicate provider detection could use improvement. It currently throws when duplicate binding is added.
+
+
+Arities Autogen
+------------
+The files `Cleanse/BinderArities.swift` and `Cleanse/PropertyInjectionArities.swift` are code-generated. Please use
+`./arities-autogen.sh` to build them.
+
 
 Contributing
 ------------
