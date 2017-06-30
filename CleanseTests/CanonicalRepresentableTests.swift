@@ -58,7 +58,7 @@ class CanonicalRepresentableTests: XCTestCase {
 
     // verifies #26
     func testUnboxProtocol() {
-        let bar = try! BarComponent().build()
+        let bar = try! ComponentFactory.of(BarComponent.self).build()
         XCTAssertNotNil(bar.foo)
     }
 
@@ -73,14 +73,14 @@ class CanonicalRepresentableTests: XCTestCase {
         }
     }
 
-    struct BarComponent : Cleanse.Component {
+    struct BarComponent : Cleanse.RootComponent {
         typealias Root = Bar
 
-        func configure<B : Binder>(binder binder: B) {
-            binder
-                .bind(Bar.self)
-                .to(factory: Bar.init)
+        static func configureRoot(binder bind: ReceiptBinder<CanonicalRepresentableTests.Bar>) -> BindingReceipt<CanonicalRepresentableTests.Bar> {
+            return bind.to(factory: Bar.init)
+        }
 
+        static func configure(binder: Binder<Unscoped>) {
             binder
                 .bind(FooProto.self)
                 .to(factory: Foo.init)
