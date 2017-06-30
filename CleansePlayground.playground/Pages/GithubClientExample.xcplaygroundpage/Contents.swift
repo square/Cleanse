@@ -2,33 +2,33 @@
  
  ## Github Client Example.
 
- This is a demonstration of using Cleanse and NSURLSession and friends to configure a GitHub client that
+ This is a demonstration of using Cleanse and URLSession and friends to configure a GitHub client that
  will list a user's projects.
 */
 import Cleanse
-import XCPlayground
+import PlaygroundSupport
 
 // Since we will be doing an asynchronous call, we need to make it so the execution doesn't stop immediately
-XCPlaygroundPage.currentPage.needsIndefiniteExecution = true
+PlaygroundPage.current.needsIndefiniteExecution = true
 
 //: Define our services. This are just normal objects, not Cleanse related.
 
 /// Simple Service that lists "Member" logins for the current organization.
 protocol GithubListMembersService {
-    func listMembers(organizationName: String, handler: [String] -> ())
+    func listMembers(for orgName: String, handler: @escaping ([String]) -> Void)
 }
 
-/// Implementation of GithubListMembersService. It requires a base URL and an `NSURLSession`.
+/// Implementation of GithubListMembersService. It requires a base URL and an `URLSession`.
 struct GithubListMembersServiceImpl : GithubListMembersService {
-    let githubURL: NSURL
-    let urlSession: NSURLSession
+    let githubURL: URL
+    let urlSession: URLSession
 
-    func listMembers(organizationName: String, handler: [String] -> ()) {
-        let url = githubURL.URLByAppendingPathComponent("orgs/\(organizationName)/public_members")
+    func listMembers(for orgName: String, handler: @escaping ([String]) -> Void) {
+        let url = githubURL.appendingPathComponent("orgs/\(orgName)/public_members")
 
-        let dataTask = urlSession.dataTaskWithURL(url) { data, response, error in
+        let dataTask = urlSession.dataTask(with: url) { data, response, error in
             // For simplicity of example, just yield an empty list if the request wasn't successful
-            guard let data = data, let result = (try? NSJSONSerialization.JSONObjectWithData(data, options: [])) as? [[String: AnyObject]] else {
+            guard let data = data, let result = (try? JSONSerialization.jsonObject(with: data, options: [])) as? [[String: AnyObject]] else {
                 handler([])
                 return
             }
@@ -42,99 +42,107 @@ struct GithubListMembersServiceImpl : GithubListMembersService {
 
 /// Fake implementation of GithubListMembersService. This doesn't hit the network and thus doesn't require anything.
 struct FakeListMembersServiceImpl : GithubListMembersService {
-    func listMembers(organizationName: String, handler: [String] -> ()) {
+    func listMembers(for orgName: String, handler: @escaping ([String]) -> Void) {
         handler(["Fake #1", "Fake #2", "Fake #3"])
     }
 }
 
+//: Define our Network Scope (like a Singleton)
+struct Network : Scope {}
+
 //: Define our Cleanse Module(s) and Component(s). These objects are responsible for setting up and initializing the object graph.
 
-/// The `NetworkModule` provides an `NSURLSession`.
+/// The `NetworkModule` provides an `URLSession`.
 struct NetworkModule : Module {
-    static func configure<B : Binder>(binder binder: B) {
+    static func configure(binder: Binder<Network>) {
 
-        //: Provide `NSURLSessionConfiguration.ephemeralSessionConfiguration` when a `NSURLSessionConfiguration` is required.
+        //: Provide `URLSessionConfiguration.ephemeral` when a `URLSessionConfiguration` is required.
         binder
             .bind()
-            .asSingleton()
-            .to(factory: NSURLSessionConfiguration.ephemeralSessionConfiguration)
+            .sharedInScope()
+            .to { URLSessionConfiguration.ephemeral }
 
-        //: Provide `NSURLSession`. It depends on `NSURLSessionConfiguration` configured above (`$0`).
+        //: Provide `URLSession`. It depends on `URLSessionConfiguration` configured above (`$0`).
         binder
             .bind()
-            .asSingleton()
+            .sharedInScope()
             .to {
-                NSURLSession(
+                URLSession(
                     configuration: $0,
                     delegate: nil,
-                    delegateQueue: NSOperationQueue.mainQueue()
+                    delegateQueue: OperationQueue.main
                 )
         }
     }
 }
 
-/// This represents the base URL for GitHub. We might have multiple `NSURL`s in the app, so we should define each one with a specific tag.
+//: This represents the base URL for GitHub. We might have multiple `URL`s in the app, so we should define each one with a specific tag.
 struct GithubBaseURL : Tag {
-    typealias Element = NSURL
+    typealias Element = URL
 }
 
-/// Configure the Github API.
+//: Configure the Real Github API.
 struct GithubAPIModule : Module {
-    static func configure<B : Binder>(binder binder: B) {
+    static func configure(binder: Binder<Network>) {
+        binder.include(module: NetworkModule.self)
 
         // Configure the base URL for Github's API to be `"https://api.github.com"`
         binder
             .bind()
             .tagged(with: GithubBaseURL.self)
-            .to(value: NSURL(string: "https://api.github.com")!)
+            .to(value: URL(string: "https://api.github.com")!)
 
-        // Configure GithubMembersServiceImpl to be the implementation of GithubMembersService.
         binder
-            .bind(GithubListMembersService.self)
-            .asSingleton()
-            .to { (githubURL: TaggedProvider<GithubBaseURL>, urlSession: NSURLSession) in
+            .bind(GithubListMembersServiceImpl.self)
+            .sharedInScope()
+            .to { (githubURL: TaggedProvider<GithubBaseURL>, urlSession: URLSession) in
                 return GithubListMembersServiceImpl(githubURL: githubURL.get(), urlSession: urlSession)
         }
     }
 }
 
+//: Configure the Fake Github API. You would use this in tests or even while developing so you don't have to rely on a staging server.
 struct FakeAPIModule : Module {
-    static func configure<B : Binder>(binder binder: B) {
+    static func configure(binder: Binder<Network>) {
         binder
-            .bind(GithubListMembersService)
-            .asSingleton()
-            .to { FakeListMembersServiceImpl() }
+            .bind(FakeListMembersServiceImpl.self)
+            .sharedInScope()
+            .to (factory: FakeListMembersServiceImpl.init)
     }
 }
 
-/// Define a Component. This is the root object that the object graph is built around.
+//: Define a Component. This is the root object that the object graph is built around.
 struct GithubListMembersComponent : RootComponent {
     // When we build this Component we want to return `GithubListMembersService`.
     typealias Root = GithubListMembersService
 
-    static func configure<B : Binder>(binder binder: B) {
-        // Install the modules we defined earlier.
-        binder.install(module: NetworkModule.self)
+    static func configureRoot(binder bind: ReceiptBinder<GithubListMembersService>) -> BindingReceipt<GithubListMembersService> {
+        // Toggle this value to switch between hitting a real and fake service.
+        let fakeMode = true
 
-        // Toggle these to switch between hitting a real and fake service.
-//         binder.install(module: FakeAPIModule.self)
-        binder.install(module: GithubAPIModule.self)
+        return bind.to { (fake: FakeListMembersServiceImpl, real: GithubListMembersServiceImpl) -> GithubListMembersService in
+            return fakeMode ? fake : real
+        }
+    }
+
+    static func configure(binder: Binder<Network>) {
+        // Install both the fake and real modules we defined earlier.
+        binder.include(module: FakeAPIModule.self)
+        binder.include(module: GithubAPIModule.self)
     }
 }
 
 //: Build the component; the return value is the `Root` defined above: `GithubListMembersService`
-
 let membersService: GithubListMembersService = try! ComponentFactory.of(GithubListMembersComponent.self).build()
-print("Got ourselves a member service pointing")
+print("The member service: \(membersService)")
 
 //: Finally, list all the members.
-
-membersService.listMembers("square") { members in
+membersService.listMembers(for: "square") { members in
     print("Fetched \(members.count) members:")
 
-    for (i, login) in members.enumerate() {
-        print("\(i+1).\t\(login)")
+    for (i, username) in members.enumerated() {
+        print("\(i+1).\t\(username)")
     }
 
-    XCPlaygroundPage.currentPage.finishExecution()
+    PlaygroundPage.current.finishExecution()
 }
