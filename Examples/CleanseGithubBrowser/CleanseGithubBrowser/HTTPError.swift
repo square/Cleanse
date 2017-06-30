@@ -9,7 +9,7 @@
 import Foundation
 
 
-struct HTTPError : ErrorType {
+struct HTTPError : Error {
     let statusCode: Int
 
     /// - returns: nil if status code isn't an error code

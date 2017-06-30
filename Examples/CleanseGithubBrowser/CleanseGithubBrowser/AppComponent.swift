@@ -8,25 +8,20 @@
 
 import Cleanse
 
-
-
-struct AppComponent<ServicesModule: GithubServicesModule> : Cleanse.RootComponent {
+struct AppComponent<ServiceModule: GithubServicesModule> : Cleanse.RootComponent where ServiceModule.Scope == Singleton {
     typealias Root = PropertyInjector<AppDelegate>
     typealias Scope = Singleton
 
-    static func configure<B : Binder>(binder binder: B) {
+    static func configure(binder: SingletonBinder) {
         binder.include(module: CoreAppModule.self)
-
-        binder.include(module: ServicesModule.self)
+        binder.include(module: ServiceModule.self)
 
         #if DEBUG
-
         binder.include(module: FakeModeSettingsModule.self)
-
         #endif
 
-        binder.bind().configured(with: ServicesModule.configureGithubMembersService)
-        binder.bind().configured(with: ServicesModule.configureRepositoriesMembersService)
+        binder.bind().configured(with: ServiceModule.configureGithubMembersService)
+        binder.bind().configured(with: ServiceModule.configureRepositoriesMembersService)
     }
 
     static func configureRoot(binder bind: ReceiptBinder<Root>) -> BindingReceipt<Root> {
@@ -34,8 +29,9 @@ struct AppComponent<ServicesModule: GithubServicesModule> : Cleanse.RootComponen
     }
 }
 
+
 struct CoreAppModule : Cleanse.Module {
-    static func configure<B : Binder>(binder binder: B) {
+    static func configure(binder: SingletonBinder) {
         // We want to make it so the app uses "square" as the github user.
         binder
             .bind()
