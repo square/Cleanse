@@ -11,6 +11,9 @@
 
 import Cleanse
 
+struct Singleton : Scope {
+}
+
 protocol Pump {
     func pump()
 }
@@ -37,7 +40,7 @@ class Thermosiphon : Pump {
 
 //: Module that configures `Thermosiphon` to be our `Pump`
 struct PumpModule : Module {
-    static func configure<B : Binder>(binder binder: B) {
+    static func configure(binder: UnscopedBinder) {
         binder
             .bind(Pump.self)
             .to(factory: Thermosiphon.init)
@@ -63,16 +66,15 @@ class ElectricHeater : Heater {
 
 //: Module that configures `ElectricHeater` to be our `Heater`. It also has a dependency on `PumpModule`.
 struct DripCoffeeModule : Module {
-    static func configure<B : Binder>(binder binder: B) {
-        binder.install(module: PumpModule.self)
+    static func configure(binder: Binder<Singleton>) {
+        binder.include(module: PumpModule.self)
 
         binder
             .bind(Heater.self)
-            .asSingleton()
+            .sharedInScope()
             .to(factory: ElectricHeater.init)
     }
 }
-
 
 //: Our root object. It requires both `Heater` and `Pump` to be configured.
 class CoffeeMaker {
@@ -93,22 +95,20 @@ class CoffeeMaker {
 }
 
 //: Now let's create the Component. A component defines what the root of our object graph is and the modules it depends on to construct that root object.
-
 struct CoffeeMakerComponent : RootComponent {
     typealias Root = CoffeeMaker
 
-    static func configure<B : Binder>(binder binder: B) {
-        binder.install(module: DripCoffeeModule.self)
+    static func configureRoot(binder bind: ReceiptBinder<CoffeeMaker>) -> BindingReceipt<CoffeeMaker> {
+        return bind.to(factory: CoffeeMaker.init)
+    }
 
-        binder
-            .bind()
-            .to(factory: CoffeeMaker.init)
+    static func configure(binder: Binder<Singleton>) {
+        binder.include(module: DripCoffeeModule.self)
     }
 }
 
-// Create a ComponentFactory from the Component you'd like to use. Then call the `build()` method on that instance, which returns the Component's `Root`.
+//: Create a ComponentFactory from the Component you'd like to use. Then call the `build()` method on that instance, which returns the Component's `Root`.
 let coffeeMaker = try! ComponentFactory.of(CoffeeMakerComponent.self).build()
 
 //: Now that we have our coffee maker, let's brew a cup of Joe!
-
 coffeeMaker.brew()
