@@ -9,18 +9,12 @@
 import Foundation
 
 
-#if !swift(>=3.0)
-    public typealias ErrorProtocol = ErrorType
-#endif
-
-
 /// All errors emitted by Cleanse implement this protocol
-public protocol CleanseError : ErrorProtocol, CustomStringConvertible {
+public protocol CleanseError : Error, CustomStringConvertible {
 }
 
 
 public struct ProviderRequestDebugInfo {
-    
     /// This is what was passed to the first argument of
     let requestedType: Any.Type
     
@@ -37,16 +31,24 @@ public struct MultiError : CleanseError {
     public let errors: [CleanseError]
     
     public var description: String {
-        var result = "Multiple Errors"
+        var result = "\nMultiple Errors"
         
         let cnt = errors.count
         
         for (i, e) in errors.enumerated() {
             result += "\nerror \(i+1)/\(cnt):\n\(e.description)"
         }
-        
-        return result
+
+        return result + "\n"
     }
+}
+
+private func canonicalDisplayType(_ t: Any.Type) -> Any.Type {
+        if let t = t as? _AnyStandardProvider.Type {
+            return t.providesType
+        }
+
+        return t
 }
 
 /// Error used to indicate that a provider requirement is unmet.
@@ -66,7 +68,7 @@ public struct MissingProvider : CleanseError {
     }
     
     public var description: String {
-        var message = "*** \(requestedType) *** binding missing"
+        var message = "*** \(canonicalDisplayType(requestedType)) *** binding missing"
         
         for r in requests {
             var didNewLine = false
@@ -82,18 +84,16 @@ public struct MissingProvider : CleanseError {
             
             if let providerRequiredFor = r.providerRequiredFor {
                 maybeDoNewLine()
-                message += " required by \(providerRequiredFor)"
+                message += " required by \(canonicalDisplayType(providerRequiredFor))"
             }
 
             if let sourceLocation = r.sourceLocation {
                 maybeDoNewLine()
                 
-                let trimmedSourceLocation = String(sourceLocation).components(separatedBy: "/").suffix(2).joined(separator: "/")
+                let trimmedSourceLocation = String(describing: sourceLocation).components(separatedBy: "/").suffix(2).joined(separator: "/")
                 
                 message += " at \(trimmedSourceLocation)"
             }
-            
-
         }
         
 
@@ -101,4 +101,47 @@ public struct MissingProvider : CleanseError {
     }
 }
 
+/// Error used to indicate that there is an unbroken dependency cycle
+public struct DependencyCycle : CleanseError {
+    /// The types that depend on the requested type
+    let requirementStack: [ProviderRequestDebugInfo]
+
+    /// The type that was requested
+    var requestedType: Any.Type {
+        return requirementStack[0].requestedType
+    }
+
+    init(requirementStack: [ProviderRequestDebugInfo]) {
+        precondition(!requirementStack.isEmpty)
+        self.requirementStack = requirementStack
+    }
+
+    public var description: String {
+        var message = "*** \(canonicalDisplayType(requestedType)) *** Dependency Cycle Detected"
+
+        for r in requirementStack {
+            message += "\n  -> required by \(canonicalDisplayType(r.requestedType))"
+
+            if let sourceLocation = r.sourceLocation {
+                let trimmedSourceLocation = String(describing: sourceLocation).components(separatedBy: "/").suffix(2).joined(separator: "/")
+
+                message += " at \(trimmedSourceLocation)"
+            }
+        }
+        
+        return message
+    }
+}
+
+/// Error used to indicate that two components contain each other that have the same scope
+public struct InvalidScopeNesting : CleanseError {
+    let scope: Scope.Type
+
+    let innerComponent: Any.Type
+    let outerComponent: Any.Type
+
+    public var description: String {
+        return "Component (\(outerComponent)) contains a component (\(innerComponent)) with the same scope: (\(scope))"
+    }
+}
 

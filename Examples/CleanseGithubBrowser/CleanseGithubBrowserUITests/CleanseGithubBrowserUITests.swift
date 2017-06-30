@@ -30,27 +30,26 @@ class CleanseGithubBrowserUITests: XCTestCase {
     }
 
     func testRepositories() {
-        XCTAssertTrue(app.tabBars.buttons["Repositories"].hittable)
+        XCTAssertTrue(app.tabBars.buttons["Repositories"].isHittable)
 
-        XCTAssertTrue(app.tables.cells.staticTexts["okhttp"].hittable)
-        XCTAssertTrue(app.tables.cells.staticTexts["cleanse"].hittable)
+        XCTAssertTrue(app.tables.cells.staticTexts["okhttp"].isHittable)
+        XCTAssertTrue(app.tables.cells.staticTexts["cleanse"].isHittable)
     }
-
 
     func testMembers() {
         app.tabBars.buttons["Members"].tap()
 
-        XCTAssertTrue(app.tables.cells.staticTexts["abrons"].hittable)
-        XCTAssertTrue(app.tables.cells.staticTexts["mikelikespie"].hittable)
+        XCTAssertTrue(app.tables.cells.staticTexts["abrons"].isHittable)
+        XCTAssertTrue(app.tables.cells.staticTexts["mikelikespie"].isHittable)
     }
 
 
     func testSettings() {
         app.tabBars.buttons["Settings"].tap()
 
-        XCTAssertTrue(app.tables.cells.staticTexts["Repositories"].hittable)
-        XCTAssertTrue(app.tables.cells.staticTexts["Members"].hittable)
-        XCTAssertTrue(app.tables.cells.staticTexts["Fake Mode"].hittable)
+        XCTAssertTrue(app.tables.cells.staticTexts["Repositories"].isHittable)
+        XCTAssertTrue(app.tables.cells.staticTexts["Members"].isHittable)
+        XCTAssertTrue(app.tables.cells.staticTexts["Fake Mode"].isHittable)
     }
 
 
@@ -59,7 +58,7 @@ class CleanseGithubBrowserUITests: XCTestCase {
 
         app.tables.cells.staticTexts["Repositories"].tap()
 
-        XCTAssertTrue(app.tables.cells.staticTexts["Show Watcher Count"].hittable)
+        XCTAssertTrue(app.tables.cells.staticTexts["Show Watcher Count"].isHittable)
     }
 
     func testSettings_members() {
@@ -67,6 +66,6 @@ class CleanseGithubBrowserUITests: XCTestCase {
 
         app.tables.cells.staticTexts["Members"].tap()
 
-        XCTAssertTrue(app.tables.cells.staticTexts["Use Green Cell Text"].hittable)
+        XCTAssertTrue(app.tables.cells.staticTexts["Use Green Cell Text"].isHittable)
     }
 }

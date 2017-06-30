@@ -12,7 +12,7 @@ import Foundation
 /**
  Portion of the binder protocol used to request future providers. This is only used internally and will probably go away
  */
-public protocol ProviderProvider : class {
+public protocol ProviderProvider {
     /// Raw inner function to request a provider. One should call standard provider methods instead
     func _internalProvider<Element>(_ type: Element.Type, debugInfo: ProviderRequestDebugInfo?) -> Provider<Element>
 }

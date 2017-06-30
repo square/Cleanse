@@ -9,7 +9,7 @@
 import Foundation
 
 
-protocol PropertyInjectorProtocol  {
+public protocol PropertyInjectorProtocol  {
     associatedtype Element: AnyObject
     func injectProperties(into instance: Element)
 }
@@ -17,7 +17,7 @@ protocol PropertyInjectorProtocol  {
 
 /// This the mechanism property injection is done underneath the hood
 public struct PropertyInjector<Element: AnyObject> : PropertyInjectorProtocol {
-    let injectionClosure: Element -> ()
+    let injectionClosure: (Element) -> ()
     
     /// Call this to inject properties into an instance of an object.
     public func injectProperties(into instance: Element) {

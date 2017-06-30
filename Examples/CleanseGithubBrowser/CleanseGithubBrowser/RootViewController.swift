@@ -6,9 +6,8 @@
 //  Copyright © 2016 Square, Inc. All rights reserved.
 //
 
-import UIKit
 import Cleanse
-
+import UIKit
 
 // Adding to a collection of this will make one appear on the tab bar
 struct RootTabBarItem {
@@ -27,12 +26,11 @@ class RootViewController : UITabBarController {
 
         /// Sort the view controllers by rank
         let viewControllers = items
-            .sort { $0.rank < $1.rank  }
+            .sorted { $0.rank < $1.rank  }
             .map { $0.viewController }
 
         self.viewControllers = viewControllers
-
-        selectedViewController = viewControllers.first!
+        self.selectedViewController = viewControllers.first!
     }
 
     /// We declare this unavailable. This makes it so its unambiguous when referring to `RootViewController.init`
@@ -42,14 +40,15 @@ class RootViewController : UITabBarController {
         fatalError("init(coder:) has not been implemented")
     }
 
-    /// Configures RootViewController
     struct Module : Cleanse.Module {
-        func configure<B : Binder>(binder binder: B) {
+        static func configure(binder: UnscopedBinder) {
+            // This creates and binds a RootViewController.
             binder
                 .bind(RootViewController.self)
                 .to(factory: RootViewController.init)
 
-            // This satiisfield UIWindow wanting the TaggedProvider<UIViewController.Root>
+            // This satisfies UIWindow wanting the TaggedProvider<UIViewController.Root> 
+            // with the RootViewController created above.
             binder
                 .bind()
                 .tagged(with: UIViewController.Root.self)

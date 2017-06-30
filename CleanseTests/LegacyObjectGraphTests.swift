@@ -70,7 +70,7 @@ class LegacyObjectGraphTests: XCTestCase {
     }
     
     struct SimpleLegacyModule : Module {
-        func configure<B : Binder>(binder binder: B) {
+        static func configure(binder: UnscopedBinder) {
             binder
                 .bind()
                 .tagged(with: String1.self)
@@ -86,8 +86,8 @@ class LegacyObjectGraphTests: XCTestCase {
     }
 
     struct PropertyInjectionLegacyModuleBase : Module {
-        func configure<B : Binder>(binder binder: B) {
-            binder.install(module: SimpleLegacyModule())
+        static func configure(binder: UnscopedBinder) {
+            binder.include(module: SimpleLegacyModule.self)
             
             binder
                 .bind()
@@ -97,9 +97,7 @@ class LegacyObjectGraphTests: XCTestCase {
             
             binder
                 .bindPropertyInjectionOf(FreeBeer.self)
-                .to(injector: FreeBeer.injectProperties)
-            
-            
+                .to(injector: FreeBeer.injectProperties)            
             
             binder
                 .bind(FreeBeer.self)
@@ -122,8 +120,8 @@ class LegacyObjectGraphTests: XCTestCase {
     
     
     struct PropertyInjectionLegacyModule : Module {
-        func configure<B : Binder>(binder binder: B) {
-            binder.install(module: PropertyInjectionLegacyModuleBase())
+        static func configure(binder: UnscopedBinder) {
+            binder.include(module: PropertyInjectionLegacyModuleBase.self)
             
             binder
                 .bindPropertyInjectionOf(MoreFreeBeer.self)
@@ -132,31 +130,49 @@ class LegacyObjectGraphTests: XCTestCase {
     }
     
     struct PropertyInjectionLegacyModuleOverridingString2 : Module {
-        func configure<B : Binder>(binder binder: B) {
-            binder.install(module: PropertyInjectionLegacyModuleBase())
+        static func configure(binder: UnscopedBinder) {
+            binder.include(module: PropertyInjectionLegacyModuleBase.self)
                         
             binder
                 .bindPropertyInjectionOf(MoreFreeBeer.self)
                 .to(injector: MoreFreeBeer.injectPropertiesWithSuper_OverridingString2WithString3)
         }
     }
-    
+
+    struct SimpleLegacyComponent : RootComponent {
+        typealias Root = LegacyObjectGraph
+
+        static func configure(binder: UnscopedBinder) {
+            binder.include(module: SimpleLegacyModule.self)
+        }
+    }
+
     func testLegacyObjectGraph() {
-        let objectGraph = try! SimpleLegacyModule().asComponent(rootObjectType: LegacyObjectGraph.self).build()
-        XCTAssertEqual(objectGraph.objectForClass(NSString.self, withName: "String1") as! NSString as String, "String 1")
+        let objectGraph = try! ComponentFactory.of(SimpleLegacyComponent.self).build()
+        XCTAssertEqual(objectGraph.objectForClass(cls: NSString.self, withName: "String1") as! NSString as String, "String 1")
     }
     
     
     func testLegacyObjectGraph_Provider() {
-        let objectGraph = try! SimpleLegacyModule().asComponent(rootObjectType: LegacyObjectGraph.self).build()
-        XCTAssertEqual((objectGraph.providerForClass(Foo.self)() as! Foo).string1, "String 1")
+        let objectGraph = try! ComponentFactory.of(SimpleLegacyComponent.self).build()
+        XCTAssertEqual((objectGraph.providerForClass(cls: Foo.self)() as! Foo).string1, "String 1")
+    }
+
+
+    struct PropertyInjectionComponent : RootComponent {
+        typealias Root = LegacyObjectGraph
+
+        static func configure(binder: UnscopedBinder) {
+            binder.include(module: PropertyInjectionLegacyModule.self)
+        }
     }
     
+
     func testLegacyObjectGraph_PropertyInjection() {
-        let objectGraph = try! PropertyInjectionLegacyModule().asComponent(rootObjectType: LegacyObjectGraph.self).build()
-        
+        let objectGraph = try! ComponentFactory.of(PropertyInjectionComponent.self).build()
+
         let moreFreeBeer = MoreFreeBeer()
-        objectGraph.injectPropertiesIntoObject(moreFreeBeer)
+        objectGraph.injectPropertiesIntoObject(object: moreFreeBeer)
         
         XCTAssertEqual(moreFreeBeer.string1, "String 1")
         XCTAssertEqual(moreFreeBeer.string2, "String 2")
@@ -165,19 +181,27 @@ class LegacyObjectGraphTests: XCTestCase {
     }
     
     func testLegacyObjectGraph_PropertyInjection_Injected() {
-        let objectGraph = try! PropertyInjectionLegacyModule().asComponent(rootObjectType: LegacyObjectGraph.self).build()
-        
-        let moreFreeBeer = objectGraph.objectForClass(MoreFreeBeer.self) as! MoreFreeBeer
+        let objectGraph = try! ComponentFactory.of(PropertyInjectionComponent.self).build()
+
+        let moreFreeBeer = objectGraph.objectForClass(cls: MoreFreeBeer.self) as! MoreFreeBeer
         
         XCTAssertEqual(moreFreeBeer.string1, "String 1")
         XCTAssertEqual(moreFreeBeer.string2, "String 2")
         XCTAssertEqual(moreFreeBeer.string3, "String 3")
     }
-    
+
+
+    struct PropertyInjectionLegacyComponentOverridingString2 : RootComponent {
+        typealias Root = LegacyObjectGraph
+
+        static func configure(binder: UnscopedBinder) {
+            binder.include(module: PropertyInjectionLegacyModuleOverridingString2.self)
+        }
+    }
     func testLegacyObjectGraph_PropertyInjection_OverridingString2() {
-        let objectGraph = try! PropertyInjectionLegacyModuleOverridingString2().asComponent(rootObjectType: LegacyObjectGraph.self).build()
-        
-        let moreFreeBeer = objectGraph.objectForClass(MoreFreeBeer.self) as! MoreFreeBeer
+        let objectGraph = try! ComponentFactory.of(PropertyInjectionLegacyComponentOverridingString2.self).build()
+
+        let moreFreeBeer = objectGraph.objectForClass(cls: MoreFreeBeer.self) as! MoreFreeBeer
         
         XCTAssertEqual(moreFreeBeer.string1, "String 1")
         XCTAssertEqual(moreFreeBeer.string2, "String 3")

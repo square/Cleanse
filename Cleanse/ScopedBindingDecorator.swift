@@ -9,7 +9,7 @@
 import Foundation
 
 /// Internal type used for binding. We decorate a provider with this to indicate if we're scoped or not
-public struct ScopedBindingDecorator<Wrapped: BindingBuilder, S: _Scope> : BindingBuilderDecorator {
+public struct ScopedBindingDecorator<Wrapped: BindingBuilder, S: _ScopeBase> : BindingBuilderDecorator {
     public typealias MaybeScope = S
 
     public let wrapped: Wrapped

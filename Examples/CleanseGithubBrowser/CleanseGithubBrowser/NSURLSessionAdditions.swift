@@ -9,46 +9,42 @@
 import Foundation
 
 
-extension NSURLSession {
-
-    func jsonTask(baseURL baseURL: NSURL, pathComponents: String..., resultHandler: ErrorOptional<AnyObject> -> ()) -> NSURLSessionDataTask {
-
-        let url = baseURL.URLByAppendingPathComponent(pathComponents.joined(separator: "/"))
-
-        return jsonTask(url: url, resultHandler: resultHandler)
+extension URLSession {
+    func jsonTask(baseURL: URL, pathComponents: String..., resultHandler: @escaping (ErrorOptional<Any>) -> ()) -> URLSessionDataTask {
+        let url = baseURL.appendingPathComponent(pathComponents.joined(separator: "/"))
+        return jsonTask(url: url as URL, resultHandler: resultHandler)
     }
 
-    private func jsonTask(url url: NSURL, resultHandler: ErrorOptional<AnyObject> -> ()) -> NSURLSessionDataTask {
-
-        let task = self.dataTaskWithURL(url) { (data, response, error) in
-            if let error: ErrorType = error ?? HTTPError(statusCode: (response as! NSHTTPURLResponse).statusCode) {
-                resultHandler(.init(error))
+    private func jsonTask(url: URL, resultHandler: @escaping (ErrorOptional<Any>) -> ()) -> URLSessionDataTask {
+        let task = self.dataTask(with: url as URL) { (data, response, error) in
+            if let error: Error = error ?? HTTPError(statusCode: (response as! HTTPURLResponse).statusCode) {
+                resultHandler(ErrorOptional(error))
                 return
             }
 
             do {
-                try resultHandler(.init(NSJSONSerialization.JSONObjectWithData(data!, options: [])))
+                try resultHandler(ErrorOptional(JSONSerialization.jsonObject(with: data!, options: [])))
             } catch let e {
-                resultHandler(.init(e))
+                resultHandler(ErrorOptional(e))
                 return
             }
         }
 
         task.resume()
-
         return task
     }
 
+    @discardableResult
     func jsonListTask(
-        baseURL baseURL: NSURL,
+        baseURL: URL,
         pathComponents: String...,
         query: String? = nil,
-        resultHandler: ErrorOptional<[[String: AnyObject]]> -> ()
-    ) -> NSURLSessionDataTask {
-        var url = baseURL.URLByAppendingPathComponent(pathComponents.joined(separator: "/"))
+        resultHandler: @escaping (ErrorOptional<[[String: AnyObject]]>) -> ()
+    ) -> URLSessionDataTask {
+        var url = baseURL.appendingPathComponent(pathComponents.joined(separator: "/"))
 
         if let query = query {
-            url = NSURL(string: url.absoluteString + "?" + query)!
+            url = URL(string: url.absoluteString + "?" + query)!
         }
 
         return jsonTask(url: url) { resultHandler($0.map { $0 as! [[String: AnyObject]] }) }

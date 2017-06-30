@@ -6,13 +6,12 @@
 //  Copyright © 2016 Square, Inc. All rights reserved.
 //
 
-import Foundation
 import Cleanse
+import Foundation
 import UIKit
 
 struct FakeModeSettingsModule : Cleanse.Module {
-    func configure<B : Binder>(binder binder: B) {
-
+    static func configure(binder: UnscopedBinder) {
         binder.bind().to(factory: FakeModeSettingsSplitViewController.init)
         binder.bind().to(factory: FakeModeCell.init)
 
@@ -27,46 +26,40 @@ struct FakeModeSettingsModule : Cleanse.Module {
     }
 }
 
-
-
 class FakeModeSettingsSplitViewController : TableViewController {
     private let cells: [UITableViewCell]
 
     init(fakeModeCell: FakeModeCell) {
-
         self.cells = [fakeModeCell]
-
         super.init()
-
         self.title = "Fake Mode Settings"
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return cells.count
     }
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         return cells[indexPath.row]
     }
 }
 
 class FakeModeCell : UITableViewCell {
     let `switch` = UISwitch()
-    let processInfo: NSProcessInfo
+    let processInfo: ProcessInfo
 
-    init(processInfo: NSProcessInfo) {
+    init(processInfo: ProcessInfo) {
         self.processInfo = processInfo
 
-        super.init(style: .Default, reuseIdentifier: nil)
+        super.init(style: .default, reuseIdentifier: nil)
 
-        `switch`.on = processInfo.environment["USE_FAKES"] == "YES"
-
-        `switch`.addTarget(self, action: #selector(valueChanged), forControlEvents: .TouchUpInside)
+        `switch`.isOn = processInfo.environment["USE_FAKES"] == "YES"
+        `switch`.addTarget(self, action: #selector(valueChanged), for: .touchUpInside)
 
         textLabel?.text = "Fake Mode Enabled"
 
         accessoryView = `switch`
-        selectionStyle = .None
+        selectionStyle = .none
     }
 
     @available(*, unavailable)
@@ -75,12 +68,10 @@ class FakeModeCell : UITableViewCell {
     }
 
     @objc private func valueChanged() {
-        let textValue = `switch`.on ? "YES" : "NO"
-
+        let textValue = `switch`.isOn ? "YES" : "NO"
         setenv("USE_FAKES", textValue, 1)
 
-        // This is kinda bad, but since fake mode is a hack anywas...
-
-        (UIApplication.sharedApplication().delegate! as! AppDelegate).resetApplication()
+        // This is kinda bad, but since fake mode is a hack anyways...
+        (UIApplication.shared.delegate! as! AppDelegate).resetApplication()
     }
 }

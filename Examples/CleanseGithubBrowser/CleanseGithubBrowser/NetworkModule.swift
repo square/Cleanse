@@ -11,23 +11,21 @@ import Cleanse
 
 /// Wires up NSURLSession and friends
 struct NetworkModule : Module {
-    func configure<B : Binder>(binder binder: B) {
+    static func configure(binder: SingletonBinder) {
 
         binder
             .bind()
-            .asSingleton()
-            .to(factory: NSURLSessionConfiguration.ephemeralSessionConfiguration)
+            .sharedInScope()
+            .to { URLSessionConfiguration.ephemeral }
 
         binder
-            .bind(NSURLSession.self)
-            .asSingleton()
-            .to {
-                NSURLSession(configuration: $0, delegate: nil, delegateQueue: NSOperationQueue.mainQueue())
-            }
+            .bind(URLSession.self)
+            .sharedInScope()
+            .to { URLSession(configuration: $0, delegate: nil, delegateQueue: OperationQueue.main) }
 
         binder
-            .bind()
+            .bind(URL.self)
             .tagged(with: GithubBaseURL.self)
-            .to(value: NSURL(string: "https://api.github.com")!)
+            .to(value: URL(string: "https://api.github.com")!)
     }
 }

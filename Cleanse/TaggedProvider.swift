@@ -13,12 +13,16 @@ public struct TaggedProvider<Tag: Cleanse.Tag> : ProviderProtocol {
 
     let getter: () -> Element
     
-    public init(getter: () -> Element) {
+    public init(getter: @escaping () -> Element) {
         self.getter = getter
     }
 
     public func get() -> Element {
         return getter()
+    }
+
+    public func asProvider() -> Provider<Element> {
+        return Provider(getter: getter)
     }
 }
 
@@ -27,7 +31,7 @@ protocol AnyTaggedProvider : AnyProvider {
 }
 
 extension TaggedProvider : AnyTaggedProvider {
-    static func makeNew(getter getter: () -> Any) -> AnyProvider {
+    static func makeNew(getter: @escaping () -> Any) -> AnyProvider {
         return TaggedProvider(getter: { getter() as! Element })
     }
     
@@ -40,16 +44,3 @@ extension TaggedProvider : AnyTaggedProvider {
         return Tag.self
     }
 }
-
-extension TaggedProvider : ProviderConvertible {
-    public func asProvider() -> Provider<Element> {
-        return Provider(getter: self.getter)
-    }
-}
-
-extension TaggedProvider : ProxyFactoryInitializable {
-    static func makeProxyObject<F : ProxyFactory>(proxyFactory proxyFactory: F) -> TaggedProvider<Tag> {
-        return TaggedProvider { proxyFactory.of() }
-    }
-}
-

@@ -55,24 +55,21 @@ class SettingsSplitViewController : SplitViewController {
 
         self.tabBarItem.image = UIImage(
             named: "TabBarIcons/Settings",
-            inBundle: NSBundle(forClass: self.dynamicType),
-            compatibleWithTraitCollection: nil
+            in: Bundle(for: type(of: self)),
+            compatibleWith: nil
         )
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .whiteColor()
+        view.backgroundColor = .white
     }
 
     /// Module that adds SettingsSplitViewController & friends
     struct Module : Cleanse.Module {
-        func configure<B : Binder>(binder binder: B) {
-
+        static func configure(binder: UnscopedBinder) {
             binder.bind().to(factory: SettingsSplitViewController.init)
-
             binder.bind().to(factory: MasterViewController.init)
-
 
             // Bind an empty list to Settings in case there aren't any.
             binder
@@ -97,49 +94,46 @@ extension SettingsSplitViewController  {
     class MasterViewController : TableViewController {
         let settingsItems: [SettingsItem]
 
-        private var lastSelectedItemIndex: Int?
+        fileprivate var lastSelectedItemIndex: Int?
 
         /// Our master view controller takes a list of `SettingsItems` to display.
         required init(settingsItems: [SettingsItem]) {
-            self.settingsItems = settingsItems.sort { $0.rank < $1.rank }
-
+            self.settingsItems = settingsItems.sorted { $0.rank < $1.rank }
             super.init()
 
             self.clearsSelectionOnViewWillAppear = false
-
             self.title = "Settings"
         }
 
         var splitViewControllerIsCollapsed: Bool {
-            return splitViewController?.collapsed ?? false
+            return splitViewController?.isCollapsed ?? false
         }
 
-        override func viewWillAppear(animated: Bool) {
+        override func viewWillAppear(_ animated: Bool) {
             super.viewWillAppear(animated)
 
-            deselectRowIfCollapsed(animated)
-            selectDefaultItemIfExpanded(animated)
+            deselectRowIfCollapsed(animated: animated)
+            selectDefaultItemIfExpanded(animated: animated)
 
             // If the view controller is collapsed and we're appearing, it implies that the user explicitely hit the back button
-            if splitViewControllerIsCollapsed && !isMovingToParentViewController() {
+            if splitViewControllerIsCollapsed && !isMovingToParentViewController {
                 self.lastSelectedItemIndex = nil
             }
         }
 
-        private func selectDefaultItemIfExpanded(animated: Bool) {
+        fileprivate func selectDefaultItemIfExpanded(animated: Bool) {
             guard !splitViewControllerIsCollapsed else {
                 return
             }
 
             let itemIndex = lastSelectedItemIndex ?? defaultItemIndex
-
-            let targetIndexPath = NSIndexPath(forRow: itemIndex, inSection:0)
+            let targetIndexPath = IndexPath(row: itemIndex, section: 0)
 
             if tableView.indexPathForSelectedRow != targetIndexPath {
-                tableView.selectRowAtIndexPath(
-                    targetIndexPath,
+                tableView.selectRow(
+                    at: targetIndexPath,
                     animated: animated,
-                    scrollPosition: .None
+                    scrollPosition: .none
                 )
             }
 
@@ -148,7 +142,7 @@ extension SettingsSplitViewController  {
             }
         }
 
-        private func deselectRowIfCollapsed(animated: Bool) {
+        fileprivate func deselectRowIfCollapsed(animated: Bool) {
             guard splitViewControllerIsCollapsed else {
                 return
             }
@@ -157,29 +151,29 @@ extension SettingsSplitViewController  {
                 return
             }
 
-            tableView.deselectRowAtIndexPath(selectedIndexPath, animated: animated)
+            tableView.deselectRow(at: selectedIndexPath, animated: animated)
         }
         private func selectAndShowItem(atIndex index: Int, animated: Bool) {
-            tableView.selectRowAtIndexPath(
-                NSIndexPath(forRow: index, inSection:0),
+            tableView.selectRow(
+                at: IndexPath(row: index, section: 0),
                 animated: animated,
-                scrollPosition: .None
+                scrollPosition: .none
             )
 
             showItem(atIndex: index)
         }
 
-        private func showItem(atIndex index: Int) {
+        fileprivate func showItem(atIndex index: Int) {
             showDetailViewController(detailViewControllerForItem(atIndex: index), sender: self)
         }
 
-        private func detailViewControllerForItem(atIndex index: Int) -> UINavigationController {
+        fileprivate func detailViewControllerForItem(atIndex index: Int) -> UINavigationController {
             let item = settingsItems[index]
 
             return UINavigationController(rootViewController: item.viewControllerProvider.get())
         }
 
-        private var defaultItemIndex: Int {
+        fileprivate var defaultItemIndex: Int {
             return 0
         }
     }
@@ -187,23 +181,21 @@ extension SettingsSplitViewController  {
 
 /// TableView delegate stuff
 extension SettingsSplitViewController.MasterViewController {
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return settingsItems.count
     }
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell") ?? UITableViewCell(style: .Default, reuseIdentifier: "Cell")
-
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let item = settingsItems[indexPath.row]
 
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") ?? UITableViewCell(style: .default, reuseIdentifier: "Cell")
         cell.textLabel?.text = item.title
-
-        updateDisclosureForCell(cell, collapsed: splitViewControllerIsCollapsed)
+        updateDisclosureForCell(cell: cell, collapsed: splitViewControllerIsCollapsed)
 
         return cell
     }
 
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         lastSelectedItemIndex = indexPath.row
         showItem(atIndex: indexPath.row)
     }
@@ -221,8 +213,7 @@ extension SettingsSplitViewController.MasterViewController : UISplitViewControll
         let primaryViewController = primaryViewController as! UINavigationController
 
         // The primary view controller, may have a nexted UINavigationController. If this is the case, we let it do its default thing
-        if let topViewController = primaryViewController.topViewController
-            where topViewController is UINavigationController {
+        if let topViewController = primaryViewController.topViewController, topViewController is UINavigationController {
             return nil
         }
 
@@ -244,7 +235,7 @@ extension SettingsSplitViewController.MasterViewController : UISplitViewControll
     }
 
 
-    override func traitCollectionDidChange(previousTraitCollection: UITraitCollection?) {
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         // We use this to update whether or not we show disclosures, etc.
 
@@ -254,15 +245,15 @@ extension SettingsSplitViewController.MasterViewController : UISplitViewControll
     private func updateCellDisclosuresAndSelection() {
         let collapsed = splitViewControllerIsCollapsed
         for c in tableView.visibleCells {
-            updateDisclosureForCell(c, collapsed: collapsed)
+            updateDisclosureForCell(cell: c, collapsed: collapsed)
         }
 
-        deselectRowIfCollapsed(false)
-        selectDefaultItemIfExpanded(false)
+        deselectRowIfCollapsed(animated: false)
+        selectDefaultItemIfExpanded(animated: false)
     }
 
-    private func updateDisclosureForCell(cell: UITableViewCell, collapsed: Bool) {
-        let accessoryType = collapsed ? UITableViewCellAccessoryType.DisclosureIndicator : .None
+    fileprivate func updateDisclosureForCell(cell: UITableViewCell, collapsed: Bool) {
+        let accessoryType = collapsed ? UITableViewCellAccessoryType.disclosureIndicator : .none
 
         if cell.accessoryType != accessoryType {
             cell.accessoryType = accessoryType

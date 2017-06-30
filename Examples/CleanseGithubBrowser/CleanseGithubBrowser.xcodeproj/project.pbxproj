@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		884618AF1D9324AD0001ADEB /* AppComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 884618AE1D9324AD0001ADEB /* AppComponent.swift */; };
+		88D655411F04774200AFE00E /* SingletonScope.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D655401F04774200AFE00E /* SingletonScope.swift */; };
 		F69184B31D0DF28A00125872 /* GithubMemberService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69184B21D0DF28A00125872 /* GithubMemberService.swift */; };
 		F69184B61D0DF2CA00125872 /* GithubRepositoriesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69184B51D0DF2CA00125872 /* GithubRepositoriesService.swift */; };
 		F69184BB1D0DF3DD00125872 /* NetworkModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69184BA1D0DF3DD00125872 /* NetworkModule.swift */; };
@@ -14,7 +16,7 @@
 		F69184BF1D0DF70F00125872 /* HTTPError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69184BE1D0DF70F00125872 /* HTTPError.swift */; };
 		F69184C31D0DFB4A00125872 /* GithubServicesModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69184C21D0DFB4A00125872 /* GithubServicesModule.swift */; };
 		F69184C61D0E015A00125872 /* NSURLSessionAdditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69184C51D0E015A00125872 /* NSURLSessionAdditions.swift */; };
-		F69184CE1D0E31F200125872 /* Fakes.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69184CD1D0E31F200125872 /* Fakes.swift */; };
+		F69184CE1D0E31F200125872 /* FakeServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69184CD1D0E31F200125872 /* FakeServices.swift */; };
 		F69184D01D0E33F600125872 /* FakeModeSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69184CF1D0E33F600125872 /* FakeModeSettings.swift */; };
 		F69184D21D0E357600125872 /* FoundationCommonModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69184D11D0E357600125872 /* FoundationCommonModule.swift */; };
 		F6C9F35D1D0BD01700877D0B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6C9F35C1D0BD01700877D0B /* AppDelegate.swift */; };
@@ -34,6 +36,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		88D6553C1F04591700AFE00E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F6C9F38A1D0BD1A100877D0B /* Cleanse.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 88D6552C1F042D4300AFE00E;
+			remoteInfo = CleanseGen;
+		};
 		F6C9F36E1D0BD01700877D0B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = F6C9F3511D0BD01700877D0B /* Project object */;
@@ -93,6 +102,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		884618AE1D9324AD0001ADEB /* AppComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppComponent.swift; sourceTree = "<group>"; };
+		88D655401F04774200AFE00E /* SingletonScope.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingletonScope.swift; sourceTree = "<group>"; };
 		F69184B21D0DF28A00125872 /* GithubMemberService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GithubMemberService.swift; sourceTree = "<group>"; };
 		F69184B51D0DF2CA00125872 /* GithubRepositoriesService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GithubRepositoriesService.swift; sourceTree = "<group>"; };
 		F69184BA1D0DF3DD00125872 /* NetworkModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkModule.swift; sourceTree = "<group>"; };
@@ -100,7 +111,7 @@
 		F69184BE1D0DF70F00125872 /* HTTPError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPError.swift; sourceTree = "<group>"; };
 		F69184C21D0DFB4A00125872 /* GithubServicesModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GithubServicesModule.swift; sourceTree = "<group>"; };
 		F69184C51D0E015A00125872 /* NSURLSessionAdditions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSURLSessionAdditions.swift; sourceTree = "<group>"; };
-		F69184CD1D0E31F200125872 /* Fakes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fakes.swift; sourceTree = "<group>"; };
+		F69184CD1D0E31F200125872 /* FakeServices.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeServices.swift; sourceTree = "<group>"; };
 		F69184CF1D0E33F600125872 /* FakeModeSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeModeSettings.swift; sourceTree = "<group>"; };
 		F69184D11D0E357600125872 /* FoundationCommonModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoundationCommonModule.swift; sourceTree = "<group>"; };
 		F6C9F3591D0BD01700877D0B /* CleanseGithubBrowser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CleanseGithubBrowser.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -153,15 +164,15 @@
 		F69184B71D0DF32800125872 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				F69184BC1D0DF5DC00125872 /* ErrorOptional.swift */,
+				F69184CF1D0E33F600125872 /* FakeModeSettings.swift */,
+				F69184CD1D0E31F200125872 /* FakeServices.swift */,
 				F69184B21D0DF28A00125872 /* GithubMemberService.swift */,
 				F69184B51D0DF2CA00125872 /* GithubRepositoriesService.swift */,
 				F69184C21D0DFB4A00125872 /* GithubServicesModule.swift */,
-				F69184BA1D0DF3DD00125872 /* NetworkModule.swift */,
-				F69184BC1D0DF5DC00125872 /* ErrorOptional.swift */,
 				F69184BE1D0DF70F00125872 /* HTTPError.swift */,
+				F69184BA1D0DF3DD00125872 /* NetworkModule.swift */,
 				F69184C51D0E015A00125872 /* NSURLSessionAdditions.swift */,
-				F69184CD1D0E31F200125872 /* Fakes.swift */,
-				F69184CF1D0E33F600125872 /* FakeModeSettings.swift */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -178,9 +189,9 @@
 		F69184D41D0F221600125872 /* Pages */ = {
 			isa = PBXGroup;
 			children = (
-				F6E8782F1D0BD911006F3FAB /* SettingsPage.swift */,
-				F6E878311D0D1120006F3FAB /* RepositoriesPage.swift */,
 				F6E878331D0D1638006F3FAB /* MembersPage.swift */,
+				F6E878311D0D1120006F3FAB /* RepositoriesPage.swift */,
+				F6E8782F1D0BD911006F3FAB /* SettingsPage.swift */,
 			);
 			name = Pages;
 			sourceTree = "<group>";
@@ -188,8 +199,9 @@
 		F69184D51D0F222F00125872 /* Common Modules */ = {
 			isa = PBXGroup;
 			children = (
-				F6C9F3A01D0BD26900877D0B /* UIKitCommonModule.swift */,
 				F69184D11D0E357600125872 /* FoundationCommonModule.swift */,
+				F6C9F3A01D0BD26900877D0B /* UIKitCommonModule.swift */,
+				88D655401F04774200AFE00E /* SingletonScope.swift */,
 			);
 			name = "Common Modules";
 			sourceTree = "<group>";
@@ -226,15 +238,16 @@
 		F6C9F35B1D0BD01700877D0B /* CleanseGithubBrowser */ = {
 			isa = PBXGroup;
 			children = (
-				F6C9F3631D0BD01700877D0B /* Assets.xcassets */,
-				F6C9F3651D0BD01700877D0B /* LaunchScreen.storyboard */,
-				F6C9F3681D0BD01700877D0B /* Info.plist */,
-				F6C9F35C1D0BD01700877D0B /* AppDelegate.swift */,
-				F6E8782D1D0BD6D7006F3FAB /* RootViewController.swift */,
-				F69184D41D0F221600125872 /* Pages */,
-				F69184D51D0F222F00125872 /* Common Modules */,
 				F69184C41D0DFEF600125872 /* Base Classes */,
+				F69184D51D0F222F00125872 /* Common Modules */,
+				F69184D41D0F221600125872 /* Pages */,
 				F69184B71D0DF32800125872 /* Services */,
+				884618AE1D9324AD0001ADEB /* AppComponent.swift */,
+				F6C9F35C1D0BD01700877D0B /* AppDelegate.swift */,
+				F6C9F3631D0BD01700877D0B /* Assets.xcassets */,
+				F6C9F3681D0BD01700877D0B /* Info.plist */,
+				F6C9F3651D0BD01700877D0B /* LaunchScreen.storyboard */,
+				F6E8782D1D0BD6D7006F3FAB /* RootViewController.swift */,
 			);
 			path = CleanseGithubBrowser;
 			sourceTree = "<group>";
@@ -261,6 +274,7 @@
 			isa = PBXGroup;
 			children = (
 				F6C9F3901D0BD1A200877D0B /* Cleanse.framework */,
+				88D6553D1F04591700AFE00E /* CleanseGen.framework */,
 				F6C9F3921D0BD1A200877D0B /* CleanseTests.xctest */,
 			);
 			name = Products;
@@ -332,18 +346,21 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "Square, Inc";
 				TargetAttributes = {
 					F6C9F3581D0BD01700877D0B = {
 						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0830;
 					};
 					F6C9F36C1D0BD01700877D0B = {
 						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0830;
 						TestTargetID = F6C9F3581D0BD01700877D0B;
 					};
 					F6C9F3771D0BD01700877D0B = {
 						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0830;
 						TestTargetID = F6C9F3581D0BD01700877D0B;
 					};
 				};
@@ -375,6 +392,13 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		88D6553D1F04591700AFE00E /* CleanseGen.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = CleanseGen.framework;
+			remoteRef = 88D6553C1F04591700AFE00E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		F6C9F3901D0BD1A200877D0B /* Cleanse.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -426,16 +450,18 @@
 				F6C9F35D1D0BD01700877D0B /* AppDelegate.swift in Sources */,
 				F6E878361D0DD112006F3FAB /* TableViewController.swift in Sources */,
 				F69184B61D0DF2CA00125872 /* GithubRepositoriesService.swift in Sources */,
+				88D655411F04774200AFE00E /* SingletonScope.swift in Sources */,
 				F6C9F3A11D0BD26900877D0B /* UIKitCommonModule.swift in Sources */,
 				F6E8782E1D0BD6D7006F3FAB /* RootViewController.swift in Sources */,
 				F69184C61D0E015A00125872 /* NSURLSessionAdditions.swift in Sources */,
-				F69184CE1D0E31F200125872 /* Fakes.swift in Sources */,
+				F69184CE1D0E31F200125872 /* FakeServices.swift in Sources */,
 				F69184BF1D0DF70F00125872 /* HTTPError.swift in Sources */,
 				F6E878341D0D1638006F3FAB /* MembersPage.swift in Sources */,
 				F69184C31D0DFB4A00125872 /* GithubServicesModule.swift in Sources */,
 				F69184D01D0E33F600125872 /* FakeModeSettings.swift in Sources */,
 				F69184B31D0DF28A00125872 /* GithubMemberService.swift in Sources */,
 				F6E878301D0BD911006F3FAB /* SettingsPage.swift in Sources */,
+				884618AF1D9324AD0001ADEB /* AppComponent.swift in Sources */,
 				F6E878321D0D1120006F3FAB /* RepositoriesPage.swift in Sources */,
 				F69184BD1D0DF5DC00125872 /* ErrorOptional.swift in Sources */,
 				F6E878381D0DD11A006F3FAB /* SplitViewController.swift in Sources */,
@@ -510,8 +536,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -539,6 +567,7 @@
 				OTHER_SWIFT_FLAGS = "-DDEBUG $(inherited)";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 2.3;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -557,8 +586,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -578,6 +609,8 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_SWIFT_FLAGS = "";
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 2.3;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -586,24 +619,26 @@
 		F6C9F3821D0BD01700877D0B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = CleanseGithubBrowser/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.squareup.CleanseGithubBrowser;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
 		F6C9F3831D0BD01700877D0B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = CleanseGithubBrowser/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.squareup.CleanseGithubBrowser;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -615,6 +650,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.squareup.CleanseGithubBrowserTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CleanseGithubBrowser.app/CleanseGithubBrowser";
 			};
 			name = Debug;
@@ -627,6 +663,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.squareup.CleanseGithubBrowserTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CleanseGithubBrowser.app/CleanseGithubBrowser";
 			};
 			name = Release;
@@ -638,6 +675,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.squareup.CleanseGithubBrowserUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = CleanseGithubBrowser;
 			};
 			name = Debug;
@@ -649,6 +687,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.squareup.CleanseGithubBrowserUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = CleanseGithubBrowser;
 			};
 			name = Release;

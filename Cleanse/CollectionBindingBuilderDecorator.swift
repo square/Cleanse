@@ -9,7 +9,7 @@
 import Foundation
 
 
-public struct CollectionBindingBuilderDecorator<Wrapped: BindingBuilder  where Wrapped.CollectionOrUnique == _UniqueBinding, Wrapped.FinalProvider: _StandardProvider, Wrapped.MaybeScope == _Unscoped> : BindingBuilderDecorator {
+public struct CollectionBindingBuilderDecorator<Wrapped: BindingBuilder> : BindingBuilderDecorator  where Wrapped.CollectionOrUnique == _UniqueBinding, Wrapped.FinalProvider: _StandardProvider, Wrapped.MaybeScope == Unscoped {
     public typealias FinalProvider = Provider<[Wrapped.FinalProvider.Element]>
     public typealias Input = [Wrapped.Input]
     public typealias CollectionOrUnique = _CollectionBinding
@@ -20,18 +20,17 @@ public struct CollectionBindingBuilderDecorator<Wrapped: BindingBuilder  where W
         self.wrapped = wrapped
     }
     
-    public static func mapElement(input input: Input) -> FinalProvider.Element {
+    public static func mapElement(input: Input) -> FinalProvider.Element {
         return input.map(Wrapped.mapElement)
     }
     
-    public static var collectionMergeFunc: Optional<[FinalProvider.Element] -> FinalProvider.Element> {
-        return { Array($0.flatten()) }
+    public static var collectionMergeFunc: Optional<([FinalProvider.Element]) -> FinalProvider.Element> {
+        return { Array($0.joined()) }
     }
 }
 
-public extension BindingBuilder where CollectionOrUnique == _UniqueBinding, FinalProvider: _StandardProvider, MaybeScope == _Unscoped {
+public extension BindingBuilder where CollectionOrUnique == _UniqueBinding, FinalProvider: _StandardProvider, MaybeScope == Unscoped {
     /// If makes it bind Element to [Element]
-    @warn_unused_result
     public func intoCollection() -> CollectionBindingBuilderDecorator<Self> {
         return with()
     }
