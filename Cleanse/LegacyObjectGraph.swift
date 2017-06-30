@@ -11,7 +11,7 @@ import Foundation
 #if SUPPORT_LEGACY_OBJECT_GRAPH
 
 typealias LegacyProviderProvider = (AnyClass, String?) -> () -> AnyObject
-typealias LegacyPropertyInjectorProvider = AnyClass -> AnyObject -> ()
+typealias LegacyPropertyInjectorProvider = (AnyClass) -> (AnyObject) -> ()
 
 /// Protocol with base method for LegacyObjectGraph
 public protocol LegacyObjectGraphProtocol {
@@ -31,31 +31,18 @@ public protocol LegacyObjectGraphProtocol {
     }
     
     /// Convenience method equivalent to `providerForClass(cls: cls, withName: nil)()`
-    @objc public func objectForClass(cls: AnyClass) -> AnyObject {
-        #if swift(>=3.0)
-            return objectForClass(cls: cls, withName: nil)
-        #else
-            return objectForClass(cls, withName: nil)
-        #endif
-
+    @objc(objectForClass:) public func objectForClass(cls: AnyClass) -> AnyObject {
+        return objectForClass(cls: cls, withName: nil)
     }
     
     /// Convenience method equivalent to `providerForClass(cls: cls, withName: nil)`
-    @objc public func providerForClass(cls: AnyClass) -> () -> AnyObject {
-        #if swift(>=3.0)
-            return providerForClass(cls: cls, withName: nil)
-        #else
-            return providerForClass(cls, withName: nil)
-        #endif
+    @objc(providerForClass:) public func providerForClass(cls: AnyClass) -> () -> AnyObject {
+        return providerForClass(cls: cls, withName: nil)
     }
     
     /// Convenience method equivalent to `providerForClass(cls: cls, withName: name)()`
-    @objc public func objectForClass(cls: AnyClass, withName name: String?) -> AnyObject {
-        #if swift(>=3.0)
-            return providerForClass(cls: cls, withName: name)()
-        #else
-            return providerForClass(cls, withName: name)()
-        #endif
+    @objc(objectForClass:withName:) public func objectForClass(cls: AnyClass, withName name: String?) -> AnyObject {
+        return providerForClass(cls: cls, withName: name)()
     }
     
     @objc public func providerForClass(cls: AnyClass, withName name: String?) -> () -> AnyObject {
@@ -63,19 +50,23 @@ public protocol LegacyObjectGraphProtocol {
     }
     
     /// Injects properties into an injectable class marked with ST_INJECT(). These properties must be declared in the base interface
-    @objc public func injectPropertiesIntoObject(object: AnyObject) {
-        graph.legacyPropertyInjector(cls: object.dynamicType)(object)
+    @objc(injectPropertiesIntoObject:) public func injectPropertiesIntoObject(object: AnyObject) {
+        graph.legacyPropertyInjector(cls: type(of: object))(object)
     }
 }
 
 extension _AnyTag {
     /// This is a hack to be compatible with legacy names
     static var legacyName: String? {
-        #if swift(>=3.0)
-            return "\(self)".components(separatedBy: ".").suffix(from: 0).joined(separator: ".")
-        #else
-            return "\(self)".componentsSeparatedByString(".").suffixFrom(0).joinWithSeparator(".")
-        #endif
+        return "\(self)".components(separatedBy: ".").suffix(from: 0).joined(separator: ".")
+    }
+}
+
+
+/// LegacyObjectGraphs just appear, so we can have a default implementation
+public extension ComponentBase where Root == LegacyObjectGraph {
+    public static func configureRoot(binder bind: ReceiptBinder<Root>) -> BindingReceipt<Root> {
+        return BindingReceipt()
     }
 }
 

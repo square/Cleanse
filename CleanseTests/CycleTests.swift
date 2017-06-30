@@ -28,16 +28,16 @@ class CycleTests: XCTestCase {
     }
 
     struct BadComponent : RootComponent {
-        typealias  Root = AA
+        typealias Root = AA
 
-        static func configure<B : Binder>(binder binder: B) {
+        static func configure(binder: Binder<Singleton>) {
+            binder.bind(BB.self).sharedInScope().to(factory: BB.init)
+        }
 
-            binder.bind(AA.self).asSingleton().to(factory: AA.init)
-            binder.bind(BB.self).asSingleton().to(factory: BB.init)
+        static func configureRoot(binder bind: ReceiptBinder<Root>) -> BindingReceipt<Root> {
+            return bind.to(factory: Root.init)
         }
     }
-
-
 
     class AA_OK {
         init(b: BB_OK) {
@@ -51,18 +51,20 @@ class CycleTests: XCTestCase {
     }
 
     struct GoodComponent : RootComponent {
-        typealias  Root = AA
+        typealias  Root = AA_OK
 
-        static func configure<B : Binder>(binder binder: B) {
+        static func configureRoot(binder bind: ReceiptBinder<Root>) -> BindingReceipt<Root> {
+            return bind.to(factory: Root.init)
+        }
 
-            binder.bind().asSingleton().to(factory: AA_OK.init)
-            binder.bind().asSingleton().to(factory: BB_OK.init)
+        static func configure(binder: Binder<Singleton>) {
+            binder.bind().sharedInScope().to(factory: BB_OK.init)
         }
     }
 
     func testCycleDetection() {
         do {
-            _ = try ComponentFactory.of(BadComponent)
+            _ = try ComponentFactory.of(BadComponent.self)
             XCTFail("Should not succeed")
         } catch let e as DependencyCycle {
             let message = e.description
@@ -75,6 +77,6 @@ class CycleTests: XCTestCase {
     }
 
     func testWeakCyclesOK() {
-        try! ComponentFactory.of(GoodComponent)
+        _ = try! ComponentFactory.of(GoodComponent.self)
     }
 }

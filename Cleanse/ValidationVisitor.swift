@@ -10,7 +10,7 @@ import Foundation
 
 
 extension ProviderProtocol {
-    private static var providerToClosureType: Provider<() -> Element>.Type {
+    fileprivate static var providerToClosureType: Provider<() -> Element>.Type {
         return Provider<() -> Element>.self
     }
 }
@@ -45,8 +45,8 @@ private class ProviderInfo : DelegatedHashable, CustomStringConvertible {
         return ObjectIdentifier(self)
     }
 
-    private var description: String {
-        return "ProviderInfo for \(rawBinding.provider.dynamicType)"
+    fileprivate var description: String {
+        return "ProviderInfo for \(type(of: rawBinding.provider))"
     }
 }
 
@@ -64,7 +64,7 @@ private class ComponentInfo {
 
     var providerAliases = [ProviderKey: ProviderKey]()
 
-    private var cycleCheckedProviders = Set<ProviderInfo>()
+    fileprivate var cycleCheckedProviders = Set<ProviderInfo>()
 
     init(scope: Scope.Type?, seed: Any.Type, isRootComponent: Bool, parent: ComponentInfo?, componentType: Any.Type?) {
         self.isRootComponent = isRootComponent
@@ -74,49 +74,35 @@ private class ComponentInfo {
         self.componentType = componentType
     }
 
-    private func validate(inout errors: [CleanseError]) {
+    fileprivate func validate(_ errors: inout [CleanseError]) {
         validateNestedScopes(&errors)
 
-        for p in providers.values.flatten() {
+        for p in providers.values.joined() {
             validate(provider: p, errors: &errors)
         }
     }
 
-    private func validateNestedScopes(inout errors: [CleanseError]) {
+    fileprivate func validateNestedScopes(_ errors: inout [CleanseError]) {
         if scope == nil {
             return
         }
 
-        for var current = parent; current != nil; current = current?.parent {
-            let current = current!
+        var loopCurrent = parent
+        while let current = loopCurrent {
             if current.scope == scope {
                 errors.append(InvalidScopeNesting(scope: scope!, innerComponent: self.componentType!, outerComponent: current.componentType!))
             }
+            loopCurrent = current.parent
         }
     }
 
-    private func validate(provider providerInfo:  ProviderInfo, inout errors: [CleanseError]) {
-        guard isScopeValid(providerInfo) else {
-            errors.append(
-                InvalidBindingScope(
-                    requirement: ProviderRequestDebugInfo(
-                        requestedType: providerInfo.rawBinding.provider.dynamicType,
-                        providerRequiredFor: providerInfo.rawBinding.provider.dynamicType,
-                        sourceLocation: providerInfo.rawBinding.sourceLocation
-                    ),
-                    attemptedScope: providerInfo.rawBinding.scope!,
-                    expectedScope: self.scope)
-            )
-            return
-        }
-
-
+    fileprivate func validate(provider providerInfo:  ProviderInfo, errors: inout [CleanseError]) {
         for r in providerInfo.requirements {
             validate(requirement: r, providerInfo: providerInfo, errors: &errors)
         }
 
         do {
-            try validateCycles(providerKey: ProviderKey(providerInfo.rawBinding.provider.dynamicType), providerInfo: providerInfo)
+            try validateCycles(providerKey: ProviderKey(type(of: providerInfo.rawBinding.provider)), providerInfo: providerInfo)
         } catch let e as CleanseError {
             errors.append(e)
         } catch {
@@ -125,7 +111,7 @@ private class ComponentInfo {
     }
 
     // Once we find one cycle, stop (hence throwing instead of appending to a list of errors)
-    private func validateCycles(providerKey providerKey: ProviderKey, providerInfo:  ProviderInfo) throws {
+    fileprivate func validateCycles(providerKey: ProviderKey, providerInfo:  ProviderInfo) throws {
 
         var providerStack = [(ProviderKey, ProviderInfo)]()
         var providersInStack = Set<ProviderInfo>()
@@ -138,7 +124,7 @@ private class ComponentInfo {
         )
     }
 
-    private func validateCycles(providerKey providerKey: ProviderKey, providerInfo:  ProviderInfo, inout providerStack: [(ProviderKey, ProviderInfo)], inout providersInStack: Set<ProviderInfo>) throws {
+    fileprivate func validateCycles(providerKey: ProviderKey, providerInfo:  ProviderInfo, providerStack: inout [(ProviderKey, ProviderInfo)], providersInStack: inout Set<ProviderInfo>) throws {
         if cycleCheckedProviders.contains(providerInfo) {
             return
         }
@@ -148,7 +134,7 @@ private class ComponentInfo {
         }
 
         guard !providersInStack.contains(providerInfo) else {
-            let providerStack = providerStack.suffixFrom(providerStack.indexOf { $1 == providerInfo }!) + [(providerKey, providerInfo)]
+            let providerStack = providerStack.suffix(from: providerStack.index { $1 == providerInfo }!) + [(providerKey, providerInfo)]
 
             var debugInfos = [ProviderRequestDebugInfo]()
 
@@ -163,7 +149,7 @@ private class ComponentInfo {
                     )
                 )
 
-                lastRequirement = providerInfo.rawBinding.provider.dynamicType
+                lastRequirement = type(of: providerInfo.rawBinding.provider)
             }
 
             throw DependencyCycle(requirementStack: debugInfos)
@@ -174,7 +160,7 @@ private class ComponentInfo {
         providersInStack.insert(providerInfo)
 
         defer {
-            providerStack.popLast()
+            _ = providerStack.popLast()
             providersInStack.remove(providerInfo)
         }
 
@@ -188,7 +174,7 @@ private class ComponentInfo {
         }
     }
 
-    private func validate(requirement requirement: ProviderKey, providerInfo:  ProviderInfo, inout errors: [CleanseError]) {
+    fileprivate func validate(requirement: ProviderKey, providerInfo:  ProviderInfo, errors: inout [CleanseError]) {
         #if SUPPORT_LEGACY_OBJECT_GRAPH
             if requirement == ProviderKey(Provider<LegacyObjectGraph>.self) {
                 return
@@ -200,7 +186,7 @@ private class ComponentInfo {
                 MissingProvider(requests: [
                     ProviderRequestDebugInfo(
                         requestedType: requirement.type,
-                        providerRequiredFor:providerInfo.rawBinding.provider.dynamicType,
+                        providerRequiredFor:type(of: providerInfo.rawBinding.provider),
                         sourceLocation: providerInfo.rawBinding.sourceLocation
                     )]
                 )
@@ -210,16 +196,7 @@ private class ComponentInfo {
         }
     }
 
-
-    private func isScopeValid(providerInfo:  ProviderInfo) -> Bool {
-        guard let requestedScope = providerInfo.rawBinding.scope else {
-            return true
-        }
-
-        return requestedScope == self.scope
-    }
-
-    private func getProviderInfo(key: ProviderKey) -> [ProviderInfo] {
+    fileprivate func getProviderInfo(_ key: ProviderKey) -> [ProviderInfo] {
         let key = providerAliases[key] ?? key
 
         var providers = getCurrentProviderInfo(key)
@@ -236,22 +213,19 @@ private class ComponentInfo {
     }
 
 
-    private func getCurrentProviderInfo(key: ProviderKey) -> [ProviderInfo] {
-        let keyType = key.type
-        let providerKey: ProviderKey
-
-        if let current = self.providers[key] where !current.isEmpty {
+    fileprivate func getCurrentProviderInfo(_ key: ProviderKey) -> [ProviderInfo] {
+        if let current = self.providers[key] , !current.isEmpty {
             return current
         }
 
         return maybeResolveCanonical(keyType: key.type)
     }
 
-    private func doesHaveRequirement(key: ProviderKey) -> Bool {
+    fileprivate func doesHaveRequirement(_ key: ProviderKey) -> Bool {
         return !getProviderInfo(key).isEmpty
     }
 
-    private func maybeResolveCanonical(keyType keyType: Any.Type) -> [ProviderInfo] {
+    fileprivate func maybeResolveCanonical(keyType: Any.Type) -> [ProviderInfo] {
         if let keyType = keyType as? AnyProvider.Type {
             return maybeResolveCanonical(keyType: keyType.providesType)
         }
@@ -275,12 +249,12 @@ private class ComponentInfo {
 final class ValidationVisitor : ComponentVisitor {
     var visitorState = VisitorState<ValidationVisitor>()
 
-    private var rootComponent: ComponentInfo
-    private var currentComponent: ComponentInfo
+    fileprivate var rootComponent: ComponentInfo
+    fileprivate var currentComponent: ComponentInfo
 
-    private var components = [ComponentInfo]()
+    fileprivate var components = [ComponentInfo]()
 
-    private var currentProvider: ProviderInfo?
+    fileprivate var currentProvider: ProviderInfo?
 
     init() {
         rootComponent = ComponentInfo(
@@ -292,11 +266,29 @@ final class ValidationVisitor : ComponentVisitor {
         )
         currentComponent = rootComponent
     }
-    func enterComponent<C : Component>(dependency dependency: C.Type) {
+    
+    func enterComponent<C : Component>(dependency: C.Type) {
+        enterComponentBase(isRoot: false, dependency: dependency)
+    }
+
+    func leaveComponent<C : Component>(dependency: C.Type) {
+        leaveComponentBase()
+    }
+
+    func enterRootComponent<C : RootComponent>(dependency: C.Type) {
+        enterComponentBase(isRoot: true, dependency: dependency)
+    }
+
+    func leaveRootComponent<C : RootComponent>(dependency: C.Type) {
+        leaveComponentBase()
+    }
+
+
+    private func enterComponentBase<C : Cleanse.ComponentBase>(isRoot: Bool, dependency: C.Type) {
         let component = ComponentInfo(
             scope: C.Scope.scopeOrNil,
             seed: C.Seed.self,
-            isRootComponent: C.isRootComponent,
+            isRootComponent: isRoot,
             parent: currentComponent,
             componentType: dependency
         )
@@ -307,23 +299,22 @@ final class ValidationVisitor : ComponentVisitor {
         currentComponent = component
     }
 
-    func leaveComponent<C : Component>(dependency dependency: C.Type) {
+    private func leaveComponentBase() {
         currentComponent = currentComponent.parent!
     }
 
-
-    func enterProvider(binding binding: RawProviderBinding) {
+    func enterProvider(binding: RawProviderBinding) {
         precondition(currentProvider == nil)
         currentProvider = ProviderInfo(rawBinding: binding)
     }
 
     
-    func visitRequirement(requirement requirement: AnyProvider.Type, binding: RawProviderBinding) {
+    func visitRequirement(requirement: AnyProvider.Type, binding: RawProviderBinding) {
         currentProvider!.requirements.insert(ProviderKey(requirement))
     }
 
-    func leaveProvider(binding binding: RawProviderBinding) {
-        let pkey = ProviderKey(binding.provider.dynamicType)
+    func leaveProvider(binding: RawProviderBinding) {
+        let pkey = ProviderKey(type(of: binding.provider))
         
         if currentComponent.providers[pkey] == nil {
             currentComponent.providers[pkey] = [currentProvider!]
@@ -331,9 +322,15 @@ final class ValidationVisitor : ComponentVisitor {
             currentComponent.providers[pkey]!.append(currentProvider!)
         }
 
-        currentComponent.providerAliases[ProviderKey(binding.provider.dynamicType.anyProviderToClosureType)] = pkey
+        currentComponent.providerAliases[ProviderKey(type(of: binding.provider).anyProviderToClosureType)] = pkey
 
         self.currentProvider  = nil
+    }
+
+    func enterModule<M : Module>(module: M.Type) {
+    }
+
+    func leaveModule<M : Module>(module: M.Type) {
     }
 
     func finalize() throws {
@@ -343,7 +340,7 @@ final class ValidationVisitor : ComponentVisitor {
             c.validate(&errors)
         }
 
-        errors.sortInPlace {
+        errors.sort {
             return $0.0.description < $0.1.description
         }
 

@@ -9,7 +9,5 @@
 import Foundation
 
 
-public protocol Component : _BaseComponent {
-    ///  can have custom scopes associated with them.
-    associatedtype Scope = _Unscoped
+public protocol Component : ComponentBase {
 }

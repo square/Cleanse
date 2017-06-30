@@ -8,8 +8,6 @@
 
 import Foundation
 
-
-
 import XCTest
 
 @testable import Cleanse
@@ -33,13 +31,15 @@ class CanonicalRepresentableTests: XCTestCase {
     struct TestComponent : Cleanse.RootComponent {
         typealias Root = TestRoot
         
-        static func configure<B : Binder>(binder binder: B) {
-            binder.bind().to(factory: TestRoot.init)
-            
+        static func configure(binder: UnscopedBinder) {
             binder.bind(String.self).to(value: "Hey!")
         }
+
+        static func configureRoot(binder bind: ReceiptBinder<Root>) -> BindingReceipt<Root> {
+            return bind.to(factory: Root.init)
+        }
     }
-    
+
     func testCanonicalRepresentable() {
         let root = try! ComponentFactory.of(TestComponent.self).build()
 

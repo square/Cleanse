@@ -6,17 +6,16 @@
 //  Copyright © 2016 Square, Inc. All rights reserved.
 //
 
+@testable import Cleanse
 import Foundation
-
-
 import XCTest
 
-@testable import Cleanse
+struct Singleton : Scope {
+}
 
 class DebuggingTests: XCTestCase {
-    
     struct FooModule : Module {
-        static func configure<B : Binder>(binder binder: B) {
+        static func configure(binder: UnscopedBinder) {
             binder.bind().to(value: 3)
             binder.bind().to(value: "Imma string")
         }
@@ -27,11 +26,9 @@ class DebuggingTests: XCTestCase {
         let g = Graph(scope: Singleton.self)
         
         // TODO: make it more descriptive
-        
-        g.install(module: FooModule.self)
+        g.include(module: FooModule.self)
         
         try! g.finalize()
-        
         let description = g.debugDescription
         
         Assert(description, contains: "Provider<String>")
@@ -41,7 +38,6 @@ class DebuggingTests: XCTestCase {
     }
 }
 
-
-func Assert(@autoclosure _ entireString: () throws -> String, @autoclosure contains expectedContents: () throws -> String, file: StaticString = #file, line: UInt = #line) {
-    XCTAssertTrue(try entireString().contains(expectedContents()), "Expected \(try! entireString()) to contain \(try! expectedContents())", file: file, line: line)
+func Assert(_ entireString: @autoclosure () throws -> String, contains expectedContents: @autoclosure () throws -> String, file: StaticString = #file, line: UInt = #line) {
+    XCTAssertTrue(try entireString().contains(expectedContents()), "Expected \(try! entireString())\nto contain \(try! expectedContents())", file: file, line: line)
 }

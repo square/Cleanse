@@ -30,7 +30,7 @@ class PropertyInjectionTests: XCTestCase {
         var b: String!
         var crazyStruct: CrazyStructTime!
         
-        func injectProperties(superInjector superInjector: PropertyInjector<AClass>, b: TaggedProvider<BTag>, crazyStruct: CrazyStructTime) {
+        func injectProperties(superInjector: PropertyInjector<AClass>, b: TaggedProvider<BTag>, crazyStruct: CrazyStructTime) {
             superInjector.injectProperties(into: self)
             self.b = b.get()
             self.crazyStruct = crazyStruct
@@ -47,7 +47,7 @@ class PropertyInjectionTests: XCTestCase {
     
     
     struct PropertyInjectionModule : Module {
-        static func configure<B : Binder>(binder binder: B) {
+        static func configure(binder: UnscopedBinder) {
             binder
                 .bind()
                 .tagged(with:  BTag.self)
@@ -86,13 +86,14 @@ class PropertyInjectionTests: XCTestCase {
                 // We also can take to as (Element, arg1, ..., argN). This is convenient for helper methdos or for closures
                 .to(injector: self.injectPropertiesIntoC)
             
-            
-            binder
-                .bindPropertyInjectionOf(PropertyInjectionTests.self)
-                .to(injector: PropertyInjectionTests.injectProperties)
         }
-        
-        static func injectPropertiesIntoC(target target: CClass, superInjector: PropertyInjector<BClass>, cString: TaggedProvider<CTag>) {
+
+        static func configurePropertyInjector(binder bind: PropertyInjectionReceiptBinder<PropertyInjectionTests>) -> BindingReceipt<PropertyInjector<PropertyInjectionTests>> {
+            return bind.to(injector: PropertyInjectionTests.injectProperties)
+
+        }
+
+        static func injectPropertiesIntoC(target: CClass, superInjector: PropertyInjector<BClass>, cString: TaggedProvider<CTag>) {
             superInjector.injectProperties(into: target)
             target.a = "I overrode you"
             target.c = cString
@@ -100,7 +101,7 @@ class PropertyInjectionTests: XCTestCase {
     }
     
     func injectProperties(
-        propAInjector: PropertyInjector<AClass>,
+        _ propAInjector: PropertyInjector<AClass>,
         propBInjector: PropertyInjector<BClass>,
         propCInjector: PropertyInjector<CClass>
         ) {
@@ -116,8 +117,12 @@ class PropertyInjectionTests: XCTestCase {
     struct PropertyInjectionComponent : RootComponent {
         typealias Root = PropertyInjector<PropertyInjectionTests>
 
-        static func configure<B : Binder>(binder binder: B) {
-            binder.install(module: PropertyInjectionModule.self)
+        static func configure(binder: UnscopedBinder) {
+            binder.include(module: PropertyInjectionModule.self)
+        }
+
+        static func configureRoot(binder bind: ReceiptBinder<Root>) -> BindingReceipt<Root> {
+            return bind.propertyInjector(configuredWith: PropertyInjectionModule.configurePropertyInjector)
         }
     }
 

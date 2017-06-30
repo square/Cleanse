@@ -13,25 +13,24 @@ struct GithubMember {
     let login: String
 
     static func fromJSON(json: [String: AnyObject]) -> GithubMember {
-        return .init(
-            login: json["login"] as! String
-        )
+        let username = json["login"] as! String
+        return GithubMember(login: username)
     }
 }
 
 /// Service that lists "Member" for the current organization
 protocol GithubMembersService {
-    func list(handler: ErrorOptional<[GithubMember]> -> ())
+    func list(handler: @escaping (ErrorOptional<[GithubMember]>) -> ())
 }
 
 struct GithubMembersServiceImpl : GithubMembersService {
     let githubURL: TaggedProvider<GithubBaseURL>
     let githubOrganizationName: TaggedProvider<GithubOrganizationName>
 
-    let urlSession: NSURLSession
+    let urlSession: URLSession
 
     /// Lists members of an organization
-    func list(handler: ErrorOptional<[GithubMember]> -> ()) {
+    func list(handler: @escaping (ErrorOptional<[GithubMember]>) -> ()) {
         urlSession.jsonListTask(
             baseURL: githubURL.get(),
             pathComponents: "orgs", githubOrganizationName.get(), "public_members") { result in
@@ -39,14 +38,5 @@ struct GithubMembersServiceImpl : GithubMembersService {
                     $0.map(GithubMember.fromJSON)
                 })
         }
-    }
-}
-
-/// Hooks up GithubMembersService to its implementation
-public struct GithubMembersServiceModule : Module {
-    public static func configure<B : Binder>(binder binder: B) {
-        binder
-            .bind(GithubMembersService.self)
-            .to(factory: GithubMembersServiceImpl.init)
     }
 }

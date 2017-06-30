@@ -18,14 +18,15 @@ class MemoryManagementTests: XCTestCase {
     struct MemoryManagementTestsComponent : Cleanse.RootComponent {
         typealias Root = MemoryManagementTests.Root
         
-        static func configure<B : Binder>(binder binder: B) {
-            
-            binder.bind().to(factory: Root.init)
-            
-            binder.install(module: Module.self)
+        static func configure(binder: Binder<Singleton>) {
+            binder.include(module: Module.self)
+        }
+
+        static func configureRoot(binder bind: ReceiptBinder<Root>) -> BindingReceipt<Root> {
+            return bind.to(factory: Root.init)
         }
     }
-    
+
     struct Root {
         let single1: Single1
         let single2: Single2
@@ -53,14 +54,14 @@ class MemoryManagementTests: XCTestCase {
         let single2: Single2
         
         init(single2: Single2) {
-            self.dynamicType.counter += 1
-            self.value = self.dynamicType.counter
+            type(of: self).counter += 1
+            self.value = type(of: self).counter
             self.single2 = single2
         }
     }
     
     class Single2 {
-        private let single1: Single1
+        fileprivate let single1: Single1
         init(single1: Single1) {
             self.single1 = single1
         }
@@ -76,14 +77,14 @@ class MemoryManagementTests: XCTestCase {
     }
 
     struct Module : Cleanse.Module {
-        static func configure<B : Binder>(binder binder: B) {
-            binder.bind().asSingleton().to(factory: Single1.init)
-            binder.bind().asSingleton().to(factory: Single2.init)
-            binder.bind().asSingleton().to(factory: SingleStruct1.init)
+        static func configure(binder: Binder<Singleton>) {
+            binder.bind().sharedInScope().to(factory: Single1.init)
+            binder.bind().sharedInScope().to(factory: Single2.init)
+            binder.bind().sharedInScope().to(factory: SingleStruct1.init)
             
-            binder.bind().intoCollection().asSingleton().to { SingleCollectionElement(value: 3) }
-            binder.bind().intoCollection().asSingleton().to { SingleCollectionElement(value: 4) }
-            binder.bind().intoCollection().asSingleton().to { SingleCollectionElement(value: 5) }
+            binder.bind().intoCollection().sharedInScope().to { SingleCollectionElement(value: 3) }
+            binder.bind().intoCollection().sharedInScope().to { SingleCollectionElement(value: 4) }
+            binder.bind().intoCollection().sharedInScope().to { SingleCollectionElement(value: 5) }
         }
     }
     
@@ -186,14 +187,3 @@ class MemoryManagementTests: XCTestCase {
         XCTAssertNil(s3p, "Should be released")
     }
 }
-
-
-#if !swift(>=3.0)
-    
-    extension CollectionType {
-        func sorted(@noescape isOrderedBefore: (Self.Generator.Element, Self.Generator.Element) -> Bool) -> [Self.Generator.Element] {
-            return self.sort(isOrderedBefore)
-        }
-    }
-
-#endif

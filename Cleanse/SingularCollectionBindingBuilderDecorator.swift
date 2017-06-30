@@ -8,12 +8,12 @@
 
 import Foundation
 
-public struct SingularCollectionBindingBuilderDecorator<Wrapped: BindingBuilder
-                                                        where
-                                                        Wrapped.CollectionOrUnique == _UniqueBinding,
-                                                        Wrapped.FinalProvider: _StandardProvider,
-                                                        Wrapped.MaybeScope == _Unscoped
-                                                        > : BindingBuilderDecorator {
+public struct SingularCollectionBindingBuilderDecorator<Wrapped: BindingBuilder> : BindingBuilderDecorator
+    where
+    Wrapped.CollectionOrUnique == _UniqueBinding,
+    Wrapped.FinalProvider: _StandardProvider,
+    Wrapped.MaybeScope == Unscoped
+{
     public typealias FinalProvider = Provider<[Wrapped.FinalProvider.Element]>
     public typealias CollectionOrUnique = _CollectionBinding
     
@@ -23,19 +23,18 @@ public struct SingularCollectionBindingBuilderDecorator<Wrapped: BindingBuilder
         self.wrapped = wrapped
     }
     
-    public static func mapElement(input input: Wrapped.Input) -> FinalProvider.Element {
+    public static func mapElement(input: Wrapped.Input) -> FinalProvider.Element {
         return [Wrapped.mapElement(input: input)]
     }
     
-    public static var collectionMergeFunc: Optional<[FinalProvider.Element] -> FinalProvider.Element> {
-        return { Array($0.flatten()) }
+    public static var collectionMergeFunc: Optional<([FinalProvider.Element]) -> FinalProvider.Element> {
+        return { Array($0.joined()) }
     }
 }
 
 
-public extension BindingBuilder where CollectionOrUnique == _UniqueBinding, FinalProvider: _StandardProvider, MaybeScope == _Unscoped {
+public extension BindingBuilder where CollectionOrUnique == _UniqueBinding, FinalProvider: _StandardProvider, MaybeScope == Unscoped {
     /// If makes it bind `Element` to `[Element]`
-    @warn_unused_result
     public func intoCollection() -> SingularCollectionBindingBuilderDecorator<Self> {
         return with()
     }

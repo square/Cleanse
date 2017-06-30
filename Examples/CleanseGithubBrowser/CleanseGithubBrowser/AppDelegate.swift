@@ -9,11 +9,15 @@
 import UIKit
 import Cleanse
 
+
+typealias ReleaseAppComponent = AppComponent<RealeaseGithubServicesModule>
+typealias FakeAppComponent = AppComponent<FakeGithubServicesModule>
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         resetApplication()
         return true
     }
@@ -42,15 +46,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     // This doesn't use DI since we need to know whether or not to use fake mode outside the context of the the component
-    private var useFakeMode: Bool {
-        return NSProcessInfo.processInfo().environment["USE_FAKES"] == "YES"
+    fileprivate var useFakeMode: Bool {
+        return ProcessInfo.processInfo.environment["USE_FAKES"] == "YES"
     }
 }
 
 extension AppDelegate {
     /// Since we don't control creation of our AppDelegate, we have to use "property injection" to populate 
     /// our required properties
-    func injectProperties(window: UIWindow) {
+    func injectProperties(_ window: UIWindow) {
         self.window = window
     }
 }

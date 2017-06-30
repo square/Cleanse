@@ -11,11 +11,11 @@ import Foundation
 private var weakProviderAssociatedObjectKey = 0
 
 class ScopedProvider {
-    private let rawProvider : AnyProvider
+    fileprivate let rawProvider : AnyProvider
 
-    private let lock = NSLock()
+    fileprivate let lock = NSLock()
 
-    private var cachedValue: Any?
+    fileprivate var cachedValue: Any?
 
     init(rawProvider: AnyProvider) {
         self.rawProvider = rawProvider
@@ -24,10 +24,10 @@ class ScopedProvider {
 
     /// This retains self
     var wrappedProvider: AnyProvider {
-        return rawProvider.dynamicType.makeNew(getter: self.provide)
+        return type(of: rawProvider).makeNew(getter: self.provide)
     }
 
-    private func provide() -> Any {
+    fileprivate func provide() -> Any {
         // If we already have it we can avoid locking
         if let cachedValue = cachedValue {
             return cachedValue
