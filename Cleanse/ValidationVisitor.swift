@@ -134,7 +134,7 @@ private class ComponentInfo {
         }
 
         guard !providersInStack.contains(providerInfo) else {
-            let providerStack = providerStack.suffix(from: providerStack.index { $1 == providerInfo }!) + [(providerKey, providerInfo)]
+            let providerStack = providerStack.suffix(from: providerStack.index { $0.1 == providerInfo }!) + [(providerKey, providerInfo)]
 
             var debugInfos = [ProviderRequestDebugInfo]()
 
@@ -341,7 +341,7 @@ final class ValidationVisitor : ComponentVisitor {
         }
 
         errors.sort {
-            return $0.0.description < $0.1.description
+            return $0.description < $1.description
         }
 
         switch errors.count {

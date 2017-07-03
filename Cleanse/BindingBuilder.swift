@@ -73,7 +73,7 @@ extension Provider : _StandardProvider, _AnyStandardProvider {
 extension BindingBuilder where FinalProvider: _StandardProvider, Self.MaybeScope == Unscoped {
     /// Qualifies the provider being registered with a tag.
 
-    public func tagged<Tag: Cleanse.Tag>(with tag: Tag.Type) -> TaggedBindingBuilderDecorator<Self, Tag> where Tag.Element == FinalProvider.Element {
+    public func tagged<Tag>(with tag: Tag.Type) -> TaggedBindingBuilderDecorator<Self, Tag> {
         return self.with()
     }
 }

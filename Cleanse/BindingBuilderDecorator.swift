@@ -17,12 +17,11 @@ public protocol BindingBuilderDecorator : BindingBuilder {
     
     /// Support for collection binding. Users probably don't have to worry about this. Also they have default implementations
     /// TODO: Move elsewhere perhaps
-    associatedtype MaybeScope : _ScopeBase = Wrapped.MaybeScope
+    associatedtype MaybeScope = Wrapped.MaybeScope
     associatedtype Input = Wrapped.Input
-    associatedtype Binder: Cleanse.BinderBase = Wrapped.Binder
-    associatedtype FinalProvider : ProviderProtocol = Wrapped.FinalProvider
-    
-    associatedtype CollectionOrUnique: _CollectionOrUniqueBindingBase = Wrapped.CollectionOrUnique
+    associatedtype Binder = Wrapped.Binder
+    associatedtype FinalProvider = Wrapped.FinalProvider
+    associatedtype CollectionOrUnique = Wrapped.CollectionOrUnique
     
     static var collectionMergeFunc: Optional<([FinalProvider.Element]) -> FinalProvider.Element> { get }
 }
