@@ -12,6 +12,8 @@ import Foundation
 public struct ScopedBindingDecorator<Wrapped: BindingBuilder, S: _ScopeBase> : BindingBuilderDecorator {
     public typealias MaybeScope = S
 
+    public typealias FinalProvider = Wrapped.FinalProvider
+
     public let wrapped: Wrapped
     
     public init(wrapped: Wrapped) {
