@@ -14,142 +14,171 @@ import XCTest
 @testable import Cleanse
 
 
-var counter = 0
+private var counter = 0
 
 /// Useful for singletons
-func nextCount() -> Int {
+private func nextCount() -> Int {
     counter += 1
     return counter
 }
 
+
 class ComponentTests: XCTestCase {
-    struct CountTag : Tag {
-        typealias Element = Int
-    }
-    
-    struct Root {
-        let hamburger: Hamburger
-        let hamburgerProvider: () -> Hamburger
-        let spicyHamburger: TaggedProvider<SpicyTag>
-        let hotDog: HotDog
-        let hotDogProvider: () -> HotDog
-    }
-    
-    struct OuterComponent : Cleanse.Component {
-        typealias Root = ComponentTests.Root
-        
-        func configure<B : Binder>(binder binder: B) {
-            binder.bind().to(factory: Root.init)
 
-            binder
-                .bindComponent(HamburgerComponent.self)  
-                .to(factory: HamburgerComponent.init)
-            
+    func testSubcomponents() {
+        let app = try! ComponentFactory.of(AppComponent.self).build()
 
-            // Bind a special variant of this that has the default topping of HotSauce
-            binder
-                .bindComponent()
-                .tagged(with:  SpicyTag.self)
-                .to { (countProvider: TaggedProvider<CountTag>, countProvider2: TaggedProvider<CountTag>) in
-                    HamburgerComponent(defaultToppingProvider: .init(value: .HotSauce), countProvider: countProvider)
-                }
-            
-            binder
-                .bindComponent()
-                .asSingleton()
-                .to(factory: HotDogComponent.init)
+        let user1root1 = app.loggedInComponentFactory.build("user-1")
+        let user1root2 = app.loggedInComponentFactory.build("user-1")
+        let user2root1 = app.loggedInComponentFactory.build("user-2")
 
-            binder
-                .bind()
-                .to(value: Topping.Watermellon)
-            
-            binder
-                .bind(Int.self)
-                .tagged(with:  CountTag.self)
-                .to(factory: nextCount)
+        XCTAssertEqual(user1root1.userProvider.get().name, "User One")
+        XCTAssertEqual(user2root1.userProvider.get().name, "User Two")
+        XCTAssertTrue(user1root1.userProvider.get() === user1root1.userProvider.get(), "The user should be scoped and always return the same value")
+        XCTAssertFalse(user1root1.userProvider.get() === user1root2.userProvider.get(), "Different instances of the same component should return different objects")
+    }
 
-            
-        }
+    func testSubcomponentsWithMultibindings() {
+        let app = try! ComponentFactory.of(AppComponent.self).build()
+
+        XCTAssertEqual(
+            app.allLoggedOutStrings.get().sorted(),
+            ["A", "B", "C"]
+        )
+
+        XCTAssertEqual(
+            app.loggedInComponentFactory.build("user-1").allLoggedInStrings.get().sorted(),
+            ["A", "B", "C", "D", "E", "F"],
+            "Subcomponents should be additive to collection bindings"
+        )
     }
     
-    enum Topping {
-        case Ham
-        case Watermellon
-        case HotSauce
-    }
-    
-    
-    struct SpicyTag : Tag {
-        typealias Element = Hamburger
-    }
-    
-    struct Hamburger {
-        let topping: Topping
-        let count: Int
-        
-        init(topping: Topping, count: TaggedProvider<CountTag>) {
-            self.topping = topping
-            self.count = count.get()
-        }
-    }
-    
-    
-    struct HamburgerComponent : Cleanse.Component {
-        typealias Root = Hamburger
-        
-        private let defaultToppingProvider: Provider<Topping>
-        private let countProvider: TaggedProvider<CountTag>
-        
-        func configure<B : Binder>(binder binder: B) {
-            binder
-                .bind(Int.self)
-                .tagged(with:  CountTag.self)
-                .to(provider: countProvider)
-            
-            binder
-                .bind()
-                .to(provider: defaultToppingProvider)
-            
-            let factory = Hamburger.init
-            binder.bind(Hamburger.self).to(factory: Hamburger.init)
-        }
-    }
-    
-    struct HotDog {
-        let count: Int
-        init(count: TaggedProvider<CountTag>) {
-            self.count = count.get()
+    private class App {
+        let loggedInComponentFactory: ComponentFactory<LoggedInComponent>
+
+        let allLoggedOutStrings: Provider<[String]>
+
+        fileprivate init(
+            loggedInComponentFactory: Provider<ComponentFactory<LoggedInComponent>>,
+            allLoggedOutStrings: Provider<[String]>) {
+            self.loggedInComponentFactory = loggedInComponentFactory.get()
+            self.allLoggedOutStrings = allLoggedOutStrings
         }
 
-    }
-    
-    struct HotDogComponent : Cleanse.Component {
-        typealias Root = HotDog
-        
-        private let countProvider: TaggedProvider<CountTag>
-        
-        func configure<B : Binder>(binder binder: B) {
-            
-            binder
-                .bind(Int.self)
-                .tagged(with:  CountTag.self)
-                .to(provider: countProvider)
-            
-            binder.bind().to(factory: HotDog.init)
+        func nameOfUser(_ userID: String) -> String? {
+            return loggedInComponentFactory.build(userID).userProvider.get().name
         }
     }
 
-    func testComponents() {
-        let root = try! OuterComponent().build()
-        
-        XCTAssertEqual(root.hamburger.topping, Topping.Watermellon)
-        XCTAssertEqual(root.hamburgerProvider().topping, Topping.Watermellon)
-        
-        XCTAssertEqual(root.spicyHamburger.get().topping, Topping.HotSauce)
+    private struct AppComponent : RootComponent {
+        fileprivate typealias Root = App
 
-        XCTAssertNotEqual(root.hamburgerProvider().count, root.hamburger.count)
-        
-        XCTAssertEqual(root.hotDogProvider().count, root.hotDog.count)
+        static func configure(binder: Binder<Singleton>) {
+            binder.include(module: UserServiceModule.self)
+
+            binder.install(dependency: LoggedInComponent.self)
+
+            binder
+                .bind(String.self)
+                .intoCollection()
+                .to(value: "A")
+
+            binder
+                .bind(String.self)
+                .intoCollection()
+                .to(value: "B")
+
+            binder
+                .bind(String.self)
+                .intoCollection()
+                .to(value: "C")
+        }
+
+        static func configureRoot(binder bind: ReceiptBinder<Root>) -> BindingReceipt<Root> {
+            return bind.to(factory: Root.init)
+        }
+    }
+
+    private struct UserScoped : Scope {
+    }
+
+    private struct LoggedInRoot {
+        var userProvider: Provider<User>
+        var allLoggedInStrings: Provider<[String]>
+    }
+
+    private struct LoggedInComponent : Component {
+        typealias Root = LoggedInRoot
+        typealias Seed = TaggedProvider<UserID>  // Our seed is the UserID
+
+        static func configure(binder: Binder<UserScoped>) {
+            binder.bind().sharedInScope().to(factory: User.init)
+
+            binder
+                .bind(String.self)
+                .intoCollection()
+                .to(value: "D")
+
+            binder
+                .bind(String.self)
+                .intoCollection()
+                .to(value: "E")
+
+            binder
+                .bind(String.self)
+                .intoCollection()
+                .to(value: "F")
+        }
+
+        static func configureRoot(binder bind: ReceiptBinder<Root>) -> BindingReceipt<Root> {
+            return bind.to(factory: Root.init)
+        }
+    }
+
+    /// This represents the UserID of a
+    private struct UserID : Tag {
+        typealias Element = String
+    }
+
+    private class User {
+
+        let id: String
+
+        let userService: UserService
+
+        init(id: TaggedProvider<UserID>, userService: UserService) {
+            self.id = id.get()
+            self.userService = userService
+        }
+
+        var name: String? {
+            return userService.getNameForUser(userID: id)
+        }
+    }
+
+    private struct UserServiceModule : Module {
+        static func configure(binder: Binder<Singleton>) {
+            binder
+                .bind(UserService.self)
+                .sharedInScope()
+                .to(factory: UserServiceImpl.init)
+        }
+    }
+}
+
+private protocol UserService {
+    func getNameForUser(userID: String) -> String?
+}
+
+private struct UserServiceImpl : UserService {
+    typealias Scope = Singleton
+
+    func getNameForUser(userID: String) -> String? {
+        switch userID {
+        case "user-1": return "User One"
+        case "user-2": return "User Two"
+        default: return nil
+        }
     }
 }
 

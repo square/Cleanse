@@ -13,7 +13,7 @@ import Cleanse
 
 /// A module that configures a tab page on the root view controller as well as on the settings page
 struct RepositoriesModule : Cleanse.Module {
-    func configure<B : Binder>(binder binder: B) {
+    static func configure(binder: SingletonBinder) {
         // Make RepositoriesViewController available to be injected
         binder
             .bind()
@@ -37,7 +37,7 @@ struct RepositoriesModule : Cleanse.Module {
         // Make the RepositoriesPageSettings available as a singleton. This is a shared object
         binder
             .bind()
-            .asSingleton()
+            .sharedInScope()
             .to(factory: RepositoriesPageSettings.init)
 
         // Make the ShowWatcherCountCell available for injection
@@ -82,23 +82,20 @@ class RepositoriesViewController : TableViewController {
 
         self.tabBarItem.image = UIImage(
             named: "TabBarIcons/Repositories",
-            inBundle: NSBundle(forClass: self.dynamicType),
-            compatibleWithTraitCollection: nil
+            in: Bundle(for: type(of: self)),
+            compatibleWith: nil
         )
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return repositories.count
     }
 
-    override func tableView(
-        tableView: UITableView,
-        cellForRowAtIndexPath indexPath: NSIndexPath
-    ) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let identifier = settings.showWatcherCount ? "Cell1" : "Cell2"
-        let style: UITableViewCellStyle = settings.showWatcherCount ? .Subtitle : .Default
+        let style: UITableViewCellStyle = settings.showWatcherCount ? .subtitle : .default
 
-        let cell = tableView.dequeueReusableCellWithIdentifier(identifier)
+        let cell = tableView.dequeueReusableCell(withIdentifier: identifier)
             ?? UITableViewCell(style: style, reuseIdentifier: identifier)
 
         let repository = repositories[indexPath.row]
@@ -109,13 +106,13 @@ class RepositoriesViewController : TableViewController {
             cell.detailTextLabel?.text = "\(repository.watchersCount) watchers"
         }
 
-        cell.selectionStyle = .None
+        cell.selectionStyle = .none
         
         return cell
     }
 
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         refresh()
     }
@@ -145,23 +142,19 @@ class RepositoriesPageSettings {
 }
 
 class RepositoriesSettingsSplitViewController : TableViewController {
-
     private let cells: [UITableViewCell]
 
     init(showWatcherCount: ShowWatcherCountCell) {
-
         self.cells = [showWatcherCount]
-
         super.init()
-
         self.title = "Repositories Settings"
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return cells.count
     }
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         return cells[indexPath.row]
     }
 }
@@ -172,21 +165,19 @@ class ShowWatcherCountCell : UITableViewCell {
 
     init(settings: RepositoriesPageSettings) {
         self.settings = settings
+        super.init(style: .default, reuseIdentifier: nil)
 
-        super.init(style: .Default, reuseIdentifier: nil)
-
-        `switch`.on = settings.showWatcherCount
-
-        `switch`.addTarget(self, action: #selector(valueChanged), forControlEvents: .TouchUpInside)
+        `switch`.isOn = settings.showWatcherCount
+        `switch`.addTarget(self, action: #selector(valueChanged), for: .touchUpInside)
 
         textLabel?.text = "Show Watcher Count"
 
         accessoryView = `switch`
-        selectionStyle = .None
+        selectionStyle = .none
     }
 
     @objc private func valueChanged() {
-        self.settings.showWatcherCount = `switch`.on
+        self.settings.showWatcherCount = `switch`.isOn
     }
 
     @available(*, unavailable)

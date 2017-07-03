@@ -9,7 +9,7 @@
 import Foundation
 
 /// Internal type used for binding. We decorate a provider with this to indicate if we're scoped or not
-public struct TaggedBindingBuilderDecorator<Wrapped: BindingBuilder, Tag: Cleanse.Tag where Tag.Element == Wrapped.FinalProvider.Element> : BindingBuilderDecorator {
+public struct TaggedBindingBuilderDecorator<Wrapped: BindingBuilder, Tag: Cleanse.Tag> : BindingBuilderDecorator where Tag.Element == Wrapped.FinalProvider.Element {
     public typealias FinalProvider = TaggedProvider<Tag>
     
     public let wrapped: Wrapped

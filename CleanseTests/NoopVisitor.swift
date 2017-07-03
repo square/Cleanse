@@ -12,8 +12,6 @@ import XCTest
 
 @testable import Cleanse
 
-
-
-final class NoopVisitor : ComponentVisitor {
+final class NoopVisitor : SimpleComponentVisitor {
     var visitorState = VisitorState<NoopVisitor>()
 }

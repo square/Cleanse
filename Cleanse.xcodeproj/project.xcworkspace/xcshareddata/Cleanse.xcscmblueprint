@@ -4,11 +4,13 @@
 
   },
   "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "7F4664FA65AADBC384859AD71F1C93E5320699FF" : 9223372036854775807,
     "FA78EFA588CAAA527A39EFF7FEB4200B880E2491" : 0,
     "C29DD0E89C17000393FD71820E9E7C86451DD28A" : 0
   },
   "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "85D0171F-7EAD-4682-B2C2-5BBDC5C235DD",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "7F4664FA65AADBC384859AD71F1C93E5320699FF" : "..\/..",
     "FA78EFA588CAAA527A39EFF7FEB4200B880E2491" : "Cleanse\/",
     "C29DD0E89C17000393FD71820E9E7C86451DD28A" : ".."
   },
@@ -16,6 +18,11 @@
   "DVTSourceControlWorkspaceBlueprintVersion" : 204,
   "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "Cleanse.xcodeproj",
   "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "ssh:\/\/git.corp.squareup.com\/ml\/snapshottestbinaries.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "7F4664FA65AADBC384859AD71F1C93E5320699FF"
+    },
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "ssh:\/\/git.corp.squareup.com\/ios\/appointments.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",

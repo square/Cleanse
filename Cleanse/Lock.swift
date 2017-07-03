@@ -10,7 +10,7 @@ import Foundation
 
 
 extension NSLock {
-    func with<Element>(@noescape closure: () throws -> Element) rethrows -> Element {
+    func with<Element>(_ closure: () throws -> Element) rethrows -> Element {
         lock()
         defer { unlock() }
         

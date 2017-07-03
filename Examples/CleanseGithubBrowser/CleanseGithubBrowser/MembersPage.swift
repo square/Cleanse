@@ -5,7 +5,7 @@ import Cleanse
 
 /// A module that configures a tab page on the root view controller as well as on the settings page
 struct MembersModule : Cleanse.Module {
-    func configure<B : Binder>(binder binder: B) {
+    static func configure(binder: SingletonBinder) {
         // Make MembersSettingsSplitViewController available for injection
         binder
             .bind()
@@ -20,7 +20,7 @@ struct MembersModule : Cleanse.Module {
         // The settings for our MembersPage is a shared object that we mutate. Make it available as a singleton
         binder
             .bind()
-            .asSingleton()
+            .sharedInScope()
             .to(factory: MembersPageSettings.init)
 
         // Make the "UseGreenCell" table view cell available
@@ -53,9 +53,7 @@ struct MembersModule : Cleanse.Module {
 
 class MembersViewController : TableViewController {
     let memberService: GithubMembersService
-
     private var members = [GithubMember]()
-
     private var settings: MembersPageSettings
 
     init(
@@ -73,31 +71,30 @@ class MembersViewController : TableViewController {
 
         self.tabBarItem.image = UIImage(
             named: "TabBarIcons/Members",
-            inBundle: NSBundle(forClass: self.dynamicType),
-            compatibleWithTraitCollection: nil
+            in: Bundle(for: type(of: self)),
+            compatibleWith
+            : nil
         )
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return members.count
     }
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell") ?? UITableViewCell(style: .Default, reuseIdentifier: "Cell")
-
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let member = members[indexPath.row]
 
-        cell.textLabel?.text = member.login
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") ?? UITableViewCell(style: .default, reuseIdentifier: "Cell")
+        cell.selectionStyle = .none
 
-        let textColor = settings.useGreen ? UIColor.greenColor() : .blackColor()
+        let textColor = settings.useGreen ? UIColor.green : UIColor.black
+        cell.textLabel?.text = member.login
         cell.textLabel?.textColor = textColor
 
-        cell.selectionStyle = .None
-        
         return cell
     }
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         refresh()
     }
@@ -130,19 +127,16 @@ class MembersSettingsSplitViewController : TableViewController {
     private let cells: [UITableViewCell]
 
     init(useGreenCell: UseGreenCell) {
-
         self.cells = [useGreenCell]
-
         super.init()
-
         self.title = "Members Settings"
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return cells.count
     }
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         return cells[indexPath.row]
     }
 }
@@ -155,15 +149,14 @@ class UseGreenCell : UITableViewCell {
     init(settings: MembersPageSettings) {
         self.settings = settings
 
-        super.init(style: .Default, reuseIdentifier: nil)
+        super.init(style: .default, reuseIdentifier: nil)
 
-        `switch`.on = settings.useGreen
-
-        `switch`.addTarget(self, action: #selector(valueChanged), forControlEvents: .TouchUpInside)
+        `switch`.isOn = settings.useGreen
+        `switch`.addTarget(self, action: #selector(valueChanged), for: .touchUpInside)
 
         textLabel?.text = "Use Green Cell Text"
         accessoryView = `switch`
-        selectionStyle = .None
+        selectionStyle = .none
     }
 
     @available(*, unavailable)
@@ -172,6 +165,6 @@ class UseGreenCell : UITableViewCell {
     }
 
     @objc private func valueChanged() {
-        self.settings.useGreen = `switch`.on
+        self.settings.useGreen = `switch`.isOn
     }
 }

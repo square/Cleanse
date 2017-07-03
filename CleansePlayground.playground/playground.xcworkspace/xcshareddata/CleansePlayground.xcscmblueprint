@@ -1,15 +1,15 @@
 {
-  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "4D070F8988EF4BE0F7A7140CB1FE13353E18177F",
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "FA78EFA588CAAA527A39EFF7FEB4200B880E2491",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
 
   },
   "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
-    "4D070F8988EF4BE0F7A7140CB1FE13353E18177F" : 0,
+    "FA78EFA588CAAA527A39EFF7FEB4200B880E2491" : 9223372036854775807,
     "C29DD0E89C17000393FD71820E9E7C86451DD28A" : 0
   },
   "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "C9383146-7609-43F6-A193-8ABE1B105154",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
-    "4D070F8988EF4BE0F7A7140CB1FE13353E18177F" : "Cleanse\/",
+    "FA78EFA588CAAA527A39EFF7FEB4200B880E2491" : "Cleanse\/",
     "C29DD0E89C17000393FD71820E9E7C86451DD28A" : ".."
   },
   "DVTSourceControlWorkspaceBlueprintNameKey" : "CleansePlayground",
@@ -17,14 +17,14 @@
   "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "CleansePlayground.playground",
   "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
     {
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "ssh:\/\/git.corp.squareup.com\/ml\/cleanse.git",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "4D070F8988EF4BE0F7A7140CB1FE13353E18177F"
-    },
-    {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "ssh:\/\/git.corp.squareup.com\/ios\/appointments.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "C29DD0E89C17000393FD71820E9E7C86451DD28A"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "ssh:\/\/git.corp.squareup.com\/ml\/cleanse.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "FA78EFA588CAAA527A39EFF7FEB4200B880E2491"
     }
   ]
 }

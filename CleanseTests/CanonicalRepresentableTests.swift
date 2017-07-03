@@ -8,8 +8,6 @@
 
 import Foundation
 
-
-
 import XCTest
 
 @testable import Cleanse
@@ -30,19 +28,21 @@ class CanonicalRepresentableTests: XCTestCase {
         #endif
     }
         
-    struct TestComponent : Cleanse.Component {
+    struct TestComponent : Cleanse.RootComponent {
         typealias Root = TestRoot
         
-        func configure<B : Binder>(binder binder: B) {
-            binder.bind().to(factory: TestRoot.init)
-            
+        static func configure(binder: UnscopedBinder) {
             binder.bind(String.self).to(value: "Hey!")
         }
+
+        static func configureRoot(binder bind: ReceiptBinder<Root>) -> BindingReceipt<Root> {
+            return bind.to(factory: Root.init)
+        }
     }
-    
+
     func testCanonicalRepresentable() {
-        let root = try! TestComponent().build()
-        
+        let root = try! ComponentFactory.of(TestComponent.self).build()
+
         XCTAssertEqual(root.normal, "Hey!")
         XCTAssertEqual(root.implicitelyUnboxedOptional, "Hey!")
         XCTAssertEqual(root.optional, "Hey!")
@@ -58,7 +58,7 @@ class CanonicalRepresentableTests: XCTestCase {
 
     // verifies #26
     func testUnboxProtocol() {
-        let bar = try! BarComponent().build()
+        let bar = try! ComponentFactory.of(BarComponent.self).build()
         XCTAssertNotNil(bar.foo)
     }
 
@@ -73,14 +73,14 @@ class CanonicalRepresentableTests: XCTestCase {
         }
     }
 
-    struct BarComponent : Cleanse.Component {
+    struct BarComponent : Cleanse.RootComponent {
         typealias Root = Bar
 
-        func configure<B : Binder>(binder binder: B) {
-            binder
-                .bind(Bar.self)
-                .to(factory: Bar.init)
+        static func configureRoot(binder bind: ReceiptBinder<CanonicalRepresentableTests.Bar>) -> BindingReceipt<CanonicalRepresentableTests.Bar> {
+            return bind.to(factory: Bar.init)
+        }
 
+        static func configure(binder: Binder<Unscoped>) {
             binder
                 .bind(FooProto.self)
                 .to(factory: Foo.init)

@@ -11,6 +11,9 @@
 
 import Cleanse
 
+struct Singleton : Scope {
+}
+
 protocol Pump {
     func pump()
 }
@@ -37,8 +40,10 @@ class Thermosiphon : Pump {
 
 //: Module that configures `Thermosiphon` to be our `Pump`
 struct PumpModule : Module {
-    func configure<B : Binder>(binder binder: B) {
-        binder.bind(Pump.self).to(factory: Thermosiphon.init)
+    static func configure(binder: UnscopedBinder) {
+        binder
+            .bind(Pump.self)
+            .to(factory: Thermosiphon.init)
     }
 }
 
@@ -61,17 +66,19 @@ class ElectricHeater : Heater {
 
 //: Module that configures `ElectricHeater` to be our `Heater`. It also has a dependency on `PumpModule`.
 struct DripCoffeeModule : Module {
-    func configure<B : Binder>(binder binder: B) {
-        binder.install(module: PumpModule())
-            
-        binder.bind(Heater.self).asSingleton().to(factory: ElectricHeater.init)
+    static func configure(binder: Binder<Singleton>) {
+        binder.include(module: PumpModule.self)
+
+        binder
+            .bind(Heater.self)
+            .sharedInScope()
+            .to(factory: ElectricHeater.init)
     }
 }
 
-
 //: Our root object. It requires both `Heater` and `Pump` to be configured.
 class CoffeeMaker {
-    let heater: Provider<Heater>  // Create a possibly costly heater only when we use it.
+    let heater: Provider<Heater>  // Create a possibly costly heater only when we need it.
     let pump: Pump
     
     init(heater: Provider<Heater>, pump: Pump) {
@@ -87,28 +94,21 @@ class CoffeeMaker {
     }
 }
 
-//: A component defines what our root of our object graph is and the modules it depends on to construct the root object
-
-struct CoffeeMakerComponent : Component {
+//: Now let's create the Component. A component defines what the root of our object graph is and the modules it depends on to construct that root object.
+struct CoffeeMakerComponent : RootComponent {
     typealias Root = CoffeeMaker
 
-    func configure<B : Binder>(binder binder: B) {
-        binder.install(module: DripCoffeeModule())
+    static func configureRoot(binder bind: ReceiptBinder<CoffeeMaker>) -> BindingReceipt<CoffeeMaker> {
+        return bind.to(factory: CoffeeMaker.init)
+    }
 
-        
-        // Bind our root object
-        binder.bind().to(factory: CoffeeMaker.init)
+    static func configure(binder: Binder<Singleton>) {
+        binder.include(module: DripCoffeeModule.self)
     }
 }
 
-//: One calls the `build()` method on an instance of a component. This method returns the Root object if successful
-
-let coffeeMaker = try! CoffeeMakerComponent().build()
+//: Create a ComponentFactory from the Component you'd like to use. Then call the `build()` method on that instance, which returns the Component's `Root`.
+let coffeeMaker = try! ComponentFactory.of(CoffeeMakerComponent.self).build()
 
 //: Now that we have our coffee maker, let's brew a cup of Joe!
-
 coffeeMaker.brew()
-
-
-
-

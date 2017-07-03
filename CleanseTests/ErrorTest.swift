@@ -13,10 +13,19 @@ import XCTest
 
 @testable import Cleanse
 
-
-
 class ErrorTests: XCTestCase {
-    
+
+    struct PropertyInjectionWithMissingDependenciesComponent : RootComponent {
+        typealias Root = PropertyInjector<ErrorTests>
+
+        static func configure(binder: UnscopedBinder) {
+            binder.include(module: ModuleWithMissingDependencies.self)
+        }
+
+        static func configureRoot(binder bind: ReceiptBinder<Root>) -> BindingReceipt<Root> {
+            return bind.propertyInjector(configuredWith: ModuleWithMissingDependencies.configureInjector)
+        }
+    }
     
     var structWithDeps: StructWithDependencies!
     
@@ -36,7 +45,7 @@ Missing provider of type TaggedProvider<GTag>
          
 */
         do {
-            try ModuleWithMissingDependencies().buildAsComponentAndInjectPropertiesInto(targetInstance: self)
+            _ = try ComponentFactory.of(PropertyInjectionWithMissingDependenciesComponent.self)
             
             XCTFail("Should not succeed")
         } catch let e as MultiError {
@@ -45,7 +54,7 @@ Missing provider of type TaggedProvider<GTag>
             Assert(message, contains: "*** TaggedProvider<FTag> *** binding missing")
             Assert(message, contains: "*** TaggedProvider<GTag> *** binding missing")
             Assert(message, contains: "*** CheeseBannana *** binding missing")
-            Assert(message, contains: "required by Provider<StructWithDependencies> at ")
+            Assert(message, contains: "required by StructWithDependencies at ")
             Assert(message, contains: "ErrorTest.swift:")
         } catch let e {
             XCTFail("Unexpected Error \(e)")
@@ -85,32 +94,21 @@ Missing provider of type TaggedProvider<GTag>
     }
     
     struct ModuleWithMissingDependencies : Module {
-        func configure<B : Binder>(binder binder: B) {
+        static func configure(binder: UnscopedBinder) {
             binder.bind().to(factory: StructWithDependencies.init)
             binder.bind().to(factory: StructWithDependencies2.init)
             
             binder.bind().tagged(with:  ATag.self).to(value: "AAA")
             binder.bind().tagged(with:  BTag.self).to(value: "BBB")
             binder.bind().tagged(with:  CTag.self).to(value: "CCC")
-            
-            binder
-                .bindPropertyInjectionOf(ErrorTests.self)
-                .to { (target: ErrorTests, arg1: StructWithDependencies) in
+        }
+
+        static func configureInjector(binder bind: PropertyInjectionReceiptBinder<ErrorTests>) -> BindingReceipt<PropertyInjector<ErrorTests>> {
+            return bind.to { (target: ErrorTests, arg1: StructWithDependencies) in
                     target.structWithDeps = arg1
-                }
+            }
         }
     }
     
     // TODO: once cycle validation is added, add support for that
 }
-
-#if !swift(>=3)
-    
-    extension String {
-        @warn_unused_result
-        func contains(other: String) -> Bool {
-            return self.containsString(other)
-        }
-    }
-    
-#endif

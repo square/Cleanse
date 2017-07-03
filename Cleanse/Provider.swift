@@ -8,14 +8,6 @@
 
 import Foundation
 
-
-
-public protocol ProviderConvertible {
-    associatedtype Element
-    
-    func asProvider() -> Provider<Element>
-}
-
 /**
  Protocol for providers. The canonical implementation is `Provider`, but `TaggedProvider` exists as well.
  */
@@ -23,9 +15,9 @@ public protocol ProviderProtocol {
     /// Element type of the provider. Its what get returns
     associatedtype Element
     
-    init<P: ProviderProtocol where P.Element == Element>(other: P)
+    init<P: ProviderProtocol>(other: P) where P.Element == Element
     init(value: Element)
-    init(getter: () -> Element)
+    init(getter: @escaping (Void) -> Element)
 
     /// - returns: provides an instance of `Element`
     func get() -> Element
@@ -37,13 +29,13 @@ public extension ProviderProtocol {
         self.init(getter: { value })
     }
 
-    public init<P: ProviderProtocol where P.Element == Element>(other: P) {
+    public init<P: ProviderProtocol>(other: P) where P.Element == Element {
         self.init(getter: other.get)
     }
 }
 
 
-protocol AnyProvider : AnyProxyFactoryInitializable {
+protocol AnyProvider {
     static var providesType: Any.Type { get }
     var instanceProvidesType: Any.Type { get }
     
@@ -52,7 +44,7 @@ protocol AnyProvider : AnyProxyFactoryInitializable {
     /// Of type Provider<() -> Element>
     var anyGetterProvider: AnyProvider? { get }
     
-    static func makeNew(getter getter: () -> Any) -> AnyProvider
+    static func makeNew(getter: @escaping (Void) -> Any) -> AnyProvider
 
     func asCheckedProvider<Element>(_ type: Element.Type) -> Provider<Element>
     
@@ -60,9 +52,8 @@ protocol AnyProvider : AnyProxyFactoryInitializable {
     /// If we're Provider<Provider<Element>> flatten to just be Provider<Element>.
     func flatten<Element>(_ type: Element.Type) -> Provider<Element>
     
-    
-//    /// For collection support.
-//    static func mergeAny(providerResults: [AnyProvider]) -> AnyProvider
+
+    static var anyProviderToClosureType: AnyProvider.Type { get }
 }
 
 extension AnyProvider {
@@ -76,7 +67,7 @@ extension AnyProvider {
 
 extension AnyProvider {
     /// Applies a transform to Element and returns a typed provider
-    func map<NewE>(transform transform: Any -> NewE) -> Provider<NewE> {
+    func map<NewE>(transform: @escaping (Any) -> NewE) -> Provider<NewE> {
         return Provider { transform(self.getAny()) }
     }
 }
@@ -84,7 +75,7 @@ extension AnyProvider {
 
 extension ProviderProtocol {
     /// Applies a transform to Element and returns the resulting provider
-    public func map<NewE>(transform transform: Element -> NewE) -> Provider<NewE> {
+    public func map<NewE>(transform: @escaping (Element) -> NewE) -> Provider<NewE> {
         return Provider {
             let originalValue = self.get()
             return transform(originalValue)
@@ -100,11 +91,11 @@ public struct Provider<Element> : ProviderProtocol {
     
     typealias ClosureType = () -> Element
     
-    public init(getter: () -> Element) {
+    public init(getter: @escaping () -> Element) {
         self.getter = getter
     }
 
-    public init<P : ProviderProtocol where P.Element == Element>(other: P) {
+    public init<P : ProviderProtocol>(other: P) where P.Element == Element {
         self.getter = other.get
     }
 
@@ -114,7 +105,7 @@ public struct Provider<Element> : ProviderProtocol {
 }
 
 extension Provider : AnyProvider {
-    static func makeNew(getter getter: () -> Any) -> AnyProvider {
+    static func makeNew(getter: @escaping () -> Any) -> AnyProvider {
         return Provider(getter: { getter() as! Element })
     }
     
@@ -141,28 +132,9 @@ extension ProviderProtocol where Self: AnyProvider {
         precondition(Element.self is AnyProvider.Type, "Can only call flatten on Provider<Provider<Element>>")
         precondition((Element.self as! AnyProvider.Type).providesType == CheckedE.self, "CheckedE must be Element.Element")
         
-        let e = Element.self as! AnyProvider.Type
+        _ = Element.self as! AnyProvider.Type
         
         let getter = self.get
         return Provider { (getter() as! AnyProvider).asCheckedProvider(CheckedE.self).get() }
-    }
-}
-
-extension Provider : ProviderConvertible {
-    public func asProvider() -> Provider<Element> {
-        return self
-    }
-}
-
-extension Provider : ProxyFactoryInitializable {    
-    static func makeProxyObject<F : ProxyFactory>(proxyFactory proxyFactory: F) -> Provider<Element> {
-        return Provider { proxyFactory.of() }
-    }
-}
-
-extension ProviderProtocol {
-    /// Providers can always be proxy objects
-    static var isActuallyProxyObject: Bool {
-        return true
     }
 }
