@@ -53,7 +53,7 @@ public struct PropertyInjectorBindingBuilder<B: BinderBase, Element: AnyObject> 
 
 extension PropertyInjectorBindingBuilderProtocol {
     /// This is where the injection happens    
-    func innerTo(propertyInjector: @escaping (Element) -> (),
+    func innerTo(propertyInjector: @escaping (Element) -> Void,
                  file: StaticString,
                  line: Int,
                  function: StaticString) -> BindingReceipt<PropertyInjector<Element>> {
@@ -61,7 +61,7 @@ extension PropertyInjectorBindingBuilderProtocol {
         let realBuilder = toPropertyInjectorBindingBuilder()
         let binder = realBuilder.binder
         
-        typealias Injector = (Element) -> ()
+        typealias Injector = (Element) -> Void
         
         return binder
             .bind()
