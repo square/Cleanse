@@ -11,7 +11,7 @@ protocol Finalizable {
 }
 
 struct AnonymousFinalizable : Finalizable {
-    let finalizeFunc: () throws -> ()
+    let finalizeFunc: () throws -> Void
 
     func finalize() throws {
         try self.finalizeFunc()

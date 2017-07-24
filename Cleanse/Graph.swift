@@ -329,7 +329,7 @@ class Graph : BinderBase {
     #if SUPPORT_LEGACY_OBJECT_GRAPH
     
     private var legacyKeyToKey = Dictionary<LegacyKey, AnyProvider.Type>()
-    private var legacyPropertyInjectors = Dictionary<RequirementKey, (AnyObject) -> ()>()
+    private var legacyPropertyInjectors = Dictionary<RequirementKey, (AnyObject) -> Void>()
     
     private func maybeAddLegacyProviders(provider: AnyProvider) {
         /// Hack for Legacy Injection
@@ -375,10 +375,10 @@ class Graph : BinderBase {
             .map { $0 as AnyObject }
     }
     
-    func legacyPropertyInjector(cls: AnyObject.Type) -> (AnyObject) -> ()  {
+    func legacyPropertyInjector(cls: AnyObject.Type) -> (AnyObject) -> Void  {
         precondition(cls is NSObject.Type, "Can only do legacy property injection for NSObjects")
         
-        var foundPropertyInjectors = Array<(AnyObject) -> ()>()
+        var foundPropertyInjectors = Array<(AnyObject) -> Void>()
         
         var curCls: NSObject.Type! = cls as! NSObject.Type
         
