@@ -75,7 +75,7 @@ class PropertyInjectionTests: XCTestCase {
             
             binder
                 .bindPropertyInjectionOf(BClass.self)
-                // We generate arities of (Element) -> (arg1, ..., argN) -> () as arguments for to since these are the result of referring to the static method
+                // We generate arities of (Element) -> (arg1, ..., argN) -> Void as arguments for to since these are the result of referring to the static method
                 .to {
                     $0.injectProperties(superInjector: $1, b: $2, crazyStruct: $3)
             }
