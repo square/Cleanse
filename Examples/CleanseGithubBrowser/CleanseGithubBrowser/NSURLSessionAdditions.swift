@@ -10,12 +10,12 @@ import Foundation
 
 
 extension URLSession {
-    func jsonTask(baseURL: URL, pathComponents: String..., resultHandler: @escaping (ErrorOptional<Any>) -> ()) -> URLSessionDataTask {
+    func jsonTask(baseURL: URL, pathComponents: String..., resultHandler: @escaping (ErrorOptional<Any>) -> Void) -> URLSessionDataTask {
         let url = baseURL.appendingPathComponent(pathComponents.joined(separator: "/"))
         return jsonTask(url: url as URL, resultHandler: resultHandler)
     }
 
-    private func jsonTask(url: URL, resultHandler: @escaping (ErrorOptional<Any>) -> ()) -> URLSessionDataTask {
+    private func jsonTask(url: URL, resultHandler: @escaping (ErrorOptional<Any>) -> Void) -> URLSessionDataTask {
         let task = self.dataTask(with: url as URL) { (data, response, error) in
             if let error: Error = error ?? HTTPError(statusCode: (response as! HTTPURLResponse).statusCode) {
                 resultHandler(ErrorOptional(error))
@@ -39,7 +39,7 @@ extension URLSession {
         baseURL: URL,
         pathComponents: String...,
         query: String? = nil,
-        resultHandler: @escaping (ErrorOptional<[[String: AnyObject]]>) -> ()
+        resultHandler: @escaping (ErrorOptional<[[String: AnyObject]]>) -> Void
     ) -> URLSessionDataTask {
         var url = baseURL.appendingPathComponent(pathComponents.joined(separator: "/"))
 

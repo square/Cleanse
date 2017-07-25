@@ -36,7 +36,7 @@ struct FakeGithubServicesModule : GithubServicesModule {
 
 
 struct FakeGithubMembersService : GithubMembersService {
-    func list(handler: @escaping (ErrorOptional<[GithubMember]>) -> ()) {
+    func list(handler: @escaping (ErrorOptional<[GithubMember]>) -> Void) {
         DispatchQueue.main.async() { 
             handler(.init([
                 GithubMember(login: "abrons"),
@@ -48,7 +48,7 @@ struct FakeGithubMembersService : GithubMembersService {
 }
 
 struct FakeGithubRepositoriesService : GithubRepositoriesService {
-    func list(_ handler: @escaping (ErrorOptional<[GithubRepository]>) -> ()) {
+    func list(_ handler: @escaping (ErrorOptional<[GithubRepository]>) -> Void) {
         DispatchQueue.main.async() {
             handler(.init([
                 GithubRepository(name: "okhttp", watchersCount: 11_917),
