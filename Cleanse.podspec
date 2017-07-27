@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name     = 'Cleanse'
-  s.version  = '1.0-rc1'
+  s.version  = '1.0-rc2'
   s.license  = 'Apache License, Version 2.0'
   s.summary  = 'Lightweight Swift Dependency Injection Framework'
   s.homepage = 'https://github.com/square/Cleanse'
