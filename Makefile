@@ -1,10 +1,9 @@
 .DUMMY: build documentation
 
-SWIFT_ROOT=/Library/Developer/Toolchains/swift-latest.xctoolchain
-SWIFT=$(SWIFT_ROOT)/usr/bin/swift
+SWIFT=swift
 
-# This can go away once 
-SWIFT_ARGS=-Xswiftc=-suppress-warnings
+# This can go away once
+SWIFT_ARGS=-Xswiftc=-warnings-as-errors
 
 .build:
 
@@ -21,7 +20,7 @@ generated_sources: Cleanse/BinderArities.swift Cleanse/PropertyInjectionArities.
 
 Cleanse/BinderArities.swift: CleanseGen/GenerateBinderArities.swift
 	xcrun swift CleanseGen/GenerateBinderArities.swift > Cleanse/BinderArities.swift
-	
+
 Cleanse/PropertyInjectionArities.swift: CleanseGen/GeneratePropertyInjectionArities.swift
 	xcrun swift CleanseGen/GeneratePropertyInjectionArities.swift > Cleanse/PropertyInjectionArities.swift
 
