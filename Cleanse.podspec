@@ -7,5 +7,5 @@ Pod::Spec.new do |s|
   s.authors  = 'Square'
   s.source   = { :git => 'https://github.com/square/Cleanse.git', :tag => s.version }
   s.source_files = 'Cleanse/*.swift'
-  s.ios.deployment_target = '8.3'
+  s.ios.deployment_target = '9.0'
 end
