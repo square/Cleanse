@@ -1,10 +1,10 @@
-# cache: bundler
+cache: bundler
 language: objective-c
 
-osx_image: xcode8.3
+osx_image: xcode9.2
 xcode_project: Cleanse.xcodeproj
 xcode_scheme: Cleanse
-xcode_sdk: iphonesimulator10.3
+xcode_sdk: iphonesimulator11.2
 
 script:
   - xcodebuild test -project $TRAVIS_XCODE_PROJECT -scheme $TRAVIS_XCODE_SCHEME -sdk $TRAVIS_XCODE_SDK -enableCodeCoverage=YES -destination "platform=iOS Simulator,name=iPad Air 2"
