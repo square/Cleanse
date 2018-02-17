@@ -7,14 +7,17 @@
 //
 
 protocol Finalizable {
+
     func finalize() throws
+
 }
 
-struct AnonymousFinalizable : Finalizable {
-    let finalizeFunc: () throws -> ()
+struct AnonymousFinalizable: Finalizable {
+
+    let finalizeFunc: () throws -> Void
 
     func finalize() throws {
         try self.finalizeFunc()
     }
+    
 }
-

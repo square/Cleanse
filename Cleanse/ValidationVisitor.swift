@@ -8,20 +8,24 @@
 
 import Foundation
 
-
 extension ProviderProtocol {
+
     fileprivate static var providerToClosureType: Provider<() -> Element>.Type {
         return Provider<() -> Element>.self
     }
+
 }
 
 extension AnyProvider where Self: ProviderProtocol {
+
     static var anyProviderToClosureType: AnyProvider.Type {
         return providerToClosureType
     }
+
 }
 
-private struct ProviderKey : TypeKeyProtocol {
+private struct ProviderKey: TypeKeyProtocol {
+
     let ctype: AnyProvider.Type
 
     var type: Any.Type {
@@ -31,9 +35,11 @@ private struct ProviderKey : TypeKeyProtocol {
     init(_ type: AnyProvider.Type) {
         self.ctype = type
     }
+
 }
 
-private class ProviderInfo : DelegatedHashable, CustomStringConvertible {
+private class ProviderInfo: DelegatedHashable, CustomStringConvertible {
+
     let rawBinding: RawProviderBinding
     var requirements: Set<ProviderKey> = []
 
@@ -51,6 +57,7 @@ private class ProviderInfo : DelegatedHashable, CustomStringConvertible {
 }
 
 private class ComponentInfo {
+
     let scope: Scope.Type?
     let seed: Any.Type
     let isRootComponent: Bool
@@ -96,7 +103,7 @@ private class ComponentInfo {
         }
     }
 
-    fileprivate func validate(provider providerInfo:  ProviderInfo, errors: inout [CleanseError]) {
+    fileprivate func validate(provider providerInfo: ProviderInfo, errors: inout [CleanseError]) {
         for r in providerInfo.requirements {
             validate(requirement: r, providerInfo: providerInfo, errors: &errors)
         }
@@ -111,7 +118,7 @@ private class ComponentInfo {
     }
 
     // Once we find one cycle, stop (hence throwing instead of appending to a list of errors)
-    fileprivate func validateCycles(providerKey: ProviderKey, providerInfo:  ProviderInfo) throws {
+    fileprivate func validateCycles(providerKey: ProviderKey, providerInfo: ProviderInfo) throws {
 
         var providerStack = [(ProviderKey, ProviderInfo)]()
         var providersInStack = Set<ProviderInfo>()
@@ -124,7 +131,7 @@ private class ComponentInfo {
         )
     }
 
-    fileprivate func validateCycles(providerKey: ProviderKey, providerInfo:  ProviderInfo, providerStack: inout [(ProviderKey, ProviderInfo)], providersInStack: inout Set<ProviderInfo>) throws {
+    fileprivate func validateCycles(providerKey: ProviderKey, providerInfo: ProviderInfo, providerStack: inout [(ProviderKey, ProviderInfo)], providersInStack: inout Set<ProviderInfo>) throws {
         if cycleCheckedProviders.contains(providerInfo) {
             return
         }
@@ -169,12 +176,11 @@ private class ComponentInfo {
                 continue
             }
 
-
             try validateCycles(providerKey: key, providerInfo: d, providerStack: &providerStack, providersInStack: &providersInStack  )
         }
     }
 
-    fileprivate func validate(requirement: ProviderKey, providerInfo:  ProviderInfo, errors: inout [CleanseError]) {
+    fileprivate func validate(requirement: ProviderKey, providerInfo: ProviderInfo, errors: inout [CleanseError]) {
         #if SUPPORT_LEGACY_OBJECT_GRAPH
             if requirement == ProviderKey(Provider<LegacyObjectGraph>.self) {
                 return
@@ -186,7 +192,7 @@ private class ComponentInfo {
                 MissingProvider(requests: [
                     ProviderRequestDebugInfo(
                         requestedType: requirement.type,
-                        providerRequiredFor:type(of: providerInfo.rawBinding.provider),
+                        providerRequiredFor: type(of: providerInfo.rawBinding.provider),
                         sourceLocation: providerInfo.rawBinding.sourceLocation
                     )]
                 )
@@ -212,9 +218,8 @@ private class ComponentInfo {
         return providers
     }
 
-
     fileprivate func getCurrentProviderInfo(_ key: ProviderKey) -> [ProviderInfo] {
-        if let current = self.providers[key] , !current.isEmpty {
+        if let current = self.providers[key], !current.isEmpty {
             return current
         }
 
@@ -244,9 +249,9 @@ private class ComponentInfo {
     }
 }
 
-
 /// Verifies that all our dependencies are satisfied
-final class ValidationVisitor : ComponentVisitor {
+final class ValidationVisitor: ComponentVisitor {
+    
     var visitorState = VisitorState<ValidationVisitor>()
 
     fileprivate var rootComponent: ComponentInfo
@@ -266,25 +271,24 @@ final class ValidationVisitor : ComponentVisitor {
         )
         currentComponent = rootComponent
     }
-    
-    func enterComponent<C : Component>(dependency: C.Type) {
+
+    func enterComponent<C: Component>(dependency: C.Type) {
         enterComponentBase(isRoot: false, dependency: dependency)
     }
 
-    func leaveComponent<C : Component>(dependency: C.Type) {
+    func leaveComponent<C: Component>(dependency: C.Type) {
         leaveComponentBase()
     }
 
-    func enterRootComponent<C : RootComponent>(dependency: C.Type) {
+    func enterRootComponent<C: RootComponent>(dependency: C.Type) {
         enterComponentBase(isRoot: true, dependency: dependency)
     }
 
-    func leaveRootComponent<C : RootComponent>(dependency: C.Type) {
+    func leaveRootComponent<C: RootComponent>(dependency: C.Type) {
         leaveComponentBase()
     }
 
-
-    private func enterComponentBase<C : Cleanse.ComponentBase>(isRoot: Bool, dependency: C.Type) {
+    private func enterComponentBase<C: Cleanse.ComponentBase>(isRoot: Bool, dependency: C.Type) {
         let component = ComponentInfo(
             scope: C.Scope.scopeOrNil,
             seed: C.Seed.self,
@@ -308,14 +312,13 @@ final class ValidationVisitor : ComponentVisitor {
         currentProvider = ProviderInfo(rawBinding: binding)
     }
 
-    
     func visitRequirement(requirement: AnyProvider.Type, binding: RawProviderBinding) {
         currentProvider!.requirements.insert(ProviderKey(requirement))
     }
 
     func leaveProvider(binding: RawProviderBinding) {
         let pkey = ProviderKey(type(of: binding.provider))
-        
+
         if currentComponent.providers[pkey] == nil {
             currentComponent.providers[pkey] = [currentProvider!]
         } else {
@@ -324,13 +327,13 @@ final class ValidationVisitor : ComponentVisitor {
 
         currentComponent.providerAliases[ProviderKey(type(of: binding.provider).anyProviderToClosureType)] = pkey
 
-        self.currentProvider  = nil
+        self.currentProvider = nil
     }
 
-    func enterModule<M : Module>(module: M.Type) {
+    func enterModule<M: Module>(module: M.Type) {
     }
 
-    func leaveModule<M : Module>(module: M.Type) {
+    func leaveModule<M: Module>(module: M.Type) {
     }
 
     func finalize() throws {
@@ -354,4 +357,5 @@ final class ValidationVisitor : ComponentVisitor {
             throw MultiError(errors: errors)
         }
     }
+
 }

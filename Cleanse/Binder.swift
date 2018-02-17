@@ -8,25 +8,30 @@
 
 import Foundation
 
-
 /**
  Internal representation of a completed `BindingBuilder`. It is consolidated into a protocol to make message signatures simpler.
  */
 public protocol _InternalBindInfoProtocol {
-    associatedtype BP : BindingBuilder
-    
+
+    associatedtype BP: BindingBuilder
+
     var bindingProvider: BP { get }
     var provider: BP.FinalProvider { get }
+
 }
 
 struct InternalBindInfo<BP_: BindingBuilder> : _InternalBindInfoProtocol {
+
     typealias BP = BP_
-    
+
     let bindingProvider: BP
     let provider: BP_.FinalProvider
+
 }
 
-public protocol BinderBase : Installer, ProviderProvider {
+public protocol BinderBase: Installer, ProviderProvider {
+
     /// Authoritative bind function.
     func _internalBind(binding: RawProviderBinding)
+    
 }

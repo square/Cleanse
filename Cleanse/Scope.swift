@@ -13,13 +13,12 @@ import Foundation
 public protocol _ScopeBase {
 }
 
-
 /// Currently there are only two scopes, `Unscoped` and `Singleton`.
-public protocol Scope : _ScopeBase {
+public protocol Scope: _ScopeBase {
 }
 
 /// This a special scope that means its not scoped
-public struct Unscoped : _ScopeBase {
+public struct Unscoped: _ScopeBase {
 }
 
 extension _ScopeBase {
@@ -28,4 +27,5 @@ extension _ScopeBase {
     static var scopeOrNil: Scope.Type? {
         return self as? Scope.Type
     }
+    
 }

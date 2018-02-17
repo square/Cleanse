@@ -9,7 +9,8 @@
 import Foundation
 
 /// Type erased binder
-public struct AnyBinder : BinderBase, WrappedBinder {
+public struct AnyBinder: BinderBase, WrappedBinder {
+
     public let binder: BinderBase
 
     public init(binder: BinderBase) {
@@ -20,4 +21,5 @@ public struct AnyBinder : BinderBase, WrappedBinder {
             self.binder = binder
         }
     }
+    
 }

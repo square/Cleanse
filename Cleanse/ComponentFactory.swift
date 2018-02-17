@@ -9,13 +9,17 @@
 import Foundation
 
 public protocol ComponentFactoryProtocol {
+
     associatedtype ComponentElement: Cleanse.ComponentBase
 
     func build(_ seed: ComponentElement.Seed) -> ComponentElement.Root
+
 }
 
 public struct ComponentFactory<C: ComponentBase> : ComponentFactoryProtocol {
+
     public typealias ComponentElement = C
+    
     fileprivate let factoryFunction: (_ seed: ComponentElement.Seed) -> C.Root
 
     init(factoryFunction: @escaping (_ seed: ComponentElement.Seed) -> C.Root) {
@@ -26,10 +30,13 @@ public struct ComponentFactory<C: ComponentBase> : ComponentFactoryProtocol {
     public func build(_ seed: ComponentElement.Seed) -> ComponentElement.Root {
         return factoryFunction(seed)
     }
+
 }
 
 extension ComponentFactoryProtocol where ComponentElement.Seed: ProviderProtocol {
+
     public func build(_ seed: ComponentElement.Seed.Element) -> ComponentElement.Root {
-        return build(ComponentElement.Seed.init(value: seed))
+        return build(ComponentElement.Seed(value: seed))
     }
+
 }

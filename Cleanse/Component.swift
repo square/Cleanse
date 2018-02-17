@@ -8,6 +8,4 @@
 
 import Foundation
 
-
-public protocol Component : ComponentBase {
-}
+public protocol Component: ComponentBase {}

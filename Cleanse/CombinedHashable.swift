@@ -8,17 +8,17 @@
 
 import Foundation
 
-
 /// Combines two hashable values. Useful for paths of hashable values
 struct CombinedHashable<L: Hashable, R: Hashable> : Hashable {
+
     let l: L
     let r: R
-    
+
     init(_ l: L, _ r: R) {
         self.l = l
         self.r = r
     }
-    
+
     var hashValue: Int {
         var seed = UInt(bitPattern: l.hashValue)
         let rHashValue = UInt(bitPattern: r.hashValue)
@@ -26,9 +26,9 @@ struct CombinedHashable<L: Hashable, R: Hashable> : Hashable {
         seed ^= rHashValue &+ 0x9e3779b9 &+ (seed << 6) &+ (seed >> 2)
         return Int(bitPattern: seed)
     }
+
 }
 
-func ==<L, R> (lhs: CombinedHashable<L, R>, rhs: CombinedHashable<L, R>) -> Bool {
+func == <L, R> (lhs: CombinedHashable<L, R>, rhs: CombinedHashable<L, R>) -> Bool {
     return lhs.l == rhs.l && lhs.r == rhs.r
 }
-

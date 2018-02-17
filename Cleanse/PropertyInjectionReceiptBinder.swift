@@ -9,6 +9,7 @@
 import Foundation
 
 public struct PropertyInjectionReceiptBinder<E: AnyObject> : PropertyInjectorBindingBuilderProtocol {
+
     public typealias Element = E
     public typealias B = AnyBinder
 
@@ -21,10 +22,13 @@ public struct PropertyInjectionReceiptBinder<E: AnyObject> : PropertyInjectorBin
     public func toPropertyInjectorBindingBuilder() -> PropertyInjectorBindingBuilder<B, Element> {
         return PropertyInjectorBindingBuilder(binder: binder)
     }
+
 }
 
 public extension BindToable where Input: PropertyInjectorProtocol {
+
     public func propertyInjector(configuredWith configurationFunction: (PropertyInjectionReceiptBinder<Input.Element>) -> BindingReceipt<PropertyInjector<Input.Element>>) -> BindingReceipt<PropertyInjector<Input.Element>> {
         return configurationFunction(PropertyInjectionReceiptBinder(PropertyInjectorBindingBuilder(binder: self.binder)))
     }
+    
 }

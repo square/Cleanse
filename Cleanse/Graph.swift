@@ -8,51 +8,56 @@
 
 import Foundation
 
+// swiftlint:disable file_length
+
 private class FutureProvider {
+
     let instanceProvidesType: Any.Type
     var actualProvider: AnyProvider?
 
     init(providesType: Any.Type) {
        self.instanceProvidesType = providesType
     }
-    
+
     func getAny() -> Any {
         return actualProvider!.getAny()
     }
-    
+
     func resolve(actualProvider: AnyProvider) {
         precondition(actualProvider.instanceProvidesType == instanceProvidesType, "Expected new value to have a provider type of \(instanceProvidesType) instead it has \(actualProvider.instanceProvidesType)")
         self.actualProvider = actualProvider
     }
+
 }
 
 /// Contents of an object graph. Also the "Binder" object
-class Graph : BinderBase {
-    fileprivate var requirements = Dictionary<RequirementKey, [ProviderRequestDebugInfo]>()
-    
-    fileprivate var futureProviders = Dictionary<RequirementKey, FutureProvider>()
+class Graph: BinderBase {
+
+    fileprivate var requirements = [RequirementKey: [ProviderRequestDebugInfo]]()
+
+    fileprivate var futureProviders = [RequirementKey: FutureProvider]()
 
     /// Keyeed by type of value
-    fileprivate var providers = Dictionary<RequirementKey, AnyProvider>()
-    
+    fileprivate var providers = [RequirementKey: AnyProvider]()
+
     /// Values of outer array are values that contain () -> Type
-    fileprivate var collectionProviders = Dictionary<CollectionProvidersKey, [AnyProvider]>()
-    
+    fileprivate var collectionProviders = [CollectionProvidersKey: [AnyProvider]]()
+
     fileprivate var finalizables = [Finalizable]()
-    
+
     fileprivate var parent: Graph?
 
     fileprivate let scope: Scope.Type?
 
     private var seenModules = Set<SeenModuleKey>()
-    
+
     init(scope: Scope.Type?, parent: Graph?=nil) {
         self.scope = scope
         self.parent = parent
     }
-    
+
     var finalized = false
-    
+
     func _internalBind(binding: RawProviderBinding) {
 
         let scopedProvider: AnyProvider
@@ -64,15 +69,14 @@ class Graph : BinderBase {
         } else {
             scopedProvider = binding.provider
         }
-        
+
         if binding.isCollectionProvider {
             addCollectionProvider(provider: scopedProvider, mergeFunc: binding.collectionMergeFunc!)
         } else {
             addProvider(provider: scopedProvider)
         }
     }
-    
-    
+
     private func findOrCreateFutureProvider<Element>(type: Element.Type, debugInfo: ProviderRequestDebugInfo) -> Provider<Element> {
         guard let type = type as? AnyProvider.Type else {
             return findOrCreateFutureProvider(type: Provider<Element>.self, debugInfo: debugInfo).flatten(Element.self)
@@ -85,7 +89,7 @@ class Graph : BinderBase {
         } else {
             key = .init(type)
         }
-        
+
         let futureProvider: FutureProvider
 
         if let existing = self.futureProviders[key] {
@@ -104,7 +108,7 @@ class Graph : BinderBase {
         } else {
             return Provider(value: type.makeNew(getter: { futureProvider.getAny() }) as! Element)
         }
-        
+
     }
 
     private func addProvider(provider: AnyProvider) {
@@ -116,39 +120,39 @@ class Graph : BinderBase {
         }
 
         providers[key] = provider
-        
+
         if let getterProvider = provider.anyGetterProvider {
             providers[RequirementKey(type(of: getterProvider))] = getterProvider
         }
-        
+
         #if SUPPORT_LEGACY_OBJECT_GRAPH
-            
+
         self.maybeAddLegacyProviders(provider: provider)
-        
+
         #endif
     }
-    
+
     /// Add provider for elements of a collection
     private func addCollectionProvider(provider: AnyProvider, mergeFunc: @escaping ([Any]) -> Any) {
         let collectionProviderKey: CollectionProvidersKey
-        
+
         collectionProviderKey = .init(type(of: provider))
-        
+
         if collectionProviders[collectionProviderKey] == nil {
             finalizables.append(AnonymousFinalizable {
                 let collectionProviders = self.gatherAllCollectionProviders(key: collectionProviderKey)
-                
+
                 let aggregatedProvider = type(of: provider).makeNew {
                     let values = collectionProviders.map { $0.getAny() }
                     return mergeFunc(values)
                 }
-                
+
                 self.addProvider(provider: aggregatedProvider)
             })
-            
+
             collectionProviders[collectionProviderKey] = []
         }
-        
+
         collectionProviders[collectionProviderKey]!.append(provider)
     }
 
@@ -170,11 +174,10 @@ class Graph : BinderBase {
     /// Wraps a provider in a scope if necessary
     private func scopeProvider(provider: AnyProvider) -> AnyProvider {
             let scopedProviderCls = ScopedProvider(rawProvider: provider)
-        
+
             return scopedProviderCls.wrappedProvider
     }
 
-    
     func _internalProvider<Element>(_ type: Element.Type, debugInfo: ProviderRequestDebugInfo?) -> Provider<Element> {
         precondition(!finalized, "Cannot call \(#function) after finalize is called")
 
@@ -183,68 +186,66 @@ class Graph : BinderBase {
         let futureProvider = self.findOrCreateFutureProvider(type: type, debugInfo: newRequirements)
         return futureProvider.asCheckedProvider(Element.self)
     }
-    
+
     private func maybeBindCanonical(keyType: Any.Type) -> AnyProvider? {
         if let keyType = keyType as? AnyProvider.Type {
             return maybeBindCanonical(keyType: keyType.providesType)
         }
-        
+
         guard let keyType = keyType as? AnyCanonicalRepresentable.Type else {
             return nil
         }
-        
-        
+
         if let canonicalProvider = providers[RequirementKey(keyType.canonicalProviderType)] {
             return keyType.transformFromCanonicalAnyCanonical(canonicalProvider: canonicalProvider)
         }
-        
+
         /// If we get here, check if we want to bind it
 
         if let childP = maybeBindCanonical(keyType: keyType.canonicalProviderType) {
             return keyType.transformFromCanonicalAnyCanonical(canonicalProvider: childP)
         }
-    
+
         return nil
     }
-    
+
     /// This must be called beforethe graph is used
     func finalize() throws {
         precondition(!finalized, "Cannot call \(#function) more than once")
-        
+
         var errors = [CleanseError]()
-        
+
         try finalizables.forEach { try $0.finalize() }
         finalizables.removeAll()
-        
+
         // Add any canonical type mappings if needed
         for key in requirements.keys where getRegisteredProvider(key: key) == nil {
             let keyType = (key.type as! AnyProvider.Type)
-            
+
             if let p = maybeBindCanonical(keyType: keyType.providesType) {
                 providers[key] = p
             }
         }
-        
+
         // We may also need to add a provider of ourselves. This is needed for subcomponents.
 
         #if SUPPORT_LEGACY_OBJECT_GRAPH
             let legacyObjectGraphKey = RequirementKey(Provider<LegacyObjectGraph>.self)
-                
+
             if self.requirements[legacyObjectGraphKey] != nil && self.providers[legacyObjectGraphKey] == nil {
-                self.providers[legacyObjectGraphKey] = Provider<LegacyObjectGraph> {  [weak self] in LegacyObjectGraph(graph: self!) }
+                self.providers[legacyObjectGraphKey] = Provider<LegacyObjectGraph> { [weak self] in LegacyObjectGraph(graph: self!) }
             }
         #endif
 
-        
         // TODO: validate cycles
-        
+
         // TODO: validate individual object graphs
         for r in futureProviders.keys {
             if getRegisteredProvider(key: r) == nil {
                 errors.append(MissingProvider(requests: requirements[r]!))
             }
         }
-        
+
         switch errors.count {
         case 0:
             // Everything is cool
@@ -255,12 +256,12 @@ class Graph : BinderBase {
             throw MultiError(errors: errors)
         }
 
-        for (k,v) in self.futureProviders {
+        for (k, v) in self.futureProviders {
             v.resolve(actualProvider: getRegisteredProvider(key: k)!)
         }
 
         self.futureProviders.removeAll()
-        
+
         finalized = true
     }
 
@@ -286,14 +287,14 @@ class Graph : BinderBase {
                         subgraph._internalBind(binding: RawProviderBinding(
                             scope: nil,
                             provider: seed,
-                            collectionMergeFunc:  nil,
+                            collectionMergeFunc: nil,
                             sourceLocation: nil
                         ))
                     } else {
                         subgraph._internalBind(binding: RawProviderBinding(
                             scope: nil,
                             provider: Provider(value: seed),
-                            collectionMergeFunc:  nil,
+                            collectionMergeFunc: nil,
                             sourceLocation: nil
                         ))
                     }
@@ -310,27 +311,26 @@ class Graph : BinderBase {
             })
     }
 
-
-    func install<C : RootComponent>(dependency: C.Type) {
+    func install<C: RootComponent>(dependency: C.Type) {
         install(componentBase: dependency)
     }
 
-    func install<C : Component>(dependency: C.Type) {
+    func install<C: Component>(dependency: C.Type) {
         install(componentBase: dependency)
     }
-    
+
     // For use in finalize. Gets our provider, or recurses up to the parent's
     private func getRegisteredProvider(key: RequirementKey) -> AnyProvider? {
         return self.providers[key] ?? parent?.getRegisteredProvider(key: key)
     }
-    
+
     // MARK: Legacy support
-    
+
     #if SUPPORT_LEGACY_OBJECT_GRAPH
-    
-    private var legacyKeyToKey = Dictionary<LegacyKey, AnyProvider.Type>()
-    private var legacyPropertyInjectors = Dictionary<RequirementKey, (AnyObject) -> ()>()
-    
+
+    private var legacyKeyToKey = [LegacyKey: AnyProvider.Type]()
+    private var legacyPropertyInjectors = [RequirementKey: (AnyObject) -> Void]()
+
     private func maybeAddLegacyProviders(provider: AnyProvider) {
         /// Hack for Legacy Injection
 
@@ -346,17 +346,17 @@ class Graph : BinderBase {
             precondition(legacyKeyToKey[legacyKey] == nil)
             legacyKeyToKey[legacyKey] = type(of: provider)
         }
-        
+
         if let propertyInjectorType = provider.instanceProvidesType as? AnyPropertyInjectorProtocol.Type {
             legacyPropertyInjectors[RequirementKey(propertyInjectorType.injectedType)] = (provider.getAny() as! AnyPropertyInjectorProtocol).untypedInjectProperties
         }
     }
-    
+
     func legacyProvider(cls: Any.Type, name: String?) -> Provider<AnyObject> {
         let legacyKey = LegacyKey(cls: cls, name: name)
-        
+
         let rawProvider: AnyProvider
-        
+
         if let providerKey = legacyKeyToKey[legacyKey], let provider = self.providers[RequirementKey(providerKey)] {
             rawProvider = provider
         } else if let canonicalCls = cls as? AnyCanonicalRepresentable.Type,
@@ -366,27 +366,27 @@ class Graph : BinderBase {
         } else {
             preconditionFailure("Could not find legacy provider for \(cls) named \(String(describing: name))")
         }
-        
+
         if name == nil {
             return rawProvider.map { $0 as AnyObject }
         }
-        
+
         return rawProvider
             .map { $0 as AnyObject }
     }
-    
-    func legacyPropertyInjector(cls: AnyObject.Type) -> (AnyObject) -> ()  {
+
+    func legacyPropertyInjector(cls: AnyObject.Type) -> (AnyObject) -> Void {
         precondition(cls is NSObject.Type, "Can only do legacy property injection for NSObjects")
-        
-        var foundPropertyInjectors = Array<(AnyObject) -> ()>()
-        
+
+        var foundPropertyInjectors = [(AnyObject) -> Void]()
+
         var curCls: NSObject.Type! = cls as! NSObject.Type
-        
+
         while curCls != nil {
             if let pi = legacyPropertyInjectors[RequirementKey(curCls)] {
                 foundPropertyInjectors.append(pi)
             }
-            
+
             if let superCls = curCls.superclass() {
                 curCls = superCls as! NSObject.Type
             } else {
@@ -394,8 +394,8 @@ class Graph : BinderBase {
             }
         }
 
-        precondition(foundPropertyInjectors.count > 0, "Could not find property legacy property injectors for \(cls)")
-        
+        precondition(!foundPropertyInjectors.isEmpty, "Could not find property legacy property injectors for \(cls)")
+
         return { (o: AnyObject) in
             /// Iterate through all the found property injectors starting at the most root class and iterating to child classes
             for pi in foundPropertyInjectors.reversed() {
@@ -403,43 +403,37 @@ class Graph : BinderBase {
             }
         }
     }
-    
+
     #endif
+    
 }
 
-extension Graph : CustomDebugStringConvertible {
+extension Graph: CustomDebugStringConvertible {
+
     var debugDescription: String {
         var result = "Bound Providers Keys:"
-        
+
         for p in self.providers.keys {
             result += "\n  * \(p.description)"
         }
-        
+
         return result
     }
+
 }
 
 /// Helper function to pull out the alternate provider variant.
 /// This is basicall so we can have Tagged<() -> Date, Now> injected into us
 private protocol AlternateVariantTaggedValue {
-    static func addAlternateProviderToGraph<Element>(provider: Provider<Element>, graph: Graph)
-}
 
+    static func addAlternateProviderToGraph<Element>(provider: Provider<Element>, graph: Graph)
+
+}
 
 /// MARK: Helpers to key things by type and have good debug representations
 
-private struct RequirementKey : TypeKeyProtocol {
-    typealias TT = Any
-    
-    let type: TT.Type
-    
-    init(_ type: TT.Type) {
-        self.type = type
-    }
-}
+private struct RequirementKey: TypeKeyProtocol {
 
-
-private struct SeenModuleKey : TypeKeyProtocol {
     typealias TT = Any
 
     let type: TT.Type
@@ -447,16 +441,29 @@ private struct SeenModuleKey : TypeKeyProtocol {
     init(_ type: TT.Type) {
         self.type = type
     }
+
 }
 
-private struct CollectionProvidersKey : TypeKeyProtocol {
+private struct SeenModuleKey: TypeKeyProtocol {
+
     typealias TT = Any
 
     let type: TT.Type
-    
+
     init(_ type: TT.Type) {
         self.type = type
     }
+
 }
 
+private struct CollectionProvidersKey: TypeKeyProtocol {
 
+    typealias TT = Any
+
+    let type: TT.Type
+
+    init(_ type: TT.Type) {
+        self.type = type
+    }
+    
+}

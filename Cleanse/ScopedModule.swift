@@ -8,7 +8,6 @@
 
 import Foundation
 
-
-public protocol ScopedModule : Module {
+public protocol ScopedModule: Module {
 
 }

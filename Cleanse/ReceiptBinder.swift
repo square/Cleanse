@@ -8,16 +8,15 @@
 
 import Foundation
 
-
 public struct ReceiptBinder<Element> : BindToable {
+
     public typealias Input = Element
     public typealias Binder = AnyBinder
 
     private let innerTo: (_ file: StaticString, _ line: Int, _ function: StaticString, _ provider: Provider<Input>) -> BindingReceipt<Input>
     public let binder: AnyBinder
 
-    public let _finalProviderType : Any.Type
-
+    public let _finalProviderType: Any.Type
 
     init<BB: BindToable>(_ underlyingBindingBuilder: BB) where BB.Input == Input {
         self.innerTo = underlyingBindingBuilder._innerTo
@@ -28,13 +27,14 @@ public struct ReceiptBinder<Element> : BindToable {
     public func _innerTo(file: StaticString, line: Int, function: StaticString, provider: Provider<Input>) -> BindingReceipt<Input> {
         return innerTo(file, line, function, provider)
     }
+
 }
 
 public extension BindToable {
+
     @discardableResult
     public func configured(with configurationFunction: (ReceiptBinder<Input>) -> BindingReceipt<Input>) -> BindingReceipt<Input> {
         return configurationFunction(ReceiptBinder(self))
     }
-}
 
-//public extension BindToable where 
+}

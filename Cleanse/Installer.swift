@@ -8,9 +8,9 @@
 
 import Foundation
 
-
 /// The portion of the `Binder` Protocol that is responsible for installing module dependencies
 public protocol Installer {
+
     /**
      Installs a module as a dependnecy of the caller
      
@@ -20,5 +20,5 @@ public protocol Installer {
 
     func install<C: Component>(dependency: C.Type)
     func install<C: RootComponent>(dependency: C.Type)
+    
 }
-

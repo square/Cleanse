@@ -10,17 +10,20 @@ import Foundation
 
 /// An implementation of this is used to have a hashable of a type.
 /// This is preferable to using ObjectIdentifier since it can be typed and has a better description
-protocol TypeKeyProtocol : DelegatedHashable, CustomStringConvertible {
+protocol TypeKeyProtocol: DelegatedHashable, CustomStringConvertible {
+
     var type: Any.Type { get }
+
 }
 
 extension TypeKeyProtocol {
+
     var hashable: ObjectIdentifier {
         return ObjectIdentifier(type)
     }
-    
+
     var description: String {
         return "\(type)"
     }
+    
 }
-

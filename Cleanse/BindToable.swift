@@ -9,16 +9,17 @@
 import Foundation
 
 public protocol BindToable {
-    associatedtype Input
-    associatedtype Binder : BinderBase
 
-    func _innerTo(
-        file: StaticString,
-        line: Int,
-        function: StaticString,
-        provider: Provider<Input>) -> BindingReceipt<Input>
+    associatedtype Input
+    associatedtype Binder: BinderBase
+
+    func _innerTo(file: StaticString,
+                  line: Int,
+                  function: StaticString,
+                  provider: Provider<Input>) -> BindingReceipt<Input>
 
     var _finalProviderType: Any.Type { get }
 
     var binder: Binder { get }
+
 }

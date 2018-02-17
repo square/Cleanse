@@ -8,9 +8,9 @@
 
 import Foundation
 
-
 /// Base protocol for both Components and RootComponents. Generally want to implement Components or RootComponent instead
 public protocol ComponentBase {
+
     /// This is the binding required to construct a new Component. Think of it as somewhat of an initialization value.
     associatedtype Seed = Void
 
@@ -22,4 +22,5 @@ public protocol ComponentBase {
     static func configure(binder: Binder<Self.Scope>)
 
     static func configureRoot(binder bind: ReceiptBinder<Root>) -> BindingReceipt<Root>
+    
 }

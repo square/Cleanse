@@ -8,12 +8,13 @@
 
 import Foundation
 
-
 extension NSLock {
+    
     func with<Element>(_ closure: () throws -> Element) rethrows -> Element {
         lock()
         defer { unlock() }
-        
-        return try closure()       
+
+        return try closure()
     }
+
 }

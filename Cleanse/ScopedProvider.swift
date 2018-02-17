@@ -11,7 +11,8 @@ import Foundation
 private var weakProviderAssociatedObjectKey = 0
 
 class ScopedProvider {
-    fileprivate let rawProvider : AnyProvider
+
+    fileprivate let rawProvider: AnyProvider
 
     fileprivate let lock = NSLock()
 
@@ -20,7 +21,6 @@ class ScopedProvider {
     init(rawProvider: AnyProvider) {
         self.rawProvider = rawProvider
     }
-
 
     /// This retains self
     var wrappedProvider: AnyProvider {
@@ -45,4 +45,5 @@ class ScopedProvider {
             return newValue
         }
     }
+    
 }

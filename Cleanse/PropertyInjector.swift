@@ -8,46 +8,49 @@
 
 import Foundation
 
+public protocol PropertyInjectorProtocol {
 
-public protocol PropertyInjectorProtocol  {
     associatedtype Element: AnyObject
-    func injectProperties(into instance: Element)
-}
 
+    func injectProperties(into instance: Element)
+
+}
 
 /// This the mechanism property injection is done underneath the hood
 public struct PropertyInjector<Element: AnyObject> : PropertyInjectorProtocol {
-    let injectionClosure: (Element) -> ()
-    
+
+    let injectionClosure: (Element) -> Void
+
     /// Call this to inject properties into an instance of an object.
     public func injectProperties(into instance: Element) {
         injectionClosure(instance)
     }
+
 }
 
-
 #if SUPPORT_LEGACY_OBJECT_GRAPH
+
+/// This is used to for legacy support
+protocol AnyPropertyInjectorProtocol {
+
+    func untypedInjectProperties(into instance: AnyObject)
+
+    static var injectedType: AnyClass { get }
     
-    /// This is used to for legacy support
-    protocol AnyPropertyInjectorProtocol {
-        func untypedInjectProperties(into instance: AnyObject)
-        
-        static var injectedType: AnyClass { get }
+}
+
+extension PropertyInjectorProtocol {
+
+    func untypedInjectProperties(into instance: AnyObject) {
+        injectProperties(into: instance as! Element)
     }
-    
-    
-    
-    extension PropertyInjectorProtocol {
-        func untypedInjectProperties(into instance: AnyObject) {
-            injectProperties(into: instance as! Element)
-        }
-        
-        static var injectedType: AnyClass {
-            return Element.self
-        }
+
+    static var injectedType: AnyClass {
+        return Element.self
     }
-    
-    extension PropertyInjector : AnyPropertyInjectorProtocol {
-        
-    }
+
+}
+
+extension PropertyInjector: AnyPropertyInjectorProtocol {}
+
 #endif

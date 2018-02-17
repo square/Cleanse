@@ -9,6 +9,7 @@
 import Foundation
 
 public struct WeakProvider<E: AnyObject> : ProviderProtocol {
+
     public typealias Element = E?
 
     fileprivate let getter: () -> Element
@@ -21,13 +22,17 @@ public struct WeakProvider<E: AnyObject> : ProviderProtocol {
     public func get() -> Element {
         return self.getter()
     }
+
 }
 
-protocol AnyWeakProvider : AnyProvider {
+protocol AnyWeakProvider: AnyProvider {
+
     static var standardProviderType: AnyProvider.Type { get }
+
 }
 
-extension WeakProvider : AnyProvider, AnyWeakProvider {
+extension WeakProvider: AnyProvider, AnyWeakProvider {
+
     static func makeNew(getter: @escaping () -> Any) -> AnyProvider {
         return WeakProvider(getter: {
             getter() as? E
@@ -41,4 +46,5 @@ extension WeakProvider : AnyProvider, AnyWeakProvider {
     static var standardProviderType: AnyProvider.Type {
         return Provider<E>.self
     }
+    
 }

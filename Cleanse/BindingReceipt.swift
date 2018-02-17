@@ -8,7 +8,5 @@
 
 import Foundation
 
-
 /// This is used to fulfill contracts that a binding has occured
-public struct BindingReceipt<Element> {
-}
+public struct BindingReceipt<Element> {}

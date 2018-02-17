@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 /**
  Basic building block for an object graph or component. A module defines how instances are created that are exposed to the rest of the object graph as well as requirements to construct these provided instances.
  
@@ -17,7 +16,9 @@ import Foundation
  This is the same for modules in Cleanse, if not even moreso since "configure" may be called more than once to validate the object graph.
  */
 public protocol Module {
+    
     associatedtype Scope: Cleanse._ScopeBase = Unscoped
 
     static func configure(binder: Binder<Self.Scope>)
+
 }

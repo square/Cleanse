@@ -9,53 +9,66 @@
 import Foundation
 
 protocol AnyCanonicalRepresentable {
+
     static var canonicalProviderType: AnyProvider.Type { get }
+
     static func transformFromCanonicalAnyCanonical(canonicalProvider: AnyProvider) -> AnyProvider
+
 }
 
-protocol CanonicalRepresentable : AnyCanonicalRepresentable {
+protocol CanonicalRepresentable: AnyCanonicalRepresentable {
+
     associatedtype Canonical
-    
+
     static func transformFromCanonicalCanonical(canonical: Canonical) -> Self
+
 }
 
 extension CanonicalRepresentable {
+
     static var canonicalProviderType: AnyProvider.Type {
         return Provider<Canonical>.self
     }
-    
+
     static func transformFromCanonicalAnyCanonical(canonicalProvider: AnyProvider) -> AnyProvider {
         let typedProvider = canonicalProvider.asCheckedProvider(Canonical.self)
         return typedProvider.map(transform: Self.transformFromCanonicalCanonical)
     }
+
 }
 
-extension ImplicitlyUnwrappedOptional : CanonicalRepresentable {
+extension ImplicitlyUnwrappedOptional: CanonicalRepresentable {
+
     typealias Canonical = Wrapped
 
     static func transformFromCanonicalCanonical(canonical: Wrapped) -> ImplicitlyUnwrappedOptional {
         return canonical
     }
+
 }
 
-extension Optional : CanonicalRepresentable {
+extension Optional: CanonicalRepresentable {
+
     typealias Canonical = Wrapped
-    
+
     static func transformFromCanonicalCanonical(canonical: Wrapped) -> Optional {
         return canonical
     }
+
 }
 
 #if SUPPORT_LEGACY_OBJECT_GRAPH
-    
-    extension NSString : CanonicalRepresentable {
+
+    extension NSString: CanonicalRepresentable {
+
         public typealias Canonical = String
-        
+
         class func transformFromCanonicalCanonical(canonical: String) -> Self {
             return .init(string: canonical)
         }
+
     }
-    
+
 #endif
 
 //extension Provider : CanonicalRepresentable {

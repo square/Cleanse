@@ -78,10 +78,11 @@ import Swift
 
 */
 
-public protocol Tag : _BaseTag, _AnyTag {
-    
+public protocol Tag: _BaseTag, _AnyTag {
+
     /// This tag should only be used on type Element
     associatedtype Element
+    
 }
 
 /// So we can distinguish a Tag from _BaseTag
@@ -93,6 +94,6 @@ public protocol _BaseTag {
 }
 
 /// This represents the absense of a tag
-public struct _VoidTag : _BaseTag {
-    
+public struct _VoidTag: _BaseTag {
+
 }
