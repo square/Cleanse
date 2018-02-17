@@ -59,3 +59,6 @@ DerivedCache/
 Carthage/
 
 *.xcscmblueprint
+
+# fastlane
+fastlane/report.xml
