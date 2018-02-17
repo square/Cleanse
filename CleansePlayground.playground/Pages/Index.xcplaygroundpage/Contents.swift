@@ -7,4 +7,3 @@
  1. [GitHub Client Example](GithubClientExample)
 
  */
-

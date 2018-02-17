@@ -17,7 +17,6 @@ class CleanseGithubBrowserUITests: XCTestCase {
     override func setUp() {
         super.setUp()
 
-
         app = XCUIApplication()
 
         // We want our app to enable fake mode when we launch
@@ -43,7 +42,6 @@ class CleanseGithubBrowserUITests: XCTestCase {
         XCTAssertTrue(app.tables.cells.staticTexts["mikelikespie"].isHittable)
     }
 
-
     func testSettings() {
         app.tabBars.buttons["Settings"].tap()
 
@@ -51,7 +49,6 @@ class CleanseGithubBrowserUITests: XCTestCase {
         XCTAssertTrue(app.tables.cells.staticTexts["Members"].isHittable)
         XCTAssertTrue(app.tables.cells.staticTexts["Fake Mode"].isHittable)
     }
-
 
     func testSettings_repositories() {
         app.tabBars.buttons["Settings"].tap()

@@ -1,10 +1,9 @@
+import Cleanse
 import Foundation
 import UIKit
-import Cleanse
-
 
 /// A module that configures a tab page on the root view controller as well as on the settings page
-struct MembersModule : Cleanse.Module {
+struct MembersModule: Cleanse.Module {
     static func configure(binder: SingletonBinder) {
         // Make MembersSettingsSplitViewController available for injection
         binder
@@ -15,7 +14,6 @@ struct MembersModule : Cleanse.Module {
         binder
             .bind()
             .to(factory: MembersSettingsSplitViewController.init)
-
 
         // The settings for our MembersPage is a shared object that we mutate. Make it available as a singleton
         binder
@@ -51,7 +49,7 @@ struct MembersModule : Cleanse.Module {
     }
 }
 
-class MembersViewController : TableViewController {
+class MembersViewController: TableViewController {
     let memberService: GithubMembersService
     private var members = [GithubMember]()
     private var settings: MembersPageSettings
@@ -108,7 +106,7 @@ class MembersViewController : TableViewController {
             do {
                 self.members = try result.get()
                 self.tableView.reloadData()
-            } catch let e  {
+            } catch let e {
                 NSLog("We got an error \(e) fetching Member. Doing nothing")
                 return
             }
@@ -123,7 +121,7 @@ class MembersPageSettings {
 }
 
 /// View controller that is used in the settings page
-class MembersSettingsSplitViewController : TableViewController {
+class MembersSettingsSplitViewController: TableViewController {
     private let cells: [UITableViewCell]
 
     init(useGreenCell: UseGreenCell) {
@@ -142,7 +140,7 @@ class MembersSettingsSplitViewController : TableViewController {
 }
 
 /// Cell that has a switch that toggles whether or not "useGreen" should be enabled
-class UseGreenCell : UITableViewCell {
+class UseGreenCell: UITableViewCell {
     let `switch` = UISwitch()
     let settings: MembersPageSettings
 

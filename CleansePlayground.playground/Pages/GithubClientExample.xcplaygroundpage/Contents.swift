@@ -19,7 +19,7 @@ protocol GithubListMembersService {
 }
 
 /// Implementation of GithubListMembersService. It requires a base URL and an `URLSession`.
-struct GithubListMembersServiceImpl : GithubListMembersService {
+struct GithubListMembersServiceImpl: GithubListMembersService {
     let githubURL: URL
     let urlSession: URLSession
 
@@ -41,19 +41,19 @@ struct GithubListMembersServiceImpl : GithubListMembersService {
 }
 
 /// Fake implementation of GithubListMembersService. This doesn't hit the network and thus doesn't require anything.
-struct FakeListMembersServiceImpl : GithubListMembersService {
+struct FakeListMembersServiceImpl: GithubListMembersService {
     func listMembers(for orgName: String, handler: @escaping ([String]) -> Void) {
         handler(["Fake #1", "Fake #2", "Fake #3"])
     }
 }
 
 //: Define our Network Scope (like a Singleton)
-struct Network : Scope {}
+struct Network: Scope {}
 
 //: Define our Cleanse Module(s) and Component(s). These objects are responsible for setting up and initializing the object graph.
 
 /// The `NetworkModule` provides an `URLSession`.
-struct NetworkModule : Module {
+struct NetworkModule: Module {
     static func configure(binder: Binder<Network>) {
 
         //: Provide `URLSessionConfiguration.ephemeral` when a `URLSessionConfiguration` is required.
@@ -77,12 +77,12 @@ struct NetworkModule : Module {
 }
 
 //: This represents the base URL for GitHub. We might have multiple `URL`s in the app, so we should define each one with a specific tag.
-struct GithubBaseURL : Tag {
+struct GithubBaseURL: Tag {
     typealias Element = URL
 }
 
 //: Configure the Real Github API.
-struct GithubAPIModule : Module {
+struct GithubAPIModule: Module {
     static func configure(binder: Binder<Network>) {
         binder.include(module: NetworkModule.self)
 
@@ -102,7 +102,7 @@ struct GithubAPIModule : Module {
 }
 
 //: Configure the Fake Github API. You would use this in tests or even while developing so you don't have to rely on a staging server.
-struct FakeAPIModule : Module {
+struct FakeAPIModule: Module {
     static func configure(binder: Binder<Network>) {
         binder
             .bind(FakeListMembersServiceImpl.self)
@@ -112,7 +112,7 @@ struct FakeAPIModule : Module {
 }
 
 //: Define a Component. This is the root object that the object graph is built around.
-struct GithubListMembersComponent : RootComponent {
+struct GithubListMembersComponent: RootComponent {
     // When we build this Component we want to return `GithubListMembersService`.
     typealias Root = GithubListMembersService
 
@@ -141,7 +141,7 @@ membersService.listMembers(for: "square") { members in
     print("Fetched \(members.count) members:")
 
     for (i, username) in members.enumerated() {
-        print("\(i+1).\t\(username)")
+        print("\(i + 1).\t\(username)")
     }
 
     PlaygroundPage.current.finishExecution()

@@ -8,12 +8,10 @@
 
 import Foundation
 
-
 /// Represents either an error or result type.
 enum ErrorOptional<Wrapped> {
     case Result(Wrapped)
     case Error(Error)
-
 
     init(_ result: Wrapped) {
         self = .Result(result)
@@ -32,7 +30,6 @@ enum ErrorOptional<Wrapped> {
         }
     }
 }
-
 
 extension ErrorOptional {
     func map<NewWrapped>(transform: (Wrapped) throws -> NewWrapped) -> ErrorOptional<NewWrapped> {

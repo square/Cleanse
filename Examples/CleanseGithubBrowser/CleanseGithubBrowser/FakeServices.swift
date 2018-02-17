@@ -6,13 +6,13 @@
 //  Copyright © 2016 Square, Inc. All rights reserved.
 //
 
-import Foundation
 import Cleanse
+import Foundation
 
 /// Contains fake implementations of the services that use the network
 
 /// Configure the services to be implemented by fakes
-struct FakeGithubServicesModule : GithubServicesModule {
+struct FakeGithubServicesModule: GithubServicesModule {
     static func configure(binder: SingletonBinder) {
         binder
             .bind()
@@ -34,21 +34,20 @@ struct FakeGithubServicesModule : GithubServicesModule {
     }
 }
 
-
-struct FakeGithubMembersService : GithubMembersService {
-    func list(handler: @escaping (ErrorOptional<[GithubMember]>) -> ()) {
-        DispatchQueue.main.async() { 
+struct FakeGithubMembersService: GithubMembersService {
+    func list(handler: @escaping (ErrorOptional<[GithubMember]>) -> Void) {
+        DispatchQueue.main.async() {
             handler(.init([
                 GithubMember(login: "abrons"),
                 GithubMember(login: "mikelikespie"),
-                GithubMember(login: "holmes"),
+                GithubMember(login: "holmes")
             ]))
         }
     }
 }
 
-struct FakeGithubRepositoriesService : GithubRepositoriesService {
-    func list(_ handler: @escaping (ErrorOptional<[GithubRepository]>) -> ()) {
+struct FakeGithubRepositoriesService: GithubRepositoriesService {
+    func list(_ handler: @escaping (ErrorOptional<[GithubRepository]>) -> Void) {
         DispatchQueue.main.async() {
             handler(.init([
                 GithubRepository(name: "okhttp", watchersCount: 11_917),

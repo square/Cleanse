@@ -11,7 +11,7 @@
 
 import Cleanse
 
-struct Singleton : Scope {
+struct Singleton: Scope {
 }
 
 protocol Pump {
@@ -24,13 +24,13 @@ protocol Heater {
     var isHot: Bool { get }
 }
 
-class Thermosiphon : Pump {
+class Thermosiphon: Pump {
     let heater: Heater
-    
+
     init(heater: Heater) {
         self.heater = heater
     }
-    
+
     func pump() {
         if heater.isHot {
             print("=> => pumping => =>")
@@ -39,7 +39,7 @@ class Thermosiphon : Pump {
 }
 
 //: Module that configures `Thermosiphon` to be our `Pump`
-struct PumpModule : Module {
+struct PumpModule: Module {
     static func configure(binder: UnscopedBinder) {
         binder
             .bind(Pump.self)
@@ -47,25 +47,25 @@ struct PumpModule : Module {
     }
 }
 
-class ElectricHeater : Heater {
+class ElectricHeater: Heater {
     private var heating = false
-    
+
     var isHot: Bool {
         return heating
     }
-    
+
     func on() {
         print("~ ~ ~ Heating ~ ~ ~")
         heating = true
     }
-    
+
     func off() {
         heating = false
     }
 }
 
 //: Module that configures `ElectricHeater` to be our `Heater`. It also has a dependency on `PumpModule`.
-struct DripCoffeeModule : Module {
+struct DripCoffeeModule: Module {
     static func configure(binder: Binder<Singleton>) {
         binder.include(module: PumpModule.self)
 
@@ -80,22 +80,22 @@ struct DripCoffeeModule : Module {
 class CoffeeMaker {
     let heater: Provider<Heater>  // Create a possibly costly heater only when we need it.
     let pump: Pump
-    
+
     init(heater: Provider<Heater>, pump: Pump) {
         self.pump = pump
         self.heater = heater
     }
 
     func brew() {
-        heater.get().on();
-        pump.pump();
-        print(" [_]P coffee! [_]P ");
-        heater.get().off();
+        heater.get().on()
+        pump.pump()
+        print(" [_]P coffee! [_]P ")
+        heater.get().off()
     }
 }
 
 //: Now let's create the Component. A component defines what the root of our object graph is and the modules it depends on to construct that root object.
-struct CoffeeMakerComponent : RootComponent {
+struct CoffeeMakerComponent: RootComponent {
     typealias Root = CoffeeMaker
 
     static func configureRoot(binder bind: ReceiptBinder<CoffeeMaker>) -> BindingReceipt<CoffeeMaker> {

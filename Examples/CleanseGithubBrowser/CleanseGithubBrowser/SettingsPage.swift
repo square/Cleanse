@@ -6,10 +6,9 @@
 //  Copyright © 2016 Square, Inc. All rights reserved.
 //
 
-import Foundation
 import Cleanse
+import Foundation
 import UIKit
-
 
 /// These can be provided to a collection to add an item to settings.
 struct SettingsItem {
@@ -47,7 +46,7 @@ struct SettingsItem {
 }
 
 /// Split view controller that has settings items as the Master, and the settings details as the detail item
-class SettingsSplitViewController : SplitViewController {
+class SettingsSplitViewController: SplitViewController {
     init(masterViewController: MasterViewController) {
         super.init(masterViewController:  masterViewController)
 
@@ -66,7 +65,7 @@ class SettingsSplitViewController : SplitViewController {
     }
 
     /// Module that adds SettingsSplitViewController & friends
-    struct Module : Cleanse.Module {
+    struct Module: Cleanse.Module {
         static func configure(binder: UnscopedBinder) {
             binder.bind().to(factory: SettingsSplitViewController.init)
             binder.bind().to(factory: MasterViewController.init)
@@ -88,10 +87,10 @@ class SettingsSplitViewController : SplitViewController {
     }
 }
 
-extension SettingsSplitViewController  {
+extension SettingsSplitViewController {
     /// Master view controller for the Settings split view controller.
     /// A lot of this implementation could be split into a generic SplitViewController implementation
-    class MasterViewController : TableViewController {
+    class MasterViewController: TableViewController {
         let settingsItems: [SettingsItem]
 
         fileprivate var lastSelectedItemIndex: Int?
@@ -202,7 +201,7 @@ extension SettingsSplitViewController.MasterViewController {
 }
 
 /// Split view controller delegate stuff
-extension SettingsSplitViewController.MasterViewController : UISplitViewControllerDelegate {
+extension SettingsSplitViewController.MasterViewController: UISplitViewControllerDelegate {
     @objc func splitViewController(
         splitViewController: UISplitViewController,
         separateSecondaryViewControllerFromPrimaryViewController primaryViewController: UIViewController
@@ -233,7 +232,6 @@ extension SettingsSplitViewController.MasterViewController : UISplitViewControll
     private var detailItemHasBeenExplicitelySelected: Bool {
         return lastSelectedItemIndex != nil
     }
-
 
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)

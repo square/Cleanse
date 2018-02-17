@@ -6,8 +6,8 @@
 //  Copyright © 2016 Square, Inc. All rights reserved.
 //
 
-import Foundation
 import Cleanse
+import Foundation
 
 struct GithubRepository {
     let name: String
@@ -23,16 +23,16 @@ struct GithubRepository {
 
 /// Service that lists repositories for the current user
 protocol GithubRepositoriesService {
-    func list(_ handler: @escaping (ErrorOptional<[GithubRepository]>) -> ())
+    func list(_ handler: @escaping (ErrorOptional<[GithubRepository]>) -> Void)
 }
 
-struct GithubRepositoriesServiceImpl : GithubRepositoriesService {
+struct GithubRepositoriesServiceImpl: GithubRepositoriesService {
     let githubURL: TaggedProvider<GithubBaseURL>
     let githubOrganizationName: TaggedProvider<GithubOrganizationName>
 
     let urlSession: URLSession
 
-    func list(_ handler: @escaping (ErrorOptional<[GithubRepository]>) -> ()) {
+    func list(_ handler: @escaping (ErrorOptional<[GithubRepository]>) -> Void) {
         urlSession.jsonListTask(
             baseURL: githubURL.get(),
             pathComponents: "users", githubOrganizationName.get(), "repos",

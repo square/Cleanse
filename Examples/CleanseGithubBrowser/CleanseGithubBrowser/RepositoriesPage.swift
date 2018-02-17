@@ -6,13 +6,12 @@
 //  Copyright © 2016 Square, Inc. All rights reserved.
 //
 
+import Cleanse
 import Foundation
 import UIKit
-import Cleanse
-
 
 /// A module that configures a tab page on the root view controller as well as on the settings page
-struct RepositoriesModule : Cleanse.Module {
+struct RepositoriesModule: Cleanse.Module {
     static func configure(binder: SingletonBinder) {
         // Make RepositoriesViewController available to be injected
         binder
@@ -32,7 +31,6 @@ struct RepositoriesModule : Cleanse.Module {
                 let navController = UINavigationController(rootViewController: repositoriesViewController)
                 return RootTabBarItem(viewController: navController, rank: 0)
             }
-
 
         // Make the RepositoriesPageSettings available as a singleton. This is a shared object
         binder
@@ -60,7 +58,7 @@ struct RepositoriesModule : Cleanse.Module {
 }
 
 /// View controller that shows a list of repositories for the configured github organization
-class RepositoriesViewController : TableViewController {
+class RepositoriesViewController: TableViewController {
     let repositoriesService: GithubRepositoriesService
 
     private var repositories = [GithubRepository]()
@@ -107,10 +105,9 @@ class RepositoriesViewController : TableViewController {
         }
 
         cell.selectionStyle = .none
-        
+
         return cell
     }
-
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -126,7 +123,7 @@ class RepositoriesViewController : TableViewController {
             do {
                 self.repositories = try result.get()
                 self.tableView.reloadData()
-            } catch let e  {
+            } catch let e {
                 NSLog("We got an error \(e) fetching repositories. Doing nothing")
                 return
             }
@@ -134,14 +131,13 @@ class RepositoriesViewController : TableViewController {
     }
 }
 
-
 /// This is a singleton that controls how the members page is displayed
 class RepositoriesPageSettings {
     // If true, we show the number of watchers
     var showWatcherCount = true
 }
 
-class RepositoriesSettingsSplitViewController : TableViewController {
+class RepositoriesSettingsSplitViewController: TableViewController {
     private let cells: [UITableViewCell]
 
     init(showWatcherCount: ShowWatcherCountCell) {
@@ -159,7 +155,7 @@ class RepositoriesSettingsSplitViewController : TableViewController {
     }
 }
 
-class ShowWatcherCountCell : UITableViewCell {
+class ShowWatcherCountCell: UITableViewCell {
     let `switch` = UISwitch()
     let settings: RepositoriesPageSettings
 
@@ -185,5 +181,3 @@ class ShowWatcherCountCell : UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 }
-
-

@@ -6,11 +6,11 @@
 //  Copyright © 2016 Square, Inc. All rights reserved.
 //
 
-import Foundation
 import Cleanse
+import Foundation
 
 /// Wires up NSURLSession and friends
-struct NetworkModule : Module {
+struct NetworkModule: Module {
     static func configure(binder: SingletonBinder) {
 
         binder

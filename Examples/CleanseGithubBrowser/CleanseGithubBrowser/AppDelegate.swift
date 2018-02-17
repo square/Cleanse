@@ -6,9 +6,8 @@
 //  Copyright © 2016 Square, Inc. All rights reserved.
 //
 
-import UIKit
 import Cleanse
-
+import UIKit
 
 typealias ReleaseAppComponent = AppComponent<RealeaseGithubServicesModule>
 typealias FakeAppComponent = AppComponent<FakeGithubServicesModule>
@@ -29,8 +28,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Fake mode makes it easy to test and demo the app. It uses in process versions of the services
         if useFakeMode {
             // Build and validate the release module to catch bugs sooner.
-            let _ = try! ComponentFactory.of(ReleaseAppComponent.self)
-            
+            _ = try! ComponentFactory.of(ReleaseAppComponent.self)
+
             propertyInjector = try! ComponentFactory.of(FakeAppComponent.self).build()
         } else {
             propertyInjector = try! ComponentFactory.of(ReleaseAppComponent.self, validate: false).build()

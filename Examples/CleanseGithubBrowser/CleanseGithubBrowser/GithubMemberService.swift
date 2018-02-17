@@ -6,8 +6,8 @@
 //  Copyright © 2016 Square, Inc. All rights reserved.
 //
 
-import Foundation
 import Cleanse
+import Foundation
 
 struct GithubMember {
     let login: String
@@ -20,17 +20,17 @@ struct GithubMember {
 
 /// Service that lists "Member" for the current organization
 protocol GithubMembersService {
-    func list(handler: @escaping (ErrorOptional<[GithubMember]>) -> ())
+    func list(handler: @escaping (ErrorOptional<[GithubMember]>) -> Void)
 }
 
-struct GithubMembersServiceImpl : GithubMembersService {
+struct GithubMembersServiceImpl: GithubMembersService {
     let githubURL: TaggedProvider<GithubBaseURL>
     let githubOrganizationName: TaggedProvider<GithubOrganizationName>
 
     let urlSession: URLSession
 
     /// Lists members of an organization
-    func list(handler: @escaping (ErrorOptional<[GithubMember]>) -> ()) {
+    func list(handler: @escaping (ErrorOptional<[GithubMember]>) -> Void) {
         urlSession.jsonListTask(
             baseURL: githubURL.get(),
             pathComponents: "orgs", githubOrganizationName.get(), "public_members") { result in

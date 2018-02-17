@@ -10,7 +10,7 @@ import Cleanse
 import Foundation
 import UIKit
 
-struct FakeModeSettingsModule : Cleanse.Module {
+struct FakeModeSettingsModule: Cleanse.Module {
     static func configure(binder: UnscopedBinder) {
         binder.bind().to(factory: FakeModeSettingsSplitViewController.init)
         binder.bind().to(factory: FakeModeCell.init)
@@ -26,7 +26,7 @@ struct FakeModeSettingsModule : Cleanse.Module {
     }
 }
 
-class FakeModeSettingsSplitViewController : TableViewController {
+class FakeModeSettingsSplitViewController: TableViewController {
     private let cells: [UITableViewCell]
 
     init(fakeModeCell: FakeModeCell) {
@@ -44,7 +44,7 @@ class FakeModeSettingsSplitViewController : TableViewController {
     }
 }
 
-class FakeModeCell : UITableViewCell {
+class FakeModeCell: UITableViewCell {
     let `switch` = UISwitch()
     let processInfo: ProcessInfo
 

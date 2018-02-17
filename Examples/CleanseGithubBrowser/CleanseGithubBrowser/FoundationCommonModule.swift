@@ -6,11 +6,11 @@
 //  Copyright © 2016 Square, Inc. All rights reserved.
 //
 
-import Foundation
 import Cleanse
+import Foundation
 
 /// Module that configures common bindings from the `Foundation` framework
-struct FoundationCommonModule : Module {
+struct FoundationCommonModule: Module {
     static func configure(binder: SingletonBinder) {
         binder
             .bind(ProcessInfo.self)

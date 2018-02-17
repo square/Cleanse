@@ -6,9 +6,9 @@
 //  Copyright © 2016 Square, Inc. All rights reserved.
 //
 
-import XCTest
-@testable import CleanseGithubBrowser
 import Cleanse
+@testable import CleanseGithubBrowser
+import XCTest
 
 /// Using the DI framework doens't mean its required to unit test its components.
 class CleanseGithubBrowserTests: XCTestCase {

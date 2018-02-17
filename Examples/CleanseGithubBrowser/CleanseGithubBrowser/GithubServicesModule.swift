@@ -6,18 +6,16 @@
 //  Copyright © 2016 Square, Inc. All rights reserved.
 //
 
-import Foundation
 import Cleanse
+import Foundation
 
-
-protocol GithubServicesModule : Module {
+protocol GithubServicesModule: Module {
     static func configureGithubMembersService(binder bind: ReceiptBinder<GithubMembersService>) -> BindingReceipt<GithubMembersService>
     static func configureRepositoriesMembersService(binder bind: ReceiptBinder<GithubRepositoriesService>) -> BindingReceipt<GithubRepositoriesService>
 }
 
-
 /// Wires up common definitions shared across services as well as installing the services's modules
-struct RealeaseGithubServicesModule : GithubServicesModule {
+struct RealeaseGithubServicesModule: GithubServicesModule {
     static func configure(binder: SingletonBinder) {
         binder.include(module: NetworkModule.self)
     }
@@ -31,15 +29,15 @@ struct RealeaseGithubServicesModule : GithubServicesModule {
     }
 }
 
-struct GithubBaseURL : Tag {
+struct GithubBaseURL: Tag {
     typealias Element = URL
 }
 
 /// Represents the github user name we want to query.
-struct GithubUserName : Tag {
+struct GithubUserName: Tag {
     typealias Element = String
 }
 
-struct GithubOrganizationName : Tag {
+struct GithubOrganizationName: Tag {
     typealias Element = String
 }

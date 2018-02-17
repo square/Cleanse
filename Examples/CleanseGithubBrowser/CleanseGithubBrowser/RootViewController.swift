@@ -19,14 +19,14 @@ struct RootTabBarItem {
 }
 
 /// Root View Controller for our application
-class RootViewController : UITabBarController {
+class RootViewController: UITabBarController {
     /// We want a list of RootTabBarItem's injected into us. These are the tabs we display
     init(items: [RootTabBarItem]) {
         super.init(nibName: nil, bundle: nil)
 
         /// Sort the view controllers by rank
         let viewControllers = items
-            .sorted { $0.rank < $1.rank  }
+            .sorted { $0.rank < $1.rank }
             .map { $0.viewController }
 
         self.viewControllers = viewControllers
@@ -40,7 +40,7 @@ class RootViewController : UITabBarController {
         fatalError("init(coder:) has not been implemented")
     }
 
-    struct Module : Cleanse.Module {
+    struct Module: Cleanse.Module {
         static func configure(binder: UnscopedBinder) {
             // This creates and binds a RootViewController.
             binder
@@ -56,4 +56,3 @@ class RootViewController : UITabBarController {
         }
     }
 }
-

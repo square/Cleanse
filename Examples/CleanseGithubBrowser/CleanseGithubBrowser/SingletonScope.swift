@@ -6,10 +6,10 @@
 //  Copyright © 2017 Square, Inc. All rights reserved.
 //
 
-import Foundation
 import Cleanse
+import Foundation
 
-public struct Singleton : Cleanse.Scope {
+public struct Singleton: Cleanse.Scope {
 }
 
 public typealias SingletonBinder = Binder<Singleton>

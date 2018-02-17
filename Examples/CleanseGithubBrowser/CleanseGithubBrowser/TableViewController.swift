@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 /// Common base class for UITableViewController that has better default constructors
-class TableViewController : UITableViewController {
+class TableViewController: UITableViewController {
     init() {
         super.init(nibName: nil, bundle: nil)
     }

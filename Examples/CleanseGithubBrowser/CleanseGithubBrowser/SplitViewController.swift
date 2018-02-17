@@ -9,7 +9,7 @@
 import UIKit
 
 /// Common base class for UISplitViewController that has better default constructors
-class SplitViewController : UISplitViewController {
+class SplitViewController: UISplitViewController {
     init<RootVC: UIViewController>(masterViewController: RootVC) where RootVC: UISplitViewControllerDelegate {
         super.init(nibName: nil, bundle: nil)
 

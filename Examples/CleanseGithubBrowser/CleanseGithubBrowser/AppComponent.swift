@@ -29,8 +29,7 @@ struct AppComponent<ServiceModule: GithubServicesModule> : Cleanse.RootComponent
     }
 }
 
-
-struct CoreAppModule : Cleanse.Module {
+struct CoreAppModule: Cleanse.Module {
     static func configure(binder: SingletonBinder) {
         // We want to make it so the app uses "square" as the github user.
         binder
