@@ -9,16 +9,12 @@
 # Uncomment the line if you want fastlane to automatically update itself
 update_fastlane
 
-default_platform(:ios)
-
-platform :ios do
-
-  # Lint the project
-  lane :lint do
-      swiftlint(
-          ignore_exit_status: true,
-          strict: true
-      )
-  end
-  
+# Lint the project
+lane :lint do
+    swiftlint(
+        ignore_exit_status: false,
+        strict: false,
+        reporter: 'xcode',
+        quiet: true
+    )
 end
