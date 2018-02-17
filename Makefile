@@ -14,7 +14,7 @@ test: build
 	$(SWIFT) test
 
 clean:
-	$(SWIFT) build --clean
+	$(SWIFT) package clean
 
 generated_sources: Cleanse/BinderArities.swift Cleanse/PropertyInjectionArities.swift
 
