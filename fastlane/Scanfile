@@ -1,0 +1,4 @@
+scheme "Cleanse"
+clean true
+code_coverage true
+device "iPhone 7 Plus (11.2)"

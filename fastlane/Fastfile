@@ -6,7 +6,6 @@
 #     https://docs.fastlane.tools/actions
 #
 
-# Uncomment the line if you want fastlane to automatically update itself
 update_fastlane
 
 # Lint the project
@@ -17,4 +16,12 @@ lane :lint do
         reporter: 'xcode',
         quiet: true
     )
+end
+
+lane :test do
+    scan
+end
+
+lane :documentation do
+    jazzy
 end
