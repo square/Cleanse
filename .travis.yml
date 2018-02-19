@@ -7,10 +7,10 @@ xcode_scheme: Cleanse
 xcode_sdk: iphonesimulator11.2
 
 script:
-  - xcodebuild test -project $TRAVIS_XCODE_PROJECT -scheme $TRAVIS_XCODE_SCHEME -sdk $TRAVIS_XCODE_SDK -enableCodeCoverage=YES -destination "platform=iOS Simulator,name=iPad Air 2"
+  - bundle exec fastlane test
 
 before_install:
   - rvm use $RVM_RUBY_VERSION
 
-install: bundle install -j4 --path vendor/bundle --without documentation test development
+install: bundle install
 after_success: bundle exec slather
