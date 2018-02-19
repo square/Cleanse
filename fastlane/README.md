@@ -20,6 +20,16 @@ or alternatively using `brew cask install fastlane`
 fastlane lint
 ```
 
+### test
+```
+fastlane test
+```
+
+### documentation
+```
+fastlane documentation
+```
+
 
 ----
 
