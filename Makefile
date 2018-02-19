@@ -18,11 +18,11 @@ clean:
 
 generated_sources: Cleanse/BinderArities.swift Cleanse/PropertyInjectionArities.swift
 
-Cleanse/BinderArities.swift: CleanseGen/GenerateBinderArities.swift
-	xcrun swift CleanseGen/GenerateBinderArities.swift > Cleanse/BinderArities.swift
+Cleanse/BinderArities.swift: CleanseGen/main.swift
+	xcrun swift CleanseGen/main.swift > Cleanse/BinderArities.swift
 
-Cleanse/PropertyInjectionArities.swift: CleanseGen/GeneratePropertyInjectionArities.swift
-	xcrun swift CleanseGen/GeneratePropertyInjectionArities.swift > Cleanse/PropertyInjectionArities.swift
+Cleanse/PropertyInjectionArities.swift: CleanseGen/main.swift
+	xcrun swift CleanseGen/main.swift > Cleanse/PropertyInjectionArities.swift
 
 docs/index.html: build
 	jazzy
