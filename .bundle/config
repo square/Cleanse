@@ -1,0 +1,4 @@
+---
+BUNDLE_PATH: "vendor/bundle"
+BUNDLE_JOBS: "4"
+BUNDLE_WITHOUT: "documentation:test:development"
