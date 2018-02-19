@@ -1,7 +1,8 @@
 coverage_service: coveralls
 xcodeproj: Cleanse.xcodeproj
+workspace: Cleanse.xcworkspace
 scheme: Cleanse
+output_directory: coverage
 ignore:
   - Cleanse/PropertyInjectionArities.swift
   - Cleanse/BinderArities.swift
-
