@@ -17,7 +17,7 @@ public protocol ProviderProtocol {
     
     init<P: ProviderProtocol>(other: P) where P.Element == Element
     init(value: Element)
-    init(getter: @escaping (Void) -> Element)
+    init(getter: @escaping ()-> Element)
 
     /// - returns: provides an instance of `Element`
     func get() -> Element
@@ -44,7 +44,7 @@ protocol AnyProvider {
     /// Of type Provider<() -> Element>
     var anyGetterProvider: AnyProvider? { get }
     
-    static func makeNew(getter: @escaping (Void) -> Any) -> AnyProvider
+    static func makeNew(getter: @escaping ()-> Any) -> AnyProvider
 
     func asCheckedProvider<Element>(_ type: Element.Type) -> Provider<Element>
     
