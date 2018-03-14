@@ -341,7 +341,7 @@ final class ValidationVisitor : ComponentVisitor {
         }
 
         errors.sort {
-            return $0.0.description < $0.1.description
+            return $0.description < $1.description
         }
 
         switch errors.count {

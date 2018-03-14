@@ -10,14 +10,14 @@ import Foundation
 
 #if SUPPORT_LEGACY_OBJECT_GRAPH
 
-typealias LegacyProviderProvider = (AnyClass, String?) -> (Void) -> AnyObject
+typealias LegacyProviderProvider = (AnyClass, String?) -> ()-> AnyObject
 typealias LegacyPropertyInjectorProvider = (AnyClass) -> (AnyObject) -> Void
 
 /// Protocol with base method for LegacyObjectGraph
 public protocol LegacyObjectGraphProtocol {
     
     /// Core method that all legacy methods are based off of. This returns a function that when evaluated it will emit the instance registered for `cls`
-    func providerForClass(cls: AnyClass, withName name: String?) -> (Void) -> AnyObject
+    func providerForClass(cls: AnyClass, withName name: String?) -> ()-> AnyObject
 }
 
 /// This is a class to support backwards compatibility for Cleanse's Predecessor, Stiletto.
@@ -36,7 +36,7 @@ public protocol LegacyObjectGraphProtocol {
     }
     
     /// Convenience method equivalent to `providerForClass(cls: cls, withName: nil)`
-    @objc(providerForClass:) public func providerForClass(cls: AnyClass) -> (Void) -> AnyObject {
+    @objc(providerForClass:) public func providerForClass(cls: AnyClass) -> ()-> AnyObject {
         return providerForClass(cls: cls, withName: nil)
     }
     
@@ -45,7 +45,7 @@ public protocol LegacyObjectGraphProtocol {
         return providerForClass(cls: cls, withName: name)()
     }
     
-    @objc public func providerForClass(cls: AnyClass, withName name: String?) -> (Void) -> AnyObject {
+    @objc public func providerForClass(cls: AnyClass, withName name: String?) -> ()-> AnyObject {
         return graph.legacyProvider(cls: cls, name:  name).get
     }
     
