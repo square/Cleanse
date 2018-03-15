@@ -8,7 +8,7 @@
 
 import Foundation
 
-let maxArities = 21
+let maxArities = 25
 
 struct GenerateBindersArities {
     static func build(path: String) {
