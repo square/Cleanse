@@ -120,7 +120,7 @@ extension ComponentVisitor {
     }
 
     private func bindFactory<C : Cleanse.ComponentBase>(_ dependency: C.Type) {
-        self.bind(ComponentFactory<C>.self).to { () -> ComponentFactory<C> in
+        self.bind(ComponentFactory<C>.self).to0 { () -> ComponentFactory<C> in
             preconditionFailure("Should not ever evaluate"); _ = Void()
         }
     }

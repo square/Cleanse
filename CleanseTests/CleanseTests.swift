@@ -35,7 +35,7 @@ struct GrillModule : Module {
     static func configure(binder: Binder<Singleton>) {
         binder.include(module: BurgerModule.self)
         
-        binder.bind().to(factory: Grill.init)
+        binder.bind().to1(factory: Grill.init)
     }
 }
 
@@ -63,7 +63,7 @@ class SomethingThatDoesAnAPICall {
         static func configure(binder: UnscopedBinder) {
             binder
                 .bind(SomethingThatDoesAnAPICall.self)
-                .to(factory: SomethingThatDoesAnAPICall.init)
+                .to1(factory: SomethingThatDoesAnAPICall.init)
         }
     }
 }
@@ -83,22 +83,22 @@ struct APIComponent : RootComponent {
     }
 
     static func configureRoot(binder bind: ReceiptBinder<Root>) -> BindingReceipt<Root> {
-        return bind.to(factory: Root.init)
+        return bind.to1(factory: Root.init)
     }
 }
 
 struct BurgerModule : Module {
     static func configure(binder: Binder<Singleton>) {
         binder.bind().to(factory: Burger.init)
-        binder.bind().to { return Cheese.cheddar }
-        binder.bind().to { Roll.ciabatta }
+        binder.bind().to0 { return Cheese.cheddar }
+        binder.bind().to0 { Roll.ciabatta }
         
         var singletonCountTest = 1
         binder
             .bind(Int.self)
             .tagged(with:  SlicesOfCheese.self)
             .sharedInScope()
-            .to {
+            .to0 {
                 defer { singletonCountTest += 1 }
                 return singletonCountTest
             }
@@ -109,7 +109,7 @@ struct BurgerModule : Module {
         binder
             .bind(Int.self)
             .tagged(with:  BurgerIndex.self)
-            .to {
+            .to0 {
                 defer { burgerIndex += 1 }
                 return burgerIndex
             }
@@ -137,7 +137,7 @@ struct SimpleModule : RootComponent {
 class CleanseTests: XCTestCase {
 
     func test__Simplest() {
-        let value = try! ComponentFactory.of(SimpleModule.self).build()
+        let value = try! ComponentFactory.of(SimpleModule.self).build(())
         XCTAssertEqual(value, 3)
     }
     
@@ -218,12 +218,12 @@ class CleanseTests: XCTestCase {
         }
 
         static func configureRoot(binder bind: ReceiptBinder<Root>) -> BindingReceipt<Root> {
-            return bind.to(factory: Root.init)
+            return bind.to1(factory: Root.init)
         }
     }
 
     func test_CollectionBuilderBinding() {
-        let results = try! ComponentFactory.of(CollectionBuilderBindingTestComponent.self).build()
+        let results = try! ComponentFactory.of(CollectionBuilderBindingTestComponent.self).build(())
         XCTAssertEqual(results.taggedIntCollection1.get().sorted(), [1,2,3,8,9,10,11])
     }
 }

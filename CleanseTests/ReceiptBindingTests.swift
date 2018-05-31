@@ -14,13 +14,13 @@ import XCTest
 
 class ReceiptBindingTests: XCTestCase {
     func testDevelopmentComponent() {
-        let userService = try! ComponentFactory.of(UserServiceComponent<DevelopmentUserServiceModule>.self).build()
+        let userService = try! ComponentFactory.of(UserServiceComponent<DevelopmentUserServiceModule>.self).build(())
 
         XCTAssertEqual(userService.getNameForUser(userID: "user-1"), "Development User One")
     }
 
     func testProductionComponent() {
-        let userService = try! ComponentFactory.of(UserServiceComponent<ProductionUserServiceModule>.self).build()
+        let userService = try! ComponentFactory.of(UserServiceComponent<ProductionUserServiceModule>.self).build(())
         XCTAssertEqual(userService.getNameForUser(userID: "user-1"), "User One")
     }
 }
@@ -70,22 +70,22 @@ private struct DevelopmentUserService : UserService {
 
 private struct ProductionUserServiceModule : UserServiceModule {
     fileprivate static func configure(binder: Binder<Singleton>) {
-        binder.bind().sharedInScope().to(factory: ProductionUserService.init)
+        binder.bind().sharedInScope().to0(factory: ProductionUserService.init)
     }
 
     fileprivate static func configureUserService(binder bind: ReceiptBinder<UserService>) -> BindingReceipt<UserService> {
-        return bind.to { $0 as ProductionUserService }
+        return bind.to1 { $0 as ProductionUserService }
     }
 }
 
 
 private struct DevelopmentUserServiceModule : UserServiceModule {
     fileprivate static func configure(binder: Binder<Singleton>) {
-        binder.bind().sharedInScope().to(factory: DevelopmentUserService.init)
+        binder.bind().sharedInScope().to0(factory: DevelopmentUserService.init)
     }
 
     fileprivate static func configureUserService(binder bind: ReceiptBinder<UserService>) -> BindingReceipt<UserService> {
-        return bind.to { $0 as DevelopmentUserService }
+        return bind.to1 { $0 as DevelopmentUserService }
     }
 }
 

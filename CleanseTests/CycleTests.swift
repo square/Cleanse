@@ -31,11 +31,11 @@ class CycleTests: XCTestCase {
         typealias Root = AA
 
         static func configure(binder: Binder<Singleton>) {
-            binder.bind(BB.self).sharedInScope().to(factory: BB.init)
+            binder.bind(BB.self).sharedInScope().to1(factory: BB.init)
         }
 
         static func configureRoot(binder bind: ReceiptBinder<Root>) -> BindingReceipt<Root> {
-            return bind.to(factory: Root.init)
+            return bind.to1(factory: Root.init)
         }
     }
 
@@ -54,11 +54,11 @@ class CycleTests: XCTestCase {
         typealias  Root = AA_OK
 
         static func configureRoot(binder bind: ReceiptBinder<Root>) -> BindingReceipt<Root> {
-            return bind.to(factory: Root.init)
+            return bind.to1(factory: Root.init)
         }
 
         static func configure(binder: Binder<Singleton>) {
-            binder.bind().sharedInScope().to(factory: BB_OK.init)
+            binder.bind().sharedInScope().to1(factory: BB_OK.init)
         }
     }
 
