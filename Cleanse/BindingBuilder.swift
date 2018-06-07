@@ -105,7 +105,7 @@ extension BindToable {
     /**
      This is the 0th arity `to(factory:)` function. This finishes the binding process.
      */
-    @discardableResult public func to(
+    @discardableResult public func to0(
         file: StaticString=#file,
              line: Int=#line,
              function: StaticString=#function,

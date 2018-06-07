@@ -276,7 +276,7 @@ class Graph : BinderBase {
     private func install<C: ComponentBase>(componentBase dependency: C.Type) {
         // TODO: validate subcomponents
         self.bind(ComponentFactory<C>.self)
-            .to(factory: { [weak self] in
+            .to0(factory: { [weak self] in
                 let `self` = self!
                 return ComponentFactory { seed in
                     let subgraph = Graph(scope: C.Scope.scopeOrNil, parent: self)

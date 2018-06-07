@@ -128,7 +128,7 @@ class PropertyInjectionTests: XCTestCase {
 
     func testPropertyInject() {
         try! ComponentFactory.of(PropertyInjectionComponent.self)
-            .build()
+            .build(())
             .injectProperties(into: self)
         
         let a = AClass()

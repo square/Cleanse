@@ -26,7 +26,7 @@ class ComponentVisitorTests: XCTestCase {
 
         static func configureRoot(binder bind: ReceiptBinder<Root>) -> BindingReceipt<Root> {
             return bind.to { (cf1: ComponentFactory<Component1>, cf2: ComponentFactory<Component2>, s: String) in
-                return RR(r1: cf1.build(), r2: cf2.build(s))
+                return RR(r1: cf1.build(()), r2: cf2.build(s))
             }
         }
     }
@@ -43,7 +43,7 @@ class ComponentVisitorTests: XCTestCase {
         }
 
         static func configureRoot(binder bind: ReceiptBinder<Root>) -> BindingReceipt<Root> {
-            return bind.to(factory: Root.init)
+            return bind.to0(factory: Root.init)
         }
     }
 
@@ -55,7 +55,7 @@ class ComponentVisitorTests: XCTestCase {
         }
 
         static func configureRoot(binder bind: ReceiptBinder<Root>) -> BindingReceipt<Root> {
-            return bind.to(factory: Root.init)
+            return bind.to1(factory: Root.init)
         }
     }
 

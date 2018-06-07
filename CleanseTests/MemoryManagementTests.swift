@@ -78,13 +78,13 @@ class MemoryManagementTests: XCTestCase {
 
     struct Module : Cleanse.Module {
         static func configure(binder: Binder<Singleton>) {
-            binder.bind().sharedInScope().to(factory: Single1.init)
-            binder.bind().sharedInScope().to(factory: Single2.init)
-            binder.bind().sharedInScope().to(factory: SingleStruct1.init)
+            binder.bind().sharedInScope().to1(factory: Single1.init)
+            binder.bind().sharedInScope().to1(factory: Single2.init)
+            binder.bind().sharedInScope().to1(factory: SingleStruct1.init)
             
-            binder.bind().intoCollection().sharedInScope().to { SingleCollectionElement(value: 3) }
-            binder.bind().intoCollection().sharedInScope().to { SingleCollectionElement(value: 4) }
-            binder.bind().intoCollection().sharedInScope().to { SingleCollectionElement(value: 5) }
+            binder.bind().intoCollection().sharedInScope().to0 { SingleCollectionElement(value: 3) }
+            binder.bind().intoCollection().sharedInScope().to0 { SingleCollectionElement(value: 4) }
+            binder.bind().intoCollection().sharedInScope().to0 { SingleCollectionElement(value: 5) }
         }
     }
     
@@ -93,7 +93,7 @@ class MemoryManagementTests: XCTestCase {
         weak var s2: Single2? = nil
         
         autoreleasepool {
-            let root = try! ComponentFactory.of(MemoryManagementTestsComponent.self).build()
+            let root = try! ComponentFactory.of(MemoryManagementTestsComponent.self).build(())
             s1 = root.single1
             s2 = root.single2
             
@@ -122,7 +122,7 @@ class MemoryManagementTests: XCTestCase {
         weak var s2: Single2? = nil
         
         autoreleasepool {
-            let root = try! ComponentFactory.of(MemoryManagementTestsComponent.self).build()
+            let root = try! ComponentFactory.of(MemoryManagementTestsComponent.self).build(())
             s1 = root.single1
             s2 = root.single2
             
@@ -151,7 +151,7 @@ class MemoryManagementTests: XCTestCase {
         weak var s3p: SingleCollectionElement? = nil
         
         autoreleasepool {
-            let root = try! ComponentFactory.of(MemoryManagementTestsComponent.self).build()
+            let root = try! ComponentFactory.of(MemoryManagementTestsComponent.self).build(())
 
             let c = root.collection.sorted { $0.value < $1.value }
             

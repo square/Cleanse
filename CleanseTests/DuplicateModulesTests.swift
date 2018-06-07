@@ -65,7 +65,7 @@ private struct DuplicateModuleComponent : RootComponent {
 /// Resolves https://github.com/square/Cleanse/issues/37
 class DuplicateModulesTests: XCTestCase {
     func testDuplicateModuleIncludesOk() {
-        let root = try! ComponentFactory.of(DuplicateModuleComponent.self).build()
+        let root = try! ComponentFactory.of(DuplicateModuleComponent.self).build(())
 
         XCTAssertEqual(root.s1.get(), "s1")
         XCTAssertEqual(root.s2.get(), "s2")

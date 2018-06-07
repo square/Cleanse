@@ -26,7 +26,7 @@ private func nextCount() -> Int {
 class ComponentTests: XCTestCase {
 
     func testSubcomponents() {
-        let app = try! ComponentFactory.of(AppComponent.self).build()
+        let app = try! ComponentFactory.of(AppComponent.self).build(())
 
         let user1root1 = app.loggedInComponentFactory.build("user-1")
         let user1root2 = app.loggedInComponentFactory.build("user-1")
@@ -39,7 +39,7 @@ class ComponentTests: XCTestCase {
     }
 
     func testSubcomponentsWithMultibindings() {
-        let app = try! ComponentFactory.of(AppComponent.self).build()
+        let app = try! ComponentFactory.of(AppComponent.self).build(())
 
         XCTAssertEqual(
             app.allLoggedOutStrings.get().sorted(),
@@ -161,7 +161,7 @@ class ComponentTests: XCTestCase {
             binder
                 .bind(UserService.self)
                 .sharedInScope()
-                .to(factory: UserServiceImpl.init)
+                .to0(factory: UserServiceImpl.init)
         }
     }
 }
