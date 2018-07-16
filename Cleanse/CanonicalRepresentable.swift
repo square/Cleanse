@@ -59,12 +59,3 @@ extension Optional : CanonicalRepresentable {
     }
     
 #endif
-
-//extension Provider : CanonicalRepresentable {
-//    public typealias Canonical = Element
-//    
-//    
-//    static func transformFromCanonicalCanonical(canonical canonical: Element) -> Provider {
-//        return Provider(value: canonical)
-//    }
-//}
