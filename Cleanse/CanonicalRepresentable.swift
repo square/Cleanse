@@ -30,6 +30,7 @@ extension CanonicalRepresentable {
     }
 }
 
+#if swift(>=4.1)
 extension ImplicitlyUnwrappedOptional : CanonicalRepresentable {
     typealias Canonical = Wrapped
 
@@ -37,6 +38,7 @@ extension ImplicitlyUnwrappedOptional : CanonicalRepresentable {
         return canonical
     }
 }
+#endif
 
 extension Optional : CanonicalRepresentable {
     typealias Canonical = Wrapped
