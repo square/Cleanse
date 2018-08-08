@@ -78,13 +78,13 @@ class MemoryManagementTests: XCTestCase {
 
     struct Module : Cleanse.Module {
         static func configure(binder: Binder<Singleton>) {
-            binder.bind().sharedInScope().to1(factory: Single1.init)
-            binder.bind().sharedInScope().to1(factory: Single2.init)
-            binder.bind().sharedInScope().to1(factory: SingleStruct1.init)
+            binder.bind().sharedInScope().to(factory: Single1.init)
+            binder.bind().sharedInScope().to(factory: Single2.init)
+            binder.bind().sharedInScope().to(factory: SingleStruct1.init)
             
-            binder.bind().intoCollection().sharedInScope().to0 { SingleCollectionElement(value: 3) }
-            binder.bind().intoCollection().sharedInScope().to0 { SingleCollectionElement(value: 4) }
-            binder.bind().intoCollection().sharedInScope().to0 { SingleCollectionElement(value: 5) }
+            binder.bind().intoCollection().sharedInScope().to { SingleCollectionElement(value: 3) }
+            binder.bind().intoCollection().sharedInScope().to { SingleCollectionElement(value: 4) }
+            binder.bind().intoCollection().sharedInScope().to { SingleCollectionElement(value: 5) }
         }
     }
     

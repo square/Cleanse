@@ -43,7 +43,7 @@ class ComponentVisitorTests: XCTestCase {
         }
 
         static func configureRoot(binder bind: ReceiptBinder<Root>) -> BindingReceipt<Root> {
-            return bind.to0(factory: Root.init)
+            return bind.to(factory: Root.init)
         }
     }
 
@@ -55,7 +55,7 @@ class ComponentVisitorTests: XCTestCase {
         }
 
         static func configureRoot(binder bind: ReceiptBinder<Root>) -> BindingReceipt<Root> {
-            return bind.to1(factory: Root.init)
+            return bind.to(factory: Root.init)
         }
     }
 

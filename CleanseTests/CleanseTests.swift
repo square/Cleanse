@@ -35,7 +35,7 @@ struct GrillModule : Module {
     static func configure(binder: Binder<Singleton>) {
         binder.include(module: BurgerModule.self)
         
-        binder.bind().to1(factory: Grill.init)
+        binder.bind().to(factory: Grill.init)
     }
 }
 
@@ -63,7 +63,7 @@ class SomethingThatDoesAnAPICall {
         static func configure(binder: UnscopedBinder) {
             binder
                 .bind(SomethingThatDoesAnAPICall.self)
-                .to1(factory: SomethingThatDoesAnAPICall.init)
+                .to(factory: SomethingThatDoesAnAPICall.init)
         }
     }
 }
@@ -83,22 +83,22 @@ struct APIComponent : RootComponent {
     }
 
     static func configureRoot(binder bind: ReceiptBinder<Root>) -> BindingReceipt<Root> {
-        return bind.to1(factory: Root.init)
+        return bind.to(factory: Root.init)
     }
 }
 
 struct BurgerModule : Module {
     static func configure(binder: Binder<Singleton>) {
         binder.bind().to(factory: Burger.init)
-        binder.bind().to0 { return Cheese.cheddar }
-        binder.bind().to0 { Roll.ciabatta }
+        binder.bind().to { return Cheese.cheddar }
+        binder.bind().to { Roll.ciabatta }
         
         var singletonCountTest = 1
         binder
             .bind(Int.self)
             .tagged(with:  SlicesOfCheese.self)
             .sharedInScope()
-            .to0 {
+            .to {
                 defer { singletonCountTest += 1 }
                 return singletonCountTest
             }
@@ -109,7 +109,7 @@ struct BurgerModule : Module {
         binder
             .bind(Int.self)
             .tagged(with:  BurgerIndex.self)
-            .to0 {
+            .to {
                 defer { burgerIndex += 1 }
                 return burgerIndex
             }
@@ -218,7 +218,7 @@ class CleanseTests: XCTestCase {
         }
 
         static func configureRoot(binder bind: ReceiptBinder<Root>) -> BindingReceipt<Root> {
-            return bind.to1(factory: Root.init)
+            return bind.to(factory: Root.init)
         }
     }
 

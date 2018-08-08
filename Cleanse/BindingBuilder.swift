@@ -101,10 +101,23 @@ extension BindToable {
         ) -> BindingReceipt<Input> {
         return _innerTo(file: file, line: line, function: function, provider: Provider(value: value))
     }
+    
+    /**
+     This is the 0th arity `to(factory:)` function. This finishes the binding process.
+     */
+    @discardableResult public func to(
+        file: StaticString=#file,
+        line: Int=#line,
+        function: StaticString=#function,
+        factory: @escaping () -> Input) -> BindingReceipt<Input> {
+        
+        return _innerTo(file: file, line: line, function: function, provider: Provider(getter: factory))
+    }
 
     /**
      This is the 0th arity `to(factory:)` function. This finishes the binding process.
      */
+    @available(*, deprecated, renamed: "to")
     @discardableResult public func to0(
         file: StaticString=#file,
              line: Int=#line,
