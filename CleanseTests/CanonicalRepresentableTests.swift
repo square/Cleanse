@@ -77,13 +77,13 @@ class CanonicalRepresentableTests: XCTestCase {
         typealias Root = Bar
 
         static func configureRoot(binder bind: ReceiptBinder<CanonicalRepresentableTests.Bar>) -> BindingReceipt<CanonicalRepresentableTests.Bar> {
-            return bind.to1(factory: Bar.init)
+            return bind.to(factory: Bar.init)
         }
 
         static func configure(binder: Binder<Unscoped>) {
             binder
                 .bind(FooProto.self)
-                .to0(factory: Foo.init)
+                .to(factory: Foo.init)
         }
     }
 

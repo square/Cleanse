@@ -76,7 +76,7 @@ class LegacyObjectGraphTests: XCTestCase {
                 .tagged(with: String1.self)
                 .to(value: "String 1")
             
-            binder.bind().to1(factory: Foo.init)
+            binder.bind().to(factory: Foo.init)
             
             binder
                 .bind()
@@ -101,7 +101,7 @@ class LegacyObjectGraphTests: XCTestCase {
             
             binder
                 .bind(FreeBeer.self)
-                .to1 { (injector: PropertyInjector<FreeBeer>) in
+                .to { (injector: PropertyInjector<FreeBeer>) in
                     let result = FreeBeer()
                     injector.injectProperties(into: result)
                     return result
@@ -109,7 +109,7 @@ class LegacyObjectGraphTests: XCTestCase {
             
             binder
                 .bind(MoreFreeBeer.self)
-                .to1 { (injector: PropertyInjector<MoreFreeBeer>) in
+                .to { (injector: PropertyInjector<MoreFreeBeer>) in
                     let result = MoreFreeBeer()
                     injector.injectProperties(into: result)
                     return result

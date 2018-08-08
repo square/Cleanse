@@ -21,14 +21,6 @@ Cleanse is currently in *beta* phase. This means its API is subject to change (b
 .. _Guice: https://github.com/google/guice
 .. _Dagger: http://google.github.io/dagger/
 
-
-Important Swift4 Update!
------------------------
-Due to a breaking change in Swift as a result of `SE-0110`_, the Cleanse API has a minor change in order to work with Swift 4 (tracking issue at `SR-6108`_). For binder-arity 0 and 1, the respective ``to`` functions have changed to ``to0`` and ``to1`` in order for Swift to disamiguate all the other binder-arity functions. For example, a binding that used to look like ``bind(CoffeeMaker.self).to(factory: CoffeeMaker.init)`` where ``CoffeeMaker`` has 1 dependency now looks like ``bind(CoffeeMaker.self).to1(factory: CoffeeMaker.init)``. The same applies to objects with 0 dependencies, which is now replaced with ``to0``.
-
-.. _SE-0110: https://github.com/apple/swift-evolution/blob/master/proposals/0110-distingish-single-tuple-arg.md
-.. _SR-6108: https://bugs.swift.org/browse/SR-6108
-
 Getting Started
 ---------------
 This is a quick guide on how to get started using Cleanse in your application.

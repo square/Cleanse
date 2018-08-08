@@ -46,7 +46,7 @@ class ScopeErrorTests: XCTestCase {
         static func configure(binder: Binder<Scope1>) {
             binder.install(dependency: InvalidInnerComponentWithSameScope.self)
 
-            binder.bind().to1 { ($0 as ComponentFactory<InvalidInnerComponentWithSameScope>).build(()) }
+            binder.bind().to { ($0 as ComponentFactory<InvalidInnerComponentWithSameScope>).build(()) }
         }
 
         static func configureRoot(binder bind: ReceiptBinder<Root>) -> BindingReceipt<Root> {

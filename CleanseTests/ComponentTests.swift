@@ -161,7 +161,7 @@ class ComponentTests: XCTestCase {
             binder
                 .bind(UserService.self)
                 .sharedInScope()
-                .to0(factory: UserServiceImpl.init)
+                .to(factory: UserServiceImpl.init)
         }
     }
 }

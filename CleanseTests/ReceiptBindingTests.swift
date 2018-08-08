@@ -70,22 +70,22 @@ private struct DevelopmentUserService : UserService {
 
 private struct ProductionUserServiceModule : UserServiceModule {
     fileprivate static func configure(binder: Binder<Singleton>) {
-        binder.bind().sharedInScope().to0(factory: ProductionUserService.init)
+        binder.bind().sharedInScope().to(factory: ProductionUserService.init)
     }
 
     fileprivate static func configureUserService(binder bind: ReceiptBinder<UserService>) -> BindingReceipt<UserService> {
-        return bind.to1 { $0 as ProductionUserService }
+        return bind.to { $0 as ProductionUserService }
     }
 }
 
 
 private struct DevelopmentUserServiceModule : UserServiceModule {
     fileprivate static func configure(binder: Binder<Singleton>) {
-        binder.bind().sharedInScope().to0(factory: DevelopmentUserService.init)
+        binder.bind().sharedInScope().to(factory: DevelopmentUserService.init)
     }
 
     fileprivate static func configureUserService(binder bind: ReceiptBinder<UserService>) -> BindingReceipt<UserService> {
-        return bind.to1 { $0 as DevelopmentUserService }
+        return bind.to { $0 as DevelopmentUserService }
     }
 }
 
