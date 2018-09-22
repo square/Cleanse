@@ -421,7 +421,7 @@ Root Component
 Unlike Guice and Dagger1, there is no ObjectGraph/Injector object that one can pull arbitrary instances out of.
 
 Cleanse has a concept of a ``Component``. A ``Component`` is essentially a ``Module``, but with an `associated type`_
-named ``Root``. The ``Root`` asosociated type in a component is the *Root* of the object graph. An instance of ``Root``
+named ``Root``. The ``Root`` associated type in a component is the *Root* of the object graph. An instance of ``Root``
 is what's returned when a ``Component`` is constructed. It also may be referred to as an "entry point",
 
 The component protocol is defined as:
@@ -667,7 +667,7 @@ Collection Bindings
 ```````````````````
 It is sometimes desirable to provide multiple objects of the same type into one collection. A very common use of
 this would be providing interceptors or filters to an RPC library.
-In an app, one may want to add to a set of view controllers of a tab bar controller, or setttings in a settings page.
+In an app, one may want to add to a set of view controllers of a tab bar controller, or settings in a settings page.
 
 This concept is referred to as *Multibindings*
 `in Dagger <http://google.github.io/dagger/multibindings.html>`_
