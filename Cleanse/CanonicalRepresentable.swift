@@ -30,6 +30,7 @@ extension CanonicalRepresentable {
     }
 }
 
+#if swift(>=4.1)
 extension ImplicitlyUnwrappedOptional : CanonicalRepresentable {
     typealias Canonical = Wrapped
 
@@ -37,6 +38,7 @@ extension ImplicitlyUnwrappedOptional : CanonicalRepresentable {
         return canonical
     }
 }
+#endif
 
 extension Optional : CanonicalRepresentable {
     typealias Canonical = Wrapped
@@ -57,12 +59,3 @@ extension Optional : CanonicalRepresentable {
     }
     
 #endif
-
-//extension Provider : CanonicalRepresentable {
-//    public typealias Canonical = Element
-//    
-//    
-//    static func transformFromCanonicalCanonical(canonical canonical: Element) -> Provider {
-//        return Provider(value: canonical)
-//    }
-//}
