@@ -30,13 +30,19 @@ extension CanonicalRepresentable {
     }
 }
 
+// XC 9 Support. In XC 10, ImplicitlyUnwrappedOptional is removed in Swift v4.2. There is a source break
+// during compatibility mode when compiling swift 3 code that also makes the compiler think that the
+// ImplicitlyUnwrappedOptional has been renamed to Optional. Swift v4.2 (XC 10) during compatibility mode
+// interprets swift 3 code as swift v3.4. For XC 9 and below (where ImplicitlyUnwrappedOptional still exists),
+// Swift 4 in compatibility mode inteprets swift 3 code as swift v3.3 and below. Hence, #if !swift(>=3.4).
+#if !swift(>=3.4)
 extension ImplicitlyUnwrappedOptional : CanonicalRepresentable {
     typealias Canonical = Wrapped
-
     static func transformFromCanonicalCanonical(canonical: Wrapped) -> ImplicitlyUnwrappedOptional {
         return canonical
     }
 }
+#endif
 
 extension Optional : CanonicalRepresentable {
     typealias Canonical = Wrapped
@@ -57,12 +63,3 @@ extension Optional : CanonicalRepresentable {
     }
     
 #endif
-
-//extension Provider : CanonicalRepresentable {
-//    public typealias Canonical = Element
-//    
-//    
-//    static func transformFromCanonicalCanonical(canonical canonical: Element) -> Provider {
-//        return Provider(value: canonical)
-//    }
-//}
