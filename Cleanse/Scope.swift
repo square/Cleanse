@@ -18,7 +18,6 @@ public protocol _ScopeBase {
 public protocol Scope : _ScopeBase {
 }
 
-public struct Singleton : Scope {}
 
 /// This a special scope that means its not scoped
 public struct Unscoped : _ScopeBase {
