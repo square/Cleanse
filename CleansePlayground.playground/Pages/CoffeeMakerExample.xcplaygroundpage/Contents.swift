@@ -108,7 +108,7 @@ struct CoffeeMakerComponent : RootComponent {
 }
 
 //: Create a ComponentFactory from the Component you'd like to use. Then call the `build()` method on that instance, which returns the Component's `Root`.
-let coffeeMaker = try! ComponentFactory.of(CoffeeMakerComponent.self).build()
+let coffeeMaker = try! ComponentFactory.of(CoffeeMakerComponent.self).build(())
 
 //: Now that we have our coffee maker, let's brew a cup of Joe!
 coffeeMaker.brew()
