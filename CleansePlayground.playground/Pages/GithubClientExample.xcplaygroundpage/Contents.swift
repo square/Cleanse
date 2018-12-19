@@ -133,7 +133,7 @@ struct GithubListMembersComponent : RootComponent {
 }
 
 //: Build the component; the return value is the `Root` defined above: `GithubListMembersService`
-let membersService: GithubListMembersService = try! ComponentFactory.of(GithubListMembersComponent.self).build()
+let membersService: GithubListMembersService = try! ComponentFactory.of(GithubListMembersComponent.self).build(())
 print("The member service: \(membersService)")
 
 //: Finally, list all the members.
