@@ -120,19 +120,21 @@ The first function is required of any `Component` since it tells Cleanse how to 
       bind.to(injector: AppDelegate.injectProperties)
     })
   }
-  
+
 **Note**: Even though we can configure property injection with closures, it is generally cleaner to make a method that sets the
-properties like we did with `AppDelegate.injectProperties`:
+properties like we did with `AppDelegate.injectProperties`.
 
 
 Now, in our App Delegate let's add the new function we referenced when configuring our root object. 
 This tells Cleanse to use the ``injectProperties`` function when a ``PropertyInjector<AppDelegate>`` is
 requested.
 
-.. code-block::swift
+.. code-block:: swift
+
   func injectProperties(_ window: UIWindow) {
     self.window = window
   }
+  
 
 We've successfully wired up our root component! Our root object `PropertyInjector<AppDelegate>` is configured properly, so in our App Delegate we can now `build` the component (and graph) to use.
 
