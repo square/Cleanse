@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct WeakProvider<E: AnyObject> : ProviderProtocol {
+public struct WeakProvider<E> : ProviderProtocol {
     public typealias Element = E?
 
     fileprivate let getter: () -> Element
