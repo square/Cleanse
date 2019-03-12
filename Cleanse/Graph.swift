@@ -96,15 +96,8 @@ class Graph : BinderBase {
         }
 
         requirements[key] = (requirements[key] ?? []) + [debugInfo]
-
-        if type is AnyWeakProvider.Type {
-            return Provider(value: type.makeNew(getter: { [weak futureProvider] in
-                 futureProvider?.getAny() as Any
-            }) as! Element)
-        } else {
-            return Provider(value: type.makeNew(getter: { futureProvider.getAny() }) as! Element)
-        }
         
+        return Provider(value: type.makeNew(getter: { futureProvider.getAny() }) as! Element)
     }
 
     private func addProvider(provider: AnyProvider) {
