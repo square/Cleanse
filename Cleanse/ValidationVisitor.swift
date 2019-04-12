@@ -134,7 +134,7 @@ private class ComponentInfo {
         }
 
         guard !providersInStack.contains(providerInfo) else {
-            let providerStack = providerStack.suffix(from: providerStack.index { $1 == providerInfo }!) + [(providerKey, providerInfo)]
+            let providerStack = providerStack.suffix(from: providerStack.firstIndex { $1 == providerInfo }!) + [(providerKey, providerInfo)]
 
             var debugInfos = [ProviderRequestDebugInfo]()
 

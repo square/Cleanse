@@ -24,7 +24,7 @@ public struct PropertyInjectionReceiptBinder<E: AnyObject> : PropertyInjectorBin
 }
 
 public extension BindToable where Input: PropertyInjectorProtocol {
-    public func propertyInjector(configuredWith configurationFunction: (PropertyInjectionReceiptBinder<Input.Element>) -> BindingReceipt<PropertyInjector<Input.Element>>) -> BindingReceipt<PropertyInjector<Input.Element>> {
+    func propertyInjector(configuredWith configurationFunction: (PropertyInjectionReceiptBinder<Input.Element>) -> BindingReceipt<PropertyInjector<Input.Element>>) -> BindingReceipt<PropertyInjector<Input.Element>> {
         return configurationFunction(PropertyInjectionReceiptBinder(PropertyInjectorBindingBuilder(binder: self.binder)))
     }
 }

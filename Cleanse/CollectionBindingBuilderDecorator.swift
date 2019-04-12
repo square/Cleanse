@@ -31,7 +31,7 @@ public struct CollectionBindingBuilderDecorator<Wrapped: BindingBuilder> : Bindi
 
 public extension BindingBuilder where CollectionOrUnique == _UniqueBinding, FinalProvider: _StandardProvider, MaybeScope == Unscoped {
     /// If makes it bind Element to [Element]
-    public func intoCollection() -> CollectionBindingBuilderDecorator<Self> {
+    func intoCollection() -> CollectionBindingBuilderDecorator<Self> {
         return with()
     }
 }

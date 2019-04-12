@@ -17,7 +17,7 @@ struct GenerateBindersArities {
 
         let contents = (1..<maxArities)
             // Swift4 support uses a tuple around the factory args for arity-1 to disambiguiate between all the other arity functions.
-            .reduce(start) { $0.appending(make(arity: $1, swift4Support: $1 == 1)) }
+            .reduce(start) { $0.appending(make(arity: $1, swift4Support: true)) }
             .appending(makeDeprecated(arity: 1))
             .appending("}\n")
 
@@ -50,7 +50,7 @@ struct GenerateBindersArities {
         }
 
         contents += "\n"
-        contents += "    return _innerTo(file: file, line: line, function: function, provider: Provider {\n     factory(\n        \(paramIndexes.map { "provider\($0).get()" }.joined(separator: ",\n        "))\n    )\n   })\n"
+        contents += "    return _innerTo(file: file, line: line, function: function, provider: Provider {\n     factory((\n        \(paramIndexes.map { "provider\($0).get()" }.joined(separator: ",\n        ")))\n    )\n   })\n"
         contents += "}\n\n"
 
         return contents
