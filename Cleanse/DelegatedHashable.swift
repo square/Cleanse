@@ -18,6 +18,9 @@ extension DelegatedHashable {
     var hashValue: Int {
         return hashable.hashValue
     }
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(hashable)
+    }
 }
 
 func ==<DH: DelegatedHashable>(lhs: DH, rhs: DH) -> Bool {

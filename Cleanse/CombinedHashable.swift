@@ -18,14 +18,6 @@ struct CombinedHashable<L: Hashable, R: Hashable> : Hashable {
         self.l = l
         self.r = r
     }
-    
-    var hashValue: Int {
-        var seed = UInt(bitPattern: l.hashValue)
-        let rHashValue = UInt(bitPattern: r.hashValue)
-        // magic number from http://www.boost.org/doc/libs/1_35_0/doc/html/boost/hash_combine_id241013.html
-        seed ^= rHashValue &+ 0x9e3779b9 &+ (seed << 6) &+ (seed >> 2)
-        return Int(bitPattern: seed)
-    }
 }
 
 func ==<L, R> (lhs: CombinedHashable<L, R>, rhs: CombinedHashable<L, R>) -> Bool {
