@@ -17,7 +17,7 @@ struct GenerateBindersArities {
 
         let contents = (1..<maxArities)
             // Swift4 support uses a tuple around the factory args for arity-1 to disambiguiate between all the other arity functions.
-            .reduce(start) { $0.appending(make(arity: $1, swift4Support: true)) }
+            .reduce(start) { $0.appending(make(arity: $1, tupleArgs: true)) }
             .appending(makeDeprecated(arity: 1))
             .appending("}\n")
 
@@ -28,11 +28,11 @@ struct GenerateBindersArities {
         }
     }
 
-    private static func make(arity: Int, swift4Support: Bool = false) -> String {
+    private static func make(arity: Int, tupleArgs: Bool = false) -> String {
         let paramIndexes = 1...arity
         let sourceInfoArguments = "file: StaticString=#file, line: Int=#line, function: StaticString=#function"
-        let extraOpeningParam = swift4Support ? "(" : ""
-        let extraClosingParam = swift4Support ? ")" : ""
+        let extraOpeningParam = tupleArgs ? "(" : ""
+        let extraClosingParam = tupleArgs ? ")" : ""
         
         var contents = ""
         contents += "/// \(arity)-arity `to(factory:)` function.\n"

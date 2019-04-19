@@ -14,10 +14,7 @@ protocol DelegatedHashable : Hashable {
     var hashable: H { get }
 }
 
-extension DelegatedHashable {
-    var hashValue: Int {
-        return hashable.hashValue
-    }
+extension DelegatedHashable {    
     func hash(into hasher: inout Hasher) {
         hasher.combine(hashable)
     }
