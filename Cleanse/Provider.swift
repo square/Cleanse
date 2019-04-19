@@ -25,11 +25,11 @@ public protocol ProviderProtocol {
 
 
 public extension ProviderProtocol {
-    public init(value: Element) {
+    init(value: Element) {
         self.init(getter: { value })
     }
 
-    public init<P: ProviderProtocol>(other: P) where P.Element == Element {
+    init<P: ProviderProtocol>(other: P) where P.Element == Element {
         self.init(getter: other.get)
     }
 }
