@@ -17,7 +17,7 @@ typealias FakeAppComponent = AppComponent<FakeGithubServicesModule>
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         resetApplication()
         return true
     }
@@ -31,9 +31,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             // Build and validate the release module to catch bugs sooner.
             let _ = try! ComponentFactory.of(ReleaseAppComponent.self)
             
-            propertyInjector = try! ComponentFactory.of(FakeAppComponent.self).build()
+            propertyInjector = try! ComponentFactory.of(FakeAppComponent.self).build(())
         } else {
-            propertyInjector = try! ComponentFactory.of(ReleaseAppComponent.self, validate: false).build()
+            propertyInjector = try! ComponentFactory.of(ReleaseAppComponent.self, validate: false).build(())
         }
 
         // Now inject the properties into ourselves

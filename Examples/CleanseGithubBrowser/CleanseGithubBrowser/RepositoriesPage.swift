@@ -93,7 +93,7 @@ class RepositoriesViewController : TableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let identifier = settings.showWatcherCount ? "Cell1" : "Cell2"
-        let style: UITableViewCellStyle = settings.showWatcherCount ? .subtitle : .default
+        let style: UITableViewCell.CellStyle = settings.showWatcherCount ? .subtitle : .default
 
         let cell = tableView.dequeueReusableCell(withIdentifier: identifier)
             ?? UITableViewCell(style: style, reuseIdentifier: identifier)

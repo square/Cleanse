@@ -116,7 +116,7 @@ extension SettingsSplitViewController  {
             selectDefaultItemIfExpanded(animated: animated)
 
             // If the view controller is collapsed and we're appearing, it implies that the user explicitely hit the back button
-            if splitViewControllerIsCollapsed && !isMovingToParentViewController {
+            if splitViewControllerIsCollapsed && !isMovingToParent {
                 self.lastSelectedItemIndex = nil
             }
         }
@@ -253,7 +253,7 @@ extension SettingsSplitViewController.MasterViewController : UISplitViewControll
     }
 
     fileprivate func updateDisclosureForCell(cell: UITableViewCell, collapsed: Bool) {
-        let accessoryType = collapsed ? UITableViewCellAccessoryType.disclosureIndicator : .none
+        let accessoryType = collapsed ? UITableViewCell.AccessoryType.disclosureIndicator : .none
 
         if cell.accessoryType != accessoryType {
             cell.accessoryType = accessoryType
