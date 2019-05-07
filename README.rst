@@ -158,7 +158,7 @@ Satisfying Dependencies
 Running the app now will yield a new error saying a provider for ``UIWindow`` is missing. That's because we referenced it from our `injectProperties` function, but Cleanse didn't find a binding for the ``UIWindow`` type. So let's create one! 
 
 A ``Module`` in Cleanse is similar to a ``Component`` but doesn't define a root object, ``Component``\ s can *install*
-``Module``\ s and ``Modules``\ s can install other ``Modules`` using ``binder.install(module:)``.
+``Module``\ s and ``Modules``\ s can install other ``Modules`` using ``binder.include(module:)``.
 
 Let's define a module that creates our main window. The following will declare `UIWindow` as a singleton. We can do this by changing the parameter `Binder<Unscoped>` to `Binder<Singleton>`. You can learn more about scopes in the `Scope Step`_ section.
 
