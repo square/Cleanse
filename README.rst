@@ -13,8 +13,9 @@ Cleanse - Swift Dependency Injection
 
 
 Cleanse is a `dependency injection`_ framework for Swift. It is designed from the ground-up with *developer experience*
-in mind. It takes inspiration from both `Dagger`_ and `Guice`_.
+in mind. It takes inspiration from both `Dagger`_ and `Guice`_. Feel free to join the discussion in our slack channel `Cleanse-Swift`_.
 
+.. _Cleanse-Swift: https://join.slack.com/t/cleanse-swift/shared_invite/enQtNjQ4NTI3ODg2ODM1LTY3M2Y0ODdhNDMxNmE0ZDAxNTIyMjUxZDgyMTdkNGE0N2RiYmRlMDc1MDZmNmJlOTFiMDdkMGUzNzZlZWRkYzU
 .. _dependency injection: https://en.wikipedia.org/wiki/Dependency_injection
 .. _Guice: https://github.com/google/guice
 .. _Dagger: http://google.github.io/dagger/
@@ -75,78 +76,75 @@ one must import it.
 
 Defining a Component and Root Type
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Cleanse will build a graph of objects, however, when we build the object graph, we only get one type back, which we
-call a "Root". In a Cocoa Touch application, our root object is logically the App Delegate, however we don't control
-construction of that, so we have to use `Property Injection`_ to populate the required properties in our App Delegate.
+Cleanse is responsible for building a graph (or more specifically a `directed acyclic graph`_) that represents all of your dependencies.
+This graph starts with a root object which is connected to its immediate dependencies, and those dependencies hold edges to its dependencies and so on until we have a complete picture of your application's object graph.
 
-.. note::
+.. _`directed acyclic graph`: https://en.wikipedia.org/wiki/Directed_acyclic_graph
 
-  `Property Injection`_ should be used only when absolutely necessary
-  (when we don't control the construction of a type)
+The entry point into managing your dependencies with Cleanse starts by defining a "Root" object that is returned to you upon construction. In a Cocoa Touch application, our root object could be the ``rootViewController`` object we set on the application's ``UIWindow``. *(More logically the root object is the App Delegate, however since since we don't control construction of that we would have to use Property Injection. You can read more about this in the* `Advanced Setup`_ *guide)*
 
-Let's start by defining the ``RootComponent``:
+Let's begin by defining the ``RootComponent``:
+
 
 .. code-block:: swift
 
-  extension AppDelegate {
-    struct Component : Cleanse.RootComponent {
-      // When we call build() it will return the Root type, which is a PropertyInjector<AppDelegate>.
-      // More on how we use the PropertyInjector type later.
-      typealias Root = PropertyInjector<AppDelegate>
-      
+  struct Component : Cleanse.RootComponent {
+      // When we call build(()) it will return the Root type, which is a RootViewController instance.
+      typealias Root = RootViewController
+
       // Required function from Cleanse.RootComponent protocol.
-      static func configureRoot(binder bind: ReceiptBinder<PropertyInjector<AppDelegate>>) -> BindingReceipt<PropertyInjector<AppDelegate>> {
-      
+      static func configureRoot(binder bind: ReceiptBinder<RootViewController>) -> BindingReceipt<RootViewController> {
+
       }
-      
+
       // Required function from Cleanse.RootComponent protocol.
       static func configure(binder: Binder<Unscoped>) {
           // We will fill out contents later.
       }
-    }
   }
   
 After creating our root component, we find that we're required to implement two functions:
-``static func configureRoot(binder bind: ReceiptBinder<PropertyInjector<AppDelegate>>) -> BindingReceipt<PropertyInjector<AppDelegate>>`` and ``static func configure(binder: Binder<Unscoped>)``
+``static func configureRoot(binder bind: ReceiptBinder<RootViewController>) -> BindingReceipt<RootViewController>`` and ``static func configure(binder: Binder<Unscoped>)``. These functions are very important because they will contain the logic for how we construct every object/dependency in our app. The parameters and return types are confusing right now, but will make more sense as we go along.
 
-The parameters and return types are confusing right now, but will make more sense as we go along.
-
-The first function is required of any `Component` since it tells Cleanse how to construct the root object. Since we have to use property injection, we will fill out its contents with the following:
+The first function is required of any `Component` since it tells Cleanse how to construct the root object. Let's fill in the contents to configure how we will construct our ``RootViewController``.
 
 .. code-block:: swift
 
-  static func configureRoot(binder bind: ReceiptBinder<PropertyInjector<AppDelegate>>) -> BindingReceipt<PropertyInjector<AppDelegate>> {
-    return bind.propertyInjector(configuredWith: { bind in
-      bind.to(injector: AppDelegate.injectProperties)
-    })
+  static func configureRoot(binder bind: ReceiptBinder<RootViewController>) -> BindingReceipt<RootViewController> {
+      return bind.to(factory: RootViewController.init)
   }
 
-**Note**: Even though we can configure property injection with closures, it is generally cleaner to make a method that sets the
-properties like we did with `AppDelegate.injectProperties`.
 
-
-Now, in our App Delegate let's add the new function we referenced when configuring our root object. 
-This tells Cleanse to use the ``injectProperties`` function when a ``PropertyInjector<AppDelegate>`` is
-requested.
+Now, let's create our ``RootViewController`` class
 
 .. code-block:: swift
 
-  func injectProperties(_ window: UIWindow) {
-    self.window = window
+  class RootViewController: UIViewController {
+      init() {
+          super.init(nibName: nil, bundle: nil)
+      }
+    
+      required init?(coder aDecoder: NSCoder) {
+          fatalError("init(coder:) has not been implemented")
+      }
+    
+      override func viewDidLoad() {
+          super.viewDidLoad()
+          self.view.backgroundColor = .blue
+      }
   }
   
 
-We've successfully wired up our root component! Our root object `PropertyInjector<AppDelegate>` is configured properly, so in our App Delegate we can now `build` the component (and graph) to use.
+We've successfully wired up our root component! Our root object ``RootViewController`` is configured properly, so in our App Delegate we can now `build` the component (and graph) to use it.
 
 .. code-block:: swift
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Build our component, and make the property injector
-        let propertyInjector = try! ComponentFactory.of(AppDelegate.Component.self).build(())
+        let rootViewController = try! ComponentFactory.of(AppDelegate.Component.self).build(())
 
-         // Now inject the properties into ourselves
-        propertyInjector.injectProperties(into: self)
-
+        // Now inject the properties into ourselves
+        window!.rootViewController = rootViewController
         window!.makeKeyAndVisible()
 
         return true
@@ -155,112 +153,54 @@ We've successfully wired up our root component! Our root object `PropertyInjecto
 Satisfying Dependencies
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-Running the app now will yield a new error saying a provider for ``UIWindow`` is missing. That's because we referenced it from our `injectProperties` function, but Cleanse didn't find a binding for the ``UIWindow`` type. So let's create one! 
-
-A ``Module`` in Cleanse is similar to a ``Component`` but doesn't define a root object, ``Component``\ s can *install*
-``Module``\ s and ``Modules``\ s can install other ``Modules`` using ``binder.include(module:)``.
-
-Let's define a module that creates our main window. The following will declare `UIWindow` as a singleton. We can do this by changing the parameter `Binder<Unscoped>` to `Binder<Singleton>`. You can learn more about scopes in the `Scope Step`_ section.
+Running the app will now display our ``RootViewController`` with a blue background. However this is not very interesting nor realistic as our ``RootViewController`` will likely require many dependencies to set up our app. So let's create a simple dependency ``RootViewProperties`` that will hold the background color of our root view (among other future properties).
 
 .. code-block:: swift
 
-  extension UIWindow {
-    struct Module : Cleanse.Module {
-      public func configure(binder: Binder<Singleton>) {
-        binder
-          .bind(UIWindow.self)
-          .sharedInScope()
-          .to { (rootViewController: TaggedProvider<UIViewController.Root>) in
-            let window = UIWindow(frame: UIScreen.mainScreen().bounds)
-            window.rootViewController = rootViewController.get()
-            return window
-          }
+  struct RootViewProperties {
+      let backgroundColor: UIColor
+  }
+  
+And then inject ``RootViewProperties`` into our ``RootViewContoller`` and set the background color.
+
+.. code-block:: swift
+
+  class RootViewController: UIViewController {
+      let rootViewProperties: RootViewProperties
+      init(rootViewProperties: RootViewProperties) {
+          self.rootViewProperties = rootViewProperties
+          super.init(nibName: nil, bundle: nil)
       }
-    }
-  }
-
-and in our ``AppDelegate.Component.configure`` method we want to install this module by adding
-
-.. code-block:: swift
-
-  binder.install(module: UIWindow.Module.self)
-
-We have satisfied the dependency for our App Delegate (``UIWindow``), but we have a new dependency,
-``TaggedProvider<UIViewController.Root>``. The ``TaggedProvider<UIViewController.Root>`` represents a "special" view
-controller which can be read about in `Type Tags`_. The Tag, ``UIViewController.Root`` should be defined as:
-
-.. code-block:: swift
-
-  extension UIViewController {
-    /// This will represent the rootViewController that is assigned to our main window
-    public struct Root : Tag {
-      public typealias Element = UIViewController
-    }
-  }
-
-And now we have one last dependency to satisfy, our root view controller. For this example, let's just make a simple
-view controller:
-
-.. code-block:: swift
-
-  /// Root View Controller for our application
-  class RootViewController : UIViewController {
-    /// Initializer we want to use. Can add more arguments to this if wanted
-    init() {
-      super.init(nibName: nil, bundle: nil)
-    }
-
-    /// We declare this unavailable. This makes it so its unambiguous when referring to `RootViewController.init`
-    /// we get the constructor we want
-    @available(*, unavailable)
-    required init?(coder aDecoder: NSCoder) {
-      fatalError("init(coder:) has not been implemented")
-    }
-
-    override func viewDidLoad() {
-      super.viewDidLoad()
-      // Set up your view here!
-    }
-  }
-
-And we'll want to make a module to configure it:
-
-.. code-block:: swift
-
-  extension RootViewController {
-    /// Configures RootViewController
-    struct Module : Cleanse.Module {
-      func configure<B : Binder>(binder binder: B) {
-        // Configures the RootViewController to be provided by the initializer
-        binder
-          .bind(RootViewController.self)
-          .to(factory: RootViewController.init)
-
-        // This satisfies UIWindow depending on TaggedProvider<UIViewController.Root>
-        // The actual root is our RootViewController wrapped in a UINavigationController
-        binder
-          .bind(UIViewController.self)
-          .tagged(with: UIViewController.Root.self)
-          .to { UINavigationController(rootViewController: $0 as RootViewController) }
+    
+      required init?(coder aDecoder: NSCoder) {
+          fatalError("init(coder:) has not been implemented")
       }
-    }
+    
+      override func viewDidLoad() {
+          super.viewDidLoad()
+    
+          self.view.backgroundColor = rootViewProperties.backgroundColor
+      }
   }
+  
 
-(note: One can omit the `RootViewController.self` from the binding builder as it's not required, but we recommend you include it anyways to make it easier to discover where specific types are constructed in Cleanse.)
-
-and in our ``AppDelegate.Component.configure`` method we want to install this module by adding
+Running the app now will yield a new error saying a provider for ``RootViewProperties`` is missing. That's because we referenced it from our ``RootViewController`` class, but Cleanse didn't find a binding for the ``RootViewProperties`` type. So let's create one! We will do this inside the ``static func configure(binder: Binder<Unscoped>)`` function we talked about earlier inside our root component.
 
 .. code-block:: swift
 
-  binder.install(module: RootViewController.Module.self)
+  static func configure(binder: Binder<Unscoped>) {
+        binder
+            .bind(RootViewProperties.self)
+            .to { () -> RootViewProperties in
+                RootViewProperties(backgroundColor: .blue)
+            }
+    }
 
+Now that we have satisfied the ``RootViewProperties`` dependency, we should be able to successfully launch and see the same blue background as before.
 
-Now, all of our dependencies should be satisfied and the app should launch successfully.
+As the functionality of this app grows, one may add more dependencies to ``RootViewController`` as well as more Modules_ to satisfy them.
 
-As the functionality of this app grows, one may add arguments to RootViewController and its dependencies as well as more
-modules to satisfy them.
-
-As previously mentioned, it may be worth taking a look at our `example app`_ to see a more full-featured example.
+It may be worth taking a look at our `example app`_ to see a more full-featured example.
 
 .. _example app: https://github.com/square/Cleanse/tree/master/Examples/CleanseGithubBrowser
 
@@ -270,7 +210,7 @@ Core Concepts & Data Types
 ``Provider``\ /\ ``ProviderProtocol``
 `````````````````````````````````````
 
-Has a method that returns a value of its containing type. Serves same functionality as Java's `javax.inject.Provider`_.
+Wraps a value of its containing type. Serves the same functionality as Java's `javax.inject.Provider`_.
 
 ``Provider`` and ``TaggedProvider`` (see below) implement ``ProviderProtocol`` protocol which is defined as:
 
@@ -346,23 +286,7 @@ If we had a class that requires this URL to perform a function, the constructor 
             self.primaryURL = primaryURL.get()
         }
     }
-
-This would be the equivalent in Java using ``javax.inject`` annotations:
-
-.. code-block:: java
-
-    @Qualifier @interface PrimaryAPIURL {
-    }
-    // ...
-    class SomethingThatDoesAnAPICall {
-       @Inject SomethingThatDoesAnAPICall(@PrimaryAPIURL String primaryURL) {
-           this.primaryURL = primaryURL
-       }
-    }
-
-Unlike java’s annotation system, ``Tag``\s cannot have constants in them (there is no equivalent of
-``@Named("omgponies")``), however, the creation of new Tags in cleanse is much lighter weight and encourages
-better practices.
+    
 
 Modules
 ```````
@@ -382,8 +306,6 @@ The ``Module`` protocol has a single method, ``configure(binder:)``, and is is d
 Examples
 ~~~~~~~~
 
-.. note:: Configuration of modules is further elaborated on below
-
 Providing the Base API URL
 """"""""""""""""""""""""""
 
@@ -401,13 +323,9 @@ Providing the Base API URL
 Consuming the Primary API URL (e.g. "https://connect.squareup.com/v2/")
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-.. note::
-
-    It seems to be a good pattern to embed the ``Module`` that configures X as an inner struct of X named ``Module``. To
-    disambiguate Cleanse's Module protocol from the inner struct being defined, one has to qualify the protocol with
-    ``Cleanse.Module``
-
-
+**Note**: It is generally a good practice to embed the ``Module`` that configures X as an inner struct of X named ``Module``. To disambiguate Cleanse's Module protocol from the inner struct being defined, one has to qualify the protocol with ``Cleanse.Module``
+    
+    
 .. code-block:: swift
 
     class SomethingThatDoesAnAPICall {
@@ -424,23 +342,30 @@ Consuming the Primary API URL (e.g. "https://connect.squareup.com/v2/")
         }
     }
 
-Root Component
-``````````````
-Unlike Guice and Dagger1, there is no ObjectGraph/Injector object that one can pull arbitrary instances out of.
+Components
+`````````````````````
+Cleanse has a concept of a ``Component``. A ``Component`` represents an object graph of our dependencies that returns the ``Root`` `associated type`_ upon construction and is used as the "entry point" into Cleanse. However, we can also use a ``Component`` to create a subgraph inside our parent object graph, called a subcomponent. Subcomponents are closely related to scopes_ and are used to scope your dependencies. Objects inside a component are only allowed to inject dependencies that exist within the same component (or scope), or an ancestor's component. A parent component is not allowed to reach into a subcomponent and retrieve a dependency. One example of using components to scope dependencies is by having a ``LoggedInComponent`` inherting from your application's Root component. This allows you to bind logged in specific objects such as session tokens or account objects within the ``LoggedInComponent`` so that you can't accidently leak these dependencies into objects used outside of a logged session (i.e welcome flow views).
 
-Cleanse has a concept of a ``Component``. A ``Component`` is essentially a ``Module``, but with an `associated type`_
-named ``Root``. The ``Root`` associated type in a component is the *Root* of the object graph. An instance of ``Root``
-is what's returned when a ``Component`` is constructed. It also may be referred to as an "entry point",
-
-The component protocol is defined as:
+The base component protocol is defined as:
 
 .. code-block:: swift
 
-    public protocol Component : Module {
-        associatedtype Root
+    public protocol ComponentBase {
+      /// This is the binding required to construct a new Component. Think of it as somewhat of an initialization value.
+      associatedtype Seed = Void
+
+      /// This should be set to the root type of object that is created.
+      associatedtype Root
+
+      associatedtype Scope: Cleanse._ScopeBase = Unscoped
+
+      static func configure(binder: Binder<Self.Scope>)
+
+      static func configureRoot(binder bind: ReceiptBinder<Root>) -> BindingReceipt<Root>
     }
 
-The outermost component of an object graph (e.g. the Root component), is built by the ``build()`` method.
+
+The outermost component of an object graph (e.g. the Root component), is built by the ``build(())`` method on `ComponentFactory`.
 This is defined as the following protocol extension:
 
 .. code-block:: swift
@@ -453,8 +378,8 @@ This is defined as the following protocol extension:
 Examples
 ~~~~~~~~
 
-Defining a component
-""""""""""""""""""""
+Defining a subcomponent
+"""""""""""""""""""""""
 
 .. code-block:: swift
 
@@ -465,9 +390,9 @@ Defining a component
     struct APIComponent : Component {
         typealias Root = RootAPI
         func configure<B : Binder>(binder binder: B) {
-            // "install" the modules that create the component
-            binder.install(module: PrimaryAPIURLModule())
-            binder.install(module: SomethingThatDoesAnAPICall.Module())
+            // "include" the modules that create the component
+            binder.include(module: PrimaryAPIURLModule())
+            binder.include(module: SomethingThatDoesAnAPICall.Module())
             // bind our root Object
             binder
                 .bind(RootAPI.self)
@@ -477,10 +402,35 @@ Defining a component
 
 Using the component
 """""""""""""""""""
+Cleanse will automatically create the type ``ComponentFactory<APIComponent>`` in your object graph by calling ``binder.install(dependency: APIComponent.self)``.
+
 .. code-block:: swift
 
-    let root = try! APIComponent().build()
-    root.somethingUsingTheAPI.doSomethingFun()
+  struct Root : RootComponent {
+      func configure<B : Binder>(binder binder: B) {
+          binder.install(dependency: APIComponent.self)
+      }
+      // ...
+  }
+  
+
+And then you can use it by injecting in the ``ComponentFactory<APIComponent>`` instance into an object and calling ``build(())``.
+
+.. code-block:: swift
+
+  class RootViewController: UIViewController {
+      let loggedInComponent: ComponentFactory<APIComponent>
+    
+      init(loggedInComponent: ComponentFactory<APIComponent>) {
+          self.loggedInComponent = loggedInComponent
+          super.init(nibName: nil, bundle: nil)
+      }
+    
+      func logIn() {
+          let apiRoot = loggedInComponent.build(())
+      }
+  }
+  
 
 Binder
 ``````
@@ -492,7 +442,7 @@ One passes it an instance of a module to be installed.  It is used like:
 
 .. code-block:: swift
 
-  binder.install(module: PrimaryAPIURLModule.self)
+  binder.include(module: PrimaryAPIURLModule.self)
 
 It essentially tells the binder to call ``configure(binder:)`` on ``PrimaryAPIURLModule``.
 
@@ -506,10 +456,8 @@ to prevent errors by only partially configuring a binding.
 
 .. _metattype: https://developer.apple.com/library/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Types.html#//apple_ref/swift/grammar/metatype-type
 
-.. Note::
 
-  The ``type`` argument of ``bind()`` has a default and can be inferred and omitted in some common cases.
-  In this documentation we sometimes specify it explicitly to improve readability.
+The ``type`` argument of ``bind()`` has a default and can be inferred and omitted in some common cases. In this documentation we sometimes specify it explicitly to improve readability.
 
 
 ``BindingBuilder`` and Configuring Your Bindings
@@ -535,22 +483,18 @@ Tag Step (Optional)
 An optional step that indicates that the provided type should actually be
 ``TaggedProvider<Element>`` and not just ``Provider<Element>``.
 
-.. seealso::
+See: `Type Tags`_ for more information
 
-  `Type Tags`_ for more information
-
+.. _scopes:
 
 Scope Step
 ~~~~~~~~~~~~~~~~~~~~~
 
 By default, whenever an object is requested, Cleanse constructs a new one.
-If the optional `.sharedInScope()` is specified, Cleanse will memoize and return the same instance in the scope of the ``Component``
-it was configured in. So if this is configured as a singleton in the `RootComponent`, then will return the same instance for the entire app.
+If the optional `.sharedInScope()` is specified, Cleanse will memoize and return the same instance in the scope of the ``Component`` it was configured in. Each ``Component`` requires its own `Scope` type. So if this is configured as a singleton in the `RootComponent`, then will return the same instance for the entire app.
 
-In the future we may want to allow a class conforming to protocol (possibly named ``Singleton``) to indicate that it
-should be bound as a singleton. It is tracked by `this issue`_
+Cleanse provides two scopes for you: ``Unscoped`` and ``Singleton``. ``Unscoped`` is the default scope that will always construct a new object, and ``Singleton`` is provided out of convenience but not necessary to use. It is most commonly used as the scope type for your application's ``RootComponent``.
 
-.. _this issue: https://github.com/square/Cleanse/issues/3
 
 Terminating Step
 ~~~~~~~~~~~~~~~~
@@ -682,15 +626,7 @@ This concept is referred to as *Multibindings*
 and
 `in Guice <https://github.com/google/guice/wiki/Multibindings>`_.
 
-Unlike Dagger and Guice where one can provide elements to both a ``Set`` and ``Map``,
-Cleanse will only allow one to provide elements into an ``Array``. The choice of ``Array`` is because unlike
-Java where every type of object can be part of a ``Set``, only types that are ``Hashable`` can be part of a ``Set``
-in Swift. This requirement would make it not useful in many cases.
-
-.. Note::
-
-  Providing to a Set or Dictionary is not an unwanted feature and could probably be built as an
-  extension on top of providing to ``Arrays``.
+Providing to a Set or Dictionary is not an unwanted feature and could probably be built as an extension on top of providing to ``Arrays``.
 
 Binding an element to a collection is very similar to standard `Bind Step`_\ s,
 but with the addition of one step: calling ``.intoCollection()`` in the builder definition.::
@@ -708,6 +644,7 @@ but with the addition of one step: calling ``.intoCollection()`` in the builder 
 The `Terminating Step`_ for this builder sequence can either be a factory/value/provider
 of a single ``Element`` or ``Array`` of ``Element``\ s.
 
+.. _`Property Injection`:
 Property Injection
 ``````````````````
 There are a few instances where one does not control the construction of an object, but dependency injection would be deemed useful.
@@ -793,33 +730,93 @@ One can bind a property injection for FreeBeer by doing:
       .bindPropertyInjectionOf(FreeBeer.self)
       .to(injector: FreeBeer.injectProperties)
 
-.. Note::
-
-  The result type of the expression ``FreeBeer.injectProperties`` is
-  ``FreeBeer -> (TaggedProvider<String1>, TaggedProvider<String2>) -> ()``
+The result type of the expression ``FreeBeer.injectProperties`` is ``FreeBeer -> (TaggedProvider<String1>, TaggedProvider<String2>) -> ()``
 
 After binding a property injector for ``Element``, one will be able to request the type ``PropertyInjector<Element>``
-in a factory argument. This has a single method defined as
+in a factory argument. This has a single method defined as:
 
 .. code-block:: swift
 
   func injectProperties(into instance: Element)
 
-Which will perform property injection into Element
+Which will then perform property injection into ``Element``.
 
-.. Note::
+**Note:** Property injectors in the non-legacy API are unaware of class hierarchies. If one wants property injection to cascade up a class hierarchy, the injector bound may call the inject method for super, or request a ``PropertyInjector<Superclass>`` as an injector argument and use that.
 
-  Property injectors in the non-legacy API are unaware of class hierarchies. If one wants property injection to cascade
-  up a class hierarchy, the injector bound may call the inject method for super, or request a
-  ``PropertyInjector<Superclass>`` as an injector argument and use that.
+.. _`Advanced Setup`:
+Advanced Setup
+``````````````
+We can make the root of our Cleanse object graph the App Delegate through `Property Injection`_. We must use property injection here because we don't control construction of the app delegate. Now we can model our "Root" as an instance of ``PropertyInjector<AppDelegate>`` and then use this object to inject properties into our already constructed App Delegate.
 
+Let's start by redefining the ``RootComponent``:
+
+.. code-block:: swift
+    extension AppDelegate {
+      struct Component : Cleanse.RootComponent {
+        // When we call build() it will return the Root type, which is a PropertyInjector<AppDelegate>.
+        // More on how we use the PropertyInjector type later.
+        typealias Root = PropertyInjector<AppDelegate>
+
+        // Required function from Cleanse.RootComponent protocol.
+        static func configureRoot(binder bind: ReceiptBinder<PropertyInjector<AppDelegate>>) -> BindingReceipt<PropertyInjector<AppDelegate>> {
+            return bind.propertyInjector(configuredWith: { bind in
+                bind.to(injector: AppDelegate.injectProperties)
+            })
+        }
+
+        // Required function from Cleanse.RootComponent protocol.
+        static func configure(binder: Binder<Unscoped>) {
+            // Binding go here.
+        }
+      }
+    }
+ 
+Inside of our app delegate, we add the function ``injectProperties``:
+
+.. code-block:: swift
+
+  func injectProperties(_ window: UIWindow) {
+    self.window = window
+  }
+ 
+Now to wire up our new root object, we can call ``injectProperties(:)`` on ourself in the app delegate:
+
+.. code-block:: swift
+
+  func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+      // Build our component, and make the property injector
+      let propertyInjector = try! ComponentFactory.of(AppDelegate.Component.self).build(())
+
+       // Now inject the properties into ourselves
+      propertyInjector.injectProperties(into: self)
+
+      window!.makeKeyAndVisible()
+
+      return true
+  }
+
+Running the app now will yield a new error saying a provider for ``UIWindow`` is missing, but after binding an instance of our ``UIWindow`` and its dependencies, we should be good to go!
+
+.. code-block:: swift
+
+  extension UIWindow {
+    struct Module : Cleanse.Module {
+      public func configure(binder: Binder<Singleton>) {
+        binder
+          .bind(UIWindow.self)
+          // The root app window should only be constructed once.
+          .sharedInScope()
+          .to { (rootViewController: RootViewController) in
+            let window = UIWindow(frame: UIScreen.mainScreen().bounds)
+            window.rootViewController = rootViewController
+            return window
+          }
+      }
+    }
+  }
 
 Features
 --------
-Cleanse is work in progress, but already has a powerful feature set. There are some features that other DI frameworks
-have which are desired in cleanse.
-
-
 =================================== =================================
    Feature                          Cleanse Implementation Status
 =================================== =================================
@@ -828,8 +825,8 @@ Overrides                           Supported
 Objective-C Compatibility layer     Supported (Experimental)
 Property Injection [#pinj]_         Supported
 Type Qualifiers                     Supported via `Type Tags`_
-`Assisted Injection`_ [#assinj]_    TBD
-`Subcomponents`_                    TBD
+`Assisted Injection`_ [#assinj]_    Supported via the `Seed` associated value on `Components`_
+`Subcomponents`_                    Supported via `Components`_
 =================================== =================================
 
 .. [#assinj] Assisted Injection will probably take the form of `Subcomponents`_ that can have arguments.
@@ -847,7 +844,7 @@ support fast failure. It currently supports fast failing for some of the more co
 =================================== =================================
 Missing Providers                   Supported [#f1]_
 Duplicate Bindings                  Supported [#f2]_
-Cycle Detection                     TBD (very important to add soon)
+Cycle Detection                     Supported
 =================================== =================================
 
 .. [#f1] When a provider is missing, errors present line numbers, etc. where the provider was required. Cleanse
