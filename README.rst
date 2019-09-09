@@ -463,8 +463,9 @@ And then you can use it by injecting in the ``ComponentFactory<APIComponent>`` i
       }
   }
 
-Assisted Injection
-`````````
+Assisted Injection (RFC_)
+````````````````````````
+.. _RFC: https://github.com/square/Cleanse/issues/112
 Assisted injection is used when combining seeded parameters and pre-bound dependencies. Similar to how a subcomponent has a ``Seed`` that is used to build the object graph, assisted injection allows you to eliminate boilerplate by creating a ``Factory`` type with a defined ``Seed`` object for construction via the ``build(_:)`` function.
 
 Examples
