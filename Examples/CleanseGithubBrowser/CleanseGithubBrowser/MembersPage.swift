@@ -2,6 +2,12 @@ import Foundation
 import UIKit
 import Cleanse
 
+public struct AssistedInjectionTags {
+    struct MembersPageSettingsSeed: AssistedFactory {
+        public typealias Seed = Bool
+        public typealias Element = MembersPageSettings
+    }
+}
 
 /// A module that configures a tab page on the root view controller as well as on the settings page
 struct MembersModule : Cleanse.Module {
@@ -15,14 +21,16 @@ struct MembersModule : Cleanse.Module {
         binder
             .bind()
             .to(factory: MembersSettingsSplitViewController.init)
-
-
-        // The settings for our MembersPage is a shared object that we mutate. Make it available as a singleton
+        
         binder
-            .bind()
-            .sharedInScope()
-            .to(factory: MembersPageSettings.init)
-
+            .bindFactory(MembersPageSettings.self)
+            .with(AssistedInjectionTags.MembersPageSettingsSeed.self)
+            .to { (value) -> MembersPageSettings in
+                let a = MembersPageSettings()
+                a.useGreen = value.get()
+                return a
+        }
+        
         // Make the "UseGreenCell" table view cell available
         binder
             .bind()
@@ -59,10 +67,10 @@ class MembersViewController : TableViewController {
     init(
         memberService: GithubMembersService,
         githubOrganizationName: TaggedProvider<GithubOrganizationName>,
-        settings: MembersPageSettings
+        settings: Factory<AssistedInjectionTags.MembersPageSettingsSeed>
     ) {
         self.memberService = memberService
-        self.settings = settings
+        self.settings = settings.build(false)
 
         super.init()
 
@@ -146,12 +154,12 @@ class UseGreenCell : UITableViewCell {
     let `switch` = UISwitch()
     let settings: MembersPageSettings
 
-    init(settings: MembersPageSettings) {
-        self.settings = settings
+    init(settings: Factory<AssistedInjectionTags.MembersPageSettingsSeed>) {
+        self.settings = settings.build(true)
 
         super.init(style: .default, reuseIdentifier: nil)
 
-        `switch`.isOn = settings.useGreen
+        `switch`.isOn = self.settings.useGreen
         `switch`.addTarget(self, action: #selector(valueChanged), for: .touchUpInside)
 
         textLabel?.text = "Use Green Cell Text"
