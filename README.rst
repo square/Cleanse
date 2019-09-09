@@ -64,6 +64,38 @@ of a ``Project`` declaration.
 
 .. _Swift Package Manager: https://github.com/apple/swift-package-manager
 
+Features
+--------
+=================================== =================================
+   Feature                          Cleanse Implementation Status
+=================================== =================================
+Multi-Bindings                      Supported (``.intoCollection()``)
+Overrides                           Supported
+Objective-C Compatibility layer     Supported (Experimental)
+Property Injection [#pinj]_         Supported
+Type Qualifiers                     Supported via `Type Tags`_
+`Assisted Injection`_               Supported
+`Subcomponents`_                    Supported via `Components`_
+=================================== =================================
+
+.. [#pinj] Property injection is known as `field injection`_ in other DI frameworks
+
+.. _Subcomponents: http://google.github.io/dagger/subcomponents.html
+.. _field injection: https://github.com/google/guice/wiki/Injections#field-injection
+
+Another very important part of a DI framework is how it handles errors. Failing fast is ideal. Cleanse is designed to
+support fast failure. It currently supports fast failing for some of the more common errors, but it isn't complete
+
+=================================== =================================
+   Error Type                       Cleanse Implementation Status
+=================================== =================================
+Missing Providers                   Supported [#f1]_
+Duplicate Bindings                  Supported
+Cycle Detection                     Supported
+=================================== =================================
+
+.. [#f1] When a provider is missing, errors present line numbers, etc. where the provider was required. Cleanse
+        will also collect all errors before failing
 
 Using Cleanse
 `````````````
@@ -430,8 +462,84 @@ And then you can use it by injecting in the ``ComponentFactory<APIComponent>`` i
           let apiRoot = loggedInComponent.build(())
       }
   }
-  
 
+Assisted Injection
+``````````````````
+Summary (RFC_)
+~~~~~~~~~~~~~~
+
+.. _RFC: https://github.com/square/Cleanse/issues/112
+
+
+Assisted injection is used when combining seeded parameters and pre-bound dependencies. Similar to how a subcomponent has a ``Seed`` that is used to build the object graph, assisted injection allows you to eliminate boilerplate by creating a ``Factory`` type with a defined ``Seed`` object for construction via the ``build(_:)`` function.
+
+Examples
+~~~~~~~~
+
+Creating a factory
+""""""""""""""""""
+Say we have a detail view controller that displays a particular customer's information based on the user's selection from a list view controller.
+
+.. code-block:: swift
+
+  class CustomerDetailViewController: UIViewController {
+      let customerID: String
+      let customerService: CustomerService
+      init(customerID: Assisted<String>, customerService: CustomerService) {
+          self.customerID = customerID.get()
+          self.customerService = customerService
+      }
+      ...
+  }
+  
+In our initializer, we have ``Assisted<String>`` which represents an assisted injection parameter based on the customer ID selected from the list view controller, and a pre-bound dependency ``CustomerService``.
+
+In order to create our factory, we need to define a type that conforms to ``AssistedFactory`` to set our ``Seed`` and ``Element`` types.
+
+.. code-block:: swift
+
+  extension CustomerDetailViewController {
+      struct Seed: AssistedFactory {
+          typealias Seed = String
+          typealias Element = CustomerDetailViewController
+      }
+  }
+
+Once we create our ``AssistedFactory`` object, we can create the factory binding through Cleanse.
+
+.. code-block:: swift
+
+  extension CustomerDetailViewController {
+      struct Module: Cleanse.Module {
+          static func configure(binder: Binder<Unscoped>) {
+              binder
+                .bindFactory(CustomerDetailViewController.self)
+                .with(AssistedFactory.self)
+                .to(factory: CustomerDetailViewController.init)
+          }
+      }
+  }
+
+Consuming our factory
+"""""""""""""""""""""
+After creating our binding, Cleanse will bind a ``Factory<CustomerDetailViewController.AssistedFactory>`` type into our object graph. So in our customer list view controller, consuming this factory may look like:
+
+.. code-block:: swift
+
+    class CustomerListViewController: UIViewController {
+        let detailViewControllerFactory: Factory<CustomerDetailViewController.AssistedFactory>
+        
+        init(detailViewControllerFactory: Factory<CustomerDetailViewController.AssistedFactory>) {
+            self.detailViewControllerFactory = detailViewControllerFactory
+        }
+        ...
+        
+        func tappedCustomer(with customerID: String) {
+            let detailVC = detailViewControllerFactory.build(customerID)
+            self.present(detailVC, animated: false)
+        }
+    }
+  
 Binder
 ``````
 A ``Binder`` instance is what is passed to ``Module.configure(binder:)`` which module implementations use to configure
@@ -814,42 +922,6 @@ Running the app now will yield a new error saying a provider for ``UIWindow`` is
       }
     }
   }
-
-Features
---------
-=================================== =================================
-   Feature                          Cleanse Implementation Status
-=================================== =================================
-Multi-Bindings                      Supported (``.intoCollection()``)
-Overrides                           Supported
-Objective-C Compatibility layer     Supported (Experimental)
-Property Injection [#pinj]_         Supported
-Type Qualifiers                     Supported via `Type Tags`_
-`Assisted Injection`_ [#assinj]_    Supported via the `Seed` associated value on `Components`_
-`Subcomponents`_                    Supported via `Components`_
-=================================== =================================
-
-.. [#assinj] Assisted Injection will probably take the form of `Subcomponents`_ that can have arguments.
-.. [#pinj] Property injection is known as `field injection`_ in other DI frameworks
-
-.. _Assisted Injection: https://github.com/google/guice/wiki/AssistedInject
-.. _Subcomponents: http://google.github.io/dagger/subcomponents.html
-.. _field injection: https://github.com/google/guice/wiki/Injections#field-injection
-
-Another very important part of a DI framework is how it handles errors. Failing fast is ideal. Cleanse is designed to
-support fast failure. It currently supports fast failing for some of the more common errors, but it isn't complete
-
-=================================== =================================
-   Error Type                       Cleanse Implementation Status
-=================================== =================================
-Missing Providers                   Supported [#f1]_
-Duplicate Bindings                  Supported [#f2]_
-Cycle Detection                     Supported
-=================================== =================================
-
-.. [#f1] When a provider is missing, errors present line numbers, etc. where the provider was required. Cleanse
-        will also collect all errors before failing
-.. [#f2] Duplicate provider detection could use improvement. It currently throws when duplicate binding is added.
 
 Contributing
 ------------
