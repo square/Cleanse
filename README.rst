@@ -465,7 +465,7 @@ And then you can use it by injecting in the ``ComponentFactory<APIComponent>`` i
 
 Assisted Injection
 `````````
-Assisted injection is used when combining seeded parameters and pre-bound dependencies. Similar to how a subcomponent has a ``Seed`` that is used to build the object graph, assisted injection allows you to eliminate boilerplate code by creating a ``Factory`` type with a defined `Seed` object for construction via the ``build(_:)`` function.
+Assisted injection is used when combining seeded parameters and pre-bound dependencies. Similar to how a subcomponent has a ``Seed`` that is used to build the object graph, assisted injection allows you to eliminate boilerplate by creating a ``Factory`` type with a defined ``Seed`` object for construction via the ``build(_:)`` function.
 
 Examples
 ~~~~~~~~
@@ -486,16 +486,16 @@ Say we have a detail view controller that displays a particular customer's infor
       ...
   }
   
-In our initializer, we have ``Assisted<String>`` which represents an assisted injection parameter based on the customer ID selected from the list view controller, and a pre-bound dependency `CustomerService`.
+In our initializer, we have ``Assisted<String>`` which represents an assisted injection parameter based on the customer ID selected from the list view controller, and a pre-bound dependency ``CustomerService``.
 
-In order to create our factory, we need to define a type that conforms to ``AssistedFactory`` to set our ``Seed`` and return type ``Element``.
+In order to create our factory, we need to define a type that conforms to ``AssistedFactory`` to set our ``Seed`` and ``Element`` types.
 
 .. code-block:: swift
 
   extension CustomerDetailViewController {
       struct Seed: AssistedFactory {
           typealias Seed = String
-          typelias Element = CustomerDetailViewController
+          typealias Element = CustomerDetailViewController
       }
   }
 
