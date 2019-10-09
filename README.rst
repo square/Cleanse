@@ -172,10 +172,10 @@ We've successfully wired up our root component! Our root object ``RootViewContro
 .. code-block:: swift
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Build our component, and make the property injector
+        // Build our root object in our graph.
         let rootViewController = try! ComponentFactory.of(AppDelegate.Component.self).build(())
 
-        // Now inject the properties into ourselves
+        // Now we can use the root object in our app.
         window!.rootViewController = rootViewController
         window!.makeKeyAndVisible()
 
