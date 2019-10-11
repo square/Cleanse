@@ -10,6 +10,10 @@
 		88A8D19B1E81D52A00F15A75 /* TaggedProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A8D19A1E81D52A00F15A75 /* TaggedProviderTests.swift */; };
 		88D655301F042D4300AFE00E /* CleanseGen.h in Headers */ = {isa = PBXBuildFile; fileRef = 88D6552E1F042D4300AFE00E /* CleanseGen.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		88D655381F042F9200AFE00E /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D655371F042F9200AFE00E /* main.swift */; };
+		DC4A0CA5235032F700A2E576 /* CleanseServiceLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4A0CA4235032F700A2E576 /* CleanseServiceLoader.swift */; };
+		DC4A0CA72350F8B200A2E576 /* CleanseErrorReporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4A0CA62350F8B200A2E576 /* CleanseErrorReporter.swift */; };
+		DC4A0CA92350FD4F00A2E576 /* ComponentBinding.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4A0CA82350FD4F00A2E576 /* ComponentBinding.swift */; };
+		DC4ACFD4234EBA7900A2E576 /* SPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4ACFD3234EBA7900A2E576 /* SPI.swift */; };
 		DCE9317723220C6800C0522F /* Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE9317623220C6800C0522F /* Factory.swift */; };
 		DCE9317923220CA900C0522F /* AssistedFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE9317823220CA900C0522F /* AssistedFactory.swift */; };
 		DCE9317B23220CF900C0522F /* Assisted.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE9317A23220CF900C0522F /* Assisted.swift */; };
@@ -100,6 +104,10 @@
 		88D6552E1F042D4300AFE00E /* CleanseGen.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CleanseGen.h; sourceTree = "<group>"; };
 		88D6552F1F042D4300AFE00E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		88D655371F042F9200AFE00E /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		DC4A0CA4235032F700A2E576 /* CleanseServiceLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleanseServiceLoader.swift; sourceTree = "<group>"; };
+		DC4A0CA62350F8B200A2E576 /* CleanseErrorReporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleanseErrorReporter.swift; sourceTree = "<group>"; };
+		DC4A0CA82350FD4F00A2E576 /* ComponentBinding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentBinding.swift; sourceTree = "<group>"; };
+		DC4ACFD3234EBA7900A2E576 /* SPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPI.swift; sourceTree = "<group>"; };
 		DCE9317623220C6800C0522F /* Factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Factory.swift; sourceTree = "<group>"; };
 		DCE9317823220CA900C0522F /* AssistedFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssistedFactory.swift; sourceTree = "<group>"; };
 		DCE9317A23220CF900C0522F /* Assisted.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Assisted.swift; sourceTree = "<group>"; };
@@ -213,6 +221,17 @@
 			path = CleanseGen;
 			sourceTree = "<group>";
 		};
+		DC4ACFD2234EBA5300A2E576 /* SPI */ = {
+			isa = PBXGroup;
+			children = (
+				DC4ACFD3234EBA7900A2E576 /* SPI.swift */,
+				DC4A0CA4235032F700A2E576 /* CleanseServiceLoader.swift */,
+				DC4A0CA62350F8B200A2E576 /* CleanseErrorReporter.swift */,
+				DC4A0CA82350FD4F00A2E576 /* ComponentBinding.swift */,
+			);
+			name = SPI;
+			sourceTree = "<group>";
+		};
 		DCE9317523220C5800C0522F /* Assisted Inject */ = {
 			isa = PBXGroup;
 			children = (
@@ -248,6 +267,7 @@
 		F61133BA1CD414E200069972 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				DC4ACFD2234EBA5300A2E576 /* SPI */,
 				DCE9317523220C5800C0522F /* Assisted Inject */,
 				F62C6A001CD90F6B00137422 /* Binder */,
 				F6760C651D2E0B6D009C6F8A /* ComponentBase */,
@@ -606,6 +626,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DC4ACFD4234EBA7900A2E576 /* SPI.swift in Sources */,
 				F6615D231CD026890079DE8D /* ProviderProvider.swift in Sources */,
 				F6FA73561E2027D60038D8F8 /* BindToable.swift in Sources */,
 				F6A660F31CCB1B6B004DD6E3 /* Scope.swift in Sources */,
@@ -641,6 +662,7 @@
 				F6760C5C1D2DF67F009C6F8A /* Finalizable.swift in Sources */,
 				F65642CA1CCEFB6D00C927E6 /* Binder.swift in Sources */,
 				F62C69F51CD8481200137422 /* ComponentVisitor.swift in Sources */,
+				DC4A0CA92350FD4F00A2E576 /* ComponentBinding.swift in Sources */,
 				F69D1AA51CDDEF67009132B4 /* RawProviderBinding.swift in Sources */,
 				F61133C51CD7B5A900069972 /* RootComponent.swift in Sources */,
 				F69D1A9B1CDDBC53009132B4 /* BindingBuilder.swift in Sources */,
@@ -656,9 +678,11 @@
 				F69D1AA01CDDE229009132B4 /* BinderArities.swift in Sources */,
 				DCE9317B23220CF900C0522F /* Assisted.swift in Sources */,
 				DCE9318023220E9900C0522F /* AssistedInjectionSeedDecorator.swift in Sources */,
+				DC4A0CA72350F8B200A2E576 /* CleanseErrorReporter.swift in Sources */,
 				F63EF7961CD2F8430016306D /* SourceLocation.swift in Sources */,
 				F6FA73581E202AB30038D8F8 /* AnyBinder.swift in Sources */,
 				F6B387901CE18BB2001CBC4F /* BaseBindingBuilder.swift in Sources */,
+				DC4A0CA5235032F700A2E576 /* CleanseServiceLoader.swift in Sources */,
 				F624D2941D40172A00C36F98 /* WeakProvider.swift in Sources */,
 				F62C69FD1CD8927400137422 /* CanonicalRepresentable.swift in Sources */,
 			);

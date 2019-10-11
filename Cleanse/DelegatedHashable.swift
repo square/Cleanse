@@ -9,18 +9,18 @@
 import Foundation
 
 /// Easy way to make a hashable object. Delegates it to a hashable property.
-protocol DelegatedHashable : Hashable {
+public protocol DelegatedHashable : Hashable {
     associatedtype H: Hashable
     var hashable: H { get }
 }
 
 extension DelegatedHashable {    
-    func hash(into hasher: inout Hasher) {
+    public func hash(into hasher: inout Hasher) {
         hasher.combine(hashable)
     }
 }
 
-func ==<DH: DelegatedHashable>(lhs: DH, rhs: DH) -> Bool {
+public func ==<DH: DelegatedHashable>(lhs: DH, rhs: DH) -> Bool {
     return lhs.hashable == rhs.hashable
 }
 

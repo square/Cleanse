@@ -13,12 +13,12 @@ public protocol RootComponent : ComponentBase {
 }
 
 public extension ComponentFactoryProtocol where ComponentElement : RootComponent {
-    static func of(_ componentType: ComponentElement.Type, validate: Bool = true) throws -> ComponentFactory<ComponentElement>  {
+    static func of(_ componentType: ComponentElement.Type, validate: Bool = true, serviceLoader: CleanseServiceLoader = CleanseServiceLoader.instance) throws -> ComponentFactory<ComponentElement>  {
 
         if validate {
             let validator = ValidationVisitor()
             validator.install(dependency: ComponentElement.self)
-            try validator.finalize()
+            try validator.finalize(serviceLoader)
         }
         
         let graph = Graph(scope: nil)
