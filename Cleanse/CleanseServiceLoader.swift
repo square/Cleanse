@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// Service loader for binding plugins. Passed into `RootComponent` factory function.
 public final class CleanseServiceLoader {
     var services: [CleanseBindingPlugin] = []
     
