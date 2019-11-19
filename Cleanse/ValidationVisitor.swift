@@ -21,10 +21,11 @@ extension AnyProvider where Self: ProviderProtocol {
     }
 }
 
-private struct ProviderKey : TypeKeyProtocol {
+
+public struct ProviderKey : TypeKeyProtocol {
     let ctype: AnyProvider.Type
 
-    var type: Any.Type {
+    public var type: Any.Type {
         return ctype
     }
 
@@ -33,7 +34,8 @@ private struct ProviderKey : TypeKeyProtocol {
     }
 }
 
-private class ProviderInfo : DelegatedHashable, CustomStringConvertible {
+
+public class ProviderInfo : DelegatedHashable, CustomStringConvertible {
     let rawBinding: RawProviderBinding
     var requirements: Set<ProviderKey> = []
 
@@ -41,24 +43,32 @@ private class ProviderInfo : DelegatedHashable, CustomStringConvertible {
         self.rawBinding = rawBinding
     }
 
-    var hashable: ObjectIdentifier {
+    public var hashable: ObjectIdentifier {
         return ObjectIdentifier(self)
     }
 
-    fileprivate var description: String {
+    public var description: String {
         return "ProviderInfo for \(type(of: rawBinding.provider))"
     }
 }
 
-private class ComponentInfo {
+private class ComponentInfo: ComponentBinding {
     let scope: Scope.Type?
     let seed: Any.Type
     let isRootComponent: Bool
     let componentType: Any.Type?
+    
+    var parent: ComponentBinding? {
+        return parentInfo
+    }
+    
+    var subcomponents: [ComponentBinding] {
+        return subcomponentsInfo
+    }
 
-    weak var parent: ComponentInfo?
+    weak var parentInfo: ComponentInfo?
 
-    var subcomponents: [ComponentInfo] = []
+    var subcomponentsInfo: [ComponentInfo] = []
 
     var providers = [ProviderKey: [ProviderInfo]]()
 
@@ -70,7 +80,7 @@ private class ComponentInfo {
         self.isRootComponent = isRootComponent
         self.scope = scope
         self.seed = seed
-        self.parent = parent
+        self.parentInfo = parent
         self.componentType = componentType
     }
 
@@ -87,12 +97,12 @@ private class ComponentInfo {
             return
         }
 
-        var loopCurrent = parent
+        var loopCurrent = parentInfo
         while let current = loopCurrent {
             if current.scope == scope {
                 errors.append(InvalidScopeNesting(scope: scope!, innerComponent: self.componentType!, outerComponent: current.componentType!))
             }
-            loopCurrent = current.parent
+            loopCurrent = current.parentInfo
         }
     }
 
@@ -201,12 +211,12 @@ private class ComponentInfo {
 
         var providers = getCurrentProviderInfo(key)
 
-        var component = self.parent
+        var component = self.parentInfo
 
         while let c = component {
             providers += c.getCurrentProviderInfo(key)
 
-            component = component?.parent
+            component = component?.parentInfo
         }
 
         return providers
@@ -295,12 +305,12 @@ final class ValidationVisitor : ComponentVisitor {
 
         components.append(component)
 
-        currentComponent.subcomponents.append(component)
+        currentComponent.subcomponentsInfo.append(component)
         currentComponent = component
     }
 
     private func leaveComponentBase() {
-        currentComponent = currentComponent.parent!
+        currentComponent = currentComponent.parentInfo!
     }
 
     func enterProvider(binding: RawProviderBinding) {
@@ -333,25 +343,20 @@ final class ValidationVisitor : ComponentVisitor {
     func leaveModule<M : Module>(module: M.Type) {
     }
 
-    func finalize() throws {
+    func finalize(_ serviceLoader: CleanseServiceLoader) throws {
+        let errorReporter = CleanseErrorReporter()
         var errors = [CleanseError]()
 
         for c in components {
             c.validate(&errors)
         }
-
-        errors.sort {
-            return $0.description < $1.description
+        
+        errorReporter.append(contentsOf: errors)
+        
+        for service in serviceLoader.services {
+            service.visit(root: rootComponent, errorReporter: errorReporter)
         }
-
-        switch errors.count {
-        case 0:
-            // Everything is cool
-            break
-        case 1:
-            throw errors[0]
-        default:
-            throw MultiError(errors: errors)
-        }
+        
+        try errorReporter.report()
     }
 }

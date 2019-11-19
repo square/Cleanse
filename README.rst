@@ -29,7 +29,7 @@ A full-fledged example of using Cleanse with Cocoa Touch can be found in ``Examp
 Installation
 ````````````
 Using `CocoaPods`_
-~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~
 You can pull in the latest Cleanse version into your ``Podfile`` using
 
 ``pod 'Cleanse'``
@@ -76,6 +76,7 @@ Property Injection [#pinj]_         Supported
 Type Qualifiers                     Supported via `Type Tags`_
 `Assisted Injection`_               Supported
 `Subcomponents`_                    Supported via `Components`_
+`Service Provider Interface`_       Supported
 =================================== =================================
 
 .. [#pinj] Property injection is known as `field injection`_ in other DI frameworks
@@ -134,7 +135,7 @@ Let's begin by defining the ``RootComponent``:
           // We will fill out contents later.
       }
   }
-  
+
 After creating our root component, we find that we're required to implement two functions:
 ``static func configureRoot(binder bind: ReceiptBinder<RootViewController>) -> BindingReceipt<RootViewController>`` and ``static func configure(binder: Binder<Unscoped>)``. These functions are very important because they will contain the logic for how we construct every object/dependency in our app. The parameters and return types are confusing right now, but will make more sense as we go along.
 
@@ -155,17 +156,17 @@ Now, let's create our ``RootViewController`` class
       init() {
           super.init(nibName: nil, bundle: nil)
       }
-    
+
       required init?(coder aDecoder: NSCoder) {
           fatalError("init(coder:) has not been implemented")
       }
-    
+
       override func viewDidLoad() {
           super.viewDidLoad()
           self.view.backgroundColor = .blue
       }
   }
-  
+
 
 We've successfully wired up our root component! Our root object ``RootViewController`` is configured properly, so in our App Delegate we can now `build` the component (and graph) to use it.
 
@@ -192,7 +193,7 @@ Running the app will now display our ``RootViewController`` with a blue backgrou
   struct RootViewProperties {
       let backgroundColor: UIColor
   }
-  
+
 And then inject ``RootViewProperties`` into our ``RootViewContoller`` and set the background color.
 
 .. code-block:: swift
@@ -203,18 +204,18 @@ And then inject ``RootViewProperties`` into our ``RootViewContoller`` and set th
           self.rootViewProperties = rootViewProperties
           super.init(nibName: nil, bundle: nil)
       }
-    
+
       required init?(coder aDecoder: NSCoder) {
           fatalError("init(coder:) has not been implemented")
       }
-    
+
       override func viewDidLoad() {
           super.viewDidLoad()
-    
+
           self.view.backgroundColor = rootViewProperties.backgroundColor
       }
   }
-  
+
 
 Running the app now will yield a new error saying a provider for ``RootViewProperties`` is missing. That's because we referenced it from our ``RootViewController`` class, but Cleanse didn't find a binding for the ``RootViewProperties`` type. So let's create one! We will do this inside the ``static func configure(binder: Binder<Unscoped>)`` function we talked about earlier inside our root component.
 
@@ -318,7 +319,7 @@ If we had a class that requires this URL to perform a function, the constructor 
             self.primaryURL = primaryURL.get()
         }
     }
-    
+
 
 Modules
 ```````
@@ -356,8 +357,8 @@ Consuming the Primary API URL (e.g. "https://connect.squareup.com/v2/")
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 **Note**: It is generally a good practice to embed the ``Module`` that configures X as an inner struct of X named ``Module``. To disambiguate Cleanse's Module protocol from the inner struct being defined, one has to qualify the protocol with ``Cleanse.Module``
-    
-    
+
+
 .. code-block:: swift
 
     class SomethingThatDoesAnAPICall {
@@ -444,7 +445,7 @@ Cleanse will automatically create the type ``ComponentFactory<APIComponent>`` in
       }
       // ...
   }
-  
+
 
 And then you can use it by injecting in the ``ComponentFactory<APIComponent>`` instance into an object and calling ``build(())``.
 
@@ -452,12 +453,12 @@ And then you can use it by injecting in the ``ComponentFactory<APIComponent>`` i
 
   class RootViewController: UIViewController {
       let loggedInComponent: ComponentFactory<APIComponent>
-    
+
       init(loggedInComponent: ComponentFactory<APIComponent>) {
           self.loggedInComponent = loggedInComponent
           super.init(nibName: nil, bundle: nil)
       }
-    
+
       func logIn() {
           let apiRoot = loggedInComponent.build(())
       }
@@ -465,10 +466,10 @@ And then you can use it by injecting in the ``ComponentFactory<APIComponent>`` i
 
 Assisted Injection
 ``````````````````
-Summary (RFC_)
-~~~~~~~~~~~~~~
+Summary (`RFC #112`_)
+~~~~~~~~~~~~~~~~~~~~~
 
-.. _RFC: https://github.com/square/Cleanse/issues/112
+.. _RFC #112: https://github.com/square/Cleanse/issues/112
 
 
 Assisted injection is used when combining seeded parameters and pre-bound dependencies. Similar to how a subcomponent has a ``Seed`` that is used to build the object graph, assisted injection allows you to eliminate boilerplate by creating a ``Factory`` type with a defined ``Seed`` object for construction via the ``build(_:)`` function.
@@ -491,7 +492,7 @@ Say we have a detail view controller that displays a particular customer's infor
       }
       ...
   }
-  
+
 In our initializer, we have ``Assisted<String>`` which represents an assisted injection parameter based on the customer ID selected from the list view controller, and a pre-bound dependency ``CustomerService``.
 
 In order to create our factory, we need to define a type that conforms to ``AssistedFactory`` to set our ``Seed`` and ``Element`` types.
@@ -528,18 +529,53 @@ After creating our binding, Cleanse will bind a ``Factory<CustomerDetailViewCont
 
     class CustomerListViewController: UIViewController {
         let detailViewControllerFactory: Factory<CustomerDetailViewController.AssistedFactory>
-        
+
         init(detailViewControllerFactory: Factory<CustomerDetailViewController.AssistedFactory>) {
             self.detailViewControllerFactory = detailViewControllerFactory
         }
         ...
-        
+
         func tappedCustomer(with customerID: String) {
             let detailVC = detailViewControllerFactory.build(customerID)
             self.present(detailVC, animated: false)
         }
     }
-  
+
+Service Provider Interface
+``````````````````````````
+Summary (`RFC #118`_)
+~~~~~~~~~~~~~~~~~~~~~
+
+.. _RFC #118: https://github.com/square/Cleanse/issues/118
+
+Cleanse provides a plugin interface that developers can use to hook into the generated object graph to create custom validations and tooling.
+
+Creating a plugin can be done in 3 steps:
+
+**1. Create your plugin implementation by conforming to the protocol** ``CleanseBindingPlugin``
+
+You will be required to implement the function ``func visit(root: ComponentBinding, errorReporter:
+CleanseErrorReporter)``, which hands you an instance of a ``ComponentBinding`` and
+``CleanseErrorReporter``.
+
+The first parameter, ``ComponentBinding``, is a representation of the root component and can be used
+to traverse the entire object graph. The second, ``CleanseErrorReporter`` is used to report
+errors back to the user after validation is complete.
+
+**2. Register your plugin with a** ``CleanseServiceLoader`` **instance**
+
+After creating an instance of a ``CleanseServiceLoader``, you can register your plugin via the
+``register(_:)`` function.
+
+**3. Pass your service loader into the** ``RootComponent`` **factory function**
+
+The ``RootComponent`` factory function, ``public static func of(_:validate:serviceLoader:)`` accepts
+a ``CleanseServiceLoader`` instance and will run all the plugins registered within that object.
+
+**NOTE**: Your plugins will only be run if you set `validate` to `true` in the factory function.
+
+Sample plugin implementations are available in the RFC linked above.
+
 Binder
 ``````
 A ``Binder`` instance is what is passed to ``Module.configure(binder:)`` which module implementations use to configure
@@ -878,7 +914,7 @@ Let's start by redefining the ``RootComponent``:
         }
       }
     }
- 
+
 Inside of our app delegate, we add the function ``injectProperties``:
 
 .. code-block:: swift
@@ -886,7 +922,7 @@ Inside of our app delegate, we add the function ``injectProperties``:
   func injectProperties(_ window: UIWindow) {
     self.window = window
   }
- 
+
 Now to wire up our new root object, we can call ``injectProperties(:)`` on ourself in the app delegate:
 
 .. code-block:: swift
