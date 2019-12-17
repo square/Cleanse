@@ -13,3 +13,7 @@
   [#112](https://github.com/square/Cleanse/issues/112)
 
 #### Bug Fixes
+
+* Retain subcomponent graphs  
+  [Sebastian Shanus](https://github.com/sebastianv1)
+  [#42](https://github.com/square/Cleanse/issues/42)

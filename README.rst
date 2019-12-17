@@ -170,11 +170,17 @@ Now, let's create our ``RootViewController`` class
 
 We've successfully wired up our root component! Our root object ``RootViewController`` is configured properly, so in our App Delegate we can now `build` the component (and graph) to use it.
 
+**Important**: It is important that you retain an instance of the `ComponentFactory<E>` returned from `ComponentFactory.of(:)`. Otherwise subcomponents may unexpectedly become deallocated.
+
 .. code-block:: swift
+
+    // IMPORTANT: We must retain an instance of our `ComponentFactory`.
+    var factory: ComponentFactory<AppDelegate.Component>?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Build our root object in our graph.
-        let rootViewController = try! ComponentFactory.of(AppDelegate.Component.self).build(())
+        factory = try! ComponentFactory.of(AppDelegate.Component.self)
+        let rootViewController = factory!.build(())
 
         // Now we can use the root object in our app.
         window!.rootViewController = rootViewController

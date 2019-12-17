@@ -23,6 +23,7 @@
 		DCE9318223220ED800C0522F /* AssistedInjection.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE9318123220ED800C0522F /* AssistedInjection.swift */; };
 		DCE93184232212BA00C0522F /* AssistedInjectionArities.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE93183232212BA00C0522F /* AssistedInjectionArities.swift */; };
 		DCE931862322175800C0522F /* AssistedInjectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE931852322175800C0522F /* AssistedInjectionTests.swift */; };
+		DCFC812F23A8687B00629D44 /* SubcomponentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFC812E23A8687B00629D44 /* SubcomponentTests.swift */; };
 		F61133BF1CD41EE600069972 /* TypeKeyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61133BE1CD41EE600069972 /* TypeKeyProtocol.swift */; };
 		F61133C11CD7B36600069972 /* MemoryManagementTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61133C01CD7B36600069972 /* MemoryManagementTests.swift */; };
 		F61133C51CD7B5A900069972 /* RootComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61133C41CD7B5A900069972 /* RootComponent.swift */; };
@@ -118,6 +119,7 @@
 		DCE9318123220ED800C0522F /* AssistedInjection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssistedInjection.swift; sourceTree = "<group>"; };
 		DCE93183232212BA00C0522F /* AssistedInjectionArities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssistedInjectionArities.swift; sourceTree = "<group>"; };
 		DCE931852322175800C0522F /* AssistedInjectionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssistedInjectionTests.swift; sourceTree = "<group>"; };
+		DCFC812E23A8687B00629D44 /* SubcomponentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubcomponentTests.swift; sourceTree = "<group>"; };
 		F61133BE1CD41EE600069972 /* TypeKeyProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypeKeyProtocol.swift; sourceTree = "<group>"; };
 		F61133C01CD7B36600069972 /* MemoryManagementTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryManagementTests.swift; sourceTree = "<group>"; };
 		F61133C41CD7B5A900069972 /* RootComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootComponent.swift; sourceTree = "<group>"; };
@@ -440,6 +442,7 @@
 				88A8D19A1E81D52A00F15A75 /* TaggedProviderTests.swift */,
 				DCE931852322175800C0522F /* AssistedInjectionTests.swift */,
 				DC8ACA80238315EB005A6F51 /* SPITests.swift */,
+				DCFC812E23A8687B00629D44 /* SubcomponentTests.swift */,
 			);
 			path = CleanseTests;
 			sourceTree = "<group>";
@@ -703,6 +706,7 @@
 				F6A82B811CE2F182007C3A32 /* DebuggingTests.swift in Sources */,
 				F6A660DA1CCB07C3004DD6E3 /* CleanseTests.swift in Sources */,
 				F6A82B7D1CE2858B007C3A32 /* LegacyObjectGraphTests.swift in Sources */,
+				DCFC812F23A8687B00629D44 /* SubcomponentTests.swift in Sources */,
 				F61191361CD30B3300686C0C /* ErrorTest.swift in Sources */,
 				F6FA735A1E2032F90038D8F8 /* ReceiptBindingTests.swift in Sources */,
 				F6AB45151CD9D1F90021AF36 /* NoopVisitor.swift in Sources */,
