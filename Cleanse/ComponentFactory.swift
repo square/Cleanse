@@ -14,17 +14,22 @@ public protocol ComponentFactoryProtocol {
     func build(_ seed: ComponentElement.Seed) -> ComponentElement.Root
 }
 
-public struct ComponentFactory<C: ComponentBase> : ComponentFactoryProtocol {
+public final class ComponentFactory<C: ComponentBase> : ComponentFactoryProtocol {
     public typealias ComponentElement = C
-    fileprivate let factoryFunction: (_ seed: ComponentElement.Seed) -> C.Root
+    fileprivate let factoryFunction: (_ seed: ComponentElement.Seed, _ subgraph: Graph) -> C.Root
+    fileprivate let parent: Graph?
+    fileprivate var subgraphs: [Graph] = []
 
-    init(factoryFunction: @escaping (_ seed: ComponentElement.Seed) -> C.Root) {
+    init(parent: Graph?, factoryFunction: @escaping (_ seed: ComponentElement.Seed, _ subgraph: Graph) -> C.Root) {
         self.factoryFunction = factoryFunction
+        self.parent = parent
     }
 
     /// Builds the Component and returns its root object.
     public func build(_ seed: ComponentElement.Seed) -> ComponentElement.Root {
-        return factoryFunction(seed)
+        let subgraph = Graph(scope: C.Scope.scopeOrNil, parent: parent)
+        subgraphs.append(subgraph)
+        return factoryFunction(seed, subgraph)
     }
 }
 
