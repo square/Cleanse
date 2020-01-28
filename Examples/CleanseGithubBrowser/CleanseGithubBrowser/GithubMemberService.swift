@@ -20,7 +20,7 @@ struct GithubMember {
 
 /// Service that lists "Member" for the current organization
 protocol GithubMembersService {
-    func list(handler: @escaping (ErrorOptional<[GithubMember]>) -> Void)
+    func list(handler: @escaping (Result<[GithubMember], Error>) -> Void)
 }
 
 struct GithubMembersServiceImpl : GithubMembersService {
@@ -30,7 +30,7 @@ struct GithubMembersServiceImpl : GithubMembersService {
     let urlSession: URLSession
 
     /// Lists members of an organization
-    func list(handler: @escaping (ErrorOptional<[GithubMember]>) -> Void) {
+    func list(handler: @escaping (Result<[GithubMember], Error>) -> Void) {
         urlSession.jsonListTask(
             baseURL: githubURL.get(),
             pathComponents: "orgs", githubOrganizationName.get(), "public_members") { result in

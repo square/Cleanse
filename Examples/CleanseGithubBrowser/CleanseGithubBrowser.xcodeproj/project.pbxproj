@@ -12,7 +12,6 @@
 		F69184B31D0DF28A00125872 /* GithubMemberService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69184B21D0DF28A00125872 /* GithubMemberService.swift */; };
 		F69184B61D0DF2CA00125872 /* GithubRepositoriesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69184B51D0DF2CA00125872 /* GithubRepositoriesService.swift */; };
 		F69184BB1D0DF3DD00125872 /* NetworkModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69184BA1D0DF3DD00125872 /* NetworkModule.swift */; };
-		F69184BD1D0DF5DC00125872 /* ErrorOptional.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69184BC1D0DF5DC00125872 /* ErrorOptional.swift */; };
 		F69184BF1D0DF70F00125872 /* HTTPError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69184BE1D0DF70F00125872 /* HTTPError.swift */; };
 		F69184C31D0DFB4A00125872 /* GithubServicesModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69184C21D0DFB4A00125872 /* GithubServicesModule.swift */; };
 		F69184C61D0E015A00125872 /* NSURLSessionAdditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69184C51D0E015A00125872 /* NSURLSessionAdditions.swift */; };
@@ -107,7 +106,6 @@
 		F69184B21D0DF28A00125872 /* GithubMemberService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GithubMemberService.swift; sourceTree = "<group>"; };
 		F69184B51D0DF2CA00125872 /* GithubRepositoriesService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GithubRepositoriesService.swift; sourceTree = "<group>"; };
 		F69184BA1D0DF3DD00125872 /* NetworkModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkModule.swift; sourceTree = "<group>"; };
-		F69184BC1D0DF5DC00125872 /* ErrorOptional.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorOptional.swift; sourceTree = "<group>"; };
 		F69184BE1D0DF70F00125872 /* HTTPError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPError.swift; sourceTree = "<group>"; };
 		F69184C21D0DFB4A00125872 /* GithubServicesModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GithubServicesModule.swift; sourceTree = "<group>"; };
 		F69184C51D0E015A00125872 /* NSURLSessionAdditions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSURLSessionAdditions.swift; sourceTree = "<group>"; };
@@ -164,7 +162,6 @@
 		F69184B71D0DF32800125872 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				F69184BC1D0DF5DC00125872 /* ErrorOptional.swift */,
 				F69184CF1D0E33F600125872 /* FakeModeSettings.swift */,
 				F69184CD1D0E31F200125872 /* FakeServices.swift */,
 				F69184B21D0DF28A00125872 /* GithubMemberService.swift */,
@@ -464,7 +461,6 @@
 				F6E878301D0BD911006F3FAB /* SettingsPage.swift in Sources */,
 				884618AF1D9324AD0001ADEB /* AppComponent.swift in Sources */,
 				F6E878321D0D1120006F3FAB /* RepositoriesPage.swift in Sources */,
-				F69184BD1D0DF5DC00125872 /* ErrorOptional.swift in Sources */,
 				F6E878381D0DD11A006F3FAB /* SplitViewController.swift in Sources */,
 				F69184D21D0E357600125872 /* FoundationCommonModule.swift in Sources */,
 			);
@@ -651,7 +647,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.squareup.CleanseGithubBrowserTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CleanseGithubBrowser.app/CleanseGithubBrowser";
 			};
 			name = Debug;
@@ -664,7 +660,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.squareup.CleanseGithubBrowserTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CleanseGithubBrowser.app/CleanseGithubBrowser";
 			};
 			name = Release;
@@ -676,7 +672,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.squareup.CleanseGithubBrowserUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 5.0;
 				TEST_TARGET_NAME = CleanseGithubBrowser;
 			};
 			name = Debug;
@@ -688,7 +684,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.squareup.CleanseGithubBrowserUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 5.0;
 				TEST_TARGET_NAME = CleanseGithubBrowser;
 			};
 			name = Release;
