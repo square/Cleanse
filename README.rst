@@ -901,6 +901,7 @@ We can make the root of our Cleanse object graph the App Delegate through `Prope
 Let's start by redefining the ``RootComponent``:
 
 .. code-block:: swift
+
     extension AppDelegate {
       struct Component : Cleanse.RootComponent {
         // When we call build() it will return the Root type, which is a PropertyInjector<AppDelegate>.
