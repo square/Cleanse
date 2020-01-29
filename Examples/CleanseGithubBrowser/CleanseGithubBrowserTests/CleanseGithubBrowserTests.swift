@@ -14,10 +14,13 @@ import Cleanse
 class CleanseGithubBrowserTests: XCTestCase {
     func testMembersViewController_Title() {
         // Tests that the member's view controller sets the title appropriately.
+        let factory = Factory<AssistedInjectionTags.MembersPageSettingsSeed> { _ in
+            return MembersPageSettings()
+        }
         let vc = MembersViewController(
             memberService: FakeGithubMembersService(),
             githubOrganizationName: .init(value: "Organiztion Name"),
-            settings: MembersPageSettings()
+            settings: factory
         )
 
         XCTAssertEqual(vc.navigationItem.title, "Members of Organiztion Name")
