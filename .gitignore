@@ -62,3 +62,6 @@ Carthage/
 
 # Cocoapods
 gen/
+
+# Swift PM
+.swiftpm

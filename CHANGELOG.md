@@ -2,7 +2,11 @@
 
 ## Master
 
-#### Features
+#### Features & Updates
+
+* Xcode 11.2 Support  
+  [Sebastian Shanus](https://github.com/sebastianv1)
+  [#125](https://github.com/square/Cleanse/issues/125)
 
 * Service Provider Interface (SPI)  
   [Sebastian Shanus](https://github.com/sebastianv1)
