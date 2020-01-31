@@ -4,6 +4,10 @@
 
 #### Features & Updates
 
+* Replace demo app's ErrorOptional type with Swift Foundation Result type  
+  [Sihao Lu](https://github.com/DJBen)
+  [#126](https://github.com/square/Cleanse/pull/126)
+
 * Xcode 11.2 Support  
   [Sebastian Shanus](https://github.com/sebastianv1)
   [#125](https://github.com/square/Cleanse/issues/125)
@@ -21,9 +25,3 @@
 * Retain subcomponent graphs  
   [Sebastian Shanus](https://github.com/sebastianv1)
   [#42](https://github.com/square/Cleanse/issues/42)
-
-#### Improvements
-
-* Replace demo app's ErrorOptional type with Swift Foundation Result type
-  [Sihao Lu](https://github.com/DJBen)
-  [#126](https://github.com/square/Cleanse/pull/126)
