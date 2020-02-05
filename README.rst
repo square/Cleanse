@@ -52,15 +52,8 @@ Cleanse should be able to be configured with `Carthage`_. One should be able to 
 
 Using `Swift Package Manager`_
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Cleanse can be used with `Swift Package Manager`_. The following a definition that can be added to the dependencies
-of a ``Project`` declaration.
-
-.. code-block:: swift
-
-  .Package(
-    url: "https://github.com/square/cleanse.git",
-    versions: Version(0,1,0)..<Version(1,0,0)
-  ),
+Cleanse can be used with `Swift Package Manager`_. The following a definition that can be added to the dependencies 
+of a ``Project`` declaration. Adding `Cleanse` as a package dependency in Xcode 11 is supported by v4.2.5 and above.
 
 .. _Swift Package Manager: https://github.com/apple/swift-package-manager
 
