@@ -4,6 +4,16 @@
 
 #### Features & Updates
 
+* None
+
+#### Bug Fixues
+
+* None
+
+## 4.2.5
+
+#### Features & Updates
+
 * Replace demo app's ErrorOptional type with Swift Foundation Result type  
   [Sihao Lu](https://github.com/DJBen)
   [#126](https://github.com/square/Cleanse/pull/126)
