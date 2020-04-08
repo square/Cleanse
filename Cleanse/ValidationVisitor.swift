@@ -343,7 +343,7 @@ final class ValidationVisitor : ComponentVisitor {
     func leaveModule<M : Module>(module: M.Type) {
     }
 
-    func finalize(_ serviceLoader: CleanseServiceLoader) throws {
+    func    finalize(_ serviceLoader: CleanseServiceLoader) throws {
         let errorReporter = CleanseErrorReporter()
         var errors = [CleanseError]()
 
