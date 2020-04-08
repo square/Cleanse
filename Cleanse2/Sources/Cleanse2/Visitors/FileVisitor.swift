@@ -14,15 +14,14 @@ struct FileResults {
 }
 
 struct FileVisitor: SyntaxVisitor {
-    // TODO: Fix this
-    var importsCleanse = true
+    var importsCleanse = false
     
     var moduleResultsByName: [String:ModuleResults] = [:]
     var componentResultsByName: [String:ComponentResults] = [:]
     
     mutating func visitPost(_ node: ImportDeclSyntax) {
         if node.path.contains(where: { (syntax) -> Bool in
-            return syntax.name.text == "Cleanse"
+            return syntax.name.text == "CleanseCore"
         }) {
             importsCleanse = true
         }

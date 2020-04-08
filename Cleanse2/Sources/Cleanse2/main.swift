@@ -34,10 +34,6 @@ struct Cleanse2: ParsableCommand {
         } catch {
             print("\(error)")
         }
-        
-        let root = MyRoot_Factory().build()
-        root.helloWorld()
-        
     }
 }
 

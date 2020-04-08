@@ -15,5 +15,11 @@ let package = Package(
         .target(
             name: "Cleanse2",
             dependencies: ["ArgumentParser", "SwiftSyntax"]),
+        .target(
+	    name: "CleanseCore",
+            dependencies: []),
+        .target(
+            name: "Sandbox",
+            dependencies: ["Cleanse2", "CleanseCore"]),
     ]
 )
