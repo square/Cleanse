@@ -9,15 +9,20 @@ import Foundation
 import SwiftSyntax
 
 struct ComponentResults {
-    let modules: [String]
-    let parent: String?
-    let root: NormalizedTypeSyntax
+    let name: TypedKey
+    let modules: [TypedKey]
+    let parent: TypedKey?
+    let root: TypedKey
 }
 
 struct ComponentVisitor: SyntaxVisitor {
-    private var modules: [String] = []
-    private var parent: String? = nil
-    private var rootType: NormalizedTypeSyntax? = nil
+    let name: TypedKey
+    private var modules: [TypedKey] = []
+    private var parent: TypedKey? = nil
+    private var rootType: TypedKey? = nil
+    init(name: TypedKey) {
+        self.name = name
+    }
     
     enum DefinedVarTypes: String, CaseIterable {
         case modules = "modules"
@@ -31,11 +36,18 @@ struct ComponentVisitor: SyntaxVisitor {
         } ?? .unknown
         switch matchedType {
         case .modules:
-            let moduleNames = NormalizedTypeSyntax(syntax: node.bindings).text.captureMatches(regex: "(\\w*).self")
+            let moduleNames = node
+                .bindings
+                .withoutTrivia()
+                .tokens
+                .map { $0.text }
+                .joined()
+                .captureMatches(regex: "(\\w*).self")
+                .map { TypedKey(syntax: SyntaxFactory.makeTypeIdentifier($0)) }
             modules += moduleNames
         case .subcomponents:
-            let parent = NormalizedTypeSyntax(syntax: node.bindings).text.captureFirst(regex: "(\\w*).self")
-            self.parent = parent
+            let parent = node.bindings.withoutTrivia().tokens.map { $0.text }.joined().captureFirst(regex: "(\\w*).self")
+            self.parent = TypedKey(syntax: SyntaxFactory.makeTypeIdentifier(parent))
         case .unknown:
             break
         }
@@ -47,7 +59,7 @@ struct ComponentVisitor: SyntaxVisitor {
         }
         
         // TODO: Maybe some validations around duplicate Roots? Should not get here though cause of syntax errors? But think about how this could run first thus causing this to error before the actual syntax error?
-        rootType = NormalizedTypeSyntax(syntax: initialzer.value)
+        rootType = TypedKey(syntax: initialzer.value)
     }
     
     func finalize() -> ComponentResults {
@@ -55,6 +67,7 @@ struct ComponentVisitor: SyntaxVisitor {
             fatalError()
         }
         return ComponentResults(
+            name: name,
             modules: modules,
             parent: parent,
             root: root
@@ -69,6 +82,6 @@ extension VariableDeclSyntax {
         }
         var iterator = bindings.makeIterator()
         let firstBinding = iterator.next()!
-        return NormalizedTypeSyntax(syntax: firstBinding).text.matches(regex: regex)
+        return firstBinding.tokens.map { $0.text }.joined().matches(regex: regex)
     }
 }

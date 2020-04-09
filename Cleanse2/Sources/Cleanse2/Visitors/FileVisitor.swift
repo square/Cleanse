@@ -9,15 +9,16 @@ import Foundation
 import SwiftSyntax
 
 struct FileResults {
-    let moduleResultsByName: [String:ModuleResults]
-    let componentResultsByName: [String:ComponentResults]
+    let moduleResultsByName: [TypedKey:ModuleResults]
+    let componentResultsByName: [TypedKey:ComponentResults]
 }
 
+// TODO: Refactor the visitPost functions into 1 shared function.
 struct FileVisitor: SyntaxVisitor {
     var importsCleanse = false
     
-    var moduleResultsByName: [String:ModuleResults] = [:]
-    var componentResultsByName: [String:ComponentResults] = [:]
+    var moduleResultsByName: [TypedKey:ModuleResults] = [:]
+    var componentResultsByName: [TypedKey:ComponentResults] = [:]
     
     mutating func visitPost(_ node: ImportDeclSyntax) {
         if node.path.contains(where: { (syntax) -> Bool in
@@ -34,15 +35,16 @@ struct FileVisitor: SyntaxVisitor {
         var typeVerifier = TypeVerifier()
         node.walk(&typeVerifier)
         
-        let name = node.identifier.text
+        let typedName = TypedKey(syntax: SyntaxFactory.makeTypeIdentifier(node.identifier.text))
         switch typeVerifier.cleanseType {
         case .component:
-            var componentVisitor = ComponentVisitor()
+            var componentVisitor = ComponentVisitor(name: typedName)
             node.walk(&componentVisitor)
+            componentResultsByName[typedName] = componentVisitor.finalize()
         case .module:
-            var moduleVisitor = ModuleVisitor(name: name)
+            var moduleVisitor = ModuleVisitor(name: typedName)
             node.walk(&moduleVisitor)
-            moduleResultsByName[name] = moduleVisitor.finalize()
+            moduleResultsByName[typedName] = moduleVisitor.finalize()
         case .none:
             break
         }
@@ -55,16 +57,16 @@ struct FileVisitor: SyntaxVisitor {
         var typeVerifier = TypeVerifier()
         node.walk(&typeVerifier)
         
-        let name = node.identifier.text
+        let typedName = TypedKey(syntax: SyntaxFactory.makeTypeIdentifier(node.identifier.text))
         switch typeVerifier.cleanseType {
         case .component:
-            var componentVisitor = ComponentVisitor()
+            var componentVisitor = ComponentVisitor(name: typedName)
             node.walk(&componentVisitor)
-            componentResultsByName[name] = componentVisitor.finalize()
+            componentResultsByName[typedName] = componentVisitor.finalize()
         case .module:
-            var moduleVisitor = ModuleVisitor(name: name)
+            var moduleVisitor = ModuleVisitor(name: typedName)
             node.walk(&moduleVisitor)
-            moduleResultsByName[name] = moduleVisitor.finalize()
+            moduleResultsByName[typedName] = moduleVisitor.finalize()
         case .none:
             break
         }

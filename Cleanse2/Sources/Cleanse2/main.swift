@@ -3,6 +3,13 @@ import ArgumentParser
 import SwiftSyntax
 import Foundation
 
+/*
+ TODOs:
+ 
+ 1. Allow duplicate module and providers names that do no intersect in the DAG. Generate suffix UUID on typed key?
+ 
+ */
+
 
 struct Cleanse2: ParsableCommand {
     @Option(name: .shortAndLong, parsing: .upToNextOption, help: "Swift source files to be parsed to build Cleanse DAG.")
@@ -24,15 +31,17 @@ struct Cleanse2: ParsableCommand {
         // Analyze step.
         do {
             let analyzer = Analyzer(fileResults: fileResults)
-            let analyzerResults = try analyzer.finalize()
-            let resolver = Resolver(roots: analyzerResults)
-            let resolverResults = try resolver.finalize()
-            var generator = Generator(resolvedComponents: resolverResults)
+            let analyzerResults = analyzer.finalize()
+            
+            let resolver = Resolver(roots: analyzerResults.rootNodes)
+            let resolverResults = resolver.finalize()
+            var generator = Generator(resolvedComponents: resolverResults.resolvedComponents, diagnostics: resolverResults.diagnostics)
             var stringOutput = ""
             try generator.finalize(write: &stringOutput)
             try stringOutput.write(to: URL(fileURLWithPath: output), atomically: true, encoding: .utf8)
+            
         } catch {
-            print("\(error)")
+            print("Cleanse compiler error! \(error)")
         }
     }
 }

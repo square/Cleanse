@@ -8,10 +8,12 @@
 import Foundation
 
 struct CoffeeMaker {
-    let coffee: Coffee
+    let coffeeBrands: [Coffee]
     
     func brew() {
-        print("I just brewed \(coffee.name)!")
+        coffeeBrands.forEach { (coffee) in
+            print("I just brewed \(coffee.name)!")
+        }
     }
 }
 

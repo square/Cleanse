@@ -8,60 +8,28 @@
 import Foundation
 import SwiftSyntax
 
-struct NormalizedTypeSyntax: Hashable {
-    let text: String
-    init(syntax: Syntax) {
-        text = syntax.tokens.map { $0.text }.joined()
-    }
-}
-
-struct ProviderInfo {
-    let type: NormalizedTypeSyntax
-    let owningModule: String
-    let declSyntax: FunctionDeclSyntax
-    
-    var dependencies: [NormalizedTypeSyntax] {
-        return declSyntax.signature.input.parameterList.compactMap { parameter -> NormalizedTypeSyntax? in
-            guard let dependency = parameter.type else {
-                return nil
-            }
-            return NormalizedTypeSyntax(syntax: dependency)
-        }
-    }
-    
-    static func make(from function: FunctionDeclSyntax, in module: String) -> ProviderInfo? {
-        // Validations
-        guard let output = function.signature.output else {
-            return nil
-        }
-        
-        let type = NormalizedTypeSyntax(syntax: output.returnType)
-        
-        return ProviderInfo(type: type, owningModule: module, declSyntax: function)
-    }
-}
 
 struct ModuleResults {
-    let moduleName: String
-    let providersByType: [NormalizedTypeSyntax:ProviderInfo]
+    let module: TypedKey
+    let providersByType: [TypedKey:Provider]
 }
 
 struct ModuleVisitor: SyntaxVisitor {
-    private let name: String
-    var providersByType: [NormalizedTypeSyntax:ProviderInfo] = [:]
-    init(name: String) {
+    private let name: TypedKey
+    var providersByType: [TypedKey:Provider] = [:]
+    init(name: TypedKey) {
         self.name = name
     }
     
     mutating func visitPost(_ node: FunctionDeclSyntax) {
-        if let providerInfo = ProviderInfo.make(from: node, in: name) {
-            providersByType[providerInfo.type] = providerInfo
+        if let Provider = Provider.make(from: node, in: name) {
+            providersByType[Provider.type] = Provider
         }
     }
     
     func finalize() -> ModuleResults {
         ModuleResults(
-            moduleName: name,
+            module: name,
             providersByType: providersByType
         )
     }

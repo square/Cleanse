@@ -8,6 +8,22 @@
 import Foundation
 import CleanseCore
 
+//struct NewModule: Module {
+//    static func scopedCoffee() -> Coffee {
+//        return Coffee(name: "New Brand")
+//    }
+//}
+//struct Subcomponent: Component {
+//    static var modules: [Module.Type] {
+//        [NewModule.self]
+//    }
+//    
+//    static var parent: ComponentBase.Type? = MyRoot.self
+//    
+//    typealias Root = Coffee
+//    
+//    
+//}
 
 struct MyRoot: Component {
     static var modules: [Module.Type] {
@@ -25,12 +41,21 @@ struct CoffeeModule: Module {
         return Coffee(name: "Philz")
     }
     
+    static func newCoffeeArray() -> [ Coffee ] {
+        return [
+            Coffee(name: "Philz"),
+            Coffee(name: "Lady Falcon"),
+            Coffee(name: "Death Wish"),
+            Coffee(name: "Starbucks")
+        ]
+    }
+    
     static func provideCoffeeBrand(philzCoffee: Coffee) -> CoffeeBrand {
         return CoffeeBrand(type: philzCoffee)
     }
     
-    static func provideCoffeeMachine(philzCoffee: Coffee) -> CoffeeMaker {
-        return CoffeeMaker(coffee: philzCoffee)
+    static func provideCoffeeMachine(allCoffee: [Coffee]) -> CoffeeMaker {
+        return CoffeeMaker(coffeeBrands: allCoffee)
     }
 }
 
