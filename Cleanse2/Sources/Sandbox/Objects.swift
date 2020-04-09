@@ -25,12 +25,18 @@ struct Coffee {
     let name: String
 }
 
+struct CountryOrigin {
+    let name: String
+}
+
 struct WelcomeObject {
     let coffeeMaker: CoffeeMaker
     let coffeeBrand: CoffeeBrand
+    let countryOrigin: CountryOrigin
+    
     
     func helloWorld() {
         coffeeMaker.brew()
-        print("My Brand: \(coffeeBrand.type)")
+        print("This coffee is from \(countryOrigin.name)")
     }
 }

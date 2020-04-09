@@ -6,7 +6,7 @@ import Foundation
 /*
  TODOs:
  
- 1. Allow duplicate module and providers names that do no intersect in the DAG. Generate suffix UUID on typed key?
+ 1. Allow duplicate module and providers names that do no intersect in the DAG. Generate suffix UUID on typed key probably.
  
  */
 
@@ -28,18 +28,19 @@ struct Cleanse2: ParsableCommand {
             visitedFiles.append(visitor)
             fileResults.append(visitor.finalize())
         }
-        // Analyze step.
         do {
             let analyzer = Analyzer(fileResults: fileResults)
             let analyzerResults = analyzer.finalize()
             
             let resolver = Resolver(roots: analyzerResults.rootNodes)
             let resolverResults = resolver.finalize()
-            var generator = Generator(resolvedComponents: resolverResults.resolvedComponents, diagnostics: resolverResults.diagnostics)
+            
+            let allDiagnostics = analyzerResults.diagnostics + resolverResults.diagnostics
+            var generator = Generator(resolvedComponents: resolverResults.resolvedComponents, diagnostics: allDiagnostics)
             var stringOutput = ""
             try generator.finalize(write: &stringOutput)
-            try stringOutput.write(to: URL(fileURLWithPath: output), atomically: true, encoding: .utf8)
             
+            try stringOutput.write(to: URL(fileURLWithPath: output), atomically: true, encoding: .utf8)
         } catch {
             print("Cleanse compiler error! \(error)")
         }

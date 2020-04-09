@@ -22,7 +22,7 @@ struct Resolver {
     func finalize() -> ResolverResults {
         var seenNodes = Set<ComponentNode>()
         var resolvedNodes: [ResolvedComponent] = []
-        var dianostics: [Diagnostic] = []
+        var diagnostics: [Diagnostic] = []
         var queue = roots
         while !queue.isEmpty {
             let node = queue.removeFirst()
@@ -35,7 +35,7 @@ struct Resolver {
             }
             
             guard let rootProviderInfo = node.providersInfoByType[node.root] else {
-                dianostics += [Diagnostic(type: .error, scope: .component(node.name), description: "Missing root provider \(node.root.rawRepresentation) for component \(node.name.rawRepresentation)")]
+                diagnostics += [Diagnostic(type: .error, scope: .component(node.name), description: "Missing root provider \(node.root.rawRepresentation) for component \(node.name.rawRepresentation)")]
                 continue
             }
             let rootResolvedProvider = ResolvedProvider(
@@ -49,7 +49,7 @@ struct Resolver {
                 let resolvedDependencies = info.dependencies.compactMap { self.resolve(dependency: $0, in: node) }
                 guard resolvedDependencies.count == info.dependencies.count else {
                     resolvedDependencies.map { $0.info.type }.difference(from: info.dependencies).forEach { (missingType) in
-                        dianostics.append(Diagnostic(
+                        diagnostics.append(Diagnostic(
                             type: .error,
                             scope: .provider(type),
                             description: "Missing dependency type \(missingType.rawRepresentation) for provider \(type.rawRepresentation)"))
@@ -65,7 +65,7 @@ struct Resolver {
             )
         }
         
-        return ResolverResults(resolvedComponents: resolvedNodes, diagnostics: dianostics)
+        return ResolverResults(resolvedComponents: resolvedNodes, diagnostics: diagnostics)
     }
     
     private func resolve(dependency type: TypedKey, in component: ComponentNode?, depth: Int = 0) -> ResolvedProviderDependency? {

@@ -37,12 +37,15 @@ public struct Generator {
     }
     
     mutating func finalize<O:TextOutputStream>(write output: inout O) throws {
-        diagnostics.forEach { (dianostic) in
-            dianostic.syntaxDecl.write(to: &output)
-        }
-        resolvedComponents.forEach { (component) in
-            component.structDecl.withTrailingTrivia(.newlines(2)).write(to: &output)
-            component.extensionSyntax.withTrailingTrivia(.newlines(2)).write(to: &output)
+        if diagnostics.count > 0 {
+            diagnostics.forEach { (dianostic) in
+                dianostic.syntaxDecl.write(to: &output)
+            }
+        } else {
+            resolvedComponents.forEach { (component) in
+                component.structDecl.withTrailingTrivia(.newlines(2)).write(to: &output)
+                component.extensionSyntax.withTrailingTrivia(.newlines(2)).write(to: &output)
+            }
         }
     }
 }

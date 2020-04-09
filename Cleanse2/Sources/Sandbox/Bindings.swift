@@ -61,8 +61,12 @@ struct CoffeeModule: Module {
 
 
 struct RootModule: Module {
-    static func provideRoot(coffeeMaker: CoffeeMaker, brand: CoffeeBrand) -> WelcomeObject {
-        return WelcomeObject(coffeeMaker: coffeeMaker, coffeeBrand: brand)
+    static func provideRoot(coffeeMaker: CoffeeMaker, brand: CoffeeBrand, countryOrigin: CountryOrigin) -> WelcomeObject {
+        return WelcomeObject(coffeeMaker: coffeeMaker, coffeeBrand: brand, countryOrigin: countryOrigin)
+    }
+    
+    static func newCountryOrigin() -> CountryOrigin {
+        return CountryOrigin(name: "USA")
     }
 }
 
