@@ -1,3 +1,3 @@
 
-let root = MyRoot_Factory().build()
-root.helloWorld()
+let root = RootComponent_Factory().build()
+root.openShop()

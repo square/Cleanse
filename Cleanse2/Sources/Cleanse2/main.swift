@@ -6,8 +6,11 @@ import Foundation
 /*
  TODOs:
  
+ 0. Scopes. Will be implemented by providing a scope object within the component factory.
  1. Allow duplicate module and providers names that do no intersect in the DAG. Generate suffix UUID on typed key probably.
- 
+ 2. Fixup how to reference actual impl and scoping. Everything right now assumes its in the same target.
+ 3. Think about predefined components. Right now you have to runing cleansec before receiving the type.
+ 4. Subcomponents
  */
 
 

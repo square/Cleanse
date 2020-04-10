@@ -61,7 +61,13 @@ struct Resolver {
             }
             
             resolvedNodes.append(
-                ResolvedComponent(name: node.name, resolvedProviders: resolvedProviders, root: rootResolvedProvider, parent: node.parent?.name)
+                ResolvedComponent(
+                    name: node.name,
+                    resolvedProviders: resolvedProviders,
+                    root: rootResolvedProvider,
+                    parent: node.parent?.name,
+                    subcomponents: node.children.map { $0.name }
+                )
             )
         }
         

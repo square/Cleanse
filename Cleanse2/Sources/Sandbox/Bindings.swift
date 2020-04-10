@@ -8,65 +8,37 @@
 import Foundation
 import CleanseCore
 
-//struct NewModule: Module {
-//    static func scopedCoffee() -> Coffee {
-//        return Coffee(name: "New Brand")
-//    }
-//}
-//struct Subcomponent: Component {
-//    static var modules: [Module.Type] {
-//        [NewModule.self]
-//    }
-//    
-//    static var parent: ComponentBase.Type? = MyRoot.self
-//    
-//    typealias Root = Coffee
-//    
-//    
-//}
-
-struct MyRoot: Component {
-    static var modules: [Module.Type] {
-        [
-            CoffeeModule.self,
-            RootModule.self
-        ]
-    }
+struct RootComponent: Component {
+    typealias Root = CoffeeCompany
     
-    typealias Root = WelcomeObject
+    static var modules: [Module.Type] = [CoffeeModule.self]
 }
 
-struct CoffeeModule: Module {
-    static func provideCoffee() -> Coffee {
-        return Coffee(name: "Philz")
+struct CoffeeModule : Module {
+    static func newCoffeeCompany(coffees: [Coffee], coffeeMaker: CoffeeMaker, employees: [Employee]) -> CoffeeCompany {
+        return CoffeeCompany(
+            coffeesOfTheDay: coffees,
+            coffeeMaker: coffeeMaker,
+            employees: employees)
     }
-    
-    static func newCoffeeArray() -> [ Coffee ] {
-        return [
+
+    static func allTheCoffee() -> [Coffee] {
+        [
             Coffee(name: "Philz"),
             Coffee(name: "Lady Falcon"),
-            Coffee(name: "Death Wish"),
-            Coffee(name: "Starbucks")
+            Coffee(name: "Death Wish")
         ]
     }
-    
-    static func provideCoffeeBrand(philzCoffee: Coffee) -> CoffeeBrand {
-        return CoffeeBrand(type: philzCoffee)
-    }
-    
-    static func provideCoffeeMachine(allCoffee: [Coffee]) -> CoffeeMaker {
-        return CoffeeMaker(coffeeBrands: allCoffee)
-    }
-}
 
-
-struct RootModule: Module {
-    static func provideRoot(coffeeMaker: CoffeeMaker, brand: CoffeeBrand, countryOrigin: CountryOrigin) -> WelcomeObject {
-        return WelcomeObject(coffeeMaker: coffeeMaker, coffeeBrand: brand, countryOrigin: countryOrigin)
+    static func provideEmployees() -> [Employee] {
+        [
+            Employee(firstName: "Espresso", lastName: "Joe"),
+            Employee(firstName: "Bob", lastName: "Barista")
+        ]
     }
-    
-    static func newCountryOrigin() -> CountryOrigin {
-        return CountryOrigin(name: "USA")
+
+    static func newCoffeeMaker(allCoffee: [Coffee]) -> CoffeeMaker {
+        CoffeeMaker(supportedCoffee: allCoffee)
     }
 }
 

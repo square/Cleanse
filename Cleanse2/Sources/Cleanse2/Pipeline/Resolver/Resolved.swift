@@ -23,4 +23,5 @@ struct ResolvedComponent {
     let resolvedProviders: [ResolvedProvider]
     let root: ResolvedProvider
     let parent: TypedKey?
+    let subcomponents: [TypedKey]
 }

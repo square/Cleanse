@@ -26,7 +26,7 @@ struct ComponentVisitor: SyntaxVisitor {
     
     enum DefinedVarTypes: String, CaseIterable {
         case modules = "modules"
-        case subcomponents = "parent"
+        case parent = "parent"
         case unknown
     }
     
@@ -45,7 +45,7 @@ struct ComponentVisitor: SyntaxVisitor {
                 .captureMatches(regex: "(\\w*).self")
                 .map { TypedKey(syntax: SyntaxFactory.makeTypeIdentifier($0)) }
             modules += moduleNames
-        case .subcomponents:
+        case .parent:
             let parent = node.bindings.withoutTrivia().tokens.map { $0.text }.joined().captureFirst(regex: "(\\w*).self")
             self.parent = TypedKey(syntax: SyntaxFactory.makeTypeIdentifier(parent))
         case .unknown:
