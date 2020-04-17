@@ -6,7 +6,7 @@
 
 * None
 
-#### Bug Fixues
+#### Bug Fixes
 
 * None
 
