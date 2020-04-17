@@ -8,7 +8,9 @@
 
 #### Bug Fixes
 
-* None
+* Fix `WeakProviders` becoming deinitialized.  
+  [Sebastian Shanus](https://github.com/sebastianv1)
+  [#98](https://github.com/square/Cleanse/issues/98)
 
 ## 4.2.5
 

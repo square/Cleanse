@@ -258,8 +258,6 @@ class Graph : BinderBase {
         for (k,v) in self.futureProviders {
             v.resolve(actualProvider: getRegisteredProvider(key: k)!)
         }
-
-        self.futureProviders.removeAll()
         
         finalized = true
     }
