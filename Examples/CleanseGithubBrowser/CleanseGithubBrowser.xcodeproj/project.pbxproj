@@ -288,6 +288,7 @@
 				F6C9F3561D0BD01700877D0B /* Frameworks */,
 				F6C9F3571D0BD01700877D0B /* Resources */,
 				F6C9F39F1D0BD1F500877D0B /* Embed Frameworks */,
+				DCF604AB244D590100DFE5F0 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -438,6 +439,26 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		DCF604AB244D590100DFE5F0 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\necho \"HI\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		F6C9F3551D0BD01700877D0B /* Sources */ = {
@@ -622,6 +643,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.squareup.CleanseGithubBrowser;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EXEC = "$(SRCROOT)/../../script/ast.rb";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
@@ -635,6 +657,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.squareup.CleanseGithubBrowser;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EXEC = "$(SRCROOT)/../../script/ast.rb";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;

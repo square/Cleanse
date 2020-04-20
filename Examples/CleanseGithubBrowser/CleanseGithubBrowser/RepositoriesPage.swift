@@ -10,10 +10,26 @@ import Foundation
 import UIKit
 import Cleanse
 
+struct A{}
+
+struct TestSubcomponent: Component {
+    static func configure(binder: Binder<Unscoped>) {
+        
+    }
+    
+    static func configureRoot(binder bind: ReceiptBinder<A>) -> BindingReceipt<A> {
+        return bind.to(value: A())
+    }
+    
+    typealias Root = A
+    
+    
+}
 
 /// A module that configures a tab page on the root view controller as well as on the settings page
 struct RepositoriesModule : Cleanse.Module {
     static func configure(binder: SingletonBinder) {
+        binder.install(dependency: TestSubcomponent.self)
         // Make RepositoriesViewController available to be injected
         binder
             .bind()
