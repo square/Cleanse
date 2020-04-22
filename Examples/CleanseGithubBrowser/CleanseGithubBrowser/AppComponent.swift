@@ -8,20 +8,45 @@
 
 import Cleanse
 
-struct AppComponent<ServiceModule: GithubServicesModule> : Cleanse.RootComponent where ServiceModule.Scope == Singleton {
+struct TestAppComponent: Cleanse.RootComponent {
     typealias Root = PropertyInjector<AppDelegate>
     typealias Scope = Singleton
 
     static func configure(binder: SingletonBinder) {
         binder.include(module: CoreAppModule.self)
-        binder.include(module: ServiceModule.self)
+        binder.include(module: FakeGithubServicesModule.self)
+
+        #if DEBUG
+        binder.include(module: FakeModeSettingsModule.self)
+        #endif
+        
+        binder.bind(Int.self).configured { (bind) -> BindingReceipt<Int> in
+            bind.to(value: 3)
+        }
+
+        binder.bind().configured(with: FakeGithubServicesModule.configureGithubMembersService)
+        binder.bind().configured(with: FakeGithubServicesModule.configureRepositoriesMembersService)
+    }
+
+    static func configureRoot(binder bind: ReceiptBinder<Root>) -> BindingReceipt<Root> {
+        return bind.propertyInjector(configuredWith: CoreAppModule.configureAppDelegateInjector)
+    }
+}
+
+struct AppComponent : Cleanse.RootComponent {
+    typealias Root = PropertyInjector<AppDelegate>
+    typealias Scope = Singleton
+
+    static func configure(binder: SingletonBinder) {
+        binder.include(module: CoreAppModule.self)
+        binder.include(module: RealeaseGithubServicesModule.self)
 
         #if DEBUG
         binder.include(module: FakeModeSettingsModule.self)
         #endif
 
-        binder.bind().configured(with: ServiceModule.configureGithubMembersService)
-        binder.bind().configured(with: ServiceModule.configureRepositoriesMembersService)
+        binder.bind().configured(with: RealeaseGithubServicesModule.configureGithubMembersService)
+        binder.bind().configured(with: RealeaseGithubServicesModule.configureRepositoriesMembersService)
     }
 
     static func configureRoot(binder bind: ReceiptBinder<Root>) -> BindingReceipt<Root> {

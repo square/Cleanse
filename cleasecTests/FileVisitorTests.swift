@@ -1,0 +1,38 @@
+//
+//  FileVisitorTests.swift
+//  cleasecTests
+//
+//  Created by Sebastian Edward Shanus on 4/21/20.
+//  Copyright © 2020 Square, Inc. All rights reserved.
+//
+
+import XCTest
+import swift_ast_parser
+@testable import cleasec
+
+fileprivate let importedFixture = """
+(source_file "/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift"
+  (import_decl range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:9:1 - line:9:8] 'Foundation')
+  (import_decl range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:10:1 - line:10:8] 'Cleanse'))
+"""
+
+fileprivate let nonImportedFixture = """
+(source_file "/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift"
+(import_decl range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:9:1 - line:9:8] 'Foundation'))
+"""
+
+class FileVisitorTests: XCTestCase {
+    var visitor = FileVisitor()
+    
+    func testImportedCleanse() {
+        let node = NodeSyntaxParser.parse(text: importedFixture).first!
+        visitor.walk(node)
+        XCTAssertTrue(visitor.importsCleanse)
+    }
+    
+    func testNonImportedCleanse() {
+        let node = NodeSyntaxParser.parse(text: nonImportedFixture).first!
+        visitor.walk(node)
+        XCTAssertFalse(visitor.importsCleanse)
+    }
+}

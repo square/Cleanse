@@ -40,9 +40,14 @@ def main
 		ast_input.delete_at(idx)
 	end
 
-	dump_ast_command = [swiftc_executable] + ['-dump-ast'] + ast_input
-	combined_command = og_command + ['&&'] + dump_ast_command
+	pipe_to_file_command = ['2>&1']
+	if output_file = input.grep(/DAST_FILE/).first
+		pipe_to_file_command = ['&>'] + [output_file.split('=')[1]]
+	end
+
+	dump_ast_command = [swiftc_executable] + ['-dump-ast'] + ast_input + pipe_to_file_command
 	puts dump_ast_command.join(" ")
+	combined_command = og_command + ['&&'] + dump_ast_command
 	system(combined_command.join(" "))
 end
 

@@ -22,8 +22,7 @@ struct TestSubcomponent: Component {
     }
     
     typealias Root = A
-    
-    
+
 }
 
 /// A module that configures a tab page on the root view controller as well as on the settings page

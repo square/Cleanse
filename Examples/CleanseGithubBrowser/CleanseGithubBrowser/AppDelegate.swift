@@ -10,8 +10,8 @@ import UIKit
 import Cleanse
 
 
-typealias ReleaseAppComponent = AppComponent<RealeaseGithubServicesModule>
-typealias FakeAppComponent = AppComponent<FakeGithubServicesModule>
+typealias ReleaseAppComponent = AppComponent
+typealias FakeAppComponent = TestAppComponent
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
