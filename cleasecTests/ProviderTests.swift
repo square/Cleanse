@@ -46,4 +46,11 @@ class ProviderTests: XCTestCase {
         XCTAssertEqual(configureVisitor.providers.count, 0)
         XCTAssertEqual(configureVisitor.referenceProviders.first!.reference, configureVisitor.referenceProviders.first!.reference)
     }
+    
+    func testAssistedFactoryProvider() {
+        let node = NodeSyntaxParser.parse(text: ProviderFixtures.assistedFactoryProviderFixture).first!
+        configureVisitor.walk(node)
+        XCTAssertEqual(configureVisitor.providers.count, 1)
+        XCTAssertEqual(configureVisitor.providers.first!, StandardProvider(type: "Factory<AssistedSeed>", dependencies: ["String"], tag: nil, scoped: nil))
+    }
 }

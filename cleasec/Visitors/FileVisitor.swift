@@ -97,7 +97,7 @@ public struct FileVisitor: SyntaxVisitor {
             danglingProviders: danglingProviders,
             referenceProviders: referenceProviders,
             seed: componentVisitor.seed,
-            modules: configVisitor.includedModules,
+            includedModules: configVisitor.includedModules,
             subcomponents: configVisitor.subcomponents,
             isRoot: isRoot)
         )
@@ -117,11 +117,21 @@ public struct FileVisitor: SyntaxVisitor {
     }
     
     private func isModule(_ node: InheritableSyntax) -> String? {
-        guard let inherits = node.inherits, inherits.contains(pattern: "(Cleanse.)?Module")
-            , let moduleName = node.raw.firstCapture(pattern: #"\"(\w+)\""#) else {
+        guard let _ = node.inherits, let moduleName = node.raw.firstCapture(pattern: #"\"(\w+)\""#) else {
             return nil
         }
-        return moduleName
+        var typeVisitor = CleanseTypeVisitor()
+        typeVisitor.walk(node)
+        if let cleanseType = typeVisitor.finalize() {
+            switch cleanseType {
+            case .module:
+                return moduleName
+            default:
+                return nil
+            }
+        } else {
+            return nil
+        }
     }
     
     private enum ComponentType {

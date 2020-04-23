@@ -5,11 +5,12 @@ require 'pathname'
 
 
 class Node
-	attr_accessor :case_name, :class_name
+	attr_accessor :case_name, :class_name, :case_var_name
 
-	def initialize(case_name, class_name)
+	def initialize(case_name, class_name, case_var_name=case_name)
 		@case_name = case_name
 		@class_name = class_name
+		@case_var_name = case_var_name
 	end
 end
 
@@ -147,10 +148,10 @@ NODES = [
 	Node.new("pattern_optional_some", "PatternOptionalSome"),
 	Node.new("pattern_bool", "PatternBool"),
 	Node.new("extension_decl", "ExtensionDecl"),
-	Node.new("`typealias`", "Typealias"),
+	Node.new("typealias", "Typealias", "`typealias`"),
 	Node.new("generic_type_param", "GenericTypeParam"),
 	Node.new("associated_type_decl", "AssociatedTypeDecl"),
-	Node.new("`protocol`", "Protocol"),
+	Node.new("`protocol`", "ProtocolInst"),
 	Node.new("param_decl", "ParamDecl"),
 	Node.new("module", "module"),
 	Node.new("brace_stmt", "BraceStmt"),

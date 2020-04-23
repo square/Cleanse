@@ -372,4 +372,122 @@ struct ProviderFixtures {
     (typealias implicit "Seed" interface type='Component.Seed.Type' access=internal type='Void')
     (typealias implicit "Scope" interface type='Component.Scope.Type' access=internal type='Unscoped')))
 """
+    
+    /**
+     ````
+     struct A {
+         let assisted: Assisted<Int>
+         let string: String
+     }
+
+     class AssistedSeed: AssistedFactory {
+         typealias Seed = Int
+         typealias Element = A
+     }
+
+     struct AModule: Module {
+         static func configure(binder: Binder<Unscoped>) {
+             binder.bindFactory(A.self).with(AssistedSeed.self).to(factory: A.init)
+         }
+     }
+     ````
+     */
+    static let assistedFactoryProviderFixture = """
+(source_file "/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift"
+  (import_decl range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:9:1 - line:9:8] 'Foundation')
+  (import_decl range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:10:1 - line:10:8] 'Cleanse')
+  (struct_decl range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:12:1 - line:15:1] "A" interface type='A.Type' access=internal non-resilient
+    (pattern_binding_decl range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:13:5 - line:13:31]
+      (pattern_typed type='Assisted<Int>'
+        (pattern_named type='Assisted<Int>' 'assisted')
+        (type_ident
+          (component id='Assisted' bind=Cleanse.(file).Assisted)
+            (type_ident
+              (component id='Int' bind=Swift.(file).Int)))))
+    (var_decl range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:13:9 - line:13:9] "assisted" type='Assisted<Int>' interface type='Assisted<Int>' access=internal let readImpl=stored immutable
+      (accessor_decl implicit range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:13:9 - line:13:9] 'anonname=0x7fd856339370' interface type='(A) -> () -> Assisted<Int>' access=internal get_for=assisted
+        (parameter "self" interface type='A')
+        (parameter_list)
+        (brace_stmt implicit range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:13:9 - line:13:9]
+          (return_stmt implicit
+            (member_ref_expr implicit type='Assisted<Int>' decl=Test.(file).A.assisted@/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:13:9 direct_to_storage
+              (declref_expr implicit type='A' decl=Test.(file).A.<anonymous>.self@/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:13:9 function_ref=unapplied))))))
+    (accessor_decl implicit range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:13:9 - line:13:9] 'anonname=0x7fd856339370' interface type='(A) -> () -> Assisted<Int>' access=internal get_for=assisted
+      (parameter "self" interface type='A')
+      (parameter_list)
+      (brace_stmt implicit range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:13:9 - line:13:9]
+        (return_stmt implicit
+          (member_ref_expr implicit type='Assisted<Int>' decl=Test.(file).A.assisted@/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:13:9 direct_to_storage
+            (declref_expr implicit type='A' decl=Test.(file).A.<anonymous>.self@/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:13:9 function_ref=unapplied)))))
+    (pattern_binding_decl range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:14:5 - line:14:17]
+      (pattern_typed type='String'
+        (pattern_named type='String' 'string')
+        (type_ident
+          (component id='String' bind=Swift.(file).String))))
+    (var_decl range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:14:9 - line:14:9] "string" type='String' interface type='String' access=internal let readImpl=stored immutable
+      (accessor_decl implicit range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:14:9 - line:14:9] 'anonname=0x7fd856339570' interface type='(A) -> () -> String' access=internal get_for=string
+        (parameter "self" interface type='A')
+        (parameter_list)
+        (brace_stmt implicit range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:14:9 - line:14:9]
+          (return_stmt implicit
+            (member_ref_expr implicit type='String' decl=Test.(file).A.string@/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:14:9 direct_to_storage
+              (declref_expr implicit type='A' decl=Test.(file).A.<anonymous>.self@/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:14:9 function_ref=unapplied))))))
+    (accessor_decl implicit range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:14:9 - line:14:9] 'anonname=0x7fd856339570' interface type='(A) -> () -> String' access=internal get_for=string
+      (parameter "self" interface type='A')
+      (parameter_list)
+      (brace_stmt implicit range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:14:9 - line:14:9]
+        (return_stmt implicit
+          (member_ref_expr implicit type='String' decl=Test.(file).A.string@/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:14:9 direct_to_storage
+            (declref_expr implicit type='A' decl=Test.(file).A.<anonymous>.self@/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:14:9 function_ref=unapplied)))))
+    (constructor_decl implicit range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:12:8 - line:12:8] "init(assisted:string:)" interface type='(A.Type) -> (Assisted<Int>, String) -> A' access=internal designated
+      (parameter "self" interface type='A' inout)
+      (parameter_list
+        (parameter "assisted" apiName=assisted interface type='Assisted<Int>')
+        (parameter "string" apiName=string interface type='String') range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:12:8 - line:12:8])))
+  (class_decl range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:17:1 - line:20:1] "AssistedSeed" interface type='AssistedSeed.Type' access=internal non-resilient inherits: AssistedFactory
+    (typealias range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:18:5 - line:18:22] "Seed" interface type='AssistedSeed.Seed.Type' access=internal type='Int')
+    (typealias range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:19:5 - line:19:25] "Element" interface type='AssistedSeed.Element.Type' access=internal type='A')
+    (constructor_decl implicit range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:17:7 - line:17:7] "init()" interface type='(AssistedSeed.Type) -> () -> AssistedSeed' access=internal designated
+      (parameter "self" interface type='AssistedSeed')
+      (parameter_list)
+      (brace_stmt implicit
+        (return_stmt implicit)))
+    (destructor_decl implicit range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:17:7 - line:17:7] "deinit" interface type='(AssistedSeed) -> () -> ()' access=internal @objc
+      (parameter "self" interface type='AssistedSeed')
+      (parameter_list)
+      (brace_stmt implicit range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:17:7 - line:17:7])))
+  (struct_decl range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:22:1 - line:26:1] "AModule" interface type='AModule.Type' access=internal non-resilient inherits: Module
+    (func_decl range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:23:5 - line:25:5] "configure(binder:)" interface type='(AModule.Type) -> (Binder<Unscoped>) -> ()' access=internal type
+      (parameter "self" interface type='AModule.Type')
+      (parameter_list
+        (parameter "binder" apiName=binder interface type='Binder<Unscoped>') range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:23:26 - line:23:51])
+      (call_expr type='BindingReceipt<Factory<AssistedSeed>>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:24:60 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:24:9 - line:24:78] nothrow arg_labels=factory:
+        (dot_syntax_call_expr type='(StaticString, Int, StaticString, @escaping ((Assisted<AssistedSeed.Seed>, String)) -> AssistedSeed.Element) -> BindingReceipt<Factory<AssistedSeed>>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:24:60 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:24:9 - line:24:60] nothrow
+          (declref_expr type='(AssistedInjectionSeedDecorator<Binder<Unscoped>, A, AssistedSeed>) -> (StaticString, Int, StaticString, @escaping ((Assisted<AssistedSeed.Seed>, String)) -> AssistedSeed.Element) -> BindingReceipt<Factory<AssistedSeed>>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:24:60 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:24:60 - line:24:60] decl=Cleanse.(file).AssistedInjectionBuilder extension.to(file:line:function:factory:) [with (substitution_map generic_signature=<Self, P_1 where Self : AssistedInjectionBuilder> (substitution Self -> AssistedInjectionSeedDecorator<Binder<Unscoped>, A, AssistedSeed>) (substitution P_1 -> String))] function_ref=single)
+          (call_expr type='AssistedInjectionSeedDecorator<Binder<Unscoped>, A, AssistedSeed>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:24:36 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:24:9 - line:24:58] nothrow arg_labels=_:
+            (dot_syntax_call_expr type='(AssistedSeed.Type) -> AssistedInjectionSeedDecorator<Binder<Unscoped>, A, AssistedSeed>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:24:36 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:24:9 - line:24:36] nothrow
+              (declref_expr type='(AssistedInjectionBindingBuilder<Binder<Unscoped>, A>) -> (AssistedSeed.Type) -> AssistedInjectionSeedDecorator<Binder<Unscoped>, A, AssistedSeed>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:24:36 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:24:36 - line:24:36] decl=Cleanse.(file).AssistedInjectionBindingBuilder extension.with [with (substitution_map generic_signature=<B, E, S where B : BinderBase, E == S.Element, S : AssistedFactory> (substitution B -> Binder<Unscoped>) (substitution E -> A) (substitution S -> AssistedSeed))] function_ref=single)
+              (call_expr type='AssistedInjectionBindingBuilder<Binder<Unscoped>, A>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:24:16 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:24:9 - line:24:34] nothrow arg_labels=_:
+                (dot_syntax_call_expr type='(A.Type) -> AssistedInjectionBindingBuilder<Binder<Unscoped>, A>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:24:16 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:24:9 - line:24:16] nothrow
+                  (declref_expr type='(Binder<Unscoped>) -> (A.Type) -> AssistedInjectionBindingBuilder<Binder<Unscoped>, A>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:24:16 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:24:16 - line:24:16] decl=Cleanse.(file).BinderBase extension.bindFactory [with (substitution_map generic_signature=<Self, Element where Self : BinderBase> (substitution Self -> Binder<Unscoped>) (substitution Element -> A))] function_ref=single)
+                  (declref_expr type='Binder<Unscoped>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:24:9 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:24:9 - line:24:9] decl=Test.(file).AModule.configure(binder:).binder@/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:23:27 function_ref=unapplied))
+                (paren_expr type='(A.Type)' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:24:28 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:24:27 - line:24:34]
+                  (dot_self_expr type='A.Type' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:24:28 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:24:28 - line:24:30]
+                    (type_expr type='A.Type' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:24:28 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:24:28 - line:24:28] typerepr='A')))))
+            (paren_expr type='(AssistedSeed.Type)' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:24:41 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:24:40 - line:24:58]
+              (dot_self_expr type='AssistedSeed.Type' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:24:41 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:24:41 - line:24:54]
+                (type_expr type='AssistedSeed.Type' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:24:41 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:24:41 - line:24:41] typerepr='AssistedSeed')))))
+        (argument_shuffle_expr implicit type='(file: StaticString, line: Int, function: StaticString, factory: ((Assisted<AssistedSeed.Seed>, String)) -> AssistedSeed.Element)' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:24:62 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:24:62 - line:24:78] tuple_to_tuple elements=[-3, -3, -3, 0] variadic_sources=[] default_args_owner=Cleanse.(file).AssistedInjectionBuilder extension.to(file:line:function:factory:) [with (substitution_map generic_signature=<Self, P_1 where Self : AssistedInjectionBuilder> (substitution Self -> AssistedInjectionSeedDecorator<Binder<Unscoped>, A, AssistedSeed>) (substitution P_1 -> String))]
+          (tuple_expr type='(factory: ((Assisted<AssistedSeed.Seed>, String)) -> AssistedSeed.Element)' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:24:62 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:24:62 - line:24:78] names=factory
+            (function_conversion_expr implicit type='((Assisted<AssistedSeed.Seed>, String)) -> AssistedSeed.Element' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:24:74 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:24:72 - line:24:74]
+              (constructor_ref_call_expr type='(Assisted<Int>, String) -> A' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:24:74 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:24:72 - line:24:74] nothrow
+                (declref_expr type='(A.Type) -> (Assisted<Int>, String) -> A' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:24:74 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:24:74 - line:24:74] decl=Test.(file).A.init(assisted:string:)@/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:12:8 function_ref=unapplied)
+                (type_expr type='A.Type' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:24:72 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:24:72 - line:24:72] typerepr='A')))))))
+    (constructor_decl implicit range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:22:8 - line:22:8] "init()" interface type='(AModule.Type) -> () -> AModule' access=internal designated
+      (parameter "self" interface type='AModule' inout)
+      (parameter_list)
+      (brace_stmt implicit
+        (return_stmt implicit)))
+    (typealias implicit "Scope" interface type='AModule.Scope.Type' access=internal type='Unscoped')))
+"""
 }

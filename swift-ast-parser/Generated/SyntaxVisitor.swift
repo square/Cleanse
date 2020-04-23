@@ -502,7 +502,7 @@ public extension SyntaxVisitor {
             visit(node: node)
             shouldVisitChildren = visitChildren(node: node)
         
-        } else if let node = node as? Protocol {
+        } else if let node = node as? ProtocolInst {
             visit(node: node)
             shouldVisitChildren = visitChildren(node: node)
         
@@ -836,9 +836,7 @@ public extension SyntaxVisitor {
         }
 
         if shouldVisitChildren {
-            node.children.forEach { c in
-                walk(c)
-            }
+            node.children.forEach { walk($0) }
         }
     }
 }
@@ -1217,8 +1215,8 @@ public protocol SyntaxVisitor {
     mutating func visit(node: AssociatedTypeDecl)
     mutating func visitChildren(node: AssociatedTypeDecl) -> Bool
     
-    mutating func visit(node: Protocol)
-    mutating func visitChildren(node: Protocol) -> Bool
+    mutating func visit(node: ProtocolInst)
+    mutating func visitChildren(node: ProtocolInst) -> Bool
     
     mutating func visit(node: ParamDecl)
     mutating func visitChildren(node: ParamDecl) -> Bool
@@ -2337,10 +2335,10 @@ public extension SyntaxVisitor {
         true
     }
     
-    mutating func visit(node: Protocol) {
+    mutating func visit(node: ProtocolInst) {
         // Noop
     }
-    mutating func visitChildren(node: Protocol) -> Bool {
+    mutating func visitChildren(node: ProtocolInst) -> Bool {
         true
     }
     

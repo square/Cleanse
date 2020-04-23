@@ -13,14 +13,18 @@ public struct ModuleOutput {
     public let components: [Component]
 }
 
-public struct Component {
+public struct Component: CustomStringConvertible {
     public let type: String
     public let rootType: String
     public let providers: [StandardProvider]
     public let danglingProviders: [DanglingProvider]
     public let referenceProviders: [ReferenceProvider]
     public let seed: String
-    public let modules: [String]
+    public let includedModules: [String]
     public let subcomponents: [String]
     public let isRoot: Bool
+    
+    public var description: String {
+        "Component:\(type)\n  \(providers)\n  \(danglingProviders)\n  \(referenceProviders)\n--\nincludedModules:\(includedModules)\nsubcomponets:\(subcomponents)"
+    }
 }

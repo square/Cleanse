@@ -244,7 +244,7 @@ public enum NodeIdentifier: String {
 
     case extension_decl = "extension_decl"
 
-    case `typealias` = "`typealias`"
+    case `typealias` = "typealias"
 
     case generic_type_param = "generic_type_param"
 
@@ -1037,7 +1037,7 @@ public struct AssociatedTypeDecl: Syntax {
     public let children: [Syntax]
 }
 
-public struct Protocol: Syntax {
+public struct ProtocolInst: Syntax {
     public let raw: String
     public let children: [Syntax]
 }
@@ -1830,7 +1830,7 @@ extension String {
                 return AssociatedTypeDecl(raw: self, children: children)
 		
             case .`protocol`: 
-                return Protocol(raw: self, children: children)
+                return ProtocolInst(raw: self, children: children)
 		
             case .param_decl: 
                 return ParamDecl(raw: self, children: children)

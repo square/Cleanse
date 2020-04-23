@@ -17,8 +17,8 @@ struct ConfigureVisitor: SyntaxVisitor {
     var subcomponents: [String] = []
     
     private enum BindingAPI: String {
-        case moduleInclude = "decl=Cleanse.(file).WrappedBinder extension.include(module:)"
-        case installComponent = "Cleanse.(file).WrappedBinder extension.install(dependency:)"
+        case moduleInclude = "extension.include(module:)"
+        case installComponent = "extension.install(dependency:)"
     }
     
     mutating func visit(node: CallExpr) {

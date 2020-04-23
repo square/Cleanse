@@ -2,7 +2,7 @@
 
 public enum NodeIdentifier: String {
 <% for @item in @decl_items %>
-    case <%= @item.case_name %> = "<%= @item.case_name %>"
+    case <%= @item.case_var_name %> = "<%= @item.case_name %>"
 <% end %>
 }
 
@@ -22,7 +22,7 @@ extension String {
     func createNode(id: NodeIdentifier, children: [Syntax]) -> Syntax {
         switch id {
         <% for @item in @decl_items %>
-            case .<%= @item.case_name %>: 
+            case .<%= @item.case_var_name %>: 
                 return <%= @item.class_name %>(raw: self, children: children)
 		<% end %>
         }

@@ -13,22 +13,35 @@ public protocol Provider {
     var type: String { get }
 }
 
-public struct StandardProvider: Provider, Equatable {
+public struct StandardProvider: Provider, Equatable, CustomStringConvertible {
     public let type: String
     public let dependencies: [String]
     public let tag: String?
     public let scoped: String?
+    
+    public var description: String {
+        "Standard-\(type): -> \(dependencies)"
+    }
 }
 
-public struct DanglingProvider: Provider, Equatable {
+public struct DanglingProvider: Provider, Equatable, CustomStringConvertible {
     public let type: String
     public let dependencies: [String]
     public let reference: String
+    
+    public var description: String {
+        "Dangling-\(type) -> \(dependencies)"
+    }
 }
 
-public struct ReferenceProvider: Provider, Equatable {
+public struct ReferenceProvider: Provider, Equatable, CustomStringConvertible {
     public let type: String
     public let tag: String?
     public let scoped: String?
     public let reference: String
+    
+    public var description: String {
+        "Reference-\(type): \(reference)"
+    }
 }
+
