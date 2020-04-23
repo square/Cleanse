@@ -24,8 +24,26 @@ class ProviderTests: XCTestCase {
     func testDanglingAndReferenceConnected() {
         let node = NodeSyntaxParser.parse(text: ProviderFixtures.danglingAndReferenceProvidersFixture).first!
         configureVisitor.walk(node)
+        XCTAssertEqual(configureVisitor.providers.count, 0)
         XCTAssertEqual(configureVisitor.danglingProviders.count, 1)
         XCTAssertEqual(configureVisitor.referenceProviders.count, 1)
+        XCTAssertEqual(configureVisitor.referenceProviders.first!.reference, configureVisitor.referenceProviders.first!.reference)
+    }
+    
+    func testPropertyInjectorBinding() {
+        let node = NodeSyntaxParser.parse(text: ProviderFixtures.propertyInjectionBindingFixture).first!
+        configureVisitor.walk(node)
+        XCTAssertEqual(configureVisitor.providers.count, 1)
+        XCTAssertEqual(configureVisitor.providers.first!.type, "PropertyInjector<A>")
+        XCTAssertEqual(configureVisitor.providers.first!.dependencies, ["Int"])
+    }
+    
+    func testPropertyInjectorRoot() {
+        let node = NodeSyntaxParser.parse(text: ProviderFixtures.rootPropertyInjectorProvider).first!
+        configureVisitor.walk(node)
+        XCTAssertEqual(configureVisitor.danglingProviders.count, 1)
+        XCTAssertEqual(configureVisitor.referenceProviders.count, 1)
+        XCTAssertEqual(configureVisitor.providers.count, 0)
         XCTAssertEqual(configureVisitor.referenceProviders.first!.reference, configureVisitor.referenceProviders.first!.reference)
     }
 }

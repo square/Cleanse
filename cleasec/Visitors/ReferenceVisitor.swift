@@ -35,7 +35,14 @@ struct ReferenceVisitor: SyntaxVisitor {
     }
     
     mutating func visit(node: DeclrefExpr) {
-        let pattern = "->\\s\\(ReceiptBinder<\(type)>\\) -> BindingReceipt<\(type)>"
+        let receiptBinderType: String
+        let bindingReceiptType = "BindingReceipt<\(type)>"
+        if let innerPropertyInjectorType = type.firstCapture(pattern: "PropertyInjector<(.*)>") {
+            receiptBinderType = "PropertyInjectionReceiptBinder<\(innerPropertyInjectorType)>"
+        } else {
+            receiptBinderType = "ReceiptBinder<\(type)>"
+        }
+        let pattern = "->\\s\\(\(receiptBinderType)\\) -> \(bindingReceiptType)"        
         guard node.raw.contains(pattern: pattern), let reference = node.raw.firstCapture(pattern: #"decl=(.*)@"#) else {
             return
         }

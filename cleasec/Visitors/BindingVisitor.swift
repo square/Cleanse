@@ -25,12 +25,15 @@ struct BindingVisitor: SyntaxVisitor {
         case provider = "BaseBindingBuilder"
         case taggedProvider = "TaggedBindingBuilderDecorator"
         case scopedProvider = "ScopedBindingDecorator"
+        case propertyInjector = "PropertyInjectorBindingBuilder"
     }
     
     private enum BindingAPI: String, CaseIterable {
         case toValue = "decl=Cleanse.(file).BindToable extension.to(value:file:line:function:)"
         case toFactory = "decl=Cleanse.(file).BindToable extension.to(file:line:function:factory:)"
         case configure = "decl=Cleanse.(file).BindToable extension.configured(with:)"
+        case toFactoryPropertyInjector = "decl=Cleanse.(file).PropertyInjectorBindingBuilderProtocol extension.to(file:line:function:injector:)"
+        case configurePropertyInjector = "decl=Cleanse.(file).BindToable extension.propertyInjector(configuredWith:)"
     }
     
     let type: String
@@ -55,10 +58,10 @@ struct BindingVisitor: SyntaxVisitor {
         switch api {
         case .toValue:
             binding = .provider
-        case .toFactory:
+        case .toFactory, .toFactoryPropertyInjector:
             dependencies = node.raw.allCaptures(pattern: #"substitution\sP_[\d]\s->\s(\w+)\)"#)
             binding = .provider
-        case .configure:
+        case .configure, .configurePropertyInjector:
             binding = .reference
         }
     }
@@ -72,7 +75,7 @@ struct BindingVisitor: SyntaxVisitor {
             return
         }
         switch baseBindingType {
-        case .provider:
+        case .provider, .propertyInjector:
             bindings.append(.provider)
         case .taggedProvider:
             if let tag = node.type.allCaptures(pattern: #"(\w+)(?=>)"#).last {

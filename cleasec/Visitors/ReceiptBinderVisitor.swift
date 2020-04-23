@@ -14,7 +14,13 @@ struct ReceiptBinderVisitor: SyntaxVisitor {
     
     var reference: String? = nil
     mutating func visit(node: DeclrefExpr) {
-        if node.type == "ReceiptBinder<\(type)>" {
+        let receiptBinderType: String
+        if let innerPropertyInjectorType = type.firstCapture(pattern: "PropertyInjector<(.*)>") {
+            receiptBinderType = "PropertyInjectionReceiptBinder<\(innerPropertyInjectorType)>"
+        } else {
+            receiptBinderType = "ReceiptBinder<\(type)>"
+        }
+        if node.type == receiptBinderType {
             reference = node.raw.firstCapture(pattern: #"decl=(.*)\.\w+@"#)
         }
     }
