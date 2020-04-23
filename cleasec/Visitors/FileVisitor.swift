@@ -9,9 +9,9 @@
 import Foundation
 import swift_ast_parser
 
-struct FileRepresentation {
-    let components: [Component]
-    let modules: [Module]
+public struct FileRepresentation {
+    public let components: [Component]
+    public let modules: [Module]
 }
 
 public struct FileVisitor: SyntaxVisitor {
@@ -68,14 +68,34 @@ public struct FileVisitor: SyntaxVisitor {
         var configVisitor = ConfigureVisitor()
         componentVisitor.walk(node)
         configVisitor.walk(node)
+        
         var providers = configVisitor.providers
-        if let rootProvider = componentVisitor.rootProvider {
-            providers.append(rootProvider)
-        } else {
-            print("Failed to create root provider for component \(componentName)")
+        let danglingProviders = configVisitor.danglingProviders
+        var referenceProviders = configVisitor.referenceProviders
+        guard let rootProvider = componentVisitor.rootProvider else {
+            print("Failed to create \(componentName). Could not parse root provider")
+            return
+        }
+        let rootType: String
+        switch rootProvider {
+        case .dangling(let dangling):
+            // When dangling, we map directly into a bound provider since nothing else calls it.
+            rootType = dangling.type
+            providers.append(StandardProvider(
+                type: dangling.type,
+                dependencies: dangling.dependencies,
+                tag: nil,
+                scoped: nil))
+        case .reference(let reference):
+            rootType = reference.type
+            referenceProviders.append(reference)
         }
         components.append(Component(
+            type: componentName,
+            rootType: rootType,
             providers: providers,
+            danglingProviders: danglingProviders,
+            referenceProviders: referenceProviders,
             seed: componentVisitor.seed,
             modules: configVisitor.includedModules,
             subcomponents: configVisitor.subcomponents,
@@ -89,6 +109,8 @@ public struct FileVisitor: SyntaxVisitor {
         modules.append(Module(
             type: moduleName,
             providers: configureVisitor.providers,
+            danglingProviders: configureVisitor.danglingProviders,
+            referenceProviders: configureVisitor.referenceProviders,
             includedModules: configureVisitor.includedModules,
             subcomponents: configureVisitor.subcomponents)
         )

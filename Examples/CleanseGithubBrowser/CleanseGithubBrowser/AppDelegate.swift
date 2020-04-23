@@ -27,13 +27,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let propertyInjector: PropertyInjector<AppDelegate>
 
         // Fake mode makes it easy to test and demo the app. It uses in process versions of the services
+        let serviceLoader = CleanseServiceLoader([AllBindingPlugin()])
         if useFakeMode {
             // Build and validate the release module to catch bugs sooner.
             let _ = try! ComponentFactory.of(ReleaseAppComponent.self)
-            
-            propertyInjector = try! ComponentFactory.of(FakeAppComponent.self).build(())
+            propertyInjector = try! ComponentFactory.of(FakeAppComponent.self, serviceLoader: serviceLoader).build(())
         } else {
-            propertyInjector = try! ComponentFactory.of(ReleaseAppComponent.self, validate: false).build(())
+            propertyInjector = try! ComponentFactory.of(ReleaseAppComponent.self, serviceLoader: serviceLoader).build(())
         }
 
         // Now inject the properties into ourselves

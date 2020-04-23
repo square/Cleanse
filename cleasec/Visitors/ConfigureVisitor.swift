@@ -10,7 +10,7 @@ import Foundation
 import swift_ast_parser
 
 struct ConfigureVisitor: SyntaxVisitor {
-    var providers: [Provider] = []
+    var providers: [StandardProvider] = []
     var danglingProviders: [DanglingProvider] = []
     var referenceProviders: [ReferenceProvider] = []
     var includedModules: [String] = []
@@ -43,7 +43,7 @@ struct ConfigureVisitor: SyntaxVisitor {
             switch bindingVisitor.binding {
             case .provider:
                 if let finalType = innerType {
-                    providers.append(Provider(
+                    providers.append(StandardProvider(
                         type: finalType,
                         dependencies: bindingVisitor.dependencies,
                         tag: innerTag,
@@ -68,7 +68,7 @@ struct ConfigureVisitor: SyntaxVisitor {
                 referenceVisitor.walkChildren(node)
                 switch referenceVisitor.referenceType {
                 case .provider(let provider):
-                    providers.append(Provider(
+                    providers.append(StandardProvider(
                         type: provider.type,
                         dependencies: provider.dependencies,
                         tag: innerTag,
@@ -93,13 +93,13 @@ struct ConfigureVisitor: SyntaxVisitor {
     
     mutating func visit(node: DeclrefExpr) {
         if node.raw.contains(BindingAPI.moduleInclude.rawValue) {
-            if let moduleName = node.raw.firstCapture(pattern: #"substitution\sM\s->\s(\w+)\)"#) {
+            if let moduleName = node.raw.firstCapture(pattern: #"substitution\sM\s->\s(.*)\)\)]"#) {
                 includedModules.append(moduleName)
             } else {
-                print("Found module, but could not parse its name.")
+                print("Found module, but could not parse its name. \(node)")
             }
         } else if node.raw.contains(BindingAPI.installComponent.rawValue) {
-            if let subcomponentName = node.raw.firstCapture(pattern: #"substitution\sC\s->\s(\w+)\)"#) {
+            if let subcomponentName = node.raw.firstCapture(pattern: #"substitution\sC\s->\s(.*)\)\)]"#) {
                 subcomponents.append(subcomponentName)
             } else {
                 print("Found subcomponent, but could not parse its name.")

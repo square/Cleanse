@@ -16,7 +16,11 @@ enum ComponentSeed {
 
 struct ComponentVisitor: SyntaxVisitor {
     var seed = "Void"
-    var rootProvider: Provider?
+    enum RootProvider {
+        case dangling(DanglingProvider)
+        case reference(ReferenceProvider)
+    }
+    var rootProvider: RootProvider?
     
     mutating func visit(node: Typealias) {
         if node.raw.contains("\"Seed\"") {
@@ -30,14 +34,11 @@ struct ComponentVisitor: SyntaxVisitor {
         if node.raw.contains("configureRoot(binder:)") {
             var rootProviderVisitor = ConfigureVisitor()
             rootProviderVisitor.walk(node)
-            guard let danglingRoot = rootProviderVisitor.danglingProviders.first else {
-                return
+            if let danglingRoot = rootProviderVisitor.danglingProviders.first {
+                rootProvider = .dangling(danglingRoot)
+            } else if let referenceRoot = rootProviderVisitor.referenceProviders.first {
+                rootProvider = .reference(referenceRoot)
             }
-            rootProvider = Provider(
-                type: danglingRoot.type,
-                dependencies: danglingRoot.dependencies,
-                tag: nil,
-                scoped: nil)
         }
     }
     

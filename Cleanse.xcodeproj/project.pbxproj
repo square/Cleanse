@@ -38,6 +38,8 @@
 		DC5937DA245151C500D70652 /* ProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5937D9245151C500D70652 /* ProviderTests.swift */; };
 		DC5937DC2451522200D70652 /* ProviderFixtures.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5937DB2451522200D70652 /* ProviderFixtures.swift */; };
 		DC5937DE245154E100D70652 /* ReceiptBinderVisitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5937DD245154E100D70652 /* ReceiptBinderVisitor.swift */; };
+		DC5937E12451673400D70652 /* cleasec.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC1F567C244F9C1E00CCFDD5 /* cleasec.framework */; };
+		DC5937E32451678700D70652 /* Sample.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5937E22451678700D70652 /* Sample.swift */; };
 		DC8ACA81238315EB005A6F51 /* SPITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8ACA80238315EB005A6F51 /* SPITests.swift */; };
 		DCC5E6362450E76F0032A69F /* Module.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC5E6352450E76F0032A69F /* Module.swift */; };
 		DCC5E6382450E7960032A69F /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC5E6372450E7960032A69F /* Component.swift */; };
@@ -52,7 +54,6 @@
 		DCE93184232212BA00C0522F /* AssistedInjectionArities.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE93183232212BA00C0522F /* AssistedInjectionArities.swift */; };
 		DCE931862322175800C0522F /* AssistedInjectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE931852322175800C0522F /* AssistedInjectionTests.swift */; };
 		DCF60958244E204200DFE5F0 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF60957244E204200DFE5F0 /* main.swift */; };
-		DCF6095F244E243700DFE5F0 /* Sample.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF6095E244E243700DFE5F0 /* Sample.swift */; };
 		DCFC812F23A8687B00629D44 /* SubcomponentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFC812E23A8687B00629D44 /* SubcomponentTests.swift */; };
 		F61133BF1CD41EE600069972 /* TypeKeyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61133BE1CD41EE600069972 /* TypeKeyProtocol.swift */; };
 		F61133C11CD7B36600069972 /* MemoryManagementTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61133C01CD7B36600069972 /* MemoryManagementTests.swift */; };
@@ -142,6 +143,13 @@
 			remoteGlobalIDString = DC1F5664244F9A9000CCFDD5;
 			remoteInfo = "swift-ast-parser";
 		};
+		DC5937DF2451673000D70652 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F6A660C11CCB07C2004DD6E3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DC1F567B244F9C1E00CCFDD5;
+			remoteInfo = cleasec;
+		};
 		F6A660D61CCB07C3004DD6E3 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = F6A660C11CCB07C2004DD6E3 /* Project object */;
@@ -194,6 +202,7 @@
 		DC5937D9245151C500D70652 /* ProviderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderTests.swift; sourceTree = "<group>"; };
 		DC5937DB2451522200D70652 /* ProviderFixtures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderFixtures.swift; sourceTree = "<group>"; };
 		DC5937DD245154E100D70652 /* ReceiptBinderVisitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptBinderVisitor.swift; sourceTree = "<group>"; };
+		DC5937E22451678700D70652 /* Sample.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sample.swift; sourceTree = "<group>"; };
 		DC8ACA80238315EB005A6F51 /* SPITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPITests.swift; sourceTree = "<group>"; };
 		DCC5E6352450E76F0032A69F /* Module.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Module.swift; sourceTree = "<group>"; };
 		DCC5E6372450E7960032A69F /* Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Component.swift; sourceTree = "<group>"; };
@@ -210,7 +219,6 @@
 		DCF60955244E204200DFE5F0 /* cleansec-ast-parser */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "cleansec-ast-parser"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCF60957244E204200DFE5F0 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		DCF6095C244E22B200DFE5F0 /* Nodes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Nodes.swift; sourceTree = "<group>"; };
-		DCF6095E244E243700DFE5F0 /* Sample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sample.swift; sourceTree = "<group>"; };
 		DCF60960244E32FA00DFE5F0 /* Syntax.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Syntax.swift; sourceTree = "<group>"; };
 		DCF60962244E330D00DFE5F0 /* NodeSyntaxParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeSyntaxParser.swift; sourceTree = "<group>"; };
 		DCF60964244E399F00DFE5F0 /* NodeImpls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeImpls.swift; sourceTree = "<group>"; };
@@ -321,6 +329,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DC5937E12451673400D70652 /* cleasec.framework in Frameworks */,
 				DC1F5674244F9AD200CCFDD5 /* swift_ast_parser.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -467,8 +476,8 @@
 		DCF60956244E204200DFE5F0 /* cleansec-ast-parser */ = {
 			isa = PBXGroup;
 			children = (
+				DC5937E22451678700D70652 /* Sample.swift */,
 				DCF60957244E204200DFE5F0 /* main.swift */,
-				DCF6095E244E243700DFE5F0 /* Sample.swift */,
 			);
 			path = "cleansec-ast-parser";
 			sourceTree = "<group>";
@@ -831,6 +840,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				DC5937E02451673000D70652 /* PBXTargetDependency */,
 				DC1F5672244F9ACD00CCFDD5 /* PBXTargetDependency */,
 			);
 			name = "cleansec-ast-parser";
@@ -1042,7 +1052,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DCF60958244E204200DFE5F0 /* main.swift in Sources */,
-				DCF6095F244E243700DFE5F0 /* Sample.swift in Sources */,
+				DC5937E32451678700D70652 /* Sample.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1154,6 +1164,11 @@
 			isa = PBXTargetDependency;
 			target = DC1F5664244F9A9000CCFDD5 /* swift-ast-parser */;
 			targetProxy = DC1F5693244F9C2900CCFDD5 /* PBXContainerItemProxy */;
+		};
+		DC5937E02451673000D70652 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DC1F567B244F9C1E00CCFDD5 /* cleasec */;
+			targetProxy = DC5937DF2451673000D70652 /* PBXContainerItemProxy */;
 		};
 		F6A660D71CCB07C3004DD6E3 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		884618AF1D9324AD0001ADEB /* AppComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 884618AE1D9324AD0001ADEB /* AppComponent.swift */; };
 		88D655411F04774200AFE00E /* SingletonScope.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D655401F04774200AFE00E /* SingletonScope.swift */; };
+		DC5937E62451ECB100D70652 /* AllBindingsPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5937E52451ECB100D70652 /* AllBindingsPlugin.swift */; };
 		F69184B31D0DF28A00125872 /* GithubMemberService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69184B21D0DF28A00125872 /* GithubMemberService.swift */; };
 		F69184B61D0DF2CA00125872 /* GithubRepositoriesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69184B51D0DF2CA00125872 /* GithubRepositoriesService.swift */; };
 		F69184BB1D0DF3DD00125872 /* NetworkModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69184BA1D0DF3DD00125872 /* NetworkModule.swift */; };
@@ -41,6 +42,34 @@
 			proxyType = 2;
 			remoteGlobalIDString = 88D6552C1F042D4300AFE00E;
 			remoteInfo = CleanseGen;
+		};
+		DC5937ED2451ECB100D70652 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F6C9F38A1D0BD1A100877D0B /* Cleanse.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = DCF60955244E204200DFE5F0;
+			remoteInfo = "cleansec-ast-parser";
+		};
+		DC5937EF2451ECB100D70652 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F6C9F38A1D0BD1A100877D0B /* Cleanse.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = DC1F5665244F9A9000CCFDD5;
+			remoteInfo = "swift-ast-parser";
+		};
+		DC5937F12451ECB100D70652 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F6C9F38A1D0BD1A100877D0B /* Cleanse.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = DC1F567C244F9C1E00CCFDD5;
+			remoteInfo = cleasec;
+		};
+		DC5937F32451ECB100D70652 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F6C9F38A1D0BD1A100877D0B /* Cleanse.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = DC1F5684244F9C1E00CCFDD5;
+			remoteInfo = cleasecTests;
 		};
 		F6C9F36E1D0BD01700877D0B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -103,6 +132,7 @@
 /* Begin PBXFileReference section */
 		884618AE1D9324AD0001ADEB /* AppComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppComponent.swift; sourceTree = "<group>"; };
 		88D655401F04774200AFE00E /* SingletonScope.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingletonScope.swift; sourceTree = "<group>"; };
+		DC5937E52451ECB100D70652 /* AllBindingsPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllBindingsPlugin.swift; sourceTree = "<group>"; };
 		F69184B21D0DF28A00125872 /* GithubMemberService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GithubMemberService.swift; sourceTree = "<group>"; };
 		F69184B51D0DF2CA00125872 /* GithubRepositoriesService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GithubRepositoriesService.swift; sourceTree = "<group>"; };
 		F69184BA1D0DF3DD00125872 /* NetworkModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkModule.swift; sourceTree = "<group>"; };
@@ -245,6 +275,7 @@
 				F6C9F3681D0BD01700877D0B /* Info.plist */,
 				F6C9F3651D0BD01700877D0B /* LaunchScreen.storyboard */,
 				F6E8782D1D0BD6D7006F3FAB /* RootViewController.swift */,
+				DC5937E52451ECB100D70652 /* AllBindingsPlugin.swift */,
 			);
 			path = CleanseGithubBrowser;
 			sourceTree = "<group>";
@@ -273,6 +304,10 @@
 				F6C9F3901D0BD1A200877D0B /* Cleanse.framework */,
 				88D6553D1F04591700AFE00E /* CleanseGen.framework */,
 				F6C9F3921D0BD1A200877D0B /* CleanseTests.xctest */,
+				DC5937EE2451ECB100D70652 /* cleansec-ast-parser */,
+				DC5937F02451ECB100D70652 /* swift_ast_parser.framework */,
+				DC5937F22451ECB100D70652 /* cleasec.framework */,
+				DC5937F42451ECB100D70652 /* cleasecTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -398,6 +433,34 @@
 			remoteRef = 88D6553C1F04591700AFE00E /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		DC5937EE2451ECB100D70652 /* cleansec-ast-parser */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = "cleansec-ast-parser";
+			remoteRef = DC5937ED2451ECB100D70652 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		DC5937F02451ECB100D70652 /* swift_ast_parser.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = swift_ast_parser.framework;
+			remoteRef = DC5937EF2451ECB100D70652 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		DC5937F22451ECB100D70652 /* cleasec.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = cleasec.framework;
+			remoteRef = DC5937F12451ECB100D70652 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		DC5937F42451ECB100D70652 /* cleasecTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = cleasecTests.xctest;
+			remoteRef = DC5937F32451ECB100D70652 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		F6C9F3901D0BD1A200877D0B /* Cleanse.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -481,6 +544,7 @@
 				F69184B31D0DF28A00125872 /* GithubMemberService.swift in Sources */,
 				F6E878301D0BD911006F3FAB /* SettingsPage.swift in Sources */,
 				884618AF1D9324AD0001ADEB /* AppComponent.swift in Sources */,
+				DC5937E62451ECB100D70652 /* AllBindingsPlugin.swift in Sources */,
 				F6E878321D0D1120006F3FAB /* RepositoriesPage.swift in Sources */,
 				F6E878381D0DD11A006F3FAB /* SplitViewController.swift in Sources */,
 				F69184D21D0E357600125872 /* FoundationCommonModule.swift in Sources */,

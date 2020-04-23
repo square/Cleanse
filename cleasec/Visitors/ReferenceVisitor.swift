@@ -12,7 +12,7 @@ import swift_ast_parser
 enum ReferenceType {
     case unknown
     case reference(String)
-    case provider(Provider)
+    case provider(StandardProvider)
 }
 
 struct ReferenceVisitor: SyntaxVisitor {
@@ -24,7 +24,7 @@ struct ReferenceVisitor: SyntaxVisitor {
         bindingVisitor.walk(node)
         switch bindingVisitor.binding {
         case .provider:
-            referenceType = .provider(Provider(
+            referenceType = .provider(StandardProvider(
                 type: type,
                 dependencies: bindingVisitor.dependencies,
                 tag: nil,

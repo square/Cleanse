@@ -26,6 +26,7 @@ struct BindingVisitor: SyntaxVisitor {
         case taggedProvider = "TaggedBindingBuilderDecorator"
         case scopedProvider = "ScopedBindingDecorator"
         case propertyInjector = "PropertyInjectorBindingBuilder"
+        case assistedInjectionProvider = "AssistedInjectionSeedDecorator"
     }
     
     private enum BindingAPI: String, CaseIterable {
@@ -34,6 +35,7 @@ struct BindingVisitor: SyntaxVisitor {
         case configure = "decl=Cleanse.(file).BindToable extension.configured(with:)"
         case toFactoryPropertyInjector = "decl=Cleanse.(file).PropertyInjectorBindingBuilderProtocol extension.to(file:line:function:injector:)"
         case configurePropertyInjector = "decl=Cleanse.(file).BindToable extension.propertyInjector(configuredWith:)"
+        case toFactoryAssistedInjection = "decl=Cleanse.(file).AssistedInjectionBuilder extension.to(file:line:function:factory:)"
     }
     
     let type: String
@@ -58,7 +60,7 @@ struct BindingVisitor: SyntaxVisitor {
         switch api {
         case .toValue:
             binding = .provider
-        case .toFactory, .toFactoryPropertyInjector:
+        case .toFactory, .toFactoryPropertyInjector, .toFactoryAssistedInjection:
             dependencies = node.raw.allCaptures(pattern: #"substitution\sP_[\d]\s->\s(\w+)\)"#)
             binding = .provider
         case .configure, .configurePropertyInjector:
@@ -75,7 +77,7 @@ struct BindingVisitor: SyntaxVisitor {
             return
         }
         switch baseBindingType {
-        case .provider, .propertyInjector:
+        case .provider, .propertyInjector, .assistedInjectionProvider:
             bindings.append(.provider)
         case .taggedProvider:
             if let tag = node.type.allCaptures(pattern: #"(\w+)(?=>)"#).last {

@@ -8,53 +8,19 @@
 
 import Foundation
 import swift_ast_parser
+import cleasec
 
 func main() {
-    
-}
-
-struct Provider {
-    let type: String
-    let dependencies: [String]
-}
-
-extension Provider: CustomStringConvertible {
-    var description: String {
-        return "\(type) -> \(dependencies)"
-    }
-}
-
-struct ProviderVisitor: SyntaxVisitor {
-    var providers: [Provider] = []
-    mutating func visit(node: CallExpr) {
-        if let type = node.type.firstCapture(pattern: "BindingReceipt<(.*)>") {
-            var dependencyVisitor = BindingProviderVisitor(type: type)
-            dependencyVisitor.walk(node)
-//            providers.append(Provider(type: type, dependencies: dependencyVisitor.dependencies))
+    let files = Cleansec.analyze(text: sample_text, searchNodes: [])
+    files.forEach { (rep) in
+        print("----")
+        if rep.components.count > 0 {
+            print(rep.components)
+        }
+        if rep.modules.count > 0 {
+            print(rep.modules)
         }
     }
 }
 
-struct BindingProviderVisitor: SyntaxVisitor {
-    enum BoundType {
-        case none, dangling, full
-    }
-    let type: String
-    
-    var boundType: BoundType = .none
-    
-    func visit(node: DeclrefExpr) {
-        
-    }
-}
-
-func parse(text: String) {
-    let node = NodeSyntaxParser.parse(text: text)
-    node.forEach { (n) in
-        var visitor = ProviderVisitor()
-        visitor.walk(n)
-        print(visitor.providers)
-    }
-}
-
-parse(text: sample_text)
+main()

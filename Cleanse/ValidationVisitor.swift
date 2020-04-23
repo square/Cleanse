@@ -36,8 +36,8 @@ public struct ProviderKey : TypeKeyProtocol {
 
 
 public class ProviderInfo : DelegatedHashable, CustomStringConvertible {
-    let rawBinding: RawProviderBinding
-    var requirements: Set<ProviderKey> = []
+    public let rawBinding: RawProviderBinding
+    public var requirements: Set<ProviderKey> = []
 
     init(rawBinding: RawProviderBinding) {
         self.rawBinding = rawBinding

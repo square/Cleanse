@@ -14,7 +14,11 @@ public struct ModuleOutput {
 }
 
 public struct Component {
-    public let providers: [Provider]
+    public let type: String
+    public let rootType: String
+    public let providers: [StandardProvider]
+    public let danglingProviders: [DanglingProvider]
+    public let referenceProviders: [ReferenceProvider]
     public let seed: String
     public let modules: [String]
     public let subcomponents: [String]

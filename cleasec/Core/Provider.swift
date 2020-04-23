@@ -9,20 +9,24 @@
 import Foundation
 import swift_ast_parser
 
-public struct Provider: Equatable {
+public protocol Provider {
+    var type: String { get }
+}
+
+public struct StandardProvider: Provider, Equatable {
     public let type: String
     public let dependencies: [String]
     public let tag: String?
     public let scoped: String?
 }
 
-public struct DanglingProvider: Equatable {
+public struct DanglingProvider: Provider, Equatable {
     public let type: String
     public let dependencies: [String]
     public let reference: String
 }
 
-public struct ReferenceProvider {
+public struct ReferenceProvider: Provider, Equatable {
     public let type: String
     public let tag: String?
     public let scoped: String?

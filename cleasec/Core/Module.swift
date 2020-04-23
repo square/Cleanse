@@ -11,6 +11,8 @@ import Foundation
 public struct Module {
     public let type: String
     public let providers: [Provider]
+    public let danglingProviders: [DanglingProvider]
+    public let referenceProviders: [ReferenceProvider]
     public let includedModules: [String]
     public let subcomponents: [String]
 }
