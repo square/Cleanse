@@ -11,6 +11,7 @@ import swift_ast_parser
 
 struct ConfigureVisitor: SyntaxVisitor {
     var providers: [Provider] = []
+    var danglingProviders: [DanglingProvider] = []
     var includedModules: [String] = []
     var subcomponents: [String] = []
     
@@ -38,19 +39,26 @@ struct ConfigureVisitor: SyntaxVisitor {
                         innerScope = scope
                     }
                 }
-                guard let finalType = innerType else {
-                    print("Found type but couldn't discern BaseBindingBuilder")
-                    return
+                
+                if let finalType = innerType {
+                    providers.append(Provider(
+                        type: finalType,
+                        dependencies: bindingVisitor.dependencies,
+                        tag: innerTag,
+                        scoped: innerScope)
+                    )
+                } else {
+                    // Dangling
+                    danglingProviders.append(DanglingProvider(
+                        type: type,
+                        dependencies: bindingVisitor.dependencies)
+                    )
                 }
-                providers.append(Provider(
-                    type: finalType,
-                    dependencies: bindingVisitor.dependencies,
-                    tag: innerTag,
-                    scoped: innerScope)
-                )
-            default:
+            case .reference:
                 // TODO
                 break
+            case .unknown:
+                print("Found binding expression, but failed to create any semblance of a provider. \(node.raw)")
             }
         }
     }

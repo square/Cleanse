@@ -68,8 +68,14 @@ public struct FileVisitor: SyntaxVisitor {
         var configVisitor = ConfigureVisitor()
         componentVisitor.walk(node)
         configVisitor.walk(node)
+        var providers = configVisitor.providers
+        if let rootProvider = componentVisitor.rootProvider {
+            providers.append(rootProvider)
+        } else {
+            print("Failed to create root provider for component \(componentName)")
+        }
         components.append(Component(
-            providers: configVisitor.providers,
+            providers: providers,
             seed: componentVisitor.seed,
             modules: configVisitor.includedModules,
             subcomponents: configVisitor.subcomponents,

@@ -8,9 +8,14 @@
 
 import Foundation
 
-public struct Provider {
+public struct Provider: Equatable {
     public let type: String
     public let dependencies: [String]
     public let tag: String?
     public let scoped: String?
+}
+
+public struct DanglingProvider {
+    public let type: String
+    public let dependencies: [String]
 }
