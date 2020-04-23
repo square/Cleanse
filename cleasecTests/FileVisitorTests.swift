@@ -35,4 +35,18 @@ class FileVisitorTests: XCTestCase {
         visitor.walk(node)
         XCTAssertFalse(visitor.importsCleanse)
     }
+    
+    func testParsesNormalComponent() {
+        let node = NodeSyntaxParser.parse(text: ComponentFixtures.simpleComponentFixtures).first!
+        visitor.walk(node)
+        XCTAssertEqual(visitor.components.count, 1)
+        XCTAssertEqual(visitor.components.first!.isRoot, false)
+    }
+    
+    func testParsesRootComponent() {
+        let node = NodeSyntaxParser.parse(text: ComponentFixtures.simpleRootComponentFixture).first!
+        visitor.walk(node)
+        XCTAssertEqual(visitor.components.count, 1)
+        XCTAssertEqual(visitor.components.first!.isRoot, true)
+    }
 }

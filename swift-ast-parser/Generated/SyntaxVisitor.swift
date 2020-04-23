@@ -2,7 +2,7 @@
 
 public extension SyntaxVisitor {
     mutating func walk(_ node: Syntax) {
-        var shouldVisitChildren = false
+        var shouldVisitChildren = true
         if false {
           // Noop
         
@@ -836,7 +836,9 @@ public extension SyntaxVisitor {
         }
 
         if shouldVisitChildren {
-            node.children.forEach { walk($0) }
+            node.children.forEach { c in
+                walk(c)
+            }
         }
     }
 }

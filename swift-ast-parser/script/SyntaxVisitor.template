@@ -2,7 +2,7 @@
 
 public extension SyntaxVisitor {
     mutating func walk(_ node: Syntax) {
-        var shouldVisitChildren = false
+        var shouldVisitChildren = true
         if false {
           // Noop
         <% for @item in @decl_items %>

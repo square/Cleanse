@@ -18,4 +18,5 @@ public struct Component {
     public let seed: String
     public let modules: [String]
     public let subcomponents: [String]
+    public let isRoot: Bool
 }
