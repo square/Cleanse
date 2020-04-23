@@ -12,6 +12,7 @@ import swift_ast_parser
 struct ConfigureVisitor: SyntaxVisitor {
     var providers: [Provider] = []
     var danglingProviders: [DanglingProvider] = []
+    var referenceProviders: [ReferenceProvider] = []
     var includedModules: [String] = []
     var subcomponents: [String] = []
     
@@ -24,22 +25,23 @@ struct ConfigureVisitor: SyntaxVisitor {
         if let type = node.type.firstCapture(pattern: "BindingReceipt<(.*)>") {
             var bindingVisitor = BindingVisitor(type: type)
             bindingVisitor.walk(node)
+            
+            var innerType: String? = nil
+            var innerTag: String? = nil
+            var innerScope: String? = nil
+            bindingVisitor.bindings.forEach { b in
+                switch b {
+                case .provider:
+                    innerType = type
+                case .taggedProvider(let tag):
+                    innerTag = tag
+                case .scopedProvider(let scope):
+                    innerScope = scope
+                }
+            }
+            
             switch bindingVisitor.binding {
             case .provider:
-                var innerType: String? = nil
-                var innerTag: String? = nil
-                var innerScope: String? = nil
-                bindingVisitor.bindings.forEach { b in
-                    switch b {
-                    case .provider:
-                        innerType = type
-                    case .taggedProvider(let tag):
-                        innerTag = tag
-                    case .scopedProvider(let scope):
-                        innerScope = scope
-                    }
-                }
-                
                 if let finalType = innerType {
                     providers.append(Provider(
                         type: finalType,
@@ -48,15 +50,41 @@ struct ConfigureVisitor: SyntaxVisitor {
                         scoped: innerScope)
                     )
                 } else {
-                    // Dangling
-                    danglingProviders.append(DanglingProvider(
-                        type: type,
-                        dependencies: bindingVisitor.dependencies)
-                    )
+                    var receiptBinderVisitor = ReceiptBinderVisitor(type: type)
+                    receiptBinderVisitor.walk(node)
+                    if let reference = receiptBinderVisitor.reference {
+                        danglingProviders.append(DanglingProvider(
+                            type: type,
+                            dependencies: bindingVisitor.dependencies,
+                            reference: reference)
+                        )
+                    } else {
+                        print("Unknown dangling reference provider type.")
+                    }
+                    
                 }
             case .reference:
-                // TODO
-                break
+                var referenceVisitor = ReferenceVisitor(type: type)
+                referenceVisitor.walkChildren(node)
+                switch referenceVisitor.referenceType {
+                case .provider(let provider):
+                    providers.append(Provider(
+                        type: provider.type,
+                        dependencies: provider.dependencies,
+                        tag: innerTag,
+                        scoped: innerScope)
+                    )
+                case .reference(let reference):
+                    referenceProviders.append(ReferenceProvider(
+                        type: type,
+                        tag: innerTag,
+                        scoped: innerScope,
+                        reference: reference)
+                    )
+                case .unknown:
+                    print("Failed to parse reference node: \(node)")
+                }
+                
             case .unknown:
                 print("Found binding expression, but failed to create any semblance of a provider. \(node.raw)")
             }

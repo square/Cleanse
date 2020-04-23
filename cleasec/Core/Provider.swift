@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import swift_ast_parser
 
 public struct Provider: Equatable {
     public let type: String
@@ -15,7 +16,15 @@ public struct Provider: Equatable {
     public let scoped: String?
 }
 
-public struct DanglingProvider {
+public struct DanglingProvider: Equatable {
     public let type: String
     public let dependencies: [String]
+    public let reference: String
+}
+
+public struct ReferenceProvider {
+    public let type: String
+    public let tag: String?
+    public let scoped: String?
+    public let reference: String
 }

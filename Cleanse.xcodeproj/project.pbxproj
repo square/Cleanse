@@ -33,6 +33,11 @@
 		DC4A0CA72350F8B200A2E576 /* CleanseErrorReporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4A0CA62350F8B200A2E576 /* CleanseErrorReporter.swift */; };
 		DC4A0CA92350FD4F00A2E576 /* ComponentBinding.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4A0CA82350FD4F00A2E576 /* ComponentBinding.swift */; };
 		DC4ACFD4234EBA7900A2E576 /* CleanseBindingPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4ACFD3234EBA7900A2E576 /* CleanseBindingPlugin.swift */; };
+		DC5937D624514D3400D70652 /* ReferenceVisitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5937D524514D3400D70652 /* ReferenceVisitor.swift */; };
+		DC5937D824514E1C00D70652 /* SyntaxVisitorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5937D724514E1C00D70652 /* SyntaxVisitorExtension.swift */; };
+		DC5937DA245151C500D70652 /* ProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5937D9245151C500D70652 /* ProviderTests.swift */; };
+		DC5937DC2451522200D70652 /* ProviderFixtures.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5937DB2451522200D70652 /* ProviderFixtures.swift */; };
+		DC5937DE245154E100D70652 /* ReceiptBinderVisitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5937DD245154E100D70652 /* ReceiptBinderVisitor.swift */; };
 		DC8ACA81238315EB005A6F51 /* SPITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8ACA80238315EB005A6F51 /* SPITests.swift */; };
 		DCC5E6362450E76F0032A69F /* Module.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC5E6352450E76F0032A69F /* Module.swift */; };
 		DCC5E6382450E7960032A69F /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC5E6372450E7960032A69F /* Component.swift */; };
@@ -184,6 +189,11 @@
 		DC4A0CA62350F8B200A2E576 /* CleanseErrorReporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleanseErrorReporter.swift; sourceTree = "<group>"; };
 		DC4A0CA82350FD4F00A2E576 /* ComponentBinding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentBinding.swift; sourceTree = "<group>"; };
 		DC4ACFD3234EBA7900A2E576 /* CleanseBindingPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleanseBindingPlugin.swift; sourceTree = "<group>"; };
+		DC5937D524514D3400D70652 /* ReferenceVisitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferenceVisitor.swift; sourceTree = "<group>"; };
+		DC5937D724514E1C00D70652 /* SyntaxVisitorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyntaxVisitorExtension.swift; sourceTree = "<group>"; };
+		DC5937D9245151C500D70652 /* ProviderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderTests.swift; sourceTree = "<group>"; };
+		DC5937DB2451522200D70652 /* ProviderFixtures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderFixtures.swift; sourceTree = "<group>"; };
+		DC5937DD245154E100D70652 /* ReceiptBinderVisitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptBinderVisitor.swift; sourceTree = "<group>"; };
 		DC8ACA80238315EB005A6F51 /* SPITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPITests.swift; sourceTree = "<group>"; };
 		DCC5E6352450E76F0032A69F /* Module.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Module.swift; sourceTree = "<group>"; };
 		DCC5E6372450E7960032A69F /* Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Component.swift; sourceTree = "<group>"; };
@@ -353,6 +363,7 @@
 				DCF60966244E3B4200DFE5F0 /* Regex.swift */,
 				DC1F5667244F9A9000CCFDD5 /* swift_ast_parser.h */,
 				DC1F5668244F9A9000CCFDD5 /* Info.plist */,
+				DC5937D724514E1C00D70652 /* SyntaxVisitorExtension.swift */,
 			);
 			path = "swift-ast-parser";
 			sourceTree = "<group>";
@@ -383,6 +394,7 @@
 				DC1F568B244F9C1E00CCFDD5 /* Info.plist */,
 				DC1F5699244F9DA200CCFDD5 /* FileVisitorTests.swift */,
 				DC1F56D6244FC13600CCFDD5 /* ConfigureVisitorTests.swift */,
+				DC5937D9245151C500D70652 /* ProviderTests.swift */,
 			);
 			path = cleasecTests;
 			sourceTree = "<group>";
@@ -394,6 +406,8 @@
 				DC1F56D1244FAB2500CCFDD5 /* ConfigureVisitor.swift */,
 				DCC5E63D24510D5A0032A69F /* BindingVisitor.swift */,
 				DC30D51C24511892009F3CF5 /* ComponentVisitor.swift */,
+				DC5937D524514D3400D70652 /* ReferenceVisitor.swift */,
+				DC5937DD245154E100D70652 /* ReceiptBinderVisitor.swift */,
 			);
 			path = Visitors;
 			sourceTree = "<group>";
@@ -413,6 +427,7 @@
 			children = (
 				DC1F56DB244FC58600CCFDD5 /* ModuleFixtures.swift */,
 				DC30D51E2451244D009F3CF5 /* ComponentFixtures.swift */,
+				DC5937DB2451522200D70652 /* ProviderFixtures.swift */,
 			);
 			path = Fixtures;
 			sourceTree = "<group>";
@@ -988,6 +1003,7 @@
 				DC1F566E244F9AAE00CCFDD5 /* NodeImpls.swift in Sources */,
 				DC1F566F244F9AAE00CCFDD5 /* Regex.swift in Sources */,
 				DC1F5670244F9AAE00CCFDD5 /* NodeSyntaxParser.swift in Sources */,
+				DC5937D824514E1C00D70652 /* SyntaxVisitorExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -998,11 +1014,13 @@
 				DC1F56D2244FAB2500CCFDD5 /* ConfigureVisitor.swift in Sources */,
 				DCC5E6362450E76F0032A69F /* Module.swift in Sources */,
 				DCC5E63E24510D5A0032A69F /* BindingVisitor.swift in Sources */,
+				DC5937D624514D3400D70652 /* ReferenceVisitor.swift in Sources */,
 				DC1F56D5244FAE1B00CCFDD5 /* Provider.swift in Sources */,
 				DC30D51D24511892009F3CF5 /* ComponentVisitor.swift in Sources */,
 				DCC5E63A24510A4F0032A69F /* Cleansec.swift in Sources */,
 				DC1F5698244F9C8A00CCFDD5 /* FileVisitor.swift in Sources */,
 				DCC5E6382450E7960032A69F /* Component.swift in Sources */,
+				DC5937DE245154E100D70652 /* ReceiptBinderVisitor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1012,7 +1030,9 @@
 			files = (
 				DC1F56D7244FC13600CCFDD5 /* ConfigureVisitorTests.swift in Sources */,
 				DC1F569A244F9DA200CCFDD5 /* FileVisitorTests.swift in Sources */,
+				DC5937DA245151C500D70652 /* ProviderTests.swift in Sources */,
 				DC1F56DC244FC58600CCFDD5 /* ModuleFixtures.swift in Sources */,
+				DC5937DC2451522200D70652 /* ProviderFixtures.swift in Sources */,
 				DC30D51F2451244D009F3CF5 /* ComponentFixtures.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
