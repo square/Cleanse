@@ -9,8 +9,16 @@
 import Foundation
 import swift_ast_parser
 
+struct FileRepresentation {
+    let components: [Component]
+    let modules: [Module]
+}
+
 public struct FileVisitor: SyntaxVisitor {
     var importsCleanse: Bool = false
+    var modules: [Module] = []
+    var components: [Component] = []
+    
     mutating public func visit(node: ImportDecl) {
         if node.raw.contains("Cleanse") {
             importsCleanse = true
@@ -18,19 +26,69 @@ public struct FileVisitor: SyntaxVisitor {
     }
     
     mutating public func visit(node: StructDecl) {
-        visitModule(node)
+        if let moduleName = isModule(node) {
+            visitModule(node, moduleName: moduleName)
+        }
+        if let componentName = isComponent(node) {
+            visitComponent(node, componentName: componentName)
+        }
     }
     
     mutating public func visit(node: ClassDecl) {
-        visitModule(node)
-    }
-    
-    private func visitModule(_ node: InheritableSyntax) {
-        guard let inherits = node.inherits, inherits.contains(pattern: "(Cleanse.)?Module") else {
-            return
+        if let moduleName = isModule(node) {
+            visitModule(node, moduleName: moduleName)
         }
-//        var moduleVisitor = ModuleVisitor(name: <#String#>)
-//        moduleVisitor.walk(node)
+        if let componentName = isComponent(node) {
+            visitComponent(node, componentName: componentName)
+        }
     }
     
+    private mutating func visitComponent(_ node: InheritableSyntax, componentName: String) {
+        var componentVisitor = ComponentVisitor()
+        var configVisitor = ConfigureVisitor()
+        componentVisitor.walk(node)
+        configVisitor.walk(node)
+        components.append(Component(
+            providers: configVisitor.providers,
+            seed: componentVisitor.seed,
+            modules: configVisitor.includedModules,
+            subcomponents: configVisitor.subcomponents)
+        )
+    }
+    
+    private mutating func visitModule(_ node: InheritableSyntax, moduleName: String) {
+        var configureVisitor = ConfigureVisitor()
+        configureVisitor.walk(node)
+        modules.append(Module(
+            type: moduleName,
+            providers: configureVisitor.providers,
+            includedModules: configureVisitor.includedModules,
+            subcomponents: configureVisitor.subcomponents)
+        )
+    }
+    
+    private func isModule(_ node: InheritableSyntax) -> String? {
+        guard let inherits = node.inherits, inherits.contains(pattern: "(Cleanse.)?Module")
+            , let moduleName = node.raw.firstCapture(pattern: #"\"(\w+)\""#) else {
+            return nil
+        }
+        return moduleName
+    }
+    
+    private func isComponent(_ node: InheritableSyntax) -> String? {
+        guard let inherits = node.inherits, inherits.contains(pattern: "(Cleanse.)?(Component|RootComponent)")
+            , let componentName = node.raw.firstCapture(pattern: #"\"(\w+)\""#) else {
+            return nil
+        }
+        return componentName
+    }
+}
+
+extension FileVisitor {
+    func finalize() -> FileRepresentation {
+        return FileRepresentation(
+            components: components,
+            modules: modules
+        )
+    }
 }

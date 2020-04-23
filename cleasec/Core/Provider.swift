@@ -8,9 +8,9 @@
 
 import Foundation
 
-struct Provider {
-    let type: String
-    let dependencies: [String]
-    let tag: String?
-    let scoped: String?
+public struct Provider {
+    public let type: String
+    public let dependencies: [String]
+    public let tag: String?
+    public let scoped: String?
 }

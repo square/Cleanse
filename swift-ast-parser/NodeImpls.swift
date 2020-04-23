@@ -30,5 +30,6 @@ extension Parameter: TypedSyntax {}
 extension ParenExpr: TypedSyntax {}
 extension TupleExpr: TypedSyntax {}
 extension DeclrefExpr: TypedSyntax {}
+extension Typealias: TypedSyntax{}
 
 extension ArgumentShuffleExpr: ImplicitlyTypedSyntax {}

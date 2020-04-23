@@ -330,4 +330,107 @@ struct ModuleFixtures {
             (return_stmt implicit)))
         (typealias implicit "Scope" interface type='CoreAppModule.Scope.Type' access=internal type='Singleton')))
 """
+    
+    static let implicitTypeBinding = """
+      (struct_decl range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:17:1 - line:22:1] "CoreAppModule" interface type='CoreAppModule.Type' access=internal non-resilient inherits: Module
+        (func_decl range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:18:5 - line:21:5] "configure(binder:)" interface type='(CoreAppModule.Type) -> (Binder<Singleton>) -> ()' access=internal type
+          (parameter "self" interface type='CoreAppModule.Type')
+          (parameter_list
+            (parameter "binder" apiName=binder interface type='Binder<Singleton>') range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:18:26 - line:18:52])
+          (call_expr type='BindingReceipt<A>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:20:21 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:19:9 - line:20:39] nothrow arg_labels=factory:
+            (dot_syntax_call_expr type='(StaticString, Int, StaticString, @escaping ((String, Int)) -> A) -> BindingReceipt<A>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:20:21 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:19:9 - line:20:21] nothrow
+              (declref_expr type='(BaseBindingBuilder<A, Binder<Singleton>>) -> (StaticString, Int, StaticString, @escaping ((String, Int)) -> A) -> BindingReceipt<A>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:20:21 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:20:21 - line:20:21] decl=Cleanse.(file).BindToable extension.to(file:line:function:factory:) [with (substitution_map generic_signature=<Self, P_1, P_2 where Self : BindToable> (substitution Self -> BaseBindingBuilder<A, Binder<Singleton>>) (substitution P_1 -> String) (substitution P_2 -> Int))] function_ref=single)
+              (call_expr type='BaseBindingBuilder<A, Binder<Singleton>>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:20:14 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:19:9 - line:20:19] nothrow arg_labels=
+                (dot_syntax_call_expr type='(A.Type) -> BaseBindingBuilder<A, Binder<Singleton>>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:20:14 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:19:9 - line:20:14] nothrow
+                  (declref_expr type='(Binder<Singleton>) -> (A.Type) -> BaseBindingBuilder<A, Binder<Singleton>>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:20:14 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:20:14 - line:20:14] decl=Cleanse.(file).BinderBase extension.bind [with (substitution_map generic_signature=<Self, Element where Self : BinderBase> (substitution Self -> Binder<Singleton>) (substitution Element -> A))] function_ref=single)
+                  (declref_expr type='Binder<Singleton>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:19:9 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:19:9 - line:19:9] decl=Test.(file).CoreAppModule.configure(binder:).binder@/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:18:27 function_ref=unapplied))
+                (argument_shuffle_expr implicit type='(A.Type)' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:20:18 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:20:18 - line:20:19] tuple_to_scalar elements=[-1] variadic_sources=[] default_args_owner=Cleanse.(file).BinderBase extension.bind [with (substitution_map generic_signature=<Self, Element where Self : BinderBase> (substitution Self -> Binder<Singleton>) (substitution Element -> A))]
+                  (tuple_expr type='()' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:20:18 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:20:18 - line:20:19]))))
+            (argument_shuffle_expr implicit type='(file: StaticString, line: Int, function: StaticString, factory: ((String, Int)) -> A)' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:20:23 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:20:23 - line:20:39] tuple_to_tuple elements=[-3, -3, -3, 0] variadic_sources=[] default_args_owner=Cleanse.(file).BindToable extension.to(file:line:function:factory:) [with (substitution_map generic_signature=<Self, P_1, P_2 where Self : BindToable> (substitution Self -> BaseBindingBuilder<A, Binder<Singleton>>) (substitution P_1 -> String) (substitution P_2 -> Int))]
+              (tuple_expr type='(factory: ((String, Int)) -> A)' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:20:23 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:20:23 - line:20:39] names=factory
+                (function_conversion_expr implicit type='((String, Int)) -> A' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:20:35 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:20:33 - line:20:35]
+                  (constructor_ref_call_expr type='(String, Int) -> A' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:20:35 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:20:33 - line:20:35] nothrow
+                    (declref_expr type='(A.Type) -> (String, Int) -> A' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:20:35 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:20:35 - line:20:35] decl=Test.(file).A.init(string:number:)@/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:12:8 function_ref=unapplied)
+                    (type_expr type='A.Type' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:20:33 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:20:33 - line:20:33] typerepr='A')))))))
+        (constructor_decl implicit range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:17:8 - line:17:8] "init()" interface type='(CoreAppModule.Type) -> () -> CoreAppModule' access=internal designated
+          (parameter "self" interface type='CoreAppModule' inout)
+          (parameter_list)
+          (brace_stmt implicit
+            (return_stmt implicit)))
+        (typealias implicit "Scope" interface type='CoreAppModule.Scope.Type' access=internal type='Singleton')))
+"""
+    /**
+     ````
+     struct AnotherModuke: Cleanse.Module {
+         static func configure(binder: Binder<Unscoped>) {}
+     }
+
+     struct CoreAppModule : Cleanse.Module {
+         static func configure(binder: Binder<Unscoped>) {
+             binder.include(module: AnotherModuke.self)
+         }
+     }
+     ````
+     */
+    static let moduleIncludeFixture = """
+      (struct_decl range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:23:1 - line:29:1] "CoreAppModule" interface type='CoreAppModule.Type' access=internal non-resilient inherits: Module
+        (func_decl range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:24:5 - line:26:5] "configure(binder:)" interface type='(CoreAppModule.Type) -> (Binder<Unscoped>) -> ()' access=internal type
+          (parameter "self" interface type='CoreAppModule.Type')
+          (parameter_list
+            (parameter "binder" apiName=binder interface type='Binder<Unscoped>') range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:24:26 - line:24:51])
+          (call_expr type='()' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:25:16 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:25:9 - line:25:50] nothrow arg_labels=module:
+            (dot_syntax_call_expr type='(AnotherModuke.Type) -> ()' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:25:16 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:25:9 - line:25:16] nothrow
+              (declref_expr type='(Binder<Unscoped>) -> (AnotherModuke.Type) -> ()' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:25:16 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:25:16 - line:25:16] decl=Cleanse.(file).WrappedBinder extension.include(module:) [with (substitution_map generic_signature=<Self, M where Self : WrappedBinder, M : Module, M.Scope == Unscoped> (substitution Self -> Binder<Unscoped>) (substitution M -> AnotherModuke))] function_ref=single)
+              (declref_expr type='Binder<Unscoped>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:25:9 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:25:9 - line:25:9] decl=Test.(file).CoreAppModule.configure(binder:).binder@/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:24:27 function_ref=unapplied))
+            (tuple_expr type='(module: AnotherModuke.Type)' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:25:23 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:25:23 - line:25:50] names=module
+              (dot_self_expr type='AnotherModuke.Type' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:25:32 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:25:32 - line:25:46]
+                (type_expr type='AnotherModuke.Type' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:25:32 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:25:32 - line:25:32] typerepr='AnotherModuke')))))
+        (constructor_decl implicit range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:23:8 - line:23:8] "init()" interface type='(CoreAppModule.Type) -> () -> CoreAppModule' access=internal designated
+          (parameter "self" interface type='CoreAppModule' inout)
+          (parameter_list)
+          (brace_stmt implicit
+            (return_stmt implicit)))
+        (typealias implicit "Scope" interface type='CoreAppModule.Scope.Type' access=internal type='Unscoped')))
+"""
+    
+    /**
+     ````
+     struct Subcomponent: Component {
+         static func configure(binder: Binder<Unscoped>) {
+             
+         }
+         static func configureRoot(binder bind: ReceiptBinder<Int>) -> BindingReceipt<Int> {
+             return bind.to(value: 3)
+         }
+         typealias Root = Int
+     }
+
+     struct CoreAppModule : Cleanse.Module {
+         static func configure(binder: Binder<Unscoped>) {
+             binder.install(dependency: Subcomponent.self)
+         }
+     }
+     ````
+     */
+    static let subcomponentInstallFixture = """
+      (struct_decl range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:27:1 - line:31:1] "CoreAppModule" interface type='CoreAppModule.Type' access=internal non-resilient inherits: Module
+        (func_decl range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:28:5 - line:30:5] "configure(binder:)" interface type='(CoreAppModule.Type) -> (Binder<Unscoped>) -> ()' access=internal type
+          (parameter "self" interface type='CoreAppModule.Type')
+          (parameter_list
+            (parameter "binder" apiName=binder interface type='Binder<Unscoped>') range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:28:26 - line:28:51])
+          (call_expr type='()' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:29:16 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:29:9 - line:29:53] nothrow arg_labels=dependency:
+            (dot_syntax_call_expr type='(Subcomponent.Type) -> ()' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:29:16 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:29:9 - line:29:16] nothrow
+              (declref_expr type='(Binder<Unscoped>) -> (Subcomponent.Type) -> ()' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:29:16 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:29:16 - line:29:16] decl=Cleanse.(file).WrappedBinder extension.install(dependency:) [with (substitution_map generic_signature=<Self, C where Self : WrappedBinder, C : Component> (substitution Self -> Binder<Unscoped>) (substitution C -> Subcomponent))] function_ref=single)
+              (declref_expr type='Binder<Unscoped>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:29:9 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:29:9 - line:29:9] decl=Test.(file).CoreAppModule.configure(binder:).binder@/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:28:27 function_ref=unapplied))
+            (tuple_expr type='(dependency: Subcomponent.Type)' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:29:23 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:29:23 - line:29:53] names=dependency
+              (dot_self_expr type='Subcomponent.Type' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:29:36 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:29:36 - line:29:49]
+                (type_expr type='Subcomponent.Type' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:29:36 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:29:36 - line:29:36] typerepr='Subcomponent')))))
+        (constructor_decl implicit range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:27:8 - line:27:8] "init()" interface type='(CoreAppModule.Type) -> () -> CoreAppModule' access=internal designated
+          (parameter "self" interface type='CoreAppModule' inout)
+          (parameter_list)
+          (brace_stmt implicit
+            (return_stmt implicit)))
+        (typealias implicit "Scope" interface type='CoreAppModule.Scope.Type' access=internal type='Unscoped')))
+"""
+
 }

@@ -1,57 +1,15 @@
 //
-//  ModuleVisitor.swift
+//  BindingVisitor.swift
 //  cleasec
 //
-//  Created by Sebastian Edward Shanus on 4/21/20.
+//  Created by Sebastian Edward Shanus on 4/22/20.
 //  Copyright © 2020 Square, Inc. All rights reserved.
 //
 
 import Foundation
 import swift_ast_parser
-
-struct ModuleVisitor: SyntaxVisitor {
-    let name: String
-    var providers: [Provider] = []
-    
-    mutating func visit(node: CallExpr) {
-        if let type = node.type.firstCapture(pattern: "BindingReceipt<(.*)>") {
-            var bindingVisitor = DeclVisitor(type: type)
-            bindingVisitor.walk(node)
-            switch bindingVisitor.binding {
-            case .provider:
-                var innerType: String? = nil
-                var innerTag: String? = nil
-                var innerScope: String? = nil
-                bindingVisitor.bindings.forEach { b in
-                    switch b {
-                    case .provider:
-                        innerType = type
-                    case .taggedProvider(let tag):
-                        innerTag = tag
-                    case .scopedProvider(let scope):
-                        innerScope = scope
-                    }
-                }
-                guard let finalType = innerType else {
-                    print("Found type but couldn't discern BaseBindingBuilder")
-                    return
-                }
-                providers.append(Provider(
-                    type: finalType,
-                    dependencies: bindingVisitor.dependencies,
-                    tag: innerTag,
-                    scoped: innerScope)
-                )
-            default:
-                // TODO
-                break
-            }
-        }
-    }
-}
-
-
-fileprivate struct DeclVisitor: SyntaxVisitor {
+ 
+struct BindingVisitor: SyntaxVisitor {
     enum Binding {
         case provider
         case taggedProvider(tag: String)
@@ -60,7 +18,6 @@ fileprivate struct DeclVisitor: SyntaxVisitor {
     
     enum BindingType {
         case unknown
-        case dangling
         case reference
         case provider
     }
@@ -102,7 +59,7 @@ fileprivate struct DeclVisitor: SyntaxVisitor {
             dependencies = node.raw.allCaptures(pattern: #"substitution\sP_[\d]\s->\s(\w+)\)"#)
             binding = .provider
         case .configure:
-            binding = .dangling
+            binding = .reference
         }
     }
     

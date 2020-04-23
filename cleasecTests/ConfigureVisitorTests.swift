@@ -1,18 +1,10 @@
-//
-//  ModuleVisitorTests.swift
-//  cleasecTests
-//
-//  Created by Sebastian Edward Shanus on 4/21/20.
-//  Copyright © 2020 Square, Inc. All rights reserved.
-//
-
 import Foundation
 import swift_ast_parser
 @testable import cleasec
 import XCTest
 
-class ModuleVisitorTests: XCTestCase {
-    var moduleVisitor = ModuleVisitor(name: "Test")
+class ConfigureVisitorTests: XCTestCase {
+    var moduleVisitor = ConfigureVisitor()
     
     func testNormalBinding() {
         let node = NodeSyntaxParser.parse(text: ModuleFixtures.simpleModuleBinding).first!
@@ -42,5 +34,28 @@ class ModuleVisitorTests: XCTestCase {
         XCTAssertEqual(moduleVisitor.providers.first!.tag, "MyTag")
         XCTAssertEqual(moduleVisitor.providers.first!.scoped, "Singleton")
     }
-
+    
+    func testModuleWithImplicitType() {
+        let node = NodeSyntaxParser.parse(text: ModuleFixtures.implicitTypeBinding).first!
+        moduleVisitor.walk(node)
+        XCTAssertEqual(moduleVisitor.providers.count, 1)
+        XCTAssertEqual(moduleVisitor.providers.first!.type, "A")
+        XCTAssertEqual(moduleVisitor.providers.first!.dependencies, ["String", "Int"])
+    }
+    
+    func testModuleInclude() {
+        let node = NodeSyntaxParser.parse(text: ModuleFixtures.moduleIncludeFixture).first!
+        moduleVisitor.walk(node)
+        XCTAssertEqual(moduleVisitor.providers.count, 0)
+        XCTAssertEqual(moduleVisitor.includedModules.count, 1)
+        XCTAssertEqual(moduleVisitor.includedModules, ["AnotherModuke"])
+    }
+    
+    func testInstallSubcomponent() {
+        let node = NodeSyntaxParser.parse(text: ModuleFixtures.subcomponentInstallFixture).first!
+        moduleVisitor.walk(node)
+        XCTAssertEqual(moduleVisitor.providers.count, 0)
+        XCTAssertEqual(moduleVisitor.subcomponents.count, 1)
+        XCTAssertEqual(moduleVisitor.subcomponents, ["Subcomponent"])
+    }
 }
