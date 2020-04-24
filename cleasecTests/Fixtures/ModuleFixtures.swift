@@ -432,5 +432,43 @@ struct ModuleFixtures {
             (return_stmt implicit)))
         (typealias implicit "Scope" interface type='CoreAppModule.Scope.Type' access=internal type='Unscoped')))
 """
+    
+    
+    /**
+     ````
+     struct Blah {
+         struct Module: Cleanse.Module {
+             static func configure(binder: Binder<Unscoped>) {
+                 
+             }
+         }
+     }
+     
+     ````
+     */
+    static let nestedModuleFixture = """
+
+(source_file "/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift"
+  (import_decl range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:9:1 - line:9:8] 'Foundation')
+  (import_decl range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:10:1 - line:10:8] 'Cleanse')
+  (struct_decl range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:12:1 - line:18:1] "Blah" interface type='Blah.Type' access=internal non-resilient
+    (struct_decl range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:13:5 - line:17:5] "Module" interface type='Blah.Module.Type' access=internal non-resilient inherits: Module
+      (func_decl range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:14:9 - line:16:9] "configure(binder:)" interface type='(Blah.Module.Type) -> (Binder<Unscoped>) -> ()' access=internal type
+        (parameter "self" interface type='Blah.Module.Type')
+        (parameter_list
+          (parameter "binder" apiName=binder interface type='Binder<Unscoped>') range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:14:30 - line:14:55])
+        (brace_stmt range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:14:57 - line:16:9]))
+      (constructor_decl implicit range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:13:12 - line:13:12] "init()" interface type='(Blah.Module.Type) -> () -> Blah.Module' access=internal designated
+        (parameter "self" interface type='Blah.Module' inout)
+        (parameter_list)
+        (brace_stmt implicit
+          (return_stmt implicit)))
+      (typealias implicit "Scope" interface type='Blah.Module.Scope.Type' access=internal type='Unscoped'))
+    (constructor_decl implicit range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:12:8 - line:12:8] "init()" interface type='(Blah.Type) -> () -> Blah' access=internal designated
+      (parameter "self" interface type='Blah' inout)
+      (parameter_list)
+      (brace_stmt implicit
+        (return_stmt implicit)))))
+"""
 
 }

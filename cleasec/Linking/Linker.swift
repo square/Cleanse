@@ -40,8 +40,6 @@ public struct Linker {
             dict[provider.reference] = provider
         }
         
-        
-        
         let linkedComponents = files.flatMap { $0.components }.map { component -> LinkedComponent in
             let linkedProviders = link(
                 referenceProviders: component.referenceProviders,

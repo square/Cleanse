@@ -53,4 +53,11 @@ class FileVisitorTests: XCTestCase {
         XCTAssertEqual(visitor.components.first!.rootType, "Int")
         XCTAssertEqual(visitor.components.first!.providers, [StandardProvider(type: "Int", dependencies: [], tag: nil, scoped: nil, collectionType: nil)])
     }
+    
+    func testNestedModule() {
+        let node = NodeSyntaxParser.parse(text: ModuleFixtures.nestedModuleFixture).first!
+        visitor.walk(node)
+        XCTAssertEqual(visitor.modules.count, 1)
+        XCTAssertEqual(visitor.modules.first!.type, "Blah.Module")
+    }
 }

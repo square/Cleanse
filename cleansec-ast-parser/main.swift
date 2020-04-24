@@ -12,28 +12,11 @@ import cleasec
 
 func main() {
     let interface = Cleansec.analyze(text: sample_text, searchNodes: [])
-    interface.components.forEach { (component) in
-        print("COMPONENT: \(component.type)")
-        print("--\nProviders")
-        component.providers.forEach { (provider) in
-            print("Provider: \(provider.type) -> \(provider.dependencies)")
-        }
-        print("--\nIncluded Modules")
-        print(component.includedModules)
-        print("--\nIncluded Subcomponents")
-        print(component.subcomponents)
-    }
     
-    interface.modules.forEach { (module) in
-        print("Module: \(module.type)")
-        print("--\nProviders")
-        module.providers.forEach { (provider) in
-            print("Provider: \(provider.type) -> \(provider.dependencies)")
-        }
-        print("--\nIncluded Modules")
-        print(module.includedModules)
-        print("--\nIncluded Subcomponents")
-        print(module.subcomponents)
+    let rootComponents = interface.components.filter { $0.isRoot }
+    rootComponents.forEach { (root) in
+        let resolvedComponent = Resolver.resolve(rootComponent: root, in: interface)
+        print(resolvedComponent)
     }
 }
 

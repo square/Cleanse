@@ -119,7 +119,7 @@ public struct FileVisitor: SyntaxVisitor {
     }
     
     private func isModule(_ node: InheritableSyntax) -> String? {
-        guard let _ = node.inherits, let moduleName = node.raw.firstCapture(pattern: #"\"(\w+)\""#) else {
+        guard let _ = node.inherits, let moduleName = node.raw.firstCapture(pattern: #"interface type='(.*)\.Type'"#) else {
             return nil
         }
         var typeVisitor = CleanseTypeVisitor()
@@ -142,7 +142,7 @@ public struct FileVisitor: SyntaxVisitor {
     }
     
     private func isComponent(_ node: InheritableSyntax) -> ComponentType? {
-        guard let inherits = node.inherits, let componentName = node.raw.firstCapture(pattern: #"\"(\w+)\""#) else {
+        guard let inherits = node.inherits, let componentName = node.raw.firstCapture(pattern: #"interface type='(.*)\.Type'"#) else {
             return nil
         }
         if inherits.contains(pattern: "(Cleanse.)?RootComponent") {
