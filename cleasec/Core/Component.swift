@@ -8,12 +8,7 @@
 
 import Foundation
 
-public struct ModuleOutput {
-    public let modules: [Module]
-    public let components: [Component]
-}
-
-public struct Component: CustomStringConvertible {
+public struct Component {
     public let type: String
     public let rootType: String
     public let providers: [StandardProvider]
@@ -23,8 +18,4 @@ public struct Component: CustomStringConvertible {
     public let includedModules: [String]
     public let subcomponents: [String]
     public let isRoot: Bool
-    
-    public var description: String {
-        "Component:\(type)\n  \(providers)\n  \(danglingProviders)\n  \(referenceProviders)\n--\nincludedModules:\(includedModules)\nsubcomponets:\(subcomponents)"
-    }
 }
