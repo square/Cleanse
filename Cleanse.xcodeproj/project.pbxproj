@@ -391,6 +391,7 @@
 		DC1F567D244F9C1E00CCFDD5 /* cleasec */ = {
 			isa = PBXGroup;
 			children = (
+				DC5938022453464000D70652 /* Resolver */,
 				DC5937FF245246C400D70652 /* Linking */,
 				DC1F56D3244FAE1400CCFDD5 /* Core */,
 				DC1F5696244F9C4900CCFDD5 /* Visitors */,
@@ -464,6 +465,13 @@
 				DC593800245246D400D70652 /* Linker.swift */,
 			);
 			path = Linking;
+			sourceTree = "<group>";
+		};
+		DC5938022453464000D70652 /* Resolver */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Resolver;
 			sourceTree = "<group>";
 		};
 		DCE9317523220C5800C0522F /* Assisted Inject */ = {

@@ -85,7 +85,9 @@ public struct FileVisitor: SyntaxVisitor {
                 type: dangling.type,
                 dependencies: dangling.dependencies,
                 tag: nil,
-                scoped: nil))
+                scoped: nil,
+                collectionType: nil)
+            )
         case .reference(let reference):
             rootType = reference.type
             referenceProviders.append(reference)

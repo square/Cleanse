@@ -29,6 +29,7 @@ struct ConfigureVisitor: SyntaxVisitor {
             var innerType: String? = nil
             var innerTag: String? = nil
             var innerScope: String? = nil
+            var innerCollectionType: String? = nil
             bindingVisitor.bindings.forEach { b in
                 switch b {
                 case .provider:
@@ -37,6 +38,9 @@ struct ConfigureVisitor: SyntaxVisitor {
                     innerTag = tag
                 case .scopedProvider(let scope):
                     innerScope = scope
+                case .collectionProvider(let singular):
+                    let collectionType = singular ? "[\(type)]" : type
+                    innerCollectionType = collectionType
                 }
             }
             
@@ -47,7 +51,8 @@ struct ConfigureVisitor: SyntaxVisitor {
                         type: finalType,
                         dependencies: bindingVisitor.dependencies,
                         tag: innerTag,
-                        scoped: innerScope)
+                        scoped: innerScope,
+                        collectionType: innerCollectionType)
                     )
                 } else {
                     var receiptBinderVisitor = ReceiptBinderVisitor(type: type)
@@ -72,13 +77,15 @@ struct ConfigureVisitor: SyntaxVisitor {
                         type: provider.type,
                         dependencies: provider.dependencies,
                         tag: innerTag,
-                        scoped: innerScope)
+                        scoped: innerScope,
+                        collectionType: innerCollectionType)
                     )
                 case .reference(let reference):
                     referenceProviders.append(ReferenceProvider(
                         type: type,
                         tag: innerTag,
                         scoped: innerScope,
+                        collectionType: innerCollectionType,
                         reference: reference)
                     )
                 case .unknown:

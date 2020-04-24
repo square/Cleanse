@@ -28,7 +28,9 @@ struct ReferenceVisitor: SyntaxVisitor {
                 type: type,
                 dependencies: bindingVisitor.dependencies,
                 tag: nil,
-                scoped: nil))
+                scoped: nil,
+                collectionType: nil)
+            )
         default:
             break
         }

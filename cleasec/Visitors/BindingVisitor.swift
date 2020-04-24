@@ -14,6 +14,7 @@ struct BindingVisitor: SyntaxVisitor {
         case provider
         case taggedProvider(tag: String)
         case scopedProvider(scope: String)
+        case collectionProvider(isSingular: Bool)
     }
     
     enum BindingType {
@@ -27,6 +28,8 @@ struct BindingVisitor: SyntaxVisitor {
         case scopedProvider = "ScopedBindingDecorator"
         case propertyInjector = "PropertyInjectorBindingBuilder"
         case assistedInjectionProvider = "AssistedInjectionSeedDecorator"
+        case singularCollectionProvider = "SingularCollectionBindingBuilderDecorator"
+        case collectionProvider = "CollectionBindingBuilderDecorator"
     }
     
     private enum BindingAPI: String, CaseIterable {
@@ -84,6 +87,10 @@ struct BindingVisitor: SyntaxVisitor {
         switch baseBindingType {
         case .provider, .propertyInjector, .assistedInjectionProvider:
             bindings.append(.provider)
+        case .singularCollectionProvider:
+            bindings.append(.collectionProvider(isSingular: true))
+        case .collectionProvider:
+            bindings.append(.collectionProvider(isSingular: false))
         case .taggedProvider:
             if let tag = node.type.allCaptures(pattern: #"(\w+)(?=>)"#).last {
                 bindings.append(.taggedProvider(tag: tag))

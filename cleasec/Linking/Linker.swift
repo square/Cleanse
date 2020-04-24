@@ -89,7 +89,8 @@ public struct Linker {
                 type: referenceProvider.type,
                 dependencies: linked.dependencies,
                 tag: referenceProvider.tag,
-                scoped: referenceProvider.scoped
+                scoped: referenceProvider.scoped,
+                collectionType: referenceProvider.collectionType
             )
         }
     }

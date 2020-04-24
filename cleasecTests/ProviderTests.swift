@@ -51,7 +51,7 @@ class ProviderTests: XCTestCase {
         let node = NodeSyntaxParser.parse(text: ProviderFixtures.assistedFactoryProviderFixture).first!
         configureVisitor.walk(node)
         XCTAssertEqual(configureVisitor.providers.count, 1)
-        XCTAssertEqual(configureVisitor.providers.first!, StandardProvider(type: "Factory<AssistedSeed>", dependencies: ["String"], tag: nil, scoped: nil))
+        XCTAssertEqual(configureVisitor.providers.first!, StandardProvider(type: "Factory<AssistedSeed>", dependencies: ["String"], tag: nil, scoped: nil, collectionType: nil))
     }
     
     func testTaggedProviderDependency() {
@@ -59,5 +59,24 @@ class ProviderTests: XCTestCase {
         configureVisitor.walk(node)
         XCTAssertEqual(configureVisitor.providers.count, 1)
         XCTAssertEqual(configureVisitor.providers.first!.dependencies, ["TaggedProvider<MyTag>"])
+    }
+    
+    func testCollectionBindings() {
+        let node = NodeSyntaxParser.parse(text: ProviderFixtures.collectionBindingsFixture).first!
+        configureVisitor.walk(node)
+        XCTAssertEqual(configureVisitor.providers.count, 5)
+        XCTAssertEqual(configureVisitor.providers[0].dependencies, ["[Int]"])
+        XCTAssertEqual(configureVisitor.providers[1].dependencies, ["[[Int]]"])
+        XCTAssertEqual(configureVisitor.providers[2].collectionType, "[Int]")
+        XCTAssertEqual(configureVisitor.providers[3].collectionType, "[Int]")
+        XCTAssertEqual(configureVisitor.providers[4].collectionType, "[[Int]]")
+    }
+    
+    func testDecoratedReferenceProvider() {
+        let node = NodeSyntaxParser.parse(text: ProviderFixtures.decoratedReferenceProviderFixture).first!
+        configureVisitor.walk(node)
+        XCTAssertEqual(configureVisitor.referenceProviders.count, 2)
+        XCTAssertEqual(configureVisitor.referenceProviders.first!.scoped, "Singleton")
+        XCTAssertEqual(configureVisitor.referenceProviders[1].tag, "ATag")
     }
 }

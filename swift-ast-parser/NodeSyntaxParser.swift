@@ -45,7 +45,7 @@ struct InputSanitizer {
         let firstSplitString = String(firstSplit)
         if text.whitespaceIndentCount == 0 && firstSplitString.starts(with: "(source_file") {
             return true
-        } else if firstSplitString.starts(with: "(") && firstSplitString.firstCapture(pattern: #"\((\w+)"#) != nil {
+        } else if firstSplitString.starts(with: "(") && firstSplitString.firstCapture(pattern: #"\((\w+)"#) != nil && text.whitespaceIndentCount > 0 {
             return true
         } else {
             return false

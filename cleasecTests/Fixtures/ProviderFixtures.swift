@@ -572,4 +572,338 @@ struct ProviderFixtures {
         (return_stmt implicit)))
     (typealias implicit "Scope" interface type='AModule.Scope.Type' access=internal type='Unscoped')))
 """
+    
+    /**
+     ````
+     struct A {
+         let a: Array<Int>
+     }
+
+     struct AModule: Module {
+         static func configure(binder: Binder<Unscoped>) {
+             binder.bind(A.self).to { (a:Array<Int>) -> A in
+                 return A(a: a)
+             }
+             
+             binder.bind(A.self).to { (a: [ [Int] ]) -> A in
+                 return A(a: a.first!)
+             }
+             
+             binder
+                 .bind(Int.self)
+                 .intoCollection()
+                 .to(value: 5)
+             
+             binder
+                 .bind(Int.self)
+                 .intoCollection()
+                 .to(value: [1,2,3])
+             
+             binder
+                 .bind([Int].self)
+                 .intoCollection()
+                 .to(value: [2])
+         }
+     }
+
+     ````
+     */
+    static let collectionBindingsFixture = """
+(source_file "/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift"
+  (import_decl range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:9:1 - line:9:8] 'Foundation')
+  (import_decl range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:10:1 - line:10:8] 'Cleanse')
+  (struct_decl range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:12:1 - line:14:1] "A" interface type='A.Type' access=internal non-resilient
+    (pattern_binding_decl range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:13:5 - line:13:21]
+      (pattern_typed type='Array<Int>'
+        (pattern_named type='Array<Int>' 'a')
+        (type_ident
+          (component id='Array' bind=Swift.(file).Array)
+            (type_ident
+              (component id='Int' bind=Swift.(file).Int)))))
+    (var_decl range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:13:9 - line:13:9] "a" type='Array<Int>' interface type='Array<Int>' access=internal let readImpl=stored immutable
+      (accessor_decl implicit range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:13:9 - line:13:9] 'anonname=0x7fc966877180' interface type='(A) -> () -> Array<Int>' access=internal get_for=a
+        (parameter "self" interface type='A')
+        (parameter_list)
+        (brace_stmt implicit range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:13:9 - line:13:9]
+          (return_stmt implicit
+            (member_ref_expr implicit type='Array<Int>' decl=Test.(file).A.a@/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:13:9 direct_to_storage
+              (declref_expr implicit type='A' decl=Test.(file).A.<anonymous>.self@/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:13:9 function_ref=unapplied))))))
+    (accessor_decl implicit range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:13:9 - line:13:9] 'anonname=0x7fc966877180' interface type='(A) -> () -> Array<Int>' access=internal get_for=a
+      (parameter "self" interface type='A')
+      (parameter_list)
+      (brace_stmt implicit range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:13:9 - line:13:9]
+        (return_stmt implicit
+          (member_ref_expr implicit type='Array<Int>' decl=Test.(file).A.a@/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:13:9 direct_to_storage
+            (declref_expr implicit type='A' decl=Test.(file).A.<anonymous>.self@/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:13:9 function_ref=unapplied)))))
+    (constructor_decl implicit range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:12:8 - line:12:8] "init(a:)" interface type='(A.Type) -> (Array<Int>) -> A' access=internal designated
+      (parameter "self" interface type='A' inout)
+      (parameter_list
+        (parameter "a" apiName=a interface type='Array<Int>') range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:12:8 - line:12:8])))
+  (struct_decl range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:16:1 - line:41:1] "AModule" interface type='AModule.Type' access=internal non-resilient inherits: Module
+    (func_decl range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:17:5 - line:40:5] "configure(binder:)" interface type='(AModule.Type) -> (Binder<Unscoped>) -> ()' access=internal type
+      (parameter "self" interface type='AModule.Type')
+      (parameter_list
+        (parameter "binder" apiName=binder interface type='Binder<Unscoped>') range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:17:26 - line:17:51])
+      (brace_stmt range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:17:53 - line:40:5]
+        (call_expr type='BindingReceipt<A>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:18:29 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:18:9 - line:20:9] nothrow arg_labels=_:
+          (dot_syntax_call_expr type='(StaticString, Int, StaticString, @escaping (([Int])) -> A) -> BindingReceipt<A>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:18:29 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:18:9 - line:18:29] nothrow
+            (declref_expr type='(BaseBindingBuilder<A, Binder<Unscoped>>) -> (StaticString, Int, StaticString, @escaping (([Int])) -> A) -> BindingReceipt<A>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:18:29 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:18:29 - line:18:29] decl=Cleanse.(file).BindToable extension.to(file:line:function:factory:) [with (substitution_map generic_signature=<Self, P_1 where Self : BindToable> (substitution Self -> BaseBindingBuilder<A, Binder<Unscoped>>) (substitution P_1 -> [Int]))] function_ref=single)
+            (call_expr type='BaseBindingBuilder<A, Binder<Unscoped>>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:18:16 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:18:9 - line:18:27] nothrow arg_labels=_:
+              (dot_syntax_call_expr type='(A.Type) -> BaseBindingBuilder<A, Binder<Unscoped>>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:18:16 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:18:9 - line:18:16] nothrow
+                (declref_expr type='(Binder<Unscoped>) -> (A.Type) -> BaseBindingBuilder<A, Binder<Unscoped>>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:18:16 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:18:16 - line:18:16] decl=Cleanse.(file).BinderBase extension.bind [with (substitution_map generic_signature=<Self, Element where Self : BinderBase> (substitution Self -> Binder<Unscoped>) (substitution Element -> A))] function_ref=single)
+                (declref_expr type='Binder<Unscoped>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:18:9 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:18:9 - line:18:9] decl=Test.(file).AModule.configure(binder:).binder@/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:17:27 function_ref=unapplied))
+              (paren_expr type='(A.Type)' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:18:21 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:18:20 - line:18:27]
+                (dot_self_expr type='A.Type' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:18:21 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:18:21 - line:18:23]
+                  (type_expr type='A.Type' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:18:21 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:18:21 - line:18:21] typerepr='A')))))
+          (argument_shuffle_expr implicit type='(file: StaticString, line: Int, function: StaticString, factory: (([Int])) -> A)' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:18:32 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:18:32 - line:20:9] scalar_to_tuple elements=[-3, -3, -3, 0] variadic_sources=[] default_args_owner=Cleanse.(file).BindToable extension.to(file:line:function:factory:) [with (substitution_map generic_signature=<Self, P_1 where Self : BindToable> (substitution Self -> BaseBindingBuilder<A, Binder<Unscoped>>) (substitution P_1 -> [Int]))]
+            (paren_expr type='((([Int])) -> A)' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:18:32 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:18:32 - line:20:9] trailing-closure
+              (closure_expr type='(Array<Int>) -> A' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:18:32 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:18:32 - line:20:9] discriminator=0 escaping single-expression
+                (parameter_list
+                  (parameter "a" type='Array<Int>' interface type='Array<Int>') range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:18:34 - line:18:47])
+                (call_expr type='A' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:19:20 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:19:20 - line:19:26] nothrow arg_labels=a:
+                  (constructor_ref_call_expr type='(Array<Int>) -> A' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:19:20 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:19:20 - line:19:20] nothrow
+                    (declref_expr implicit type='(A.Type) -> (Array<Int>) -> A' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:19:20 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:19:20 - line:19:20] decl=Test.(file).A.init(a:)@/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:12:8 function_ref=single)
+                    (type_expr type='A.Type' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:19:20 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:19:20 - line:19:20] typerepr='A'))
+                  (tuple_expr type='(a: Array<Int>)' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:19:21 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:19:21 - line:19:26] names=a
+                    (declref_expr type='Array<Int>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:19:25 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:19:25 - line:19:25] decl=Test.(file).AModule.configure(binder:).explicit closure discriminator=0.a@/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:18:35 function_ref=unapplied)))))))
+        (call_expr type='BindingReceipt<A>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:22:29 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:22:9 - line:24:9] nothrow arg_labels=_:
+          (dot_syntax_call_expr type='(StaticString, Int, StaticString, @escaping (([[Int]])) -> A) -> BindingReceipt<A>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:22:29 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:22:9 - line:22:29] nothrow
+            (declref_expr type='(BaseBindingBuilder<A, Binder<Unscoped>>) -> (StaticString, Int, StaticString, @escaping (([[Int]])) -> A) -> BindingReceipt<A>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:22:29 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:22:29 - line:22:29] decl=Cleanse.(file).BindToable extension.to(file:line:function:factory:) [with (substitution_map generic_signature=<Self, P_1 where Self : BindToable> (substitution Self -> BaseBindingBuilder<A, Binder<Unscoped>>) (substitution P_1 -> [[Int]]))] function_ref=single)
+            (call_expr type='BaseBindingBuilder<A, Binder<Unscoped>>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:22:16 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:22:9 - line:22:27] nothrow arg_labels=_:
+              (dot_syntax_call_expr type='(A.Type) -> BaseBindingBuilder<A, Binder<Unscoped>>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:22:16 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:22:9 - line:22:16] nothrow
+                (declref_expr type='(Binder<Unscoped>) -> (A.Type) -> BaseBindingBuilder<A, Binder<Unscoped>>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:22:16 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:22:16 - line:22:16] decl=Cleanse.(file).BinderBase extension.bind [with (substitution_map generic_signature=<Self, Element where Self : BinderBase> (substitution Self -> Binder<Unscoped>) (substitution Element -> A))] function_ref=single)
+                (declref_expr type='Binder<Unscoped>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:22:9 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:22:9 - line:22:9] decl=Test.(file).AModule.configure(binder:).binder@/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:17:27 function_ref=unapplied))
+              (paren_expr type='(A.Type)' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:22:21 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:22:20 - line:22:27]
+                (dot_self_expr type='A.Type' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:22:21 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:22:21 - line:22:23]
+                  (type_expr type='A.Type' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:22:21 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:22:21 - line:22:21] typerepr='A')))))
+          (argument_shuffle_expr implicit type='(file: StaticString, line: Int, function: StaticString, factory: (([[Int]])) -> A)' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:22:32 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:22:32 - line:24:9] scalar_to_tuple elements=[-3, -3, -3, 0] variadic_sources=[] default_args_owner=Cleanse.(file).BindToable extension.to(file:line:function:factory:) [with (substitution_map generic_signature=<Self, P_1 where Self : BindToable> (substitution Self -> BaseBindingBuilder<A, Binder<Unscoped>>) (substitution P_1 -> [[Int]]))]
+            (paren_expr type='((([[Int]])) -> A)' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:22:32 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:22:32 - line:24:9] trailing-closure
+              (closure_expr type='([[Int]]) -> A' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:22:32 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:22:32 - line:24:9] discriminator=1 escaping single-expression
+                (parameter_list
+                  (parameter "a" type='[[Int]]' interface type='[[Int]]') range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:22:34 - line:22:47])
+                (call_expr type='A' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:23:20 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:23:20 - line:23:33] nothrow arg_labels=a:
+                  (constructor_ref_call_expr type='(Array<Int>) -> A' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:23:20 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:23:20 - line:23:20] nothrow
+                    (declref_expr implicit type='(A.Type) -> (Array<Int>) -> A' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:23:20 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:23:20 - line:23:20] decl=Test.(file).A.init(a:)@/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:12:8 function_ref=single)
+                    (type_expr type='A.Type' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:23:20 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:23:20 - line:23:20] typerepr='A'))
+                  (tuple_expr type='(a: [Int])' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:23:21 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:23:21 - line:23:33] names=a
+                    (force_value_expr type='[Int]' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:23:32 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:23:25 - line:23:32]
+                      (member_ref_expr type='[Int]?' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:23:27 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:23:25 - line:23:27] decl=Swift.(file).Collection extension.first [with (substitution_map generic_signature=<Self where Self : Collection> (substitution Self -> [[Int]]))]
+                        (declref_expr type='[[Int]]' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:23:25 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:23:25 - line:23:25] decl=Test.(file).AModule.configure(binder:).explicit closure discriminator=1.a@/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:22:35 function_ref=unapplied)))))))))
+        (call_expr type='BindingReceipt<Int>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:29:14 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:26:9 - line:29:25] nothrow arg_labels=value:
+          (dot_syntax_call_expr type='(Int, StaticString, Int, StaticString) -> BindingReceipt<Int>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:29:14 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:26:9 - line:29:14] nothrow
+            (declref_expr type='(SingularCollectionBindingBuilderDecorator<BaseBindingBuilder<Int, Binder<Unscoped>>>) -> (Int, StaticString, Int, StaticString) -> BindingReceipt<Int>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:29:14 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:29:14 - line:29:14] decl=Cleanse.(file).BindToable extension.to(value:file:line:function:) [with (substitution_map generic_signature=<Self where Self : BindToable> (substitution Self -> SingularCollectionBindingBuilderDecorator<BaseBindingBuilder<Int, Binder<Unscoped>>>))] function_ref=single)
+            (call_expr type='SingularCollectionBindingBuilderDecorator<BaseBindingBuilder<Int, Binder<Unscoped>>>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:28:14 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:26:9 - line:28:29] nothrow arg_labels=
+              (dot_syntax_call_expr type='() -> SingularCollectionBindingBuilderDecorator<BaseBindingBuilder<Int, Binder<Unscoped>>>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:28:14 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:26:9 - line:28:14] nothrow
+                (declref_expr type='(BaseBindingBuilder<Int, Binder<Unscoped>>) -> () -> SingularCollectionBindingBuilderDecorator<BaseBindingBuilder<Int, Binder<Unscoped>>>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:28:14 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:28:14 - line:28:14] decl=Cleanse.(file).BindingBuilder extension.intoCollection() [with (substitution_map generic_signature=<Self where Self : BindingBuilder, Self.CollectionOrUnique == _UniqueBinding, Self.FinalProvider : _StandardProvider, Self.MaybeScope == Unscoped> (substitution Self -> BaseBindingBuilder<Int, Binder<Unscoped>>))] function_ref=single)
+                (call_expr type='BaseBindingBuilder<Int, Binder<Unscoped>>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:27:14 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:26:9 - line:27:27] nothrow arg_labels=_:
+                  (dot_syntax_call_expr type='(Int.Type) -> BaseBindingBuilder<Int, Binder<Unscoped>>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:27:14 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:26:9 - line:27:14] nothrow
+                    (declref_expr type='(Binder<Unscoped>) -> (Int.Type) -> BaseBindingBuilder<Int, Binder<Unscoped>>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:27:14 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:27:14 - line:27:14] decl=Cleanse.(file).BinderBase extension.bind [with (substitution_map generic_signature=<Self, Element where Self : BinderBase> (substitution Self -> Binder<Unscoped>) (substitution Element -> Int))] function_ref=single)
+                    (declref_expr type='Binder<Unscoped>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:26:9 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:26:9 - line:26:9] decl=Test.(file).AModule.configure(binder:).binder@/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:17:27 function_ref=unapplied))
+                  (paren_expr type='(Int.Type)' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:27:19 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:27:18 - line:27:27]
+                    (dot_self_expr type='Int.Type' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:27:19 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:27:19 - line:27:23]
+                      (type_expr type='Int.Type' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:27:19 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:27:19 - line:27:19] typerepr='Int')))))
+              (tuple_expr type='()' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:28:28 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:28:28 - line:28:29])))
+          (argument_shuffle_expr implicit type='(value: Int, file: StaticString, line: Int, function: StaticString)' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:29:16 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:29:16 - line:29:25] tuple_to_tuple elements=[0, -3, -3, -3] variadic_sources=[] default_args_owner=Cleanse.(file).BindToable extension.to(value:file:line:function:) [with (substitution_map generic_signature=<Self where Self : BindToable> (substitution Self -> SingularCollectionBindingBuilderDecorator<BaseBindingBuilder<Int, Binder<Unscoped>>>))]
+            (tuple_expr type='(value: Int)' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:29:16 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:29:16 - line:29:25] names=value
+              (integer_literal_expr type='Int' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:29:24 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:29:24 - line:29:24] value=5 builtin_initializer=Swift.(file).Int.init(_builtinIntegerLiteral:) initializer=**NULL**))))
+        (call_expr type='BindingReceipt<[Int]>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:34:14 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:31:9 - line:34:31] nothrow arg_labels=value:
+          (dot_syntax_call_expr type='([Int], StaticString, Int, StaticString) -> BindingReceipt<[Int]>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:34:14 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:31:9 - line:34:14] nothrow
+            (declref_expr type='(CollectionBindingBuilderDecorator<BaseBindingBuilder<Int, Binder<Unscoped>>>) -> ([Int], StaticString, Int, StaticString) -> BindingReceipt<[Int]>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:34:14 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:34:14 - line:34:14] decl=Cleanse.(file).BindToable extension.to(value:file:line:function:) [with (substitution_map generic_signature=<Self where Self : BindToable> (substitution Self -> CollectionBindingBuilderDecorator<BaseBindingBuilder<Int, Binder<Unscoped>>>))] function_ref=single)
+            (call_expr type='CollectionBindingBuilderDecorator<BaseBindingBuilder<Int, Binder<Unscoped>>>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:33:14 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:31:9 - line:33:29] nothrow arg_labels=
+              (dot_syntax_call_expr type='() -> CollectionBindingBuilderDecorator<BaseBindingBuilder<Int, Binder<Unscoped>>>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:33:14 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:31:9 - line:33:14] nothrow
+                (declref_expr type='(BaseBindingBuilder<Int, Binder<Unscoped>>) -> () -> CollectionBindingBuilderDecorator<BaseBindingBuilder<Int, Binder<Unscoped>>>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:33:14 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:33:14 - line:33:14] decl=Cleanse.(file).BindingBuilder extension.intoCollection() [with (substitution_map generic_signature=<Self where Self : BindingBuilder, Self.CollectionOrUnique == _UniqueBinding, Self.FinalProvider : _StandardProvider, Self.MaybeScope == Unscoped> (substitution Self -> BaseBindingBuilder<Int, Binder<Unscoped>>))] function_ref=single)
+                (call_expr type='BaseBindingBuilder<Int, Binder<Unscoped>>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:32:14 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:31:9 - line:32:27] nothrow arg_labels=_:
+                  (dot_syntax_call_expr type='(Int.Type) -> BaseBindingBuilder<Int, Binder<Unscoped>>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:32:14 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:31:9 - line:32:14] nothrow
+                    (declref_expr type='(Binder<Unscoped>) -> (Int.Type) -> BaseBindingBuilder<Int, Binder<Unscoped>>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:32:14 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:32:14 - line:32:14] decl=Cleanse.(file).BinderBase extension.bind [with (substitution_map generic_signature=<Self, Element where Self : BinderBase> (substitution Self -> Binder<Unscoped>) (substitution Element -> Int))] function_ref=single)
+                    (declref_expr type='Binder<Unscoped>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:31:9 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:31:9 - line:31:9] decl=Test.(file).AModule.configure(binder:).binder@/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:17:27 function_ref=unapplied))
+                  (paren_expr type='(Int.Type)' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:32:19 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:32:18 - line:32:27]
+                    (dot_self_expr type='Int.Type' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:32:19 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:32:19 - line:32:23]
+                      (type_expr type='Int.Type' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:32:19 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:32:19 - line:32:19] typerepr='Int')))))
+              (tuple_expr type='()' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:33:28 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:33:28 - line:33:29])))
+          (argument_shuffle_expr implicit type='(value: [Int], file: StaticString, line: Int, function: StaticString)' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:34:16 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:34:16 - line:34:31] tuple_to_tuple elements=[0, -3, -3, -3] variadic_sources=[] default_args_owner=Cleanse.(file).BindToable extension.to(value:file:line:function:) [with (substitution_map generic_signature=<Self where Self : BindToable> (substitution Self -> CollectionBindingBuilderDecorator<BaseBindingBuilder<Int, Binder<Unscoped>>>))]
+            (tuple_expr type='(value: [Int])' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:34:16 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:34:16 - line:34:31] names=value
+              (array_expr type='[Int]' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:34:24 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:34:24 - line:34:30]
+                (integer_literal_expr type='Int' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:34:25 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:34:25 - line:34:25] value=1 builtin_initializer=Swift.(file).Int.init(_builtinIntegerLiteral:) initializer=**NULL**)
+                (integer_literal_expr type='Int' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:34:27 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:34:27 - line:34:27] value=2 builtin_initializer=Swift.(file).Int.init(_builtinIntegerLiteral:) initializer=**NULL**)
+                (integer_literal_expr type='Int' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:34:29 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:34:29 - line:34:29] value=3 builtin_initializer=Swift.(file).Int.init(_builtinIntegerLiteral:) initializer=**NULL**)
+                (semantic_expr
+                  (call_expr implicit type='[Int]' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:34:24 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:34:24 - line:34:29] nothrow arg_labels=arrayLiteral:_:_:
+                    (constructor_ref_call_expr implicit type='(Int...) -> [Int]' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:34:24 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:34:24 - line:34:24] nothrow
+                      (declref_expr implicit type='(Array<Int>.Type) -> (Int...) -> [Int]' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:34:24 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:34:24 - line:34:24] decl=Swift.(file).Array extension.init(arrayLiteral:) [with (substitution_map generic_signature=<Element> (substitution Element -> Int))] function_ref=single)
+                      (type_expr implicit type='[Int].Type' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:34:24 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:34:24 - line:34:24] typerepr='[Int]'))
+                    (argument_shuffle_expr implicit type='(arrayLiteral: Int...)' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:34:25 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:34:25 - line:34:29] tuple_to_tuple elements=[-2] variadic_sources=[0, 1, 2] default_args_owner=Swift.(file).Array extension.init(arrayLiteral:) [with (substitution_map generic_signature=<Element> (substitution Element -> Int))]
+                      (tuple_expr implicit type='(arrayLiteral: Int, Int, Int)' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:34:25 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:34:25 - line:34:29] names=arrayLiteral,'',''
+                        (integer_literal_expr type='Int' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:34:25 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:34:25 - line:34:25] value=1 builtin_initializer=Swift.(file).Int.init(_builtinIntegerLiteral:) initializer=**NULL**)
+                        (integer_literal_expr type='Int' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:34:27 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:34:27 - line:34:27] value=2 builtin_initializer=Swift.(file).Int.init(_builtinIntegerLiteral:) initializer=**NULL**)
+                        (integer_literal_expr type='Int' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:34:29 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:34:29 - line:34:29] value=3 builtin_initializer=Swift.(file).Int.init(_builtinIntegerLiteral:) initializer=**NULL**)))))))))
+        (call_expr type='BindingReceipt<[Int]>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:39:14 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:36:9 - line:39:27] nothrow arg_labels=value:
+          (dot_syntax_call_expr type='([Int], StaticString, Int, StaticString) -> BindingReceipt<[Int]>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:39:14 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:36:9 - line:39:14] nothrow
+            (declref_expr type='(SingularCollectionBindingBuilderDecorator<BaseBindingBuilder<[Int], Binder<Unscoped>>>) -> ([Int], StaticString, Int, StaticString) -> BindingReceipt<[Int]>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:39:14 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:39:14 - line:39:14] decl=Cleanse.(file).BindToable extension.to(value:file:line:function:) [with (substitution_map generic_signature=<Self where Self : BindToable> (substitution Self -> SingularCollectionBindingBuilderDecorator<BaseBindingBuilder<[Int], Binder<Unscoped>>>))] function_ref=single)
+            (call_expr type='SingularCollectionBindingBuilderDecorator<BaseBindingBuilder<[Int], Binder<Unscoped>>>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:38:14 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:36:9 - line:38:29] nothrow arg_labels=
+              (dot_syntax_call_expr type='() -> SingularCollectionBindingBuilderDecorator<BaseBindingBuilder<[Int], Binder<Unscoped>>>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:38:14 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:36:9 - line:38:14] nothrow
+                (declref_expr type='(BaseBindingBuilder<[Int], Binder<Unscoped>>) -> () -> SingularCollectionBindingBu
+ilderDecorator<BaseBindingBuilder<[Int], Binder<Unscoped>>>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:38:14 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:38:14 - line:38:14] decl=Cleanse.(file).BindingBuilder extension.intoCollection() [with (substitution_map generic_signature=<Self where Self : BindingBuilder, Self.CollectionOrUnique == _UniqueBinding, Self.FinalProvider : _StandardProvider, Self.MaybeScope == Unscoped> (substitution Self -> BaseBindingBuilder<[Int], Binder<Unscoped>>))] function_ref=single)
+                (call_expr type='BaseBindingBuilder<[Int], Binder<Unscoped>>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:37:14 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:36:9 - line:37:29] nothrow arg_labels=_:
+                  (dot_syntax_call_expr type='([Int].Type) -> BaseBindingBuilder<[Int], Binder<Unscoped>>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:37:14 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:36:9 - line:37:14] nothrow
+                    (declref_expr type='(Binder<Unscoped>) -> ([Int].Type) -> BaseBindingBuilder<[Int], Binder<Unscoped>>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:37:14 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:37:14 - line:37:14] decl=Cleanse.(file).BinderBase extension.bind [with (substitution_map generic_signature=<Self, Element where Self : BinderBase> (substitution Self -> Binder<Unscoped>) (substitution Element -> [Int]))] function_ref=single)
+                    (declref_expr type='Binder<Unscoped>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:36:9 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:36:9 - line:36:9] decl=Test.(file).AModule.configure(binder:).binder@/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:17:27 function_ref=unapplied))
+                  (paren_expr type='([Int].Type)' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:37:19 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:37:18 - line:37:29]
+                    (dot_self_expr type='[Int].Type' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:37:19 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:37:19 - line:37:25]
+                      (type_expr type='[Int].Type' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:37:19 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:37:19 - line:37:23] typerepr='[Int]')))))
+              (tuple_expr type='()' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:38:28 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:38:28 - line:38:29])))
+          (argument_shuffle_expr implicit type='(value: [Int], file: StaticString, line: Int, function: StaticString)' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:39:16 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:39:16 - line:39:27] tuple_to_tuple elements=[0, -3, -3, -3] variadic_sources=[] default_args_owner=Cleanse.(file).BindToable extension.to(value:file:line:function:) [with (substitution_map generic_signature=<Self where Self : BindToable> (substitution Self -> SingularCollectionBindingBuilderDecorator<BaseBindingBuilder<[Int], Binder<Unscoped>>>))]
+            (tuple_expr type='(value: [Int])' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:39:16 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:39:16 - line:39:27] names=value
+              (array_expr type='[Int]' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:39:24 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:39:24 - line:39:26]
+                (integer_literal_expr type='Int' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:39:25 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:39:25 - line:39:25] value=2 builtin_initializer=Swift.(file).Int.init(_builtinIntegerLiteral:) initializer=**NULL**)
+                (semantic_expr
+                  (call_expr implicit type='[Int]' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:39:24 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:39:24 - line:39:25] nothrow arg_labels=arrayLiteral:
+                    (constructor_ref_call_expr implicit type='(Int...) -> [Int]' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:39:24 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:39:24 - line:39:24] nothrow
+                      (declref_expr implicit type='(Array<Int>.Type) -> (Int...) -> [Int]' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:39:24 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:39:24 - line:39:24] decl=Swift.(file).Array extension.init(arrayLiteral:) [with (substitution_map generic_signature=<Element> (substitution Element -> Int))] function_ref=single)
+                      (type_expr implicit type='[Int].Type' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:39:24 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:39:24 - line:39:24] typerepr='[Int]'))
+                    (argument_shuffle_expr implicit type='(arrayLiteral: Int...)' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:39:25 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:39:25 - line:39:25] tuple_to_tuple elements=[-2] variadic_sources=[0] default_args_owner=Swift.(file).Array extension.init(arrayLiteral:) [with (substitution_map generic_signature=<Element> (substitution Element -> Int))]
+                      (tuple_expr implicit type='(arrayLiteral: Int)' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:39:25 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:39:25 - line:39:25] names=arrayLiteral
+                        (integer_literal_expr type='Int' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:39:25 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:39:25 - line:39:25] value=2 builtin_initializer=Swift.(file).Int.init(_builtinIntegerLiteral:) initializer=**NULL**)))))))))))
+    (constructor_decl implicit range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:16:8 - line:16:8] "init()" interface type='(AModule.Type) -> () -> AModule' access=internal designated
+      (parameter "self" interface type='AModule' inout)
+      (parameter_list)
+      (brace_stmt implicit
+        (return_stmt implicit)))
+    (typealias implicit "Scope" interface type='AModule.Scope.Type' access=internal type='Unscoped')))
+"""
+    
+    /**
+     ````
+     struct A {
+         let a: Array<Int>
+     }
+
+     struct ATag: Tag {
+         typealias Element = A
+     }
+
+     struct AModule: Module {
+         static func configureA(b: ReceiptBinder<A>) -> BindingReceipt<A> {
+             return b.to(factory: A.init)
+         }
+         
+         static func configure(binder: Binder<Singleton>) {
+             binder.bind(A.self).sharedInScope().configured(with: configureA)
+             binder.bind(A.self).tagged(with: ATag.self).configured(with: configureA)
+         }
+     }
+     ````
+     */
+    static let decoratedReferenceProviderFixture = """
+(source_file "/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift"
+ (import_decl range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:9:1 - line:9:8] 'Foundation')
+ (import_decl range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:10:1 - line:10:8] 'Cleanse')
+ (struct_decl range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:12:1 - line:14:1] "A" interface type='A.Type' access=internal non-resilient
+   (pattern_binding_decl range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:13:5 - line:13:21]
+     (pattern_typed type='Array<Int>'
+       (pattern_named type='Array<Int>' 'a')
+       (type_ident
+         (component id='Array' bind=Swift.(file).Array)
+           (type_ident
+             (component id='Int' bind=Swift.(file).Int)))))
+   (var_decl range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:13:9 - line:13:9] "a" type='Array<Int>' interface type='Array<Int>' access=internal let readImpl=stored immutable
+     (accessor_decl implicit range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:13:9 - line:13:9] 'anonname=0x7fc56b2088f8' interface type='(A) -> () -> Array<Int>' access=internal get_for=a
+       (parameter "self" interface type='A')
+       (parameter_list)
+       (brace_stmt implicit range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:13:9 - line:13:9]
+         (return_stmt implicit
+           (member_ref_expr implicit type='Array<Int>' decl=Test.(file).A.a@/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:13:9 direct_to_storage
+             (declref_expr implicit type='A' decl=Test.(file).A.<anonymous>.self@/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:13:9 function_ref=unapplied))))))
+   (accessor_decl implicit range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:13:9 - line:13:9] 'anonname=0x7fc56b2088f8' interface type='(A) -> () -> Array<Int>' access=internal get_for=a
+     (parameter "self" interface type='A')
+     (parameter_list)
+     (brace_stmt implicit range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:13:9 - line:13:9]
+       (return_stmt implicit
+         (member_ref_expr implicit type='Array<Int>' decl=Test.(file).A.a@/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:13:9 direct_to_storage
+           (declref_expr implicit type='A' decl=Test.(file).A.<anonymous>.self@/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:13:9 function_ref=unapplied)))))
+   (constructor_decl implicit range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:12:8 - line:12:8] "init(a:)" interface type='(A.Type) -> (Array<Int>) -> A' access=internal designated
+     (parameter "self" interface type='A' inout)
+     (parameter_list
+       (parameter "a" apiName=a interface type='Array<Int>') range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:12:8 - line:12:8])))
+ (struct_decl range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:16:1 - line:18:1] "ATag" interface type='ATag.Type' access=internal non-resilient inherits: Tag
+   (typealias range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:17:5 - line:17:25] "Element" interface type='ATag.Element.Type' access=internal type='A')
+   (constructor_decl implicit range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:16:8 - line:16:8] "init()" interface type='(ATag.Type) -> () -> ATag' access=internal designated
+     (parameter "self" interface type='ATag' inout)
+     (parameter_list)
+     (brace_stmt implicit
+       (return_stmt implicit))))
+ (struct_decl range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:20:1 - line:29:1] "AModule" interface type='AModule.Type' access=internal non-resilient inherits: Module
+   (func_decl range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:21:5 - line:23:5] "configureA(b:)" interface type='(AModule.Type) -> (ReceiptBinder<A>) -> BindingReceipt<A>' access=internal type
+     (parameter "self" interface type='AModule.Type')
+     (parameter_list
+       (parameter "b" apiName=b interface type='ReceiptBinder<A>') range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:21:27 - line:21:47])
+     (result
+       (type_ident
+         (component id='BindingReceipt' bind=Cleanse.(file).BindingReceipt)
+           (type_ident
+             (component id='A' bind=Test.(file).A@/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:12:8))))
+     (brace_stmt range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:21:70 - line:23:5]
+       (return_stmt range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:22:9 - line:22:36]
+         (call_expr type='BindingReceipt<A>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:22:18 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:22:16 - line:22:36] nothrow arg_labels=factory:
+           (dot_syntax_call_expr type='(StaticString, Int, StaticString, @escaping (([Int])) -> A) -> BindingReceipt<A>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:22:18 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:22:16 - line:22:18] nothrow
+             (declref_expr type='(ReceiptBinder<A>) -> (StaticString, Int, StaticString, @escaping (([Int])) -> A) -> BindingReceipt<A>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:22:18 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:22:18 - line:22:18] decl=Cleanse.(file).BindToable extension.to(file:line:function:factory:) [with (substitution_map generic_signature=<Self, P_1 where Self : BindToable> (substitution Self -> ReceiptBinder<A>) (substitution P_1 -> [Int]))] function_ref=single)
+             (declref_expr type='ReceiptBinder<A>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:22:16 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:22:16 - line:22:16] decl=Test.(file).AModule.configureA(b:).b@/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:21:28 function_ref=unapplied))
+           (argument_shuffle_expr implicit type='(file: StaticString, line: Int, function: StaticString, factory: (([Int])) -> A)' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:22:20 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:22:20 - line:22:36] tuple_to_tuple elements=[-3, -3, -3, 0] variadic_sources=[] default_args_owner=Cleanse.(file).BindToable extension.to(file:line:function:factory:) [with (substitution_map generic_signature=<Self, P_1 where Self : BindToable> (substitution Self -> ReceiptBinder<A>) (substitution P_1 -> [Int]))]
+             (tuple_expr type='(factory: (Array<Int>) -> A)' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:22:20 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:22:20 - line:22:36] names=factory
+               (constructor_ref_call_expr type='(Array<Int>) -> A' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:22:32 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:22:30 - line:22:32] nothrow
+                 (declref_expr type='(A.Type) -> (Array<Int>) -> A' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:22:32 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:22:32 - line:22:32] decl=Test.(file).A.init(a:)@/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:12:8 function_ref=unapplied)
+                 (type_expr type='A.Type' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:22:30 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:22:30 - line:22:30] typerepr='A'))))))))
+   (func_decl range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:25:5 - line:28:5] "configure(binder:)" interface type='(AModule.Type) -> (Binder<Singleton>) -> ()' access=internal type
+     (parameter "self" interface type='AModule.Type')
+     (parameter_list
+       (parameter "binder" apiName=binder interface type='Binder<Singleton>') range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:25:26 - line:25:52])
+     (brace_stmt range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:25:54 - line:28:5]
+       (call_expr type='BindingReceipt<A>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:26:45 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:26:9 - line:26:72] nothrow arg_labels=with:
+         (dot_syntax_call_expr type='((ReceiptBinder<A>) -> BindingReceipt<A>) -> BindingReceipt<A>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:26:45 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:26:9 - line:26:45] nothrow
+           (declref_expr type='(ScopedBindingDecorator<BaseBindingBuilder<A, Binder<Singleton>>, Singleton>) -> ((ReceiptBinder<A>) -> BindingReceipt<A>) -> BindingReceipt<A>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:26:45 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:26:45 - line:26:45] decl=Cleanse.(file).BindToable extension.configured(with:) [with (substitution_map generic_signature=<Self where Self : BindToable> (substitution Self -> ScopedBindingDecorator<BaseBindingBuilder<A, Binder<Singleton>>, Singleton>))] function_ref=single)
+           (call_expr type='ScopedBindingDecorator<BaseBindingBuilder<A, Binder<Singleton>>, Singleton>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:26:29 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:26:9 - line:26:43] nothrow arg_labels=
+             (dot_syntax_call_expr type='() -> ScopedBindingDecorator<BaseBindingBuilder<A, Binder<Singleton>>, Singleton>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:26:29 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:26:9 - line:26:29] nothrow
+               (declref_expr type='(BaseBindingBuilder<A, Binder<Singleton>>) -> () -> ScopedBindingDecorator<BaseBindingBuilder<A, Binder<Singleton>>, Singleton>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:26:29 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:26:29 - line:26:29] decl=Cleanse.(file).BindingBuilder extension.sharedInScope() [with (substitution_map generic_signature=<Self where Self : BindingBuilder, Self.Binder : BinderType, Self.MaybeScope == Unscoped, Self.Binder.Scope : Scope> (substitution Self -> BaseBindingBuilder<A, Binder<Singleton>>))] function_ref=single)
+               (call_expr type='BaseBindingBuilder<A, Binder<Singleton>>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:26:16 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:26:9 - line:26:27] nothrow arg_labels=_:
+                 (dot_syntax_call_expr type='(A.Type) -> BaseBindingBuilder<A, Binder<Singleton>>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:26:16 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:26:9 - line:26:16] nothrow
+                   (declref_expr type='(Binder<Singleton>) -> (A.Type) -> BaseBindingBuilder<A, Binder<Singleton>>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:26:16 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:26:16 - line:26:16] decl=Cleanse.(file).BinderBase extension.bind [with (substitution_map generic_signature=<Self, Element where Self : BinderBase> (substitution Self -> Binder<Singleton>) (substitution Element -> A))] function_ref=single)
+                   (declref_expr type='Binder<Singleton>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:26:9 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:26:9 - line:26:9] decl=Test.(file).AModule.configure(binder:).binder@/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:25:27 function_ref=unapplied))
+                 (paren_expr type='(A.Type)' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:26:21 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:26:20 - line:26:27]
+                   (dot_self_expr type='A.Type' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:26:21 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:26:21 - line:26:23]
+                     (type_expr type='A.Type' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:26:21 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:26:21 - line:26:21] typerepr='A')))))
+             (tuple_expr type='()' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:26:42 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:26:42 - line:26:43])))
+         (tuple_expr type='(with: (ReceiptBinder<A>) -> BindingReceipt<A>)' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:26:55 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:26:55 - line:26:72] names=with
+           (function_conversion_expr implicit type='(ReceiptBinder<A>) -> BindingReceipt<A>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:26:62 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:26:62 - line:26:62]
+             (dot_syntax_call_expr implicit type='(ReceiptBinder<A>) -> BindingReceipt<A>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:26:62 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:26:62 - line:26:62] nothrow
+               (declref_expr type='(AModule.Type) -> (ReceiptBinder<A>) -> BindingReceipt<A>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:26:62 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:26:62 - line:26:62] decl=Test.(file).AModule.configureA(b:)@/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:21:17 function_ref=unapplied)
+               (declref_expr implicit type='AModule.Type' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:26:62 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:26:62 - line:26:62] decl=Test.(file).AModule.configure(binder:).self@/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:25:17 function_ref=unapplied)))))
+       (call_expr type='BindingReceipt<A>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:27:53 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:27:9 - line:27:80] nothrow arg_labels=with:
+         (dot_syntax_call_expr type='((ReceiptBinder<A>) -> BindingReceipt<A>) -> BindingReceipt<A>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:27:53 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:27:9 - line:27:53] nothrow
+           (declref_expr type='(TaggedBindingBuilderDecorator<BaseBindingBuilder<A, Binder<Singleton>>, ATag>) -> ((ReceiptBinder<A>) -> BindingReceipt<A>) -> BindingReceipt<A>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:27:53 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:27:53 - line:27:53] decl=Cleanse.(file).BindToable extension.configured(with:) [with (substitution_map generic_signature=<Self where Self : BindToable> (substitution Self -> TaggedBindingBuilderDecorator<BaseBindingBuilder<A, Binder<Singleton>>, ATag>))] function_ref=single)
+           (call_expr type='TaggedBindingBuilderDecorator<BaseBindingBuilder<A, Binder<Singleton>>, ATag>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:27:29 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:27:9 - line:27:51] nothrow arg_labels=with:
+             (dot_syntax_call_expr type='(ATag.Type) -> TaggedBindingBuilderDecorator<BaseBindingBuilder<A, Binder<Singleton>>, ATag>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:27:29 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:27:9 - line:27:29] nothrow
+               (declref_expr type='(BaseBindingBuilder<A, Binder<Singleton>>) -> (ATag.Type) -> TaggedBindingBuilderDecorator<BaseBindingBuilder<A, Binder<Singleton>>, ATag>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:27:29 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:27:29 - line:27:29] decl=Cleanse.(file).BindingBuilder extension.tagged(with:) [with (substitution_map generic_signature=<Self, Tag where Self : BindingBuilder, Tag : Tag, Self.FinalProvider : _StandardProvider, Self.MaybeScope == Unscoped, Tag.Element == Self.FinalProvider.Element>
+(substitution Self -> BaseBindingBuilder<A, Binder<Singleton>>) (substitution Tag -> ATag))] function_ref=single)
+               (call_expr type='BaseBindingBuilder<A, Binder<Singleton>>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:27:16 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:27:9 - line:27:27] nothrow arg_labels=_:
+                 (dot_syntax_call_expr type='(A.Type) -> BaseBindingBuilder<A, Binder<Singleton>>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:27:16 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:27:9 - line:27:16] nothrow
+                   (declref_expr type='(Binder<Singleton>) -> (A.Type) -> BaseBindingBuilder<A, Binder<Singleton>>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:27:16 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:27:16 - line:27:16] decl=Cleanse.(file).BinderBase extension.bind [with (substitution_map generic_signature=<Self, Element where Self : BinderBase> (substitution Self -> Binder<Singleton>) (substitution Element -> A))] function_ref=single)
+                   (declref_expr type='Binder<Singleton>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:27:9 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:27:9 - line:27:9] decl=Test.(file).AModule.configure(binder:).binder@/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:25:27 function_ref=unapplied))
+                 (paren_expr type='(A.Type)' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:27:21 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:27:20 - line:27:27]
+                   (dot_self_expr type='A.Type' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:27:21 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:27:21 - line:27:23]
+                     (type_expr type='A.Type' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:27:21 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:27:21 - line:27:21] typerepr='A')))))
+             (tuple_expr type='(with: ATag.Type)' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:27:35 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:27:35 - line:27:51] names=with
+               (dot_self_expr type='ATag.Type' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:27:42 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:27:42 - line:27:47]
+                 (type_expr type='ATag.Type' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:27:42 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:27:42 - line:27:42] typerepr='ATag')))))
+         (tuple_expr type='(with: (ReceiptBinder<A>) -> BindingReceipt<A>)' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:27:63 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:27:63 - line:27:80] names=with
+           (function_conversion_expr implicit type='(ReceiptBinder<A>) -> BindingReceipt<A>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:27:70 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:27:70 - line:27:70]
+             (dot_syntax_call_expr implicit type='(ReceiptBinder<A>) -> BindingReceipt<A>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:27:70 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:27:70 - line:27:70] nothrow
+               (declref_expr type='(AModule.Type) -> (ReceiptBinder<A>) -> BindingReceipt<A>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:27:70 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:27:70 - line:27:70] decl=Test.(file).AModule.configureA(b:)@/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:21:17 function_ref=unapplied)
+               (declref_expr implicit type='AModule.Type' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:27:70 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:27:70 - line:27:70] decl=Test.(file).AModule.configure(binder:).self@/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:25:17 function_ref=unapplied)))))))
+   (constructor_decl implicit range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:20:8 - line:20:8] "init()" interface type='(AModule.Type) -> () -> AModule' access=internal designated
+     (parameter "self" interface type='AModule' inout)
+     (parameter_list)
+     (brace_stmt implicit
+       (return_stmt implicit)))
+   (typealias implicit "Scope" interface type='AModule.Scope.Type' access=internal type='Singleton')))
+"""
+
 }

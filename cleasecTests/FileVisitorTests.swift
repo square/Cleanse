@@ -42,7 +42,7 @@ class FileVisitorTests: XCTestCase {
         XCTAssertEqual(visitor.components.count, 1)
         XCTAssertEqual(visitor.components.first!.isRoot, false)
         XCTAssertEqual(visitor.components.first!.rootType, "Int")
-        XCTAssertEqual(visitor.components.first!.providers, [StandardProvider(type: "Int", dependencies: [], tag: nil, scoped: nil)])
+        XCTAssertEqual(visitor.components.first!.providers, [StandardProvider(type: "Int", dependencies: [], tag: nil, scoped: nil, collectionType: nil)])
     }
     
     func testParsesRootComponent() {
@@ -51,6 +51,6 @@ class FileVisitorTests: XCTestCase {
         XCTAssertEqual(visitor.components.count, 1)
         XCTAssertEqual(visitor.components.first!.isRoot, true)
         XCTAssertEqual(visitor.components.first!.rootType, "Int")
-        XCTAssertEqual(visitor.components.first!.providers, [StandardProvider(type: "Int", dependencies: [], tag: nil, scoped: nil)])
+        XCTAssertEqual(visitor.components.first!.providers, [StandardProvider(type: "Int", dependencies: [], tag: nil, scoped: nil, collectionType: nil)])
     }
 }
