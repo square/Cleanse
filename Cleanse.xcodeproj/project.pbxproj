@@ -41,6 +41,7 @@
 		DC5937E12451673400D70652 /* cleasec.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC1F567C244F9C1E00CCFDD5 /* cleasec.framework */; };
 		DC5937E32451678700D70652 /* Sample.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5937E22451678700D70652 /* Sample.swift */; };
 		DC5937FB24520D9200D70652 /* CleanseTypeVisitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5937FA24520D9200D70652 /* CleanseTypeVisitor.swift */; };
+		DC593801245246D400D70652 /* Linker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC593800245246D400D70652 /* Linker.swift */; };
 		DC8ACA81238315EB005A6F51 /* SPITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8ACA80238315EB005A6F51 /* SPITests.swift */; };
 		DCC5E6362450E76F0032A69F /* Module.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC5E6352450E76F0032A69F /* Module.swift */; };
 		DCC5E6382450E7960032A69F /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC5E6372450E7960032A69F /* Component.swift */; };
@@ -205,6 +206,7 @@
 		DC5937DD245154E100D70652 /* ReceiptBinderVisitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptBinderVisitor.swift; sourceTree = "<group>"; };
 		DC5937E22451678700D70652 /* Sample.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sample.swift; sourceTree = "<group>"; };
 		DC5937FA24520D9200D70652 /* CleanseTypeVisitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleanseTypeVisitor.swift; sourceTree = "<group>"; };
+		DC593800245246D400D70652 /* Linker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Linker.swift; sourceTree = "<group>"; };
 		DC8ACA80238315EB005A6F51 /* SPITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPITests.swift; sourceTree = "<group>"; };
 		DCC5E6352450E76F0032A69F /* Module.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Module.swift; sourceTree = "<group>"; };
 		DCC5E6372450E7960032A69F /* Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Component.swift; sourceTree = "<group>"; };
@@ -389,6 +391,7 @@
 		DC1F567D244F9C1E00CCFDD5 /* cleasec */ = {
 			isa = PBXGroup;
 			children = (
+				DC5937FF245246C400D70652 /* Linking */,
 				DC1F56D3244FAE1400CCFDD5 /* Core */,
 				DC1F5696244F9C4900CCFDD5 /* Visitors */,
 				DC1F567E244F9C1E00CCFDD5 /* cleasec.h */,
@@ -453,6 +456,14 @@
 				DC4A0CA82350FD4F00A2E576 /* ComponentBinding.swift */,
 			);
 			name = SPI;
+			sourceTree = "<group>";
+		};
+		DC5937FF245246C400D70652 /* Linking */ = {
+			isa = PBXGroup;
+			children = (
+				DC593800245246D400D70652 /* Linker.swift */,
+			);
+			path = Linking;
 			sourceTree = "<group>";
 		};
 		DCE9317523220C5800C0522F /* Assisted Inject */ = {
@@ -1028,6 +1039,7 @@
 				DCC5E6362450E76F0032A69F /* Module.swift in Sources */,
 				DCC5E63E24510D5A0032A69F /* BindingVisitor.swift in Sources */,
 				DC5937D624514D3400D70652 /* ReferenceVisitor.swift in Sources */,
+				DC593801245246D400D70652 /* Linker.swift in Sources */,
 				DC5937FB24520D9200D70652 /* CleanseTypeVisitor.swift in Sources */,
 				DC1F56D5244FAE1B00CCFDD5 /* Provider.swift in Sources */,
 				DC30D51D24511892009F3CF5 /* ComponentVisitor.swift in Sources */,

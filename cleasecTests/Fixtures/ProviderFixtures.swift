@@ -490,4 +490,86 @@ struct ProviderFixtures {
         (return_stmt implicit)))
     (typealias implicit "Scope" interface type='AModule.Scope.Type' access=internal type='Unscoped')))
 """
+    
+    /**
+     ````
+     struct MyTag: Tag {
+         typealias Element = Int
+     }
+
+     struct A {
+         let provider: TaggedProvider<MyTag>
+     }
+     struct AModule: Module {
+         static func configure(binder: Binder<Unscoped>) {
+             binder.bind(A.self).to(factory: A.init)
+         }
+     }
+     ````
+     */
+    static let taggedProviderDependencyFixture = """
+(source_file "/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift"
+  (import_decl range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:9:1 - line:9:8] 'Foundation')
+  (import_decl range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:10:1 - line:10:8] 'Cleanse')
+  (struct_decl range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:12:1 - line:14:1] "MyTag" interface type='MyTag.Type' access=internal non-resilient inherits: Tag
+    (typealias range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:13:5 - line:13:25] "Element" interface type='MyTag.Element.Type' access=internal type='Int')
+    (constructor_decl implicit range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:12:8 - line:12:8] "init()" interface type='(MyTag.Type) -> () -> MyTag' access=internal designated
+      (parameter "self" interface type='MyTag' inout)
+      (parameter_list)
+      (brace_stmt implicit
+        (return_stmt implicit))))
+  (struct_decl range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:16:1 - line:18:1] "A" interface type='A.Type' access=internal non-resilient
+    (pattern_binding_decl range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:17:5 - line:17:39]
+      (pattern_typed type='TaggedProvider<MyTag>'
+        (pattern_named type='TaggedProvider<MyTag>' 'provider')
+        (type_ident
+          (component id='TaggedProvider' bind=Cleanse.(file).TaggedProvider)
+            (type_ident
+              (component id='MyTag' bind=Test.(file).MyTag@/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:12:8)))))
+    (var_decl range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:17:9 - line:17:9] "provider" type='TaggedProvider<MyTag>' interface type='TaggedProvider<MyTag>' access=internal let readImpl=stored immutable
+      (accessor_decl implicit range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:17:9 - line:17:9] 'anonname=0x7fd02ed4b160' interface type='(A) -> () -> TaggedProvider<MyTag>' access=internal get_for=provider
+        (parameter "self" interface type='A')
+        (parameter_list)
+        (brace_stmt implicit range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:17:9 - line:17:9]
+          (return_stmt implicit
+            (member_ref_expr implicit type='TaggedProvider<MyTag>' decl=Test.(file).A.provider@/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:17:9 direct_to_storage
+              (declref_expr implicit type='A' decl=Test.(file).A.<anonymous>.self@/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:17:9 function_ref=unapplied))))))
+    (accessor_decl implicit range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:17:9 - line:17:9] 'anonname=0x7fd02ed4b160' interface type='(A) -> () -> TaggedProvider<MyTag>' access=internal get_for=provider
+      (parameter "self" interface type='A')
+      (parameter_list)
+      (brace_stmt implicit range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:17:9 - line:17:9]
+        (return_stmt implicit
+          (member_ref_expr implicit type='TaggedProvider<MyTag>' decl=Test.(file).A.provider@/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:17:9 direct_to_storage
+            (declref_expr implicit type='A' decl=Test.(file).A.<anonymous>.self@/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:17:9 function_ref=unapplied)))))
+    (constructor_decl implicit range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:16:8 - line:16:8] "init(provider:)" interface type='(A.Type) -> (TaggedProvider<MyTag>) -> A' access=internal designated
+      (parameter "self" interface type='A' inout)
+      (parameter_list
+        (parameter "provider" apiName=provider interface type='TaggedProvider<MyTag>') range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:16:8 - line:16:8])))
+  (struct_decl range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:19:1 - line:23:1] "AModule" interface type='AModule.Type' access=internal non-resilient inherits: Module
+    (func_decl range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:20:5 - line:22:5] "configure(binder:)" interface type='(AModule.Type) -> (Binder<Unscoped>) -> ()' access=internal type
+      (parameter "self" interface type='AModule.Type')
+      (parameter_list
+        (parameter "binder" apiName=binder interface type='Binder<Unscoped>') range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:20:26 - line:20:51])
+      (call_expr type='BindingReceipt<A>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:21:29 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:21:9 - line:21:47] nothrow arg_labels=factory:
+        (dot_syntax_call_expr type='(StaticString, Int, StaticString, @escaping ((TaggedProvider<MyTag>)) -> A) -> BindingReceipt<A>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:21:29 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:21:9 - line:21:29] nothrow
+          (declref_expr type='(BaseBindingBuilder<A, Binder<Unscoped>>) -> (StaticString, Int, StaticString, @escaping ((TaggedProvider<MyTag>)) -> A) -> BindingReceipt<A>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:21:29 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:21:29 - line:21:29] decl=Cleanse.(file).BindToable extension.to(file:line:function:factory:) [with (substitution_map generic_signature=<Self, P_1 where Self : BindToable> (substitution Self -> BaseBindingBuilder<A, Binder<Unscoped>>) (substitution P_1 -> TaggedProvider<MyTag>))] function_ref=single)
+          (call_expr type='BaseBindingBuilder<A, Binder<Unscoped>>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:21:16 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:21:9 - line:21:27] nothrow arg_labels=_:
+            (dot_syntax_call_expr type='(A.Type) -> BaseBindingBuilder<A, Binder<Unscoped>>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:21:16 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:21:9 - line:21:16] nothrow
+              (declref_expr type='(Binder<Unscoped>) -> (A.Type) -> BaseBindingBuilder<A, Binder<Unscoped>>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:21:16 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:21:16 - line:21:16] decl=Cleanse.(file).BinderBase extension.bind [with (substitution_map generic_signature=<Self, Element where Self : BinderBase> (substitution Self -> Binder<Unscoped>) (substitution Element -> A))] function_ref=single)
+              (declref_expr type='Binder<Unscoped>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:21:9 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:21:9 - line:21:9] decl=Test.(file).AModule.configure(binder:).binder@/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:20:27 function_ref=unapplied))
+            (paren_expr type='(A.Type)' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:21:21 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:21:20 - line:21:27]
+              (dot_self_expr type='A.Type' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:21:21 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:21:21 - line:21:23]
+                (type_expr type='A.Type' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:21:21 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:21:21 - line:21:21] typerepr='A')))))
+        (argument_shuffle_expr implicit type='(file: StaticString, line: Int, function: StaticString, factory: ((TaggedProvider<MyTag>)) -> A)' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:21:31 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:21:31 - line:21:47] tuple_to_tuple elements=[-3, -3, -3, 0] variadic_sources=[] default_args_owner=Cleanse.(file).BindToable extension.to(file:line:function:factory:) [with (substitution_map generic_signature=<Self, P_1 where Self : BindToable> (substitution Self -> BaseBindingBuilder<A, Binder<Unscoped>>) (substitution P_1 -> TaggedProvider<MyTag>))]
+          (tuple_expr type='(factory: (TaggedProvider<MyTag>) -> A)' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:21:31 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:21:31 - line:21:47] names=factory
+            (constructor_ref_call_expr type='(TaggedProvider<MyTag>) -> A' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:21:43 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:21:41 - line:21:43] nothrow
+              (declref_expr type='(A.Type) -> (TaggedProvider<MyTag>) -> A' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:21:43 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:21:43 - line:21:43] decl=Test.(file).A.init(provider:)@/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:16:8 function_ref=unapplied)
+              (type_expr type='A.Type' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:21:41 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:21:41 - line:21:41] typerepr='A'))))))
+    (constructor_decl implicit range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:19:8 - line:19:8] "init()" interface type='(AModule.Type) -> () -> AModule' access=internal designated
+      (parameter "self" interface type='AModule' inout)
+      (parameter_list)
+      (brace_stmt implicit
+        (return_stmt implicit)))
+    (typealias implicit "Scope" interface type='AModule.Scope.Type' access=internal type='Unscoped')))
+"""
 }

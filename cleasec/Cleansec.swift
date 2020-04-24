@@ -10,15 +10,17 @@ import Foundation
 import swift_ast_parser
 
 public struct Cleansec {
-    static func analyze(nodes: [Syntax], searchNodes: [ModuleOutput]) -> [FileRepresentation] {
-        nodes.map { syntax -> FileRepresentation in
-            var fileVisitor = FileVisitor()
-            fileVisitor.walk(syntax)
-            return fileVisitor.finalize()
-        }
+    static func analyze(nodes: [Syntax], searchNodes: [ModuleOutput]) -> ModuleInterface {
+        Linker.linkProviders(
+            files: nodes.map { syntax -> FileRepresentation in
+                var fileVisitor = FileVisitor()
+                fileVisitor.walk(syntax)
+                return fileVisitor.finalize()
+            }
+        )
     }
     
-    public static func analyze(text: String, searchNodes: [ModuleOutput]) -> [FileRepresentation] {
+    public static func analyze(text: String, searchNodes: [ModuleOutput]) -> ModuleInterface {
         let nodes = NodeSyntaxParser.parse(text: text)
         return analyze(nodes: nodes, searchNodes: searchNodes)
     }

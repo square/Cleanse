@@ -13,11 +13,13 @@ struct AllBindingPlugin: CleanseBindingPlugin {
     
     func visit(root: ComponentBinding, errorReporter: CleanseErrorReporter) {
         var allComponents: [ComponentBinding] = [root]
+        var providers: [Any.Type] = []
         while !allComponents.isEmpty {
             let top = allComponents.remove(at: 0)
             print("------------")
             print("Component: \(top.componentType)")
             top.providers.forEach { (key, values) in
+                providers.append(key.type)
                 print("\(key):")
                 values.forEach { (info) in
                     print(String(repeating: " ", count: 2) + "\(info)")
@@ -27,6 +29,9 @@ struct AllBindingPlugin: CleanseBindingPlugin {
             }
             allComponents.append(contentsOf: top.subcomponents)
         }
+        
+        print("Providers:\n")
+        print(providers)
     }
     
 }

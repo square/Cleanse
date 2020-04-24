@@ -10,7 +10,7 @@ import Foundation
 
 public struct Module: CustomStringConvertible {
     public let type: String
-    public let providers: [Provider]
+    public let providers: [StandardProvider]
     public let danglingProviders: [DanglingProvider]
     public let referenceProviders: [ReferenceProvider]
     public let includedModules: [String]
