@@ -89,8 +89,9 @@ public struct FileVisitor: SyntaxVisitor {
                 collectionType: nil)
             )
         case .reference(let reference):
+            // If root is a reference, it'll get picked up by configure visitor. Not great ATM. We won't add to referenceProviders array.
+            // This actually exposes and edge case not handled right now where dangling providers can also be reference providers. N-lengthed chain.
             rootType = reference.type
-            referenceProviders.append(reference)
         }
         components.append(Component(
             type: componentName,

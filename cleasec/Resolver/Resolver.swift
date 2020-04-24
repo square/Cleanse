@@ -88,11 +88,11 @@ public struct Resolver {
         let moduleDiagnostics = moduleResults.flatMap { $0.diagnostics }
         
         let allProviders = component.providers + moduleProviders
-        let allSubcomponents = component.subcomponents + moduleSubcomponents
+        let allSubcomponents = (component.subcomponents + moduleSubcomponents).uniques
         var allDiagnostics = diagnostics + moduleDiagnostics
         
         let allCanonicalProviders = allProviders.map { ProviderPreprocessor.process($0) }
-        let providersByType = allCanonicalProviders.reduce(into: [String:[CanonicalProvider]]()) { (dict, provider) in
+        var providersByType = allCanonicalProviders.reduce(into: [String:[CanonicalProvider]]()) { (dict, provider) in
             if var existing = dict[provider.type] {
                 if existing.contains(where: { !$0.isCollection }) || !provider.isCollection {
                     allDiagnostics += [ResolutionError(error: .duplicateDependency(provider.type))]
@@ -104,6 +104,12 @@ public struct Resolver {
                 dict[provider.type] = [provider]
             }
         }
+        // Add ComponentFactory providers
+        allSubcomponents
+            .map { CanonicalProvider(type: "ComponentFactory<\($0)>", dependencies: [], isCollection: false) }
+            .forEach { (provider) in
+                providersByType[provider.type] = [provider]
+            }
         
         let resolvedComponent = ResolvedComponent(
             type: component.type,
@@ -180,4 +186,18 @@ public struct Resolver {
         )
     }
     
+}
+
+extension Array where Element: Hashable {
+    var uniques: Array {
+        var buffer = Array()
+        var added = Set<Element>()
+        for elem in self {
+            if !added.contains(elem) {
+                buffer.append(elem)
+                added.insert(elem)
+            }
+        }
+        return buffer
+    }
 }
