@@ -45,8 +45,7 @@ def main
 		pipe_to_file_command = ['&>'] + [output_file.split('=')[1]]
 	end
 
-	dump_ast_command = [swiftc_executable] + ['-dump-ast'] + ast_input + pipe_to_file_command
-	puts dump_ast_command.join(" ")
+	dump_ast_command = [swiftc_executable] + ['-dump-ast', '-suppress-warnings'] + ast_input + pipe_to_file_command
 	combined_command = og_command + ['&&'] + dump_ast_command
 	system(combined_command.join(" "))
 end
