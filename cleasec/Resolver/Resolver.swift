@@ -42,6 +42,13 @@ public struct CanonicalProvider {
     public let isCollection: Bool
 }
 
+extension CanonicalProvider {
+    var lazyProvider: CanonicalProvider {
+        // Think about dependencies. Should there be none? The inner type, or all shared dependencies?
+        return CanonicalProvider(type: "Provider<\(type)>", dependencies: [], isCollection: isCollection)
+    }
+}
+
 // Maps collection and tagged bindings into their canonical form.
 struct ProviderPreprocessor {
     static func process(_ provider: StandardProvider) -> CanonicalProvider {
@@ -99,9 +106,11 @@ public struct Resolver {
                 } else {
                     existing.append(provider)
                     dict[provider.type] = existing
+                    dict[provider.lazyProvider.type] = [provider.lazyProvider]
                 }
             } else {
                 dict[provider.type] = [provider]
+                dict[provider.lazyProvider.type] = [provider.lazyProvider]
             }
         }
         // Add ComponentFactory providers
@@ -115,7 +124,7 @@ public struct Resolver {
             type: component.type,
             parent: parent,
             providersByType: providersByType,
-            diagnostics: allDiagnostics
+            diagnostics: []
         )
         
         // Dependency validation
@@ -134,7 +143,7 @@ public struct Resolver {
         }
         resolvedComponent.children = childComponents
         let childDiagnostics = childComponents.flatMap { $0.diagnostics }
-        resolvedComponent.diagnostics.append(contentsOf: childDiagnostics)
+        resolvedComponent.diagnostics = allDiagnostics + childDiagnostics
         
         return resolvedComponent
     }

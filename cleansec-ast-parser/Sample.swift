@@ -484,14 +484,14 @@ nseGithubBrowser/SplitViewController.swift:17:33 - line:17:96] names=arrayLitera
         (type_ident
           (component id='Int' bind=Swift.(file).Int))))
     (var_decl range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/HTTPError.swift:13:9 - line:13:9] "statusCode" type='Int' interface type='Int' access=internal let readImpl=stored immutable
-      (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/HTTPError.swift:13:9 - line:13:9] 'anonname=0x7fd4de988d18' interface type='(HTTPError) -> () -> Int' access=internal get_for=statusCode
+      (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/HTTPError.swift:13:9 - line:13:9] 'anonname=0x7fb992272b18' interface type='(HTTPError) -> () -> Int' access=internal get_for=statusCode
         (parameter "self" interface type='HTTPError')
         (parameter_list)
         (brace_stmt implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/HTTPError.swift:13:9 - line:13:9]
           (return_stmt implicit
             (member_ref_expr implicit type='Int' decl=CleanseGithubBrowser.(file).HTTPError.statusCode@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/HTTPError.swift:13:9 direct_to_storage
               (declref_expr implicit type='HTTPError' decl=CleanseGithubBrowser.(file).HTTPError.<anonymous>.self@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/HTTPError.swift:13:9 function_ref=unapplied))))))
-    (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/HTTPError.swift:13:9 - line:13:9] 'anonname=0x7fd4de988d18' interface type='(HTTPError) -> () -> Int' access=internal get_for=statusCode
+    (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/HTTPError.swift:13:9 - line:13:9] 'anonname=0x7fb992272b18' interface type='(HTTPError) -> () -> Int' access=internal get_for=statusCode
       (parameter "self" interface type='HTTPError')
       (parameter_list)
       (brace_stmt implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/HTTPError.swift:13:9 - line:13:9]
@@ -595,14 +595,14 @@ nseGithubBrowser/SplitViewController.swift:17:33 - line:17:96] names=arrayLitera
         (type_ident
           (component id='String' bind=Swift.(file).String))))
     (var_decl range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/GithubRepositoriesService.swift:13:9 - line:13:9] "name" type='String' interface type='String' access=internal let readImpl=stored immutable
-      (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/GithubRepositoriesService.swift:13:9 - line:13:9] 'anonname=0x7f985d0db9a8' interface type='(GithubRepository) -> () -> String' access=internal get_for=name
+      (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/GithubRepositoriesService.swift:13:9 - line:13:9] 'anonname=0x7feb1993e5a8' interface type='(GithubRepository) -> () -> String' access=internal get_for=name
         (parameter "self" interface type='GithubRepository')
         (parameter_list)
         (brace_stmt implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/GithubRepositoriesService.swift:13:9 - line:13:9]
           (return_stmt implicit
             (member_ref_expr implicit type='String' decl=CleanseGithubBrowser.(file).GithubRepository.name@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/GithubRepositoriesService.swift:13:9 direct_to_storage
               (declref_expr implicit type='GithubRepository' decl=CleanseGithubBrowser.(file).GithubRepository.<anonymous>.self@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/GithubRepositoriesService.swift:13:9 function_ref=unapplied))))))
-    (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/GithubRepositoriesService.swift:13:9 - line:13:9] 'anonname=0x7f985d0db9a8' interface type='(GithubRepository) -> () -> String' access=internal get_for=name
+    (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/GithubRepositoriesService.swift:13:9 - line:13:9] 'anonname=0x7feb1993e5a8' interface type='(GithubRepository) -> () -> String' access=internal get_for=name
       (parameter "self" interface type='GithubRepository')
       (parameter_list)
       (brace_stmt implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/GithubRepositoriesService.swift:13:9 - line:13:9]
@@ -615,14 +615,14 @@ nseGithubBrowser/SplitViewController.swift:17:33 - line:17:96] names=arrayLitera
         (type_ident
           (component id='Int' bind=Swift.(file).Int))))
     (var_decl range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/GithubRepositoriesService.swift:14:9 - line:14:9] "watchersCount" type='Int' interface type='Int' access=internal let readImpl=stored immutable
-      (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/GithubRepositoriesService.swift:14:9 - line:14:9] 'anonname=0x7f985d0dbb88' interface type='(GithubRepository) -> () -> Int' access=internal get_for=watchersCount
+      (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/GithubRepositoriesService.swift:14:9 - line:14:9] 'anonname=0x7feb1993e788' interface type='(GithubRepository) -> () -> Int' access=internal get_for=watchersCount
         (parameter "self" interface type='GithubRepository')
         (parameter_list)
         (brace_stmt implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/GithubRepositoriesService.swift:14:9 - line:14:9]
           (return_stmt implicit
             (member_ref_expr implicit type='Int' decl=CleanseGithubBrowser.(file).GithubRepository.watchersCount@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/GithubRepositoriesService.swift:14:9 direct_to_storage
               (declref_expr implicit type='GithubRepository' decl=CleanseGithubBrowser.(file).GithubRepository.<anonymous>.self@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/GithubRepositoriesService.swift:14:9 function_ref=unapplied))))))
-    (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/GithubRepositoriesService.swift:14:9 - line:14:9] 'anonname=0x7f985d0dbb88' interface type='(GithubRepository) -> () -> Int' access=internal get_for=watchersCount
+    (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/GithubRepositoriesService.swift:14:9 - line:14:9] 'anonname=0x7feb1993e788' interface type='(GithubRepository) -> () -> Int' access=internal get_for=watchersCount
       (parameter "self" interface type='GithubRepository')
       (parameter_list)
       (brace_stmt implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/GithubRepositoriesService.swift:14:9 - line:14:9]
@@ -674,14 +674,14 @@ nseGithubBrowser/SplitViewController.swift:17:33 - line:17:96] names=arrayLitera
             (type_ident
               (component id='GithubBaseURL' bind=CleanseGithubBrowser.(file).GithubBaseURL@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/GithubServicesModule.swift:34:8)))))
     (var_decl range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/GithubRepositoriesService.swift:30:9 - line:30:9] "githubURL" type='TaggedProvider<GithubBaseURL>' interface type='TaggedProvider<GithubBaseURL>' access=internal let readImpl=stored immutable
-      (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/GithubRepositoriesService.swift:30:9 - line:30:9] 'anonname=0x7f98ad0803c0' interface type='(GithubRepositoriesServiceImpl) -> () -> TaggedProvider<GithubBaseURL>' access=internal get_for=githubURL
+      (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/GithubRepositoriesService.swift:30:9 - line:30:9] 'anonname=0x7feb480881c0' interface type='(GithubRepositoriesServiceImpl) -> () -> TaggedProvider<GithubBaseURL>' access=internal get_for=githubURL
         (parameter "self" interface type='GithubRepositoriesServiceImpl')
         (parameter_list)
         (brace_stmt implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/GithubRepositoriesService.swift:30:9 - line:30:9]
           (return_stmt implicit
             (member_ref_expr implicit type='TaggedProvider<GithubBaseURL>' decl=CleanseGithubBrowser.(file).GithubRepositoriesServiceImpl.githubURL@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/GithubRepositoriesService.swift:30:9 direct_to_storage
               (declref_expr implicit type='GithubRepositoriesServiceImpl' decl=CleanseGithubBrowser.(file).GithubRepositoriesServiceImpl.<anonymous>.self@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/GithubRepositoriesService.swift:30:9 function_ref=unapplied))))))
-    (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/GithubRepositoriesService.swift:30:9 - line:30:9] 'anonname=0x7f98ad0803c0' interface type='(GithubRepositoriesServiceImpl) -> () -> TaggedProvider<GithubBaseURL>' access=internal get_for=githubURL
+    (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/GithubRepositoriesService.swift:30:9 - line:30:9] 'anonname=0x7feb480881c0' interface type='(GithubRepositoriesServiceImpl) -> () -> TaggedProvider<GithubBaseURL>' access=internal get_for=githubURL
       (parameter "self" interface type='GithubRepositoriesServiceImpl')
       (parameter_list)
       (brace_stmt implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/GithubRepositoriesService.swift:30:9 - line:30:9]
@@ -696,14 +696,14 @@ nseGithubBrowser/SplitViewController.swift:17:33 - line:17:96] names=arrayLitera
             (type_ident
               (component id='GithubOrganizationName' bind=CleanseGithubBrowser.(file).GithubOrganizationName@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/GithubServicesModule.swift:43:8)))))
     (var_decl range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/GithubRepositoriesService.swift:31:9 - line:31:9] "githubOrganizationName" type='TaggedProvider<GithubOrganizationName>' interface type='TaggedProvider<GithubOrganizationName>' access=internal let readImpl=stored immutable
-      (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/GithubRepositoriesService.swift:31:9 - line:31:9] 'anonname=0x7f98ad0805c0' interface type='(GithubRepositoriesServiceImpl) -> () -> TaggedProvider<GithubOrganizationName>' access=internal get_for=githubOrganizationName
+      (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/GithubRepositoriesService.swift:31:9 - line:31:9] 'anonname=0x7feb480883c0' interface type='(GithubRepositoriesServiceImpl) -> () -> TaggedProvider<GithubOrganizationName>' access=internal get_for=githubOrganizationName
         (parameter "self" interface type='GithubRepositoriesServiceImpl')
         (parameter_list)
         (brace_stmt implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/GithubRepositoriesService.swift:31:9 - line:31:9]
           (return_stmt implicit
             (member_ref_expr implicit type='TaggedProvider<GithubOrganizationName>' decl=CleanseGithubBrowser.(file).GithubRepositoriesServiceImpl.githubOrganizationName@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/GithubRepositoriesService.swift:31:9 direct_to_storage
               (declref_expr implicit type='GithubRepositoriesServiceImpl' decl=CleanseGithubBrowser.(file).GithubRepositoriesServiceImpl.<anonymous>.self@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/GithubRepositoriesService.swift:31:9 function_ref=unapplied))))))
-    (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/GithubRepositoriesService.swift:31:9 - line:31:9] 'anonname=0x7f98ad0805c0' interface type='(GithubRepositoriesServiceImpl) -> () -> TaggedProvider<GithubOrganizationName>' access=internal get_for=githubOrganizationName
+    (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/GithubRepositoriesService.swift:31:9 - line:31:9] 'anonname=0x7feb480883c0' interface type='(GithubRepositoriesServiceImpl) -> () -> TaggedProvider<GithubOrganizationName>' access=internal get_for=githubOrganizationName
       (parameter "self" interface type='GithubRepositoriesServiceImpl')
       (parameter_list)
       (brace_stmt implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/GithubRepositoriesService.swift:31:9 - line:31:9]
@@ -716,14 +716,14 @@ nseGithubBrowser/SplitViewController.swift:17:33 - line:17:96] names=arrayLitera
         (type_ident
           (component id='URLSession' bind=Foundation.(file).URLSession))))
     (var_decl range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/GithubRepositoriesService.swift:33:9 - line:33:9] "urlSession" type='URLSession' interface type='URLSession' access=internal let readImpl=stored immutable
-      (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/GithubRepositoriesService.swift:33:9 - line:33:9] 'anonname=0x7f98ad080788' interface type='(GithubRepositoriesServiceImpl) -> () -> URLSession' access=internal get_for=urlSession
+      (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/GithubRepositoriesService.swift:33:9 - line:33:9] 'anonname=0x7feb48088588' interface type='(GithubRepositoriesServiceImpl) -> () -> URLSession' access=internal get_for=urlSession
         (parameter "self" interface type='GithubRepositoriesServiceImpl')
         (parameter_list)
         (brace_stmt implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/GithubRepositoriesService.swift:33:9 - line:33:9]
           (return_stmt implicit
             (member_ref_expr implicit type='URLSession' decl=CleanseGithubBrowser.(file).GithubRepositoriesServiceImpl.urlSession@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/GithubRepositoriesService.swift:33:9 direct_to_storage
               (declref_expr implicit type='GithubRepositoriesServiceImpl' decl=CleanseGithubBrowser.(file).GithubRepositoriesServiceImpl.<anonymous>.self@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/GithubRepositoriesService.swift:33:9 function_ref=unapplied))))))
-    (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/GithubRepositoriesService.swift:33:9 - line:33:9] 'anonname=0x7f98ad080788' interface type='(GithubRepositoriesServiceImpl) -> () -> URLSession' access=internal get_for=urlSession
+    (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/GithubRepositoriesService.swift:33:9 - line:33:9] 'anonname=0x7feb48088588' interface type='(GithubRepositoriesServiceImpl) -> () -> URLSession' access=internal get_for=urlSession
       (parameter "self" interface type='GithubRepositoriesServiceImpl')
       (parameter_list)
       (brace_stmt implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/GithubRepositoriesService.swift:33:9 - line:33:9]
@@ -890,7 +890,7 @@ pe='URLSession') range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGi
         (declref_expr implicit type='(UIWindow?.Type) -> UIWindow?' decl=Swift.(file).Optional.none [with (substitution_map generic_signature=<Wrapped> (substitution Wrapped -> UIWindow))] function_ref=unapplied)
         (type_expr implicit type='UIWindow?.Type' typerepr='<<NULL>>')))
     (var_decl range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AppDelegate.swift:18:9 - line:18:9] "window" type='UIWindow?' interface type='UIWindow?' access=internal @objc readImpl=stored writeImpl=stored readWriteImpl=stored
-      (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AppDelegate.swift:18:9 - line:18:9] 'anonname=0x7ffe2da968e8' interface type='(AppDelegate) -> () -> UIWindow?' access=internal @objc get_for=window
+      (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AppDelegate.swift:18:9 - line:18:9] 'anonname=0x7feabd1db8e8' interface type='(AppDelegate) -> () -> UIWindow?' access=internal @objc get_for=window
         (parameter "self" interface type='AppDelegate')
         (parameter_list)
         (brace_stmt implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AppDelegate.swift:18:9 - line:18:9]
@@ -898,7 +898,7 @@ pe='URLSession') range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGi
             (load_expr implicit type='UIWindow?'
               (member_ref_expr implicit type='@lvalue UIWindow?' decl=CleanseGithubBrowser.(file).AppDelegate.window@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AppDelegate.swift:18:9 direct_to_storage
                 (declref_expr implicit type='AppDelegate' decl=CleanseGithubBrowser.(file).AppDelegate.<anonymous>.self@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AppDelegate.swift:18:9 function_ref=unapplied))))))
-      (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AppDelegate.swift:18:9 - line:18:9] 'anonname=0x7ffe2da96ad0' interface type='(AppDelegate) -> (UIWindow?) -> ()' access=internal @objc set_for=window
+      (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AppDelegate.swift:18:9 - line:18:9] 'anonname=0x7feabd1dbad0' interface type='(AppDelegate) -> (UIWindow?) -> ()' access=internal @objc set_for=window
         (parameter "self" interface type='AppDelegate')
         (parameter_list
           (parameter "value" interface type='UIWindow?') range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AppDelegate.swift:18:9 - line:18:9])
@@ -907,7 +907,7 @@ pe='URLSession') range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGi
             (member_ref_expr implicit type='@lvalue UIWindow?' decl=CleanseGithubBrowser.(file).AppDelegate.window@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AppDelegate.swift:18:9 direct_to_storage
               (declref_expr implicit type='AppDelegate' decl=CleanseGithubBrowser.(file).AppDelegate.<anonymous>.self@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AppDelegate.swift:18:9 function_ref=unapplied))
             (declref_expr implicit type='UIWindow?' decl=CleanseGithubBrowser.(file).AppDelegate.<anonymous>.value@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AppDelegate.swift:18:9 function_ref=unapplied))))
-      (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AppDelegate.swift:18:9 - line:18:9] 'anonname=0x7ffe2daa1418' interface type='(AppDelegate) -> () -> ()' access=internal _modify_for=window
+      (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AppDelegate.swift:18:9 - line:18:9] 'anonname=0x7feabd1e7e18' interface type='(AppDelegate) -> () -> ()' access=internal _modify_for=window
         (parameter "self" interface type='AppDelegate')
         (parameter_list)
         (brace_stmt implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AppDelegate.swift:18:9 - line:18:9]
@@ -915,7 +915,7 @@ pe='URLSession') range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGi
             (inout_expr implicit type='inout UIWindow?'
               (member_ref_expr implicit type='@lvalue UIWindow?' decl=CleanseGithubBrowser.(file).AppDelegate.window@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AppDelegate.swift:18:9 direct_to_impl
                 (declref_expr implicit type='AppDelegate' decl=CleanseGithubBrowser.(file).AppDelegate.<anonymous>.self@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AppDelegate.swift:18:9 function_ref=unapplied)))))))
-    (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AppDelegate.swift:18:9 - line:18:9] 'anonname=0x7ffe2da968e8' interface type='(AppDelegate) -> () -> UIWindow?' access=internal @objc get_for=window
+    (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AppDelegate.swift:18:9 - line:18:9] 'anonname=0x7feabd1db8e8' interface type='(AppDelegate) -> () -> UIWindow?' access=internal @objc get_for=window
       (parameter "self" interface type='AppDelegate')
       (parameter_list)
       (brace_stmt implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AppDelegate.swift:18:9 - line:18:9]
@@ -923,7 +923,7 @@ pe='URLSession') range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGi
           (load_expr implicit type='UIWindow?'
             (member_ref_expr implicit type='@lvalue UIWindow?' decl=CleanseGithubBrowser.(file).AppDelegate.window@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AppDelegate.swift:18:9 direct_to_storage
               (declref_expr implicit type='AppDelegate' decl=CleanseGithubBrowser.(file).AppDelegate.<anonymous>.self@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AppDelegate.swift:18:9 function_ref=unapplied))))))
-    (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AppDelegate.swift:18:9 - line:18:9] 'anonname=0x7ffe2da96ad0' interface type='(AppDelegate) -> (UIWindow?) -> ()' access=internal @objc set_for=window
+    (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AppDelegate.swift:18:9 - line:18:9] 'anonname=0x7feabd1dbad0' interface type='(AppDelegate) -> (UIWindow?) -> ()' access=internal @objc set_for=window
       (parameter "self" interface type='AppDelegate')
       (parameter_list
         (parameter "value" interface type='UIWindow?') range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AppDelegate.swift:18:9 - line:18:9])
@@ -932,7 +932,7 @@ pe='URLSession') range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGi
           (member_ref_expr implicit type='@lvalue UIWindow?' decl=CleanseGithubBrowser.(file).AppDelegate.window@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AppDelegate.swift:18:9 direct_to_storage
             (declref_expr implicit type='AppDelegate' decl=CleanseGithubBrowser.(file).AppDelegate.<anonymous>.self@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AppDelegate.swift:18:9 function_ref=unapplied))
           (declref_expr implicit type='UIWindow?' decl=CleanseGithubBrowser.(file).AppDelegate.<anonymous>.value@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AppDelegate.swift:18:9 function_ref=unapplied))))
-    (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AppDelegate.swift:18:9 - line:18:9] 'anonname=0x7ffe2daa1418' interface type='(AppDelegate) -> () -> ()' access=internal _modify_for=window
+    (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AppDelegate.swift:18:9 - line:18:9] 'anonname=0x7feabd1e7e18' interface type='(AppDelegate) -> () -> ()' access=internal _modify_for=window
       (parameter "self" interface type='AppDelegate')
       (parameter_list)
       (brace_stmt implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AppDelegate.swift:18:9 - line:18:9]
@@ -1089,7 +1089,7 @@ pe='URLSession') range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGi
         (type_ident
           (component id='Bool' bind=Swift.(file).Bool))))
     (var_decl range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AppDelegate.swift:49:21 - line:49:21] "useFakeMode" type='Bool' interface type='Bool' access=fileprivate readImpl=getter immutable
-      (accessor_decl range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AppDelegate.swift:49:39 - line:51:5] 'anonname=0x7ffe1c8ee780' interface type='(AppDelegate) -> () -> Bool' access=fileprivate get_for=useFakeMode
+      (accessor_decl range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AppDelegate.swift:49:39 - line:51:5] 'anonname=0x7feadd012b80' interface type='(AppDelegate) -> () -> Bool' access=fileprivate get_for=useFakeMode
         (parameter "self" interface type='AppDelegate')
         (parameter_list)
         (brace_stmt range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AppDelegate.swift:49:39 - line:51:5]
@@ -1107,7 +1107,7 @@ pe='URLSession') range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGi
                     (string_literal_expr type='String' location=/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AppDelegate.swift:50:52 range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AppDelegate.swift:50:52 - line:50:52] encoding=utf8 value="USE_FAKES" builtin_initializer=Swift.(file).String extension.init(_builtinStringLiteral:utf8CodeUnitCount:isASCII:) initializer=**NULL**)))
                 (inject_into_optional implicit type='String?' location=/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AppDelegate.swift:50:68 range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AppDelegate.swift:50:68 - line:50:68]
                   (string_literal_expr type='String' location=/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AppDelegate.swift:50:68 range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AppDelegate.swift:50:68 - line:50:68] encoding=utf8 value="YES" builtin_initializer=Swift.(file).String extension.init(_builtinStringLiteral:utf8CodeUnitCount:isASCII:) initializer=**NULL**))))))))
-    (accessor_decl range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AppDelegate.swift:49:39 - line:51:5] 'anonname=0x7ffe1c8ee780' interface type='(AppDelegate) -> () -> Bool' access=fileprivate get_for=useFakeMode
+    (accessor_decl range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AppDelegate.swift:49:39 - line:51:5] 'anonname=0x7feadd012b80' interface type='(AppDelegate) -> () -> Bool' access=fileprivate get_for=useFakeMode
       (parameter "self" interface type='AppDelegate')
       (parameter_list)
       (brace_stmt range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AppDelegate.swift:49:39 - line:51:5]
@@ -1256,10 +1256,10 @@ pe='URLSession') range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGi
                                 (declref_expr implicit type='@lvalue String.StringInterpolation' location=/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AllBindingsPlugin.swift:20:32 range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AllBindingsPlugin.swift:20:32 - line:20:32] decl=CleanseGithubBrowser.(file).AllBindingPlugin.visit(root:errorReporter:).$interpolation function_ref=unapplied)))
                             (paren_expr type='(Any.Type?)' location=/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AllBindingsPlugin.swift:20:37 range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AllBindingsPlugin.swift:20:32 - line:20:50]
                               (open_existential_expr implicit type='Any.Type?' location=/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AllBindingsPlugin.swift:20:37 range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AllBindingsPlugin.swift:20:33 - line:20:37]
-                                (opaque_value_expr implicit type='ComponentBinding' location=/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AllBindingsPlugin.swift:20:33 range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AllBindingsPlugin.swift:20:33 - line:20:33] @ 0x7fc063093858)
+                                (opaque_value_expr implicit type='ComponentBinding' location=/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AllBindingsPlugin.swift:20:33 range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AllBindingsPlugin.swift:20:33 - line:20:33] @ 0x7ff993130c58)
                                 (declref_expr type='ComponentBinding' location=/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AllBindingsPlugin.swift:20:33 range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AllBindingsPlugin.swift:20:33 - line:20:33] decl=CleanseGithubBrowser.(file).AllBindingPlugin.visit(root:errorReporter:).top@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AllBindingsPlugin.swift:18:17 function_ref=unapplied)
                                 (member_ref_expr type='Any.Type?' location=/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AllBindingsPlugin.swift:20:37 range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AllBindingsPlugin.swift:20:33 - line:20:37] decl=Cleanse.(file).ComponentBinding.componentType [with (substitution_map generic_signature=<Self where Self : ComponentBinding> (substitution Self -> ComponentBinding))]
-                                  (opaque_value_expr implicit type='ComponentBinding' location=/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AllBindingsPlugin.swift:20:33 range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AllBindingsPlugin.swift:20:33 - line:20:33] @ 0x7fc063093858)))))
+                                  (opaque_value_expr implicit type='ComponentBinding' location=/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AllBindingsPlugin.swift:20:33 range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AllBindingsPlugin.swift:20:33 - line:20:33] @ 0x7ff993130c58)))))
                           (call_expr implicit type='()' location=/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AllBindingsPlugin.swift:20:51 range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AllBindingsPlugin.swift:20:51 - line:20:51] nothrow arg_labels=_:
                             (dot_syntax_call_expr implicit type='(String) -> ()' location=/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AllBindingsPlugin.swift:20:51 range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AllBindingsPlugin.swift:20:51 - line:20:51] nothrow
                               (declref_expr implicit type='(inout DefaultStringInterpolation) -> (String) -> ()' decl=Swift.(file).DefaultStringInterpolation.appendLiteral function_ref=single)
@@ -1298,10 +1298,10 @@ pe='URLSession') range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGi
                                       (declref_expr implicit type='@lvalue String.StringInterpolation' location=/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AllBindingsPlugin.swift:20:32 range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AllBindingsPlugin.swift:20:32 - line:20:32] decl=CleanseGithubBrowser.(file).AllBindingPlugin.visit(root:errorReporter:).$interpolation function_ref=unapplied)))
                                   (paren_expr type='(Any.Type?)' location=/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AllBindingsPlugin.swift:20:37 range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AllBindingsPlugin.swift:20:32 - line:20:50]
                                     (open_existential_expr implicit type='Any.Type?' location=/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AllBindingsPlugin.swift:20:37 range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AllBindingsPlugin.swift:20:33 - line:20:37]
-                                      (opaque_value_expr implicit type='ComponentBinding' location=/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AllBindingsPlugin.swift:20:33 range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AllBindingsPlugin.swift:20:33 - line:20:33] @ 0x7fc063093858)
+                                      (opaque_value_expr implicit type='ComponentBinding' location=/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AllBindingsPlugin.swift:20:33 range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AllBindingsPlugin.swift:20:33 - line:20:33] @ 0x7ff993130c58)
                                       (declref_expr type='ComponentBinding' location=/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AllBindingsPlugin.swift:20:33 range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AllBindingsPlugin.swift:20:33 - line:20:33] decl=CleanseGithubBrowser.(file).AllBindingPlugin.visit(root:errorReporter:).top@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AllBindingsPlugin.swift:18:17 function_ref=unapplied)
                                       (member_ref_expr type='Any.Type?' location=/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AllBindingsPlugin.swift:20:37 range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AllBindingsPlugin.swift:20:33 - line:20:37] decl=Cleanse.(file).ComponentBinding.componentType [with (substitution_map generic_signature=<Self where Self : ComponentBinding> (substitution Self -> ComponentBinding))]
-                                        (opaque_value_expr implicit type='ComponentBinding' location=/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AllBindingsPlugin.swift:20:33 range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AllBindingsPlugin.swift:20:33 - line:20:33] @ 0x7fc063093858)))))
+                                        (opaque_value_expr implicit type='ComponentBinding' location=/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AllBindingsPlugin.swift:20:33 range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AllBindingsPlugin.swift:20:33 - line:20:33] @ 0x7ff993130c58)))))
                                 (call_expr implicit type='()' location=/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AllBindingsPlugin.swift:20:51 range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AllBindingsPlugin.swift:20:51 - line:20:51] nothrow arg_labels=_:
                                   (dot_syntax_call_expr implicit type='(String) -> ()' location=/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AllBindingsPlugin.swift:20:51 range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AllBindingsPlugin.swift:20:51 - line:20:51] nothrow
                                     (declref_expr implicit type='(inout DefaultStringInterpolation) -> (String) -> ()' decl=Swift.(file).DefaultStringInterpolation.appendLiteral function_ref=single)
@@ -1313,10 +1313,10 @@ pe='URLSession') range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGi
               (dot_syntax_call_expr type='(((key: ProviderKey, value: [ProviderInfo])) throws -> Void) throws -> ()' location=/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AllBindingsPlugin.swift:21:27 range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AllBindingsPlugin.swift:21:13 - line:21:27] nothrow
                 (declref_expr type='([ProviderKey : [ProviderInfo]]) -> (((key: ProviderKey, value: [ProviderInfo])) throws -> Void) throws -> ()' location=/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AllBindingsPlugin.swift:21:27 range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AllBindingsPlugin.swift:21:27 - line:21:27] decl=Swift.(file).Sequence extension.forEach [with (substitution_map generic_signature=<Self where Self : Sequence> (substitution Self -> [ProviderKey : [ProviderInfo]]))] function_ref=single)
                 (open_existential_expr implicit type='[ProviderKey : [ProviderInfo]]' location=/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AllBindingsPlugin.swift:21:17 range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AllBindingsPlugin.swift:21:13 - line:21:17]
-                  (opaque_value_expr implicit type='ComponentBinding' location=/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AllBindingsPlugin.swift:21:13 range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AllBindingsPlugin.swift:21:13 - line:21:13] @ 0x7fc063041360)
+                  (opaque_value_expr implicit type='ComponentBinding' location=/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AllBindingsPlugin.swift:21:13 range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AllBindingsPlugin.swift:21:13 - line:21:13] @ 0x7ff9420bf760)
                   (declref_expr type='ComponentBinding' location=/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AllBindingsPlugin.swift:21:13 range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AllBindingsPlugin.swift:21:13 - line:21:13] decl=CleanseGithubBrowser.(file).AllBindingPlugin.visit(root:errorReporter:).top@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AllBindingsPlugin.swift:18:17 function_ref=unapplied)
                   (member_ref_expr type='[ProviderKey : [ProviderInfo]]' location=/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AllBindingsPlugin.swift:21:17 range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AllBindingsPlugin.swift:21:13 - line:21:17] decl=Cleanse.(file).ComponentBinding.providers [with (substitution_map generic_signature=<Self where Self : ComponentBinding> (substitution Self -> ComponentBinding))]
-                    (opaque_value_expr implicit type='ComponentBinding' location=/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AllBindingsPlugin.swift:21:13 range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AllBindingsPlugin.swift:21:13 - line:21:13] @ 0x7fc063041360))))
+                    (opaque_value_expr implicit type='ComponentBinding' location=/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AllBindingsPlugin.swift:21:13 range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AllBindingsPlugin.swift:21:13 - line:21:13] @ 0x7ff9420bf760))))
               (paren_expr type='(((key: ProviderKey, value: [ProviderInfo])) throws -> Void)' location=/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AllBindingsPlugin.swift:21:35 range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AllBindingsPlugin.swift:21:35 - line:29:13] trailing-closure
                 (function_conversion_expr implicit type='((key: ProviderKey, value: [ProviderInfo])) throws -> Void' location=/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AllBindingsPlugin.swift:21:35 range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AllBindingsPlugin.swift:21:35 - line:29:13]
                   (closure_expr type='(ProviderKey, [ProviderInfo]) -> Void' location=/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AllBindingsPlugin.swift:21:35 range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AllBindingsPlugin.swift:21:35 - line:29:13] discriminator=0 captures=(providers<direct><noescape>)
@@ -1683,10 +1683,10 @@ indingsPlugin.swift:28:25 range=[/Users/sebastians/Development/Cleanse/Examples/
               (argument_shuffle_expr implicit type='(contentsOf: __owned [ComponentBinding])' location=/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AllBindingsPlugin.swift:30:33 range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AllBindingsPlugin.swift:30:33 - line:30:63] tuple_to_tuple elements=[0] variadic_sources=[] default_args_owner=Swift.(file).Array extension.append(contentsOf:) [with (substitution_map generic_signature=<Element, S where Element == S.Element, S : Sequence> (substitution Element -> ComponentBinding) (substitution S -> [ComponentBinding]))]
                 (tuple_expr type='(contentsOf: [ComponentBinding])' location=/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AllBindingsPlugin.swift:30:33 range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AllBindingsPlugin.swift:30:33 - line:30:63] names=contentsOf
                   (open_existential_expr implicit type='[ComponentBinding]' location=/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AllBindingsPlugin.swift:30:50 range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AllBindingsPlugin.swift:30:46 - line:30:50]
-                    (opaque_value_expr implicit type='ComponentBinding' location=/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AllBindingsPlugin.swift:30:46 range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AllBindingsPlugin.swift:30:46 - line:30:46] @ 0x7fc022a67760)
+                    (opaque_value_expr implicit type='ComponentBinding' location=/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AllBindingsPlugin.swift:30:46 range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AllBindingsPlugin.swift:30:46 - line:30:46] @ 0x7ff992185560)
                     (declref_expr type='ComponentBinding' location=/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AllBindingsPlugin.swift:30:46 range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AllBindingsPlugin.swift:30:46 - line:30:46] decl=CleanseGithubBrowser.(file).AllBindingPlugin.visit(root:errorReporter:).top@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AllBindingsPlugin.swift:18:17 function_ref=unapplied)
                     (member_ref_expr type='[ComponentBinding]' location=/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AllBindingsPlugin.swift:30:50 range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AllBindingsPlugin.swift:30:46 - line:30:50] decl=Cleanse.(file).ComponentBinding.subcomponents [with (substitution_map generic_signature=<Self where Self : ComponentBinding> (substitution Self -> ComponentBinding))]
-                      (opaque_value_expr implicit type='ComponentBinding' location=/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AllBindingsPlugin.swift:30:46 range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AllBindingsPlugin.swift:30:46 - line:30:46] @ 0x7fc022a67760))))))))
+                      (opaque_value_expr implicit type='ComponentBinding' location=/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AllBindingsPlugin.swift:30:46 range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AllBindingsPlugin.swift:30:46 - line:30:46] @ 0x7ff992185560))))))))
         (call_expr type='()' location=/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AllBindingsPlugin.swift:33:9 range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AllBindingsPlugin.swift:33:9 - line:33:29] nothrow arg_labels=_:
           (declref_expr type='(Any..., String, String) -> ()' location=/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AllBindingsPlugin.swift:33:9 range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AllBindingsPlugin.swift:33:9 - line:33:9] decl=Swift.(file).print(_:separator:terminator:) function_ref=single)
           (argument_shuffle_expr implicit type='(Any..., separator: String, terminator: String)' location=/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AllBindingsPlugin.swift:33:15 range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/AllBindingsPlugin.swift:33:14 - line:33:29] scalar_to_tuple elements=[-2, -1, -1] variadic_sources=[0] default_args_owner=Swift.(file).print(_:separator:terminator:)
@@ -1791,14 +1791,14 @@ indingsPlugin.swift:28:25 range=[/Users/sebastians/Development/Cleanse/Examples/
           (type_ident
             (component id='UITableViewCell' bind=UIKit.(file).UITableViewCell)))))
     (var_decl range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/FakeModeSettings.swift:30:17 - line:30:17] "cells" type='[UITableViewCell]' interface type='[UITableViewCell]' access=private final let readImpl=stored immutable
-      (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/FakeModeSettings.swift:30:17 - line:30:17] 'anonname=0x7fdcdb855720' interface type='(FakeModeSettingsSplitViewController) -> () -> [UITableViewCell]' access=private final get_for=cells
+      (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/FakeModeSettings.swift:30:17 - line:30:17] 'anonname=0x7fb3570a0b20' interface type='(FakeModeSettingsSplitViewController) -> () -> [UITableViewCell]' access=private final get_for=cells
         (parameter "self" interface type='FakeModeSettingsSplitViewController')
         (parameter_list)
         (brace_stmt implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/FakeModeSettings.swift:30:17 - line:30:17]
           (return_stmt implicit
             (member_ref_expr implicit type='[UITableViewCell]' decl=CleanseGithubBrowser.(file).FakeModeSettingsSplitViewController.cells@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/FakeModeSettings.swift:30:17 direct_to_storage
               (declref_expr implicit type='FakeModeSettingsSplitViewController' decl=CleanseGithubBrowser.(file).FakeModeSettingsSplitViewController.<anonymous>.self@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/FakeModeSettings.swift:30:17 function_ref=unapplied))))))
-    (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/FakeModeSettings.swift:30:17 - line:30:17] 'anonname=0x7fdcdb855720' interface type='(FakeModeSettingsSplitViewController) -> () -> [UITableViewCell]' access=private final get_for=cells
+    (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/FakeModeSettings.swift:30:17 - line:30:17] 'anonname=0x7fb3570a0b20' interface type='(FakeModeSettingsSplitViewController) -> () -> [UITableViewCell]' access=private final get_for=cells
       (parameter "self" interface type='FakeModeSettingsSplitViewController')
       (parameter_list)
       (brace_stmt implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/FakeModeSettings.swift:30:17 - line:30:17]
@@ -1889,14 +1889,14 @@ indingsPlugin.swift:28:25 range=[/Users/sebastians/Development/Cleanse/Examples/
           (type_expr type='UISwitch.Type' location=/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/FakeModeSettings.swift:48:20 range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/FakeModeSettings.swift:48:20 - line:48:20] typerepr='UISwitch'))
         (tuple_expr type='()' location=/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/FakeModeSettings.swift:48:28 range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/FakeModeSettings.swift:48:28 - line:48:29])))
     (var_decl range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/FakeModeSettings.swift:48:9 - line:48:9] "switch" type='UISwitch' interface type='UISwitch' access=internal final let readImpl=stored immutable
-      (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/FakeModeSettings.swift:48:9 - line:48:9] 'anonname=0x7fdcad066fc0' interface type='(FakeModeCell) -> () -> UISwitch' access=internal final get_for=switch
+      (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/FakeModeSettings.swift:48:9 - line:48:9] 'anonname=0x7fb36706d1c0' interface type='(FakeModeCell) -> () -> UISwitch' access=internal final get_for=switch
         (parameter "self" interface type='FakeModeCell')
         (parameter_list)
         (brace_stmt implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/FakeModeSettings.swift:48:9 - line:48:9]
           (return_stmt implicit
             (member_ref_expr implicit type='UISwitch' decl=CleanseGithubBrowser.(file).FakeModeCell.switch@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/FakeModeSettings.swift:48:9 direct_to_storage
               (declref_expr implicit type='FakeModeCell' decl=CleanseGithubBrowser.(file).FakeModeCell.<anonymous>.self@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/FakeModeSettings.swift:48:9 function_ref=unapplied))))))
-    (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/FakeModeSettings.swift:48:9 - line:48:9] 'anonname=0x7fdcad066fc0' interface type='(FakeModeCell) -> () -> UISwitch' access=internal final get_for=switch
+    (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/FakeModeSettings.swift:48:9 - line:48:9] 'anonname=0x7fb36706d1c0' interface type='(FakeModeCell) -> () -> UISwitch' access=internal final get_for=switch
       (parameter "self" interface type='FakeModeCell')
       (parameter_list)
       (brace_stmt implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/FakeModeSettings.swift:48:9 - line:48:9]
@@ -1909,14 +1909,14 @@ indingsPlugin.swift:28:25 range=[/Users/sebastians/Development/Cleanse/Examples/
         (type_ident
           (component id='ProcessInfo' bind=Foundation.(file).ProcessInfo))))
     (var_decl range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/FakeModeSettings.swift:49:9 - line:49:9] "processInfo" type='ProcessInfo' interface type='ProcessInfo' access=internal final let readImpl=stored immutable
-      (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/FakeModeSettings.swift:49:9 - line:49:9] 'anonname=0x7fdcad067620' interface type='(FakeModeCell) -> () -> ProcessInfo' access=internal final get_for=processInfo
+      (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/FakeModeSettings.swift:49:9 - line:49:9] 'anonname=0x7fb36706d820' interface type='(FakeModeCell) -> () -> ProcessInfo' access=internal final get_for=processInfo
         (parameter "self" interface type='FakeModeCell')
         (parameter_list)
         (brace_stmt implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/FakeModeSettings.swift:49:9 - line:49:9]
           (return_stmt implicit
             (member_ref_expr implicit type='ProcessInfo' decl=CleanseGithubBrowser.(file).FakeModeCell.processInfo@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/FakeModeSettings.swift:49:9 direct_to_storage
               (declref_expr implicit type='FakeModeCell' decl=CleanseGithubBrowser.(file).FakeModeCell.<anonymous>.self@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/FakeModeSettings.swift:49:9 function_ref=unapplied))))))
-    (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/FakeModeSettings.swift:49:9 - line:49:9] 'anonname=0x7fdcad067620' interface type='(FakeModeCell) -> () -> ProcessInfo' access=internal final get_for=processInfo
+    (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/FakeModeSettings.swift:49:9 - line:49:9] 'anonname=0x7fb36706d820' interface type='(FakeModeCell) -> () -> ProcessInfo' access=internal final get_for=processInfo
       (parameter "self" interface type='FakeModeCell')
       (parameter_list)
       (brace_stmt implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/FakeModeSettings.swift:49:9 - line:49:9]
@@ -2083,14 +2083,14 @@ indingsPlugin.swift:28:25 range=[/Users/sebastians/Development/Cleanse/Examples/
         (type_ident
           (component id='String' bind=Swift.(file).String))))
     (var_decl range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/GithubMemberService.swift:13:9 - line:13:9] "login" type='String' interface type='String' access=internal let readImpl=stored immutable
-      (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/GithubMemberService.swift:13:9 - line:13:9] 'anonname=0x7fdcad8df7c0' interface type='(GithubMember) -> () -> String' access=internal get_for=login
+      (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/GithubMemberService.swift:13:9 - line:13:9] 'anonname=0x7fb387a5c1c0' interface type='(GithubMember) -> () -> String' access=internal get_for=login
         (parameter "self" interface type='GithubMember')
         (parameter_list)
         (brace_stmt implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/GithubMemberService.swift:13:9 - line:13:9]
           (return_stmt implicit
             (member_ref_expr implicit type='String' decl=CleanseGithubBrowser.(file).GithubMember.login@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/GithubMemberService.swift:13:9 direct_to_storage
               (declref_expr implicit type='GithubMember' decl=CleanseGithubBrowser.(file).GithubMember.<anonymous>.self@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/GithubMemberService.swift:13:9 function_ref=unapplied))))))
-    (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/GithubMemberService.swift:13:9 - line:13:9] 'anonname=0x7fdcad8df7c0' interface type='(GithubMember) -> () -> String' access=internal get_for=login
+    (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/GithubMemberService.swift:13:9 - line:13:9] 'anonname=0x7fb387a5c1c0' interface type='(GithubMember) -> () -> String' access=internal get_for=login
       (parameter "self" interface type='GithubMember')
       (parameter_list)
       (brace_stmt implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/GithubMemberService.swift:13:9 - line:13:9]
@@ -2141,14 +2141,14 @@ indingsPlugin.swift:28:25 range=[/Users/sebastians/Development/Cleanse/Examples/
             (type_ident
               (component id='GithubBaseURL' bind=CleanseGithubBrowser.(file).GithubBaseURL@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/GithubServicesModule.swift:34:8)))))
     (var_decl range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/GithubMemberService.swift:27:9 - line:27:9] "githubURL" type='TaggedProvider<GithubBaseURL>' interface type='TaggedProvider<GithubBaseURL>' access=internal let readImpl=stored immutable
-      (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/GithubMemberService.swift:27:9 - line:27:9] 'anonname=0x7fdcaba97d48' interface type='(GithubMembersServiceImpl) -> () -> TaggedProvider<GithubBaseURL>' access=internal get_for=githubURL
+      (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/GithubMemberService.swift:27:9 - line:27:9] 'anonname=0x7fb387a71148' interface type='(GithubMembersServiceImpl) -> () -> TaggedProvider<GithubBaseURL>' access=internal get_for=githubURL
         (parameter "self" interface type='GithubMembersServiceImpl')
         (parameter_list)
         (brace_stmt implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/GithubMemberService.swift:27:9 - line:27:9]
           (return_stmt implicit
             (member_ref_expr implicit type='TaggedProvider<GithubBaseURL>' decl=CleanseGithubBrowser.(file).GithubMembersServiceImpl.githubURL@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/GithubMemberService.swift:27:9 direct_to_storage
               (declref_expr implicit type='GithubMembersServiceImpl' decl=CleanseGithubBrowser.(file).GithubMembersServiceImpl.<anonymous>.self@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/GithubMemberService.swift:27:9 function_ref=unapplied))))))
-    (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/GithubMemberService.swift:27:9 - line:27:9] 'anonname=0x7fdcaba97d48' interface type='(GithubMembersServiceImpl) -> () -> TaggedProvider<GithubBaseURL>' access=internal get_for=githubURL
+    (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/GithubMemberService.swift:27:9 - line:27:9] 'anonname=0x7fb387a71148' interface type='(GithubMembersServiceImpl) -> () -> TaggedProvider<GithubBaseURL>' access=internal get_for=githubURL
       (parameter "self" interface type='GithubMembersServiceImpl')
       (parameter_list)
       (brace_stmt implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/GithubMemberService.swift:27:9 - line:27:9]
@@ -2163,14 +2163,14 @@ indingsPlugin.swift:28:25 range=[/Users/sebastians/Development/Cleanse/Examples/
             (type_ident
               (component id='GithubOrganizationName' bind=CleanseGithubBrowser.(file).GithubOrganizationName@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/GithubServicesModule.swift:43:8)))))
     (var_decl range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/GithubMemberService.swift:28:9 - line:28:9] "githubOrganizationName" type='TaggedProvider<GithubOrganizationName>' interface type='TaggedProvider<GithubOrganizationName>' access=internal let readImpl=stored immutable
-      (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/GithubMemberService.swift:28:9 - line:28:9] 'anonname=0x7fdcaba97f48' interface type='(GithubMembersServiceImpl) -> () -> TaggedProvider<GithubOrganizationName>' access=internal get_for=githubOrganizationName
+      (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/GithubMemberService.swift:28:9 - line:28:9] 'anonname=0x7fb387a71348' interface type='(GithubMembersServiceImpl) -> () -> TaggedProvider<GithubOrganizationName>' access=internal get_for=githubOrganizationName
         (parameter "self" interface type='GithubMembersServiceImpl')
         (parameter_list)
         (brace_stmt implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/GithubMemberService.swift:28:9 - line:28:9]
           (return_stmt implicit
             (member_ref_expr implicit type='TaggedProvider<GithubOrganizationName>' decl=CleanseGithubBrowser.(file).GithubMembersServiceImpl.githubOrganizationName@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/GithubMemberService.swift:28:9 direct_to_storage
               (declref_expr implicit type='GithubMembersServiceImpl' decl=CleanseGithubBrowser.(file).GithubMembersServiceImpl.<anonymous>.self@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/GithubMemberService.swift:28:9 function_ref=unapplied))))))
-    (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/GithubMemberService.swift:28:9 - line:28:9] 'anonname=0x7fdcaba97f48' interface type='(GithubMembersServiceImpl) -> () -> TaggedProvider<GithubOrganizationName>' access=internal get_for=githubOrganizationName
+    (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/GithubMemberService.swift:28:9 - line:28:9] 'anonname=0x7fb387a71348' interface type='(GithubMembersServiceImpl) -> () -> TaggedProvider<GithubOrganizationName>' access=internal get_for=githubOrganizationName
       (parameter "self" interface type='GithubMembersServiceImpl')
       (parameter_list)
       (brace_stmt implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/GithubMemberService.swift:28:9 - line:28:9]
@@ -2183,14 +2183,14 @@ indingsPlugin.swift:28:25 range=[/Users/sebastians/Development/Cleanse/Examples/
         (type_ident
           (component id='URLSession' bind=Foundation.(file).URLSession))))
     (var_decl range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/GithubMemberService.swift:30:9 - line:30:9] "urlSession" type='URLSession' interface type='URLSession' access=internal let readImpl=stored immutable
-      (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/GithubMemberService.swift:30:9 - line:30:9] 'anonname=0x7fdcaba98110' interface type='(GithubMembersServiceImpl) -> () -> URLSession' access=internal get_for=urlSession
+      (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/GithubMemberService.swift:30:9 - line:30:9] 'anonname=0x7fb387a71510' interface type='(GithubMembersServiceImpl) -> () -> URLSession' access=internal get_for=urlSession
         (parameter "self" interface type='GithubMembersServiceImpl')
         (parameter_list)
         (brace_stmt implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/GithubMemberService.swift:30:9 - line:30:9]
           (return_stmt implicit
             (member_ref_expr implicit type='URLSession' decl=CleanseGithubBrowser.(file).GithubMembersServiceImpl.urlSession@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/GithubMemberService.swift:30:9 direct_to_storage
               (declref_expr implicit type='GithubMembersServiceImpl' decl=CleanseGithubBrowser.(file).GithubMembersServiceImpl.<anonymous>.self@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/GithubMemberService.swift:30:9 function_ref=unapplied))))))
-    (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/GithubMemberService.swift:30:9 - line:30:9] 'anonname=0x7fdcaba98110' interface type='(GithubMembersServiceImpl) -> () -> URLSession' access=internal get_for=urlSession
+    (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/GithubMemberService.swift:30:9 - line:30:9] 'anonname=0x7fb387a71510' interface type='(GithubMembersServiceImpl) -> () -> URLSession' access=internal get_for=urlSession
       (parameter "self" interface type='GithubMembersServiceImpl')
       (parameter_list)
       (brace_stmt implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/GithubMemberService.swift:30:9 - line:30:9]
@@ -2453,14 +2453,14 @@ indingsPlugin.swift:28:25 range=[/Users/sebastians/Development/Cleanse/Examples/
         (type_ident
           (component id='GithubRepositoriesService' bind=CleanseGithubBrowser.(file).GithubRepositoriesService@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/GithubRepositoriesService.swift:25:10))))
     (var_decl range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:79:9 - line:79:9] "repositoriesService" type='GithubRepositoriesService' interface type='GithubRepositoriesService' access=internal final let readImpl=stored immutable
-      (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:79:9 - line:79:9] 'anonname=0x7facfaa50038' interface type='(RepositoriesViewController) -> () -> GithubRepositoriesService' access=internal final get_for=repositoriesService
+      (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:79:9 - line:79:9] 'anonname=0x7fa4f80bde38' interface type='(RepositoriesViewController) -> () -> GithubRepositoriesService' access=internal final get_for=repositoriesService
         (parameter "self" interface type='RepositoriesViewController')
         (parameter_list)
         (brace_stmt implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:79:9 - line:79:9]
           (return_stmt implicit
             (member_ref_expr implicit type='GithubRepositoriesService' decl=CleanseGithubBrowser.(file).RepositoriesViewController.repositoriesService@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:79:9 direct_to_storage
               (declref_expr implicit type='RepositoriesViewController' decl=CleanseGithubBrowser.(file).RepositoriesViewController.<anonymous>.self@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:79:9 function_ref=unapplied))))))
-    (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:79:9 - line:79:9] 'anonname=0x7facfaa50038' interface type='(RepositoriesViewController) -> () -> GithubRepositoriesService' access=internal final get_for=repositoriesService
+    (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:79:9 - line:79:9] 'anonname=0x7fa4f80bde38' interface type='(RepositoriesViewController) -> () -> GithubRepositoriesService' access=internal final get_for=repositoriesService
       (parameter "self" interface type='RepositoriesViewController')
       (parameter_list)
       (brace_stmt implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:79:9 - line:79:9]
@@ -2475,7 +2475,7 @@ indingsPlugin.swift:28:25 range=[/Users/sebastians/Development/Cleanse/Examples/
           (type_expr type='[GithubRepository].Type' location=/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:81:32 range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:81:32 - line:81:49] typerepr='[GithubRepository]'))
         (tuple_expr type='()' location=/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:81:50 range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:81:50 - line:81:51])))
     (var_decl range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:81:17 - line:81:17] "repositories" type='[GithubRepository]' interface type='[GithubRepository]' access=private readImpl=stored writeImpl=stored readWriteImpl=stored
-      (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:81:17 - line:81:17] 'anonname=0x7facf90dca28' interface type='(RepositoriesViewController) -> () -> [GithubRepository]' access=private get_for=repositories
+      (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:81:17 - line:81:17] 'anonname=0x7fa520090a28' interface type='(RepositoriesViewController) -> () -> [GithubRepository]' access=private get_for=repositories
         (parameter "self" interface type='RepositoriesViewController')
         (parameter_list)
         (brace_stmt implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:81:17 - line:81:17]
@@ -2483,7 +2483,7 @@ indingsPlugin.swift:28:25 range=[/Users/sebastians/Development/Cleanse/Examples/
             (load_expr implicit type='[GithubRepository]'
               (member_ref_expr implicit type='@lvalue [GithubRepository]' decl=CleanseGithubBrowser.(file).RepositoriesViewController.repositories@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:81:17 direct_to_storage
                 (declref_expr implicit type='RepositoriesViewController' decl=CleanseGithubBrowser.(file).RepositoriesViewController.<anonymous>.self@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:81:17 function_ref=unapplied))))))
-      (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:81:17 - line:81:17] 'anonname=0x7facf90dcc10' interface type='(RepositoriesViewController) -> ([GithubRepository]) -> ()' access=private set_for=repositories
+      (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:81:17 - line:81:17] 'anonname=0x7fa520090c10' interface type='(RepositoriesViewController) -> ([GithubRepository]) -> ()' access=private set_for=repositories
         (parameter "self" interface type='RepositoriesViewController')
         (parameter_list
           (parameter "value" interface type='[GithubRepository]') range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:81:17 - line:81:17])
@@ -2492,7 +2492,7 @@ indingsPlugin.swift:28:25 range=[/Users/sebastians/Development/Cleanse/Examples/
             (member_ref_expr implicit type='@lvalue [GithubRepository]' decl=CleanseGithubBrowser.(file).RepositoriesViewController.repositories@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:81:17 direct_to_storage
               (declref_expr implicit type='RepositoriesViewController' decl=CleanseGithubBrowser.(file).RepositoriesViewController.<anonymous>.self@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:81:17 function_ref=unapplied))
             (declref_expr implicit type='[GithubRepository]' decl=CleanseGithubBrowser.(file).RepositoriesViewController.<anonymous>.value@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:81:17 function_ref=unapplied))))
-      (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:81:17 - line:81:17] 'anonname=0x7facf90dcd18' interface type='(RepositoriesViewController) -> () -> ()' access=private _modify_for=repositories
+      (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:81:17 - line:81:17] 'anonname=0x7fa520090d18' interface type='(RepositoriesViewController) -> () -> ()' access=private _modify_for=repositories
         (parameter "self" interface type='RepositoriesViewController')
         (parameter_list)
         (brace_stmt implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:81:17 - line:81:17]
@@ -2500,7 +2500,7 @@ indingsPlugin.swift:28:25 range=[/Users/sebastians/Development/Cleanse/Examples/
             (inout_expr implicit type='inout [GithubRepository]'
               (member_ref_expr implicit type='@lvalue [GithubRepository]' decl=CleanseGithubBrowser.(file).RepositoriesViewController.repositories@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:81:17 direct_to_impl
                 (declref_expr implicit type='RepositoriesViewController' decl=CleanseGithubBrowser.(file).RepositoriesViewController.<anonymous>.self@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:81:17 function_ref=unapplied)))))))
-    (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:81:17 - line:81:17] 'anonname=0x7facf90dca28' interface type='(RepositoriesViewController) -> () -> [GithubRepository]' access=private get_for=repositories
+    (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:81:17 - line:81:17] 'anonname=0x7fa520090a28' interface type='(RepositoriesViewController) -> () -> [GithubRepository]' access=private get_for=repositories
       (parameter "self" interface type='RepositoriesViewController')
       (parameter_list)
       (brace_stmt implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:81:17 - line:81:17]
@@ -2508,7 +2508,7 @@ indingsPlugin.swift:28:25 range=[/Users/sebastians/Development/Cleanse/Examples/
           (load_expr implicit type='[GithubRepository]'
             (member_ref_expr implicit type='@lvalue [GithubRepository]' decl=CleanseGithubBrowser.(file).RepositoriesViewController.repositories@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:81:17 direct_to_storage
               (declref_expr implicit type='RepositoriesViewController' decl=CleanseGithubBrowser.(file).RepositoriesViewController.<anonymous>.self@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:81:17 function_ref=unapplied))))))
-    (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:81:17 - line:81:17] 'anonname=0x7facf90dcc10' interface type='(RepositoriesViewController) -> ([GithubRepository]) -> ()' access=private set_for=repositories
+    (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:81:17 - line:81:17] 'anonname=0x7fa520090c10' interface type='(RepositoriesViewController) -> ([GithubRepository]) -> ()' access=private set_for=repositories
       (parameter "self" interface type='RepositoriesViewController')
       (parameter_list
         (parameter "value" interface type='[GithubRepository]') range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:81:17 - line:81:17])
@@ -2517,7 +2517,7 @@ indingsPlugin.swift:28:25 range=[/Users/sebastians/Development/Cleanse/Examples/
           (member_ref_expr implicit type='@lvalue [GithubRepository]' decl=CleanseGithubBrowser.(file).RepositoriesViewController.repositories@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:81:17 direct_to_storage
             (declref_expr implicit type='RepositoriesViewController' decl=CleanseGithubBrowser.(file).RepositoriesViewController.<anonymous>.self@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:81:17 function_ref=unapplied))
           (declref_expr implicit type='[GithubRepository]' decl=CleanseGithubBrowser.(file).RepositoriesViewController.<anonymous>.value@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:81:17 function_ref=unapplied))))
-    (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:81:17 - line:81:17] 'anonname=0x7facf90dcd18' interface type='(RepositoriesViewController) -> () -> ()' access=private _modify_for=repositories
+    (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:81:17 - line:81:17] 'anonname=0x7fa520090d18' interface type='(RepositoriesViewController) -> () -> ()' access=private _modify_for=repositories
       (parameter "self" interface type='RepositoriesViewController')
       (parameter_list)
       (brace_stmt implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:81:17 - line:81:17]
@@ -2531,14 +2531,14 @@ indingsPlugin.swift:28:25 range=[/Users/sebastians/Development/Cleanse/Examples/
         (type_ident
           (component id='RepositoriesPageSettings' bind=CleanseGithubBrowser.(file).RepositoriesPageSettings@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:154:7))))
     (var_decl range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:83:17 - line:83:17] "settings" type='RepositoriesPageSettings' interface type='RepositoriesPageSettings' access=private final let readImpl=stored immutable
-      (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:83:17 - line:83:17] 'anonname=0x7facf90dcfe8' interface type='(RepositoriesViewController) -> () -> RepositoriesPageSettings' access=private final get_for=settings
+      (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:83:17 - line:83:17] 'anonname=0x7fa520090fe8' interface type='(RepositoriesViewController) -> () -> RepositoriesPageSettings' access=private final get_for=settings
         (parameter "self" interface type='RepositoriesViewController')
         (parameter_list)
         (brace_stmt implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:83:17 - line:83:17]
           (return_stmt implicit
             (member_ref_expr implicit type='RepositoriesPageSettings' decl=CleanseGithubBrowser.(file).RepositoriesViewController.settings@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:83:17 direct_to_storage
               (declref_expr implicit type='RepositoriesViewController' decl=CleanseGithubBrowser.(file).RepositoriesViewController.<anonymous>.self@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:83:17 function_ref=unapplied))))))
-    (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:83:17 - line:83:17] 'anonname=0x7facf90dcfe8' interface type='(RepositoriesViewController) -> () -> RepositoriesPageSettings' access=private final get_for=settings
+    (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:83:17 - line:83:17] 'anonname=0x7fa520090fe8' interface type='(RepositoriesViewController) -> () -> RepositoriesPageSettings' access=private final get_for=settings
       (parameter "self" interface type='RepositoriesViewController')
       (parameter_list)
       (brace_stmt implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:83:17 - line:83:17]
@@ -2903,13 +2903,13 @@ indingsPlugin.swift:28:25 range=[/Users/sebastians/Development/Cleanse/Examples/
       (parameter "self" interface type='RepositoriesViewController')
       (parameter_list range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:135:17 - line:135:18])
       (open_existential_expr implicit type='()' location=/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:136:29 range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:136:9 - line:148:9]
-        (opaque_value_expr implicit type='GithubRepositoriesService' location=/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:136:9 range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:136:9 - line:136:9] @ 0x7facda144c60)
+        (opaque_value_expr implicit type='GithubRepositoriesService' location=/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:136:9 range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:136:9 - line:136:9] @ 0x7fa4f829b460)
         (member_ref_expr type='GithubRepositoriesService' location=/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:136:9 range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:136:9 - line:136:9] decl=CleanseGithubBrowser.(file).RepositoriesViewController.repositoriesService@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:79:9
           (declref_expr implicit type='RepositoriesViewController' location=/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:136:9 range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:136:9 - line:136:9] decl=CleanseGithubBrowser.(file).RepositoriesViewController.refresh().self@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:135:10 function_ref=unapplied))
         (call_expr type='()' location=/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:136:29 range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:136:9 - line:148:9] nothrow arg_labels=_:
           (dot_syntax_call_expr type='(@escaping (Result<[GithubRepository], Error>) -> Void) -> ()' location=/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:136:29 range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:136:9 - line:136:29] nothrow
             (declref_expr type='(GithubRepositoriesService) -> (@escaping (Result<[GithubRepository], Error>) -> Void) -> ()' location=/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:136:29 range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:136:29 - line:136:29] decl=CleanseGithubBrowser.(file).GithubRepositoriesService.list@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/GithubRepositoriesService.swift:26:10 [with (substitution_map generic_signature=<Self where Self : GithubRepositoriesService> (substitution Self -> GithubRepositoriesService))] function_ref=single)
-            (opaque_value_expr implicit type='GithubRepositoriesService' location=/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:136:9 range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:136:9 - line:136:9] @ 0x7facda144c60))
+            (opaque_value_expr implicit type='GithubRepositoriesService' location=/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:136:9 range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:136:9 - line:136:9] @ 0x7fa4f829b460))
           (paren_expr type='((Result<[GithubRepository], Error>) -> Void)' location=/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:136:34 range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:136:34 - line:148:9] trailing-closure
             (capture_list type='(Result<[GithubRepository], Error>) -> Void' location=/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:136:34 range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:136:34 - line:148:9]
                 (var_decl range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:136:42 - line:136:42] "self" type='RepositoriesViewController?' interface type='RepositoriesViewController?' access=private readImpl=stored writeImpl=stored readWriteImpl=stored)
@@ -3049,7 +3049,7 @@ indingsPlugin.swift:28:25 range=[/Users/sebastians/Development/Cleanse/Examples/
       (pattern_named type='Bool' 'showWatcherCount')
       (boolean_literal_expr type='Bool' location=/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:156:28 range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:156:28 - line:156:28] value=true builtin_initializer=Swift.(file).Bool extension.init(_builtinBooleanLiteral:) initializer=**NULL**))
     (var_decl range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:156:9 - line:156:9] "showWatcherCount" type='Bool' interface type='Bool' access=internal readImpl=stored writeImpl=stored readWriteImpl=stored
-      (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:156:9 - line:156:9] 'anonname=0x7facf91169f8' interface type='(RepositoriesPageSettings) -> () -> Bool' access=internal get_for=showWatcherCount
+      (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:156:9 - line:156:9] 'anonname=0x7fa5200adff8' interface type='(RepositoriesPageSettings) -> () -> Bool' access=internal get_for=showWatcherCount
         (parameter "self" interface type='RepositoriesPageSettings')
         (parameter_list)
         (brace_stmt implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:156:9 - line:156:9]
@@ -3057,7 +3057,7 @@ indingsPlugin.swift:28:25 range=[/Users/sebastians/Development/Cleanse/Examples/
             (load_expr implicit type='Bool'
               (member_ref_expr implicit type='@lvalue Bool' decl=CleanseGithubBrowser.(file).RepositoriesPageSettings.showWatcherCount@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:156:9 direct_to_storage
                 (declref_expr implicit type='RepositoriesPageSettings' decl=CleanseGithubBrowser.(file).RepositoriesPageSettings.<anonymous>.self@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:156:9 function_ref=unapplied))))))
-      (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:156:9 - line:156:9] 'anonname=0x7facf9116be0' interface type='(RepositoriesPageSettings) -> (Bool) -> ()' access=internal set_for=showWatcherCount
+      (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:156:9 - line:156:9] 'anonname=0x7fa5200ae1e0' interface type='(RepositoriesPageSettings) -> (Bool) -> ()' access=internal set_for=showWatcherCount
         (parameter "self" interface type='RepositoriesPageSettings')
         (parameter_list
           (parameter "value" interface type='Bool') range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:156:9 - line:156:9])
@@ -3066,7 +3066,7 @@ indingsPlugin.swift:28:25 range=[/Users/sebastians/Development/Cleanse/Examples/
             (member_ref_expr implicit type='@lvalue Bool' decl=CleanseGithubBrowser.(file).RepositoriesPageSettings.showWatcherCount@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:156:9 direct_to_storage
               (declref_expr implicit type='RepositoriesPageSettings' decl=CleanseGithubBrowser.(file).RepositoriesPageSettings.<anonymous>.self@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:156:9 function_ref=unapplied))
             (declref_expr implicit type='Bool' decl=CleanseGithubBrowser.(file).RepositoriesPageSettings.<anonymous>.value@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:156:9 function_ref=unapplied))))
-      (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:156:9 - line:156:9] 'anonname=0x7facf9116e18' interface type='(RepositoriesPageSettings) -> () -> ()' access=internal _modify_for=showWatcherCount
+      (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:156:9 - line:156:9] 'anonname=0x7fa5200ae418' interface type='(RepositoriesPageSettings) -> () -> ()' access=internal _modify_for=showWatcherCount
         (parameter "self" interface type='RepositoriesPageSettings')
         (parameter_list)
         (brace_stmt implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:156:9 - line:156:9]
@@ -3074,7 +3074,7 @@ indingsPlugin.swift:28:25 range=[/Users/sebastians/Development/Cleanse/Examples/
             (inout_expr implicit type='inout Bool'
               (member_ref_expr implicit type='@lvalue Bool' decl=CleanseGithubBrowser.(file).RepositoriesPageSettings.showWatcherCount@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:156:9 direct_to_impl
                 (declref_expr implicit type='RepositoriesPageSettings' decl=CleanseGithubBrowser.(file).RepositoriesPageSettings.<anonymous>.self@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:156:9 function_ref=unapplied)))))))
-    (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:156:9 - line:156:9] 'anonname=0x7facf91169f8' interface type='(RepositoriesPageSettings) -> () -> Bool' access=internal get_for=showWatcherCount
+    (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:156:9 - line:156:9] 'anonname=0x7fa5200adff8' interface type='(RepositoriesPageSettings) -> () -> Bool' access=internal get_for=showWatcherCount
       (parameter "self" interface type='RepositoriesPageSettings')
       (parameter_list)
       (brace_stmt implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:156:9 - line:156:9]
@@ -3082,7 +3082,7 @@ indingsPlugin.swift:28:25 range=[/Users/sebastians/Development/Cleanse/Examples/
           (load_expr implicit type='Bool'
             (member_ref_expr implicit type='@lvalue Bool' decl=CleanseGithubBrowser.(file).RepositoriesPageSettings.showWatcherCount@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:156:9 direct_to_storage
               (declref_expr implicit type='RepositoriesPageSettings' decl=CleanseGithubBrowser.(file).RepositoriesPageSettings.<anonymous>.self@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:156:9 function_ref=unapplied))))))
-    (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:156:9 - line:156:9] 'anonname=0x7facf9116be0' interface type='(RepositoriesPageSettings) -> (Bool) -> ()' access=internal set_for=showWatcherCount
+    (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:156:9 - line:156:9] 'anonname=0x7fa5200ae1e0' interface type='(RepositoriesPageSettings) -> (Bool) -> ()' access=internal set_for=showWatcherCount
       (parameter "self" interface type='RepositoriesPageSettings')
       (parameter_list
         (parameter "value" interface type='Bool') range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:156:9 - line:156:9])
@@ -3091,7 +3091,7 @@ indingsPlugin.swift:28:25 range=[/Users/sebastians/Development/Cleanse/Examples/
           (member_ref_expr implicit type='@lvalue Bool' decl=CleanseGithubBrowser.(file).RepositoriesPageSettings.showWatcherCount@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:156:9 direct_to_storage
             (declref_expr implicit type='RepositoriesPageSettings' decl=CleanseGithubBrowser.(file).RepositoriesPageSettings.<anonymous>.self@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:156:9 function_ref=unapplied))
           (declref_expr implicit type='Bool' decl=CleanseGithubBrowser.(file).RepositoriesPageSettings.<anonymous>.value@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:156:9 function_ref=unapplied))))
-    (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:156:9 - line:156:9] 'anonname=0x7facf9116e18' interface type='(RepositoriesPageSettings) -> () -> ()' access=internal _modify_for=showWatcherCount
+    (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:156:9 - line:156:9] 'anonname=0x7fa5200ae418' interface type='(RepositoriesPageSettings) -> () -> ()' access=internal _modify_for=showWatcherCount
       (parameter "self" interface type='RepositoriesPageSettings')
       (parameter_list)
       (brace_stmt implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:156:9 - line:156:9]
@@ -3116,14 +3116,14 @@ indingsPlugin.swift:28:25 range=[/Users/sebastians/Development/Cleanse/Examples/
           (type_ident
             (component id='UITableViewCell' bind=UIKit.(file).UITableViewCell)))))
     (var_decl range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:160:17 - line:160:17] "cells" type='[UITableViewCell]' interface type='[UITableViewCell]' access=private final let readImpl=stored immutable
-      (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:160:17 - line:160:17] 'anonname=0x7facf9117368' interface type='(RepositoriesSettingsSplitViewController) -> () -> [UITableViewCell]' access=private final get_for=cells
+      (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:160:17 - line:160:17] 'anonname=0x7fa5200ae968' interface type='(RepositoriesSettingsSplitViewController) -> () -> [UITableViewCell]' access=private final get_for=cells
         (parameter "self" interface type='RepositoriesSettingsSplitViewController')
         (parameter_list)
         (brace_stmt implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:160:17 - line:160:17]
           (return_stmt implicit
             (member_ref_expr implicit type='[UITableViewCell]' decl=CleanseGithubBrowser.(file).RepositoriesSettingsSplitViewController.cells@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:160:17 direct_to_storage
               (declref_expr implicit type='RepositoriesSettingsSplitViewController' decl=CleanseGithubBrowser.(file).RepositoriesSettingsSplitViewController.<anonymous>.self@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:160:17 function_ref=unapplied))))))
-    (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:160:17 - line:160:17] 'anonname=0x7facf9117368' interface type='(RepositoriesSettingsSplitViewController) -> () -> [UITableViewCell]' access=private final get_for=cells
+    (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:160:17 - line:160:17] 'anonname=0x7fa5200ae968' interface type='(RepositoriesSettingsSplitViewController) -> () -> [UITableViewCell]' access=private final get_for=cells
       (parameter "self" interface type='RepositoriesSettingsSplitViewController')
       (parameter_list)
       (brace_stmt implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:160:17 - line:160:17]
@@ -3214,14 +3214,14 @@ indingsPlugin.swift:28:25 range=[/Users/sebastians/Development/Cleanse/Examples/
           (type_expr type='UISwitch.Type' location=/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:178:20 range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:178:20 - line:178:20] typerepr='UISwitch'))
         (tuple_expr type='()' location=/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:178:28 range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:178:28 - line:178:29])))
     (var_decl range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:178:9 - line:178:9] "switch" type='UISwitch' interface type='UISwitch' access=internal final let readImpl=stored immutable
-      (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:178:9 - line:178:9] 'anonname=0x7facf92ed9c8' interface type='(ShowWatcherCountCell) -> () -> UISwitch' access=internal final get_for=switch
+      (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:178:9 - line:178:9] 'anonname=0x7fa4e8a6b3c8' interface type='(ShowWatcherCountCell) -> () -> UISwitch' access=internal final get_for=switch
         (parameter "self" interface type='ShowWatcherCountCell')
         (parameter_list)
         (brace_stmt implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:178:9 - line:178:9]
           (return_stmt implicit
             (member_ref_expr implicit type='UISwitch' decl=CleanseGithubBrowser.(file).ShowWatcherCountCell.switch@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:178:9 direct_to_storage
               (declref_expr implicit type='ShowWatcherCountCell' decl=CleanseGithubBrowser.(file).ShowWatcherCountCell.<anonymous>.self@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:178:9 function_ref=unapplied))))))
-    (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:178:9 - line:178:9] 'anonname=0x7facf92ed9c8' interface type='(ShowWatcherCountCell) -> () -> UISwitch' access=internal final get_for=switch
+    (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:178:9 - line:178:9] 'anonname=0x7fa4e8a6b3c8' interface type='(ShowWatcherCountCell) -> () -> UISwitch' access=internal final get_for=switch
       (parameter "self" interface type='ShowWatcherCountCell')
       (parameter_list)
       (brace_stmt implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:178:9 - line:178:9]
@@ -3234,14 +3234,14 @@ indingsPlugin.swift:28:25 range=[/Users/sebastians/Development/Cleanse/Examples/
         (type_ident
           (component id='RepositoriesPageSettings' bind=CleanseGithubBrowser.(file).RepositoriesPageSettings@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:154:7))))
     (var_decl range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:179:9 - line:179:9] "settings" type='RepositoriesPageSettings' interface type='RepositoriesPageSettings' access=internal final let readImpl=stored immutable
-      (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:179:9 - line:179:9] 'anonname=0x7facf92edc20' interface type='(ShowWatcherCountCell) -> () -> RepositoriesPageSettings' access=internal final get_for=settings
+      (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:179:9 - line:179:9] 'anonname=0x7fa4e8a6b620' interface type='(ShowWatcherCountCell) -> () -> RepositoriesPageSettings' access=internal final get_for=settings
         (parameter "self" interface type='ShowWatcherCountCell')
         (parameter_list)
         (brace_stmt implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:179:9 - line:179:9]
           (return_stmt implicit
             (member_ref_expr implicit type='RepositoriesPageSettings' decl=CleanseGithubBrowser.(file).ShowWatcherCountCell.settings@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:179:9 direct_to_storage
               (declref_expr implicit type='ShowWatcherCountCell' decl=CleanseGithubBrowser.(file).ShowWatcherCountCell.<anonymous>.self@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:179:9 function_ref=unapplied))))))
-    (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:179:9 - line:179:9] 'anonname=0x7facf92edc20' interface type='(ShowWatcherCountCell) -> () -> RepositoriesPageSettings' access=internal final get_for=settings
+    (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:179:9 - line:179:9] 'anonname=0x7fa4e8a6b620' interface type='(ShowWatcherCountCell) -> () -> RepositoriesPageSettings' access=internal final get_for=settings
       (parameter "self" interface type='ShowWatcherCountCell')
       (parameter_list)
       (brace_stmt implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RepositoriesPage.swift:179:9 - line:179:9]
@@ -3373,14 +3373,14 @@ _expr type='()' location=/Users/sebastians/Development/Cleanse/Examples/CleanseG
         (type_ident
           (component id='UIViewController' bind=UIKit.(file).UIViewController))))
     (var_decl range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RootViewController.swift:15:9 - line:15:9] "viewController" type='UIViewController' interface type='UIViewController' access=internal let readImpl=stored immutable
-      (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RootViewController.swift:15:9 - line:15:9] 'anonname=0x7fae8b1f0280' interface type='(RootTabBarItem) -> () -> UIViewController' access=internal get_for=viewController
+      (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RootViewController.swift:15:9 - line:15:9] 'anonname=0x7f9c6e1c7280' interface type='(RootTabBarItem) -> () -> UIViewController' access=internal get_for=viewController
         (parameter "self" interface type='RootTabBarItem')
         (parameter_list)
         (brace_stmt implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RootViewController.swift:15:9 - line:15:9]
           (return_stmt implicit
             (member_ref_expr implicit type='UIViewController' decl=CleanseGithubBrowser.(file).RootTabBarItem.viewController@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RootViewController.swift:15:9 direct_to_storage
               (declref_expr implicit type='RootTabBarItem' decl=CleanseGithubBrowser.(file).RootTabBarItem.<anonymous>.self@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RootViewController.swift:15:9 function_ref=unapplied))))))
-    (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RootViewController.swift:15:9 - line:15:9] 'anonname=0x7fae8b1f0280' interface type='(RootTabBarItem) -> () -> UIViewController' access=internal get_for=viewController
+    (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RootViewController.swift:15:9 - line:15:9] 'anonname=0x7f9c6e1c7280' interface type='(RootTabBarItem) -> () -> UIViewController' access=internal get_for=viewController
       (parameter "self" interface type='RootTabBarItem')
       (parameter_list)
       (brace_stmt implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RootViewController.swift:15:9 - line:15:9]
@@ -3393,14 +3393,14 @@ _expr type='()' location=/Users/sebastians/Development/Cleanse/Examples/CleanseG
         (type_ident
           (component id='Int' bind=Swift.(file).Int))))
     (var_decl range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RootViewController.swift:18:9 - line:18:9] "rank" type='Int' interface type='Int' access=internal let readImpl=stored immutable
-      (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RootViewController.swift:18:9 - line:18:9] 'anonname=0x7fae8b1f0460' interface type='(RootTabBarItem) -> () -> Int' access=internal get_for=rank
+      (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RootViewController.swift:18:9 - line:18:9] 'anonname=0x7f9c6e1c7460' interface type='(RootTabBarItem) -> () -> Int' access=internal get_for=rank
         (parameter "self" interface type='RootTabBarItem')
         (parameter_list)
         (brace_stmt implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RootViewController.swift:18:9 - line:18:9]
           (return_stmt implicit
             (member_ref_expr implicit type='Int' decl=CleanseGithubBrowser.(file).RootTabBarItem.rank@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RootViewController.swift:18:9 direct_to_storage
               (declref_expr implicit type='RootTabBarItem' decl=CleanseGithubBrowser.(file).RootTabBarItem.<anonymous>.self@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RootViewController.swift:18:9 function_ref=unapplied))))))
-    (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RootViewController.swift:18:9 - line:18:9] 'anonname=0x7fae8b1f0460' interface type='(RootTabBarItem) -> () -> Int' access=internal get_for=rank
+    (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RootViewController.swift:18:9 - line:18:9] 'anonname=0x7f9c6e1c7460' interface type='(RootTabBarItem) -> () -> Int' access=internal get_for=rank
       (parameter "self" interface type='RootTabBarItem')
       (parameter_list)
       (brace_stmt implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/RootViewController.swift:18:9 - line:18:9]
@@ -3995,14 +3995,14 @@ thubBrowser/RootViewController.swift:54:24 - line:54:57] names=with
         (type_ident
           (component id='GithubMembersService' bind=CleanseGithubBrowser.(file).GithubMembersService@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/GithubMemberService.swift:22:10))))
     (var_decl range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:63:9 - line:63:9] "memberService" type='GithubMembersService' interface type='GithubMembersService' access=internal final let readImpl=stored immutable
-      (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:63:9 - line:63:9] 'anonname=0x7fc5d312f038' interface type='(MembersViewController) -> () -> GithubMembersService' access=internal final get_for=memberService
+      (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:63:9 - line:63:9] 'anonname=0x7fc6378d3438' interface type='(MembersViewController) -> () -> GithubMembersService' access=internal final get_for=memberService
         (parameter "self" interface type='MembersViewController')
         (parameter_list)
         (brace_stmt implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:63:9 - line:63:9]
           (return_stmt implicit
             (member_ref_expr implicit type='GithubMembersService' decl=CleanseGithubBrowser.(file).MembersViewController.memberService@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:63:9 direct_to_storage
               (declref_expr implicit type='MembersViewController' decl=CleanseGithubBrowser.(file).MembersViewController.<anonymous>.self@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:63:9 function_ref=unapplied))))))
-    (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:63:9 - line:63:9] 'anonname=0x7fc5d312f038' interface type='(MembersViewController) -> () -> GithubMembersService' access=internal final get_for=memberService
+    (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:63:9 - line:63:9] 'anonname=0x7fc6378d3438' interface type='(MembersViewController) -> () -> GithubMembersService' access=internal final get_for=memberService
       (parameter "self" interface type='MembersViewController')
       (parameter_list)
       (brace_stmt implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:63:9 - line:63:9]
@@ -4017,7 +4017,7 @@ thubBrowser/RootViewController.swift:54:24 - line:54:57] names=with
           (type_expr type='[GithubMember].Type' location=/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:64:27 range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:64:27 - line:64:40] typerepr='[GithubMember]'))
         (tuple_expr type='()' location=/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:64:41 range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:64:41 - line:64:42])))
     (var_decl range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:64:17 - line:64:17] "members" type='[GithubMember]' interface type='[GithubMember]' access=private readImpl=stored writeImpl=stored readWriteImpl=stored
-      (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:64:17 - line:64:17] 'anonname=0x7fc5b2922a68' interface type='(MembersViewController) -> () -> [GithubMember]' access=private get_for=members
+      (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:64:17 - line:64:17] 'anonname=0x7fc621066668' interface type='(MembersViewController) -> () -> [GithubMember]' access=private get_for=members
         (parameter "self" interface type='MembersViewController')
         (parameter_list)
         (brace_stmt implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:64:17 - line:64:17]
@@ -4025,7 +4025,7 @@ thubBrowser/RootViewController.swift:54:24 - line:54:57] names=with
             (load_expr implicit type='[GithubMember]'
               (member_ref_expr implicit type='@lvalue [GithubMember]' decl=CleanseGithubBrowser.(file).MembersViewController.members@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:64:17 direct_to_storage
                 (declref_expr implicit type='MembersViewController' decl=CleanseGithubBrowser.(file).MembersViewController.<anonymous>.self@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:64:17 function_ref=unapplied))))))
-      (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:64:17 - line:64:17] 'anonname=0x7fc5b2922c50' interface type='(MembersViewController) -> ([GithubMember]) -> ()' access=private set_for=members
+      (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:64:17 - line:64:17] 'anonname=0x7fc621066850' interface type='(MembersViewController) -> ([GithubMember]) -> ()' access=private set_for=members
         (parameter "self" interface type='MembersViewController')
         (parameter_list
           (parameter "value" interface type='[GithubMember]') range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:64:17 - line:64:17])
@@ -4034,7 +4034,7 @@ thubBrowser/RootViewController.swift:54:24 - line:54:57] names=with
             (member_ref_expr implicit type='@lvalue [GithubMember]' decl=CleanseGithubBrowser.(file).MembersViewController.members@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:64:17 direct_to_storage
               (declref_expr implicit type='MembersViewController' decl=CleanseGithubBrowser.(file).MembersViewController.<anonymous>.self@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:64:17 function_ref=unapplied))
             (declref_expr implicit type='[GithubMember]' decl=CleanseGithubBrowser.(file).MembersViewController.<anonymous>.value@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:64:17 function_ref=unapplied))))
-      (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:64:17 - line:64:17] 'anonname=0x7fc5b2922d58' interface type='(MembersViewController) -> () -> ()' access=private _modify_for=members
+      (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:64:17 - line:64:17] 'anonname=0x7fc621066958' interface type='(MembersViewController) -> () -> ()' access=private _modify_for=members
         (parameter "self" interface type='MembersViewController')
         (parameter_list)
         (brace_stmt implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:64:17 - line:64:17]
@@ -4042,7 +4042,7 @@ thubBrowser/RootViewController.swift:54:24 - line:54:57] names=with
             (inout_expr implicit type='inout [GithubMember]'
               (member_ref_expr implicit type='@lvalue [GithubMember]' decl=CleanseGithubBrowser.(file).MembersViewController.members@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:64:17 direct_to_impl
                 (declref_expr implicit type='MembersViewController' decl=CleanseGithubBrowser.(file).MembersViewController.<anonymous>.self@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:64:17 function_ref=unapplied)))))))
-    (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:64:17 - line:64:17] 'anonname=0x7fc5b2922a68' interface type='(MembersViewController) -> () -> [GithubMember]' access=private get_for=members
+    (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:64:17 - line:64:17] 'anonname=0x7fc621066668' interface type='(MembersViewController) -> () -> [GithubMember]' access=private get_for=members
       (parameter "self" interface type='MembersViewController')
       (parameter_list)
       (brace_stmt implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:64:17 - line:64:17]
@@ -4050,7 +4050,7 @@ thubBrowser/RootViewController.swift:54:24 - line:54:57] names=with
           (load_expr implicit type='[GithubMember]'
             (member_ref_expr implicit type='@lvalue [GithubMember]' decl=CleanseGithubBrowser.(file).MembersViewController.members@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:64:17 direct_to_storage
               (declref_expr implicit type='MembersViewController' decl=CleanseGithubBrowser.(file).MembersViewController.<anonymous>.self@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:64:17 function_ref=unapplied))))))
-    (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:64:17 - line:64:17] 'anonname=0x7fc5b2922c50' interface type='(MembersViewController) -> ([GithubMember]) -> ()' access=private set_for=members
+    (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:64:17 - line:64:17] 'anonname=0x7fc621066850' interface type='(MembersViewController) -> ([GithubMember]) -> ()' access=private set_for=members
       (parameter "self" interface type='MembersViewController')
       (parameter_list
         (parameter "value" interface type='[GithubMember]') range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:64:17 - line:64:17])
@@ -4059,7 +4059,7 @@ thubBrowser/RootViewController.swift:54:24 - line:54:57] names=with
           (member_ref_expr implicit type='@lvalue [GithubMember]' decl=CleanseGithubBrowser.(file).MembersViewController.members@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:64:17 direct_to_storage
             (declref_expr implicit type='MembersViewController' decl=CleanseGithubBrowser.(file).MembersViewController.<anonymous>.self@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:64:17 function_ref=unapplied))
           (declref_expr implicit type='[GithubMember]' decl=CleanseGithubBrowser.(file).MembersViewController.<anonymous>.value@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:64:17 function_ref=unapplied))))
-    (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:64:17 - line:64:17] 'anonname=0x7fc5b2922d58' interface type='(MembersViewController) -> () -> ()' access=private _modify_for=members
+    (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:64:17 - line:64:17] 'anonname=0x7fc621066958' interface type='(MembersViewController) -> () -> ()' access=private _modify_for=members
       (parameter "self" interface type='MembersViewController')
       (parameter_list)
       (brace_stmt implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:64:17 - line:64:17]
@@ -4073,7 +4073,7 @@ thubBrowser/RootViewController.swift:54:24 - line:54:57] names=with
         (type_ident
           (component id='MembersPageSettings' bind=CleanseGithubBrowser.(file).MembersPageSettings@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:128:7))))
     (var_decl range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:65:17 - line:65:17] "settings" type='MembersPageSettings' interface type='MembersPageSettings' access=private readImpl=stored writeImpl=stored readWriteImpl=stored
-      (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:65:17 - line:65:17] 'anonname=0x7fc5b2922fc8' interface type='(MembersViewController) -> () -> MembersPageSettings' access=private get_for=settings
+      (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:65:17 - line:65:17] 'anonname=0x7fc621066bc8' interface type='(MembersViewController) -> () -> MembersPageSettings' access=private get_for=settings
         (parameter "self" interface type='MembersViewController')
         (parameter_list)
         (brace_stmt implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:65:17 - line:65:17]
@@ -4081,7 +4081,7 @@ thubBrowser/RootViewController.swift:54:24 - line:54:57] names=with
             (load_expr implicit type='MembersPageSettings'
               (member_ref_expr implicit type='@lvalue MembersPageSettings' decl=CleanseGithubBrowser.(file).MembersViewController.settings@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:65:17 direct_to_storage
                 (declref_expr implicit type='MembersViewController' decl=CleanseGithubBrowser.(file).MembersViewController.<anonymous>.self@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:65:17 function_ref=unapplied))))))
-      (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:65:17 - line:65:17] 'anonname=0x7fc5b29231b0' interface type='(MembersViewController) -> (MembersPageSettings) -> ()' access=private set_for=settings
+      (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:65:17 - line:65:17] 'anonname=0x7fc621066db0' interface type='(MembersViewController) -> (MembersPageSettings) -> ()' access=private set_for=settings
         (parameter "self" interface type='MembersViewController')
         (parameter_list
           (parameter "value" interface type='MembersPageSettings') range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:65:17 - line:65:17])
@@ -4090,7 +4090,7 @@ thubBrowser/RootViewController.swift:54:24 - line:54:57] names=with
             (member_ref_expr implicit type='@lvalue MembersPageSettings' decl=CleanseGithubBrowser.(file).MembersViewController.settings@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:65:17 direct_to_storage
               (declref_expr implicit type='MembersViewController' decl=CleanseGithubBrowser.(file).MembersViewController.<anonymous>.self@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:65:17 function_ref=unapplied))
             (declref_expr implicit type='MembersPageSettings' decl=CleanseGithubBrowser.(file).MembersViewController.<anonymous>.value@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:65:17 function_ref=unapplied))))
-      (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:65:17 - line:65:17] 'anonname=0x7fc5b29232b8' interface type='(MembersViewController) -> () -> ()' access=private _modify_for=settings
+      (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:65:17 - line:65:17] 'anonname=0x7fc621066eb8' interface type='(MembersViewController) -> () -> ()' access=private _modify_for=settings
         (parameter "self" interface type='MembersViewController')
         (parameter_list)
         (brace_stmt implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:65:17 - line:65:17]
@@ -4098,7 +4098,7 @@ thubBrowser/RootViewController.swift:54:24 - line:54:57] names=with
             (inout_expr implicit type='inout MembersPageSettings'
               (member_ref_expr implicit type='@lvalue MembersPageSettings' decl=CleanseGithubBrowser.(file).MembersViewController.settings@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:65:17 direct_to_impl
                 (declref_expr implicit type='MembersViewController' decl=CleanseGithubBrowser.(file).MembersViewController.<anonymous>.self@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:65:17 function_ref=unapplied)))))))
-    (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:65:17 - line:65:17] 'anonname=0x7fc5b2922fc8' interface type='(MembersViewController) -> () -> MembersPageSettings' access=private get_for=settings
+    (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:65:17 - line:65:17] 'anonname=0x7fc621066bc8' interface type='(MembersViewController) -> () -> MembersPageSettings' access=private get_for=settings
       (parameter "self" interface type='MembersViewController')
       (parameter_list)
       (brace_stmt implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:65:17 - line:65:17]
@@ -4106,7 +4106,7 @@ thubBrowser/RootViewController.swift:54:24 - line:54:57] names=with
           (load_expr implicit type='MembersPageSettings'
             (member_ref_expr implicit type='@lvalue MembersPageSettings' decl=CleanseGithubBrowser.(file).MembersViewController.settings@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:65:17 direct_to_storage
               (declref_expr implicit type='MembersViewController' decl=CleanseGithubBrowser.(file).MembersViewController.<anonymous>.self@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:65:17 function_ref=unapplied))))))
-    (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:65:17 - line:65:17] 'anonname=0x7fc5b29231b0' interface type='(MembersViewController) -> (MembersPageSettings) -> ()' access=private set_for=settings
+    (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:65:17 - line:65:17] 'anonname=0x7fc621066db0' interface type='(MembersViewController) -> (MembersPageSettings) -> ()' access=private set_for=settings
       (parameter "self" interface type='MembersViewController')
       (parameter_list
         (parameter "value" interface type='MembersPageSettings') range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:65:17 - line:65:17])
@@ -4115,7 +4115,7 @@ thubBrowser/RootViewController.swift:54:24 - line:54:57] names=with
           (member_ref_expr implicit type='@lvalue MembersPageSettings' decl=CleanseGithubBrowser.(file).MembersViewController.settings@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:65:17 direct_to_storage
             (declref_expr implicit type='MembersViewController' decl=CleanseGithubBrowser.(file).MembersViewController.<anonymous>.self@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:65:17 function_ref=unapplied))
           (declref_expr implicit type='MembersPageSettings' decl=CleanseGithubBrowser.(file).MembersViewController.<anonymous>.value@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:65:17 function_ref=unapplied))))
-    (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:65:17 - line:65:17] 'anonname=0x7fc5b29232b8' interface type='(MembersViewController) -> () -> ()' access=private _modify_for=settings
+    (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:65:17 - line:65:17] 'anonname=0x7fc621066eb8' interface type='(MembersViewController) -> () -> ()' access=private _modify_for=settings
       (parameter "self" interface type='MembersViewController')
       (parameter_list)
       (brace_stmt implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:65:17 - line:65:17]
@@ -4393,13 +4393,13 @@ thubBrowser/RootViewController.swift:54:24 - line:54:57] names=with
       (parameter "self" interface type='MembersViewController')
       (parameter_list range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:110:17 - line:110:18])
       (open_existential_expr implicit type='()' location=/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:111:23 range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:111:9 - line:123:9]
-        (opaque_value_expr implicit type='GithubMembersService' location=/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:111:9 range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:111:9 - line:111:9] @ 0x7fc5b387fd00)
+        (opaque_value_expr implicit type='GithubMembersService' location=/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:111:9 range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:111:9 - line:111:9] @ 0x7fc616ab5700)
         (member_ref_expr type='GithubMembersService' location=/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:111:9 range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:111:9 - line:111:9] decl=CleanseGithubBrowser.(file).MembersViewController.memberService@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:63:9
           (declref_expr implicit type='MembersViewController' location=/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:111:9 range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:111:9 - line:111:9] decl=CleanseGithubBrowser.(file).MembersViewController.refresh().self@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:110:10 function_ref=unapplied))
         (call_expr type='()' location=/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:111:23 range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:111:9 - line:123:9] nothrow arg_labels=_:
           (dot_syntax_call_expr type='(@escaping (Result<[GithubMember], Error>) -> Void) -> ()' location=/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:111:23 range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:111:9 - line:111:23] nothrow
             (declref_expr type='(GithubMembersService) -> (@escaping (Result<[GithubMember], Error>) -> Void) -> ()' location=/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:111:23 range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:111:23 - line:111:23] decl=CleanseGithubBrowser.(file).GithubMembersService.list(handler:)@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/GithubMemberService.swift:23:10 [with (substitution_map generic_signature=<Self where Self : GithubMembersService> (substitution Self -> GithubMembersService))] function_ref=single)
-            (opaque_value_expr implicit type='GithubMembersService' location=/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:111:9 range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:111:9 - line:111:9] @ 0x7fc5b387fd00))
+            (opaque_value_expr implicit type='GithubMembersService' location=/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:111:9 range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:111:9 - line:111:9] @ 0x7fc616ab5700))
           (argument_shuffle_expr implicit type='(handler: (Result<[GithubMember], Error>) -> Void)' location=/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:111:28 range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:111:28 - line:123:9] scalar_to_tuple elements=[0] variadic_sources=[] default_args_owner=CleanseGithubBrowser.(file).GithubMembersService.list(handler:)@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/GithubMemberService.swift:23:10 [with (substitution_map generic_signature=<Self where Self : GithubMembersService> (substitution Self -> GithubMembersService))]
             (paren_expr type='((Result<[GithubMember], Error>) -> Void)' location=/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:111:28 range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:111:28 - line:123:9] trailing-closure
               (capture_list type='(Result<[GithubMember], Error>) -> Void' location=/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:111:28 range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:111:28 - line:123:9]
@@ -4540,7 +4540,7 @@ thubBrowser/RootViewController.swift:54:24 - line:54:57] names=with
       (pattern_named type='Bool' 'useGreen')
       (boolean_literal_expr type='Bool' location=/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:130:20 range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:130:20 - line:130:20] value=false builtin_initializer=Swift.(file).Bool extension.init(_builtinBooleanLiteral:) initializer=**NULL**))
     (var_decl range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:130:9 - line:130:9] "useGreen" type='Bool' interface type='Bool' access=internal readImpl=stored writeImpl=stored readWriteImpl=stored
-      (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:130:9 - line:130:9] 'anonname=0x7fc5b293ab98' interface type='(MembersPageSettings) -> () -> Bool' access=internal get_for=useGreen
+      (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:130:9 - line:130:9] 'anonname=0x7fc621080798' interface type='(MembersPageSettings) -> () -> Bool' access=internal get_for=useGreen
         (parameter "self" interface type='MembersPageSettings')
         (parameter_list)
         (brace_stmt implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:130:9 - line:130:9]
@@ -4548,7 +4548,7 @@ thubBrowser/RootViewController.swift:54:24 - line:54:57] names=with
             (load_expr implicit type='Bool'
               (member_ref_expr implicit type='@lvalue Bool' decl=CleanseGithubBrowser.(file).MembersPageSettings.useGreen@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:130:9 direct_to_storage
                 (declref_expr implicit type='MembersPageSettings' decl=CleanseGithubBrowser.(file).MembersPageSettings.<anonymous>.self@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:130:9 function_ref=unapplied))))))
-      (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:130:9 - line:130:9] 'anonname=0x7fc5b293ad80' interface type='(MembersPageSettings) -> (Bool) -> ()' access=internal set_for=useGreen
+      (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:130:9 - line:130:9] 'anonname=0x7fc621080980' interface type='(MembersPageSettings) -> (Bool) -> ()' access=internal set_for=useGreen
         (parameter "self" interface type='MembersPageSettings')
         (parameter_list
           (parameter "value" interface type='Bool') range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:130:9 - line:130:9])
@@ -4557,7 +4557,7 @@ thubBrowser/RootViewController.swift:54:24 - line:54:57] names=with
             (member_ref_expr implicit type='@lvalue Bool' decl=CleanseGithubBrowser.(file).MembersPageSettings.useGreen@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:130:9 direct_to_storage
               (declref_expr implicit type='MembersPageSettings' decl=CleanseGithubBrowser.(file).MembersPageSettings.<anonymous>.self@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:130:9 function_ref=unapplied))
             (declref_expr implicit type='Bool' decl=CleanseGithubBrowser.(file).MembersPageSettings.<anonymous>.value@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:130:9 function_ref=unapplied))))
-      (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:130:9 - line:130:9] 'anonname=0x7fc5b293afb8' interface type='(MembersPageSettings) -> () -> ()' access=internal _modify_for=useGreen
+      (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:130:9 - line:130:9] 'anonname=0x7fc621080bb8' interface type='(MembersPageSettings) -> () -> ()' access=internal _modify_for=useGreen
         (parameter "self" interface type='MembersPageSettings')
         (parameter_list)
         (brace_stmt implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:130:9 - line:130:9]
@@ -4565,7 +4565,7 @@ thubBrowser/RootViewController.swift:54:24 - line:54:57] names=with
             (inout_expr implicit type='inout Bool'
               (member_ref_expr implicit type='@lvalue Bool' decl=CleanseGithubBrowser.(file).MembersPageSettings.useGreen@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:130:9 direct_to_impl
                 (declref_expr implicit type='MembersPageSettings' decl=CleanseGithubBrowser.(file).MembersPageSettings.<anonymous>.self@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:130:9 function_ref=unapplied)))))))
-    (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:130:9 - line:130:9] 'anonname=0x7fc5b293ab98' interface type='(MembersPageSettings) -> () -> Bool' access=internal get_for=useGreen
+    (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:130:9 - line:130:9] 'anonname=0x7fc621080798' interface type='(MembersPageSettings) -> () -> Bool' access=internal get_for=useGreen
       (parameter "self" interface type='MembersPageSettings')
       (parameter_list)
       (brace_stmt implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:130:9 - line:130:9]
@@ -4573,7 +4573,7 @@ thubBrowser/RootViewController.swift:54:24 - line:54:57] names=with
           (load_expr implicit type='Bool'
             (member_ref_expr implicit type='@lvalue Bool' decl=CleanseGithubBrowser.(file).MembersPageSettings.useGreen@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:130:9 direct_to_storage
               (declref_expr implicit type='MembersPageSettings' decl=CleanseGithubBrowser.(file).MembersPageSettings.<anonymous>.self@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:130:9 function_ref=unapplied))))))
-    (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:130:9 - line:130:9] 'anonname=0x7fc5b293ad80' interface type='(MembersPageSettings) -> (Bool) -> ()' access=internal set_for=useGreen
+    (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:130:9 - line:130:9] 'anonname=0x7fc621080980' interface type='(MembersPageSettings) -> (Bool) -> ()' access=internal set_for=useGreen
       (parameter "self" interface type='MembersPageSettings')
       (parameter_list
         (parameter "value" interface type='Bool') range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:130:9 - line:130:9])
@@ -4582,7 +4582,7 @@ thubBrowser/RootViewController.swift:54:24 - line:54:57] names=with
           (member_ref_expr implicit type='@lvalue Bool' decl=CleanseGithubBrowser.(file).MembersPageSettings.useGreen@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:130:9 direct_to_storage
             (declref_expr implicit type='MembersPageSettings' decl=CleanseGithubBrowser.(file).MembersPageSettings.<anonymous>.self@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:130:9 function_ref=unapplied))
           (declref_expr implicit type='Bool' decl=CleanseGithubBrowser.(file).MembersPageSettings.<anonymous>.value@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:130:9 function_ref=unapplied))))
-    (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:130:9 - line:130:9] 'anonname=0x7fc5b293afb8' interface type='(MembersPageSettings) -> () -> ()' access=internal _modify_for=useGreen
+    (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:130:9 - line:130:9] 'anonname=0x7fc621080bb8' interface type='(MembersPageSettings) -> () -> ()' access=internal _modify_for=useGreen
       (parameter "self" interface type='MembersPageSettings')
       (parameter_list)
       (brace_stmt implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:130:9 - line:130:9]
@@ -4607,14 +4607,14 @@ thubBrowser/RootViewController.swift:54:24 - line:54:57] names=with
           (type_ident
             (component id='UITableViewCell' bind=UIKit.(file).UITableViewCell)))))
     (var_decl range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:135:17 - line:135:17] "cells" type='[UITableViewCell]' interface type='[UITableViewCell]' access=private final let readImpl=stored immutable
-      (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:135:17 - line:135:17] 'anonname=0x7fc5b293b4d0' interface type='(MembersSettingsSplitViewController) -> () -> [UITableViewCell]' access=private final get_for=cells
+      (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:135:17 - line:135:17] 'anonname=0x7fc6210810d0' interface type='(MembersSettingsSplitViewController) -> () -> [UITableViewCell]' access=private final get_for=cells
         (parameter "self" interface type='MembersSettingsSplitViewController')
         (parameter_list)
         (brace_stmt implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:135:17 - line:135:17]
           (return_stmt implicit
             (member_ref_expr implicit type='[UITableViewCell]' decl=CleanseGithubBrowser.(file).MembersSettingsSplitViewController.cells@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:135:17 direct_to_storage
               (declref_expr implicit type='MembersSettingsSplitViewController' decl=CleanseGithubBrowser.(file).MembersSettingsSplitViewController.<anonymous>.self@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:135:17 function_ref=unapplied))))))
-    (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:135:17 - line:135:17] 'anonname=0x7fc5b293b4d0' interface type='(MembersSettingsSplitViewController) -> () -> [UITableViewCell]' access=private final get_for=cells
+    (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:135:17 - line:135:17] 'anonname=0x7fc6210810d0' interface type='(MembersSettingsSplitViewController) -> () -> [UITableViewCell]' access=private final get_for=cells
       (parameter "self" interface type='MembersSettingsSplitViewController')
       (parameter_list)
       (brace_stmt implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:135:17 - line:135:17]
@@ -4705,14 +4705,14 @@ thubBrowser/RootViewController.swift:54:24 - line:54:57] names=with
           (type_expr type='UISwitch.Type' location=/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:154:20 range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:154:20 - line:154:20] typerepr='UISwitch'))
         (tuple_expr type='()' location=/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:154:28 range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:154:28 - line:154:29])))
     (var_decl range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:154:9 - line:154:9] "switch" type='UISwitch' interface type='UISwitch' access=internal final let readImpl=stored immutable
-      (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:154:9 - line:154:9] 'anonname=0x7fc5b3261ae8' interface type='(UseGreenCell) -> () -> UISwitch' access=internal final get_for=switch
+      (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:154:9 - line:154:9] 'anonname=0x7fc616a71ae8' interface type='(UseGreenCell) -> () -> UISwitch' access=internal final get_for=switch
         (parameter "self" interface type='UseGreenCell')
         (parameter_list)
         (brace_stmt implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:154:9 - line:154:9]
           (return_stmt implicit
             (member_ref_expr implicit type='UISwitch' decl=CleanseGithubBrowser.(file).UseGreenCell.switch@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:154:9 direct_to_storage
               (declref_expr implicit type='UseGreenCell' decl=CleanseGithubBrowser.(file).UseGreenCell.<anonymous>.self@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:154:9 function_ref=unapplied))))))
-    (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:154:9 - line:154:9] 'anonname=0x7fc5b3261ae8' interface type='(UseGreenCell) -> () -> UISwitch' access=internal final get_for=switch
+    (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:154:9 - line:154:9] 'anonname=0x7fc616a71ae8' interface type='(UseGreenCell) -> () -> UISwitch' access=internal final get_for=switch
       (parameter "self" interface type='UseGreenCell')
       (parameter_list)
       (brace_stmt implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:154:9 - line:154:9]
@@ -4725,14 +4725,14 @@ thubBrowser/RootViewController.swift:54:24 - line:54:57] names=with
         (type_ident
           (component id='MembersPageSettings' bind=CleanseGithubBrowser.(file).MembersPageSettings@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:128:7))))
     (var_decl range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:155:9 - line:155:9] "settings" type='MembersPageSettings' interface type='MembersPageSettings' access=internal final let readImpl=stored immutable
-      (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:155:9 - line:155:9] 'anonname=0x7fc5b3261d40' interface type='(UseGreenCell) -> () -> MembersPageSettings' access=internal final get_for=settings
+      (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:155:9 - line:155:9] 'anonname=0x7fc616a71d40' interface type='(UseGreenCell) -> () -> MembersPageSettings' access=internal final get_for=settings
         (parameter "self" interface type='UseGreenCell')
         (parameter_list)
         (brace_stmt implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:155:9 - line:155:9]
           (return_stmt implicit
             (member_ref_expr implicit type='MembersPageSettings' decl=CleanseGithubBrowser.(file).UseGreenCell.settings@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:155:9 direct_to_storage
               (declref_expr implicit type='UseGreenCell' decl=CleanseGithubBrowser.(file).UseGreenCell.<anonymous>.self@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:155:9 function_ref=unapplied))))))
-    (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:155:9 - line:155:9] 'anonname=0x7fc5b3261d40' interface type='(UseGreenCell) -> () -> MembersPageSettings' access=internal final get_for=settings
+    (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:155:9 - line:155:9] 'anonname=0x7fc616a71d40' interface type='(UseGreenCell) -> () -> MembersPageSettings' access=internal final get_for=settings
       (parameter "self" interface type='UseGreenCell')
       (parameter_list)
       (brace_stmt implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/MembersPage.swift:155:9 - line:155:9]
@@ -4969,14 +4969,14 @@ Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithub
         (type_ident
           (component id='String' bind=Swift.(file).String))))
     (var_decl range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/SettingsPage.swift:17:9 - line:17:9] "title" type='String' interface type='String' access=internal let readImpl=stored immutable
-      (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/SettingsPage.swift:17:9 - line:17:9] 'anonname=0x7f90108ea9c0' interface type='(SettingsItem) -> () -> String' access=internal get_for=title
+      (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/SettingsPage.swift:17:9 - line:17:9] 'anonname=0x7ff8118c25c0' interface type='(SettingsItem) -> () -> String' access=internal get_for=title
         (parameter "self" interface type='SettingsItem')
         (parameter_list)
         (brace_stmt implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/SettingsPage.swift:17:9 - line:17:9]
           (return_stmt implicit
             (member_ref_expr implicit type='String' decl=CleanseGithubBrowser.(file).SettingsItem.title@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/SettingsPage.swift:17:9 direct_to_storage
               (declref_expr implicit type='SettingsItem' decl=CleanseGithubBrowser.(file).SettingsItem.<anonymous>.self@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/SettingsPage.swift:17:9 function_ref=unapplied))))))
-    (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/SettingsPage.swift:17:9 - line:17:9] 'anonname=0x7f90108ea9c0' interface type='(SettingsItem) -> () -> String' access=internal get_for=title
+    (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/SettingsPage.swift:17:9 - line:17:9] 'anonname=0x7ff8118c25c0' interface type='(SettingsItem) -> () -> String' access=internal get_for=title
       (parameter "self" interface type='SettingsItem')
       (parameter_list)
       (brace_stmt implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/SettingsPage.swift:17:9 - line:17:9]
@@ -4991,14 +4991,14 @@ Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithub
             (type_ident
               (component id='UIViewController' bind=UIKit.(file).UIViewController)))))
     (var_decl range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/SettingsPage.swift:20:9 - line:20:9] "viewControllerProvider" type='Provider<UIViewController>' interface type='Provider<UIViewController>' access=internal let readImpl=stored immutable
-      (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/SettingsPage.swift:20:9 - line:20:9] 'anonname=0x7f90108eaba0' interface type='(SettingsItem) -> () -> Provider<UIViewController>' access=internal get_for=viewControllerProvider
+      (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/SettingsPage.swift:20:9 - line:20:9] 'anonname=0x7ff8118c27a0' interface type='(SettingsItem) -> () -> Provider<UIViewController>' access=internal get_for=viewControllerProvider
         (parameter "self" interface type='SettingsItem')
         (parameter_list)
         (brace_stmt implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/SettingsPage.swift:20:9 - line:20:9]
           (return_stmt implicit
             (member_ref_expr implicit type='Provider<UIViewController>' decl=CleanseGithubBrowser.(file).SettingsItem.viewControllerProvider@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/SettingsPage.swift:20:9 direct_to_storage
               (declref_expr implicit type='SettingsItem' decl=CleanseGithubBrowser.(file).SettingsItem.<anonymous>.self@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/SettingsPage.swift:20:9 function_ref=unapplied))))))
-    (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/SettingsPage.swift:20:9 - line:20:9] 'anonname=0x7f90108eaba0' interface type='(SettingsItem) -> () -> Provider<UIViewController>' access=internal get_for=viewControllerProvider
+    (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/SettingsPage.swift:20:9 - line:20:9] 'anonname=0x7ff8118c27a0' interface type='(SettingsItem) -> () -> Provider<UIViewController>' access=internal get_for=viewControllerProvider
       (parameter "self" interface type='SettingsItem')
       (parameter_list)
       (brace_stmt implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/SettingsPage.swift:20:9 - line:20:9]
@@ -5011,14 +5011,14 @@ Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithub
         (type_ident
           (component id='Int' bind=Swift.(file).Int))))
     (var_decl range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/SettingsPage.swift:23:9 - line:23:9] "rank" type='Int' interface type='Int' access=internal let readImpl=stored immutable
-      (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/SettingsPage.swift:23:9 - line:23:9] 'anonname=0x7f90108ead68' interface type='(SettingsItem) -> () -> Int' access=internal get_for=rank
+      (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/SettingsPage.swift:23:9 - line:23:9] 'anonname=0x7ff8118c2968' interface type='(SettingsItem) -> () -> Int' access=internal get_for=rank
         (parameter "self" interface type='SettingsItem')
         (parameter_list)
         (brace_stmt implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/SettingsPage.swift:23:9 - line:23:9]
           (return_stmt implicit
             (member_ref_expr implicit type='Int' decl=CleanseGithubBrowser.(file).SettingsItem.rank@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/SettingsPage.swift:23:9 direct_to_storage
               (declref_expr implicit type='SettingsItem' decl=CleanseGithubBrowser.(file).SettingsItem.<anonymous>.self@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/SettingsPage.swift:23:9 function_ref=unapplied))))))
-    (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/SettingsPage.swift:23:9 - line:23:9] 'anonname=0x7f90108ead68' interface type='(SettingsItem) -> () -> Int' access=internal get_for=rank
+    (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/SettingsPage.swift:23:9 - line:23:9] 'anonname=0x7ff8118c2968' interface type='(SettingsItem) -> () -> Int' access=internal get_for=rank
       (parameter "self" interface type='SettingsItem')
       (parameter_list)
       (brace_stmt implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/SettingsPage.swift:23:9 - line:23:9]
@@ -5265,14 +5265,14 @@ Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithub
             (type_ident
               (component id='SettingsItem' bind=CleanseGithubBrowser.(file).SettingsItem@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/SettingsPage.swift:15:8)))))
       (var_decl range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/SettingsPage.swift:95:13 - line:95:13] "settingsItems" type='[SettingsItem]' interface type='[SettingsItem]' access=internal final let readImpl=stored immutable
-        (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/SettingsPage.swift:95:13 - line:95:13] 'anonname=0x7f90721b9fb0' interface type='(SettingsSplitViewController.MasterViewController) -> () -> [SettingsItem]' access=internal final get_for=settingsItems
+        (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/SettingsPage.swift:95:13 - line:95:13] 'anonname=0x7ff7f08643b0' interface type='(SettingsSplitViewController.MasterViewController) -> () -> [SettingsItem]' access=internal final get_for=settingsItems
           (parameter "self" interface type='SettingsSplitViewController.MasterViewController')
           (parameter_list)
           (brace_stmt implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/SettingsPage.swift:95:13 - line:95:13]
             (return_stmt implicit
               (member_ref_expr implicit type='[SettingsItem]' decl=CleanseGithubBrowser.(file).SettingsSplitViewController extension.MasterViewController.settingsItems@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/SettingsPage.swift:95:13 direct_to_storage
                 (declref_expr implicit type='SettingsSplitViewController.MasterViewController' decl=CleanseGithubBrowser.(file).SettingsSplitViewController extension.MasterViewController.<anonymous>.self@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/SettingsPage.swift:95:13 function_ref=unapplied))))))
-      (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/SettingsPage.swift:95:13 - line:95:13] 'anonname=0x7f90721b9fb0' interface type='(SettingsSplitViewController.MasterViewController) -> () -> [SettingsItem]' access=internal final get_for=settingsItems
+      (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/SettingsPage.swift:95:13 - line:95:13] 'anonname=0x7ff7f08643b0' interface type='(SettingsSplitViewController.MasterViewController) -> () -> [SettingsItem]' access=internal final get_for=settingsItems
         (parameter "self" interface type='SettingsSplitViewController.MasterViewController')
         (parameter_list)
         (brace_stmt implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/SettingsPage.swift:95:13 - line:95:13]
@@ -5287,7 +5287,7 @@ Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithub
           (declref_expr implicit type='(Int?.Type) -> Int?' decl=Swift.(file).Optional.none [with (substitution_map generic_signature=<Wrapped> (substitution Wrapped -> Int))] function_ref=unapplied)
           (type_expr implicit type='Int?.Type' typerepr='<<NULL>>')))
       (var_decl range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/SettingsPage.swift:97:25 - line:97:25] "lastSelectedItemIndex" type='Int?' interface type='Int?' access=fileprivate readImpl=stored writeImpl=stored readWriteImpl=stored
-        (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/SettingsPage.swift:97:25 - line:97:25] 'anonname=0x7f90721bb618' interface type='(SettingsSplitViewController.MasterViewController) -> () -> Int?' access=fileprivate get_for=lastSelectedItemIndex
+        (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/SettingsPage.swift:97:25 - line:97:25] 'anonname=0x7ff7f0865a18' interface type='(SettingsSplitViewController.MasterViewController) -> () -> Int?' access=fileprivate get_for=lastSelectedItemIndex
           (parameter "self" interface type='SettingsSplitViewController.MasterViewController')
           (parameter_list)
           (brace_stmt implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/SettingsPage.swift:97:25 - line:97:25]
@@ -5295,7 +5295,7 @@ Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithub
               (load_expr implicit type='Int?'
                 (member_ref_expr implicit type='@lvalue Int?' decl=CleanseGithubBrowser.(file).SettingsSplitViewController extension.MasterViewController.lastSelectedItemIndex@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/SettingsPage.swift:97:25 direct_to_storage
                   (declref_expr implicit type='SettingsSplitViewController.MasterViewController' decl=CleanseGithubBrowser.(file).SettingsSplitViewController extension.MasterViewController.<anonymous>.self@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/SettingsPage.swift:97:25 function_ref=unapplied))))))
-        (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/SettingsPage.swift:97:25 - line:97:25] 'anonname=0x7f90721bb800' interface type='(SettingsSplitViewController.MasterViewController) -> (Int?) -> ()' access=fileprivate set_for=lastSelectedItemIndex
+        (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/SettingsPage.swift:97:25 - line:97:25] 'anonname=0x7ff7f0865c00' interface type='(SettingsSplitViewController.MasterViewController) -> (Int?) -> ()' access=fileprivate set_for=lastSelectedItemIndex
           (parameter "self" interface type='SettingsSplitViewController.MasterViewController')
           (parameter_list
             (parameter "value" interface type='Int?') range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/SettingsPage.swift:97:25 - line:97:25])
@@ -5304,7 +5304,7 @@ Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithub
               (member_ref_expr implicit type='@lvalue Int?' decl=CleanseGithubBrowser.(file).SettingsSplitViewController extension.MasterViewController.lastSelectedItemIndex@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/SettingsPage.swift:97:25 direct_to_storage
                 (declref_expr implicit type='SettingsSplitViewController.MasterViewController' decl=CleanseGithubBrowser.(file).SettingsSplitViewController extension.MasterViewController.<anonymous>.self@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/SettingsPage.swift:97:25 function_ref=unapplied))
               (declref_expr implicit type='Int?' decl=CleanseGithubBrowser.(file).SettingsSplitViewController extension.MasterViewController.<anonymous>.value@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/SettingsPage.swift:97:25 function_ref=unapplied))))
-        (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/SettingsPage.swift:97:25 - line:97:25] 'anonname=0x7f90721bb908' interface type='(SettingsSplitViewController.MasterViewController) -> () -> ()' access=fileprivate _modify_for=lastSelectedItemIndex
+        (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/SettingsPage.swift:97:25 - line:97:25] 'anonname=0x7ff7f0865d08' interface type='(SettingsSplitViewController.MasterViewController) -> () -> ()' access=fileprivate _modify_for=lastSelectedItemIndex
           (parameter "self" interface type='SettingsSplitViewController.MasterViewController')
           (parameter_list)
           (brace_stmt implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/SettingsPage.swift:97:25 - line:97:25]
@@ -5312,7 +5312,7 @@ Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithub
               (inout_expr implicit type='inout Int?'
                 (member_ref_expr implicit type='@lvalue Int?' decl=CleanseGithubBrowser.(file).SettingsSplitViewController extension.MasterViewController.lastSelectedItemIndex@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/SettingsPage.swift:97:25 direct_to_impl
                   (declref_expr implicit type='SettingsSplitViewController.MasterViewController' decl=CleanseGithubBrowser.(file).SettingsSplitViewController extension.MasterViewController.<anonymous>.self@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/SettingsPage.swift:97:25 function_ref=unapplied)))))))
-      (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/SettingsPage.swift:97:25 - line:97:25] 'anonname=0x7f90721bb618' interface type='(SettingsSplitViewController.MasterViewController) -> () -> Int?' access=fileprivate get_for=lastSelectedItemIndex
+      (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/SettingsPage.swift:97:25 - line:97:25] 'anonname=0x7ff7f0865a18' interface type='(SettingsSplitViewController.MasterViewController) -> () -> Int?' access=fileprivate get_for=lastSelectedItemIndex
         (parameter "self" interface type='SettingsSplitViewController.MasterViewController')
         (parameter_list)
         (brace_stmt implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/SettingsPage.swift:97:25 - line:97:25]
@@ -5320,7 +5320,7 @@ Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithub
             (load_expr implicit type='Int?'
               (member_ref_expr implicit type='@lvalue Int?' decl=CleanseGithubBrowser.(file).SettingsSplitViewController extension.MasterViewController.lastSelectedItemIndex@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/SettingsPage.swift:97:25 direct_to_storage
                 (declref_expr implicit type='SettingsSplitViewController.MasterViewController' decl=CleanseGithubBrowser.(file).SettingsSplitViewController extension.MasterViewController.<anonymous>.self@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/SettingsPage.swift:97:25 function_ref=unapplied))))))
-      (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/SettingsPage.swift:97:25 - line:97:25] 'anonname=0x7f90721bb800' interface type='(SettingsSplitViewController.MasterViewController) -> (Int?) -> ()' access=fileprivate set_for=lastSelectedItemIndex
+      (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/SettingsPage.swift:97:25 - line:97:25] 'anonname=0x7ff7f0865c00' interface type='(SettingsSplitViewController.MasterViewController) -> (Int?) -> ()' access=fileprivate set_for=lastSelectedItemIndex
         (parameter "self" interface type='SettingsSplitViewController.MasterViewController')
         (parameter_list
           (parameter "value" interface type='Int?') range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/SettingsPage.swift:97:25 - line:97:25])
@@ -5329,7 +5329,7 @@ Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithub
             (member_ref_expr implicit type='@lvalue Int?' decl=CleanseGithubBrowser.(file).SettingsSplitViewController extension.MasterViewController.lastSelectedItemIndex@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/SettingsPage.swift:97:25 direct_to_storage
               (declref_expr implicit type='SettingsSplitViewController.MasterViewController' decl=CleanseGithubBrowser.(file).SettingsSplitViewController extension.MasterViewController.<anonymous>.self@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/SettingsPage.swift:97:25 function_ref=unapplied))
             (declref_expr implicit type='Int?' decl=CleanseGithubBrowser.(file).SettingsSplitViewController extension.MasterViewController.<anonymous>.value@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/SettingsPage.swift:97:25 function_ref=unapplied))))
-      (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/SettingsPage.swift:97:25 - line:97:25] 'anonname=0x7f90721bb908' interface type='(SettingsSplitViewController.MasterViewController) -> () -> ()' access=fileprivate _modify_for=lastSelectedItemIndex
+      (accessor_decl implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/SettingsPage.swift:97:25 - line:97:25] 'anonname=0x7ff7f0865d08' interface type='(SettingsSplitViewController.MasterViewController) -> () -> ()' access=fileprivate _modify_for=lastSelectedItemIndex
         (parameter "self" interface type='SettingsSplitViewController.MasterViewController')
         (parameter_list)
         (brace_stmt implicit range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/SettingsPage.swift:97:25 - line:97:25]
@@ -5389,7 +5389,7 @@ Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithub
           (type_ident
             (component id='Bool' bind=Swift.(file).Bool))))
       (var_decl range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/SettingsPage.swift:108:13 - line:108:13] "splitViewControllerIsCollapsed" type='Bool' interface type='Bool' access=internal readImpl=getter immutable
-        (accessor_decl range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/SettingsPage.swift:108:50 - line:110:9] 'anonname=0x7f90408347f0' interface type='(SettingsSplitViewController.MasterViewController) -> () -> Bool' access=internal get_for=splitViewControllerIsCollapsed
+        (accessor_decl range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/SettingsPage.swift:108:50 - line:110:9] 'anonname=0x7ff81110c5f0' interface type='(SettingsSplitViewController.MasterViewController) -> () -> Bool' access=internal get_for=splitViewControllerIsCollapsed
           (parameter "self" interface type='SettingsSplitViewController.MasterViewController')
           (parameter_list)
           (brace_stmt range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/SettingsPage.swift:108:50 - line:110:9]
@@ -5408,7 +5408,7 @@ Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithub
 
                     (parameter_list)
                     (boolean_literal_expr type='Bool' location=/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/SettingsPage.swift:109:56 range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/SettingsPage.swift:109:56 - line:109:56] value=false builtin_initializer=Swift.(file).Bool extension.init(_builtinBooleanLiteral:) initializer=**NULL**))))))))
-      (accessor_decl range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/SettingsPage.swift:108:50 - line:110:9] 'anonname=0x7f90408347f0' interface type='(SettingsSplitViewController.MasterViewController) -> () -> Bool' access=internal get_for=splitViewControllerIsCollapsed
+      (accessor_decl range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/SettingsPage.swift:108:50 - line:110:9] 'anonname=0x7ff81110c5f0' interface type='(SettingsSplitViewController.MasterViewController) -> () -> Bool' access=internal get_for=splitViewControllerIsCollapsed
         (parameter "self" interface type='SettingsSplitViewController.MasterViewController')
         (parameter_list)
         (brace_stmt range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/SettingsPage.swift:108:50 - line:110:9]
@@ -5697,13 +5697,13 @@ Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithub
           (type_ident
             (component id='Int' bind=Swift.(file).Int))))
       (var_decl range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/SettingsPage.swift:176:25 - line:176:25] "defaultItemIndex" type='Int' interface type='Int' access=fileprivate readImpl=getter immutable
-        (accessor_decl range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/SettingsPage.swift:176:47 - line:178:9] 'anonname=0x7f9040838568' interface type='(SettingsSplitViewController.MasterViewController) -> () -> Int' access=fileprivate get_for=defaultItemIndex
+        (accessor_decl range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/SettingsPage.swift:176:47 - line:178:9] 'anonname=0x7ff811110368' interface type='(SettingsSplitViewController.MasterViewController) -> () -> Int' access=fileprivate get_for=defaultItemIndex
           (parameter "self" interface type='SettingsSplitViewController.MasterViewController')
           (parameter_list)
           (brace_stmt range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/SettingsPage.swift:176:47 - line:178:9]
             (return_stmt range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/SettingsPage.swift:177:13 - line:177:20]
               (integer_literal_expr type='Int' location=/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/SettingsPage.swift:177:20 range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/SettingsPage.swift:177:20 - line:177:20] value=0 builtin_initializer=Swift.(file).Int.init(_builtinIntegerLiteral:) initializer=**NULL**)))))
-      (accessor_decl range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/SettingsPage.swift:176:47 - line:178:9] 'anonname=0x7f9040838568' interface type='(SettingsSplitViewController.MasterViewController) -> () -> Int' access=fileprivate get_for=defaultItemIndex
+      (accessor_decl range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/SettingsPage.swift:176:47 - line:178:9] 'anonname=0x7ff811110368' interface type='(SettingsSplitViewController.MasterViewController) -> () -> Int' access=fileprivate get_for=defaultItemIndex
         (parameter "self" interface type='SettingsSplitViewController.MasterViewController')
         (parameter_list)
         (brace_stmt range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/SettingsPage.swift:176:47 - line:178:9]
@@ -5895,7 +5895,7 @@ Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithub
         (type_ident
           (component id='Bool' bind=Swift.(file).Bool))))
     (var_decl range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/SettingsPage.swift:233:17 - line:233:17] "detailItemHasBeenExplicitelySelected" type='Bool' interface type='Bool' access=private readImpl=getter immutable
-      (accessor_decl range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/SettingsPage.swift:233:60 - line:235:5] 'anonname=0x7f904083b758' interface type='(SettingsSplitViewController.MasterViewController) -> () -> Bool' access=private get_for=detailItemHasBeenExplicitelySelected
+      (accessor_decl range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/SettingsPage.swift:233:60 - line:235:5] 'anonname=0x7ff811113558' interface type='(SettingsSplitViewController.MasterViewController) -> () -> Bool' access=private get_for=detailItemHasBeenExplicitelySelected
         (parameter "self" interface type='SettingsSplitViewController.MasterViewController')
         (parameter_list)
         (brace_stmt range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/SettingsPage.swift:233:60 - line:235:5]
@@ -5909,7 +5909,7 @@ Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithub
                   (member_ref_expr type='@lvalue Int?' location=/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/SettingsPage.swift:234:16 range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/SettingsPage.swift:234:16 - line:234:16] decl=CleanseGithubBrowser.(file).SettingsSplitViewController extension.MasterViewController.lastSelectedItemIndex@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/SettingsPage.swift:97:25
                     (declref_expr implicit type='SettingsSplitViewController.MasterViewController' location=/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/SettingsPage.swift:234:16 range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/SettingsPage.swift:234:16 - line:234:16] decl=CleanseGithubBrowser.(file).MasterViewController extension.<anonymous>.self@/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/SettingsPage.swift:233:60 function_ref=unapplied)))
                 (nil_literal_expr type='_OptionalNilComparisonType' location=/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/SettingsPage.swift:234:41 range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/SettingsPage.swift:234:41 - line:234:41] initializer=Swift.(file)._OptionalNilComparisonType.init(nilLiteral:))))))))
-    (accessor_decl range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/SettingsPage.swift:233:60 - line:235:5] 'anonname=0x7f904083b758' interface type='(SettingsSplitViewController.MasterViewController) -> () -> Bool' access=private get_for=detailItemHasBeenExplicitelySelected
+    (accessor_decl range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/SettingsPage.swift:233:60 - line:235:5] 'anonname=0x7ff811113558' interface type='(SettingsSplitViewController.MasterViewController) -> () -> Bool' access=private get_for=detailItemHasBeenExplicitelySelected
       (parameter "self" interface type='SettingsSplitViewController.MasterViewController')
       (parameter_list)
       (brace_stmt range=[/Users/sebastians/Development/Cleanse/Examples/CleanseGithubBrowser/CleanseGithubBrowser/SettingsPage.swift:233:60 - line:235:5]

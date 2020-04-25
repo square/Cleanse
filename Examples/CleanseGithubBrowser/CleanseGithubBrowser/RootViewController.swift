@@ -49,8 +49,8 @@ class RootViewController : UITabBarController {
 
             // This satisfies UIWindow wanting the TaggedProvider<UIViewController.Root> 
             // with the RootViewController created above.
-            binder
-                .bind()
+            let a = binder
+                .bind(UIViewController.self)
                 .tagged(with: UIViewController.Root.self)
                 .to { $0 as RootViewController }
         }
