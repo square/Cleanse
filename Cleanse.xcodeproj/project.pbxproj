@@ -48,6 +48,12 @@
 		DCC5E6382450E7960032A69F /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC5E6372450E7960032A69F /* Component.swift */; };
 		DCC5E63A24510A4F0032A69F /* Cleansec.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC5E63924510A4F0032A69F /* Cleansec.swift */; };
 		DCC5E63E24510D5A0032A69F /* BindingVisitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC5E63D24510D5A0032A69F /* BindingVisitor.swift */; };
+		DCCA5F8D2453F3EB009ECBE7 /* LinkedComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCCA5F8C2453F3EB009ECBE7 /* LinkedComponent.swift */; };
+		DCCA5F8F2453F3F4009ECBE7 /* LinkedModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCCA5F8E2453F3F4009ECBE7 /* LinkedModule.swift */; };
+		DCCA5F912453F432009ECBE7 /* LinkedInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCCA5F902453F432009ECBE7 /* LinkedInterface.swift */; };
+		DCCA5F932453F44A009ECBE7 /* ResolutionError.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCCA5F922453F44A009ECBE7 /* ResolutionError.swift */; };
+		DCCA5F952453F459009ECBE7 /* CanonicalProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCCA5F942453F459009ECBE7 /* CanonicalProvider.swift */; };
+		DCCA5F972453F46F009ECBE7 /* ResolvedComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCCA5F962453F46F009ECBE7 /* ResolvedComponent.swift */; };
 		DCE9317723220C6800C0522F /* Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE9317623220C6800C0522F /* Factory.swift */; };
 		DCE9317923220CA900C0522F /* AssistedFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE9317823220CA900C0522F /* AssistedFactory.swift */; };
 		DCE9317B23220CF900C0522F /* Assisted.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE9317A23220CF900C0522F /* Assisted.swift */; };
@@ -214,6 +220,12 @@
 		DCC5E6372450E7960032A69F /* Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Component.swift; sourceTree = "<group>"; };
 		DCC5E63924510A4F0032A69F /* Cleansec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cleansec.swift; sourceTree = "<group>"; };
 		DCC5E63D24510D5A0032A69F /* BindingVisitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BindingVisitor.swift; sourceTree = "<group>"; };
+		DCCA5F8C2453F3EB009ECBE7 /* LinkedComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedComponent.swift; sourceTree = "<group>"; };
+		DCCA5F8E2453F3F4009ECBE7 /* LinkedModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedModule.swift; sourceTree = "<group>"; };
+		DCCA5F902453F432009ECBE7 /* LinkedInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedInterface.swift; sourceTree = "<group>"; };
+		DCCA5F922453F44A009ECBE7 /* ResolutionError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResolutionError.swift; sourceTree = "<group>"; };
+		DCCA5F942453F459009ECBE7 /* CanonicalProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanonicalProvider.swift; sourceTree = "<group>"; };
+		DCCA5F962453F46F009ECBE7 /* ResolvedComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResolvedComponent.swift; sourceTree = "<group>"; };
 		DCE9317623220C6800C0522F /* Factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Factory.swift; sourceTree = "<group>"; };
 		DCE9317823220CA900C0522F /* AssistedFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssistedFactory.swift; sourceTree = "<group>"; };
 		DCE9317A23220CF900C0522F /* Assisted.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Assisted.swift; sourceTree = "<group>"; };
@@ -465,6 +477,9 @@
 			isa = PBXGroup;
 			children = (
 				DC593800245246D400D70652 /* Linker.swift */,
+				DCCA5F8E2453F3F4009ECBE7 /* LinkedModule.swift */,
+				DCCA5F8C2453F3EB009ECBE7 /* LinkedComponent.swift */,
+				DCCA5F902453F432009ECBE7 /* LinkedInterface.swift */,
 			);
 			path = Linking;
 			sourceTree = "<group>";
@@ -473,6 +488,9 @@
 			isa = PBXGroup;
 			children = (
 				DC5938052453730200D70652 /* Resolver.swift */,
+				DCCA5F922453F44A009ECBE7 /* ResolutionError.swift */,
+				DCCA5F942453F459009ECBE7 /* CanonicalProvider.swift */,
+				DCCA5F962453F46F009ECBE7 /* ResolvedComponent.swift */,
 			);
 			path = Resolver;
 			sourceTree = "<group>";
@@ -1046,18 +1064,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DCCA5F8F2453F3F4009ECBE7 /* LinkedModule.swift in Sources */,
 				DC1F56D2244FAB2500CCFDD5 /* ConfigureVisitor.swift in Sources */,
 				DCC5E6362450E76F0032A69F /* Module.swift in Sources */,
+				DCCA5F932453F44A009ECBE7 /* ResolutionError.swift in Sources */,
 				DCC5E63E24510D5A0032A69F /* BindingVisitor.swift in Sources */,
+				DCCA5F952453F459009ECBE7 /* CanonicalProvider.swift in Sources */,
 				DC5937D624514D3400D70652 /* ReferenceVisitor.swift in Sources */,
+				DCCA5F8D2453F3EB009ECBE7 /* LinkedComponent.swift in Sources */,
 				DC593801245246D400D70652 /* Linker.swift in Sources */,
 				DC5937FB24520D9200D70652 /* CleanseTypeVisitor.swift in Sources */,
+				DCCA5F912453F432009ECBE7 /* LinkedInterface.swift in Sources */,
 				DC1F56D5244FAE1B00CCFDD5 /* Provider.swift in Sources */,
 				DC30D51D24511892009F3CF5 /* ComponentVisitor.swift in Sources */,
 				DCC5E63A24510A4F0032A69F /* Cleansec.swift in Sources */,
 				DC5938062453730200D70652 /* Resolver.swift in Sources */,
 				DC1F5698244F9C8A00CCFDD5 /* FileVisitor.swift in Sources */,
 				DCC5E6382450E7960032A69F /* Component.swift in Sources */,
+				DCCA5F972453F46F009ECBE7 /* ResolvedComponent.swift in Sources */,
 				DC5937DE245154E100D70652 /* ReceiptBinderVisitor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

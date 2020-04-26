@@ -9,7 +9,11 @@
 import Foundation
 import swift_ast_parser
 
-public struct FileRepresentation {
+public struct ModuleRepresentation: Codable {
+    public let files: [FileRepresentation]
+}
+
+public struct FileRepresentation: Codable {
     public let components: [Component]
     public let modules: [Module]
 }

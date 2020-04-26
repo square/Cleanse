@@ -11,7 +11,7 @@ import swift_ast_parser
 import cleasec
 
 func main() {
-    let interface = Cleansec.analyze(text: sample_text, searchNodes: [])
+    let interface = Cleansec.analyze(text: sample_text)
     
     let rootComponents = interface.components.filter { $0.isRoot }
     rootComponents.forEach { (root) in

@@ -8,30 +8,8 @@
 
 import Foundation
 
-public struct LinkedComponent {
-    public let type: String
-    public let rootType: String
-    public let providers: [StandardProvider]
-    public let seed: String
-    public let includedModules: [String]
-    public let subcomponents: [String]
-    public let isRoot: Bool
-}
-
-public struct LinkedModule {
-    public let type: String
-    public let providers: [StandardProvider]
-    public let includedModules: [String]
-    public let subcomponents: [String]
-}
-
-public struct ModuleInterface {
-    public let components: [LinkedComponent]
-    public let modules: [LinkedModule]
-}
-
 public struct Linker {
-    static func linkProviders(files: [FileRepresentation]) -> ModuleInterface {
+    public static func linkProviders(files: [FileRepresentation]) -> LinkedInterface {
         let danglingProviders = files.flatMap { $0.components }.flatMap { $0.danglingProviders } + files.flatMap { $0.modules}.flatMap { $0.danglingProviders }
         let danglingProvidersByReference = danglingProviders.reduce(into: [String:DanglingProvider]()) { (dict, provider) in
             if let _ = dict[provider.reference] {
@@ -71,7 +49,7 @@ public struct Linker {
             )
         }
         
-        return ModuleInterface(
+        return LinkedInterface(
             components: linkedComponents,
             modules: linkedModules
         )

@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct Module: CustomStringConvertible {
+public struct Module: CustomStringConvertible, Codable {
     public let type: String
     public let providers: [StandardProvider]
     public let danglingProviders: [DanglingProvider]

@@ -14,7 +14,7 @@ public protocol Provider {
 }
 
 
-public struct StandardProvider: Provider, Equatable, CustomStringConvertible {
+public struct StandardProvider: Provider, Equatable, CustomStringConvertible, Codable {
     public let type: String
     public let dependencies: [String]
     public let tag: String?
@@ -26,7 +26,7 @@ public struct StandardProvider: Provider, Equatable, CustomStringConvertible {
     }
 }
 
-public struct DanglingProvider: Provider, Equatable, CustomStringConvertible {
+public struct DanglingProvider: Provider, Equatable, CustomStringConvertible, Codable {
     public let type: String
     public let dependencies: [String]
     public let reference: String
@@ -36,7 +36,7 @@ public struct DanglingProvider: Provider, Equatable, CustomStringConvertible {
     }
 }
 
-public struct ReferenceProvider: Provider, Equatable, CustomStringConvertible {
+public struct ReferenceProvider: Provider, Equatable, CustomStringConvertible, Codable {
     public let type: String
     public let tag: String?
     public let scoped: String?

@@ -8,63 +8,8 @@
 
 import Foundation
 
-public struct ResolutionError: Error {
-    public enum ErrorType {
-        case missingModule(String)
-        case missingComponent(String)
-        case missingDependency(String)
-        case duplicateDependency(String)
-        case cyclicalDependencies([String])
-    }
-    
-    public let error: ErrorType
-}
-
-public class ResolvedComponent {
-    public let type: String
-    public weak var parent: ResolvedComponent?
-    public var children: [ResolvedComponent]
-    public let providersByType: [String:[CanonicalProvider]]
-    public var diagnostics: [ResolutionError]
-    
-    public init(type: String, parent: ResolvedComponent?, providersByType: [String:[CanonicalProvider]], children: [ResolvedComponent] = [], diagnostics: [ResolutionError]) {
-        self.type = type
-        self.parent = parent
-        self.children = children
-        self.providersByType = providersByType
-        self.diagnostics = diagnostics
-    }
-}
-
-public struct CanonicalProvider {
-    public let type: String
-    public let dependencies: [String]
-    public let isCollection: Bool
-}
-
-extension CanonicalProvider {
-    var lazyProvider: CanonicalProvider {
-        // Think about dependencies. Should there be none? The inner type, or all shared dependencies?
-        return CanonicalProvider(type: "Provider<\(type)>", dependencies: [], isCollection: isCollection)
-    }
-}
-
-// Maps collection and tagged bindings into their canonical form.
-struct ProviderPreprocessor {
-    static func process(_ provider: StandardProvider) -> CanonicalProvider {
-        if let tagged = provider.tag {
-            // As of today, it is not possible to have a tagged and collection provider
-            return CanonicalProvider(type: "TaggedProvider<\(tagged)>", dependencies: provider.dependencies, isCollection: false)
-        }
-        if let collection = provider.collectionType {
-            return CanonicalProvider(type: collection, dependencies: provider.dependencies, isCollection: true)
-        }
-        return CanonicalProvider(type: provider.type, dependencies: provider.dependencies, isCollection: false)
-    }
-}
-
 public struct Resolver {
-    public static func resolve(rootComponent: LinkedComponent, in interface: ModuleInterface) -> ResolvedComponent {
+    public static func resolve(rootComponent: LinkedComponent, in interface: LinkedInterface) -> ResolvedComponent {
         let modulesByName = interface.modules.reduce(into: [String:LinkedModule]()) { (dict, module) in
             if let _ = dict[module.type] {
                 print("Warning! Duplicate module definitions for \(module.type). Should disambiguate.")
@@ -98,7 +43,7 @@ public struct Resolver {
         let allSubcomponents = (component.subcomponents + moduleSubcomponents).uniques
         var allDiagnostics = diagnostics + moduleDiagnostics
         
-        let allCanonicalProviders = allProviders.map { ProviderPreprocessor.process($0) }
+        let allCanonicalProviders = allProviders.map { $0.mapToCanonicalProvider() }
         var providersByType = allCanonicalProviders.reduce(into: [String:[CanonicalProvider]]()) { (dict, provider) in
             if var existing = dict[provider.type] {
                 if existing.contains(where: { !$0.isCollection }) || !provider.isCollection {
@@ -113,6 +58,7 @@ public struct Resolver {
                 dict[provider.lazyProvider.type] = [provider.lazyProvider]
             }
         }
+        
         // Add ComponentFactory providers
         allSubcomponents
             .map { CanonicalProvider(type: "ComponentFactory<\($0)>", dependencies: [], isCollection: false) }
@@ -148,22 +94,6 @@ public struct Resolver {
         return resolvedComponent
     }
     
-    private struct ComponentSearchResult {
-        let component: ResolvedComponent
-        let providersByType: [String:StandardProvider]
-        let diagnostics: [ResolutionError]
-    }
-    
-    private struct ModuleSearchResult {
-        let providers: [StandardProvider]
-        let subcomponents: [String]
-        let diagnostics: [ResolutionError]
-        
-        static var empty: ModuleSearchResult {
-            ModuleSearchResult(providers: [], subcomponents: [], diagnostics: [])
-        }
-    }
-    
     private static func resolveDependency(type: String, in resolvedComponent: ResolvedComponent?) -> [CanonicalProvider] {
         guard let c = resolvedComponent else {
             return []
@@ -194,7 +124,24 @@ public struct Resolver {
             diagnostics: diagnostics + subModuleDiagnostics
         )
     }
+}
+
+extension Resolver {
+    fileprivate struct ComponentSearchResult {
+        let component: ResolvedComponent
+        let providersByType: [String:StandardProvider]
+        let diagnostics: [ResolutionError]
+    }
     
+    fileprivate struct ModuleSearchResult {
+        let providers: [StandardProvider]
+        let subcomponents: [String]
+        let diagnostics: [ResolutionError]
+        
+        static var empty: ModuleSearchResult {
+            ModuleSearchResult(providers: [], subcomponents: [], diagnostics: [])
+        }
+    }
 }
 
 extension Array where Element: Hashable {
