@@ -520,7 +520,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "echo \"/private/tmp/dd/Cleanse-fizhylddmrvxpdghmvkaoolozwra/Build/Products/Debug/cleansec --ast-file ${AST_FILE}  --module-search-path ${AST_DIR} --module-output-path ${AST_DIR}/${PRODUCT_MODULE_NAME}.cleanescmodule\"\n/private/tmp/dd/Cleanse-fizhylddmrvxpdghmvkaoolozwra/Build/Products/Debug/cleansec --ast-file ${AST_FILE}  --module-search-path ${AST_DIR} --module-output-path ${AST_DIR}/${PRODUCT_MODULE_NAME}.cleanescmodule\n";
+			shellScript = "/private/tmp/dd/Cleanse-fizhylddmrvxpdghmvkaoolozwra/Build/Products/Debug/cleansec --ast-file ${AST_FILE}  --module-search-path ${AST_DIR} --module-output-path ${AST_DIR}/${PRODUCT_MODULE_NAME}.cleanescmodule\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
