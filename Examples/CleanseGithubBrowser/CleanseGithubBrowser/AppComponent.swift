@@ -7,6 +7,7 @@
 //
 
 import Cleanse
+import MyModule
 
 struct TestAppComponent: Cleanse.RootComponent {
     typealias Root = PropertyInjector<AppDelegate>
@@ -47,6 +48,7 @@ struct AppComponent : Cleanse.RootComponent {
 
         binder.bind().configured(with: RealeaseGithubServicesModule.configureGithubMembersService)
         binder.bind().configured(with: RealeaseGithubServicesModule.configureRepositoriesMembersService)
+        binder.include(module: MyAModule.self)
     }
 
     static func configureRoot(binder bind: ReceiptBinder<Root>) -> BindingReceipt<Root> {

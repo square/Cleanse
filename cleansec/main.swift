@@ -12,28 +12,50 @@ import cleasec
 
 struct CLI: ParsableCommand {
     @Option(name: .long)
-    var astFile: String
+    var astDirectory: String
     
     @Option(name: .long, parsing: .singleValue)
     var moduleSearchPath: [String]
     
     @Option(name: .long)
-    var moduleOutputPath: String
+    var moduleOutputDirectory: String
+    
+    @Option(name: .long)
+    var moduleName: String
+    
+    var cleanseModuleName: String {
+        return "\(moduleName).cleansecmodule"
+    }
+    
+    var astFilename: String {
+        return "\(moduleName).ast"
+    }
+    
+    var astPath: URL {
+        var astPath = URL(fileURLWithPath: astDirectory)
+        astPath.appendPathComponent(astFilename)
+        return astPath
+    }
+    
+    var moduleOutputPath: URL {
+        var moduleOutputPath = URL(fileURLWithPath: moduleOutputDirectory)
+        moduleOutputPath.appendPathComponent(cleanseModuleName)
+        return moduleOutputPath
+    }
     
     func run() throws {
-        let astText = try String(contentsOfFile: astFile)
-        
+        let astText = try String(contentsOf: astPath)
         let module = Cleansec.analyze(input: astText)
+        
         let jsonEncoder = JSONEncoder()
         jsonEncoder.outputFormatting = .prettyPrinted
-        
         let encodedModule = try jsonEncoder.encode(module)
-        try encodedModule.write(to: URL(fileURLWithPath: moduleOutputPath))
+        try encodedModule.write(to: moduleOutputPath)
         
         if !(module.files.flatMap { $0.components }.filter { $0.isRoot }.isEmpty) {
             let loadedModules = try moduleSearchPath
-                .flatMap { $0.directoryModuleFiles }
-                .map { try Data(contentsOf: URL(string: $0)!) }
+                .flatMap { $0.moduleSearchFiles(current: moduleOutputPath) }
+                .map { try Data(contentsOf: $0) }
                 .map { try JSONDecoder().decode(ModuleRepresentation.self, from: $0) }
             
             let linkedInterface = Linker.link(modules: [module] + loadedModules)
@@ -50,10 +72,17 @@ struct CLI: ParsableCommand {
 }
 
 fileprivate extension String {
-    var directoryModuleFiles: [String] {
+    func moduleSearchFiles(current: URL) -> [URL] {
         do {
             let dirContents = try FileManager().contentsOfDirectory(atPath: self)
-            return dirContents.filter { $0.hasSuffix(".cleansecmodule") }
+            return dirContents
+                .filter { $0.hasSuffix(".cleansecmodule") }
+                .map { file in
+                    var url = URL(fileURLWithPath: self)
+                    url.appendPathComponent(file)
+                    return url
+                }
+                .filter { $0 != current }
         } catch {
             print("FileManager error: \(error)")
             return []
