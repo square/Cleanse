@@ -43,13 +43,6 @@
 			remoteGlobalIDString = 88D6552C1F042D4300AFE00E;
 			remoteInfo = CleanseGen;
 		};
-		DC5937ED2451ECB100D70652 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = F6C9F38A1D0BD1A100877D0B /* Cleanse.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = DCF60955244E204200DFE5F0;
-			remoteInfo = "cleansec-ast-parser";
-		};
 		DC5937EF2451ECB100D70652 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = F6C9F38A1D0BD1A100877D0B /* Cleanse.xcodeproj */;
@@ -70,6 +63,13 @@
 			proxyType = 2;
 			remoteGlobalIDString = DC1F5684244F9C1E00CCFDD5;
 			remoteInfo = cleasecTests;
+		};
+		DCCA5FAA245661D5009ECBE7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F6C9F38A1D0BD1A100877D0B /* Cleanse.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = DCCA5F9C245659A6009ECBE7;
+			remoteInfo = cleansec;
 		};
 		F6C9F36E1D0BD01700877D0B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -304,10 +304,10 @@
 				F6C9F3901D0BD1A200877D0B /* Cleanse.framework */,
 				88D6553D1F04591700AFE00E /* CleanseGen.framework */,
 				F6C9F3921D0BD1A200877D0B /* CleanseTests.xctest */,
-				DC5937EE2451ECB100D70652 /* cleansec-ast-parser */,
 				DC5937F02451ECB100D70652 /* swift_ast_parser.framework */,
 				DC5937F22451ECB100D70652 /* cleasec.framework */,
 				DC5937F42451ECB100D70652 /* cleasecTests.xctest */,
+				DCCA5FAB245661D5009ECBE7 /* cleansec */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -320,10 +320,10 @@
 			buildConfigurationList = F6C9F3811D0BD01700877D0B /* Build configuration list for PBXNativeTarget "CleanseGithubBrowser" */;
 			buildPhases = (
 				F6C9F3551D0BD01700877D0B /* Sources */,
+				DCF604AB244D590100DFE5F0 /* cleansec */,
 				F6C9F3561D0BD01700877D0B /* Frameworks */,
 				F6C9F3571D0BD01700877D0B /* Resources */,
 				F6C9F39F1D0BD1F500877D0B /* Embed Frameworks */,
-				DCF604AB244D590100DFE5F0 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -433,13 +433,6 @@
 			remoteRef = 88D6553C1F04591700AFE00E /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		DC5937EE2451ECB100D70652 /* cleansec-ast-parser */ = {
-			isa = PBXReferenceProxy;
-			fileType = "compiled.mach-o.executable";
-			path = "cleansec-ast-parser";
-			remoteRef = DC5937ED2451ECB100D70652 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		DC5937F02451ECB100D70652 /* swift_ast_parser.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -459,6 +452,13 @@
 			fileType = wrapper.cfbundle;
 			path = cleasecTests.xctest;
 			remoteRef = DC5937F32451ECB100D70652 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		DCCA5FAB245661D5009ECBE7 /* cleansec */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = cleansec;
+			remoteRef = DCCA5FAA245661D5009ECBE7 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		F6C9F3901D0BD1A200877D0B /* Cleanse.framework */ = {
@@ -504,7 +504,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		DCF604AB244D590100DFE5F0 /* ShellScript */ = {
+		DCF604AB244D590100DFE5F0 /* cleansec */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -513,13 +513,14 @@
 			);
 			inputPaths = (
 			);
+			name = cleansec;
 			outputFileListPaths = (
 			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\necho \"HI\"\n";
+			shellScript = "echo \"/private/tmp/dd/Cleanse-fizhylddmrvxpdghmvkaoolozwra/Build/Products/Debug/cleansec --ast-file ${AST_FILE}  --module-search-path ${AST_DIR} --module-output-path ${AST_DIR}/${PRODUCT_MODULE_NAME}.cleanescmodule\"\n/private/tmp/dd/Cleanse-fizhylddmrvxpdghmvkaoolozwra/Build/Products/Debug/cleansec --ast-file ${AST_FILE}  --module-search-path ${AST_DIR} --module-output-path ${AST_DIR}/${PRODUCT_MODULE_NAME}.cleanescmodule\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -703,7 +704,9 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				GCC_PREPROCESSOR_DEFINITIONS = "AST_FILE=$(SRCROOT)/../../cleansec-ast-parser/output.ast";
+				AST_DIR = "$(TARGET_BUILD_DIR)";
+				AST_FILE = "$(AST_DIR)/$(PRODUCT_MODULE_NAME).ast";
+				GCC_PREPROCESSOR_DEFINITIONS = "AST_FILE=$(AST_FILE)";
 				INFOPLIST_FILE = CleanseGithubBrowser/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.squareup.CleanseGithubBrowser;
@@ -718,7 +721,9 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				GCC_PREPROCESSOR_DEFINITIONS = "AST_FILE=$(SRCROOT)/../../cleansec-ast-parser/output.ast";
+				AST_DIR = "$(TARGET_BUILD_DIR)";
+				AST_FILE = "$(AST_DIR)/$(PRODUCT_MODULE_NAME).ast";
+				GCC_PREPROCESSOR_DEFINITIONS = "AST_FILE=$(AST_FILE)";
 				INFOPLIST_FILE = CleanseGithubBrowser/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.squareup.CleanseGithubBrowser;

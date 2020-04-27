@@ -9,7 +9,12 @@
 import Foundation
 
 public struct Linker {
-    public static func linkProviders(files: [FileRepresentation]) -> LinkedInterface {
+    public static func link(modules: [ModuleRepresentation]) -> LinkedInterface {
+        let files = modules.flatMap { $0.files }
+        return link(files: files)
+    }
+    
+    public static func link(files: [FileRepresentation]) -> LinkedInterface {
         let danglingProviders = files.flatMap { $0.components }.flatMap { $0.danglingProviders } + files.flatMap { $0.modules}.flatMap { $0.danglingProviders }
         let danglingProvidersByReference = danglingProviders.reduce(into: [String:DanglingProvider]()) { (dict, provider) in
             if let _ = dict[provider.reference] {

@@ -19,7 +19,7 @@ protocol GithubServicesModule : Module {
 /// Wires up common definitions shared across services as well as installing the services's modules
 struct RealeaseGithubServicesModule : GithubServicesModule {
     static func configure(binder: SingletonBinder) {
-        //binder.include(module: NetworkModule.self)
+        binder.include(module: NetworkModule.self)
     }
 
     static func configureGithubMembersService(binder bind: ReceiptBinder<GithubMembersService>) -> BindingReceipt<GithubMembersService> {

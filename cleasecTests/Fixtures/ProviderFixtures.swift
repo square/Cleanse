@@ -906,4 +906,77 @@ ilderDecorator<BaseBindingBuilder<[Int], Binder<Unscoped>>>' location=/Users/seb
    (typealias implicit "Scope" interface type='AModule.Scope.Type' access=internal type='Singleton')))
 """
 
+    /**
+     ````
+     extension UIViewController {
+         /// This will represent the rootViewController that is assigned to our main window
+         struct Root : Tag {
+             typealias Element = UIViewController
+         }
+     }
+
+     struct AModule: Module {
+         static func configure(binder: Binder<Unscoped>) {
+             binder
+                 .bind(UIViewController.self)
+                 .tagged(with: UIViewController.Root.self)
+                 .to(value: UIViewController(nibName: nil, bundle: nil))
+         }
+     }
+     ````
+     */
+    static var referencedInnerTagFixture = """
+
+(source_file "/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift"
+  (import_decl range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:9:1 - line:9:8] 'Foundation')
+  (import_decl range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:10:1 - line:10:8] 'Cleanse')
+  (extension_decl range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:12:1 - line:17:1] UIViewController
+    (struct_decl range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:14:5 - line:16:5] "Root" interface type='UIViewController.Root.Type' access=internal non-resilient inherits: Tag
+      (typealias range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:15:9 - line:15:29] "Element" interface type='UIViewController.Root.Element.Type' access=internal type='UIViewController')
+      (constructor_decl implicit range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:14:12 - line:14:12] "init()" interface type='(UIViewController.Root.Type) -> () -> UIViewController.Root' access=internal designated
+        (parameter "self" interface type='UIViewController.Root' inout)
+        (parameter_list)
+        (brace_stmt implicit
+          (return_stmt implicit)))))
+  (struct_decl range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:19:1 - line:26:1] "AModule" interface type='AModule.Type' access=internal non-resilient inherits: Module
+    (func_decl range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:20:5 - line:25:5] "configure(binder:)" interface type='(AModule.Type) -> (Binder<Unscoped>) -> ()' access=internal type
+      (parameter "self" interface type='AModule.Type')
+      (parameter_list
+        (parameter "binder" apiName=binder interface type='Binder<Unscoped>') range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:20:26 - line:20:51])
+      (call_expr type='BindingReceipt<UIViewController>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:24:14 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:21:9 - line:24:67] nothrow arg_labels=value:
+        (dot_syntax_call_expr type='(UIViewController, StaticString, Int, StaticString) -> BindingReceipt<UIViewController>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:24:14 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:21:9 - line:24:14] nothrow
+          (declref_expr type='(TaggedBindingBuilderDecorator<BaseBindingBuilder<UIViewController, Binder<Unscoped>>, UIViewController.Root>) -> (UIViewController, StaticString, Int, StaticString) -> BindingReceipt<UIViewController>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:24:14 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:24:14 - line:24:14] decl=Cleanse.(file).BindToable extension.to(value:file:line:function:) [with (substitution_map generic_signature=<Self where Self : BindToable> (substitution Self -> TaggedBindingBuilderDecorator<BaseBindingBuilder<UIViewController, Binder<Unscoped>>, UIViewController.Root>))] function_ref=single)
+          (call_expr type='TaggedBindingBuilderDecorator<BaseBindingBuilder<UIViewController, Binder<Unscoped>>, UIViewController.Root>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:23:14 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:21:9 - line:23:53] nothrow arg_labels=with:
+            (dot_syntax_call_expr type='(UIViewController.Root.Type) -> TaggedBindingBuilderDecorator<BaseBindingBuilder<UIViewController, Binder<Unscoped>>, UIViewController.Root>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:23:14 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:21:9 - line:23:14] nothrow
+              (declref_expr type='(BaseBindingBuilder<UIViewController, Binder<Unscoped>>) -> (UIViewController.Root.Type) -> TaggedBindingBuilderDecorator<BaseBindingBuilder<UIViewController, Binder<Unscoped>>, UIViewController.Root>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:23:14 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:23:14 - line:23:14] decl=Cleanse.(file).BindingBuilder extension.tagged(with:) [with (substitution_map generic_signature=<Self, Tag where Self : BindingBuilder, Tag : Tag, Self.FinalProvider : _StandardProvider, Self.MaybeScope == Unscoped, Tag.Element == Self.FinalProvider.Element> (substitution Self -> BaseBindingBuilder<UIViewController, Binder<Unscoped>>) (substitution Tag -> UIViewController.Root))] function_ref=single)
+              (call_expr type='BaseBindingBuilder<UIViewController, Binder<Unscoped>>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:22:14 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:21:9 - line:22:40] nothrow arg_labels=_:
+                (dot_syntax_call_expr type='(UIViewController.Type) -> BaseBindingBuilder<UIViewController, Binder<Unscoped>>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:22:14 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:21:9 - line:22:14] nothrow
+                  (declref_expr type='(Binder<Unscoped>) -> (UIViewController.Type) -> BaseBindingBuilder<UIViewController, Binder<Unscoped>>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:22:14 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:22:14 - line:22:14] decl=Cleanse.(file).BinderBase extension.bind [with (substitution_map generic_signature=<Self, Element where Self : BinderBase> (substitution Self -> Binder<Unscoped>) (substitution Element -> UIViewController))] function_ref=single)
+                  (declref_expr type='Binder<Unscoped>' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:21:9 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:21:9 - line:21:9] decl=Test.(file).AModule.configure(binder:).binder@/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:20:27 function_ref=unapplied))
+                (paren_expr type='(UIViewController.Type)' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:22:19 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:22:18 - line:22:40]
+                  (dot_self_expr type='UIViewController.Type' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:22:19 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:22:19 - line:22:36]
+                    (type_expr type='UIViewController.Type' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:22:19 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:22:19 - line:22:19] typerepr='UIViewController')))))
+            (tuple_expr type='(with: UIViewController.Root.Type)' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:23:20 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:23:20 - line:23:53] names=with
+              (dot_self_expr type='UIViewController.Root.Type' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:23:27 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:23:27 - line:23:49]
+                (type_expr type='UIViewController.Root.Type' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:23:27 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:23:27 - line:23:44] typerepr='UIViewController.Root')))))
+        (argument_shuffle_expr implicit type='(value: UIViewController, file: StaticString, line: Int, function: StaticString)' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:24:16 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:24:16 - line:24:67] tuple_to_tuple elements=[0, -3, -3, -3] variadic_sources=[] default_args_owner=Cleanse.(file).BindToable extension.to(value:file:line:function:) [with (substitution_map generic_signature=<Self where Self : BindToable> (substitution Self -> TaggedBindingBuilderDecorator<BaseBindingBuilder<UIViewController, Binder<Unscoped>>, UIViewController.Root>))]
+          (tuple_expr type='(value: UIViewController)' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:24:16 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:24:16 - line:24:67] names=value
+            (call_expr type='UIViewController' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:24:24 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:24:24 - line:24:66] nothrow arg_labels=nibName:bundle:
+              (constructor_ref_call_expr type='(String?, Bundle?) -> UIViewController' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:24:24 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:24:24 - line:24:24] nothrow
+                (declref_expr implicit type='(UIViewController.Type) -> (String?, Bundle?) -> UIViewController' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:24:24 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:24:24 - line:24:24] decl=UIKit.(file).UIViewController.init(nibName:bundle:) function_ref=single)
+                (type_expr type='UIViewController.Type' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:24:24 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:24:24 - line:24:24] typerepr='UIViewController'))
+              (tuple_expr type='(nibName: String?, bundle: Bundle?)' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:24:40 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:24:40 - line:24:66] names=nibName,bundle
+                (dot_syntax_call_expr implicit type='String?' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:24:50 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:24:50 - line:24:50] nothrow
+                  (declref_expr implicit type='(String?.Type) -> String?' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:24:50 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:24:50 - line:24:50] decl=Swift.(file).Optional.none [with (substitution_map generic_signature=<Wrapped> (substitution Wrapped -> String))] function_ref=unapplied)
+                  (type_expr implicit type='String?.Type' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:24:50 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:24:50 - line:24:50] typerepr='String?'))
+                (dot_syntax_call_expr implicit type='Bundle?' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:24:63 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:24:63 - line:24:63] nothrow
+                  (declref_expr implicit type='(Bundle?.Type) -> Bundle?' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:24:63 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:24:63 - line:24:63] decl=Swift.(file).Optional.none [with (substitution_map generic_signature=<Wrapped> (substitution Wrapped -> Bundle))] function_ref=unapplied)
+                  (type_expr implicit type='Bundle?.Type' location=/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:24:63 range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:24:63 - line:24:63] typerepr='Bundle?'))))))))
+    (constructor_decl implicit range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:19:8 - line:19:8] "init()" interface type='(AModule.Type) -> () -> AModule' access=internal designated
+      (parameter "self" interface type='AModule' inout)
+      (parameter_list)
+      (brace_stmt implicit
+        (return_stmt implicit)))
+    (typealias implicit "Scope" interface type='AModule.Scope.Type' access=internal type='Unscoped')))
+"""
 }

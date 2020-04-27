@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -15,7 +15,6 @@
 		DC1F566E244F9AAE00CCFDD5 /* NodeImpls.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF60964244E399F00DFE5F0 /* NodeImpls.swift */; };
 		DC1F566F244F9AAE00CCFDD5 /* Regex.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF60966244E3B4200DFE5F0 /* Regex.swift */; };
 		DC1F5670244F9AAE00CCFDD5 /* NodeSyntaxParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF60962244E330D00DFE5F0 /* NodeSyntaxParser.swift */; };
-		DC1F5674244F9AD200CCFDD5 /* swift_ast_parser.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC1F5665244F9A9000CCFDD5 /* swift_ast_parser.framework */; };
 		DC1F5675244F9AF300CCFDD5 /* SyntaxVisitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF6096E244E4FBF00DFE5F0 /* SyntaxVisitor.swift */; };
 		DC1F5676244F9AF500CCFDD5 /* Nodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF6095C244E22B200DFE5F0 /* Nodes.swift */; };
 		DC1F5685244F9C1E00CCFDD5 /* cleasec.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC1F567C244F9C1E00CCFDD5 /* cleasec.framework */; };
@@ -38,8 +37,6 @@
 		DC5937DA245151C500D70652 /* ProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5937D9245151C500D70652 /* ProviderTests.swift */; };
 		DC5937DC2451522200D70652 /* ProviderFixtures.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5937DB2451522200D70652 /* ProviderFixtures.swift */; };
 		DC5937DE245154E100D70652 /* ReceiptBinderVisitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5937DD245154E100D70652 /* ReceiptBinderVisitor.swift */; };
-		DC5937E12451673400D70652 /* cleasec.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC1F567C244F9C1E00CCFDD5 /* cleasec.framework */; };
-		DC5937E32451678700D70652 /* Sample.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5937E22451678700D70652 /* Sample.swift */; };
 		DC5937FB24520D9200D70652 /* CleanseTypeVisitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5937FA24520D9200D70652 /* CleanseTypeVisitor.swift */; };
 		DC593801245246D400D70652 /* Linker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC593800245246D400D70652 /* Linker.swift */; };
 		DC5938062453730200D70652 /* Resolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5938052453730200D70652 /* Resolver.swift */; };
@@ -54,6 +51,9 @@
 		DCCA5F932453F44A009ECBE7 /* ResolutionError.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCCA5F922453F44A009ECBE7 /* ResolutionError.swift */; };
 		DCCA5F952453F459009ECBE7 /* CanonicalProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCCA5F942453F459009ECBE7 /* CanonicalProvider.swift */; };
 		DCCA5F972453F46F009ECBE7 /* ResolvedComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCCA5F962453F46F009ECBE7 /* ResolvedComponent.swift */; };
+		DCCA5F9F245659A6009ECBE7 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCCA5F9E245659A6009ECBE7 /* main.swift */; };
+		DCCA5FA5245659DD009ECBE7 /* ArgumentParser in Frameworks */ = {isa = PBXBuildFile; productRef = DCCA5FA4245659DD009ECBE7 /* ArgumentParser */; };
+		DCCA5FA824565CDF009ECBE7 /* cleasec.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC1F567C244F9C1E00CCFDD5 /* cleasec.framework */; };
 		DCE9317723220C6800C0522F /* Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE9317623220C6800C0522F /* Factory.swift */; };
 		DCE9317923220CA900C0522F /* AssistedFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE9317823220CA900C0522F /* AssistedFactory.swift */; };
 		DCE9317B23220CF900C0522F /* Assisted.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE9317A23220CF900C0522F /* Assisted.swift */; };
@@ -62,7 +62,6 @@
 		DCE9318223220ED800C0522F /* AssistedInjection.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE9318123220ED800C0522F /* AssistedInjection.swift */; };
 		DCE93184232212BA00C0522F /* AssistedInjectionArities.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE93183232212BA00C0522F /* AssistedInjectionArities.swift */; };
 		DCE931862322175800C0522F /* AssistedInjectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE931852322175800C0522F /* AssistedInjectionTests.swift */; };
-		DCF60958244E204200DFE5F0 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF60957244E204200DFE5F0 /* main.swift */; };
 		DCFC812F23A8687B00629D44 /* SubcomponentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFC812E23A8687B00629D44 /* SubcomponentTests.swift */; };
 		F61133BF1CD41EE600069972 /* TypeKeyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61133BE1CD41EE600069972 /* TypeKeyProtocol.swift */; };
 		F61133C11CD7B36600069972 /* MemoryManagementTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61133C01CD7B36600069972 /* MemoryManagementTests.swift */; };
@@ -131,13 +130,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		DC1F5671244F9ACD00CCFDD5 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = F6A660C11CCB07C2004DD6E3 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = DC1F5664244F9A9000CCFDD5;
-			remoteInfo = "swift-ast-parser";
-		};
 		DC1F5686244F9C1E00CCFDD5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = F6A660C11CCB07C2004DD6E3 /* Project object */;
@@ -152,7 +144,7 @@
 			remoteGlobalIDString = DC1F5664244F9A9000CCFDD5;
 			remoteInfo = "swift-ast-parser";
 		};
-		DC5937DF2451673000D70652 /* PBXContainerItemProxy */ = {
+		DCCA5FA624565CD9009ECBE7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = F6A660C11CCB07C2004DD6E3 /* Project object */;
 			proxyType = 1;
@@ -169,7 +161,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		DCF60953244E204200DFE5F0 /* CopyFiles */ = {
+		DCCA5F9A245659A6009ECBE7 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = /usr/share/man/man1/;
@@ -211,7 +203,6 @@
 		DC5937D9245151C500D70652 /* ProviderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderTests.swift; sourceTree = "<group>"; };
 		DC5937DB2451522200D70652 /* ProviderFixtures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderFixtures.swift; sourceTree = "<group>"; };
 		DC5937DD245154E100D70652 /* ReceiptBinderVisitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptBinderVisitor.swift; sourceTree = "<group>"; };
-		DC5937E22451678700D70652 /* Sample.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sample.swift; sourceTree = "<group>"; };
 		DC5937FA24520D9200D70652 /* CleanseTypeVisitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleanseTypeVisitor.swift; sourceTree = "<group>"; };
 		DC593800245246D400D70652 /* Linker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Linker.swift; sourceTree = "<group>"; };
 		DC5938052453730200D70652 /* Resolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resolver.swift; sourceTree = "<group>"; };
@@ -226,6 +217,8 @@
 		DCCA5F922453F44A009ECBE7 /* ResolutionError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResolutionError.swift; sourceTree = "<group>"; };
 		DCCA5F942453F459009ECBE7 /* CanonicalProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanonicalProvider.swift; sourceTree = "<group>"; };
 		DCCA5F962453F46F009ECBE7 /* ResolvedComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResolvedComponent.swift; sourceTree = "<group>"; };
+		DCCA5F9C245659A6009ECBE7 /* cleansec */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = cleansec; sourceTree = BUILT_PRODUCTS_DIR; };
+		DCCA5F9E245659A6009ECBE7 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		DCE9317623220C6800C0522F /* Factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Factory.swift; sourceTree = "<group>"; };
 		DCE9317823220CA900C0522F /* AssistedFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssistedFactory.swift; sourceTree = "<group>"; };
 		DCE9317A23220CF900C0522F /* Assisted.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Assisted.swift; sourceTree = "<group>"; };
@@ -234,8 +227,6 @@
 		DCE9318123220ED800C0522F /* AssistedInjection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssistedInjection.swift; sourceTree = "<group>"; };
 		DCE93183232212BA00C0522F /* AssistedInjectionArities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssistedInjectionArities.swift; sourceTree = "<group>"; };
 		DCE931852322175800C0522F /* AssistedInjectionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssistedInjectionTests.swift; sourceTree = "<group>"; };
-		DCF60955244E204200DFE5F0 /* cleansec-ast-parser */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "cleansec-ast-parser"; sourceTree = BUILT_PRODUCTS_DIR; };
-		DCF60957244E204200DFE5F0 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		DCF6095C244E22B200DFE5F0 /* Nodes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Nodes.swift; sourceTree = "<group>"; };
 		DCF60960244E32FA00DFE5F0 /* Syntax.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Syntax.swift; sourceTree = "<group>"; };
 		DCF60962244E330D00DFE5F0 /* NodeSyntaxParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeSyntaxParser.swift; sourceTree = "<group>"; };
@@ -343,12 +334,12 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		DCF60952244E204200DFE5F0 /* Frameworks */ = {
+		DCCA5F99245659A6009ECBE7 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DC5937E12451673400D70652 /* cleasec.framework in Frameworks */,
-				DC1F5674244F9AD200CCFDD5 /* swift_ast_parser.framework in Frameworks */,
+				DCCA5FA824565CDF009ECBE7 /* cleasec.framework in Frameworks */,
+				DCCA5FA5245659DD009ECBE7 /* ArgumentParser in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -495,6 +486,14 @@
 			path = Resolver;
 			sourceTree = "<group>";
 		};
+		DCCA5F9D245659A6009ECBE7 /* cleansec */ = {
+			isa = PBXGroup;
+			children = (
+				DCCA5F9E245659A6009ECBE7 /* main.swift */,
+			);
+			path = cleansec;
+			sourceTree = "<group>";
+		};
 		DCE9317523220C5800C0522F /* Assisted Inject */ = {
 			isa = PBXGroup;
 			children = (
@@ -514,15 +513,6 @@
 				DCE9318123220ED800C0522F /* AssistedInjection.swift */,
 			);
 			name = "Assisted Inject Builder";
-			sourceTree = "<group>";
-		};
-		DCF60956244E204200DFE5F0 /* cleansec-ast-parser */ = {
-			isa = PBXGroup;
-			children = (
-				DC5937E22451678700D70652 /* Sample.swift */,
-				DCF60957244E204200DFE5F0 /* main.swift */,
-			);
-			path = "cleansec-ast-parser";
 			sourceTree = "<group>";
 		};
 		DCF6096B244E439300DFE5F0 /* Generated */ = {
@@ -670,10 +660,10 @@
 				F6A660CC1CCB07C2004DD6E3 /* Cleanse */,
 				F6A660D81CCB07C3004DD6E3 /* CleanseTests */,
 				88D6552D1F042D4300AFE00E /* CleanseGen */,
-				DCF60956244E204200DFE5F0 /* cleansec-ast-parser */,
 				DC1F5666244F9A9000CCFDD5 /* swift-ast-parser */,
 				DC1F567D244F9C1E00CCFDD5 /* cleasec */,
 				DC1F5688244F9C1E00CCFDD5 /* cleasecTests */,
+				DCCA5F9D245659A6009ECBE7 /* cleansec */,
 				F6A660CB1CCB07C2004DD6E3 /* Products */,
 				DC1F5673244F9AD200CCFDD5 /* Frameworks */,
 			);
@@ -685,10 +675,10 @@
 				F6A660CA1CCB07C2004DD6E3 /* Cleanse.framework */,
 				F6A660D41CCB07C3004DD6E3 /* CleanseTests.xctest */,
 				88D6552C1F042D4300AFE00E /* CleanseGen.framework */,
-				DCF60955244E204200DFE5F0 /* cleansec-ast-parser */,
 				DC1F5665244F9A9000CCFDD5 /* swift_ast_parser.framework */,
 				DC1F567C244F9C1E00CCFDD5 /* cleasec.framework */,
 				DC1F5684244F9C1E00CCFDD5 /* cleasecTests.xctest */,
+				DCCA5F9C245659A6009ECBE7 /* cleansec */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -872,23 +862,25 @@
 			productReference = DC1F5684244F9C1E00CCFDD5 /* cleasecTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		DCF60954244E204200DFE5F0 /* cleansec-ast-parser */ = {
+		DCCA5F9B245659A6009ECBE7 /* cleansec */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = DCF6095B244E204200DFE5F0 /* Build configuration list for PBXNativeTarget "cleansec-ast-parser" */;
+			buildConfigurationList = DCCA5FA0245659A6009ECBE7 /* Build configuration list for PBXNativeTarget "cleansec" */;
 			buildPhases = (
-				DCF60951244E204200DFE5F0 /* Sources */,
-				DCF60952244E204200DFE5F0 /* Frameworks */,
-				DCF60953244E204200DFE5F0 /* CopyFiles */,
+				DCCA5F98245659A6009ECBE7 /* Sources */,
+				DCCA5F99245659A6009ECBE7 /* Frameworks */,
+				DCCA5F9A245659A6009ECBE7 /* CopyFiles */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				DC5937E02451673000D70652 /* PBXTargetDependency */,
-				DC1F5672244F9ACD00CCFDD5 /* PBXTargetDependency */,
+				DCCA5FA724565CD9009ECBE7 /* PBXTargetDependency */,
 			);
-			name = "cleansec-ast-parser";
-			productName = "cleansec-ast-parser";
-			productReference = DCF60955244E204200DFE5F0 /* cleansec-ast-parser */;
+			name = cleansec;
+			packageProductDependencies = (
+				DCCA5FA4245659DD009ECBE7 /* ArgumentParser */,
+			);
+			productName = cleansec;
+			productReference = DCCA5F9C245659A6009ECBE7 /* cleansec */;
 			productType = "com.apple.product-type.tool";
 		};
 		F6A660C91CCB07C2004DD6E3 /* Cleanse */ = {
@@ -954,9 +946,8 @@
 						CreatedOnToolsVersion = 11.2;
 						ProvisioningStyle = Automatic;
 					};
-					DCF60954244E204200DFE5F0 = {
+					DCCA5F9B245659A6009ECBE7 = {
 						CreatedOnToolsVersion = 11.2;
-						ProvisioningStyle = Automatic;
 					};
 					F6A660C91CCB07C2004DD6E3 = {
 						CreatedOnToolsVersion = 7.3;
@@ -977,6 +968,9 @@
 				en,
 			);
 			mainGroup = F6A660C01CCB07C2004DD6E3;
+			packageReferences = (
+				DCCA5FA3245659DD009ECBE7 /* XCRemoteSwiftPackageReference "swift-argument-parser" */,
+			);
 			productRefGroup = F6A660CB1CCB07C2004DD6E3 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -984,10 +978,10 @@
 				F6A660C91CCB07C2004DD6E3 /* Cleanse */,
 				88D6552B1F042D4300AFE00E /* CleanseGen */,
 				F6A660D31CCB07C3004DD6E3 /* CleanseTests */,
-				DCF60954244E204200DFE5F0 /* cleansec-ast-parser */,
 				DC1F5664244F9A9000CCFDD5 /* swift-ast-parser */,
 				DC1F567B244F9C1E00CCFDD5 /* cleasec */,
 				DC1F5683244F9C1E00CCFDD5 /* cleasecTests */,
+				DCCA5F9B245659A6009ECBE7 /* cleansec */,
 			);
 		};
 /* End PBXProject section */
@@ -1099,12 +1093,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		DCF60951244E204200DFE5F0 /* Sources */ = {
+		DCCA5F98245659A6009ECBE7 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DCF60958244E204200DFE5F0 /* main.swift in Sources */,
-				DC5937E32451678700D70652 /* Sample.swift in Sources */,
+				DCCA5F9F245659A6009ECBE7 /* main.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1202,11 +1195,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		DC1F5672244F9ACD00CCFDD5 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = DC1F5664244F9A9000CCFDD5 /* swift-ast-parser */;
-			targetProxy = DC1F5671244F9ACD00CCFDD5 /* PBXContainerItemProxy */;
-		};
 		DC1F5687244F9C1E00CCFDD5 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = DC1F567B244F9C1E00CCFDD5 /* cleasec */;
@@ -1217,10 +1205,10 @@
 			target = DC1F5664244F9A9000CCFDD5 /* swift-ast-parser */;
 			targetProxy = DC1F5693244F9C2900CCFDD5 /* PBXContainerItemProxy */;
 		};
-		DC5937E02451673000D70652 /* PBXTargetDependency */ = {
+		DCCA5FA724565CD9009ECBE7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = DC1F567B244F9C1E00CCFDD5 /* cleasec */;
-			targetProxy = DC5937DF2451673000D70652 /* PBXContainerItemProxy */;
+			targetProxy = DCCA5FA624565CD9009ECBE7 /* PBXContainerItemProxy */;
 		};
 		F6A660D71CCB07C3004DD6E3 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1243,7 +1231,11 @@
 				INFOPLIST_FILE = CleanseGen/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.squareup.CleanseGen;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -1266,7 +1258,11 @@
 				INFOPLIST_FILE = CleanseGen/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.squareup.CleanseGen;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -1300,7 +1296,12 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "swift-ast-parser/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -1338,7 +1339,12 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "swift-ast-parser/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.square.swift-ast-parser";
@@ -1375,7 +1381,12 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = cleasec/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -1415,7 +1426,12 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = cleasec/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.square.cleasec;
@@ -1447,7 +1463,11 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = cleasecTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -1480,7 +1500,11 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = cleasecTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.square.cleasecTests;
@@ -1490,7 +1514,7 @@
 			};
 			name = Release;
 		};
-		DCF60959244E204200DFE5F0 /* Debug */ = {
+		DCCA5FA1245659A6009ECBE7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -1518,7 +1542,7 @@
 			};
 			name = Debug;
 		};
-		DCF6095A244E204200DFE5F0 /* Release */ = {
+		DCCA5FA2245659A6009ECBE7 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -1637,7 +1661,8 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_SWIFT_FLAGS = "-DSUPPORT_LEGACY_OBJECT_GRAPH";
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos macosx";
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -1657,7 +1682,11 @@
 				INFOPLIST_FILE = Cleanse/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.squareup.Cleanse;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1677,7 +1706,11 @@
 				INFOPLIST_FILE = Cleanse/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.squareup.Cleanse;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1690,7 +1723,12 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				INFOPLIST_FILE = CleanseTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks @loader_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+					"@loader_path/../Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.squareup.CleanseTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -1702,7 +1740,12 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				INFOPLIST_FILE = CleanseTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks @loader_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+					"@loader_path/../Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.squareup.CleanseTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -1748,11 +1791,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		DCF6095B244E204200DFE5F0 /* Build configuration list for PBXNativeTarget "cleansec-ast-parser" */ = {
+		DCCA5FA0245659A6009ECBE7 /* Build configuration list for PBXNativeTarget "cleansec" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				DCF60959244E204200DFE5F0 /* Debug */,
-				DCF6095A244E204200DFE5F0 /* Release */,
+				DCCA5FA1245659A6009ECBE7 /* Debug */,
+				DCCA5FA2245659A6009ECBE7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1785,6 +1828,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		DCCA5FA3245659DD009ECBE7 /* XCRemoteSwiftPackageReference "swift-argument-parser" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-argument-parser.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.0.5;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		DCCA5FA4245659DD009ECBE7 /* ArgumentParser */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DCCA5FA3245659DD009ECBE7 /* XCRemoteSwiftPackageReference "swift-argument-parser" */;
+			productName = ArgumentParser;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = F6A660C11CCB07C2004DD6E3 /* Project object */;
 }

@@ -92,7 +92,7 @@ struct BindingVisitor: SyntaxVisitor {
         case .collectionProvider:
             bindings.append(.collectionProvider(isSingular: false))
         case .taggedProvider:
-            if let tag = node.type.allCaptures(pattern: #"(\w+)(?=>)"#).last {
+            if let tag = node.type.allCaptures(pattern: #"(\w+(?:\.\w+)*)(?=>)"#).last {
                 bindings.append(.taggedProvider(tag: tag))
             } else {
                 print("Found tagged provider, but failed to parse Tag")

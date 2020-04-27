@@ -10,18 +10,26 @@ import Foundation
 import swift_ast_parser
 
 public struct Cleansec {
-    static func analyze(nodes: [Syntax]) -> LinkedInterface {
-        Linker.linkProviders(
-            files: nodes.map { syntax -> FileRepresentation in
+    public static func analyze(input: String) -> ModuleRepresentation {
+        let nodes = NodeSyntaxParser.parse(text: input)
+        return analyze(nodes: nodes)
+    }
+    
+    public static func analyze(nodes: [Syntax]) -> ModuleRepresentation {
+        return ModuleRepresentation(
+            files: nodes.map { n in
                 var fileVisitor = FileVisitor()
-                fileVisitor.walk(syntax)
+                fileVisitor.walk(n)
                 return fileVisitor.finalize()
             }
         )
     }
     
-    public static func analyze(text: String) -> LinkedInterface {
-        let nodes = NodeSyntaxParser.parse(text: text)
-        return analyze(nodes: nodes)
+    public static func link(modules: [ModuleRepresentation]) -> LinkedInterface {
+        Linker.link(files: modules.flatMap { $0.files })
+    }
+    
+    public static func resolve(component: LinkedComponent, in interface: LinkedInterface) -> ResolvedComponent {
+        Resolver.resolve(rootComponent: component, in: interface)
     }
 }

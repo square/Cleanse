@@ -79,4 +79,11 @@ class ProviderTests: XCTestCase {
         XCTAssertEqual(configureVisitor.referenceProviders.first!.scoped, "Singleton")
         XCTAssertEqual(configureVisitor.referenceProviders[1].tag, "ATag")
     }
+    
+    func testInnerReferenceTag() {
+        let node = NodeSyntaxParser.parse(text: ProviderFixtures.referencedInnerTagFixture).first!
+        configureVisitor.walk(node)
+        XCTAssertEqual(configureVisitor.providers.count, 1)
+        XCTAssertEqual(configureVisitor.providers.first!.tag, "UIViewController.Root")
+    }
 }
