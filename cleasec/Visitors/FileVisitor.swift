@@ -75,7 +75,7 @@ public struct FileVisitor: SyntaxVisitor {
         
         var providers = configVisitor.providers
         let danglingProviders = configVisitor.danglingProviders
-        var referenceProviders = configVisitor.referenceProviders
+        let referenceProviders = configVisitor.referenceProviders
         guard let rootProvider = componentVisitor.rootProvider else {
             print("Failed to create \(componentName). Could not parse root provider")
             return
@@ -150,9 +150,9 @@ public struct FileVisitor: SyntaxVisitor {
         guard let inherits = node.inherits, let componentName = node.raw.firstCapture(pattern: #"interface type='(.*)\.Type'"#) else {
             return nil
         }
-        if inherits.contains(pattern: "(Cleanse.)?RootComponent") {
+        if inherits.contains(pattern: "^(Cleanse.)?RootComponent") {
             return .root(componentName)
-        } else if inherits.contains(pattern: "(Cleanse.)?Component") {
+        } else if inherits.contains(pattern: "^(Cleanse.)?Component") {
             return .component(componentName)
         } else {
             return nil

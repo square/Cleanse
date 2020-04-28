@@ -25,19 +25,25 @@ class FileVisitorTests: XCTestCase {
     var visitor = FileVisitor()
     
     func testImportedCleanse() {
-        let node = NodeSyntaxParser.parse(text: importedFixture).first!
+        let input = InputSanitizer.split(text: importedFixture)
+        let sanitizedInput = InputSanitizer.sanitize(text: input)
+        let node = NodeSyntaxParser.parse(text: sanitizedInput).first!
         visitor.walk(node)
         XCTAssertTrue(visitor.importsCleanse)
     }
     
     func testNonImportedCleanse() {
-        let node = NodeSyntaxParser.parse(text: nonImportedFixture).first!
+        let input = InputSanitizer.split(text: nonImportedFixture)
+        let sanitizedInput = InputSanitizer.sanitize(text: input)
+        let node = NodeSyntaxParser.parse(text: sanitizedInput).first!
         visitor.walk(node)
         XCTAssertFalse(visitor.importsCleanse)
     }
     
     func testParsesNormalComponent() {
-        let node = NodeSyntaxParser.parse(text: ComponentFixtures.simpleComponentFixtures).first!
+        let input = InputSanitizer.split(text: ComponentFixtures.simpleComponentFixtures)
+        let sanitizedInput = InputSanitizer.sanitize(text: input)
+        let node = NodeSyntaxParser.parse(text: sanitizedInput).first!
         visitor.walk(node)
         XCTAssertEqual(visitor.components.count, 1)
         XCTAssertEqual(visitor.components.first!.isRoot, false)
@@ -46,7 +52,9 @@ class FileVisitorTests: XCTestCase {
     }
     
     func testParsesRootComponent() {
-        let node = NodeSyntaxParser.parse(text: ComponentFixtures.simpleRootComponentFixture).first!
+        let input = InputSanitizer.split(text: ComponentFixtures.simpleRootComponentFixture)
+        let sanitizedInput = InputSanitizer.sanitize(text: input)
+        let node = NodeSyntaxParser.parse(text: sanitizedInput).first!
         visitor.walk(node)
         XCTAssertEqual(visitor.components.count, 1)
         XCTAssertEqual(visitor.components.first!.isRoot, true)
@@ -55,7 +63,9 @@ class FileVisitorTests: XCTestCase {
     }
     
     func testNestedModule() {
-        let node = NodeSyntaxParser.parse(text: ModuleFixtures.nestedModuleFixture).first!
+        let input = InputSanitizer.split(text: ModuleFixtures.nestedModuleFixture)
+        let sanitizedInput = InputSanitizer.sanitize(text: input)
+        let node = NodeSyntaxParser.parse(text: sanitizedInput).first!
         visitor.walk(node)
         XCTAssertEqual(visitor.modules.count, 1)
         XCTAssertEqual(visitor.modules.first!.type, "Blah.Module")

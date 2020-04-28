@@ -618,7 +618,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n/private/tmp/dd/Cleanse-fizhylddmrvxpdghmvkaoolozwra/Build/Products/Debug/cleansec --ast-file ${AST_FILE}  --module-search-path ${AST_DIR} --module-output-path ${AST_DIR}/${PRODUCT_MODULE_NAME}.cleanescmodule\n";
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n/private/tmp/dd/Cleanse-fizhylddmrvxpdghmvkaoolozwra/Build/Products/Debug/cleansec --ast-directory ${AST_DIR}  --module-search-path ${AST_DIR} --module-output-directory ${AST_DIR} --module-name ${PRODUCT_MODULE_NAME}\n";
 		};
 		DCF604AB244D590100DFE5F0 /* cleansec */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -636,7 +636,8 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "/private/tmp/dd/Cleanse-fizhylddmrvxpdghmvkaoolozwra/Build/Products/Debug/cleansec --ast-file ${AST_FILE}  --module-search-path ${AST_DIR} --module-output-path ${AST_DIR}/${PRODUCT_MODULE_NAME}.cleanescmodule\n";
+			shellScript = "echo \"/private/tmp/dd/Cleanse-fizhylddmrvxpdghmvkaoolozwra/Build/Products/Debug/cleansec --ast-directory ${AST_DIR}  --module-search-path ${AST_DIR} --module-output-directory ${AST_DIR} --module-name ${PRODUCT_MODULE_NAME}\"\n/private/tmp/dd/Cleanse-fizhylddmrvxpdghmvkaoolozwra/Build/Products/Debug/cleansec --ast-directory ${AST_DIR}  --module-search-path ${AST_DIR} --module-output-directory ${AST_DIR} --module-name ${PRODUCT_MODULE_NAME}\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 

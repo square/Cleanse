@@ -8,44 +8,54 @@
 
 import Foundation
 
-struct InputSanitizer {
-    static func sanitize(text: String) -> [String] {
-        return text
-            .split(separator: "\n")
-            .flatMap { element -> [String] in
-                if let range = element.range(of: "(source_file") {
-                    return [String(element.prefix(upTo: range.lowerBound)), String(element.suffix(from: range.lowerBound))]
-                } else {
-                    return [String(element)]
-                }
+public struct InputSanitizer {
+    public static func split(data: Data) -> [String] {
+        return data.withUnsafeBytes { bytes in
+            return bytes
+                .split(separator: UInt8(ascii: "\n"))
+                .map { String(decoding: UnsafeRawBufferPointer(rebasing: $0), as: UTF8.self) }
+        }
+    }
+    
+    public static func split(text: String) -> [String] {
+        return text.split(separator: "\n").map { String($0) }
+    }
+    
+    public static func sanitize(text: [String]) -> [String] {
+        var fixedText = text.flatMap { element -> [String] in
+            if let range = element.range(of: "(source_file") {
+                return [String(element.prefix(upTo: range.lowerBound)), String(element.suffix(from: range.lowerBound))]
+            } else {
+                return [String(element)]
             }
-            .reversed()
-            .flatMapScanPrevious { (previous, current) -> [String] in
-                if !looksLikeValidOpening(text: current) {
-                    return []
-                } else {
-                    guard let previous = previous else {
-                        return [current]
-                    }
-                    if !looksLikeValidOpening(text: previous) {
-                        let newCurrent = current + previous
-                        return [newCurrent]
-                    } else {
-                        return [current]
-                    }
-                }
+        }
+        .filter { !$0.isEmpty }
+        
+        var lastGoodIdx = 0
+        var idx = 0
+        var sanitizedText: [String] = []
+        sanitizedText.reserveCapacity(fixedText.endIndex)
+
+        while idx < fixedText.endIndex {
+            defer {
+                idx += 1
+                lastGoodIdx = sanitizedText.endIndex - 1
             }
-            .reversed()
+            let element = fixedText[idx]
+            if !looksLikeValidOpening(text: element) && lastGoodIdx > 0 {
+                sanitizedText[lastGoodIdx].append(contentsOf: element)
+            } else {
+                sanitizedText.append(element)
+            }
+        }
+        return sanitizedText
     }
     
     private static func looksLikeValidOpening(text: String) -> Bool {
-        guard let firstSplit = text.split(separator: " ").first else {
-            return false
-        }
-        let firstSplitString = String(firstSplit)
-        if text.whitespaceIndentCount == 0 && firstSplitString.starts(with: "(source_file") {
+        if text.contains(pattern: #"^\(source_file"#) {
             return true
-        } else if firstSplitString.starts(with: "(") && firstSplitString.firstCapture(pattern: #"\((\w+)"#) != nil && text.whitespaceIndentCount > 0 {
+        }
+        if let _ = text.firstCapture(pattern: #"^\s+\((\w+)"#) {
             return true
         } else {
             return false
@@ -72,12 +82,11 @@ struct ParseResult {
 }
 
 public struct NodeSyntaxParser {
-    public static func parse(text: String) -> [Syntax] {
-        let input = InputSanitizer.sanitize(text: text)
+    public static func parse(text: [String]) -> [Syntax] {
         var nodes: [Syntax] = []
         var idx = 0
-        while idx < input.endIndex {
-            let result = parse(from: input, at: idx)
+        while idx < text.endIndex {
+            let result = parse(from: text, at: idx)
             nodes += [result.syntax]
             idx = result.endingIdx
         }

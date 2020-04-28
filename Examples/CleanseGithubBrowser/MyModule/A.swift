@@ -18,6 +18,7 @@ struct B{}
 
 public struct MyAModule: Cleanse.Module {
     public static func configure(binder: Binder<Unscoped>) {
+        binder.bind(B.self).to(factory: B.init)
         binder
             .bind(A.self)
             .to { (b: B) -> A in

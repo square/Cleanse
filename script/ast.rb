@@ -47,7 +47,8 @@ def main
 
 	dump_ast_command = [swiftc_executable] + ['-dump-ast', '-suppress-warnings'] + ast_input + pipe_to_file_command
 	combined_command = og_command + ['&&'] + dump_ast_command
-	system(combined_command.join(" "))
+	sanitized_command = combined_command.map { |c| c.to_s.gsub(/\s/, "\\ ") }
+	system(sanitized_command.join(" "))
 end
 
 main

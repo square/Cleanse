@@ -10,7 +10,11 @@ import Foundation
 import swift_ast_parser
 
 public struct Cleansec {
-    public static func analyze(input: String) -> ModuleRepresentation {
+    public static func parse(input: [String]) -> [String] {
+        return InputSanitizer.sanitize(text: input)
+    }
+    
+    public static func analyze(input: [String]) -> ModuleRepresentation {
         let nodes = NodeSyntaxParser.parse(text: input)
         return analyze(nodes: nodes)
     }

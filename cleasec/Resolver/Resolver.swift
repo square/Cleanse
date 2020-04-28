@@ -59,6 +59,8 @@ public struct Resolver {
             }
         }
         
+        // Add seed dependency
+        
         // Add ComponentFactory providers
         allSubcomponents
             .map { CanonicalProvider(type: "ComponentFactory<\($0)>", dependencies: [], isCollection: false) }

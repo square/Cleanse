@@ -64,7 +64,7 @@ struct ConfigureVisitor: SyntaxVisitor {
                             reference: reference)
                         )
                     } else {
-                        print("Unknown dangling reference provider type.")
+                        print("Unknown dangling reference provider type \(node.raw)")
                     }
                     
                 }

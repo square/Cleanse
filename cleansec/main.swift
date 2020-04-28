@@ -9,6 +9,7 @@
 import Foundation
 import ArgumentParser
 import cleasec
+import swift_ast_parser
 
 struct CLI: ParsableCommand {
     @Option(name: .long)
@@ -44,8 +45,10 @@ struct CLI: ParsableCommand {
     }
     
     func run() throws {
-        let astText = try String(contentsOf: astPath)
-        let module = Cleansec.analyze(input: astText)
+        let data = try Data(contentsOf: astPath)
+        let inputString = InputSanitizer.split(data: data)
+        let sanitizedInput = InputSanitizer.sanitize(text: inputString)
+        let module = Cleansec.analyze(input: sanitizedInput)
         
         let jsonEncoder = JSONEncoder()
         jsonEncoder.outputFormatting = .prettyPrinted
