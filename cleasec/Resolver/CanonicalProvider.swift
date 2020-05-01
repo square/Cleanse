@@ -15,6 +15,12 @@ public struct CanonicalProvider {
     public let isCollection: Bool
 }
 
+extension CanonicalProvider: CustomStringConvertible {
+    public var description: String {
+        "\(type) -> \(dependencies)"
+    }
+}
+
 extension CanonicalProvider {
     var lazyProvider: CanonicalProvider {
         // Think about dependencies. Should there be none? The inner type, or all shared dependencies?

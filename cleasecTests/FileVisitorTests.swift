@@ -10,22 +10,15 @@ import XCTest
 import swift_ast_parser
 @testable import cleasec
 
-fileprivate let importedFixture = """
-(source_file "/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift"
-  (import_decl range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:9:1 - line:9:8] 'Foundation')
-  (import_decl range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:10:1 - line:10:8] 'Cleanse'))
-"""
-
-fileprivate let nonImportedFixture = """
-(source_file "/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift"
-(import_decl range=[/Users/sebastians/Desktop/SmallCleanse/Test/Sample.swift:9:1 - line:9:8] 'Foundation'))
-"""
-
 class FileVisitorTests: XCTestCase {
-    var visitor = FileVisitor()
+    var visitor: FileVisitor!
+    
+    override func setUp() {
+        visitor = FileVisitor()
+    }
     
     func testImportedCleanse() {
-        let input = InputSanitizer.split(text: importedFixture)
+        let input = InputSanitizer.split(text: Fixtures.ImportsCleanse)
         let sanitizedInput = InputSanitizer.sanitize(text: input)
         let node = NodeSyntaxParser.parse(text: sanitizedInput).first!
         visitor.walk(node)
@@ -33,7 +26,7 @@ class FileVisitorTests: XCTestCase {
     }
     
     func testNonImportedCleanse() {
-        let input = InputSanitizer.split(text: nonImportedFixture)
+        let input = InputSanitizer.split(text: Fixtures.DoesNotImportCleanse)
         let sanitizedInput = InputSanitizer.sanitize(text: input)
         let node = NodeSyntaxParser.parse(text: sanitizedInput).first!
         visitor.walk(node)
@@ -41,7 +34,7 @@ class FileVisitorTests: XCTestCase {
     }
     
     func testParsesNormalComponent() {
-        let input = InputSanitizer.split(text: ComponentFixtures.simpleComponentFixtures)
+        let input = InputSanitizer.split(text: Fixtures.SimpleComponent)
         let sanitizedInput = InputSanitizer.sanitize(text: input)
         let node = NodeSyntaxParser.parse(text: sanitizedInput).first!
         visitor.walk(node)
@@ -52,7 +45,7 @@ class FileVisitorTests: XCTestCase {
     }
     
     func testParsesRootComponent() {
-        let input = InputSanitizer.split(text: ComponentFixtures.simpleRootComponentFixture)
+        let input = InputSanitizer.split(text: Fixtures.SimpleRootComponent)
         let sanitizedInput = InputSanitizer.sanitize(text: input)
         let node = NodeSyntaxParser.parse(text: sanitizedInput).first!
         visitor.walk(node)
@@ -63,7 +56,7 @@ class FileVisitorTests: XCTestCase {
     }
     
     func testNestedModule() {
-        let input = InputSanitizer.split(text: ModuleFixtures.nestedModuleFixture)
+        let input = InputSanitizer.split(text: Fixtures.NestedModule)
         let sanitizedInput = InputSanitizer.sanitize(text: input)
         let node = NodeSyntaxParser.parse(text: sanitizedInput).first!
         visitor.walk(node)

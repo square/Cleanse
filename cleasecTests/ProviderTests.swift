@@ -16,7 +16,7 @@ class ProviderTests: XCTestCase {
     var configureVisitor = ConfigureVisitor()
     
     func testDanglingProviders() {
-        let input = InputSanitizer.split(text: ProviderFixtures.danglingProviderFixtures)
+        let input = InputSanitizer.split(text: Fixtures.DanglingProvider)
         let sanitizedInput = InputSanitizer.sanitize(text: input)
         let node = NodeSyntaxParser.parse(text: sanitizedInput).first!
         configureVisitor.walk(node)
@@ -24,7 +24,7 @@ class ProviderTests: XCTestCase {
     }
     
     func testDanglingAndReferenceConnected() {
-        let input = InputSanitizer.split(text: ProviderFixtures.danglingAndReferenceProvidersFixture)
+        let input = InputSanitizer.split(text: Fixtures.DanglingAndReference)
         let sanitizedInput = InputSanitizer.sanitize(text: input)
         let node = NodeSyntaxParser.parse(text: sanitizedInput).first!
         configureVisitor.walk(node)
@@ -35,17 +35,17 @@ class ProviderTests: XCTestCase {
     }
     
     func testPropertyInjectorBinding() {
-        let input = InputSanitizer.split(text: ProviderFixtures.propertyInjectionBindingFixture)
+        let input = InputSanitizer.split(text: Fixtures.PropertyInjection)
         let sanitizedInput = InputSanitizer.sanitize(text: input)
         let node = NodeSyntaxParser.parse(text: sanitizedInput).first!
         configureVisitor.walk(node)
         XCTAssertEqual(configureVisitor.providers.count, 1)
-        XCTAssertEqual(configureVisitor.providers.first!.type, "PropertyInjector<A>")
+        XCTAssertEqual(configureVisitor.providers.first!.type, "PropertyInjector<PropertyClass>")
         XCTAssertEqual(configureVisitor.providers.first!.dependencies, ["Int"])
     }
     
     func testPropertyInjectorRoot() {
-        let input = InputSanitizer.split(text: ProviderFixtures.rootPropertyInjectorProvider)
+        let input = InputSanitizer.split(text: Fixtures.PropertyInjectorRoot)
         let sanitizedInput = InputSanitizer.sanitize(text: input)
         let node = NodeSyntaxParser.parse(text: sanitizedInput).first!
         configureVisitor.walk(node)
@@ -56,7 +56,7 @@ class ProviderTests: XCTestCase {
     }
     
     func testAssistedFactoryProvider() {
-        let input = InputSanitizer.split(text: ProviderFixtures.assistedFactoryProviderFixture)
+        let input = InputSanitizer.split(text: Fixtures.AssistedInjection)
         let sanitizedInput = InputSanitizer.sanitize(text: input)
         let node = NodeSyntaxParser.parse(text: sanitizedInput).first!
         configureVisitor.walk(node)
@@ -65,16 +65,16 @@ class ProviderTests: XCTestCase {
     }
     
     func testTaggedProviderDependency() {
-        let input = InputSanitizer.split(text: ProviderFixtures.taggedProviderDependencyFixture)
+        let input = InputSanitizer.split(text: Fixtures.TaggedProviderDependency)
         let sanitizedInput = InputSanitizer.sanitize(text: input)
         let node = NodeSyntaxParser.parse(text: sanitizedInput).first!
         configureVisitor.walk(node)
         XCTAssertEqual(configureVisitor.providers.count, 1)
-        XCTAssertEqual(configureVisitor.providers.first!.dependencies, ["TaggedProvider<MyTag>"])
+        XCTAssertEqual(configureVisitor.providers.first!.dependencies, ["TaggedProvider<MyTag2>"])
     }
     
     func testCollectionBindings() {
-        let input = InputSanitizer.split(text: ProviderFixtures.collectionBindingsFixture)
+        let input = InputSanitizer.split(text: Fixtures.CollectionBindings)
         let sanitizedInput = InputSanitizer.sanitize(text: input)
         let node = NodeSyntaxParser.parse(text: sanitizedInput).first!
         configureVisitor.walk(node)
@@ -87,21 +87,21 @@ class ProviderTests: XCTestCase {
     }
     
     func testDecoratedReferenceProvider() {
-        let input = InputSanitizer.split(text: ProviderFixtures.decoratedReferenceProviderFixture)
+        let input = InputSanitizer.split(text: Fixtures.DecoratedReferenceProvider)
         let sanitizedInput = InputSanitizer.sanitize(text: input)
         let node = NodeSyntaxParser.parse(text: sanitizedInput).first!
         configureVisitor.walk(node)
         XCTAssertEqual(configureVisitor.referenceProviders.count, 2)
         XCTAssertEqual(configureVisitor.referenceProviders.first!.scoped, "Singleton")
-        XCTAssertEqual(configureVisitor.referenceProviders[1].tag, "ATag")
+        XCTAssertEqual(configureVisitor.referenceProviders[1].tag, "MyTag3")
     }
     
     func testInnerReferenceTag() {
-        let input = InputSanitizer.split(text: ProviderFixtures.referencedInnerTagFixture)
+        let input = InputSanitizer.split(text: Fixtures.InnerTag)
         let sanitizedInput = InputSanitizer.sanitize(text: input)
         let node = NodeSyntaxParser.parse(text: sanitizedInput).first!
         configureVisitor.walk(node)
         XCTAssertEqual(configureVisitor.providers.count, 1)
-        XCTAssertEqual(configureVisitor.providers.first!.tag, "UIViewController.Root")
+        XCTAssertEqual(configureVisitor.providers.first!.tag, "NSObject.Root")
     }
 }

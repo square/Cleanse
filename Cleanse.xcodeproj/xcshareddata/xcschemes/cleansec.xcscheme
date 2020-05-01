@@ -52,19 +52,19 @@
       </BuildableProductRunnable>
       <CommandLineArguments>
          <CommandLineArgument
-            argument = "--ast-directory /tmp/dd/CleanseGithubBrowser-gjwcymytfkdbimbxluyvjowlxalc/Build/Products/Debug-iphonesimulator"
+            argument = "--ast-directory /Users/sebastians/Development/register"
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "--module-search-path /tmp/dd/CleanseGithubBrowser-gjwcymytfkdbimbxluyvjowlxalc/Build/Products/Debug-iphonesimulator"
+            argument = "--module-search-path ."
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "--module-name CleanseGithubBrowser"
+            argument = "--module-name AppointmentsAppletWiring"
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "--module-output-directory /tmp/dd/CleanseGithubBrowser-gjwcymytfkdbimbxluyvjowlxalc/Build/Products/Debug-iphonesimulator"
+            argument = "--module-output-directory /Users/sebastians/Development/register"
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>

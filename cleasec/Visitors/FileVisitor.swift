@@ -24,7 +24,7 @@ public struct FileVisitor: SyntaxVisitor {
     var components: [Component] = []
     
     mutating public func visit(node: ImportDecl) {
-        if node.raw.contains("Cleanse") {
+        if node.raw.contains(pattern: #"'Cleanse'"#) {
             importsCleanse = true
         }
     }

@@ -18,8 +18,24 @@ protocol GithubServicesModule : Module {
 
 /// Wires up common definitions shared across services as well as installing the services's modules
 struct RealeaseGithubServicesModule : GithubServicesModule {
+    struct A {
+        let string: String
+    }
     static func configure(binder: SingletonBinder) {
         binder.include(module: NetworkModule.self)
+        binder
+            .bind(URLSessionConfiguration.self)
+            .sharedInScope()
+            .to { (a: String) in
+                return URLSessionConfiguration.ephemeral
+        }
+
+        binder
+            .bind(A.self)
+            .to(factory: A.init)
+        
+        binder
+            .bind(GithubMembersService.self).configured(with: configureGithubMembersService)
     }
 
     static func configureGithubMembersService(binder bind: ReceiptBinder<GithubMembersService>) -> BindingReceipt<GithubMembersService> {

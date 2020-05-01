@@ -6,25 +6,18 @@ import XCTest
 class ConfigureVisitorTests: XCTestCase {
     var moduleVisitor = ConfigureVisitor()
     
-    func testNormalBinding() {
-        let input = InputSanitizer.split(text: ModuleFixtures.simpleModuleBinding)
-        let sanitizedInput = InputSanitizer.sanitize(text: input)
-        let node = NodeSyntaxParser.parse(text: sanitizedInput).first!
-        moduleVisitor.walk(node)
-        XCTAssert(moduleVisitor.providers.count == 1)
-    }
-    
     func testModuleWithBindingDependencies() {
-        let input = InputSanitizer.split(text: ModuleFixtures.moduleBindingWith3Dependenices)
+        let input = InputSanitizer.split(text: Fixtures.ModuleWithDependencies)
         let sanitizedInput = InputSanitizer.sanitize(text: input)
         let node = NodeSyntaxParser.parse(text: sanitizedInput).first!
         moduleVisitor.walk(node)
-        XCTAssert(moduleVisitor.providers.count == 1)
+        XCTAssert(moduleVisitor.providers.count == 2)
         XCTAssert(moduleVisitor.providers.first!.dependencies == ["Int", "Character", "Float"])
+        XCTAssert(moduleVisitor.providers[1].dependencies == [])
     }
     
     func testModuleWithImplicitFactory() {
-        let input = InputSanitizer.split(text: ModuleFixtures.implicitModuleBinding)
+        let input = InputSanitizer.split(text: Fixtures.ModuleWithImplicitInitFactory)
         let sanitizedInput = InputSanitizer.sanitize(text: input)
         let node = NodeSyntaxParser.parse(text: sanitizedInput).first!
         moduleVisitor.walk(node)
@@ -33,7 +26,7 @@ class ConfigureVisitorTests: XCTestCase {
     }
     
     func testModuleWithTaggedAndScopedProvider() {
-        let input = InputSanitizer.split(text: ModuleFixtures.moduleWithScopedAndTaggedProvider)
+        let input = InputSanitizer.split(text: Fixtures.ModuleWithTaggedProvider)
         let sanitizedInput = InputSanitizer.sanitize(text: input)
         let node = NodeSyntaxParser.parse(text: sanitizedInput).first!
         moduleVisitor.walk(node)
@@ -44,7 +37,7 @@ class ConfigureVisitorTests: XCTestCase {
     }
     
     func testModuleWithImplicitType() {
-        let input = InputSanitizer.split(text: ModuleFixtures.implicitTypeBinding)
+        let input = InputSanitizer.split(text: Fixtures.ModuleWithImplicitType)
         let sanitizedInput = InputSanitizer.sanitize(text: input)
         let node = NodeSyntaxParser.parse(text: sanitizedInput).first!
         moduleVisitor.walk(node)
@@ -54,17 +47,17 @@ class ConfigureVisitorTests: XCTestCase {
     }
     
     func testModuleInclude() {
-        let input = InputSanitizer.split(text: ModuleFixtures.moduleIncludeFixture)
+        let input = InputSanitizer.split(text: Fixtures.ModuleIncludesModule)
         let sanitizedInput = InputSanitizer.sanitize(text: input)
         let node = NodeSyntaxParser.parse(text: sanitizedInput).first!
         moduleVisitor.walk(node)
         XCTAssertEqual(moduleVisitor.providers.count, 0)
         XCTAssertEqual(moduleVisitor.includedModules.count, 1)
-        XCTAssertEqual(moduleVisitor.includedModules, ["AnotherModuke"])
+        XCTAssertEqual(moduleVisitor.includedModules, ["AnotherModule"])
     }
     
     func testInstallSubcomponent() {
-        let input = InputSanitizer.split(text: ModuleFixtures.subcomponentInstallFixture)
+        let input = InputSanitizer.split(text: Fixtures.ModuleIncludesSubcomponent)
         let sanitizedInput = InputSanitizer.sanitize(text: input)
         let node = NodeSyntaxParser.parse(text: sanitizedInput).first!
         moduleVisitor.walk(node)
