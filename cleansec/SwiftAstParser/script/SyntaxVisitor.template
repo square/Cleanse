@@ -1,0 +1,49 @@
+// This file is generated! DO NOT EDIT!!
+
+public extension SyntaxVisitor {
+    mutating func walk(_ node: Syntax) {
+        var shouldVisitChildren = true
+        if false {
+          // Noop
+        <% for @item in @decl_items %>
+        } else if let node = node as? <%= @item.class_name %> {
+            visit(node: node)
+            shouldVisitChildren = visitChildren(node: node)
+        <% end %>
+        } else if let node = node as? UnknownSyntax {
+        	visit(node: node)
+            shouldVisitChildren = visitChildren(node: node)
+        }
+
+        if shouldVisitChildren {
+            node.children.forEach { walk($0) }
+        }
+    }
+}
+
+public protocol SyntaxVisitor {
+	<% for @item in @decl_items %>
+    mutating func visit(node: <%= @item.class_name %>)
+    mutating func visitChildren(node: <%= @item.class_name %>) -> Bool
+    <% end %>
+    mutating func visit(node: UnknownSyntax)
+    mutating func visitChildren(node: UnknownSyntax) -> Bool
+}
+
+public extension SyntaxVisitor {
+	<% for @item in @decl_items %>
+    mutating func visit(node: <%= @item.class_name %>) {
+        // Noop
+    }
+    mutating func visitChildren(node: <%= @item.class_name %>) -> Bool {
+        true
+    }
+    <% end %>
+    mutating func visit(node: UnknownSyntax) {
+        // Noop
+    }
+
+    mutating func visitChildren(node: UnknownSyntax) -> Bool {
+        true
+    }
+}

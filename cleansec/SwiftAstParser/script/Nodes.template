@@ -1,0 +1,30 @@
+// This file is generated! DO NOT EDIT!
+
+public enum NodeIdentifier: String {
+<% for @item in @decl_items %>
+    case <%= @item.case_var_name %> = "<%= @item.case_name %>"
+<% end %>
+}
+
+<% for @item in @decl_items %>
+public struct <%= @item.class_name %>: Syntax {
+    public let raw: String
+    public let children: [Syntax]
+}
+<% end %>
+
+public struct UnknownSyntax: Syntax {
+    public let raw: String
+    public let children: [Syntax]
+}
+
+extension String {
+    func createNode(id: NodeIdentifier, children: [Syntax]) -> Syntax {
+        switch id {
+        <% for @item in @decl_items %>
+            case .<%= @item.case_var_name %>: 
+                return <%= @item.class_name %>(raw: self, children: children)
+		<% end %>
+        }
+    }
+}
