@@ -1,9 +1,9 @@
 import Foundation
 
 /**
- Core representations that will be used to represent a parsed Cleanse files.
+ Core representations for parsed Cleanse files.
  
- These will be passed onto the succeediing pipeline steps and should remain agnostic to the underlying parsing implementation.
+ These will be passed onto the succeeding pipeline steps and should remain agnostic to the underlying parsing implementation.
  This would allow us to swap out parsing implementations in the future without affecting the rest of the pipeline.
  
  */

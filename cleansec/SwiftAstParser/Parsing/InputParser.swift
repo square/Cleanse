@@ -51,7 +51,7 @@ struct InputParser {
     // dump-ast output has some irregularities that need to be sanitized.
     // `source_file` doesn't prepend a newline and some
     private static func sanitize(lines: [String]) -> [String] {
-        var fixedText = lines.flatMap { element -> [String] in
+        let fixedText = lines.flatMap { element -> [String] in
             if let range = element.range(of: "(source_file") {
                 return [String(element.prefix(upTo: range.lowerBound)), String(element.suffix(from: range.lowerBound))]
             } else {

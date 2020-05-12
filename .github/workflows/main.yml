@@ -18,5 +18,5 @@ jobs:
     - name: Test Sample App
       run: xcodebuild test -project Examples/CleanseGithubBrowser/CleanseGithubBrowser.xcodeproj -scheme CleanseGithubBrowser -destination "platform=iOS Simulator,name=iPhone 8"
     - name: Test cleansec
-      run: xcodebuild test -project cleansec.xcodeproj -scheme SwiftAstParserTests -enableCodeCoverage=YES -destination "platform=macos"
+      run: xcodebuild test -workspace cleansec.xcworkspace -scheme cleansec -enableCodeCoverage=YES -destination "platform=macos"
       working-directory: cleansec
