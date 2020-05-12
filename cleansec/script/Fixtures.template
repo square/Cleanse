@@ -1,0 +1,9 @@
+// This file is generated! DO NOT EDIT!
+
+struct Fixtures {
+    <% for @f in @fixtures %>
+    static let <%= @f.var_name %> = """
+<%= @f.contents %>
+"""
+    <% end %>
+}
