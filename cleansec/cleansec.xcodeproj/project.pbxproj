@@ -31,6 +31,20 @@
 		DC8497EE246A1D3400E704D6 /* PropertyInjection.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8497D9246A1D3400E704D6 /* PropertyInjection.swift */; };
 		DC8497FE246A1E1400E704D6 /* Cleanse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC8497F6246A1E0800E704D6 /* Cleanse.framework */; };
 		DC849804246A208400E704D6 /* CodeFixtures.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC849803246A208400E704D6 /* CodeFixtures.swift */; };
+		DC849808246B050F00E704D6 /* FileVisitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC849807246B050F00E704D6 /* FileVisitor.swift */; };
+		DC84980D246B051E00E704D6 /* SwiftAstParser.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC8A67F4246474C100D78CAF /* SwiftAstParser.framework */; };
+		DC849810246B08E800E704D6 /* InheritableSyntax.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC84980F246B08E800E704D6 /* InheritableSyntax.swift */; };
+		DC849812246B09E500E704D6 /* CleanseTypeVisitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC849811246B09E500E704D6 /* CleanseTypeVisitor.swift */; };
+		DC849814246B132C00E704D6 /* BindingsVisitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC849813246B132C00E704D6 /* BindingsVisitor.swift */; };
+		DC849816246B140500E704D6 /* ProviderVisitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC849815246B140500E704D6 /* ProviderVisitor.swift */; };
+		DC849818246B171300E704D6 /* TypedSyntax.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC849817246B171300E704D6 /* TypedSyntax.swift */; };
+		DC84981B246B249D00E704D6 /* ProviderBuilders.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC84981A246B249D00E704D6 /* ProviderBuilders.swift */; };
+		DC84981D246B268700E704D6 /* DanglingProviderVisitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC84981C246B268700E704D6 /* DanglingProviderVisitor.swift */; };
+		DC84981F246B275500E704D6 /* ReferenceProviderVisitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC84981E246B275500E704D6 /* ReferenceProviderVisitor.swift */; };
+		DC849821246B2FEB00E704D6 /* ComponentRootProviderVisitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC849820246B2FEB00E704D6 /* ComponentRootProviderVisitor.swift */; };
+		DC849823246B393500E704D6 /* BindingsVisitorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC849822246B393500E704D6 /* BindingsVisitorTests.swift */; };
+		DC849828246B40A600E704D6 /* CleansecFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCD3333E2469B3AB008B053F /* CleansecFramework.framework */; };
+		DC849829246B40A600E704D6 /* SwiftAstParser.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC8A67F4246474C100D78CAF /* SwiftAstParser.framework */; };
 		DC8A67C2246396CF00D78CAF /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8A67C1246396CF00D78CAF /* main.swift */; };
 		DC8A67FD246474C200D78CAF /* SwiftAstParser.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC8A67F4246474C100D78CAF /* SwiftAstParser.framework */; };
 		DC8A6802246474C200D78CAF /* SwiftAstParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8A6801246474C200D78CAF /* SwiftAstParserTests.swift */; };
@@ -44,9 +58,9 @@
 		DC8A68142464759D00D78CAF /* DataStringMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8A68132464759D00D78CAF /* DataStringMapper.swift */; };
 		DC8A68162464760100D78CAF /* ASTStringHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8A68152464760100D78CAF /* ASTStringHelpers.swift */; };
 		DC8A681824648BEB00D78CAF /* SanitizerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8A681724648BEB00D78CAF /* SanitizerTests.swift */; };
-		DCD333472469B3AB008B053F /* Cleansec.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCD3333E2469B3AB008B053F /* Cleansec.framework */; };
-		DCD3334C2469B3AB008B053F /* CleansecTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD3334B2469B3AB008B053F /* CleansecTests.swift */; };
-		DCD3334E2469B3AB008B053F /* Cleansec.h in Headers */ = {isa = PBXBuildFile; fileRef = DCD333402469B3AB008B053F /* Cleansec.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCD333472469B3AB008B053F /* CleansecFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCD3333E2469B3AB008B053F /* CleansecFramework.framework */; };
+		DCD3334C2469B3AB008B053F /* FileVisitorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD3334B2469B3AB008B053F /* FileVisitorTests.swift */; };
+		DCD3334E2469B3AB008B053F /* CleansecFramework.h in Headers */ = {isa = PBXBuildFile; fileRef = DCD333402469B3AB008B053F /* CleansecFramework.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DCD333572469B3E5008B053F /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD333562469B3E5008B053F /* Models.swift */; };
 		DCD333592469B4E4008B053F /* ProviderModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD333582469B4E4008B053F /* ProviderModels.swift */; };
 /* End PBXBuildFile section */
@@ -79,6 +93,27 @@
 			proxyType = 1;
 			remoteGlobalIDString = F6A660C91CCB07C2004DD6E3;
 			remoteInfo = Cleanse;
+		};
+		DC84980B246B051B00E704D6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DC8A67B6246396CF00D78CAF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DC8A67F3246474C100D78CAF;
+			remoteInfo = SwiftAstParser;
+		};
+		DC849824246B40A100E704D6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DC8A67B6246396CF00D78CAF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DCD3333D2469B3AB008B053F;
+			remoteInfo = Cleansec;
+		};
+		DC849826246B40A100E704D6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DC8A67B6246396CF00D78CAF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DC8A67F3246474C100D78CAF;
+			remoteInfo = SwiftAstParser;
 		};
 		DC8A67FE246474C200D78CAF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -135,6 +170,17 @@
 		DC8497D9246A1D3400E704D6 /* PropertyInjection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropertyInjection.swift; sourceTree = "<group>"; };
 		DC8497EF246A1E0800E704D6 /* Cleanse.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Cleanse.xcodeproj; path = ../Cleanse.xcodeproj; sourceTree = "<group>"; };
 		DC849803246A208400E704D6 /* CodeFixtures.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeFixtures.swift; sourceTree = "<group>"; };
+		DC849807246B050F00E704D6 /* FileVisitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FileVisitor.swift; path = CleansecFramework/Visitors/FileVisitor.swift; sourceTree = SOURCE_ROOT; };
+		DC84980F246B08E800E704D6 /* InheritableSyntax.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InheritableSyntax.swift; sourceTree = "<group>"; };
+		DC849811246B09E500E704D6 /* CleanseTypeVisitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CleanseTypeVisitor.swift; path = CleansecFramework/Visitors/CleanseTypeVisitor.swift; sourceTree = SOURCE_ROOT; };
+		DC849813246B132C00E704D6 /* BindingsVisitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BindingsVisitor.swift; path = CleansecFramework/Visitors/BindingsVisitor.swift; sourceTree = SOURCE_ROOT; };
+		DC849815246B140500E704D6 /* ProviderVisitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ProviderVisitor.swift; path = "CleansecFramework/Visitors/Provider Visitor/ProviderVisitor.swift"; sourceTree = SOURCE_ROOT; };
+		DC849817246B171300E704D6 /* TypedSyntax.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypedSyntax.swift; sourceTree = "<group>"; };
+		DC84981A246B249D00E704D6 /* ProviderBuilders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ProviderBuilders.swift; path = "CleansecFramework/Visitors/Provider Visitor/ProviderBuilders.swift"; sourceTree = SOURCE_ROOT; };
+		DC84981C246B268700E704D6 /* DanglingProviderVisitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DanglingProviderVisitor.swift; path = "CleansecFramework/Visitors/Provider Visitor/DanglingProviderVisitor.swift"; sourceTree = SOURCE_ROOT; };
+		DC84981E246B275500E704D6 /* ReferenceProviderVisitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ReferenceProviderVisitor.swift; path = "CleansecFramework/Visitors/Provider Visitor/ReferenceProviderVisitor.swift"; sourceTree = SOURCE_ROOT; };
+		DC849820246B2FEB00E704D6 /* ComponentRootProviderVisitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ComponentRootProviderVisitor.swift; path = "CleansecFramework/Visitors/Provider Visitor/ComponentRootProviderVisitor.swift"; sourceTree = SOURCE_ROOT; };
+		DC849822246B393500E704D6 /* BindingsVisitorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BindingsVisitorTests.swift; sourceTree = "<group>"; };
 		DC8A67BE246396CF00D78CAF /* cleansec */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = cleansec; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC8A67C1246396CF00D78CAF /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		DC8A67E4246397A800D78CAF /* Syntax.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Syntax.swift; sourceTree = "<group>"; };
@@ -152,14 +198,14 @@
 		DC8A68132464759D00D78CAF /* DataStringMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStringMapper.swift; sourceTree = "<group>"; };
 		DC8A68152464760100D78CAF /* ASTStringHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASTStringHelpers.swift; sourceTree = "<group>"; };
 		DC8A681724648BEB00D78CAF /* SanitizerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SanitizerTests.swift; sourceTree = "<group>"; };
-		DCD3333E2469B3AB008B053F /* Cleansec.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Cleansec.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		DCD333402469B3AB008B053F /* Cleansec.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Cleansec.h; sourceTree = "<group>"; };
+		DCD3333E2469B3AB008B053F /* CleansecFramework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CleansecFramework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DCD333402469B3AB008B053F /* CleansecFramework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CleansecFramework.h; sourceTree = "<group>"; };
 		DCD333412469B3AB008B053F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		DCD333462469B3AB008B053F /* CleansecTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CleansecTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		DCD3334B2469B3AB008B053F /* CleansecTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleansecTests.swift; sourceTree = "<group>"; };
+		DCD333462469B3AB008B053F /* CleansecFrameworkTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CleansecFrameworkTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DCD3334B2469B3AB008B053F /* FileVisitorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileVisitorTests.swift; sourceTree = "<group>"; };
 		DCD3334D2469B3AB008B053F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		DCD333562469B3E5008B053F /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Models.swift; path = Cleansec/Visitors/Representations/Models.swift; sourceTree = SOURCE_ROOT; };
-		DCD333582469B4E4008B053F /* ProviderModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ProviderModels.swift; path = Cleansec/Visitors/Representations/ProviderModels.swift; sourceTree = SOURCE_ROOT; };
+		DCD333562469B3E5008B053F /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Models.swift; path = CleansecFramework/Visitors/Representations/Models.swift; sourceTree = SOURCE_ROOT; };
+		DCD333582469B4E4008B053F /* ProviderModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ProviderModels.swift; path = CleansecFramework/Visitors/Representations/ProviderModels.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -175,6 +221,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DC849828246B40A600E704D6 /* CleansecFramework.framework in Frameworks */,
+				DC849829246B40A600E704D6 /* SwiftAstParser.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -197,6 +245,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DC84980D246B051E00E704D6 /* SwiftAstParser.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -204,7 +253,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DCD333472469B3AB008B053F /* Cleansec.framework in Frameworks */,
+				DCD333472469B3AB008B053F /* CleansecFramework.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -274,6 +323,27 @@
 			path = Fixtures;
 			sourceTree = "<group>";
 		};
+		DC84980E246B08DA00E704D6 /* Nodes */ = {
+			isa = PBXGroup;
+			children = (
+				DC84980F246B08E800E704D6 /* InheritableSyntax.swift */,
+				DC849817246B171300E704D6 /* TypedSyntax.swift */,
+			);
+			path = Nodes;
+			sourceTree = "<group>";
+		};
+		DC849819246B248C00E704D6 /* Provider Visitor */ = {
+			isa = PBXGroup;
+			children = (
+				DC849815246B140500E704D6 /* ProviderVisitor.swift */,
+				DC84981A246B249D00E704D6 /* ProviderBuilders.swift */,
+				DC84981C246B268700E704D6 /* DanglingProviderVisitor.swift */,
+				DC84981E246B275500E704D6 /* ReferenceProviderVisitor.swift */,
+				DC849820246B2FEB00E704D6 /* ComponentRootProviderVisitor.swift */,
+			);
+			path = "Provider Visitor";
+			sourceTree = "<group>";
+		};
 		DC8A67B5246396CF00D78CAF = {
 			isa = PBXGroup;
 			children = (
@@ -281,8 +351,8 @@
 				DC8A67C0246396CF00D78CAF /* cleansec */,
 				DC8A67F5246474C100D78CAF /* SwiftAstParser */,
 				DC8A6800246474C200D78CAF /* SwiftAstParserTests */,
-				DCD3333F2469B3AB008B053F /* Cleansec */,
-				DCD3334A2469B3AB008B053F /* CleansecTests */,
+				DCD3333F2469B3AB008B053F /* CleansecFramework */,
+				DCD3334A2469B3AB008B053F /* CleansecFrameworkTests */,
 				DC8497BD246A1D1600E704D6 /* Cleansec-Generate-Fixtures */,
 				DC8A67BF246396CF00D78CAF /* Products */,
 				DC8497FD246A1E1400E704D6 /* Frameworks */,
@@ -295,8 +365,8 @@
 				DC8A67BE246396CF00D78CAF /* cleansec */,
 				DC8A67F4246474C100D78CAF /* SwiftAstParser.framework */,
 				DC8A67FC246474C200D78CAF /* SwiftAstParserTests.xctest */,
-				DCD3333E2469B3AB008B053F /* Cleansec.framework */,
-				DCD333462469B3AB008B053F /* CleansecTests.xctest */,
+				DCD3333E2469B3AB008B053F /* CleansecFramework.framework */,
+				DCD333462469B3AB008B053F /* CleansecFrameworkTests.xctest */,
 				DC8497BC246A1D1600E704D6 /* Cleansec_Generate_Fixtures.framework */,
 			);
 			name = Products;
@@ -322,6 +392,7 @@
 		DC8A67F5246474C100D78CAF /* SwiftAstParser */ = {
 			isa = PBXGroup;
 			children = (
+				DC84980E246B08DA00E704D6 /* Nodes */,
 				DC8A68102464753C00D78CAF /* Parsing */,
 				DC8A67E62463981900D78CAF /* Generated */,
 				DC8A67E4246397A800D78CAF /* Syntax.swift */,
@@ -353,30 +424,35 @@
 			path = Parsing;
 			sourceTree = "<group>";
 		};
-		DCD3333F2469B3AB008B053F /* Cleansec */ = {
+		DCD3333F2469B3AB008B053F /* CleansecFramework */ = {
 			isa = PBXGroup;
 			children = (
 				DCD333552469B3B0008B053F /* Visitors */,
-				DCD333402469B3AB008B053F /* Cleansec.h */,
+				DCD333402469B3AB008B053F /* CleansecFramework.h */,
 				DCD333412469B3AB008B053F /* Info.plist */,
 			);
-			path = Cleansec;
+			path = CleansecFramework;
 			sourceTree = "<group>";
 		};
-		DCD3334A2469B3AB008B053F /* CleansecTests */ = {
+		DCD3334A2469B3AB008B053F /* CleansecFrameworkTests */ = {
 			isa = PBXGroup;
 			children = (
 				DC849800246A1FC400E704D6 /* Fixtures */,
-				DCD3334B2469B3AB008B053F /* CleansecTests.swift */,
+				DCD3334B2469B3AB008B053F /* FileVisitorTests.swift */,
 				DCD3334D2469B3AB008B053F /* Info.plist */,
+				DC849822246B393500E704D6 /* BindingsVisitorTests.swift */,
 			);
-			path = CleansecTests;
+			path = CleansecFrameworkTests;
 			sourceTree = "<group>";
 		};
 		DCD333552469B3B0008B053F /* Visitors */ = {
 			isa = PBXGroup;
 			children = (
+				DC849819246B248C00E704D6 /* Provider Visitor */,
 				DCD3335A2469B502008B053F /* Representations */,
+				DC849807246B050F00E704D6 /* FileVisitor.swift */,
+				DC849811246B09E500E704D6 /* CleanseTypeVisitor.swift */,
+				DC849813246B132C00E704D6 /* BindingsVisitor.swift */,
 			);
 			path = Visitors;
 			sourceTree = "<group>";
@@ -413,7 +489,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DCD3334E2469B3AB008B053F /* Cleansec.h in Headers */,
+				DCD3334E2469B3AB008B053F /* CleansecFramework.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -451,6 +527,8 @@
 			buildRules = (
 			);
 			dependencies = (
+				DC849825246B40A100E704D6 /* PBXTargetDependency */,
+				DC849827246B40A100E704D6 /* PBXTargetDependency */,
 			);
 			name = cleansec;
 			productName = cleansec;
@@ -493,9 +571,9 @@
 			productReference = DC8A67FC246474C200D78CAF /* SwiftAstParserTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		DCD3333D2469B3AB008B053F /* Cleansec */ = {
+		DCD3333D2469B3AB008B053F /* CleansecFramework */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = DCD333532469B3AB008B053F /* Build configuration list for PBXNativeTarget "Cleansec" */;
+			buildConfigurationList = DCD333532469B3AB008B053F /* Build configuration list for PBXNativeTarget "CleansecFramework" */;
 			buildPhases = (
 				DCD333392469B3AB008B053F /* Headers */,
 				DCD3333A2469B3AB008B053F /* Sources */,
@@ -505,15 +583,16 @@
 			buildRules = (
 			);
 			dependencies = (
+				DC84980C246B051B00E704D6 /* PBXTargetDependency */,
 			);
-			name = Cleansec;
+			name = CleansecFramework;
 			productName = Cleansec;
-			productReference = DCD3333E2469B3AB008B053F /* Cleansec.framework */;
+			productReference = DCD3333E2469B3AB008B053F /* CleansecFramework.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		DCD333452469B3AB008B053F /* CleansecTests */ = {
+		DCD333452469B3AB008B053F /* CleansecFrameworkTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = DCD333542469B3AB008B053F /* Build configuration list for PBXNativeTarget "CleansecTests" */;
+			buildConfigurationList = DCD333542469B3AB008B053F /* Build configuration list for PBXNativeTarget "CleansecFrameworkTests" */;
 			buildPhases = (
 				DCD333422469B3AB008B053F /* Sources */,
 				DCD333432469B3AB008B053F /* Frameworks */,
@@ -524,9 +603,9 @@
 			dependencies = (
 				DCD333492469B3AB008B053F /* PBXTargetDependency */,
 			);
-			name = CleansecTests;
+			name = CleansecFrameworkTests;
 			productName = CleansecTests;
-			productReference = DCD333462469B3AB008B053F /* CleansecTests.xctest */;
+			productReference = DCD333462469B3AB008B053F /* CleansecFrameworkTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -583,8 +662,8 @@
 				DC8A67BD246396CF00D78CAF /* cleansec */,
 				DC8A67F3246474C100D78CAF /* SwiftAstParser */,
 				DC8A67FB246474C200D78CAF /* SwiftAstParserTests */,
-				DCD3333D2469B3AB008B053F /* Cleansec */,
-				DCD333452469B3AB008B053F /* CleansecTests */,
+				DCD3333D2469B3AB008B053F /* CleansecFramework */,
+				DCD333452469B3AB008B053F /* CleansecFrameworkTests */,
 				DC8497BB246A1D1600E704D6 /* Cleansec-Generate-Fixtures */,
 			);
 		};
@@ -719,10 +798,12 @@
 				DC8A680B246474CD00D78CAF /* Syntax.swift in Sources */,
 				DC8A680C246474CD00D78CAF /* SyntaxParser.swift in Sources */,
 				DC8A68162464760100D78CAF /* ASTStringHelpers.swift in Sources */,
+				DC849810246B08E800E704D6 /* InheritableSyntax.swift in Sources */,
 				DC8A680D246474CD00D78CAF /* Regex.swift in Sources */,
 				DC8A680E246474F900D78CAF /* Nodes.swift in Sources */,
 				DC8A68122464754A00D78CAF /* InputParser.swift in Sources */,
 				DC8A68142464759D00D78CAF /* DataStringMapper.swift in Sources */,
+				DC849818246B171300E704D6 /* TypedSyntax.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -739,8 +820,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DC849812246B09E500E704D6 /* CleanseTypeVisitor.swift in Sources */,
+				DC849821246B2FEB00E704D6 /* ComponentRootProviderVisitor.swift in Sources */,
+				DC84981B246B249D00E704D6 /* ProviderBuilders.swift in Sources */,
+				DC849808246B050F00E704D6 /* FileVisitor.swift in Sources */,
 				DCD333572469B3E5008B053F /* Models.swift in Sources */,
+				DC849816246B140500E704D6 /* ProviderVisitor.swift in Sources */,
+				DC849814246B132C00E704D6 /* BindingsVisitor.swift in Sources */,
 				DCD333592469B4E4008B053F /* ProviderModels.swift in Sources */,
+				DC84981F246B275500E704D6 /* ReferenceProviderVisitor.swift in Sources */,
+				DC84981D246B268700E704D6 /* DanglingProviderVisitor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -749,7 +838,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				DC849804246A208400E704D6 /* CodeFixtures.swift in Sources */,
-				DCD3334C2469B3AB008B053F /* CleansecTests.swift in Sources */,
+				DC849823246B393500E704D6 /* BindingsVisitorTests.swift in Sources */,
+				DCD3334C2469B3AB008B053F /* FileVisitorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -761,6 +851,21 @@
 			name = Cleanse;
 			targetProxy = DC8497FB246A1E0D00E704D6 /* PBXContainerItemProxy */;
 		};
+		DC84980C246B051B00E704D6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DC8A67F3246474C100D78CAF /* SwiftAstParser */;
+			targetProxy = DC84980B246B051B00E704D6 /* PBXContainerItemProxy */;
+		};
+		DC849825246B40A100E704D6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DCD3333D2469B3AB008B053F /* CleansecFramework */;
+			targetProxy = DC849824246B40A100E704D6 /* PBXContainerItemProxy */;
+		};
+		DC849827246B40A100E704D6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DC8A67F3246474C100D78CAF /* SwiftAstParser */;
+			targetProxy = DC849826246B40A100E704D6 /* PBXContainerItemProxy */;
+		};
 		DC8A67FF246474C200D78CAF /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = DC8A67F3246474C100D78CAF /* SwiftAstParser */;
@@ -768,7 +873,7 @@
 		};
 		DCD333492469B3AB008B053F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = DCD3333D2469B3AB008B053F /* Cleansec */;
+			target = DCD3333D2469B3AB008B053F /* CleansecFramework */;
 			targetProxy = DCD333482469B3AB008B053F /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -1066,7 +1171,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = Cleansec/Info.plist;
+				INFOPLIST_FILE = CleansecFramework/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1094,7 +1199,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = Cleansec/Info.plist;
+				INFOPLIST_FILE = CleansecFramework/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1116,7 +1221,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = CleansecTests/Info.plist;
+				INFOPLIST_FILE = CleansecFrameworkTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -1134,7 +1239,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = CleansecTests/Info.plist;
+				INFOPLIST_FILE = CleansecFrameworkTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -1194,7 +1299,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		DCD333532469B3AB008B053F /* Build configuration list for PBXNativeTarget "Cleansec" */ = {
+		DCD333532469B3AB008B053F /* Build configuration list for PBXNativeTarget "CleansecFramework" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				DCD3334F2469B3AB008B053F /* Debug */,
@@ -1203,7 +1308,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		DCD333542469B3AB008B053F /* Build configuration list for PBXNativeTarget "CleansecTests" */ = {
+		DCD333542469B3AB008B053F /* Build configuration list for PBXNativeTarget "CleansecFrameworkTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				DCD333512469B3AB008B053F /* Debug */,
