@@ -15,6 +15,11 @@ enum ReferenceType {
     case dependencies([String])
 }
 
+/**
+ Discerns whether the resulting reference provider can turn into a `StandardProvider` (by providing the
+ factory closure to the `configured(with:)` method), or if it needs to become a `ReferenceProvider` to point
+ at a dangling provider.
+ */
 struct ReferenceProviderVisitor: SyntaxVisitor {
     let type: String
     init(type: String) {

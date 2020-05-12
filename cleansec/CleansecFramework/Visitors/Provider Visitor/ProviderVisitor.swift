@@ -15,7 +15,6 @@ enum ProviderResult {
     case referenceBuilder(ReferenceProviderBuilder)
 }
 
-
 /**
  Parses an individual binding to discern its provider type, dependencies, and any decorated types (i.e Tagged, Scoped, Factory).
  */

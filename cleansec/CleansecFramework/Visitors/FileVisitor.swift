@@ -9,6 +9,9 @@
 import Foundation
 import SwiftAstParser
 
+/**
+ Primary parsing object that will walk a source file node and extract any cleanse objects.
+ */
 struct FileVisitor: SyntaxVisitor {
     var importsCleanse = false
     private var modules: [Module] = []

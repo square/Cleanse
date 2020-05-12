@@ -9,6 +9,9 @@
 import Foundation
 import SwiftAstParser
 
+/**
+ Extracts the resulting inner reference to be used by `ReferenceProvider` instances.
+ */
 struct DanglingProviderVisitor: SyntaxVisitor {
     let type: String
     private var reference: String? = nil

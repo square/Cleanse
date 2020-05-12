@@ -8,7 +8,8 @@
 
 import Foundation
 
-
+/// Represents a partial reference provider value. Exposes public method needed to fill in the missing
+/// properties and then build the resulting `ReferenceProvider`.
 struct ReferenceProviderBuilder {
     enum ResultingProvider {
         case reference(ReferenceProvider)
@@ -66,6 +67,8 @@ struct ReferenceProviderBuilder {
     }
 }
 
+/// Represents a partial dangling provider value. Exposes public method needed to fill in the missing
+/// properties and then build the resulting `DanglingProvider`.
 struct DanglingProviderBuilder {
     let type: String
     let dependencies: [String]

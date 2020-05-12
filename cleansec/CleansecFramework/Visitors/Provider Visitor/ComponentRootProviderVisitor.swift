@@ -9,6 +9,9 @@
 import Foundation
 import SwiftAstParser
 
+/**
+ Responsible for extracting out the root provider instance and seed type for a given component body.
+ */
 struct ComponentRootProviderVisitor: SyntaxVisitor {
     enum RootProvider {
         case dangling(DanglingProvider)
