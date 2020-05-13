@@ -63,6 +63,11 @@
 		DC9966F0246B5F4D0015B473 /* LinkedInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9966EF246B5F4D0015B473 /* LinkedInterface.swift */; };
 		DC9966F2246B5F7C0015B473 /* Linker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9966F1246B5F7C0015B473 /* Linker.swift */; };
 		DC9966F4246B63350015B473 /* LinkerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9966F3246B63350015B473 /* LinkerTests.swift */; };
+		DC9966FA246C54870015B473 /* Resolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9966F9246C54870015B473 /* Resolver.swift */; };
+		DC9966FC246C58560015B473 /* ResolutionError.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9966FB246C58560015B473 /* ResolutionError.swift */; };
+		DC9966FE246C60EE0015B473 /* CanonicalProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9966FD246C60EE0015B473 /* CanonicalProvider.swift */; };
+		DC996701246C75740015B473 /* ResolvedComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC996700246C75740015B473 /* ResolvedComponent.swift */; };
+		DC996705246C7C700015B473 /* ResolverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC996704246C7C700015B473 /* ResolverTests.swift */; };
 		DCD333472469B3AB008B053F /* CleansecFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCD3333E2469B3AB008B053F /* CleansecFramework.framework */; };
 		DCD3334C2469B3AB008B053F /* FileVisitorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD3334B2469B3AB008B053F /* FileVisitorTests.swift */; };
 		DCD3334E2469B3AB008B053F /* CleansecFramework.h in Headers */ = {isa = PBXBuildFile; fileRef = DCD333402469B3AB008B053F /* CleansecFramework.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -208,6 +213,11 @@
 		DC9966EF246B5F4D0015B473 /* LinkedInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedInterface.swift; sourceTree = "<group>"; };
 		DC9966F1246B5F7C0015B473 /* Linker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Linker.swift; sourceTree = "<group>"; };
 		DC9966F3246B63350015B473 /* LinkerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkerTests.swift; sourceTree = "<group>"; };
+		DC9966F9246C54870015B473 /* Resolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resolver.swift; sourceTree = "<group>"; };
+		DC9966FB246C58560015B473 /* ResolutionError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResolutionError.swift; sourceTree = "<group>"; };
+		DC9966FD246C60EE0015B473 /* CanonicalProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanonicalProvider.swift; sourceTree = "<group>"; };
+		DC996700246C75740015B473 /* ResolvedComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResolvedComponent.swift; sourceTree = "<group>"; };
+		DC996704246C7C700015B473 /* ResolverTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResolverTests.swift; sourceTree = "<group>"; };
 		DCD3333E2469B3AB008B053F /* CleansecFramework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CleansecFramework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCD333402469B3AB008B053F /* CleansecFramework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CleansecFramework.h; sourceTree = "<group>"; };
 		DCD333412469B3AB008B053F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -445,9 +455,21 @@
 			path = Linking;
 			sourceTree = "<group>";
 		};
+		DC9966F6246C547D0015B473 /* Resolver */ = {
+			isa = PBXGroup;
+			children = (
+				DC9966F9246C54870015B473 /* Resolver.swift */,
+				DC9966FB246C58560015B473 /* ResolutionError.swift */,
+				DC9966FD246C60EE0015B473 /* CanonicalProvider.swift */,
+				DC996700246C75740015B473 /* ResolvedComponent.swift */,
+			);
+			path = Resolver;
+			sourceTree = "<group>";
+		};
 		DCD3333F2469B3AB008B053F /* CleansecFramework */ = {
 			isa = PBXGroup;
 			children = (
+				DC9966F6246C547D0015B473 /* Resolver */,
 				DC9966E8246B5ED40015B473 /* Linking */,
 				DCD333552469B3B0008B053F /* Visitors */,
 				DCD333402469B3AB008B053F /* CleansecFramework.h */,
@@ -464,6 +486,7 @@
 				DCD3334D2469B3AB008B053F /* Info.plist */,
 				DC849822246B393500E704D6 /* BindingsVisitorTests.swift */,
 				DC9966F3246B63350015B473 /* LinkerTests.swift */,
+				DC996704246C7C700015B473 /* ResolverTests.swift */,
 			);
 			path = CleansecFrameworkTests;
 			sourceTree = "<group>";
@@ -843,19 +866,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DC9966FA246C54870015B473 /* Resolver.swift in Sources */,
 				DC849812246B09E500E704D6 /* CleanseTypeVisitor.swift in Sources */,
 				DC9966F0246B5F4D0015B473 /* LinkedInterface.swift in Sources */,
 				DC849821246B2FEB00E704D6 /* ComponentRootProviderVisitor.swift in Sources */,
 				DC9966EE246B5F280015B473 /* LinkedComponent.swift in Sources */,
 				DC84981B246B249D00E704D6 /* ProviderBuilders.swift in Sources */,
 				DC849808246B050F00E704D6 /* FileVisitor.swift in Sources */,
+				DC996701246C75740015B473 /* ResolvedComponent.swift in Sources */,
 				DCD333572469B3E5008B053F /* Models.swift in Sources */,
 				DC849816246B140500E704D6 /* ProviderVisitor.swift in Sources */,
 				DC9966EC246B5EE80015B473 /* LinkedModule.swift in Sources */,
 				DC849814246B132C00E704D6 /* BindingsVisitor.swift in Sources */,
 				DC9966F2246B5F7C0015B473 /* Linker.swift in Sources */,
+				DC9966FE246C60EE0015B473 /* CanonicalProvider.swift in Sources */,
 				DCD333592469B4E4008B053F /* ProviderModels.swift in Sources */,
 				DC84981F246B275500E704D6 /* ReferenceProviderVisitor.swift in Sources */,
+				DC9966FC246C58560015B473 /* ResolutionError.swift in Sources */,
 				DC84981D246B268700E704D6 /* DanglingProviderVisitor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -867,6 +894,7 @@
 				DC9966F4246B63350015B473 /* LinkerTests.swift in Sources */,
 				DC849804246A208400E704D6 /* CodeFixtures.swift in Sources */,
 				DC849823246B393500E704D6 /* BindingsVisitorTests.swift in Sources */,
+				DC996705246C7C700015B473 /* ResolverTests.swift in Sources */,
 				DCD3334C2469B3AB008B053F /* FileVisitorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
