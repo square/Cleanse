@@ -58,6 +58,11 @@
 		DC8A68142464759D00D78CAF /* DataStringMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8A68132464759D00D78CAF /* DataStringMapper.swift */; };
 		DC8A68162464760100D78CAF /* ASTStringHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8A68152464760100D78CAF /* ASTStringHelpers.swift */; };
 		DC8A681824648BEB00D78CAF /* SanitizerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8A681724648BEB00D78CAF /* SanitizerTests.swift */; };
+		DC9966EC246B5EE80015B473 /* LinkedModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9966EB246B5EE80015B473 /* LinkedModule.swift */; };
+		DC9966EE246B5F280015B473 /* LinkedComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9966ED246B5F280015B473 /* LinkedComponent.swift */; };
+		DC9966F0246B5F4D0015B473 /* LinkedInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9966EF246B5F4D0015B473 /* LinkedInterface.swift */; };
+		DC9966F2246B5F7C0015B473 /* Linker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9966F1246B5F7C0015B473 /* Linker.swift */; };
+		DC9966F4246B63350015B473 /* LinkerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9966F3246B63350015B473 /* LinkerTests.swift */; };
 		DCD333472469B3AB008B053F /* CleansecFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCD3333E2469B3AB008B053F /* CleansecFramework.framework */; };
 		DCD3334C2469B3AB008B053F /* FileVisitorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD3334B2469B3AB008B053F /* FileVisitorTests.swift */; };
 		DCD3334E2469B3AB008B053F /* CleansecFramework.h in Headers */ = {isa = PBXBuildFile; fileRef = DCD333402469B3AB008B053F /* CleansecFramework.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -198,6 +203,11 @@
 		DC8A68132464759D00D78CAF /* DataStringMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStringMapper.swift; sourceTree = "<group>"; };
 		DC8A68152464760100D78CAF /* ASTStringHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASTStringHelpers.swift; sourceTree = "<group>"; };
 		DC8A681724648BEB00D78CAF /* SanitizerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SanitizerTests.swift; sourceTree = "<group>"; };
+		DC9966EB246B5EE80015B473 /* LinkedModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedModule.swift; sourceTree = "<group>"; };
+		DC9966ED246B5F280015B473 /* LinkedComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedComponent.swift; sourceTree = "<group>"; };
+		DC9966EF246B5F4D0015B473 /* LinkedInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedInterface.swift; sourceTree = "<group>"; };
+		DC9966F1246B5F7C0015B473 /* Linker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Linker.swift; sourceTree = "<group>"; };
+		DC9966F3246B63350015B473 /* LinkerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkerTests.swift; sourceTree = "<group>"; };
 		DCD3333E2469B3AB008B053F /* CleansecFramework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CleansecFramework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCD333402469B3AB008B053F /* CleansecFramework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CleansecFramework.h; sourceTree = "<group>"; };
 		DCD333412469B3AB008B053F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -424,9 +434,21 @@
 			path = Parsing;
 			sourceTree = "<group>";
 		};
+		DC9966E8246B5ED40015B473 /* Linking */ = {
+			isa = PBXGroup;
+			children = (
+				DC9966EB246B5EE80015B473 /* LinkedModule.swift */,
+				DC9966ED246B5F280015B473 /* LinkedComponent.swift */,
+				DC9966EF246B5F4D0015B473 /* LinkedInterface.swift */,
+				DC9966F1246B5F7C0015B473 /* Linker.swift */,
+			);
+			path = Linking;
+			sourceTree = "<group>";
+		};
 		DCD3333F2469B3AB008B053F /* CleansecFramework */ = {
 			isa = PBXGroup;
 			children = (
+				DC9966E8246B5ED40015B473 /* Linking */,
 				DCD333552469B3B0008B053F /* Visitors */,
 				DCD333402469B3AB008B053F /* CleansecFramework.h */,
 				DCD333412469B3AB008B053F /* Info.plist */,
@@ -441,6 +463,7 @@
 				DCD3334B2469B3AB008B053F /* FileVisitorTests.swift */,
 				DCD3334D2469B3AB008B053F /* Info.plist */,
 				DC849822246B393500E704D6 /* BindingsVisitorTests.swift */,
+				DC9966F3246B63350015B473 /* LinkerTests.swift */,
 			);
 			path = CleansecFrameworkTests;
 			sourceTree = "<group>";
@@ -821,12 +844,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				DC849812246B09E500E704D6 /* CleanseTypeVisitor.swift in Sources */,
+				DC9966F0246B5F4D0015B473 /* LinkedInterface.swift in Sources */,
 				DC849821246B2FEB00E704D6 /* ComponentRootProviderVisitor.swift in Sources */,
+				DC9966EE246B5F280015B473 /* LinkedComponent.swift in Sources */,
 				DC84981B246B249D00E704D6 /* ProviderBuilders.swift in Sources */,
 				DC849808246B050F00E704D6 /* FileVisitor.swift in Sources */,
 				DCD333572469B3E5008B053F /* Models.swift in Sources */,
 				DC849816246B140500E704D6 /* ProviderVisitor.swift in Sources */,
+				DC9966EC246B5EE80015B473 /* LinkedModule.swift in Sources */,
 				DC849814246B132C00E704D6 /* BindingsVisitor.swift in Sources */,
+				DC9966F2246B5F7C0015B473 /* Linker.swift in Sources */,
 				DCD333592469B4E4008B053F /* ProviderModels.swift in Sources */,
 				DC84981F246B275500E704D6 /* ReferenceProviderVisitor.swift in Sources */,
 				DC84981D246B268700E704D6 /* DanglingProviderVisitor.swift in Sources */,
@@ -837,6 +864,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DC9966F4246B63350015B473 /* LinkerTests.swift in Sources */,
 				DC849804246A208400E704D6 /* CodeFixtures.swift in Sources */,
 				DC849823246B393500E704D6 /* BindingsVisitorTests.swift in Sources */,
 				DCD3334C2469B3AB008B053F /* FileVisitorTests.swift in Sources */,
