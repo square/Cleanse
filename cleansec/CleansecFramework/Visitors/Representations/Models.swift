@@ -11,6 +11,10 @@ import Foundation
 /// Representation of a swift module, or group of files.
 public struct ModuleRepresentation: Codable {
     public let files: [FileRepresentation]
+    
+    public init(files: [FileRepresentation]) {
+        self.files = files
+    }
 }
 
 /// Representation of a parsed swift file.
