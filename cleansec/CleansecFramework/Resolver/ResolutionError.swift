@@ -18,3 +18,18 @@ public struct ResolutionError: Equatable, Error {
     
     let type: Error
 }
+
+extension ResolutionError: CustomStringConvertible {
+    public var description: String {
+        switch type {
+        case .missingProvider(let provider):
+            return "Missing Provider: \(provider)."
+        case .missingSubcomponent(let subcomponent):
+            return "Missing Installed Compoment: \(subcomponent)."
+        case .missingModule(let module):
+            return "Missing included Module: \(module)."
+        case .duplicateProvider(let provider):
+            return "Duplicate binding for: \(provider)"
+        }
+    }
+}

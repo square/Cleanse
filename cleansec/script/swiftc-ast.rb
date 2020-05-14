@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 
 require 'pathname'
+require 'fileutils'
 
 DISALLOWED_ARGUMENTS = {
     '-emit-dependencies' => :none,
@@ -42,7 +43,9 @@ def main
 
 	pipe_to_file_command = ['2>&1']
 	if output_file = input.grep(/DAST_FILE/).first
-		pipe_to_file_command = ['&>'] + [output_file.split('=')[1]]
+		outpath_file_path = output_file.split('=')[1]
+		FileUtils.mkdir_p(Pathname.new(outpath_file_path).basename)
+		pipe_to_file_command = ['&>'] + [outpath_file_path]
 	end
 
 	dump_ast_command = [swiftc_executable] + ['-dump-ast', '-suppress-warnings'] + ast_input + pipe_to_file_command

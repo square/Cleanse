@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -58,6 +58,7 @@
 		DC8A68142464759D00D78CAF /* DataStringMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8A68132464759D00D78CAF /* DataStringMapper.swift */; };
 		DC8A68162464760100D78CAF /* ASTStringHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8A68152464760100D78CAF /* ASTStringHelpers.swift */; };
 		DC8A681824648BEB00D78CAF /* SanitizerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8A681724648BEB00D78CAF /* SanitizerTests.swift */; };
+		DC964F98246CBCDE00CE7FE1 /* cleansec in Copy bin */ = {isa = PBXBuildFile; fileRef = DC8A67BE246396CF00D78CAF /* cleansec */; };
 		DC9966EC246B5EE80015B473 /* LinkedModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9966EB246B5EE80015B473 /* LinkedModule.swift */; };
 		DC9966EE246B5F280015B473 /* LinkedComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9966ED246B5F280015B473 /* LinkedComponent.swift */; };
 		DC9966F0246B5F4D0015B473 /* LinkedInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9966EF246B5F4D0015B473 /* LinkedInterface.swift */; };
@@ -68,6 +69,8 @@
 		DC9966FE246C60EE0015B473 /* CanonicalProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9966FD246C60EE0015B473 /* CanonicalProvider.swift */; };
 		DC996701246C75740015B473 /* ResolvedComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC996700246C75740015B473 /* ResolvedComponent.swift */; };
 		DC996705246C7C700015B473 /* ResolverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC996704246C7C700015B473 /* ResolverTests.swift */; };
+		DC996709246C94770015B473 /* Cleansec.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC996708246C94770015B473 /* Cleansec.swift */; };
+		DC99670E246C9D6E0015B473 /* ArgumentParser in Frameworks */ = {isa = PBXBuildFile; productRef = DC99670D246C9D6E0015B473 /* ArgumentParser */; };
 		DCD333472469B3AB008B053F /* CleansecFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCD3333E2469B3AB008B053F /* CleansecFramework.framework */; };
 		DCD3334C2469B3AB008B053F /* FileVisitorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD3334B2469B3AB008B053F /* FileVisitorTests.swift */; };
 		DCD3334E2469B3AB008B053F /* CleansecFramework.h in Headers */ = {isa = PBXBuildFile; fileRef = DCD333402469B3AB008B053F /* CleansecFramework.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -151,6 +154,17 @@
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 		};
+		DC964F97246CBCCA00CE7FE1 /* Copy bin */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 12;
+			dstPath = "$(SRCROOT)/build";
+			dstSubfolderSpec = 0;
+			files = (
+				DC964F98246CBCDE00CE7FE1 /* cleansec in Copy bin */,
+			);
+			name = "Copy bin";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
@@ -218,6 +232,7 @@
 		DC9966FD246C60EE0015B473 /* CanonicalProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanonicalProvider.swift; sourceTree = "<group>"; };
 		DC996700246C75740015B473 /* ResolvedComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResolvedComponent.swift; sourceTree = "<group>"; };
 		DC996704246C7C700015B473 /* ResolverTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResolverTests.swift; sourceTree = "<group>"; };
+		DC996708246C94770015B473 /* Cleansec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cleansec.swift; sourceTree = "<group>"; };
 		DCD3333E2469B3AB008B053F /* CleansecFramework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CleansecFramework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCD333402469B3AB008B053F /* CleansecFramework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CleansecFramework.h; sourceTree = "<group>"; };
 		DCD333412469B3AB008B053F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -241,6 +256,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DC99670E246C9D6E0015B473 /* ArgumentParser in Frameworks */,
 				DC849828246B40A600E704D6 /* CleansecFramework.framework in Frameworks */,
 				DC849829246B40A600E704D6 /* SwiftAstParser.framework in Frameworks */,
 			);
@@ -474,6 +490,7 @@
 				DCD333552469B3B0008B053F /* Visitors */,
 				DCD333402469B3AB008B053F /* CleansecFramework.h */,
 				DCD333412469B3AB008B053F /* Info.plist */,
+				DC996708246C94770015B473 /* Cleansec.swift */,
 			);
 			path = CleansecFramework;
 			sourceTree = "<group>";
@@ -568,6 +585,7 @@
 			buildPhases = (
 				DC8A67BA246396CF00D78CAF /* Sources */,
 				DC8A67BB246396CF00D78CAF /* Frameworks */,
+				DC964F97246CBCCA00CE7FE1 /* Copy bin */,
 				DC8A67BC246396CF00D78CAF /* CopyFiles */,
 			);
 			buildRules = (
@@ -577,6 +595,9 @@
 				DC849827246B40A100E704D6 /* PBXTargetDependency */,
 			);
 			name = cleansec;
+			packageProductDependencies = (
+				DC99670D246C9D6E0015B473 /* ArgumentParser */,
+			);
 			productName = cleansec;
 			productReference = DC8A67BE246396CF00D78CAF /* cleansec */;
 			productType = "com.apple.product-type.tool";
@@ -695,6 +716,9 @@
 				Base,
 			);
 			mainGroup = DC8A67B5246396CF00D78CAF;
+			packageReferences = (
+				DC99670C246C9D6E0015B473 /* XCRemoteSwiftPackageReference "swift-argument-parser" */,
+			);
 			productRefGroup = DC8A67BF246396CF00D78CAF /* Products */;
 			projectDirPath = "";
 			projectReferences = (
@@ -877,6 +901,7 @@
 				DCD333572469B3E5008B053F /* Models.swift in Sources */,
 				DC849816246B140500E704D6 /* ProviderVisitor.swift in Sources */,
 				DC9966EC246B5EE80015B473 /* LinkedModule.swift in Sources */,
+				DC996709246C94770015B473 /* Cleansec.swift in Sources */,
 				DC849814246B132C00E704D6 /* BindingsVisitor.swift in Sources */,
 				DC9966F2246B5F7C0015B473 /* Linker.swift in Sources */,
 				DC9966FE246C60EE0015B473 /* CanonicalProvider.swift in Sources */,
@@ -1145,6 +1170,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
+				MACH_O_TYPE = staticlib;
 				PRODUCT_BUNDLE_IDENTIFIER = com.square.SwiftAstParser;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -1171,6 +1197,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
+				MACH_O_TYPE = staticlib;
 				PRODUCT_BUNDLE_IDENTIFIER = com.square.SwiftAstParser;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -1234,6 +1261,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
+				MACH_O_TYPE = staticlib;
 				PRODUCT_BUNDLE_IDENTIFIER = com.square.Cleansec;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -1262,6 +1290,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
+				MACH_O_TYPE = staticlib;
 				PRODUCT_BUNDLE_IDENTIFIER = com.square.Cleansec;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -1374,6 +1403,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		DC99670C246C9D6E0015B473 /* XCRemoteSwiftPackageReference "swift-argument-parser" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-argument-parser";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.0.5;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		DC99670D246C9D6E0015B473 /* ArgumentParser */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DC99670C246C9D6E0015B473 /* XCRemoteSwiftPackageReference "swift-argument-parser" */;
+			productName = ArgumentParser;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = DC8A67B6246396CF00D78CAF /* Project object */;
 }
