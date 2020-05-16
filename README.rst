@@ -64,17 +64,19 @@ Features
 =================================== =================================
 Multi-Bindings                      Supported (``.intoCollection()``)
 Overrides                           Supported
-Objective-C Compatibility layer     Supported (Experimental)
+Objective-C Compatibility layer     Supported
 Property Injection [#pinj]_         Supported
 Type Qualifiers                     Supported via `Type Tags`_
 `Assisted Injection`_               Supported
 `Subcomponents`_                    Supported via `Components`_
 `Service Provider Interface`_       Supported
+`cleansec`_ (Cleanse Compiler)      Experimental
 =================================== =================================
 
 .. [#pinj] Property injection is known as `field injection`_ in other DI frameworks
 
 .. _Subcomponents: http://google.github.io/dagger/subcomponents.html
+.. _cleansec: https://github.com/square/Cleanse/tree/master/cleansec
 .. _field injection: https://github.com/google/guice/wiki/Injections#field-injection
 
 Another very important part of a DI framework is how it handles errors. Failing fast is ideal. Cleanse is designed to
