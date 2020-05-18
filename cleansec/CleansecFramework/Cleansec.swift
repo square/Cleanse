@@ -29,6 +29,28 @@ public struct Cleansec {
     public static func resolve(interface: LinkedInterface) -> [ResolvedComponent] {
         Resolver.resolve(interface: interface)
     }
+    
+    public static func run(plugin path: String, astFilePath: String) -> ModuleRepresentation? {
+        let process = Process()
+        process.executableURL = URL(fileURLWithPath: path)
+        process.arguments = [astFilePath]
+        let output = Pipe()
+        process.standardOutput = output
+        
+        do {
+            try process.run()
+        } catch {
+            print("Plugin process failed: \(error)")
+            return nil
+        }
+        let data = output.fileHandleForReading.readDataToEndOfFile()
+        do {
+            return try JSONDecoder().decode(ModuleRepresentation.self, from: data)
+        } catch {
+            print("Failed to parse plugin output to `ModuleRepresentation`. Make sure you using JSONDecoder over a `ModuleRepresentation` instance.")
+            return nil
+        }
+    }
 }
 
 public struct CleansecError: CustomStringConvertible, Error {
