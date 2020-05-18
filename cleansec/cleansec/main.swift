@@ -21,8 +21,14 @@ struct CLI: ParsableCommand {
     @Option(name: .long, parsing: .singleValue, help: "Directory path(s) to search for emitted module representations when resolving graph.")
     var moduleSearchPath: [String]
     
+    @Option(name: .long, default: nil, parsing: .next, help: "Plugin binary path to be executed.")
+    var plugin: String?
+    
     @Option(name: .long, parsing: .next)
     var moduleName: String
+    
+    @Flag(name: .shortAndLong, help: "Emits a readable format of each root compoment")
+    var emitComponents: Bool
     
     var moduleRepresentationFilename: String {
         "\(moduleName).cleansecmodule.json"
@@ -69,8 +75,14 @@ struct CLI: ParsableCommand {
             .map { try Data(contentsOf: $0) }
             .map { try JSONDecoder().decode(ModuleRepresentation.self, from: $0) }
         let linkedInterface = Cleansec.link(modules: loadedModules + [moduleRepresentation])
-        let errors = Cleansec.resolve(interface: linkedInterface).flatMap { $0.diagnostics }
+        let resolvedCompoments = Cleansec.resolve(interface: linkedInterface)
+        let errors = resolvedCompoments.flatMap { $0.diagnostics }
         guard !errors.isEmpty else {
+            if emitComponents {
+                resolvedCompoments.forEach { (c) in
+                    print("------\n\(c)")
+                }
+            }
             return
         }
         throw CleansecError(resolutionErrors: errors)

@@ -76,6 +76,7 @@
 		DCD3334E2469B3AB008B053F /* CleansecFramework.h in Headers */ = {isa = PBXBuildFile; fileRef = DCD333402469B3AB008B053F /* CleansecFramework.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DCD333572469B3E5008B053F /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD333562469B3E5008B053F /* Models.swift */; };
 		DCD333592469B4E4008B053F /* ProviderModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD333582469B4E4008B053F /* ProviderModels.swift */; };
+		DCF196512472F3580057BDC5 /* PluginTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF196502472F3580057BDC5 /* PluginTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -241,6 +242,7 @@
 		DCD3334D2469B3AB008B053F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DCD333562469B3E5008B053F /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Models.swift; path = CleansecFramework/Visitors/Representations/Models.swift; sourceTree = SOURCE_ROOT; };
 		DCD333582469B4E4008B053F /* ProviderModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ProviderModels.swift; path = CleansecFramework/Visitors/Representations/ProviderModels.swift; sourceTree = SOURCE_ROOT; };
+		DCF196502472F3580057BDC5 /* PluginTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PluginTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -504,6 +506,7 @@
 				DC849822246B393500E704D6 /* BindingsVisitorTests.swift */,
 				DC9966F3246B63350015B473 /* LinkerTests.swift */,
 				DC996704246C7C700015B473 /* ResolverTests.swift */,
+				DCF196502472F3580057BDC5 /* PluginTests.swift */,
 			);
 			path = CleansecFrameworkTests;
 			sourceTree = "<group>";
@@ -920,6 +923,7 @@
 				DC849804246A208400E704D6 /* CodeFixtures.swift in Sources */,
 				DC849823246B393500E704D6 /* BindingsVisitorTests.swift in Sources */,
 				DC996705246C7C700015B473 /* ResolverTests.swift in Sources */,
+				DCF196512472F3580057BDC5 /* PluginTests.swift in Sources */,
 				DCD3334C2469B3AB008B053F /* FileVisitorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

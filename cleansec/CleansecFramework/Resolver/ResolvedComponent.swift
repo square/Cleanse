@@ -23,3 +23,9 @@ public final class ResolvedComponent {
         self.diagnostics = diagnostics
     }
 }
+
+extension ResolvedComponent: CustomStringConvertible {
+    public var description: String {
+        "COMPONENT: \(type) \n" + "BINDINGS:\n\(providersByType)\n" + "CHILDREN:\n" + "\(children)"
+    }
+}

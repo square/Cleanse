@@ -17,6 +17,12 @@ public struct CanonicalProvider: Equatable {
     public let isCollectionProvider: Bool
 }
 
+extension CanonicalProvider: CustomStringConvertible {
+    public var description: String {
+        "Provider: \(type) --> \(dependencies)"
+    }
+}
+
 extension CanonicalProvider {
     var lazyProvider: CanonicalProvider {
         return CanonicalProvider(
