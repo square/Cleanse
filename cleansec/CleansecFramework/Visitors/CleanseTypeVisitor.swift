@@ -17,8 +17,10 @@ import SwiftAstParser
  any implementation that conforms to the sub-protocol.
  
  */
-struct CleanseTypeVisitor: SyntaxVisitor {
-    enum CleanseType {
+public struct CleanseTypeVisitor: SyntaxVisitor {
+    public init() {}
+    
+    public enum CleanseType {
         case none, module, component
     }
     
@@ -34,27 +36,27 @@ struct CleanseTypeVisitor: SyntaxVisitor {
     private var seenTypealiases: [TypealiasType] = []
     private var seenFunctions: [Function] = []
     
-    mutating func visitChildren(node: StructDecl) -> Bool {
+    public mutating func visitChildren(node: StructDecl) -> Bool {
         false
     }
     
-    mutating func visitChildren(node: ClassDecl) -> Bool {
+    public mutating func visitChildren(node: ClassDecl) -> Bool {
         false
     }
     
-    mutating func visit(node: Typealias) {
+    public mutating func visit(node: Typealias) {
         if let rawType = node.raw.firstCapture(#"\"(\w+)\""#), let type = TypealiasType(rawValue: rawType) {
             seenTypealiases.append(type)
         }
     }
     
-    mutating func visit(node: FuncDecl) {
+    public mutating func visit(node: FuncDecl) {
         if let rawType = node.raw.firstCapture(#"\"(.*)\""#), let type = Function(rawValue: rawType) {
             seenFunctions.append(type)
         }
     }
     
-    func finalize() -> CleanseType {
+    public func finalize() -> CleanseType {
         guard seenTypealiases.contains(.scope), seenFunctions.contains(.configure) else {
             return .none
         }

@@ -44,7 +44,7 @@ def main
 	pipe_to_file_command = ['2>&1']
 	if output_file = input.grep(/DAST_FILE/).first
 		outpath_file_path = output_file.split('=')[1]
-		FileUtils.mkdir_p(Pathname.new(outpath_file_path).basename)
+		FileUtils.mkdir_p(Pathname.new(outpath_file_path).dirname)
 		pipe_to_file_command = ['&>'] + [outpath_file_path]
 	end
 
