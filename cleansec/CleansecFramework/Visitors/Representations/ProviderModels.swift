@@ -7,6 +7,14 @@ public struct StandardProvider: Equatable, Codable {
     public let tag: String?
     public let scoped: String?
     public let collectionType: String?
+    
+    public init(type: String, dependencies: [String], tag: String?, scoped: String?, collectionType: String?) {
+        self.type = type
+        self.dependencies = dependencies
+        self.tag = tag
+        self.scoped = scoped
+        self.collectionType = collectionType
+    }
 }
 
 /// Partial provider presentation with known dependencies, but isn't bound into object graph yet.

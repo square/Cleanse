@@ -12,8 +12,10 @@ import SwiftAstParser
 /**
  Responsible for extracting out the root provider instance and seed type for a given component body.
  */
-struct ComponentRootProviderVisitor: SyntaxVisitor {
-    enum RootProvider {
+public struct ComponentRootProviderVisitor: SyntaxVisitor {
+    public init() {}
+    
+    public enum RootProvider {
         case dangling(DanglingProvider)
         case reference(ReferenceProvider)
     }
@@ -21,7 +23,7 @@ struct ComponentRootProviderVisitor: SyntaxVisitor {
     private var seed = "Void"
     private var rootProvider: RootProvider?
     
-    mutating func visit(node: Typealias) {
+    public mutating func visit(node: Typealias) {
         if node.raw.contains("\"Seed\"") {
             if let type = node.type.firstCapture(#"'(\w+)'"#), type != "Void" {
                 seed = type
@@ -29,7 +31,7 @@ struct ComponentRootProviderVisitor: SyntaxVisitor {
         }
     }
     
-    mutating func visit(node: FuncDecl) {
+    public mutating func visit(node: FuncDecl) {
         if node.raw.contains("configureRoot(binder:)") {
             var bindingsVisitor = BindingsVisitor()
             bindingsVisitor.walk(node)
@@ -42,7 +44,7 @@ struct ComponentRootProviderVisitor: SyntaxVisitor {
         }
     }
     
-    func finalize() -> (String, RootProvider?) {
+    public func finalize() -> (String, RootProvider?) {
         return (seed, rootProvider)
     }
 }
