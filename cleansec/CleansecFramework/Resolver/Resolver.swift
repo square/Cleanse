@@ -19,20 +19,22 @@ public struct Resolver {
     ///
     public static func resolve(interface: LinkedInterface) -> [ResolvedComponent] {
         let modulesByName = interface.modules.reduce(into: [String:LinkedModule]()) { (dict, module) in
-            if let _ = dict[module.type] {
-                print("Warning: Duplicate module definitions for \(module.type). Should disambiguate.")
+            if let existing = dict[module.type] {
+                dict[module.type] = existing.merge(from: module)
+            } else {
+                dict[module.type] = module
             }
-            dict[module.type] = module
         }
         let componentsByName = interface.components.reduce(into: [String:LinkedComponent]()) { (dict, c) in
-            if let _ = dict[c.type] {
-                print("Warning: Duplicate component definitions for \(c.type). Should disambiguate.")
+            if let existing = dict[c.type] {
+                dict[c.type] = existing.merge(from: c)
+            } else {
+                dict[c.type] = c
             }
-            dict[c.type] = c
         }
         
         var diagnostics: [ResolutionError] = []
-        return interface.components.filter { $0.isRoot }.map { resolve(component: $0, modulesByName: modulesByName, componentsByName: componentsByName, diagnostics: &diagnostics)}
+        return componentsByName.values.filter { $0.isRoot }.map { resolve(component: $0, modulesByName: modulesByName, componentsByName: componentsByName, diagnostics: &diagnostics)}
     }
 }
 
@@ -100,7 +102,7 @@ fileprivate extension Resolver {
     }
     
     static func createUniqueProvidersMap(in component: LinkedComponent, includedModules: [LinkedModule], installedSubcomponents: [LinkedComponent], diagnostics: inout [ResolutionError]) -> [String:[CanonicalProvider]] {
-        var allCanonicalProviders = (component.providers + includedModules.flatMap { $0.providers}).map { $0.mapToCanonical() }
+        var allCanonicalProviders = (component.providers + includedModules.flatMap { $0.providers }).map { $0.mapToCanonical() }
         allCanonicalProviders.append(component.seedProvider)
         allCanonicalProviders.append(contentsOf: installedSubcomponents.map { $0.componentFactoryProvider} )
         

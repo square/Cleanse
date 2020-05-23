@@ -156,4 +156,11 @@ class BindingsVisitorTests: XCTestCase {
         XCTAssertEqual(result.standardProviders.first!.type, "GenericType<String>")
         XCTAssertEqual(result.standardProviders.first!.dependencies, ["String"])
     }
+    
+    func testLargeDependenicesCount() {
+         let node = SyntaxParser.parse(text: Fixtures.ManyDependencies).first!
+        visitor.walk(node)
+        let result = visitor.finalize()
+        XCTAssertEqual(result.standardProviders.first!.dependencies.count, 10)
+    }
 }

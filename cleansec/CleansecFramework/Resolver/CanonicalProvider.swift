@@ -61,7 +61,7 @@ extension StandardProvider {
             return CanonicalProvider(
                 type: "TaggedProvider<\(tag)>",
                 dependencies: dependencies,
-                isCollectionProvider: false
+                isCollectionProvider: collectionType != nil
             )
         }
         if let collection = collectionType {

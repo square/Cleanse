@@ -50,7 +50,16 @@ struct CLI: ParsableCommand {
             .map { SyntaxParser.parse(data: $0)}
             .flatMap { $0 }
         
-        let moduleRepresentation = Cleansec.analyze(syntax: syntax)
+        var pluginModuleRepresentations: [ModuleRepresentation] = []
+        if let pluginPath = plugin {
+            pluginModuleRepresentations = PluginRunner.run(plugin: pluginPath, astFiles: astFile)
+        }
+        
+        let analyzedModuleRepresentation = Cleansec.analyze(syntax: syntax)
+        let moduleRepresentation = ModuleRepresentation(
+            files: analyzedModuleRepresentation.files + pluginModuleRepresentations.flatMap { $0.files }
+        )
+        
         let encoder = JSONEncoder()
         encoder.outputFormatting = .prettyPrinted
         let moduleOutputUrl = URL(fileURLWithPath: moduleOutputPath).appendingPathComponent(moduleName).appendingPathExtension("cleansecmodule.json")
@@ -77,12 +86,12 @@ struct CLI: ParsableCommand {
         let linkedInterface = Cleansec.link(modules: loadedModules + [moduleRepresentation])
         let resolvedCompoments = Cleansec.resolve(interface: linkedInterface)
         let errors = resolvedCompoments.flatMap { $0.diagnostics }
-        guard !errors.isEmpty else {
-            if emitComponents {
-                resolvedCompoments.forEach { (c) in
-                    print("------\n\(c)")
-                }
+        if emitComponents {
+            resolvedCompoments.forEach { (c) in
+                print("------\n\(c)")
             }
+        }
+        guard !errors.isEmpty else {
             return
         }
         throw CleansecError(resolutionErrors: errors)
