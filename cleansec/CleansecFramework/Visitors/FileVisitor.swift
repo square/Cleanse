@@ -23,6 +23,10 @@ struct FileVisitor: SyntaxVisitor {
         }
     }
     
+    mutating func visitChildren(node: IfConfigDecl) -> Bool {
+        false
+    }
+    
     mutating func visit(node: StructDecl) {
         visit(inheritableNode: node)
     }

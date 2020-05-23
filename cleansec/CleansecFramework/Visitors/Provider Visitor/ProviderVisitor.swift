@@ -45,7 +45,7 @@ struct ProviderVisitor: SyntaxVisitor {
         case .toValue:
             binding = .provider
         case .toFactory, .toFactoryPropertyInjector, .toFactoryAssistedInjection:
-            dependencies = node.raw.allCaptures(#"substitution\sP_[\d]\s->\s(\S*)\)"#)
+            dependencies = node.raw.allCaptures(#"substitution\sP_[\d]+\s->\s(\S*)\)"#)
             // Sanitizes trailing ')' character from regex pattern. Worth fixing the regex.
             if var last = dependencies.popLast() {
                 last.removeLast()

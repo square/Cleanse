@@ -71,6 +71,9 @@
 		DC996705246C7C700015B473 /* ResolverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC996704246C7C700015B473 /* ResolverTests.swift */; };
 		DC996709246C94770015B473 /* Cleansec.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC996708246C94770015B473 /* Cleansec.swift */; };
 		DC99670E246C9D6E0015B473 /* ArgumentParser in Frameworks */ = {isa = PBXBuildFile; productRef = DC99670D246C9D6E0015B473 /* ArgumentParser */; };
+		DCAB6FA52476F3D800211687 /* PluginRunner.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAB6FA42476F3D800211687 /* PluginRunner.swift */; };
+		DCD305E8247736BC00CDD7B1 /* LinkedMerging.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD305E7247736BC00CDD7B1 /* LinkedMerging.swift */; };
+		DCD306C92479A28000CDD7B1 /* ManyDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD306C82479A28000CDD7B1 /* ManyDependencies.swift */; };
 		DCD333472469B3AB008B053F /* CleansecFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCD3333E2469B3AB008B053F /* CleansecFramework.framework */; };
 		DCD3334C2469B3AB008B053F /* FileVisitorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD3334B2469B3AB008B053F /* FileVisitorTests.swift */; };
 		DCD3334E2469B3AB008B053F /* CleansecFramework.h in Headers */ = {isa = PBXBuildFile; fileRef = DCD333402469B3AB008B053F /* CleansecFramework.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -234,6 +237,9 @@
 		DC996700246C75740015B473 /* ResolvedComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResolvedComponent.swift; sourceTree = "<group>"; };
 		DC996704246C7C700015B473 /* ResolverTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResolverTests.swift; sourceTree = "<group>"; };
 		DC996708246C94770015B473 /* Cleansec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cleansec.swift; sourceTree = "<group>"; };
+		DCAB6FA42476F3D800211687 /* PluginRunner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PluginRunner.swift; sourceTree = "<group>"; };
+		DCD305E7247736BC00CDD7B1 /* LinkedMerging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedMerging.swift; sourceTree = "<group>"; };
+		DCD306C82479A28000CDD7B1 /* ManyDependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManyDependencies.swift; sourceTree = "<group>"; };
 		DCD3333E2469B3AB008B053F /* CleansecFramework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CleansecFramework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCD333402469B3AB008B053F /* CleansecFramework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CleansecFramework.h; sourceTree = "<group>"; };
 		DCD333412469B3AB008B053F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -332,6 +338,7 @@
 				DC8497D0246A1D3300E704D6 /* SimpleComponent.swift */,
 				DC8497C7246A1D3300E704D6 /* SimpleRootComponent.swift */,
 				DC8497CD246A1D3300E704D6 /* TaggedProviderDependency.swift */,
+				DCD306C82479A28000CDD7B1 /* ManyDependencies.swift */,
 			);
 			path = "Code Fixtures";
 			sourceTree = "<group>";
@@ -414,6 +421,7 @@
 			isa = PBXGroup;
 			children = (
 				DC8A67C1246396CF00D78CAF /* main.swift */,
+				DCAB6FA42476F3D800211687 /* PluginRunner.swift */,
 			);
 			path = cleansec;
 			sourceTree = "<group>";
@@ -480,6 +488,7 @@
 				DC9966FB246C58560015B473 /* ResolutionError.swift */,
 				DC9966FD246C60EE0015B473 /* CanonicalProvider.swift */,
 				DC996700246C75740015B473 /* ResolvedComponent.swift */,
+				DCD305E7247736BC00CDD7B1 /* LinkedMerging.swift */,
 			);
 			path = Resolver;
 			sourceTree = "<group>";
@@ -821,7 +830,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "${SRCROOT}/script/create-fixtures.rb ${SRCROOT}/script/Fixtures.ast ${SRCROOT}/script/Fixtures.template ${SRCROOT}/CleansecTests/Fixtures/CodeFixtures.swift\n";
+			shellScript = "${SRCROOT}/script/create-fixtures.rb ${SRCROOT}/script/Fixtures.ast ${SRCROOT}/script/Fixtures.template ${SRCROOT}/CleansecFrameworkTests/Fixtures/CodeFixtures.swift\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -844,6 +853,7 @@
 				DC8497DB246A1D3400E704D6 /* ModuleWithDependencies.swift in Sources */,
 				DC8497DC246A1D3400E704D6 /* SimpleRootComponent.swift in Sources */,
 				DC8497EB246A1D3400E704D6 /* ModuleWithImplicitInitFactory.swift in Sources */,
+				DCD306C92479A28000CDD7B1 /* ManyDependencies.swift in Sources */,
 				DC8497E9246A1D3400E704D6 /* ModuleIncludesModule.swift in Sources */,
 				DC8497DA246A1D3400E704D6 /* PropertyInjectorRoot.swift in Sources */,
 				DC8497E8246A1D3400E704D6 /* AssistedInjection.swift in Sources */,
@@ -859,6 +869,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DCAB6FA52476F3D800211687 /* PluginRunner.swift in Sources */,
 				DC8A67C2246396CF00D78CAF /* main.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -895,6 +906,7 @@
 			files = (
 				DC9966FA246C54870015B473 /* Resolver.swift in Sources */,
 				DC849812246B09E500E704D6 /* CleanseTypeVisitor.swift in Sources */,
+				DCD305E8247736BC00CDD7B1 /* LinkedMerging.swift in Sources */,
 				DC9966F0246B5F4D0015B473 /* LinkedInterface.swift in Sources */,
 				DC849821246B2FEB00E704D6 /* ComponentRootProviderVisitor.swift in Sources */,
 				DC9966EE246B5F280015B473 /* LinkedComponent.swift in Sources */,
