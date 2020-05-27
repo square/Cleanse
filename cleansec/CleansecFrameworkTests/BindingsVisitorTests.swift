@@ -108,7 +108,11 @@ class BindingsVisitorTests: XCTestCase {
         visitor.walk(node)
         let result = visitor.finalize()
         XCTAssertEqual(result.standardProviders.count, 1)
-        XCTAssertEqual(result.standardProviders.first!, StandardProvider(type: "Factory<AssistedSeed>", dependencies: ["String"], tag: nil, scoped: nil, collectionType: nil))
+        XCTAssertEqual(result.standardProviders.first!.type, "Factory<AssistedSeed>")
+        XCTAssertEqual(result.standardProviders.first!.dependencies, ["String"])
+        XCTAssertNil(result.standardProviders.first!.tag)
+        XCTAssertNil(result.standardProviders.first!.scoped)
+        XCTAssertNil(result.standardProviders.first!.collectionType)
     }
 
     func testTaggedProviderDependency() {
@@ -162,5 +166,24 @@ class BindingsVisitorTests: XCTestCase {
         visitor.walk(node)
         let result = visitor.finalize()
         XCTAssertEqual(result.standardProviders.first!.dependencies.count, 10)
+    }
+    
+    func testDebugData() {
+         let node = SyntaxParser.parse(text: Fixtures.ModuleWithDependencies).first!
+        visitor.walk(node)
+        let result = visitor.finalize()
+        XCTAssertNotNil(result.standardProviders.first!.debugData.location)
+        XCTAssertTrue(result.standardProviders.first!.debugData.location!.hasSuffix("ModuleWithDependencies.swift:16:10"))
+    }
+    
+    func testDebugDataReferenceAndDangling() {
+        let node = SyntaxParser.parse(text: Fixtures.DanglingAndReference).first!
+        visitor.walk(node)
+        let result = visitor.finalize()
+        XCTAssertNotNil(result.referenceProviders.first!.debugData.location)
+        XCTAssertTrue(result.referenceProviders.first!.debugData.location!.hasSuffix("DanglingAndReference.swift:20:36"))
+        XCTAssertNotNil(result.danglingProviders.first!.debugData.location)
+        XCTAssertTrue(result.danglingProviders.first!.debugData.location!.hasSuffix("DanglingAndReference.swift:14:21"))
+
     }
 }
