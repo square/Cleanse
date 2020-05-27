@@ -93,10 +93,20 @@ fileprivate extension Resolver {
     }
     
     static func resolveDependencies(for bindings: ComponentBindings, additionalDependencies: [String], diagnostics: inout [ResolutionError]) {
-        let dependencies = bindings.providersByType.flatMap { $0.value }.filter { !$0.isLazyProvider} .flatMap { $0.dependencies } + additionalDependencies
-        dependencies.forEach { (dependency) in
+        bindings.providersByType.flatMap { $0.value }.filter { !$0.isLazyProvider }.forEach { binding in
+            let missingDependencyErrors = binding.dependencies.flatMap { d -> [ResolutionError] in
+                var errors: [ResolutionError] = []
+                if bindings.provider(for: d) == nil {
+                    errors.append(ResolutionError(type: .missingProvider(dependency: d, dependedUpon: binding)))
+                }
+                return errors
+            }
+            diagnostics.append(contentsOf: missingDependencyErrors)
+        }
+        
+        additionalDependencies.forEach { dependency in
             if bindings.provider(for: dependency) == nil {
-                diagnostics.append(ResolutionError(type: .missingProvider(dependency)))
+                diagnostics.append(ResolutionError(type: .missingProvider(dependency: dependency, dependedUpon: nil)))
             }
         }
     }
@@ -111,12 +121,12 @@ fileprivate extension Resolver {
                 if !provider.isCollectionProvider || !existing.allSatisfy({ (p) -> Bool in
                     p.isCollectionProvider == provider.isCollectionProvider
                 }) {
-                    diagnostics.append(ResolutionError(type: .duplicateProvider(provider.type)))
+                    diagnostics.append(ResolutionError(type: .duplicateProvider(provider)))
                 } else {
                     dict[provider.type]!.append(provider)
                 }
             } else {
-                dict[provider.type] = [provider]
+                dict[provider.type] = [provider]    
                 dict[provider.lazyProvider.type] = [provider.lazyProvider]
             }
         })

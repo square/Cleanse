@@ -15,6 +15,7 @@ public struct CanonicalProvider: Equatable {
     public let type: String
     public let dependencies: [String]
     public let isCollectionProvider: Bool
+    public let debugData: DebugData
 }
 
 extension CanonicalProvider: CustomStringConvertible {
@@ -28,7 +29,8 @@ extension CanonicalProvider {
         return CanonicalProvider(
             type: "Provider<\(type)>",
             dependencies: dependencies,
-            isCollectionProvider: isCollectionProvider
+            isCollectionProvider: isCollectionProvider,
+            debugData: debugData
         )
     }
     
@@ -42,7 +44,8 @@ extension LinkedComponent {
         return CanonicalProvider(
             type: seed,
             dependencies: [],
-            isCollectionProvider: false
+            isCollectionProvider: false,
+            debugData: .empty
         )
     }
     
@@ -50,7 +53,8 @@ extension LinkedComponent {
         return CanonicalProvider(
             type: "ComponentFactory<\(type)>",
             dependencies: [],
-            isCollectionProvider: false
+            isCollectionProvider: false,
+            debugData: .empty
         )
     }
 }
@@ -61,20 +65,23 @@ extension StandardProvider {
             return CanonicalProvider(
                 type: "TaggedProvider<\(tag)>",
                 dependencies: dependencies,
-                isCollectionProvider: collectionType != nil
+                isCollectionProvider: collectionType != nil,
+                debugData: debugData
             )
         }
         if let collection = collectionType {
             return CanonicalProvider(
                 type: collection,
                 dependencies: dependencies,
-                isCollectionProvider: true
+                isCollectionProvider: true,
+                debugData: debugData
             )
         }
         return CanonicalProvider(
             type: type,
             dependencies: dependencies,
-            isCollectionProvider: false
+            isCollectionProvider: false,
+            debugData: debugData
         )
     }
 }

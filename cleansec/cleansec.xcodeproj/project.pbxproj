@@ -80,6 +80,7 @@
 		DCD333572469B3E5008B053F /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD333562469B3E5008B053F /* Models.swift */; };
 		DCD333592469B4E4008B053F /* ProviderModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD333582469B4E4008B053F /* ProviderModels.swift */; };
 		DCF196512472F3580057BDC5 /* PluginTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF196502472F3580057BDC5 /* PluginTests.swift */; };
+		DCF9EAC6247D716700FDE003 /* DebugData.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF9EAC5247D716700FDE003 /* DebugData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -249,6 +250,7 @@
 		DCD333562469B3E5008B053F /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Models.swift; path = CleansecFramework/Visitors/Representations/Models.swift; sourceTree = SOURCE_ROOT; };
 		DCD333582469B4E4008B053F /* ProviderModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ProviderModels.swift; path = CleansecFramework/Visitors/Representations/ProviderModels.swift; sourceTree = SOURCE_ROOT; };
 		DCF196502472F3580057BDC5 /* PluginTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PluginTests.swift; sourceTree = "<group>"; };
+		DCF9EAC5247D716700FDE003 /* DebugData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -537,6 +539,7 @@
 			children = (
 				DCD333562469B3E5008B053F /* Models.swift */,
 				DCD333582469B4E4008B053F /* ProviderModels.swift */,
+				DCF9EAC5247D716700FDE003 /* DebugData.swift */,
 			);
 			path = Representations;
 			sourceTree = "<group>";
@@ -920,6 +923,7 @@
 				DC849814246B132C00E704D6 /* BindingsVisitor.swift in Sources */,
 				DC9966F2246B5F7C0015B473 /* Linker.swift in Sources */,
 				DC9966FE246C60EE0015B473 /* CanonicalProvider.swift in Sources */,
+				DCF9EAC6247D716700FDE003 /* DebugData.swift in Sources */,
 				DCD333592469B4E4008B053F /* ProviderModels.swift in Sources */,
 				DC84981F246B275500E704D6 /* ReferenceProviderVisitor.swift in Sources */,
 				DC9966FC246C58560015B473 /* ResolutionError.swift in Sources */,

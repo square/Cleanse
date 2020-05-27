@@ -59,6 +59,9 @@ struct ProviderVisitor: SyntaxVisitor {
     
     mutating func visit(node: CallExpr) {
         if node.type.matches("BindingReceipt<.*>") {
+            if let loc = node.raw.firstCapture(#"location=(.*)\srange"#) {
+                bindingTypeBuilder = bindingTypeBuilder.setDebugData(.location(loc))
+            }
             return
         }
         
@@ -100,6 +103,7 @@ fileprivate struct BaseBindingTypeBuilder {
     let singularCollectionBinding: Bool
     let taggedBinding: String?
     let scopedBinding: String?
+    let debugData: DebugData
     
     static var instance: BaseBindingTypeBuilder {
         return BaseBindingTypeBuilder(
@@ -107,7 +111,19 @@ fileprivate struct BaseBindingTypeBuilder {
             collectionBinding: false,
             singularCollectionBinding: false,
             taggedBinding: nil,
-            scopedBinding: nil
+            scopedBinding: nil,
+            debugData: .empty
+        )
+    }
+    
+    func setDebugData(_ data: DebugData) -> BaseBindingTypeBuilder {
+        return BaseBindingTypeBuilder(
+            graphBinding: graphBinding,
+            collectionBinding: collectionBinding,
+            singularCollectionBinding: singularCollectionBinding,
+            taggedBinding: taggedBinding,
+            scopedBinding: scopedBinding,
+            debugData: data
         )
     }
     
@@ -117,7 +133,8 @@ fileprivate struct BaseBindingTypeBuilder {
             collectionBinding: collectionBinding,
             singularCollectionBinding: singularCollectionBinding,
             taggedBinding: taggedBinding,
-            scopedBinding: scopedBinding
+            scopedBinding: scopedBinding,
+            debugData: debugData
         )
     }
     
@@ -128,7 +145,8 @@ fileprivate struct BaseBindingTypeBuilder {
                 collectionBinding: collectionBinding,
                 singularCollectionBinding: true,
                 taggedBinding: taggedBinding,
-                scopedBinding: scopedBinding
+                scopedBinding: scopedBinding,
+                debugData: debugData
             )
         } else {
             return BaseBindingTypeBuilder(
@@ -136,7 +154,8 @@ fileprivate struct BaseBindingTypeBuilder {
                 collectionBinding: true,
                 singularCollectionBinding: singularCollectionBinding,
                 taggedBinding: taggedBinding,
-                scopedBinding: scopedBinding
+                scopedBinding: scopedBinding,
+                debugData: debugData
             )
         }
     }
@@ -147,7 +166,8 @@ fileprivate struct BaseBindingTypeBuilder {
             collectionBinding: collectionBinding,
             singularCollectionBinding: singularCollectionBinding,
             taggedBinding: tag,
-            scopedBinding: scopedBinding
+            scopedBinding: scopedBinding,
+            debugData: debugData
         )
     }
     
@@ -157,7 +177,8 @@ fileprivate struct BaseBindingTypeBuilder {
             collectionBinding: collectionBinding,
             singularCollectionBinding: singularCollectionBinding,
             taggedBinding: taggedBinding,
-            scopedBinding: scope
+            scopedBinding: scope,
+            debugData: debugData
         )
     }
     
@@ -172,13 +193,17 @@ fileprivate struct BaseBindingTypeBuilder {
                     dependencies: dependencies,
                     tag: taggedBinding,
                     scoped: scopedBinding,
-                    collectionType: collectionType)
+                    collectionType: collectionType,
+                    debugData: debugData
+                    )
                 )
             } else {
                 return .danglingProviderBuilder(DanglingProviderBuilder(
                     type: type,
                     dependencies: dependencies,
-                    reference: nil)
+                    reference: nil,
+                    debugData: debugData
+                    )
                 )
             }
         case .reference:
@@ -188,7 +213,9 @@ fileprivate struct BaseBindingTypeBuilder {
                 scope: scopedBinding,
                 collectionType: collectionType,
                 dependencies: nil,
-                reference: nil)
+                reference: nil,
+                debugData: debugData
+                )
             )
         case .unknown:
             return nil

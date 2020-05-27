@@ -21,6 +21,7 @@ struct ReferenceProviderBuilder {
     let collectionType: String?
     let dependencies: [String]?
     let reference: String?
+    let debugData: DebugData
     
     // A potential reference provider can turn into a standard provider
     // by passing a closure to the configured function.
@@ -32,7 +33,9 @@ struct ReferenceProviderBuilder {
                 dependencies: dependencies,
                 tag: tag,
                 scoped: scope,
-                collectionType: collectionType))
+                collectionType: collectionType,
+                debugData: debugData
+            ))
         }
         if let reference = reference {
             return .reference(ReferenceProvider(
@@ -40,7 +43,9 @@ struct ReferenceProviderBuilder {
                 tag: tag,
                 scoped: scope,
                 collectionType: collectionType,
-                reference: reference))
+                reference: reference,
+                debugData: debugData
+            ))
         }
         
         fatalError("Cannot reach via precondition.")
@@ -53,7 +58,9 @@ struct ReferenceProviderBuilder {
             scope: scope,
             collectionType: collectionType,
             dependencies: nil,
-            reference: reference)
+            reference: reference,
+            debugData: debugData
+        )
     }
     
     func setDependencies(dependencies: [String]) -> ReferenceProviderBuilder {
@@ -63,7 +70,9 @@ struct ReferenceProviderBuilder {
             scope: scope,
             collectionType: collectionType,
             dependencies: dependencies,
-            reference: nil)
+            reference: nil,
+            debugData: debugData
+        )
     }
 }
 
@@ -73,9 +82,10 @@ struct DanglingProviderBuilder {
     let type: String
     let dependencies: [String]
     let reference: String?
+    let debugData: DebugData
     
     func setReference(_ reference: String) -> DanglingProviderBuilder {
-        return DanglingProviderBuilder(type: type, dependencies: dependencies, reference: reference)
+        return DanglingProviderBuilder(type: type, dependencies: dependencies, reference: reference, debugData: debugData)
     }
     
     func build() -> DanglingProvider {
@@ -83,7 +93,8 @@ struct DanglingProviderBuilder {
         return DanglingProvider(
             type: type,
             dependencies: dependencies,
-            reference: reference!
+            reference: reference!,
+            debugData: debugData
         )
     }
 }

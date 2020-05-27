@@ -81,7 +81,8 @@ public struct Linker {
                 dependencies: linked.dependencies,
                 tag: referenceProvider.tag,
                 scoped: referenceProvider.scoped,
-                collectionType: referenceProvider.collectionType
+                collectionType: referenceProvider.collectionType,
+                debugData: referenceProvider.debugData
             )
         }
     }

@@ -12,8 +12,8 @@ public struct ResolutionError: Equatable, Error {
     public enum Error: Equatable {
         case missingModule(String)
         case missingSubcomponent(String)
-        case duplicateProvider(String)
-        case missingProvider(String)
+        case duplicateProvider(CanonicalProvider)
+        case missingProvider(dependency: String, dependedUpon: CanonicalProvider?)
     }
     
     let type: Error
@@ -22,14 +22,19 @@ public struct ResolutionError: Equatable, Error {
 extension ResolutionError: CustomStringConvertible {
     public var description: String {
         switch type {
-        case .missingProvider(let provider):
-            return "Missing Provider: \(provider)."
+        case .missingProvider(let provider, let parent):
+            var base = "Missing Provider: \(provider).\n"
+            if let p = parent {
+                let indent = String(repeatElement(" ", count: 2))
+                base += "\(indent)Depended upon by: \(p.type):\(p.debugData.location ?? "")\n\(indent)\(p.type) --> \(provider)\n"
+            }
+            return base
         case .missingSubcomponent(let subcomponent):
             return "Missing Installed Compoment: \(subcomponent)."
         case .missingModule(let module):
             return "Missing included Module: \(module)."
         case .duplicateProvider(let provider):
-            return "Duplicate binding for: \(provider)"
+            return "Duplicate binding for \(provider.type): \(provider.debugData.location ?? "")"
         }
     }
 }
