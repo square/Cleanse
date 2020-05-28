@@ -51,9 +51,13 @@ def main
 	dump_ast_command = [swiftc_executable] + ['-dump-ast', '-suppress-warnings'] + ast_input + pipe_to_file_command
 	sanitized_og_command = og_command.map { |c| c.to_s.gsub(/\s/, "\\ ") }
 	sanitized_ast_command = dump_ast_command.map { |c| c.to_s.gsub(/\s/, "\\ ") }
-	pid = spawn(sanitized_ast_command.join(" "))
-	system(sanitized_og_command.join(" "))
-	Process.wait(pid)
+	if ENV["DISABLE_DUMP_AST"]
+		system(sanitized_og_command.join(" "))
+	else
+		pid = spawn(sanitized_ast_command.join(" "))
+		system(sanitized_og_command.join(" "))
+		Process.wait(pid)
+	end
 end
 
 main
