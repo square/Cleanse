@@ -77,6 +77,9 @@ fileprivate extension Resolver {
         
         // Added dependency is the component's `rootType`. We need to make sure there is a binding for the root object.
         resolveDependencies(for: componentBindings, additionalDependencies: [component.rootType], diagnostics: &diagnostics)
+        
+        resolveAcyclicGraph(root: component.rootType, bindings: componentBindings, diagnostics: &diagnostics)
+        
         let children = allSubcomponents.map { resolve(component: $0, modulesByName: modulesByName, componentsByName: componentsByName, parentBindings: componentBindings, diagnostics: &diagnostics) }
         
         let resolvedComponent = ResolvedComponent(
@@ -110,6 +113,44 @@ fileprivate extension Resolver {
             }
         }
     }
+    
+    static func resolveAcyclicGraph(root: String, bindings: ComponentBindings, diagnostics: inout [ResolutionError]) {
+        var resolvedNodes = Set<String>()
+        traverseDependency(root, bindings: bindings, ancestors: [], resolved: &resolvedNodes, diagnostics: &diagnostics)
+    }
+    
+    static func traverseDependency(
+        _ type: String,
+        bindings: ComponentBindings,
+        ancestors: [String],
+        resolved: inout Set<String>,
+        diagnostics: inout [ResolutionError]) {
+        
+        if resolved.contains(type) {
+            return
+        }
+        
+        if let cycleIdx = ancestors.firstIndex(of: type) {
+            resolved.insert(type)
+            let chain = Array(ancestors[cycleIdx...]) + [type]
+            diagnostics.append(ResolutionError(type: .cyclicalDependency(chain: chain)))
+            return
+        }
+        
+        // Some dependencies may not exist since they come from ancestor scopes. This is okay
+        // as it isn't possible for a cycle to exist across component boundaries.
+        guard let deps = bindings.providersByType[type] else {
+            return
+        }
+        
+        deps
+            .flatMap { $0.dependencies }
+            .forEach { traverseDependency($0, bindings: bindings, ancestors: ancestors + [type], resolved: &resolved, diagnostics: &diagnostics) }
+        
+        resolved.insert(type)
+    }
+    
+    
     
     static func createUniqueProvidersMap(in component: LinkedComponent, includedModules: [LinkedModule], installedSubcomponents: [LinkedComponent], diagnostics: inout [ResolutionError]) -> [String:[CanonicalProvider]] {
         var allCanonicalProviders = (component.providers + includedModules.flatMap { $0.providers }).map { $0.mapToCanonical() }
