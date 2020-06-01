@@ -322,4 +322,67 @@ class ResolverTests: XCTestCase {
         XCTAssertEqual(resolvedComponents.first!.diagnostics.count, 0)
         XCTAssertNotNil(resolvedComponents.first!.providersByType["TaggedProvider<MyTag>"])
     }
+    
+    func testBasicCyclicalDependency() {
+        let rootA = StandardProvider(type: "A", dependencies: ["DepA"], tag: nil, scoped: nil, collectionType: nil)
+        let depA = StandardProvider(type: "DepA", dependencies: ["DepB"], tag: nil, scoped: nil, collectionType: nil)
+        let depB = StandardProvider(type: "DepB", dependencies: ["DepA"], tag: nil, scoped: nil, collectionType: nil)
+        let component = LinkedComponent(
+            type: "Root",
+            rootType: "A",
+            providers: [rootA,depA,depB],
+            seed: "Void",
+            includedModules: [],
+            subcomponents: [],
+            isRoot: true
+        )
+        let interface = LinkedInterface(components: [component], modules: [])
+        let resolved = Resolver.resolve(interface: interface)
+        XCTAssertEqual(resolved.count, 1)
+        XCTAssertEqual(resolved.first!.diagnostics.first!, ResolutionError(type: .cyclicalDependency(chain: ["DepA", "DepB", "DepA"])))
+    }
+    
+    func testThreeNCyclicalDependency() {
+        let rootA = StandardProvider(type: "A", dependencies: ["DepA"], tag: nil, scoped: nil, collectionType: nil)
+        let depA = StandardProvider(type: "DepA", dependencies: ["DepB"], tag: nil, scoped: nil, collectionType: nil)
+        let depB = StandardProvider(type: "DepB", dependencies: ["DepC"], tag: nil, scoped: nil, collectionType: nil)
+        let depC = StandardProvider(type: "DepC", dependencies: ["DepA"], tag: nil, scoped: nil, collectionType: nil)
+        let component = LinkedComponent(
+            type: "Root",
+            rootType: "A",
+            providers: [rootA,depA,depB,depC],
+            seed: "Void",
+            includedModules: [],
+            subcomponents: [],
+            isRoot: true
+        )
+        let interface = LinkedInterface(components: [component], modules: [])
+        let resolved = Resolver.resolve(interface: interface)
+        XCTAssertEqual(resolved.count, 1)
+        XCTAssertEqual(resolved.first!.diagnostics.first!, ResolutionError(type: .cyclicalDependency(chain: ["DepA", "DepB", "DepC", "DepA"])))
+    }
+    
+    func testMultipleCyclicalDependency() {
+        let rootA = StandardProvider(type: "A", dependencies: ["DepA"], tag: nil, scoped: nil, collectionType: nil)
+        let depA = StandardProvider(type: "DepA", dependencies: ["DepB", "DepD"], tag: nil, scoped: nil, collectionType: nil)
+        let depB = StandardProvider(type: "DepB", dependencies: ["DepC"], tag: nil, scoped: nil, collectionType: nil)
+        let depC = StandardProvider(type: "DepC", dependencies: ["DepB"], tag: nil, scoped: nil, collectionType: nil)
+        let depD = StandardProvider(type: "DepD", dependencies: ["DepE"], tag: nil, scoped: nil, collectionType: nil)
+        let depE = StandardProvider(type: "DepE", dependencies: ["DepD"], tag: nil, scoped: nil, collectionType: nil)
+        let component = LinkedComponent(
+            type: "Root",
+            rootType: "A",
+            providers: [rootA,depA,depB,depC,depE,depD],
+            seed: "Void",
+            includedModules: [],
+            subcomponents: [],
+            isRoot: true
+        )
+        let interface = LinkedInterface(components: [component], modules: [])
+        let resolved = Resolver.resolve(interface: interface)
+        XCTAssertEqual(resolved.count, 1)
+        XCTAssertEqual(resolved.first!.diagnostics.count, 2)
+        XCTAssertEqual(resolved.first!.diagnostics.first!, ResolutionError(type: .cyclicalDependency(chain: ["DepB", "DepC", "DepB"])))
+        XCTAssertEqual(resolved.first!.diagnostics[1], ResolutionError(type: .cyclicalDependency(chain: ["DepD", "DepE", "DepD"])))
+    }
 }
