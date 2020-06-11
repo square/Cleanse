@@ -170,19 +170,21 @@ We've successfully wired up our root component! Our root object ``RootViewContro
 .. code-block:: swift
 
     // IMPORTANT: We must retain an instance of our `ComponentFactory`.
-    var factory: ComponentFactory<AppDelegate.Component>?
+    @UIApplicationMain
+    class AppDelegate: UIResponder, UIApplicationDelegate {
+        var factory: ComponentFactory<AppDelegate.Component>?
 
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Build our root object in our graph.
-        factory = try! ComponentFactory.of(AppDelegate.Component.self)
-        let rootViewController = factory!.build(())
+        func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) ->  Bool {
+            // Build our root object in our graph.
+            factory = try! ComponentFactory.of(AppDelegate.Component.self)
+            let rootViewController = factory!.build(())
 
-        // Now we can use the root object in our app.
-        window!.rootViewController = rootViewController
-        window!.makeKeyAndVisible()
+            // Now we can use the root object in our app.
+            window!.rootViewController = rootViewController
+            window!.makeKeyAndVisible()
 
-        return true
-    }
+            return true
+        }
 
 Satisfying Dependencies
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -346,7 +348,7 @@ Providing the Base API URL
 .. code-block:: swift
 
     struct PrimaryAPIURLModule : Module {
-      func configure<B : Binder>(binder binder: B) {
+      func configure(binder: Binder<Unscoped>) {
         binder
           .bind(NSURL.self)
           .tagged(with: PrimaryAPIURL.self)
@@ -368,7 +370,7 @@ Consuming the Primary API URL (e.g. "https://connect.squareup.com/v2/")
             self.primaryURL = primaryURL.get()
         }
         struct Module : Cleanse.Module {
-            func configure<B : Binder>(binder binder: B) {
+            func configure(binder: Binder<Unscoped>) {
                 binder
                     .bind(SomethingThatDoesAnAPICall.self)
                     .to(factory: SomethingThatDoesAnAPICall.init)
@@ -423,10 +425,10 @@ Defining a subcomponent
 
     struct APIComponent : Component {
         typealias Root = RootAPI
-        func configure<B : Binder>(binder binder: B) {
+        func configure(binder: Binder<Unscoped>) {
             // "include" the modules that create the component
-            binder.include(module: PrimaryAPIURLModule())
-            binder.include(module: SomethingThatDoesAnAPICall.Module())
+            binder.include(module: PrimaryAPIURLModule.self)
+            binder.include(module: SomethingThatDoesAnAPICall.Module.self)
             // bind our root Object
             binder
                 .bind(RootAPI.self)
@@ -441,7 +443,7 @@ Cleanse will automatically create the type ``ComponentFactory<APIComponent>`` in
 .. code-block:: swift
 
   struct Root : RootComponent {
-      func configure<B : Binder>(binder binder: B) {
+      func configure(binder: Binder<Unscoped>) {
           binder.install(dependency: APIComponent.self)
       }
       // ...
