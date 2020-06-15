@@ -23,6 +23,7 @@ struct DecoratedModule: Module {
     }
     
     static func configure(binder: Binder<Singleton>) {
+        binder.bind(Box.self).sharedInScope().to(factory: Box.init)
         binder.bind(Box.self).sharedInScope().configured(with: configureA)
         binder.bind(Box.self).tagged(with: MyTag3.self).configured(with: configureA)
     }

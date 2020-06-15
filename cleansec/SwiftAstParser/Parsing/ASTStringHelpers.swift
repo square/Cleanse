@@ -8,7 +8,7 @@ extension String {
         if matches(#"^\(source_file"#) {
             return true
         }
-        if let _ = firstCapture(#"^\s+\((\w+)"#) {
+        if let _ = firstCapture(#"^\s{2,}\((\w+)"#) {
             return true
         } else if matches(#"\s+\($"#) {
             return true

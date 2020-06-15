@@ -48,7 +48,7 @@ struct BindingsVisitor: SyntaxVisitor {
             case .provider(let provider):
                 standardProviders.append(provider)
             case .danglingProviderBuilder(var danglingProviderBuilder):
-                var danglingVisitor = DanglingProviderVisitor(type: type)
+                var danglingVisitor = DanglingProviderVisitor(type: danglingProviderBuilder.type)
                 danglingVisitor.walk(node)
                 guard let foundReference = danglingVisitor.finalize() else {
                     os_log("Unknown dangling reference provider type %@", type: .debug, node.raw)
@@ -57,7 +57,7 @@ struct BindingsVisitor: SyntaxVisitor {
                 danglingProviderBuilder = danglingProviderBuilder.setReference(foundReference)
                 danglingProviders.append(danglingProviderBuilder.build())
             case .referenceBuilder(var referenceProviderBuilder):
-                var referenceVisitor = ReferenceProviderVisitor(type: type)
+                var referenceVisitor = ReferenceProviderVisitor(type: referenceProviderBuilder.type)
                 referenceVisitor.walkChildren(node)
                 switch referenceVisitor.finalize() {
                 case .unknown:

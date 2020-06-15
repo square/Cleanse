@@ -193,4 +193,11 @@ class BindingsVisitorTests: XCTestCase {
         XCTAssertEqual(result.standardProviders.count, 1)
         XCTAssertEqual(result.standardProviders.first!.dependencies, ["() -> Float", "() -> Bool", "() -> Float"])
     }
+    
+    func testBindingsWithCustomScope() {
+        let node = SyntaxParser.parse(text: Fixtures.CustomScopeBinding).first!
+        visitor.walk(node)
+        let result = visitor.finalize()
+        XCTAssertEqual(result.standardProviders.count, 2)
+    }
 }
