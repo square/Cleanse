@@ -14,7 +14,7 @@ class SanitizerTests: XCTestCase {
     func testSplitSourceFileLines() {
         let fixture = "(a )(source_file )"
         let result = SyntaxParser.parse(text: fixture)
-        XCTAssertEqual(result.count, 2)
+        XCTAssertEqual(result.count, 1)
     }
     
     func testSplitLines() {
