@@ -73,7 +73,7 @@ struct InputParser {
             let element = fixedText[idx]
             if !element.isValidNewlineStart && lastGoodIdx >= 0 {
                 sanitizedText[lastGoodIdx].append(contentsOf: element)
-            } else {
+            } else if element.isValidNewlineStart {
                 sanitizedText.append(element)
             }
         }
