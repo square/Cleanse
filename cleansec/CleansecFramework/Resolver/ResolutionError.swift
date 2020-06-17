@@ -12,7 +12,7 @@ public struct ResolutionError: Equatable, Error {
     public enum Error: Equatable {
         case missingModule(String)
         case missingSubcomponent(String)
-        case duplicateProvider(CanonicalProvider)
+        case duplicateProvider([CanonicalProvider])
         case missingProvider(dependency: String, dependedUpon: CanonicalProvider?)
         case cyclicalDependency(chain: [String])
     }
@@ -24,21 +24,52 @@ extension ResolutionError: CustomStringConvertible {
     public var description: String {
         switch type {
         case .missingProvider(let provider, let parent):
-            var base = "Missing Provider: \(provider).\n"
+            var errorDescription = errorPrefix(debug: parent?.debugData)
+            errorDescription += "Missing Provider: '\(provider)'\n"
             if let p = parent {
-                let indent = String(repeatElement(" ", count: 2))
-                base += "\(indent)Depended upon by: \(p.type):\(p.debugData.location ?? "")\n\(indent)\(p.type) --> \(provider)\n"
+                errorDescription += "Depended upon by: '\(p.type)'\n'\(p.type)' --> '\(provider)'\n"
             }
-            return base
+            
+            return errorDescription
         case .missingSubcomponent(let subcomponent):
-            return "Missing Installed Compoment: \(subcomponent)."
+            return "error: Missing Installed Compoment: '\(subcomponent)'"
         case .missingModule(let module):
-            return "Missing included Module: \(module)."
-        case .duplicateProvider(let provider):
-            return "Duplicate binding for \(provider.type): \(provider.debugData.location ?? "")"
+            return "error: Missing included Module: '\(module)'"
+        case .duplicateProvider(let providers):
+            let first = providers.first!
+            let duplidateBindings = providers.suffix(from: 1)
+            var errorDescription = errorPrefix(debug: first.debugData)
+            errorDescription += "Duplicate binding for '\(first.type)'\n"
+            
+            errorDescription += duplidateBindings
+                .filter { $0.debugData.location != nil }
+                .map { notePrefix(debug: $0.debugData) + "'\($0.type)' previously bound here." }
+                .joined(separator: "\n")
+            
+            return errorDescription
         case .cyclicalDependency(let chain):
             let chainDescription = chain.joined(separator: " --> ")
-            return "Cycle in dependencies found: \(chainDescription)"
+            return "error: Cycle in dependencies found: \(chainDescription)"
         }
+    }
+    
+    private func notePrefix(debug: DebugData?) -> String {
+        let prefix: String
+        if let location = debug?.location {
+            prefix = "\(location): note: "
+        } else {
+            prefix = "note: "
+        }
+        return prefix
+    }
+    
+    private func errorPrefix(debug: DebugData?) -> String {
+        let prefix: String
+        if let location = debug?.location {
+            prefix = "\(location): error: "
+        } else {
+            prefix = "error: "
+        }
+        return prefix
     }
 }

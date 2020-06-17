@@ -88,7 +88,7 @@ class ResolverTests: XCTestCase {
         let resolvedComponents = Resolver.resolve(interface: interface)
         XCTAssertEqual(resolvedComponents.count, 1)
         XCTAssertEqual(resolvedComponents.first!.diagnostics.count, 1)
-        XCTAssertEqual(resolvedComponents.first!.diagnostics.first!, ResolutionError(type: .duplicateProvider(collectionProviders[1].mapToCanonical())))
+        XCTAssertEqual(resolvedComponents.first!.diagnostics.first!, ResolutionError(type: .duplicateProvider(collectionProviders.map { $0.mapToCanonical() })))
     }
     
     func testDuplicateBinding() {
@@ -111,7 +111,7 @@ class ResolverTests: XCTestCase {
         let resolvedComponents = Resolver.resolve(interface: interface)
         XCTAssertEqual(resolvedComponents.count, 1)
         XCTAssertEqual(resolvedComponents.first!.diagnostics.count, 1)
-        XCTAssertEqual(resolvedComponents.first!.diagnostics.first!, ResolutionError(type: .duplicateProvider(providers.first!.mapToCanonical())))
+        XCTAssertEqual(resolvedComponents.first!.diagnostics.first!, ResolutionError(type: .duplicateProvider(providers.map { $0.mapToCanonical() })))
     }
     
     func testDuplicateModuleIncludesIsOkay() {

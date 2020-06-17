@@ -64,3 +64,10 @@ public struct CleansecError: CustomStringConvertible, Error {
         resolutionErrors.map { $0.description }.joined(separator: "\n")
     }
 }
+
+public struct CLIError: CustomStringConvertible, Error {
+    public init() {}
+    public var description: String {
+        "cleansec failed"
+    }
+}
