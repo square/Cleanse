@@ -94,7 +94,11 @@ struct CLI: ParsableCommand {
         guard !errors.isEmpty else {
             return
         }
-        throw CleansecError(resolutionErrors: errors)
+        let stderr = FileHandle.standardError
+        let error = CleansecError(resolutionErrors: errors)
+        stderr.write(error.description.data(using: .utf8)!)
+        throw CLIError()
+        
     }
 }
 

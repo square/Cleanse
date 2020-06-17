@@ -157,20 +157,28 @@ fileprivate extension Resolver {
         allCanonicalProviders.append(component.seedProvider)
         allCanonicalProviders.append(contentsOf: installedSubcomponents.map { $0.componentFactoryProvider} )
         
-        return allCanonicalProviders.reduce(into: [String:[CanonicalProvider]](), { (dict, provider) in
-            if let existing = dict[provider.type] {
-                if !provider.isCollectionProvider || !existing.allSatisfy({ (p) -> Bool in
-                    p.isCollectionProvider == provider.isCollectionProvider
-                }) {
-                    diagnostics.append(ResolutionError(type: .duplicateProvider(provider)))
-                } else {
-                    dict[provider.type]!.append(provider)
-                }
+        let providersByType = allCanonicalProviders.reduce(into: [String:[CanonicalProvider]](), { (dict, provider) in
+            if let _ = dict[provider.type] {
+                dict[provider.type]!.append(provider)
             } else {
-                dict[provider.type] = [provider]    
+                dict[provider.type] = [provider]
                 dict[provider.lazyProvider.type] = [provider.lazyProvider]
             }
         })
+        
+        let duplicateProviderErrors = providersByType.values.compactMap { (providers) -> ResolutionError? in
+            guard providers.count > 1 else {
+                return nil
+            }
+            if providers.allSatisfy({ $0.isCollectionProvider }) {
+                return nil
+            }
+            return ResolutionError(type: .duplicateProvider(providers))
+        }
+        
+        diagnostics.append(contentsOf: duplicateProviderErrors)
+        
+        return providersByType
     }
 
     // Resolves all directly and transitively included modules in a given component.
