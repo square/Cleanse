@@ -1,2 +1,5 @@
 *.ast
+*.xcarchive
+*.zip
 build/
+bin/
