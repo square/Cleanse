@@ -10,8 +10,8 @@ import Foundation
 
 /// Represents a partial reference provider value. Exposes public method needed to fill in the missing
 /// properties and then build the resulting `ReferenceProvider`.
-struct ReferenceProviderBuilder {
-    enum ResultingProvider {
+public struct ReferenceProviderBuilder {
+    public enum ResultingProvider {
         case reference(ReferenceProvider)
         case standard(StandardProvider)
     }
@@ -25,7 +25,7 @@ struct ReferenceProviderBuilder {
     
     // A potential reference provider can turn into a standard provider
     // by passing a closure to the configured function.
-    func build() -> ResultingProvider {
+    public func build() -> ResultingProvider {
         precondition(dependencies != nil || reference != nil, "Must supply a dependencies list or reference before building.")
         if let dependencies = dependencies {
             return .standard(StandardProvider(
@@ -51,7 +51,7 @@ struct ReferenceProviderBuilder {
         fatalError("Cannot reach via precondition.")
     }
     
-    func setReference(reference: String) -> ReferenceProviderBuilder {
+    public func setReference(reference: String) -> ReferenceProviderBuilder {
         return ReferenceProviderBuilder(
             type: type,
             tag: tag,
@@ -63,7 +63,7 @@ struct ReferenceProviderBuilder {
         )
     }
     
-    func setDependencies(dependencies: [String]) -> ReferenceProviderBuilder {
+    public func setDependencies(dependencies: [String]) -> ReferenceProviderBuilder {
         return ReferenceProviderBuilder(
             type: type,
             tag: tag,
@@ -78,17 +78,17 @@ struct ReferenceProviderBuilder {
 
 /// Represents a partial dangling provider value. Exposes public method needed to fill in the missing
 /// properties and then build the resulting `DanglingProvider`.
-struct DanglingProviderBuilder {
+public struct DanglingProviderBuilder {
     let type: String
     let dependencies: [String]
     let reference: String?
     let debugData: DebugData
     
-    func setReference(_ reference: String) -> DanglingProviderBuilder {
+    public func setReference(_ reference: String) -> DanglingProviderBuilder {
         return DanglingProviderBuilder(type: type, dependencies: dependencies, reference: reference, debugData: debugData)
     }
     
-    func build() -> DanglingProvider {
+    public func build() -> DanglingProvider {
         precondition(reference != nil, "Must set a reference on the builder before building.")
         return DanglingProvider(
             type: type,
