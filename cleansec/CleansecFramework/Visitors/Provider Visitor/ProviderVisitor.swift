@@ -9,7 +9,7 @@
 import Foundation
 import SwiftAstParser
 
-enum ProviderResult {
+public enum ProviderResult {
     case provider(StandardProvider)
     case danglingProviderBuilder(DanglingProviderBuilder)
     case referenceBuilder(ReferenceProviderBuilder)
@@ -18,19 +18,19 @@ enum ProviderResult {
 /**
  Parses an individual binding to discern its provider type, dependencies, and any decorated types (i.e Tagged, Scoped, Factory).
  */
-struct ProviderVisitor: SyntaxVisitor {
+public struct ProviderVisitor: SyntaxVisitor {
     private var binding: BindingType = .unknown
     private var dependencies: [String] = []
     private var bindingTypeBuilder = BaseBindingTypeBuilder.instance
     
-    let type: String
+    public let type: String
     
-    init(type: String) {
+    public init(type: String) {
         self.type = type
     }
     
     // We just want to visit the first declrefExpr to discern the API used.
-    mutating func visit(node: DeclrefExpr) {
+    public mutating func visit(node: DeclrefExpr) {
         guard binding == .unknown else {
             return
         }
@@ -57,7 +57,7 @@ struct ProviderVisitor: SyntaxVisitor {
         }
     }
     
-    mutating func visit(node: CallExpr) {
+    public mutating func visit(node: CallExpr) {
         if node.type.matches("BindingReceipt<.*>") {
             if let loc = node.raw.firstCapture(#"location=(.*)\srange"#) {
                 bindingTypeBuilder = bindingTypeBuilder.setDebugData(.location(loc))
@@ -91,7 +91,7 @@ struct ProviderVisitor: SyntaxVisitor {
         }
     }
     
-    func finalize() -> ProviderResult? {
+    public func finalize() -> ProviderResult? {
         bindingTypeBuilder.build(bindingType: binding, type: type, dependencies: dependencies)
     }
 }
