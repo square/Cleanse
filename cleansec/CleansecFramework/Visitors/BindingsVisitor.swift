@@ -8,6 +8,7 @@
 
 import Foundation
 import SwiftAstParser
+import os.log
 
 struct BindingsResult {
     let standardProviders: [StandardProvider]
@@ -39,7 +40,7 @@ struct BindingsVisitor: SyntaxVisitor {
             var bindingVisitor = ProviderVisitor(type: type)
             bindingVisitor.walk(node)
             guard let providerResult = bindingVisitor.finalize() else {
-                print("Found binding expression, but failed to create any semblance of a provider. \(node.raw)")
+                os_log("Found binding expression, but failed to create any semblance of a provider. %@", type: .debug, node.raw)
                 return
             }
             
@@ -50,7 +51,7 @@ struct BindingsVisitor: SyntaxVisitor {
                 var danglingVisitor = DanglingProviderVisitor(type: type)
                 danglingVisitor.walk(node)
                 guard let foundReference = danglingVisitor.finalize() else {
-                    print("Unknown dangling reference provider type \(node.raw)")
+                    os_log("Unknown dangling reference provider type %@", type: .debug, node.raw)
                     return
                 }
                 danglingProviderBuilder = danglingProviderBuilder.setReference(foundReference)
@@ -60,7 +61,7 @@ struct BindingsVisitor: SyntaxVisitor {
                 referenceVisitor.walkChildren(node)
                 switch referenceVisitor.finalize() {
                 case .unknown:
-                    print("Failed to parse reference node: \(node)")
+                    os_log("Failed to parse reference node: %@", type: .debug, node.raw)
                     return
                 case .dependencies(let dependencies):
                     referenceProviderBuilder = referenceProviderBuilder.setDependencies(dependencies: dependencies)
@@ -82,13 +83,13 @@ struct BindingsVisitor: SyntaxVisitor {
             if let moduleName = node.raw.firstCapture(#"substitution\sM\s->\s(.*)\)\)]"#) {
                 includedModules.append(moduleName)
             } else {
-                print("Found included module, but could not parse its name. \(node)")
+                os_log("Found included module, but could not parse its name. %@", type: .debug, node.raw)
             }
         } else if node.raw.contains(BindingAPI.installComponent.rawValue) {
             if let subcomponentName = node.raw.firstCapture(#"substitution\sC\s->\s(.*)\)\)]"#) {
                 installedSubcomponents.append(subcomponentName)
             } else {
-                print("Found installed subcomponent, but could not parse its name.")
+                os_log("Found installed subcomponent, but could not parse its name. %@", type: .debug, node.raw)
             }
         }
     }

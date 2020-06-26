@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import os.log
 
 /**
  The Linker is repsonsible for linking `ReferenceProvider` instances to their respective `DanglingProvider`.
@@ -28,7 +29,7 @@ public struct Linker {
         let danglingProviders = components.flatMap { $0.danglingProviders } + modules.flatMap { $0.danglingProviders }
         let danglingProvidersByReference = danglingProviders.reduce(into: [String:DanglingProvider]()) { (dict, provider) in
             if let _ = dict[provider.reference] {
-                print("Warning: Duplicate dangling provider reference: \(provider.reference)")
+                os_log("Warning: Duplicate dangling provider reference: %@", type: .debug, provider.reference)
             }
             dict[provider.reference] = provider
         }
@@ -73,7 +74,7 @@ public struct Linker {
     private static func link(referenceProviders: [ReferenceProvider], danglingProvidersByReference: [String:DanglingProvider]) -> [StandardProvider] {
         return referenceProviders.compactMap { referenceProvider -> StandardProvider? in
             guard let linked = danglingProvidersByReference[referenceProvider.reference] else {
-                print("Warning: Failed to find pointee for reference provider: \(referenceProvider)")
+                os_log("Warning: Failed to find pointee for reference provider: %@", type: .debug, referenceProvider.type)
                 return nil
             }
             return StandardProvider(

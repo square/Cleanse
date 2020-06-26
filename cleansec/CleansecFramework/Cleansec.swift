@@ -8,6 +8,7 @@
 
 import Foundation
 import SwiftAstParser
+import os.log
 
 /**
  Primary public inteface for pipeline steps.
@@ -40,14 +41,14 @@ public struct Cleansec {
         do {
             try process.run()
         } catch {
-            print("Plugin process failed: \(error)")
+            os_log("Plugin process failed: %@", type: .debug, String(describing: error))
             return nil
         }
         let data = output.fileHandleForReading.readDataToEndOfFile()
         do {
             return try JSONDecoder().decode(ModuleRepresentation.self, from: data)
         } catch {
-            print("Failed to parse plugin output to `ModuleRepresentation`. Make sure you using JSONDecoder over a `ModuleRepresentation` instance.")
+            os_log("Failed to parse plugin output to `ModuleRepresentation`. Make sure you using JSONDecoder over a `ModuleRepresentation` instance.", type: .info)
             return nil
         }
     }
