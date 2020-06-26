@@ -27,7 +27,7 @@ extension ResolutionError: CustomStringConvertible {
             var errorDescription = errorPrefix(debug: parent?.debugData)
             errorDescription += "Missing Provider: '\(provider)'\n"
             if let p = parent {
-                errorDescription += "Depended upon by: '\(p.type)'\n'\(p.type)' --> '\(provider)'\n"
+                errorDescription += "Depended upon by: '\(p.type)'"
             }
             
             return errorDescription

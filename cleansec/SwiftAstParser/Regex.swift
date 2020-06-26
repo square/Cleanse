@@ -1,4 +1,5 @@
 import Foundation
+import os.log
 
 public struct RegexCapture {
     public let groups: [String]
@@ -14,7 +15,7 @@ public extension String {
             }
             return true
         } catch {
-            print("Failed to formulate regex: \(error)")
+            os_log("Failed to formulate regex: %@", type: .debug, String(describing: error))
             return false
         }
     }
@@ -35,7 +36,7 @@ public extension String {
                 return RegexCapture(groups: captures)
             }
         } catch {
-            print("Failed to formulate regex: \(error)")
+            os_log("Failed to formulate regex: %@", type: .debug, String(describing: error))
             return []
         }
     }

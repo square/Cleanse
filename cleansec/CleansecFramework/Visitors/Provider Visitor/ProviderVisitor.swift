@@ -8,6 +8,7 @@
 
 import Foundation
 import SwiftAstParser
+import os.log
 
 public enum ProviderResult {
     case provider(StandardProvider)
@@ -80,13 +81,13 @@ public struct ProviderVisitor: SyntaxVisitor {
             if let tag = node.type.allCaptures(#"(\w+(?:\.\w+)*)(?=>)"#).last {
                 bindingTypeBuilder = bindingTypeBuilder.setTaggedBinding(tag: tag)
             } else {
-                print("Found tagged provider, but failed to parse Tag")
+                os_log("Found tagged provider, but failed to parse Tag", type: .debug)
             }
         case .scopedProvider:
             if let scope = node.type.allCaptures(#"(\w+)(?=>)"#).last {
                 bindingTypeBuilder = bindingTypeBuilder.setScopedBinding(scope: scope)
             } else {
-                print("Found scoped provider, but failed to parse scope")
+                os_log("Found scoped provider, but failed to parse scope", type: .debug)
             }
         }
     }

@@ -8,6 +8,7 @@
 
 import Foundation
 import SwiftAstParser
+import os.log
 
 /**
  Primary parsing object that will walk a source file node and extract any cleanse objects.
@@ -49,7 +50,7 @@ struct FileVisitor: SyntaxVisitor {
             break
         case .module:
             guard let moduleName = inheritableNode.raw.firstCapture(#"interface type='(.*)\.Type'"#) else {
-                print("Found module. Unable to parse interface type: \(inheritableNode.raw)")
+                os_log("Found module. Unable to parse interface type: %@", type: .debug, inheritableNode.raw)
                 return
             }
             var bindingsVisitor = BindingsVisitor()
@@ -59,7 +60,7 @@ struct FileVisitor: SyntaxVisitor {
             )
         case .component:
             guard let componentName = inheritableNode.raw.firstCapture(#"interface type='(.*)\.Type'"#) else {
-                print("Found component. Unable to parse interface type: \(inheritableNode.raw)")
+                os_log("Found component. Unable to parse interface type: %@", type: .debug, inheritableNode.raw)
                 return
             }
             let isRoot = inheritableNode.inherits?.matches("^(Cleanse.)?RootComponent") ?? false
@@ -69,7 +70,7 @@ struct FileVisitor: SyntaxVisitor {
             componentRootVisitor.walk(inheritableNode)
             let (seed, rootProvider) = componentRootVisitor.finalize()
             guard let root = rootProvider else {
-                print("Unable to discern root provider for component \(componentName). Not creating component for: \(inheritableNode.raw)")
+                os_log("Unable to discern root provider for component %@. Not creating component for: %@", type: .debug, componentName, inheritableNode.raw)
                 return
             }
             switch root {
