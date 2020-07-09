@@ -53,7 +53,7 @@ struct ReferenceProviderVisitor: SyntaxVisitor {
         } else {
             receiptBinderType = "ReceiptBinder<\(type)>"
         }
-        let pattern = "->\\s\\(\(receiptBinderType)\\) -> \(bindingReceiptType)"
+        let pattern = "->\\s\\(\(receiptBinderType.escapeRegexCharacters)\\) -> \(bindingReceiptType.escapeRegexCharacters)"
         guard node.raw.matches(pattern), let reference = node.raw.firstCapture(#"decl=(.*)@"#) else {
             return
         }

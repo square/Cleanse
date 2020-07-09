@@ -21,6 +21,22 @@ class ResolverTests: XCTestCase {
         XCTAssertEqual(resolvedComponents.count, 0)
     }
     
+    func testCreatesCanonicalProviders() {
+        let provider = StandardProvider(type: "MyClass", dependencies: [], tag: nil, scoped: nil, collectionType: nil)
+        let subcomponent = LinkedComponent(type: "Subcomponent", rootType: "Int", providers: [], seed: "Void", includedModules: [], subcomponents: [], isRoot: false)
+        let module = LinkedModule(type: "AppModule", providers: [], includedModules: [], subcomponents: ["Subcomponent"])
+        let component = LinkedComponent(type: "Root", rootType: "A", providers: [provider], seed: "Void", includedModules: ["AppModule"], subcomponents: [], isRoot: true)
+        let interface = LinkedInterface(components: [subcomponent, component], modules: [module])
+        let resolvedComponents = Resolver.resolve(interface: interface)
+        XCTAssertEqual(resolvedComponents.count, 1)
+        let subcomponentFactory = resolvedComponents.first?.providersByType.keys.first { $0 == "ComponentFactory<Subcomponent>" }
+        let weakProvider = resolvedComponents.first?.providersByType.keys.first { $0 == "WeakProvider<MyClass>" }
+        let lazyProvider = resolvedComponents.first?.providersByType.keys.first { $0 == "Provider<MyClass>" }
+        XCTAssertNotNil(subcomponentFactory)
+        XCTAssertNotNil(weakProvider)
+        XCTAssertNotNil(lazyProvider)
+    }
+    
     func testResolvesSimpleRoot() {
         let component = LinkedComponent(
             type: "Nonroot",
@@ -37,7 +53,7 @@ class ResolverTests: XCTestCase {
         let resolvedComponents = Resolver.resolve(interface: interface)
         XCTAssertEqual(resolvedComponents.count, 1)
         // Providers for Seed
-        XCTAssertEqual(resolvedComponents.first!.providersByType.count, 2)
+        XCTAssertEqual(resolvedComponents.first!.providersByType.count, 4)
     }
     
     func testCollectionBindingDuplicates() {
@@ -260,10 +276,10 @@ class ResolverTests: XCTestCase {
         XCTAssertEqual(resolvedComponents.first!.diagnostics.count, 1)
     }
     
-    func testFindsLazyProviderDependency() {
+    func testFindsLazyAndWeakProviderDependency() {
         let rootA = StandardProvider(type: "A", dependencies: [], tag: nil, scoped: nil, collectionType: nil)
         let providerC = StandardProvider(type: "C", dependencies: [], tag: nil, scoped: nil, collectionType: nil)
-        let newProvider = StandardProvider(type: "MyViewController", dependencies: ["Provider<C>"], tag: nil, scoped: nil, collectionType: nil)
+        let newProvider = StandardProvider(type: "MyViewController", dependencies: ["Provider<C>", "WeakProvider<C>"], tag: nil, scoped: nil, collectionType: nil)
         let component = LinkedComponent(
             type: "Nonroot",
             rootType: "A",

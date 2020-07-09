@@ -30,10 +30,12 @@ class FileVisitorTests: XCTestCase {
         let node = SyntaxParser.parse(text: Fixtures.SimpleComponent).first!
         visitor.walk(node)
         let result = visitor.finalize()
-        XCTAssertEqual(result.components.count, 1)
+        XCTAssertEqual(result.components.count, 2)
         XCTAssertEqual(result.components.first!.isRoot, false)
         XCTAssertEqual(result.components.first!.rootType, "Int")
         XCTAssertEqual(result.components.first!.providers, [StandardProvider(type: "Int", dependencies: [], tag: nil, scoped: nil, collectionType: nil)])
+        
+        XCTAssertEqual(result.components[1].type, "Container.NestedSubcomponent")
     }
 
     func testParsesRootComponent() {

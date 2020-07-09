@@ -18,3 +18,15 @@ struct Subcomponent2: Component {
     }
     typealias Root = Int
 }
+
+fileprivate struct Container {
+    fileprivate struct NestedSubcomponent: Component {
+        static func configure(binder: Binder<Unscoped>) {
+            
+        }
+        static func configureRoot(binder bind: ReceiptBinder<Int>) -> BindingReceipt<Int> {
+            return bind.to(value: 3)
+        }
+        typealias Root = Int
+    }
+}
