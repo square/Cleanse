@@ -25,7 +25,7 @@ public struct ComponentRootProviderVisitor: SyntaxVisitor {
     
     public mutating func visit(node: Typealias) {
         if node.raw.contains("\"Seed\"") {
-            if let type = node.type.firstCapture(#"'(\w+)'"#), type != "Void" {
+            if let type = node.type.firstCapture(#"(.*)"#), type != "Void" {
                 seed = type
             }
         }
