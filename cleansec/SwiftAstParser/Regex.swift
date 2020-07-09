@@ -51,6 +51,17 @@ public extension String {
     func allCaptures(_ pattern: String, in group: Int = 0) -> [String] {
         return capture(pattern).compactMap { $0.groups.object(at: group) }
     }
+    
+    // Help escape valid Swift characters that intersect with Regex sepcial characters.
+    var escapeRegexCharacters: String {
+        var copy = self
+        let regexSpecialCharacterSet = ["?"]
+        regexSpecialCharacterSet.forEach { c in
+            copy = copy.replacingOccurrences(of: c, with: "\\\(c)")
+        }
+        
+        return copy
+    }
 }
 
 fileprivate extension Array {

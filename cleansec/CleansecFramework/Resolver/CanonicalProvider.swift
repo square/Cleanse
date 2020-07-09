@@ -26,8 +26,26 @@ extension CanonicalProvider: CustomStringConvertible {
 
 extension CanonicalProvider {
     var lazyProvider: CanonicalProvider {
-        return CanonicalProvider(
+        CanonicalProvider(
             type: "Provider<\(type)>",
+            dependencies: dependencies,
+            isCollectionProvider: isCollectionProvider,
+            debugData: debugData
+        )
+    }
+    
+    var implicitProvider: CanonicalProvider {
+        CanonicalProvider(
+            type: "() -> \(type)",
+            dependencies: dependencies,
+            isCollectionProvider: isCollectionProvider,
+            debugData: debugData
+        )
+    }
+    
+    var weakProvider: CanonicalProvider {
+        CanonicalProvider(
+            type: "WeakProvider<\(type)>",
             dependencies: dependencies,
             isCollectionProvider: isCollectionProvider,
             debugData: debugData
@@ -36,6 +54,14 @@ extension CanonicalProvider {
     
     var isLazyProvider: Bool {
         return type.matches("Provider<.*>")
+    }
+    
+    var isImplicitProvider: Bool {
+        return type.matches(#"^\(\)\s->"#)
+    }
+    
+    var isWeakProvider: Bool {
+        return type.matches("WeakProvider<.*>")
     }
 }
 

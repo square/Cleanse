@@ -184,6 +184,13 @@ class BindingsVisitorTests: XCTestCase {
         XCTAssertTrue(result.referenceProviders.first!.debugData.location!.hasSuffix("DanglingAndReference.swift:20:36"))
         XCTAssertNotNil(result.danglingProviders.first!.debugData.location)
         XCTAssertTrue(result.danglingProviders.first!.debugData.location!.hasSuffix("DanglingAndReference.swift:14:21"))
-
+    }
+    
+    func testImplicitProviderDependency() {
+        let node = SyntaxParser.parse(text: Fixtures.BasicBindings).first!
+        visitor.walk(node)
+        let result = visitor.finalize()
+        XCTAssertEqual(result.standardProviders.count, 1)
+        XCTAssertEqual(result.standardProviders.first!.dependencies, ["() -> Float", "() -> Bool", "() -> Float"])
     }
 }

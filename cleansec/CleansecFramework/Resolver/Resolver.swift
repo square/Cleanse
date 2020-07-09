@@ -96,7 +96,7 @@ fileprivate extension Resolver {
     }
     
     static func resolveDependencies(for bindings: ComponentBindings, additionalDependencies: [String], diagnostics: inout [ResolutionError]) {
-        bindings.providersByType.flatMap { $0.value }.filter { !$0.isLazyProvider }.forEach { binding in
+        bindings.providersByType.flatMap { $0.value }.filter { !$0.isLazyProvider && !$0.isWeakProvider && !$0.isImplicitProvider }.forEach { binding in
             let missingDependencyErrors = binding.dependencies.flatMap { d -> [ResolutionError] in
                 var errors: [ResolutionError] = []
                 if bindings.provider(for: d) == nil {
@@ -126,7 +126,7 @@ fileprivate extension Resolver {
         resolved: inout Set<String>,
         diagnostics: inout [ResolutionError]) {
         
-        if resolved.contains(type) {
+        if resolved.contains(type) || type.matches("WeakProvider<.*>") {
             return
         }
         
@@ -163,6 +163,8 @@ fileprivate extension Resolver {
             } else {
                 dict[provider.type] = [provider]
                 dict[provider.lazyProvider.type] = [provider.lazyProvider]
+                dict[provider.implicitProvider.type] = [provider.implicitProvider]
+                dict[provider.weakProvider.type] = [provider.weakProvider]
             }
         })
         
@@ -202,20 +204,16 @@ fileprivate extension Resolver {
         return foundModules
     }
     
+    // Resolves all directly and transitively installed subcomponents in a given component.
     static func resolveSubcomponents(_ componentsByName: [String:LinkedComponent], in component: LinkedComponent, with modules: [LinkedModule], diagnostics: inout [ResolutionError]) -> [LinkedComponent] {
-        var seenComponents = Set(component.subcomponents)
-        var componentSearchQueue = Array(seenComponents)
         var foundSubcomponents: [LinkedComponent] = []
         
-        while !componentSearchQueue.isEmpty {
-            let top = componentSearchQueue.remove(at: 0)
-            if let foundModule = componentsByName[top] {
-                foundSubcomponents.append(foundModule)
-                let uniqueInstalledSubcomponents = Set(foundModule.subcomponents).subtracting(seenComponents)
-                seenComponents.formUnion(uniqueInstalledSubcomponents)
-                componentSearchQueue.append(contentsOf: uniqueInstalledSubcomponents)
+        let installedSubcomponents = Set(component.subcomponents + modules.flatMap { $0.subcomponents })
+        installedSubcomponents.forEach { c in
+            if let foundComponent = componentsByName[c] {
+                foundSubcomponents.append(foundComponent)
             } else {
-                diagnostics.append(ResolutionError(type: .missingSubcomponent(top)))
+                diagnostics.append(ResolutionError(type: .missingSubcomponent(c)))
             }
         }
         
