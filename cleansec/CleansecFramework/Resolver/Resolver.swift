@@ -34,7 +34,7 @@ public struct Resolver {
         }
         
         var diagnostics: [ResolutionError] = []
-        return componentsByName.values.filter { $0.isRoot }.map { resolve(component: $0, modulesByName: modulesByName, componentsByName: componentsByName, diagnostics: &diagnostics)}
+        return componentsByName.values.filter { $0.isRoot }.map { resolve(component: $0, modulesByName: modulesByName, componentsByName: componentsByName, diagnostics: &diagnostics) }
     }
 }
 

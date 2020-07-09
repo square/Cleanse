@@ -14,7 +14,7 @@ public protocol TypedSyntax: Syntax {
 
 extension TypedSyntax {
     public var type: String {
-        raw.trimmedLeadingWhitespace.firstCapture("type=\\'(.*)\\'")!
+        raw.trimmedLeadingWhitespace.firstCapture(#"(?<!interface\s)type=\'(.*)\'"#)!
     }
 }
 

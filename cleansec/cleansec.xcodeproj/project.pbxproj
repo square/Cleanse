@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		DC7CDDDC24B68A20003A1221 /* BasicBindings.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7CDDDB24B68A20003A1221 /* BasicBindings.swift */; };
+		DC7CE83A24B77431003A1221 /* ComponentWithSeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7CE83924B77431003A1221 /* ComponentWithSeed.swift */; };
 		DC8497C0246A1D1600E704D6 /* Cleansec_Generate_Fixtures.h in Headers */ = {isa = PBXBuildFile; fileRef = DC8497BE246A1D1600E704D6 /* Cleansec_Generate_Fixtures.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DC8497DA246A1D3400E704D6 /* PropertyInjectorRoot.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8497C5246A1D3300E704D6 /* PropertyInjectorRoot.swift */; };
 		DC8497DB246A1D3400E704D6 /* ModuleWithDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8497C6246A1D3300E704D6 /* ModuleWithDependencies.swift */; };
@@ -175,6 +176,7 @@
 
 /* Begin PBXFileReference section */
 		DC7CDDDB24B68A20003A1221 /* BasicBindings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicBindings.swift; sourceTree = "<group>"; };
+		DC7CE83924B77431003A1221 /* ComponentWithSeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentWithSeed.swift; sourceTree = "<group>"; };
 		DC8497BC246A1D1600E704D6 /* Cleansec_Generate_Fixtures.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Cleansec_Generate_Fixtures.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC8497BE246A1D1600E704D6 /* Cleansec_Generate_Fixtures.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Cleansec_Generate_Fixtures.h; sourceTree = "<group>"; };
 		DC8497BF246A1D1600E704D6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -344,6 +346,7 @@
 				DC8497CD246A1D3300E704D6 /* TaggedProviderDependency.swift */,
 				DCD306C82479A28000CDD7B1 /* ManyDependencies.swift */,
 				DC7CDDDB24B68A20003A1221 /* BasicBindings.swift */,
+				DC7CE83924B77431003A1221 /* ComponentWithSeed.swift */,
 			);
 			path = "Code Fixtures";
 			sourceTree = "<group>";
@@ -856,6 +859,7 @@
 				DC8497E0246A1D3400E704D6 /* InnerTag.swift in Sources */,
 				DC8497ED246A1D3400E704D6 /* NestedModule.swift in Sources */,
 				DC8497E4246A1D3400E704D6 /* ModuleWithTaggedProvider.swift in Sources */,
+				DC7CE83A24B77431003A1221 /* ComponentWithSeed.swift in Sources */,
 				DC8497DE246A1D3400E704D6 /* DecoratedReferenceProvider.swift in Sources */,
 				DC8497DB246A1D3400E704D6 /* ModuleWithDependencies.swift in Sources */,
 				DC8497DC246A1D3400E704D6 /* SimpleRootComponent.swift in Sources */,

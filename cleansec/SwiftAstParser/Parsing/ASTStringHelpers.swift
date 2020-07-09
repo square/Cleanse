@@ -10,6 +10,8 @@ extension String {
         }
         if let _ = firstCapture(#"^\s+\((\w+)"#) {
             return true
+        } else if matches(#"\s+\($"#) {
+            return true
         } else {
             return false
         }
