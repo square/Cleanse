@@ -53,7 +53,7 @@ extension CanonicalProvider {
     }
     
     var isLazyProvider: Bool {
-        return type.matches("Provider<.*>")
+        return type.matches("^Provider<.*>")
     }
     
     var isImplicitProvider: Bool {
@@ -61,7 +61,7 @@ extension CanonicalProvider {
     }
     
     var isWeakProvider: Bool {
-        return type.matches("WeakProvider<.*>")
+        return type.matches("^WeakProvider<.*>")
     }
 }
 
