@@ -401,4 +401,22 @@ class ResolverTests: XCTestCase {
         XCTAssertEqual(resolved.first!.diagnostics.first!, ResolutionError(type: .cyclicalDependency(chain: ["DepB", "DepC", "DepB"])))
         XCTAssertEqual(resolved.first!.diagnostics[1], ResolutionError(type: .cyclicalDependency(chain: ["DepD", "DepE", "DepD"])))
     }
+    
+    func testResolvesTaggedProviders() {
+        let rootA = StandardProvider(type: "TaggedProvider<A>", dependencies: ["DepA"], tag: nil, scoped: nil, collectionType: nil)
+        let component = LinkedComponent(
+            type: "Root",
+            rootType: "TaggedProvider<A>",
+            providers: [rootA],
+            seed: "Void",
+            includedModules: [],
+            subcomponents: [],
+            isRoot: true
+        )
+        let interface = LinkedInterface(components: [component], modules: [])
+        let resolved = Resolver.resolve(interface: interface)
+        XCTAssertEqual(resolved.count, 1)
+        XCTAssertEqual(resolved.first!.diagnostics.count, 1)
+        XCTAssertEqual(resolved.first!.diagnostics.first!, ResolutionError(type: .missingProvider(dependency: "DepA", dependedUpon: rootA.mapToCanonical())))
+    }
 }
