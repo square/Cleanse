@@ -52,11 +52,13 @@ def main
 	sanitized_og_command = og_command.map { |c| c.to_s.gsub(/\s/, "\\ ") }
 	sanitized_ast_command = dump_ast_command.map { |c| c.to_s.gsub(/\s/, "\\ ") }
 	if ENV["DISABLE_DUMP_AST"]
-		system(sanitized_og_command.join(" "))
+		status = system(sanitized_og_command.join(" "))
+		exit(1) unless status
 	else
 		pid = spawn(sanitized_ast_command.join(" "))
-		system(sanitized_og_command.join(" "))
+		status = system(sanitized_og_command.join(" "))
 		Process.wait(pid)
+		exit(1) unless status
 	end
 end
 
