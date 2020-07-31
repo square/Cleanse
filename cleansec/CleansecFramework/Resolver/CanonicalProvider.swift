@@ -7,68 +7,26 @@
 //
 
 import Foundation
-import SwiftAstParser
 
 /// This is the final form of a provider used by dependency graphs.
 /// For example, tagged providers with a special tag turn into `TaggedProvider<MyTag>`.
 public struct CanonicalProvider: Equatable {
-    public let type: String
-    public let dependencies: [String]
+    public let type: TypeKey
+    public let dependencies: [TypeKey]
     public let isCollectionProvider: Bool
     public let debugData: DebugData
 }
 
 extension CanonicalProvider: CustomStringConvertible {
     public var description: String {
-        "Provider: \(type) --> \(dependencies)"
-    }
-}
-
-extension CanonicalProvider {
-    var lazyProvider: CanonicalProvider {
-        CanonicalProvider(
-            type: "Provider<\(type)>",
-            dependencies: dependencies,
-            isCollectionProvider: isCollectionProvider,
-            debugData: debugData
-        )
-    }
-    
-    var implicitProvider: CanonicalProvider {
-        CanonicalProvider(
-            type: "() -> \(type)",
-            dependencies: dependencies,
-            isCollectionProvider: isCollectionProvider,
-            debugData: debugData
-        )
-    }
-    
-    var weakProvider: CanonicalProvider {
-        CanonicalProvider(
-            type: "WeakProvider<\(type)>",
-            dependencies: dependencies,
-            isCollectionProvider: isCollectionProvider,
-            debugData: debugData
-        )
-    }
-    
-    var isLazyProvider: Bool {
-        return type.matches("^Provider<.*>")
-    }
-    
-    var isImplicitProvider: Bool {
-        return type.matches(#"^\(\)\s->"#)
-    }
-    
-    var isWeakProvider: Bool {
-        return type.matches("^WeakProvider<.*>")
+        "Provider: \(type.primaryType) --> \(dependencies)"
     }
 }
 
 extension LinkedComponent {
     var seedProvider: CanonicalProvider {
         return CanonicalProvider(
-            type: seed,
+            type: TypeKey(type: seed),
             dependencies: [],
             isCollectionProvider: false,
             debugData: .empty
@@ -77,7 +35,7 @@ extension LinkedComponent {
     
     var componentFactoryProvider: CanonicalProvider {
         return CanonicalProvider(
-            type: "ComponentFactory<\(type)>",
+            type: TypeKey(type: "ComponentFactory<\(type)>"),
             dependencies: [],
             isCollectionProvider: false,
             debugData: .empty
@@ -85,27 +43,33 @@ extension LinkedComponent {
     }
 }
 
+extension Array where Element == String {
+    func mapTypesToKey() -> [TypeKey] {
+        map { TypeKey(type: $0) }
+    }
+}
+
 extension StandardProvider {
     func mapToCanonical() -> CanonicalProvider {
         if let tag = tag {
             return CanonicalProvider(
-                type: "TaggedProvider<\(tag)>",
-                dependencies: dependencies,
+                type: TypeKey(type: "TaggedProvider<\(tag)>"),
+                dependencies: dependencies.mapTypesToKey(),
                 isCollectionProvider: collectionType != nil,
                 debugData: debugData
             )
         }
         if let collection = collectionType {
             return CanonicalProvider(
-                type: collection,
-                dependencies: dependencies,
+                type: TypeKey(type: collection),
+                dependencies: dependencies.mapTypesToKey(),
                 isCollectionProvider: true,
                 debugData: debugData
             )
         }
         return CanonicalProvider(
-            type: type,
-            dependencies: dependencies,
+            type: TypeKey(type: type),
+            dependencies: dependencies.mapTypesToKey(),
             isCollectionProvider: false,
             debugData: debugData
         )

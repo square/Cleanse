@@ -34,56 +34,40 @@ public struct Resolver {
         }
         
         var diagnostics: [ResolutionError] = []
-        return componentsByName.values.filter { $0.isRoot }.map { resolve(component: $0, modulesByName: modulesByName, componentsByName: componentsByName, diagnostics: &diagnostics) }
+        return componentsByName.values.filter { $0.isRoot }.map { $0.resolve(modulesByName: modulesByName, componentsByName: componentsByName, diagnostics: &diagnostics) }
     }
 }
 
-fileprivate extension Resolver {
-    // Helper object for exposing bindings created in ancestor scopes.
-    class ComponentBindings {
-        let parent: ComponentBindings?
-        let providersByType: [String:[CanonicalProvider]]
-        
-        init(providersByType: [String:[CanonicalProvider]], parent: ComponentBindings? = nil) {
-            self.providersByType = providersByType
-            self.parent = parent
-        }
-        
-        func provider(for type: String) -> CanonicalProvider? {
-            return providersByType[type]?.first ?? parent?.provider(for: type)
-        }
+// Helper object for exposing bindings created in ancestor scopes.
+fileprivate class ComponentBindings {
+    let parent: ComponentBindings?
+    let providersByType: [TypeKey:[CanonicalProvider]]
+    
+    init(providersByType: [TypeKey:[CanonicalProvider]], parent: ComponentBindings? = nil) {
+        self.providersByType = providersByType
+        self.parent = parent
     }
     
-    static func resolve(component: LinkedComponent, modulesByName: [String:LinkedModule], componentsByName: [String:LinkedComponent], parentBindings: ComponentBindings? = nil, diagnostics: inout [ResolutionError]) -> ResolvedComponent {
-        let allModules = resolveModules(
-            modulesByName, in: component,
-            diagnostics: &diagnostics
-        )
-        let allSubcomponents = resolveSubcomponents(
-            componentsByName,
-            in: component,
-            with: allModules,
-            diagnostics: &diagnostics
-        )
-        
-        let providersByType = createUniqueProvidersMap(
-            in: component,
-            includedModules: allModules,
-            installedSubcomponents: allSubcomponents,
-            diagnostics: &diagnostics
-        )
-        
+    func provider(for type: TypeKey) -> CanonicalProvider? {
+        return providersByType[type]?.first ?? parent?.provider(for: type)
+    }
+}
+
+fileprivate extension LinkedComponent {
+    func resolve(modulesByName: [String:LinkedModule], componentsByName: [String:LinkedComponent], parentBindings: ComponentBindings? = nil, diagnostics: inout [ResolutionError]) -> ResolvedComponent {
+        let allModules = resolveIncludedModules(modulesByName: modulesByName, diagnostics: &diagnostics)
+        let allSubcomponents = resolveSubcomponents(componentsByName, with: allModules, diagnostics: &diagnostics)
+        let providersByType = createUniqueProvidersMap(includedModules: allModules, installedSubcomponents: allSubcomponents, diagnostics: &diagnostics)
+
         let componentBindings = ComponentBindings(providersByType: providersByType, parent: parentBindings)
-        
         // Added dependency is the component's `rootType`. We need to make sure there is a binding for the root object.
-        resolveDependencies(for: componentBindings, additionalDependencies: [component.rootType], diagnostics: &diagnostics)
+        componentBindings.resolveDependencies(additionalDependencies: [TypeKey(type: rootType)], diagnostics: &diagnostics)
+        componentBindings.resolveAcyclicGraph(root: TypeKey(type: rootType), diagnostics: &diagnostics)
         
-        resolveAcyclicGraph(root: component.rootType, bindings: componentBindings, diagnostics: &diagnostics)
-        
-        let children = allSubcomponents.map { resolve(component: $0, modulesByName: modulesByName, componentsByName: componentsByName, parentBindings: componentBindings, diagnostics: &diagnostics) }
+        let children = allSubcomponents.map { $0.resolve(modulesByName: modulesByName, componentsByName: componentsByName, parentBindings: componentBindings, diagnostics: &diagnostics) }
         
         let resolvedComponent = ResolvedComponent(
-            type: component.type,
+            type: type,
             providersByType: providersByType,
             children: children,
             diagnostics: diagnostics)
@@ -94,98 +78,10 @@ fileprivate extension Resolver {
         
         return resolvedComponent
     }
-    
-    static func resolveDependencies(for bindings: ComponentBindings, additionalDependencies: [String], diagnostics: inout [ResolutionError]) {
-        bindings.providersByType.flatMap { $0.value }.filter { !$0.isLazyProvider && !$0.isWeakProvider && !$0.isImplicitProvider }.forEach { binding in
-            let missingDependencyErrors = binding.dependencies.flatMap { d -> [ResolutionError] in
-                var errors: [ResolutionError] = []
-                if bindings.provider(for: d) == nil {
-                    errors.append(ResolutionError(type: .missingProvider(dependency: d, dependedUpon: binding)))
-                }
-                return errors
-            }
-            diagnostics.append(contentsOf: missingDependencyErrors)
-        }
-        
-        additionalDependencies.forEach { dependency in
-            if bindings.provider(for: dependency) == nil {
-                diagnostics.append(ResolutionError(type: .missingProvider(dependency: dependency, dependedUpon: nil)))
-            }
-        }
-    }
-    
-    static func resolveAcyclicGraph(root: String, bindings: ComponentBindings, diagnostics: inout [ResolutionError]) {
-        var resolvedNodes = Set<String>()
-        traverseDependency(root, bindings: bindings, ancestors: [], resolved: &resolvedNodes, diagnostics: &diagnostics)
-    }
-    
-    static func traverseDependency(
-        _ type: String,
-        bindings: ComponentBindings,
-        ancestors: [String],
-        resolved: inout Set<String>,
-        diagnostics: inout [ResolutionError]) {
-        
-        if resolved.contains(type) || type.matches("WeakProvider<.*>") {
-            return
-        }
-        
-        if let cycleIdx = ancestors.firstIndex(of: type) {
-            resolved.insert(type)
-            let chain = Array(ancestors[cycleIdx...]) + [type]
-            diagnostics.append(ResolutionError(type: .cyclicalDependency(chain: chain)))
-            return
-        }
-        
-        // Some dependencies may not exist since they come from ancestor scopes. This is okay
-        // as it isn't possible for a cycle to exist across component boundaries.
-        guard let deps = bindings.providersByType[type] else {
-            return
-        }
-        
-        deps
-            .flatMap { $0.dependencies }
-            .forEach { traverseDependency($0, bindings: bindings, ancestors: ancestors + [type], resolved: &resolved, diagnostics: &diagnostics) }
-        
-        resolved.insert(type)
-    }
-    
-    
-    
-    static func createUniqueProvidersMap(in component: LinkedComponent, includedModules: [LinkedModule], installedSubcomponents: [LinkedComponent], diagnostics: inout [ResolutionError]) -> [String:[CanonicalProvider]] {
-        var allCanonicalProviders = (component.providers + includedModules.flatMap { $0.providers }).map { $0.mapToCanonical() }
-        allCanonicalProviders.append(component.seedProvider)
-        allCanonicalProviders.append(contentsOf: installedSubcomponents.map { $0.componentFactoryProvider} )
-        
-        let providersByType = allCanonicalProviders.reduce(into: [String:[CanonicalProvider]](), { (dict, provider) in
-            if let _ = dict[provider.type] {
-                dict[provider.type]!.append(provider)
-            } else {
-                dict[provider.type] = [provider]
-                dict[provider.lazyProvider.type] = [provider.lazyProvider]
-                dict[provider.implicitProvider.type] = [provider.implicitProvider]
-                dict[provider.weakProvider.type] = [provider.weakProvider]
-            }
-        })
-        
-        let duplicateProviderErrors = providersByType.values.compactMap { (providers) -> ResolutionError? in
-            guard providers.count > 1 else {
-                return nil
-            }
-            if providers.allSatisfy({ $0.isCollectionProvider }) {
-                return nil
-            }
-            return ResolutionError(type: .duplicateProvider(providers))
-        }
-        
-        diagnostics.append(contentsOf: duplicateProviderErrors)
-        
-        return providersByType
-    }
 
     // Resolves all directly and transitively included modules in a given component.
-    static func resolveModules(_ modulesByName: [String:LinkedModule], in component: LinkedComponent, diagnostics: inout [ResolutionError]) -> [LinkedModule] {
-        var seenModules = Set(component.includedModules)
+    func resolveIncludedModules(modulesByName: [String:LinkedModule], diagnostics: inout [ResolutionError]) -> [LinkedModule] {
+        var seenModules = Set(includedModules)
         var moduleSearchQueue = Array(seenModules)
         var foundModules: [LinkedModule] = []
         
@@ -205,10 +101,10 @@ fileprivate extension Resolver {
     }
     
     // Resolves all directly and transitively installed subcomponents in a given component.
-    static func resolveSubcomponents(_ componentsByName: [String:LinkedComponent], in component: LinkedComponent, with modules: [LinkedModule], diagnostics: inout [ResolutionError]) -> [LinkedComponent] {
+    func resolveSubcomponents(_ componentsByName: [String:LinkedComponent], with modules: [LinkedModule], diagnostics: inout [ResolutionError]) -> [LinkedComponent] {
         var foundSubcomponents: [LinkedComponent] = []
         
-        let installedSubcomponents = Set(component.subcomponents + modules.flatMap { $0.subcomponents })
+        let installedSubcomponents = Set(subcomponents + modules.flatMap { $0.subcomponents })
         installedSubcomponents.forEach { c in
             if let foundComponent = componentsByName[c] {
                 foundSubcomponents.append(foundComponent)
@@ -218,5 +114,85 @@ fileprivate extension Resolver {
         }
         
         return foundSubcomponents
+    }
+    
+    func createUniqueProvidersMap(includedModules: [LinkedModule], installedSubcomponents: [LinkedComponent], diagnostics: inout [ResolutionError]) -> [TypeKey:[CanonicalProvider]] {
+        var allCanonicalProviders = (providers + includedModules.flatMap { $0.providers }).map { $0.mapToCanonical() }
+        allCanonicalProviders.append(seedProvider)
+        allCanonicalProviders.append(contentsOf: installedSubcomponents.map { $0.componentFactoryProvider} )
+        
+        let providersByType = allCanonicalProviders.reduce(into: [TypeKey:[CanonicalProvider]](), { (dict, provider) in
+            dict[provider.type, default: []].append(provider)
+        })
+        
+        let duplicateProviderErrors = providersByType.values.compactMap { (providers) -> ResolutionError? in
+            guard providers.count > 1 else {
+                return nil
+            }
+            if providers.allSatisfy({ $0.isCollectionProvider }) {
+                return nil
+            }
+            return ResolutionError(type: .duplicateProvider(providers))
+        }
+        
+        diagnostics.append(contentsOf: duplicateProviderErrors)
+        
+        return providersByType
+    }
+}
+
+extension ComponentBindings {
+    func resolveDependencies(additionalDependencies: [TypeKey], diagnostics: inout [ResolutionError]) {
+        providersByType.flatMap { $0.value }.forEach { binding in
+            let missingDependencyErrors = binding.dependencies.flatMap { d -> [ResolutionError] in
+                var errors: [ResolutionError] = []
+                if provider(for: d) == nil {
+                    errors.append(ResolutionError(type: .missingProvider(dependency: d, dependedUpon: binding)))
+                }
+                return errors
+            }
+            diagnostics.append(contentsOf: missingDependencyErrors)
+        }
+        
+        additionalDependencies.forEach { dependency in
+            if provider(for: dependency) == nil {
+                diagnostics.append(ResolutionError(type: .missingProvider(dependency: dependency, dependedUpon: nil)))
+            }
+        }
+    }
+    
+    func resolveAcyclicGraph(root: TypeKey, diagnostics: inout [ResolutionError]) {
+        var resolvedNodes = Set<TypeKey>()
+        traverseDependency(root, ancestors: [], resolved: &resolvedNodes, diagnostics: &diagnostics)
+    }
+    
+    func traverseDependency(
+        _ type: TypeKey,
+        ancestors: [TypeKey],
+        resolved: inout Set<TypeKey>,
+        diagnostics: inout [ResolutionError]) {
+        
+        if resolved.contains(type) || type.isWeakProvider {
+            return
+        }
+        
+        if let cycleIdx = ancestors.firstIndex(of: type) {
+            resolved.insert(type)
+            let chain = Array(ancestors[cycleIdx...]) + [type]
+            diagnostics.append(ResolutionError(type: .cyclicalDependency(chain: chain)))
+            return
+        }
+        
+        // Some dependencies may not exist since they come from ancestor scopes. This is okay
+        // as it isn't possible for a cycle to exist across component boundaries.
+        guard let deps = providersByType[type] else {
+            return
+        }
+        
+        deps
+            .flatMap { $0.dependencies }
+            .forEach { traverseDependency($0, ancestors: ancestors + [type], resolved: &resolved, diagnostics: &diagnostics) }
+        
+        resolved.insert(type)
     }
 }

@@ -13,8 +13,8 @@ public struct ResolutionError: Equatable, Error {
         case missingModule(String)
         case missingSubcomponent(String)
         case duplicateProvider([CanonicalProvider])
-        case missingProvider(dependency: String, dependedUpon: CanonicalProvider?)
-        case cyclicalDependency(chain: [String])
+        case missingProvider(dependency: TypeKey, dependedUpon: CanonicalProvider?)
+        case cyclicalDependency(chain: [TypeKey])
     }
     
     let type: Error
@@ -25,7 +25,7 @@ extension ResolutionError: CustomStringConvertible {
         switch type {
         case .missingProvider(let provider, let parent):
             var errorDescription = errorPrefix(debug: parent?.debugData)
-            errorDescription += "Missing Provider: '\(provider)'\n"
+            errorDescription += "Missing Provider: '\(provider.primaryType)'\n"
             if let p = parent {
                 errorDescription += "Depended upon by: '\(p.type)'"
             }
@@ -48,7 +48,7 @@ extension ResolutionError: CustomStringConvertible {
             
             return errorDescription
         case .cyclicalDependency(let chain):
-            let chainDescription = chain.joined(separator: " --> ")
+            let chainDescription = chain.map { $0.primaryType }.joined(separator: " --> ")
             return "error: Cycle in dependencies found: \(chainDescription)"
         }
     }

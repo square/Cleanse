@@ -29,12 +29,8 @@ class ResolverTests: XCTestCase {
         let interface = LinkedInterface(components: [subcomponent, component], modules: [module])
         let resolvedComponents = Resolver.resolve(interface: interface)
         XCTAssertEqual(resolvedComponents.count, 1)
-        let subcomponentFactory = resolvedComponents.first?.providersByType.keys.first { $0 == "ComponentFactory<Subcomponent>" }
-        let weakProvider = resolvedComponents.first?.providersByType.keys.first { $0 == "WeakProvider<MyClass>" }
-        let lazyProvider = resolvedComponents.first?.providersByType.keys.first { $0 == "Provider<MyClass>" }
+        let subcomponentFactory = resolvedComponents.first?.providersByType.keys.first { $0 == TypeKey(type: "ComponentFactory<Subcomponent>") }
         XCTAssertNotNil(subcomponentFactory)
-        XCTAssertNotNil(weakProvider)
-        XCTAssertNotNil(lazyProvider)
     }
     
     func testResolvesSimpleRoot() {
@@ -53,7 +49,7 @@ class ResolverTests: XCTestCase {
         let resolvedComponents = Resolver.resolve(interface: interface)
         XCTAssertEqual(resolvedComponents.count, 1)
         // Providers for Seed
-        XCTAssertEqual(resolvedComponents.first!.providersByType.count, 4)
+        XCTAssertEqual(resolvedComponents.first!.providersByType.count, 1)
     }
     
     func testCollectionBindingDuplicates() {
@@ -79,8 +75,8 @@ class ResolverTests: XCTestCase {
         let resolvedComponents = Resolver.resolve(interface: interface)
         XCTAssertEqual(resolvedComponents.count, 1)
         XCTAssertEqual(resolvedComponents.first!.diagnostics.count, 0)
-        XCTAssertEqual(resolvedComponents.first!.providersByType["[A]"]!.count, 2)
-        XCTAssertEqual(resolvedComponents.first!.providersByType["[[A]]"]!.count, 2)
+        XCTAssertEqual(resolvedComponents.first!.providersByType[TypeKey(type: "[A]")]!.count, 2)
+        XCTAssertEqual(resolvedComponents.first!.providersByType[TypeKey(type: "[[A]]")]!.count, 2)
     }
     
     func testInvalidCollectionBindings() {
@@ -336,7 +332,7 @@ class ResolverTests: XCTestCase {
         let resolvedComponents = Resolver.resolve(interface: interface)
         XCTAssertEqual(resolvedComponents.count, 1)
         XCTAssertEqual(resolvedComponents.first!.diagnostics.count, 0)
-        XCTAssertNotNil(resolvedComponents.first!.providersByType["TaggedProvider<MyTag>"])
+        XCTAssertNotNil(resolvedComponents.first!.providersByType[TypeKey(type: "TaggedProvider<MyTag>")])
     }
     
     func testBasicCyclicalDependency() {
@@ -355,7 +351,7 @@ class ResolverTests: XCTestCase {
         let interface = LinkedInterface(components: [component], modules: [])
         let resolved = Resolver.resolve(interface: interface)
         XCTAssertEqual(resolved.count, 1)
-        XCTAssertEqual(resolved.first!.diagnostics.first!, ResolutionError(type: .cyclicalDependency(chain: ["DepA", "DepB", "DepA"])))
+        XCTAssertEqual(resolved.first!.diagnostics.first!, ResolutionError(type: .cyclicalDependency(chain: [TypeKey(type: "DepA"), TypeKey(type: "DepB"), TypeKey(type: "DepA")])))
     }
     
     func testThreeNCyclicalDependency() {
@@ -375,7 +371,7 @@ class ResolverTests: XCTestCase {
         let interface = LinkedInterface(components: [component], modules: [])
         let resolved = Resolver.resolve(interface: interface)
         XCTAssertEqual(resolved.count, 1)
-        XCTAssertEqual(resolved.first!.diagnostics.first!, ResolutionError(type: .cyclicalDependency(chain: ["DepA", "DepB", "DepC", "DepA"])))
+        XCTAssertEqual(resolved.first!.diagnostics.first!, ResolutionError(type: .cyclicalDependency(chain: [TypeKey(type: "DepA"), TypeKey(type: "DepB"), TypeKey(type: "DepC"), TypeKey(type: "DepA")])))
     }
     
     func testMultipleCyclicalDependency() {
@@ -398,8 +394,8 @@ class ResolverTests: XCTestCase {
         let resolved = Resolver.resolve(interface: interface)
         XCTAssertEqual(resolved.count, 1)
         XCTAssertEqual(resolved.first!.diagnostics.count, 2)
-        XCTAssertEqual(resolved.first!.diagnostics.first!, ResolutionError(type: .cyclicalDependency(chain: ["DepB", "DepC", "DepB"])))
-        XCTAssertEqual(resolved.first!.diagnostics[1], ResolutionError(type: .cyclicalDependency(chain: ["DepD", "DepE", "DepD"])))
+        XCTAssertEqual(resolved.first!.diagnostics.first!, ResolutionError(type: .cyclicalDependency(chain: [TypeKey(type: "DepB"), TypeKey(type: "DepC"), TypeKey(type: "DepB")])))
+        XCTAssertEqual(resolved.first!.diagnostics[1], ResolutionError(type: .cyclicalDependency(chain: [TypeKey(type: "DepD"), TypeKey(type: "DepE"), TypeKey(type: "DepD")])))
     }
     
     func testResolvesTaggedProviders() {
@@ -417,6 +413,6 @@ class ResolverTests: XCTestCase {
         let resolved = Resolver.resolve(interface: interface)
         XCTAssertEqual(resolved.count, 1)
         XCTAssertEqual(resolved.first!.diagnostics.count, 1)
-        XCTAssertEqual(resolved.first!.diagnostics.first!, ResolutionError(type: .missingProvider(dependency: "DepA", dependedUpon: rootA.mapToCanonical())))
+        XCTAssertEqual(resolved.first!.diagnostics.first!, ResolutionError(type: .missingProvider(dependency: TypeKey(type: "DepA"), dependedUpon: rootA.mapToCanonical())))
     }
 }
