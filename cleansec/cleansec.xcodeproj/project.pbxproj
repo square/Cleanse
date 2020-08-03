@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DC27A0C824D49C8800D37708 /* TypeKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC27A0C724D49C8800D37708 /* TypeKey.swift */; };
 		DC7CDDDC24B68A20003A1221 /* BasicBindings.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7CDDDB24B68A20003A1221 /* BasicBindings.swift */; };
 		DC7CE83A24B77431003A1221 /* ComponentWithSeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7CE83924B77431003A1221 /* ComponentWithSeed.swift */; };
 		DC8497C0246A1D1600E704D6 /* Cleansec_Generate_Fixtures.h in Headers */ = {isa = PBXBuildFile; fileRef = DC8497BE246A1D1600E704D6 /* Cleansec_Generate_Fixtures.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -175,6 +176,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		DC27A0C724D49C8800D37708 /* TypeKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeKey.swift; sourceTree = "<group>"; };
 		DC7CDDDB24B68A20003A1221 /* BasicBindings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicBindings.swift; sourceTree = "<group>"; };
 		DC7CE83924B77431003A1221 /* ComponentWithSeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentWithSeed.swift; sourceTree = "<group>"; };
 		DC8497BC246A1D1600E704D6 /* Cleansec_Generate_Fixtures.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Cleansec_Generate_Fixtures.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -497,6 +499,7 @@
 				DC9966FD246C60EE0015B473 /* CanonicalProvider.swift */,
 				DC996700246C75740015B473 /* ResolvedComponent.swift */,
 				DCD305E7247736BC00CDD7B1 /* LinkedMerging.swift */,
+				DC27A0C724D49C8800D37708 /* TypeKey.swift */,
 			);
 			path = Resolver;
 			sourceTree = "<group>";
@@ -920,6 +923,7 @@
 				DCD305E8247736BC00CDD7B1 /* LinkedMerging.swift in Sources */,
 				DC9966F0246B5F4D0015B473 /* LinkedInterface.swift in Sources */,
 				DC849821246B2FEB00E704D6 /* ComponentRootProviderVisitor.swift in Sources */,
+				DC27A0C824D49C8800D37708 /* TypeKey.swift in Sources */,
 				DC9966EE246B5F280015B473 /* LinkedComponent.swift in Sources */,
 				DC84981B246B249D00E704D6 /* ProviderBuilders.swift in Sources */,
 				DC849808246B050F00E704D6 /* FileVisitor.swift in Sources */,
