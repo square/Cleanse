@@ -49,9 +49,8 @@ struct InputParser {
     }
     
     // dump-ast output has some irregularities that need to be sanitized.
-    // `source_file` doesn't prepend a newline and some
     private static func sanitize(lines: [String]) -> [String] {
-        let fixedText = lines.flatMap { element -> [String] in
+        return lines.flatMap { element -> [String] in
             if let range = element.range(of: "(source_file") {
                 return [String(element.prefix(upTo: range.lowerBound)), String(element.suffix(from: range.lowerBound))]
             } else {
@@ -59,24 +58,38 @@ struct InputParser {
             }
         }
         .filter { !$0.isEmpty }
-        
-        var lastGoodIdx = -1
-        var idx = 0
-        var sanitizedText: [String] = []
-        sanitizedText.reserveCapacity(fixedText.endIndex)
-
-        while idx < fixedText.endIndex {
-            defer {
-                idx += 1
-                lastGoodIdx = sanitizedText.endIndex - 1
+        .flatMapScanPrevious { (prev, current) -> [String] in
+            if current.isOnlyWhitespace {
+                return []
             }
-            let element = fixedText[idx]
-            if !element.isValidNewlineStart && lastGoodIdx >= 0 {
-                sanitizedText[lastGoodIdx].append(contentsOf: element)
+            
+            guard let previous = prev else {
+                return [current]
+            }
+            if previous.isOnlyWhitespace {
+                return [previous + current]
+            }
+            return [current]
+        }
+        .reduce(into: [String]()) { (result, element) in
+            if !element.isValidNewlineStart && result.count > 0 {
+                result[result.endIndex - 1].append(contentsOf: element)
             } else if element.isValidNewlineStart {
-                sanitizedText.append(element)
+                result.append(element)
             }
         }
-        return sanitizedText
+    }
+}
+
+fileprivate extension Array {
+    func flatMapScanPrevious<SegmentOfResult>(_ transform: (Element?, Element) throws -> SegmentOfResult) rethrows -> [SegmentOfResult.Element] where SegmentOfResult : Sequence {
+        return try enumerated().flatMap { (arg) -> SegmentOfResult in
+            let (offset, element) = arg
+            if offset == 0 {
+                return try transform(nil, element)
+            } else {
+                return try transform(self[offset - 1], element)
+            }
+        }
     }
 }

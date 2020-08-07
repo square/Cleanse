@@ -57,4 +57,11 @@ class SanitizerTests: XCTestCase {
         let fixtureF = "  (something_cool  "
         XCTAssertEqual(fixtureF.isValidNewlineStart, true)
     }
+    
+    func testSpacesNewLine() {
+        let fixture = "(source_file)\n  (node)\n  \n  (node))"
+        let result = SyntaxParser.parse(text: fixture)
+        XCTAssert(result.count == 1)
+        XCTAssert(result.first!.children.count == 1)
+    }
 }
