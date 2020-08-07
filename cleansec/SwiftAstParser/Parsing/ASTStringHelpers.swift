@@ -16,6 +16,10 @@ extension String {
             return false
         }
     }
+    
+    var isOnlyWhitespace: Bool {
+        allSatisfy { $0.isWhitespace }
+    }
 }
 
 extension String {
