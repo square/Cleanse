@@ -54,9 +54,16 @@ public struct ProviderVisitor: SyntaxVisitor {
     }
     
     public mutating func visit(node: CallExpr) {
-        if node.type.matches("BindingReceipt<.*>") {
+        if let receiptType = node.type.firstCapture("BindingReceipt<(.*)>") {
             if let loc = node.raw.firstCapture(#"location=(.*)\srange"#) {
                 bindingTypeBuilder = bindingTypeBuilder.setDebugData(.location(loc))
+            }
+            if let danglingProviderType = receiptType.firstCapture(#"^ReceiptBinder<(.*)>"#) {
+                bindingTypeBuilder = bindingTypeBuilder.setType(type: danglingProviderType)
+            } else if let danglingPropertyInjectorType = receiptType.firstCapture(#"PropertyInjectionReceiptBinder<(.*)>\.Element>"#) {
+                bindingTypeBuilder = bindingTypeBuilder.setType(type: "PropertyInjector<\(danglingPropertyInjectorType)>")
+            } else if receiptType.matches(#"^PropertyInjector<.*>"#) {
+                bindingTypeBuilder = bindingTypeBuilder.setType(type: receiptType)
             }
             return
         }
@@ -66,8 +73,27 @@ public struct ProviderVisitor: SyntaxVisitor {
             return
         }
         switch baseBindingType {
-        case .provider, .propertyInjector, .assistedInjectionProvider:
+        case .provider:
             bindingTypeBuilder = bindingTypeBuilder.setBaseGraphBinding()
+            if let type = node.type.firstCapture(#"BaseBindingBuilder<(.*),\s.*>"#) {
+                bindingTypeBuilder = bindingTypeBuilder.setType(type: type)
+            } else {
+                os_log("Found base binding but couldn't parse type for: %@", type: .debug, node.raw)
+            }
+        case .propertyInjector:
+            bindingTypeBuilder = bindingTypeBuilder.setBaseGraphBinding()
+            if let type = node.type.firstCapture(#"PropertyInjectorBindingBuilder<.*,\s(.*)(?>)>"#) {
+                bindingTypeBuilder = bindingTypeBuilder.setType(type: "PropertyInjector<\(type)>")
+            } else {
+                os_log("Found base binding but couldn't parse type for: %@", type: .debug, node.raw)
+            }
+        case .assistedInjectionProvider:
+            bindingTypeBuilder = bindingTypeBuilder.setBaseGraphBinding()
+            if let type = node.type.firstCapture(#"AssistedInjectionSeedDecorator<.*,\s(.*)(?>)>"#) {
+                bindingTypeBuilder = bindingTypeBuilder.setType(type: "Factory<\(type)>")
+            } else {
+                os_log("Found base binding but couldn't parse type for: %@", type: .debug, node.raw)
+            }
         case .singularCollectionProvider:
             bindingTypeBuilder = bindingTypeBuilder.setCollectionBinding(singular: true)
         case .collectionProvider:
@@ -79,7 +105,7 @@ public struct ProviderVisitor: SyntaxVisitor {
                 os_log("Found tagged provider, but failed to parse Tag", type: .debug)
             }
         case .scopedProvider:
-            if let scope = node.type.allCaptures(#"(\w+)(?=>)"#).last {
+            if let scope = node.type.firstCapture(#"ScopedBindingDecorator.*\sBinder<(.*)>(?=\.Scope)"#) {
                 bindingTypeBuilder = bindingTypeBuilder.setScopedBinding(scope: scope)
             } else {
                 os_log("Found scoped provider, but failed to parse scope", type: .debug)
@@ -88,12 +114,13 @@ public struct ProviderVisitor: SyntaxVisitor {
     }
     
     public func finalize() -> ProviderResult? {
-        bindingTypeBuilder.build(bindingType: binding, type: type, dependencies: dependencies)
+        bindingTypeBuilder.build(bindingType: binding, dependencies: dependencies)
     }
 }
 
 
 fileprivate struct BaseBindingTypeBuilder {
+    let type: String?
     let graphBinding: Bool
     let collectionBinding: Bool
     let singularCollectionBinding: Bool
@@ -103,6 +130,7 @@ fileprivate struct BaseBindingTypeBuilder {
     
     static var instance: BaseBindingTypeBuilder {
         return BaseBindingTypeBuilder(
+            type: nil,
             graphBinding: false,
             collectionBinding: false,
             singularCollectionBinding: false,
@@ -114,6 +142,7 @@ fileprivate struct BaseBindingTypeBuilder {
     
     func setDebugData(_ data: DebugData) -> BaseBindingTypeBuilder {
         return BaseBindingTypeBuilder(
+            type: type,
             graphBinding: graphBinding,
             collectionBinding: collectionBinding,
             singularCollectionBinding: singularCollectionBinding,
@@ -123,8 +152,21 @@ fileprivate struct BaseBindingTypeBuilder {
         )
     }
     
+    func setType(type: String) -> BaseBindingTypeBuilder {
+       return BaseBindingTypeBuilder(
+            type: type,
+            graphBinding: graphBinding,
+            collectionBinding: collectionBinding,
+            singularCollectionBinding: singularCollectionBinding,
+            taggedBinding: taggedBinding,
+            scopedBinding: scopedBinding,
+            debugData: debugData
+        )
+    }
+    
     func setBaseGraphBinding() -> BaseBindingTypeBuilder {
         return BaseBindingTypeBuilder(
+            type: type,
             graphBinding: true,
             collectionBinding: collectionBinding,
             singularCollectionBinding: singularCollectionBinding,
@@ -137,6 +179,7 @@ fileprivate struct BaseBindingTypeBuilder {
     func setCollectionBinding(singular: Bool) -> BaseBindingTypeBuilder {
         if singular {
             return BaseBindingTypeBuilder(
+                type: type,
                 graphBinding: graphBinding,
                 collectionBinding: collectionBinding,
                 singularCollectionBinding: true,
@@ -146,6 +189,7 @@ fileprivate struct BaseBindingTypeBuilder {
             )
         } else {
             return BaseBindingTypeBuilder(
+                type: type,
                 graphBinding: graphBinding,
                 collectionBinding: true,
                 singularCollectionBinding: singularCollectionBinding,
@@ -158,6 +202,7 @@ fileprivate struct BaseBindingTypeBuilder {
     
     func setTaggedBinding(tag: String) -> BaseBindingTypeBuilder {
         return BaseBindingTypeBuilder(
+            type: type,
             graphBinding: graphBinding,
             collectionBinding: collectionBinding,
             singularCollectionBinding: singularCollectionBinding,
@@ -169,6 +214,7 @@ fileprivate struct BaseBindingTypeBuilder {
     
     func setScopedBinding(scope: String) -> BaseBindingTypeBuilder {
         return BaseBindingTypeBuilder(
+            type: type,
             graphBinding: graphBinding,
             collectionBinding: collectionBinding,
             singularCollectionBinding: singularCollectionBinding,
@@ -178,8 +224,20 @@ fileprivate struct BaseBindingTypeBuilder {
         )
     }
     
-    func build(bindingType: ProviderVisitor.BindingType, type: String, dependencies: [String]) -> ProviderResult? {
-        let collectionType = (singularCollectionBinding || collectionBinding) ? (singularCollectionBinding ? "[\(type)]" : type) : nil
+    func build(bindingType: ProviderVisitor.BindingType, dependencies: [String]) -> ProviderResult? {
+        guard let type = type else {
+            return nil
+        }
+        var collectionType: String? = nil
+        if collectionBinding {
+            if type.matches(#"[.*]"#) {
+                collectionType = type
+            } else {
+                collectionType = "[\(type)]"
+            }
+        } else if singularCollectionBinding {
+            collectionType = "[\(type)]"
+        }
         switch bindingType {
         case .provider:
             // If bound into graph, full standard. Otherwise it's a dangling reference.

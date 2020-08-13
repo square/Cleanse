@@ -84,6 +84,7 @@
 		DCD333592469B4E4008B053F /* ProviderModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD333582469B4E4008B053F /* ProviderModels.swift */; };
 		DCF196512472F3580057BDC5 /* PluginTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF196502472F3580057BDC5 /* PluginTests.swift */; };
 		DCF9EAC6247D716700FDE003 /* DebugData.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF9EAC5247D716700FDE003 /* DebugData.swift */; };
+		DCFFF07F24E48328003C27B1 /* CustomScopeBinding.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFFF07E24E48328003C27B1 /* CustomScopeBinding.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -257,6 +258,7 @@
 		DCD333582469B4E4008B053F /* ProviderModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ProviderModels.swift; path = CleansecFramework/Visitors/Representations/ProviderModels.swift; sourceTree = SOURCE_ROOT; };
 		DCF196502472F3580057BDC5 /* PluginTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PluginTests.swift; sourceTree = "<group>"; };
 		DCF9EAC5247D716700FDE003 /* DebugData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugData.swift; sourceTree = "<group>"; };
+		DCFFF07E24E48328003C27B1 /* CustomScopeBinding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomScopeBinding.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -349,6 +351,7 @@
 				DCD306C82479A28000CDD7B1 /* ManyDependencies.swift */,
 				DC7CDDDB24B68A20003A1221 /* BasicBindings.swift */,
 				DC7CE83924B77431003A1221 /* ComponentWithSeed.swift */,
+				DCFFF07E24E48328003C27B1 /* CustomScopeBinding.swift */,
 			);
 			path = "Code Fixtures";
 			sourceTree = "<group>";
@@ -856,6 +859,7 @@
 				DC8497E1246A1D3400E704D6 /* DanglingProvider.swift in Sources */,
 				DC7CDDDC24B68A20003A1221 /* BasicBindings.swift in Sources */,
 				DC8497E3246A1D3400E704D6 /* DanglingAndReference.swift in Sources */,
+				DCFFF07F24E48328003C27B1 /* CustomScopeBinding.swift in Sources */,
 				DC8497EC246A1D3400E704D6 /* ModuleWithImplicitType.swift in Sources */,
 				DC8497DD246A1D3400E704D6 /* ImportsCleanse.swift in Sources */,
 				DC8497EE246A1D3400E704D6 /* PropertyInjection.swift in Sources */,
