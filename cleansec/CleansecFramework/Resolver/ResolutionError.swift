@@ -13,7 +13,7 @@ public struct ResolutionError: Equatable, Error {
         case missingModule(String)
         case missingSubcomponent(String)
         case duplicateProvider([CanonicalProvider])
-        case missingProvider(dependency: TypeKey, dependedUpon: CanonicalProvider?)
+        case missingProvider(dependency: TypeKey, dependedUpon: CanonicalProvider?, suggestedModules: [String] = [])
         case cyclicalDependency(chain: [TypeKey])
     }
     
@@ -23,52 +23,57 @@ public struct ResolutionError: Equatable, Error {
 extension ResolutionError: CustomStringConvertible {
     public var description: String {
         switch type {
-        case .missingProvider(let provider, let parent):
-            var errorDescription = errorPrefix(debug: parent?.debugData)
-            errorDescription += "Missing Provider: '\(provider.primaryType)'\n"
+        case .missingProvider(let provider, let parent, let suggestedModules):
+            var errorDescription = "Missing Provider: '\(provider.primaryType)'\n"
             if let p = parent {
-                errorDescription += "Depended upon by: '\(p.type)'"
+                errorDescription += "Depended upon by: '\(p.type)'\n"
             }
             
-            return errorDescription
+            if suggestedModules.count > 0 {
+                errorDescription += suggestedModules
+                    .map { "Found in '\($0)'. Perhaps 'binder.include(module: \($0).self)'".notePrefixed() }
+                    .joined(separator: "\n") + "\n"
+            }
+            return errorDescription.errorPrefixed(data: parent?.debugData)
         case .missingSubcomponent(let subcomponent):
-            return "error: Missing Installed Compoment: '\(subcomponent)'"
+            return "error: Missing installed Component: '\(subcomponent)'\n"
         case .missingModule(let module):
-            return "error: Missing included Module: '\(module)'"
+            return "error: Missing included Module: '\(module)'\n"
         case .duplicateProvider(let providers):
             let first = providers.first!
             let duplidateBindings = providers.suffix(from: 1)
-            var errorDescription = errorPrefix(debug: first.debugData)
-            errorDescription += "Duplicate binding for '\(first.type)'\n"
+            var errorDescription = "Duplicate binding for '\(first.type)'\n"
             
             errorDescription += duplidateBindings
                 .filter { $0.debugData.location != nil }
-                .map { notePrefix(debug: $0.debugData) + "'\($0.type)' previously bound here." }
-                .joined(separator: "\n")
+                .map { "'\($0.type)' previously bound here.".notePrefixed(data: $0.debugData) }
+                .joined(separator: "\n") + "\n"
             
-            return errorDescription
+            return errorDescription.errorPrefixed(data: first.debugData)
         case .cyclicalDependency(let chain):
             let chainDescription = chain.map { $0.primaryType }.joined(separator: " --> ")
             return "error: Cycle in dependencies found: \(chainDescription)"
         }
     }
-    
-    private func notePrefix(debug: DebugData?) -> String {
+}
+
+fileprivate extension String {
+    func notePrefixed(data: DebugData? = nil) -> String {
         let prefix: String
-        if let location = debug?.location {
-            prefix = "\(location): note: "
+        if let location = data?.location {
+            prefix = "\(location): note: \(self)"
         } else {
-            prefix = "note: "
+            prefix = "note: \(self)"
         }
         return prefix
     }
     
-    private func errorPrefix(debug: DebugData?) -> String {
+    func errorPrefixed(data: DebugData? = nil) -> String {
         let prefix: String
-        if let location = debug?.location {
-            prefix = "\(location): error: "
+        if let location = data?.location {
+            prefix = "\(location): error: \(self)"
         } else {
-            prefix = "error: "
+            prefix = "error: \(self)"
         }
         return prefix
     }

@@ -34,7 +34,10 @@ public struct Resolver {
         }
         
         var diagnostics: [ResolutionError] = []
-        return componentsByName.values.filter { $0.isRoot }.map { $0.resolve(modulesByName: modulesByName, componentsByName: componentsByName, diagnostics: &diagnostics) }
+        return componentsByName
+            .values
+            .filter { $0.isRoot }
+            .map { $0.resolve(modulesByName: modulesByName, componentsByName: componentsByName, diagnostics: &diagnostics) }
     }
 }
 
@@ -55,16 +58,40 @@ fileprivate class ComponentBindings {
 
 fileprivate extension LinkedComponent {
     func resolve(modulesByName: [String:LinkedModule], componentsByName: [String:LinkedComponent], parentBindings: ComponentBindings? = nil, diagnostics: inout [ResolutionError]) -> ResolvedComponent {
-        let allModules = resolveIncludedModules(modulesByName: modulesByName, diagnostics: &diagnostics)
-        let allSubcomponents = resolveSubcomponents(componentsByName, with: allModules, diagnostics: &diagnostics)
-        let providersByType = createUniqueProvidersMap(includedModules: allModules, installedSubcomponents: allSubcomponents, diagnostics: &diagnostics)
+        let includedModules = resolveIncludedModules(modulesByName: modulesByName, diagnostics: &diagnostics)
+        let installedSubcomponents = resolveSubcomponents(componentsByName, with: includedModules, diagnostics: &diagnostics)
+        let providersByType = createUniqueProvidersMap(includedModules: includedModules, installedSubcomponents: installedSubcomponents, diagnostics: &diagnostics)
 
         let componentBindings = ComponentBindings(providersByType: providersByType, parent: parentBindings)
         // Added dependency is the component's `rootType`. We need to make sure there is a binding for the root object.
-        componentBindings.resolveDependencies(additionalDependencies: [TypeKey(type: rootType)], diagnostics: &diagnostics)
-        componentBindings.resolveAcyclicGraph(root: TypeKey(type: rootType), diagnostics: &diagnostics)
         
-        let children = allSubcomponents.map { $0.resolve(modulesByName: modulesByName, componentsByName: componentsByName, parentBindings: componentBindings, diagnostics: &diagnostics) }
+        let suggestedModulesByType = modulesByName.values.reduce(into: [TypeKey:[LinkedModule]]()) { (result, module) in
+            result.merge(
+                module.providers.map { $0.mapToCanonical() }.reduce(into: [TypeKey:[LinkedModule]](), { (inner, provider) in
+                    inner[provider.type] = [module]
+                })) { (l, r) -> [LinkedModule] in
+                l + r
+            }
+        }
+        componentBindings.resolveDependencies(
+            additionalDependencies: [TypeKey(type: rootType)],
+            diagnostics: &diagnostics,
+            suggestedModulesByType: suggestedModulesByType
+        )
+        
+        componentBindings.resolveAcyclicGraph(
+            root: TypeKey(type: rootType),
+            diagnostics: &diagnostics
+        )
+        
+        let children = installedSubcomponents
+            .map { $0.resolve(
+                modulesByName: modulesByName,
+                componentsByName: componentsByName,
+                parentBindings: componentBindings,
+                diagnostics: &diagnostics
+                )
+            }
         
         let resolvedComponent = ResolvedComponent(
             type: type,
@@ -142,12 +169,13 @@ fileprivate extension LinkedComponent {
 }
 
 extension ComponentBindings {
-    func resolveDependencies(additionalDependencies: [TypeKey], diagnostics: inout [ResolutionError]) {
+    func resolveDependencies(additionalDependencies: [TypeKey], diagnostics: inout [ResolutionError], suggestedModulesByType: [TypeKey:[LinkedModule]]) {
         providersByType.flatMap { $0.value }.forEach { binding in
             let missingDependencyErrors = binding.dependencies.flatMap { d -> [ResolutionError] in
                 var errors: [ResolutionError] = []
                 if provider(for: d) == nil {
-                    errors.append(ResolutionError(type: .missingProvider(dependency: d, dependedUpon: binding)))
+                    let suggestedModules = (suggestedModulesByType[d] ?? []).map { $0.type }
+                    errors.append(ResolutionError(type: .missingProvider(dependency: d, dependedUpon: binding, suggestedModules: suggestedModules)))
                 }
                 return errors
             }
