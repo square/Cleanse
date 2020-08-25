@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		DC27A0C824D49C8800D37708 /* TypeKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC27A0C724D49C8800D37708 /* TypeKey.swift */; };
+		DC6B09A424EF4DB9000D2701 /* ResolutionErrorFormatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6B09A324EF4DB9000D2701 /* ResolutionErrorFormatTests.swift */; };
 		DC7CDDDC24B68A20003A1221 /* BasicBindings.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7CDDDB24B68A20003A1221 /* BasicBindings.swift */; };
 		DC7CE83A24B77431003A1221 /* ComponentWithSeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7CE83924B77431003A1221 /* ComponentWithSeed.swift */; };
 		DC8497C0246A1D1600E704D6 /* Cleansec_Generate_Fixtures.h in Headers */ = {isa = PBXBuildFile; fileRef = DC8497BE246A1D1600E704D6 /* Cleansec_Generate_Fixtures.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -178,6 +179,7 @@
 
 /* Begin PBXFileReference section */
 		DC27A0C724D49C8800D37708 /* TypeKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeKey.swift; sourceTree = "<group>"; };
+		DC6B09A324EF4DB9000D2701 /* ResolutionErrorFormatTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResolutionErrorFormatTests.swift; sourceTree = "<group>"; };
 		DC7CDDDB24B68A20003A1221 /* BasicBindings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicBindings.swift; sourceTree = "<group>"; };
 		DC7CE83924B77431003A1221 /* ComponentWithSeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentWithSeed.swift; sourceTree = "<group>"; };
 		DC8497BC246A1D1600E704D6 /* Cleansec_Generate_Fixtures.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Cleansec_Generate_Fixtures.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -530,6 +532,7 @@
 				DC9966F3246B63350015B473 /* LinkerTests.swift */,
 				DC996704246C7C700015B473 /* ResolverTests.swift */,
 				DCF196502472F3580057BDC5 /* PluginTests.swift */,
+				DC6B09A324EF4DB9000D2701 /* ResolutionErrorFormatTests.swift */,
 			);
 			path = CleansecFrameworkTests;
 			sourceTree = "<group>";
@@ -957,6 +960,7 @@
 				DC996705246C7C700015B473 /* ResolverTests.swift in Sources */,
 				DCF196512472F3580057BDC5 /* PluginTests.swift in Sources */,
 				DCD3334C2469B3AB008B053F /* FileVisitorTests.swift in Sources */,
+				DC6B09A424EF4DB9000D2701 /* ResolutionErrorFormatTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

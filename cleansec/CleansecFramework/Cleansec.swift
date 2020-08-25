@@ -62,7 +62,7 @@ public struct CleansecError: CustomStringConvertible, Error {
     }
     
     public var description: String {
-        resolutionErrors.map { $0.description }.joined(separator: "\n")
+        resolutionErrors.map { $0.description }.joined(separator: "\n") + "\n"
     }
 }
 

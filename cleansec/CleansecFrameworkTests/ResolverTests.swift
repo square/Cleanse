@@ -415,4 +415,16 @@ class ResolverTests: XCTestCase {
         XCTAssertEqual(resolved.first!.diagnostics.count, 1)
         XCTAssertEqual(resolved.first!.diagnostics.first!, ResolutionError(type: .missingProvider(dependency: TypeKey(type: "DepA"), dependedUpon: rootA.mapToCanonical())))
     }
+    
+    func testSuggestedModules() {
+        let providerA = StandardProvider(type: "A", dependencies: [], tag: nil, scoped: nil, collectionType: nil)
+        let moduleA = LinkedModule(type: "AModule", providers: [providerA], includedModules: [], subcomponents: [])
+        
+        let providerB = StandardProvider(type: "B", dependencies: ["A"], tag: nil, scoped: nil, collectionType: nil)
+        let component = LinkedComponent(type: "MyComponent", rootType: "B", providers: [providerB], seed: "Void", includedModules: [], subcomponents: [], isRoot: true)
+        let interface = LinkedInterface(components: [component], modules: [moduleA])
+        let resolved = Resolver.resolve(interface: interface)
+        XCTAssertEqual(resolved.count, 1)
+        XCTAssertEqual(resolved.first!.diagnostics, [ResolutionError(type: .missingProvider(dependency: TypeKey(type: "A"), dependedUpon: providerB.mapToCanonical(), suggestedModules: ["AModule"]))])
+    }
 }
