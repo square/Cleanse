@@ -24,7 +24,10 @@ extension AssistedInjectionBuilder {
                 return factory(
                     Assisted<Tag.Seed> { seed }
                 )
-            })
+            },
+                file: file,
+                line: line,
+                function: function)
         return BindingReceipt()
     }
 }
