@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import Cleanse
+@testable import Cleanse
 import XCTest
 
 class AssistedInjectionTests: XCTestCase {
@@ -19,6 +19,14 @@ class AssistedInjectionTests: XCTestCase {
     struct BFactory: AssistedFactory {
         typealias Element = MajorHelpNeeded
         typealias Seed = (Money, String, Int)
+    }
+    
+    struct FreeServiceModule: Cleanse.Module {
+        static func configure(binder: Binder<Unscoped>) {
+            binder
+                .bind(FreeService.self)
+                .to(factory: FreeService.init)
+        }
     }
     
     struct FreeService {
@@ -53,10 +61,6 @@ class AssistedInjectionTests: XCTestCase {
                                            assistance: seed)
                     
                 }
-            
-            binder
-                .bind(FreeService.self)
-                .to(factory: FreeService.init)
         }
     }
     
@@ -70,6 +74,7 @@ class AssistedInjectionTests: XCTestCase {
         
         static func configure(binder: Binder<Unscoped>) {
             binder.include(module: AssistedInjectionModule.self)
+            binder.include(module: FreeServiceModule.self)
         }
         
         static func configureRoot(binder bind: ReceiptBinder<AssistedInjectionTests.AssistedRoot>) -> BindingReceipt<AssistedInjectionTests.AssistedRoot> {
@@ -78,14 +83,22 @@ class AssistedInjectionTests: XCTestCase {
         
     }
     
-    var root: AssistedRoot!
-    
-    override func setUp() {
-        super.setUp()
-        root = try! ComponentFactory.of(AssistedInjectionRoot.self).build(())
+    struct AssistedInjectionBrokenRoot: RootComponent {
+        typealias Root = AssistedRoot
+        
+        static func configure(binder: Binder<Unscoped>) {
+            binder.include(module: AssistedInjectionModule.self)
+        }
+        
+        static func configureRoot(binder bind: ReceiptBinder<AssistedInjectionTests.AssistedRoot>) -> BindingReceipt<AssistedInjectionTests.AssistedRoot> {
+            return bind.to(factory: AssistedRoot.init)
+        }
+        
     }
     
+    
     func testFactories() {
+        let root = try! ComponentFactory.of(AssistedInjectionRoot.self).build(())
         let helpNeeded = root.helpFactory.build("Hello!")
         let majorHelpNeeded = root.majorHelpFactory.build((Money(), "Hello123", 123))
         
@@ -95,5 +108,19 @@ class AssistedInjectionTests: XCTestCase {
         XCTAssertEqual(money.amount, 10)
         XCTAssertEqual(name, "Hello123")
         XCTAssertEqual(amount, 123)
+    }
+    
+    func testFactoryErrorMessage() {
+        do {
+            let _ = try ComponentFactory.of(AssistedInjectionBrokenRoot.self).build(())
+            XCTAssertTrue(false, "Should throw an error")
+        } catch {
+            guard let error = error as? MissingProvider else {
+                XCTAssertTrue(false, "Should be a missing provider error")
+                return
+            }
+            XCTAssertNotNil(error.requests.first?.sourceLocation)
+            XCTAssertTrue(error.requests.first!.sourceLocation!.description.contains("AssistedInjectionTests.swift"))
+        }
     }
 }

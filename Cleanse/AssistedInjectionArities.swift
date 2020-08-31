@@ -17,7 +17,11 @@ extension AssistedInjectionBuilder {
                 Assisted<Tag.Seed> { seed },
                 provider1.get()
             ))
-        })
+        },
+            file: file,
+            line: line,
+            function: function
+    )
 }
 
 /// 2-arity `to(factory:)` function.
@@ -38,7 +42,11 @@ extension AssistedInjectionBuilder {
                 provider1.get(),
                 provider2.get()
             ))
-        })
+        },
+            file: file,
+            line: line,
+            function: function
+    )
 }
 
 /// 3-arity `to(factory:)` function.
@@ -61,7 +69,11 @@ extension AssistedInjectionBuilder {
                 provider2.get(),
                 provider3.get()
             ))
-        })
+        },
+            file: file,
+            line: line,
+            function: function
+    )
 }
 
 /// 4-arity `to(factory:)` function.
@@ -86,7 +98,11 @@ extension AssistedInjectionBuilder {
                 provider3.get(),
                 provider4.get()
             ))
-        })
+        },
+            file: file,
+            line: line,
+            function: function
+    )
 }
 
 /// 5-arity `to(factory:)` function.
@@ -113,7 +129,11 @@ extension AssistedInjectionBuilder {
                 provider4.get(),
                 provider5.get()
             ))
-        })
+        },
+            file: file,
+            line: line,
+            function: function
+    )
 }
 
 /// 6-arity `to(factory:)` function.
@@ -142,7 +162,11 @@ extension AssistedInjectionBuilder {
                 provider5.get(),
                 provider6.get()
             ))
-        })
+        },
+            file: file,
+            line: line,
+            function: function
+    )
 }
 
 /// 7-arity `to(factory:)` function.
@@ -173,7 +197,11 @@ extension AssistedInjectionBuilder {
                 provider6.get(),
                 provider7.get()
             ))
-        })
+        },
+            file: file,
+            line: line,
+            function: function
+    )
 }
 
 /// 8-arity `to(factory:)` function.
@@ -206,7 +234,11 @@ extension AssistedInjectionBuilder {
                 provider7.get(),
                 provider8.get()
             ))
-        })
+        },
+            file: file,
+            line: line,
+            function: function
+    )
 }
 
 /// 9-arity `to(factory:)` function.
@@ -241,7 +273,11 @@ extension AssistedInjectionBuilder {
                 provider8.get(),
                 provider9.get()
             ))
-        })
+        },
+            file: file,
+            line: line,
+            function: function
+    )
 }
 
 /// 10-arity `to(factory:)` function.
@@ -278,7 +314,11 @@ extension AssistedInjectionBuilder {
                 provider9.get(),
                 provider10.get()
             ))
-        })
+        },
+            file: file,
+            line: line,
+            function: function
+    )
 }
 
 /// 11-arity `to(factory:)` function.
@@ -317,7 +357,11 @@ extension AssistedInjectionBuilder {
                 provider10.get(),
                 provider11.get()
             ))
-        })
+        },
+            file: file,
+            line: line,
+            function: function
+    )
 }
 
 /// 12-arity `to(factory:)` function.
@@ -358,7 +402,11 @@ extension AssistedInjectionBuilder {
                 provider11.get(),
                 provider12.get()
             ))
-        })
+        },
+            file: file,
+            line: line,
+            function: function
+    )
 }
 
 /// 13-arity `to(factory:)` function.
@@ -401,7 +449,11 @@ extension AssistedInjectionBuilder {
                 provider12.get(),
                 provider13.get()
             ))
-        })
+        },
+            file: file,
+            line: line,
+            function: function
+    )
 }
 
 /// 14-arity `to(factory:)` function.
@@ -446,7 +498,11 @@ extension AssistedInjectionBuilder {
                 provider13.get(),
                 provider14.get()
             ))
-        })
+        },
+            file: file,
+            line: line,
+            function: function
+    )
 }
 
 /// 15-arity `to(factory:)` function.
@@ -493,7 +549,11 @@ extension AssistedInjectionBuilder {
                 provider14.get(),
                 provider15.get()
             ))
-        })
+        },
+            file: file,
+            line: line,
+            function: function
+    )
 }
 
 /// 16-arity `to(factory:)` function.
@@ -542,7 +602,11 @@ extension AssistedInjectionBuilder {
                 provider15.get(),
                 provider16.get()
             ))
-        })
+        },
+            file: file,
+            line: line,
+            function: function
+    )
 }
 
 /// 17-arity `to(factory:)` function.
@@ -593,7 +657,11 @@ extension AssistedInjectionBuilder {
                 provider16.get(),
                 provider17.get()
             ))
-        })
+        },
+            file: file,
+            line: line,
+            function: function
+    )
 }
 
 /// 18-arity `to(factory:)` function.
@@ -646,7 +714,11 @@ extension AssistedInjectionBuilder {
                 provider17.get(),
                 provider18.get()
             ))
-        })
+        },
+            file: file,
+            line: line,
+            function: function
+    )
 }
 
 /// 19-arity `to(factory:)` function.
@@ -701,7 +773,11 @@ extension AssistedInjectionBuilder {
                 provider18.get(),
                 provider19.get()
             ))
-        })
+        },
+            file: file,
+            line: line,
+            function: function
+    )
 }
 
 /// 20-arity `to(factory:)` function.
@@ -758,7 +834,11 @@ extension AssistedInjectionBuilder {
                 provider19.get(),
                 provider20.get()
             ))
-        })
+        },
+            file: file,
+            line: line,
+            function: function
+    )
 }
 
 /// 21-arity `to(factory:)` function.
@@ -817,7 +897,11 @@ extension AssistedInjectionBuilder {
                 provider20.get(),
                 provider21.get()
             ))
-        })
+        },
+            file: file,
+            line: line,
+            function: function
+    )
 }
 
 /// 22-arity `to(factory:)` function.
@@ -878,7 +962,11 @@ extension AssistedInjectionBuilder {
                 provider21.get(),
                 provider22.get()
             ))
-        })
+        },
+            file: file,
+            line: line,
+            function: function
+    )
 }
 
 /// 23-arity `to(factory:)` function.
@@ -941,7 +1029,11 @@ extension AssistedInjectionBuilder {
                 provider22.get(),
                 provider23.get()
             ))
-        })
+        },
+            file: file,
+            line: line,
+            function: function
+    )
 }
 
 /// 24-arity `to(factory:)` function.
@@ -1006,7 +1098,11 @@ extension AssistedInjectionBuilder {
                 provider23.get(),
                 provider24.get()
             ))
-        })
+        },
+            file: file,
+            line: line,
+            function: function
+    )
 }
 
 /// 25-arity `to(factory:)` function.
@@ -1073,7 +1169,11 @@ extension AssistedInjectionBuilder {
                 provider24.get(),
                 provider25.get()
             ))
-        })
+        },
+            file: file,
+            line: line,
+            function: function
+    )
 }
 
 /// 26-arity `to(factory:)` function.
@@ -1142,7 +1242,11 @@ extension AssistedInjectionBuilder {
                 provider25.get(),
                 provider26.get()
             ))
-        })
+        },
+            file: file,
+            line: line,
+            function: function
+    )
 }
 
 /// 27-arity `to(factory:)` function.
@@ -1213,7 +1317,11 @@ extension AssistedInjectionBuilder {
                 provider26.get(),
                 provider27.get()
             ))
-        })
+        },
+            file: file,
+            line: line,
+            function: function
+    )
 }
 
 /// 28-arity `to(factory:)` function.
@@ -1286,7 +1394,11 @@ extension AssistedInjectionBuilder {
                 provider27.get(),
                 provider28.get()
             ))
-        })
+        },
+            file: file,
+            line: line,
+            function: function
+    )
 }
 
 /// 29-arity `to(factory:)` function.
@@ -1361,7 +1473,11 @@ extension AssistedInjectionBuilder {
                 provider28.get(),
                 provider29.get()
             ))
-        })
+        },
+            file: file,
+            line: line,
+            function: function
+    )
 }
 
 /// 1-arity `to(factory:)` function.
@@ -1380,7 +1496,11 @@ extension AssistedInjectionBuilder {
                 provider1.get(),
                 Assisted<Tag.Seed> { seed }
             ))
-        })
+        },
+            file: file,
+            line: line,
+            function: function
+    )
 }
 
 /// 2-arity `to(factory:)` function.
@@ -1401,7 +1521,11 @@ extension AssistedInjectionBuilder {
                 provider2.get(),
                 Assisted<Tag.Seed> { seed }
             ))
-        })
+        },
+            file: file,
+            line: line,
+            function: function
+    )
 }
 
 /// 3-arity `to(factory:)` function.
@@ -1424,7 +1548,11 @@ extension AssistedInjectionBuilder {
                 provider3.get(),
                 Assisted<Tag.Seed> { seed }
             ))
-        })
+        },
+            file: file,
+            line: line,
+            function: function
+    )
 }
 
 /// 4-arity `to(factory:)` function.
@@ -1449,7 +1577,11 @@ extension AssistedInjectionBuilder {
                 provider4.get(),
                 Assisted<Tag.Seed> { seed }
             ))
-        })
+        },
+            file: file,
+            line: line,
+            function: function
+    )
 }
 
 /// 5-arity `to(factory:)` function.
@@ -1476,7 +1608,11 @@ extension AssistedInjectionBuilder {
                 provider5.get(),
                 Assisted<Tag.Seed> { seed }
             ))
-        })
+        },
+            file: file,
+            line: line,
+            function: function
+    )
 }
 
 /// 6-arity `to(factory:)` function.
@@ -1505,7 +1641,11 @@ extension AssistedInjectionBuilder {
                 provider6.get(),
                 Assisted<Tag.Seed> { seed }
             ))
-        })
+        },
+            file: file,
+            line: line,
+            function: function
+    )
 }
 
 /// 7-arity `to(factory:)` function.
@@ -1536,7 +1676,11 @@ extension AssistedInjectionBuilder {
                 provider7.get(),
                 Assisted<Tag.Seed> { seed }
             ))
-        })
+        },
+            file: file,
+            line: line,
+            function: function
+    )
 }
 
 /// 8-arity `to(factory:)` function.
@@ -1569,7 +1713,11 @@ extension AssistedInjectionBuilder {
                 provider8.get(),
                 Assisted<Tag.Seed> { seed }
             ))
-        })
+        },
+            file: file,
+            line: line,
+            function: function
+    )
 }
 
 /// 9-arity `to(factory:)` function.
@@ -1604,7 +1752,11 @@ extension AssistedInjectionBuilder {
                 provider9.get(),
                 Assisted<Tag.Seed> { seed }
             ))
-        })
+        },
+            file: file,
+            line: line,
+            function: function
+    )
 }
 
 /// 10-arity `to(factory:)` function.
@@ -1641,7 +1793,11 @@ extension AssistedInjectionBuilder {
                 provider10.get(),
                 Assisted<Tag.Seed> { seed }
             ))
-        })
+        },
+            file: file,
+            line: line,
+            function: function
+    )
 }
 
 /// 11-arity `to(factory:)` function.
@@ -1680,7 +1836,11 @@ extension AssistedInjectionBuilder {
                 provider11.get(),
                 Assisted<Tag.Seed> { seed }
             ))
-        })
+        },
+            file: file,
+            line: line,
+            function: function
+    )
 }
 
 /// 12-arity `to(factory:)` function.
@@ -1721,7 +1881,11 @@ extension AssistedInjectionBuilder {
                 provider12.get(),
                 Assisted<Tag.Seed> { seed }
             ))
-        })
+        },
+            file: file,
+            line: line,
+            function: function
+    )
 }
 
 /// 13-arity `to(factory:)` function.
@@ -1764,7 +1928,11 @@ extension AssistedInjectionBuilder {
                 provider13.get(),
                 Assisted<Tag.Seed> { seed }
             ))
-        })
+        },
+            file: file,
+            line: line,
+            function: function
+    )
 }
 
 /// 14-arity `to(factory:)` function.
@@ -1809,7 +1977,11 @@ extension AssistedInjectionBuilder {
                 provider14.get(),
                 Assisted<Tag.Seed> { seed }
             ))
-        })
+        },
+            file: file,
+            line: line,
+            function: function
+    )
 }
 
 /// 15-arity `to(factory:)` function.
@@ -1856,7 +2028,11 @@ extension AssistedInjectionBuilder {
                 provider15.get(),
                 Assisted<Tag.Seed> { seed }
             ))
-        })
+        },
+            file: file,
+            line: line,
+            function: function
+    )
 }
 
 /// 16-arity `to(factory:)` function.
@@ -1905,7 +2081,11 @@ extension AssistedInjectionBuilder {
                 provider16.get(),
                 Assisted<Tag.Seed> { seed }
             ))
-        })
+        },
+            file: file,
+            line: line,
+            function: function
+    )
 }
 
 /// 17-arity `to(factory:)` function.
@@ -1956,7 +2136,11 @@ extension AssistedInjectionBuilder {
                 provider17.get(),
                 Assisted<Tag.Seed> { seed }
             ))
-        })
+        },
+            file: file,
+            line: line,
+            function: function
+    )
 }
 
 /// 18-arity `to(factory:)` function.
@@ -2009,7 +2193,11 @@ extension AssistedInjectionBuilder {
                 provider18.get(),
                 Assisted<Tag.Seed> { seed }
             ))
-        })
+        },
+            file: file,
+            line: line,
+            function: function
+    )
 }
 
 /// 19-arity `to(factory:)` function.
@@ -2064,7 +2252,11 @@ extension AssistedInjectionBuilder {
                 provider19.get(),
                 Assisted<Tag.Seed> { seed }
             ))
-        })
+        },
+            file: file,
+            line: line,
+            function: function
+    )
 }
 
 /// 20-arity `to(factory:)` function.
@@ -2121,7 +2313,11 @@ extension AssistedInjectionBuilder {
                 provider20.get(),
                 Assisted<Tag.Seed> { seed }
             ))
-        })
+        },
+            file: file,
+            line: line,
+            function: function
+    )
 }
 
 /// 21-arity `to(factory:)` function.
@@ -2180,7 +2376,11 @@ extension AssistedInjectionBuilder {
                 provider21.get(),
                 Assisted<Tag.Seed> { seed }
             ))
-        })
+        },
+            file: file,
+            line: line,
+            function: function
+    )
 }
 
 /// 22-arity `to(factory:)` function.
@@ -2241,7 +2441,11 @@ extension AssistedInjectionBuilder {
                 provider22.get(),
                 Assisted<Tag.Seed> { seed }
             ))
-        })
+        },
+            file: file,
+            line: line,
+            function: function
+    )
 }
 
 /// 23-arity `to(factory:)` function.
@@ -2304,7 +2508,11 @@ extension AssistedInjectionBuilder {
                 provider23.get(),
                 Assisted<Tag.Seed> { seed }
             ))
-        })
+        },
+            file: file,
+            line: line,
+            function: function
+    )
 }
 
 /// 24-arity `to(factory:)` function.
@@ -2369,7 +2577,11 @@ extension AssistedInjectionBuilder {
                 provider24.get(),
                 Assisted<Tag.Seed> { seed }
             ))
-        })
+        },
+            file: file,
+            line: line,
+            function: function
+    )
 }
 
 /// 25-arity `to(factory:)` function.
@@ -2436,7 +2648,11 @@ extension AssistedInjectionBuilder {
                 provider25.get(),
                 Assisted<Tag.Seed> { seed }
             ))
-        })
+        },
+            file: file,
+            line: line,
+            function: function
+    )
 }
 
 /// 26-arity `to(factory:)` function.
@@ -2505,7 +2721,11 @@ extension AssistedInjectionBuilder {
                 provider26.get(),
                 Assisted<Tag.Seed> { seed }
             ))
-        })
+        },
+            file: file,
+            line: line,
+            function: function
+    )
 }
 
 /// 27-arity `to(factory:)` function.
@@ -2576,7 +2796,11 @@ extension AssistedInjectionBuilder {
                 provider27.get(),
                 Assisted<Tag.Seed> { seed }
             ))
-        })
+        },
+            file: file,
+            line: line,
+            function: function
+    )
 }
 
 /// 28-arity `to(factory:)` function.
@@ -2649,7 +2873,11 @@ extension AssistedInjectionBuilder {
                 provider28.get(),
                 Assisted<Tag.Seed> { seed }
             ))
-        })
+        },
+            file: file,
+            line: line,
+            function: function
+    )
 }
 
 /// 29-arity `to(factory:)` function.
@@ -2724,7 +2952,11 @@ extension AssistedInjectionBuilder {
                 provider29.get(),
                 Assisted<Tag.Seed> { seed }
             ))
-        })
+        },
+            file: file,
+            line: line,
+            function: function
+    )
 }
 
 }

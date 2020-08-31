@@ -8,6 +8,10 @@
 
 #### Bug Fixes
 
+* Fix Assisted Injection `SourceLocation` info.  
+  [Sebastian Shanus](https://github.com/sebastianv1)
+  [#166](https://github.com/square/Cleanse/pull/166)
+
 * Fix `WeakProviders` becoming deinitialized.  
   [Sebastian Shanus](https://github.com/sebastianv1)
   [#98](https://github.com/square/Cleanse/issues/98)

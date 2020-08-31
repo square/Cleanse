@@ -221,7 +221,11 @@ struct GenerateAssistedInjectionArities {
         
         
         contents += "\(indent(3))))\n"
-        contents += "        })\n"
+        contents += "        },\n"
+        contents += "            file: file,\n"
+        contents += "            line: line,\n"
+        contents += "            function: function\n"
+        contents += "    )\n"
         contents += "}\n\n"
         
         return contents
