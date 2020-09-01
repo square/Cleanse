@@ -4,7 +4,8 @@
 
 #### Features & Updates
 
-* None
+* cleansec: Cleanse Compiler ([README](https://github.com/square/Cleanse/blob/master/cleansec/README.md))  
+  [Sebastian Shanus](https://github.com/sebastianv1)
 
 #### Bug Fixes
 
