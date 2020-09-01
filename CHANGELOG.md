@@ -4,6 +4,16 @@
 
 #### Features & Updates
 
+* None
+
+#### Bug Fixes
+
+* None
+
+## 4.2.6
+
+#### Features & Updates
+
 * cleansec: Cleanse Compiler ([README](https://github.com/square/Cleanse/blob/master/cleansec/README.md))  
   [Sebastian Shanus](https://github.com/sebastianv1)
 
