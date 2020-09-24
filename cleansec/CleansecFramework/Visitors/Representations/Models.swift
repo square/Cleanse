@@ -33,8 +33,6 @@ public struct Component: Codable {
     public let type: String
     public let rootType: String
     public let providers: [StandardProvider]
-    public let danglingProviders: [DanglingProvider]
-    public let referenceProviders: [ReferenceProvider]
     public let seed: String
     public let includedModules: [String]
     public let subcomponents: [String]
@@ -44,8 +42,6 @@ public struct Component: Codable {
         type: String,
         rootType: String,
         providers: [StandardProvider],
-        danglingProviders: [DanglingProvider],
-        referenceProviders: [ReferenceProvider],
         seed: String,
         includedModules: [String],
         subcomponents: [String],
@@ -54,8 +50,6 @@ public struct Component: Codable {
         self.type = type
         self.rootType = rootType
         self.providers = providers
-        self.danglingProviders = danglingProviders
-        self.referenceProviders = referenceProviders
         self.seed = seed
         self.includedModules = includedModules
         self.subcomponents = subcomponents
@@ -67,23 +61,17 @@ public struct Component: Codable {
 public struct Module: Codable {
     public let type: String
     public let providers: [StandardProvider]
-    public let danglingProviders: [DanglingProvider]
-    public let referenceProviders: [ReferenceProvider]
     public let includedModules: [String]
     public let subcomponents: [String]
     
     public init(
         type: String,
         providers: [StandardProvider],
-        danglingProviders: [DanglingProvider],
-        referenceProviders: [ReferenceProvider],
         includedModules: [String],
         subcomponents: [String]
     ) {
         self.type = type
         self.providers = providers
-        self.danglingProviders = danglingProviders
-        self.referenceProviders = referenceProviders
         self.includedModules = includedModules
         self.subcomponents = subcomponents
     }

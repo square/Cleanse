@@ -63,5 +63,14 @@ class FileVisitorTests: XCTestCase {
         XCTAssertEqual(result.modules.count, 1)
         XCTAssertEqual(result.modules.first!.type, "Blah.Module")
     }
+    
+    
+    func testPropertyInjectorRoot() {
+        let node = SyntaxParser.parse(text: Fixtures.PropertyInjectorRoot).first!
+        visitor.walk(node)
+        let result = visitor.finalize()
+        XCTAssertEqual(result.components.count, 1)
+        XCTAssertEqual(result.components.first!.providers, [StandardProvider(type: "PropertyInjector<MainPropertyClass>", dependencies: ["PropertyInjector<MainPropertyClass>"], tag: nil, scoped: nil, collectionType: nil)])
+    }
 
 }

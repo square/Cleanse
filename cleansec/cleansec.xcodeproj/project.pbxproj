@@ -16,12 +16,9 @@
 		DC8497DB246A1D3400E704D6 /* ModuleWithDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8497C6246A1D3300E704D6 /* ModuleWithDependencies.swift */; };
 		DC8497DC246A1D3400E704D6 /* SimpleRootComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8497C7246A1D3300E704D6 /* SimpleRootComponent.swift */; };
 		DC8497DD246A1D3400E704D6 /* ImportsCleanse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8497C8246A1D3300E704D6 /* ImportsCleanse.swift */; };
-		DC8497DE246A1D3400E704D6 /* DecoratedReferenceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8497C9246A1D3300E704D6 /* DecoratedReferenceProvider.swift */; };
 		DC8497DF246A1D3400E704D6 /* CollectionBindings.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8497CA246A1D3300E704D6 /* CollectionBindings.swift */; };
 		DC8497E0246A1D3400E704D6 /* InnerTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8497CB246A1D3300E704D6 /* InnerTag.swift */; };
-		DC8497E1246A1D3400E704D6 /* DanglingProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8497CC246A1D3300E704D6 /* DanglingProvider.swift */; };
 		DC8497E2246A1D3400E704D6 /* TaggedProviderDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8497CD246A1D3300E704D6 /* TaggedProviderDependency.swift */; };
-		DC8497E3246A1D3400E704D6 /* DanglingAndReference.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8497CE246A1D3300E704D6 /* DanglingAndReference.swift */; };
 		DC8497E4246A1D3400E704D6 /* ModuleWithTaggedProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8497CF246A1D3300E704D6 /* ModuleWithTaggedProvider.swift */; };
 		DC8497E5246A1D3400E704D6 /* SimpleComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8497D0246A1D3300E704D6 /* SimpleComponent.swift */; };
 		DC8497E6246A1D3400E704D6 /* DoesNotImportCleanse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8497D1246A1D3300E704D6 /* DoesNotImportCleanse.swift */; };
@@ -42,13 +39,12 @@
 		DC849814246B132C00E704D6 /* BindingsVisitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC849813246B132C00E704D6 /* BindingsVisitor.swift */; };
 		DC849816246B140500E704D6 /* ProviderVisitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC849815246B140500E704D6 /* ProviderVisitor.swift */; };
 		DC849818246B171300E704D6 /* TypedSyntax.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC849817246B171300E704D6 /* TypedSyntax.swift */; };
-		DC84981B246B249D00E704D6 /* ProviderBuilders.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC84981A246B249D00E704D6 /* ProviderBuilders.swift */; };
-		DC84981D246B268700E704D6 /* DanglingProviderVisitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC84981C246B268700E704D6 /* DanglingProviderVisitor.swift */; };
-		DC84981F246B275500E704D6 /* ReferenceProviderVisitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC84981E246B275500E704D6 /* ReferenceProviderVisitor.swift */; };
-		DC849821246B2FEB00E704D6 /* ComponentRootProviderVisitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC849820246B2FEB00E704D6 /* ComponentRootProviderVisitor.swift */; };
+		DC849821246B2FEB00E704D6 /* ComponentRootVisitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC849820246B2FEB00E704D6 /* ComponentRootVisitor.swift */; };
 		DC849823246B393500E704D6 /* BindingsVisitorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC849822246B393500E704D6 /* BindingsVisitorTests.swift */; };
 		DC849828246B40A600E704D6 /* CleansecFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCD3333E2469B3AB008B053F /* CleansecFramework.framework */; };
 		DC849829246B40A600E704D6 /* SwiftAstParser.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC8A67F4246474C100D78CAF /* SwiftAstParser.framework */; };
+		DC855CB9251D469600B52570 /* APITypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC855CB8251D469600B52570 /* APITypes.swift */; };
+		DC855CBB251D470300B52570 /* RootProviderVisitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC855CBA251D470300B52570 /* RootProviderVisitor.swift */; };
 		DC8A67C2246396CF00D78CAF /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8A67C1246396CF00D78CAF /* main.swift */; };
 		DC8A67FD246474C200D78CAF /* SwiftAstParser.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC8A67F4246474C100D78CAF /* SwiftAstParser.framework */; };
 		DC8A6802246474C200D78CAF /* SwiftAstParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8A6801246474C200D78CAF /* SwiftAstParserTests.swift */; };
@@ -189,12 +185,9 @@
 		DC8497C6246A1D3300E704D6 /* ModuleWithDependencies.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModuleWithDependencies.swift; sourceTree = "<group>"; };
 		DC8497C7246A1D3300E704D6 /* SimpleRootComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleRootComponent.swift; sourceTree = "<group>"; };
 		DC8497C8246A1D3300E704D6 /* ImportsCleanse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImportsCleanse.swift; sourceTree = "<group>"; };
-		DC8497C9246A1D3300E704D6 /* DecoratedReferenceProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DecoratedReferenceProvider.swift; sourceTree = "<group>"; };
 		DC8497CA246A1D3300E704D6 /* CollectionBindings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionBindings.swift; sourceTree = "<group>"; };
 		DC8497CB246A1D3300E704D6 /* InnerTag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InnerTag.swift; sourceTree = "<group>"; };
-		DC8497CC246A1D3300E704D6 /* DanglingProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DanglingProvider.swift; sourceTree = "<group>"; };
 		DC8497CD246A1D3300E704D6 /* TaggedProviderDependency.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaggedProviderDependency.swift; sourceTree = "<group>"; };
-		DC8497CE246A1D3300E704D6 /* DanglingAndReference.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DanglingAndReference.swift; sourceTree = "<group>"; };
 		DC8497CF246A1D3300E704D6 /* ModuleWithTaggedProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModuleWithTaggedProvider.swift; sourceTree = "<group>"; };
 		DC8497D0246A1D3300E704D6 /* SimpleComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleComponent.swift; sourceTree = "<group>"; };
 		DC8497D1246A1D3300E704D6 /* DoesNotImportCleanse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoesNotImportCleanse.swift; sourceTree = "<group>"; };
@@ -214,11 +207,10 @@
 		DC849813246B132C00E704D6 /* BindingsVisitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BindingsVisitor.swift; path = CleansecFramework/Visitors/BindingsVisitor.swift; sourceTree = SOURCE_ROOT; };
 		DC849815246B140500E704D6 /* ProviderVisitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ProviderVisitor.swift; path = "CleansecFramework/Visitors/Provider Visitor/ProviderVisitor.swift"; sourceTree = SOURCE_ROOT; };
 		DC849817246B171300E704D6 /* TypedSyntax.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypedSyntax.swift; sourceTree = "<group>"; };
-		DC84981A246B249D00E704D6 /* ProviderBuilders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ProviderBuilders.swift; path = "CleansecFramework/Visitors/Provider Visitor/ProviderBuilders.swift"; sourceTree = SOURCE_ROOT; };
-		DC84981C246B268700E704D6 /* DanglingProviderVisitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DanglingProviderVisitor.swift; path = "CleansecFramework/Visitors/Provider Visitor/DanglingProviderVisitor.swift"; sourceTree = SOURCE_ROOT; };
-		DC84981E246B275500E704D6 /* ReferenceProviderVisitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ReferenceProviderVisitor.swift; path = "CleansecFramework/Visitors/Provider Visitor/ReferenceProviderVisitor.swift"; sourceTree = SOURCE_ROOT; };
-		DC849820246B2FEB00E704D6 /* ComponentRootProviderVisitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ComponentRootProviderVisitor.swift; path = "CleansecFramework/Visitors/Provider Visitor/ComponentRootProviderVisitor.swift"; sourceTree = SOURCE_ROOT; };
+		DC849820246B2FEB00E704D6 /* ComponentRootVisitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ComponentRootVisitor.swift; path = "CleansecFramework/Visitors/Provider Visitor/ComponentRootVisitor.swift"; sourceTree = SOURCE_ROOT; };
 		DC849822246B393500E704D6 /* BindingsVisitorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BindingsVisitorTests.swift; sourceTree = "<group>"; };
+		DC855CB8251D469600B52570 /* APITypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APITypes.swift; sourceTree = "<group>"; };
+		DC855CBA251D470300B52570 /* RootProviderVisitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootProviderVisitor.swift; sourceTree = "<group>"; };
 		DC8A67BE246396CF00D78CAF /* cleansec */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = cleansec; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC8A67C1246396CF00D78CAF /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		DC8A67E4246397A800D78CAF /* Syntax.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Syntax.swift; sourceTree = "<group>"; };
@@ -331,9 +323,6 @@
 			children = (
 				DC8497D3246A1D3300E704D6 /* AssistedInjection.swift */,
 				DC8497CA246A1D3300E704D6 /* CollectionBindings.swift */,
-				DC8497CE246A1D3300E704D6 /* DanglingAndReference.swift */,
-				DC8497CC246A1D3300E704D6 /* DanglingProvider.swift */,
-				DC8497C9246A1D3300E704D6 /* DecoratedReferenceProvider.swift */,
 				DC8497D1246A1D3300E704D6 /* DoesNotImportCleanse.swift */,
 				DC8497D2246A1D3300E704D6 /* GenericType.swift */,
 				DC8497C8246A1D3300E704D6 /* ImportsCleanse.swift */,
@@ -396,10 +385,9 @@
 			isa = PBXGroup;
 			children = (
 				DC849815246B140500E704D6 /* ProviderVisitor.swift */,
-				DC84981A246B249D00E704D6 /* ProviderBuilders.swift */,
-				DC84981C246B268700E704D6 /* DanglingProviderVisitor.swift */,
-				DC84981E246B275500E704D6 /* ReferenceProviderVisitor.swift */,
-				DC849820246B2FEB00E704D6 /* ComponentRootProviderVisitor.swift */,
+				DC849820246B2FEB00E704D6 /* ComponentRootVisitor.swift */,
+				DC855CB8251D469600B52570 /* APITypes.swift */,
+				DC855CBA251D470300B52570 /* RootProviderVisitor.swift */,
 			);
 			path = "Provider Visitor";
 			sourceTree = "<group>";
@@ -859,9 +847,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DC8497EA246A1D3400E704D6 /* ModuleIncludesSubcomponent.swift in Sources */,
-				DC8497E1246A1D3400E704D6 /* DanglingProvider.swift in Sources */,
 				DC7CDDDC24B68A20003A1221 /* BasicBindings.swift in Sources */,
-				DC8497E3246A1D3400E704D6 /* DanglingAndReference.swift in Sources */,
 				DCFFF07F24E48328003C27B1 /* CustomScopeBinding.swift in Sources */,
 				DC8497EC246A1D3400E704D6 /* ModuleWithImplicitType.swift in Sources */,
 				DC8497DD246A1D3400E704D6 /* ImportsCleanse.swift in Sources */,
@@ -870,7 +856,6 @@
 				DC8497ED246A1D3400E704D6 /* NestedModule.swift in Sources */,
 				DC8497E4246A1D3400E704D6 /* ModuleWithTaggedProvider.swift in Sources */,
 				DC7CE83A24B77431003A1221 /* ComponentWithSeed.swift in Sources */,
-				DC8497DE246A1D3400E704D6 /* DecoratedReferenceProvider.swift in Sources */,
 				DC8497DB246A1D3400E704D6 /* ModuleWithDependencies.swift in Sources */,
 				DC8497DC246A1D3400E704D6 /* SimpleRootComponent.swift in Sources */,
 				DC8497EB246A1D3400E704D6 /* ModuleWithImplicitInitFactory.swift in Sources */,
@@ -925,14 +910,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DC855CBB251D470300B52570 /* RootProviderVisitor.swift in Sources */,
 				DC9966FA246C54870015B473 /* Resolver.swift in Sources */,
 				DC849812246B09E500E704D6 /* CleanseTypeVisitor.swift in Sources */,
 				DCD305E8247736BC00CDD7B1 /* LinkedMerging.swift in Sources */,
 				DC9966F0246B5F4D0015B473 /* LinkedInterface.swift in Sources */,
-				DC849821246B2FEB00E704D6 /* ComponentRootProviderVisitor.swift in Sources */,
+				DC855CB9251D469600B52570 /* APITypes.swift in Sources */,
+				DC849821246B2FEB00E704D6 /* ComponentRootVisitor.swift in Sources */,
 				DC27A0C824D49C8800D37708 /* TypeKey.swift in Sources */,
 				DC9966EE246B5F280015B473 /* LinkedComponent.swift in Sources */,
-				DC84981B246B249D00E704D6 /* ProviderBuilders.swift in Sources */,
 				DC849808246B050F00E704D6 /* FileVisitor.swift in Sources */,
 				DC996701246C75740015B473 /* ResolvedComponent.swift in Sources */,
 				DCD333572469B3E5008B053F /* Models.swift in Sources */,
@@ -944,9 +930,7 @@
 				DC9966FE246C60EE0015B473 /* CanonicalProvider.swift in Sources */,
 				DCF9EAC6247D716700FDE003 /* DebugData.swift in Sources */,
 				DCD333592469B4E4008B053F /* ProviderModels.swift in Sources */,
-				DC84981F246B275500E704D6 /* ReferenceProviderVisitor.swift in Sources */,
 				DC9966FC246C58560015B473 /* ResolutionError.swift in Sources */,
-				DC84981D246B268700E704D6 /* DanglingProviderVisitor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

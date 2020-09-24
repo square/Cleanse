@@ -1,5 +1,5 @@
 //
-//  ComponentRootProviderVisitor.swift
+//  ComponentRootVisitor.swift
 //  Cleansec
 //
 //  Created by Sebastian Edward Shanus on 5/12/20.
@@ -12,16 +12,11 @@ import SwiftAstParser
 /**
  Responsible for extracting out the root provider instance and seed type for a given component body.
  */
-public struct ComponentRootProviderVisitor: SyntaxVisitor {
+public struct ComponentRootVisitor: SyntaxVisitor {
     public init() {}
     
-    public enum RootProvider {
-        case dangling(DanglingProvider)
-        case reference(ReferenceProvider)
-    }
-    
     private var seed = "Void"
-    private var rootProvider: RootProvider?
+    private var rootProvider: DanglingProvider?
     
     public mutating func visit(node: Typealias) {
         if node.raw.contains("\"Seed\"") {
@@ -33,18 +28,15 @@ public struct ComponentRootProviderVisitor: SyntaxVisitor {
     
     public mutating func visit(node: FuncDecl) {
         if node.raw.contains("configureRoot(binder:)") {
-            var bindingsVisitor = BindingsVisitor()
-            bindingsVisitor.walk(node)
-            let result = bindingsVisitor.finalize()
-            if let danglingRoot = result.danglingProviders.first {
-                rootProvider = .dangling(danglingRoot)
-            } else if let referenceRoot = result.referenceProviders.first {
-                rootProvider = .reference(referenceRoot)
+            var rootProviderVisitor = RootProviderVisitor()
+            rootProviderVisitor.walk(node)
+            if let danglingRoot = rootProviderVisitor.finalize() {
+                rootProvider = danglingRoot
             }
         }
     }
     
-    public func finalize() -> (String, RootProvider?) {
+    public func finalize() -> (String, DanglingProvider?) {
         return (seed, rootProvider)
     }
 }

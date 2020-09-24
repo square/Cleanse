@@ -17,7 +17,7 @@ class PluginTests: XCTestCase {
     
     func testPluginOutput() {
         let provider = StandardProvider(type: "String", dependencies: [], tag: nil, scoped: nil, collectionType: nil)
-        let module = Module(type: "Module", providers: [provider], danglingProviders: [], referenceProviders: [], includedModules: [], subcomponents: [])
+        let module = Module(type: "Module", providers: [provider], includedModules: [], subcomponents: [])
         let file = FileRepresentation(components: [], modules: [module])
         let moduleRepresentation = ModuleRepresentation(files: [file])
         let encoder = JSONEncoder()

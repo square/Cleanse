@@ -12,8 +12,6 @@ import os.log
 
 struct BindingsResult {
     let standardProviders: [StandardProvider]
-    let danglingProviders: [DanglingProvider]
-    let referenceProviders: [ReferenceProvider]
     let includedModules: [String]
     let installedSubcomponents: [String]
 }
@@ -25,8 +23,6 @@ struct BindingsResult {
  */
 struct BindingsVisitor: SyntaxVisitor {
     private var standardProviders: [StandardProvider] = []
-    private var danglingProviders: [DanglingProvider] = []
-    private var referenceProviders: [ReferenceProvider] = []
     private var includedModules: [String] = []
     private var installedSubcomponents: [String] = []
     
@@ -35,46 +31,24 @@ struct BindingsVisitor: SyntaxVisitor {
         case installComponent = "extension.install(dependency:)"
     }
     
+    public mutating func visitChildren(node: FuncDecl) -> Bool {
+        if node.raw.contains("configureRoot(binder:)") {
+            return false
+        } else {
+            return true
+        }
+    }
+    
     mutating func visit(node: CallExpr) {
-        if let type = node.type.firstCapture("BindingReceipt<(.*)>") {
-            var bindingVisitor = ProviderVisitor(type: type)
+        if node.isCleanseBinding {
+            var bindingVisitor = ProviderVisitor()
             bindingVisitor.walk(node)
-            guard let providerResult = bindingVisitor.finalize() else {
+            guard let provider = bindingVisitor.finalize() else {
                 os_log("Found binding expression, but failed to create any semblance of a provider. %@", type: .debug, node.raw)
                 return
             }
             
-            switch providerResult {
-            case .provider(let provider):
-                standardProviders.append(provider)
-            case .danglingProviderBuilder(var danglingProviderBuilder):
-                var danglingVisitor = DanglingProviderVisitor(type: danglingProviderBuilder.type)
-                danglingVisitor.walk(node)
-                guard let foundReference = danglingVisitor.finalize() else {
-                    os_log("Unknown dangling reference provider type %@", type: .debug, node.raw)
-                    return
-                }
-                danglingProviderBuilder = danglingProviderBuilder.setReference(foundReference)
-                danglingProviders.append(danglingProviderBuilder.build())
-            case .referenceBuilder(var referenceProviderBuilder):
-                var referenceVisitor = ReferenceProviderVisitor(type: referenceProviderBuilder.type)
-                referenceVisitor.walkChildren(node)
-                switch referenceVisitor.finalize() {
-                case .unknown:
-                    os_log("Failed to parse reference node: %@", type: .debug, node.raw)
-                    return
-                case .dependencies(let dependencies):
-                    referenceProviderBuilder = referenceProviderBuilder.setDependencies(dependencies: dependencies)
-                case .reference(let reference):
-                    referenceProviderBuilder = referenceProviderBuilder.setReference(reference: reference)
-                }
-                switch referenceProviderBuilder.build() {
-                case .standard(let standardProvider):
-                    standardProviders.append(standardProvider)
-                case .reference(let referenceProvider):
-                    referenceProviders.append(referenceProvider)
-                }
-            }
+            standardProviders.append(provider)
         }
     }
     
@@ -97,8 +71,6 @@ struct BindingsVisitor: SyntaxVisitor {
     func finalize() -> BindingsResult {
         BindingsResult(
             standardProviders: standardProviders,
-            danglingProviders: danglingProviders,
-            referenceProviders: referenceProviders,
             includedModules: includedModules,
             installedSubcomponents: installedSubcomponents
         )
