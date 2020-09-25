@@ -10,12 +10,6 @@ import Foundation
 import SwiftAstParser
 import os.log
 
-public enum ProviderResult {
-    case provider(StandardProvider)
-    case danglingProviderBuilder(DanglingProviderBuilder)
-    case referenceBuilder(ReferenceProviderBuilder)
-}
-
 /**
  Parses an individual binding to discern its provider type, dependencies, and any decorated types (i.e Tagged, Scoped, Factory).
  */
@@ -23,12 +17,6 @@ public struct ProviderVisitor: SyntaxVisitor {
     private var binding: BindingType = .unknown
     private var dependencies: [String] = []
     private var bindingTypeBuilder = BaseBindingTypeBuilder.instance
-    
-    public let type: String
-    
-    public init(type: String) {
-        self.type = type
-    }
     
     // We just want to visit the first declrefExpr to discern the API used.
     public mutating func visit(node: DeclrefExpr) {
@@ -48,22 +36,13 @@ public struct ProviderVisitor: SyntaxVisitor {
         case .toFactory, .toFactoryPropertyInjector, .toFactoryAssistedInjection:
             dependencies = node.raw.allCaptures(#"\(substitution\sP_[\d]+\s->\s(\(\).*?|.*?)(?=\)\s|\)\)])"#)
             binding = .provider
-        case .configure, .configurePropertyInjector:
-            binding = .reference
         }
     }
     
     public mutating func visit(node: CallExpr) {
-        if let receiptType = node.type.firstCapture("BindingReceipt<(.*)>") {
+        if let _ = node.type.firstCapture("BindingReceipt<(.*)>") {
             if let loc = node.raw.firstCapture(#"location=(.*)\srange"#) {
                 bindingTypeBuilder = bindingTypeBuilder.setDebugData(.location(loc))
-            }
-            if let danglingProviderType = receiptType.firstCapture(#"^ReceiptBinder<(.*)>"#) {
-                bindingTypeBuilder = bindingTypeBuilder.setType(type: danglingProviderType)
-            } else if let danglingPropertyInjectorType = receiptType.firstCapture(#"PropertyInjectionReceiptBinder<(.*)>\.Element>"#) {
-                bindingTypeBuilder = bindingTypeBuilder.setType(type: "PropertyInjector<\(danglingPropertyInjectorType)>")
-            } else if receiptType.matches(#"^PropertyInjector<.*>"#) {
-                bindingTypeBuilder = bindingTypeBuilder.setType(type: receiptType)
             }
             return
         }
@@ -74,23 +53,20 @@ public struct ProviderVisitor: SyntaxVisitor {
         }
         switch baseBindingType {
         case .provider:
-            bindingTypeBuilder = bindingTypeBuilder.setBaseGraphBinding()
             if let type = node.type.firstCapture(#"BaseBindingBuilder<(.*),\s.*>"#) {
-                bindingTypeBuilder = bindingTypeBuilder.setType(type: type)
+                bindingTypeBuilder = bindingTypeBuilder.setBaseGraphBinding(type: type)
             } else {
                 os_log("Found base binding but couldn't parse type for: %@", type: .debug, node.raw)
             }
         case .propertyInjector:
-            bindingTypeBuilder = bindingTypeBuilder.setBaseGraphBinding()
             if let type = node.type.firstCapture(#"PropertyInjectorBindingBuilder<.*,\s(.*)(?>)>"#) {
-                bindingTypeBuilder = bindingTypeBuilder.setType(type: "PropertyInjector<\(type)>")
+                bindingTypeBuilder = bindingTypeBuilder.setBaseGraphBinding(type: "PropertyInjector<\(type)>")
             } else {
                 os_log("Found base binding but couldn't parse type for: %@", type: .debug, node.raw)
             }
         case .assistedInjectionProvider:
-            bindingTypeBuilder = bindingTypeBuilder.setBaseGraphBinding()
             if let type = node.type.firstCapture(#"AssistedInjectionSeedDecorator<.*,\s(.*)(?>)>"#) {
-                bindingTypeBuilder = bindingTypeBuilder.setType(type: "Factory<\(type)>")
+                bindingTypeBuilder = bindingTypeBuilder.setBaseGraphBinding(type: "Factory<\(type)>")
             } else {
                 os_log("Found base binding but couldn't parse type for: %@", type: .debug, node.raw)
             }
@@ -113,7 +89,7 @@ public struct ProviderVisitor: SyntaxVisitor {
         }
     }
     
-    public func finalize() -> ProviderResult? {
+    public func finalize() -> StandardProvider? {
         bindingTypeBuilder.build(bindingType: binding, dependencies: dependencies)
     }
 }
@@ -152,19 +128,7 @@ fileprivate struct BaseBindingTypeBuilder {
         )
     }
     
-    func setType(type: String) -> BaseBindingTypeBuilder {
-       return BaseBindingTypeBuilder(
-            type: type,
-            graphBinding: graphBinding,
-            collectionBinding: collectionBinding,
-            singularCollectionBinding: singularCollectionBinding,
-            taggedBinding: taggedBinding,
-            scopedBinding: scopedBinding,
-            debugData: debugData
-        )
-    }
-    
-    func setBaseGraphBinding() -> BaseBindingTypeBuilder {
+    func setBaseGraphBinding(type: String) -> BaseBindingTypeBuilder {
         return BaseBindingTypeBuilder(
             type: type,
             graphBinding: true,
@@ -224,7 +188,7 @@ fileprivate struct BaseBindingTypeBuilder {
         )
     }
     
-    func build(bindingType: ProviderVisitor.BindingType, dependencies: [String]) -> ProviderResult? {
+    func build(bindingType: BindingType, dependencies: [String]) -> StandardProvider? {
         guard let type = type else {
             return nil
         }
@@ -240,36 +204,13 @@ fileprivate struct BaseBindingTypeBuilder {
         }
         switch bindingType {
         case .provider:
-            // If bound into graph, full standard. Otherwise it's a dangling reference.
-            if graphBinding {
-                return .provider(StandardProvider(
-                    type: type,
-                    dependencies: dependencies,
-                    tag: taggedBinding,
-                    scoped: scopedBinding,
-                    collectionType: collectionType,
-                    debugData: debugData
-                    )
-                )
-            } else {
-                return .danglingProviderBuilder(DanglingProviderBuilder(
-                    type: type,
-                    dependencies: dependencies,
-                    reference: nil,
-                    debugData: debugData
-                    )
-                )
-            }
-        case .reference:
-            return .referenceBuilder(ReferenceProviderBuilder(
+            return StandardProvider(
                 type: type,
+                dependencies: dependencies,
                 tag: taggedBinding,
-                scope: scopedBinding,
+                scoped: scopedBinding,
                 collectionType: collectionType,
-                dependencies: nil,
-                reference: nil,
                 debugData: debugData
-                )
             )
         case .unknown:
             return nil
@@ -277,36 +218,14 @@ fileprivate struct BaseBindingTypeBuilder {
     }
 }
 
-extension ProviderVisitor {
-    fileprivate enum Binding {
-        case provider
-        case taggedProvider(tag: String)
-        case scopedProvider(scope: String)
-        case collectionProvider(isSingular: Bool)
-    }
-    
-    fileprivate enum BindingType {
-        case unknown
-        case reference
-        case provider
-    }
-    
-    fileprivate enum BaseBindingType: String, CaseIterable {
-        case provider = "BaseBindingBuilder"
-        case taggedProvider = "TaggedBindingBuilderDecorator"
-        case scopedProvider = "ScopedBindingDecorator"
-        case propertyInjector = "PropertyInjectorBindingBuilder"
-        case assistedInjectionProvider = "AssistedInjectionSeedDecorator"
-        case singularCollectionProvider = "SingularCollectionBindingBuilderDecorator"
-        case collectionProvider = "CollectionBindingBuilderDecorator"
-    }
-    
-    fileprivate enum BindingAPI: String, CaseIterable {
-        case toValue = "decl=Cleanse.(file).BindToable extension.to(value:file:line:function:)"
-        case toFactory = "decl=Cleanse.(file).BindToable extension.to(file:line:function:factory:)"
-        case configure = "decl=Cleanse.(file).BindToable extension.configured(with:)"
-        case toFactoryPropertyInjector = "decl=Cleanse.(file).PropertyInjectorBindingBuilderProtocol extension.to(file:line:function:injector:)"
-        case configurePropertyInjector = "decl=Cleanse.(file).BindToable extension.propertyInjector(configuredWith:)"
-        case toFactoryAssistedInjection = "decl=Cleanse.(file).AssistedInjectionBuilder extension.to(file:line:function:factory:)"
-    }
+fileprivate enum Binding {
+    case provider
+    case taggedProvider(tag: String)
+    case scopedProvider(scope: String)
+    case collectionProvider(isSingular: Bool)
+}
+
+fileprivate enum BindingType {
+    case unknown
+    case provider
 }

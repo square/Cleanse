@@ -9,17 +9,13 @@
 import Foundation
 import Cleanse
 
-class MainPropertyClass {
-    static func configureAppDelegateInjector(binder bind: PropertyInjectionReceiptBinder<MainPropertyClass>) -> BindingReceipt<PropertyInjector<MainPropertyClass>> {
-        return bind.to { (a, number:Int) in
-            // Noop
-        }
-    }
-}
+class MainPropertyClass {}
 
 struct RootComponent: Cleanse.RootComponent {
     static func configureRoot(binder bind: ReceiptBinder<PropertyInjector<MainPropertyClass>>) -> BindingReceipt<PropertyInjector<MainPropertyClass>> {
-        return bind.propertyInjector(configuredWith: MainPropertyClass.configureAppDelegateInjector)
+        return bind.to { (injector: PropertyInjector<MainPropertyClass>) -> PropertyInjector<MainPropertyClass> in
+            return injector
+        }
     }
     
     typealias Root = PropertyInjector<MainPropertyClass>

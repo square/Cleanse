@@ -11,123 +11,34 @@ import XCTest
 @testable import CleansecFramework
 
 class LinkerTests: XCTestCase {
-    func testLinkingWithModule() {
-        let danglingProvider = DanglingProvider(type: "A", dependencies: [], reference: "reference_id")
-        let referenceProvider = ReferenceProvider(type: "A", tag: nil, scoped: nil, collectionType: nil, reference: "reference_id")
-        let module = Module(
-            type: "Test", providers: [], danglingProviders: [danglingProvider], referenceProviders: [referenceProvider], includedModules: [], subcomponents: [])
-        let file = FileRepresentation(
-            components: [],
-            modules: [module])
-        let moduleRep = ModuleRepresentation(
-            files: [file]
-        )
-        let interface = Linker.link(modules: [moduleRep])
-        XCTAssertEqual(interface.modules.count, 1)
-        XCTAssertEqual(interface.modules.first!.providers.count, 1)
-        XCTAssertEqual(interface.modules.first!.providers.first!, StandardProvider(type: "A", dependencies: [], tag: nil, scoped: nil, collectionType: nil))
-    }
-    
-    func testLinkingAcrossModules() {
-        let danglingProvider = DanglingProvider(type: "A", dependencies: [], reference: "reference_id")
-        let referenceProvider = ReferenceProvider(type: "A", tag: nil, scoped: nil, collectionType: nil, reference: "reference_id")
-        let moduleA = Module(
-            type: "Test",
-            providers: [],
-            danglingProviders: [],
-            referenceProviders: [referenceProvider],
+    func testLinking() {
+        let componentA = Component(
+            type: "MyComponent",
+            rootType: "Int",
+            providers: [
+                StandardProvider(type: "Int", dependencies: [], tag: nil, scoped: nil, collectionType: nil)
+            ],
+            seed: "Void",
             includedModules: [],
-            subcomponents: []
+            subcomponents: [],
+            isRoot: true
         )
-        let moduleB = Module(
-            type: "Test_2",
-            providers: [],
-            danglingProviders: [danglingProvider],
-            referenceProviders: [],
+        let componentB = Component(
+            type: "SecondComponent",
+            rootType: "Float",
+            providers: [
+                StandardProvider(type: "Float", dependencies: [], tag: nil, scoped: nil, collectionType: nil)
+            ],
+            seed: "Void",
             includedModules: [],
-            subcomponents: []
+            subcomponents: [],
+            isRoot: true
         )
-        
-        
-        let file = FileRepresentation(
-            components: [],
-            modules: [moduleA, moduleB])
-        let moduleRep = ModuleRepresentation(
-            files: [file]
-        )
-        let interface = Linker.link(modules: [moduleRep])
-        XCTAssertEqual(interface.modules.count, 2)
-        XCTAssertEqual(interface.modules.first!.providers.count, 1)
-        XCTAssertEqual(interface.modules[1].providers.count, 0)
-    }
-    
-    func testMissingDangling() {
-        let referenceProvider = ReferenceProvider(type: "A", tag: nil, scoped: nil, collectionType: nil, reference: "reference_id")
-        let moduleA = Module(
-            type: "Test",
-            providers: [],
-            danglingProviders: [],
-            referenceProviders: [referenceProvider],
-            includedModules: [],
-            subcomponents: []
-        )
-        
-        
-        let file = FileRepresentation(
-            components: [],
-            modules: [moduleA])
-        let moduleRep = ModuleRepresentation(
-            files: [file]
-        )
-        let interface = Linker.link(modules: [moduleRep])
-        XCTAssertEqual(interface.modules.count, 1)
-        XCTAssertEqual(interface.modules.first!.providers.count, 0)
-    }
-    
-    func testOnlyDanging() {
-        let danglingProvider = DanglingProvider(type: "A", dependencies: [], reference: "reference_id")
-        let moduleA = Module(
-            type: "Test",
-            providers: [],
-            danglingProviders: [danglingProvider],
-            referenceProviders: [],
-            includedModules: [],
-            subcomponents: []
-        )
-        
-        
-        let file = FileRepresentation(
-            components: [],
-            modules: [moduleA])
-        let moduleRep = ModuleRepresentation(
-            files: [file]
-        )
-        let interface = Linker.link(modules: [moduleRep])
-        XCTAssertEqual(interface.modules.count, 1)
-        XCTAssertEqual(interface.modules.first!.providers.count, 0)
-    }
-    
-    func testDuplicateDangling() {
-        let danglingProvider = DanglingProvider(type: "A", dependencies: [], reference: "reference_id")
-        let referenceProvider = ReferenceProvider(type: "A", tag: nil, scoped: nil, collectionType: nil, reference: "reference_id")
-        let moduleA = Module(
-            type: "Test",
-            providers: [],
-            danglingProviders: [danglingProvider, danglingProvider],
-            referenceProviders: [referenceProvider],
-            includedModules: [],
-            subcomponents: []
-        )
-        
-        
-        let file = FileRepresentation(
-            components: [],
-            modules: [moduleA])
-        let moduleRep = ModuleRepresentation(
-            files: [file]
-        )
-        let interface = Linker.link(modules: [moduleRep])
-        XCTAssertEqual(interface.modules.count, 1)
-        XCTAssertEqual(interface.modules.first!.providers.count, 1)
+        let fileA = FileRepresentation(components: [componentA], modules: [])
+        let fileB = FileRepresentation(components: [componentB], modules: [])
+        let moduleA = ModuleRepresentation(files: [fileA])
+        let moduleB = ModuleRepresentation(files: [fileB])
+        let interface = Linker.link(modules: [moduleA, moduleB])
+        XCTAssertEqual(interface.components.count, 2)
     }
 }

@@ -65,35 +65,22 @@ struct FileVisitor: SyntaxVisitor {
             }
             let isRoot = inheritableNode.inherits?.matches("^(Cleanse.)?RootComponent") ?? false
             var bindingsVisitor = BindingsVisitor()
-            var componentRootVisitor = ComponentRootProviderVisitor()
+            var componentRootVisitor = ComponentRootVisitor()
             bindingsVisitor.walk(inheritableNode)
             componentRootVisitor.walk(inheritableNode)
             let (seed, rootProvider) = componentRootVisitor.finalize()
-            guard let root = rootProvider else {
+            guard let danglingRootProvider = rootProvider else {
                 os_log("Unable to discern root provider for component %@. Not creating component for: %@", type: .debug, componentName, inheritableNode.raw)
                 return
             }
-            switch root {
-            case .dangling(let dangling):
-                components.append(
-                    bindingsVisitor.finalize().component(
-                        type: componentName,
-                        isRoot: isRoot,
-                        rootType: dangling.type,
-                        seed: seed,
-                        additionalProviders: [dangling.standardProvider])
-                )
-            case .reference(let reference):
-                components.append(
-                    bindingsVisitor.finalize().component(
-                        type: componentName,
-                        isRoot: isRoot,
-                        rootType: reference.type,
-                        seed: seed,
-                        additionalProviders: []
-                    )
-                )
-            }
+            components.append(
+                bindingsVisitor.finalize().component(
+                    type: componentName,
+                    isRoot: isRoot,
+                    rootType: danglingRootProvider.type,
+                    seed: seed,
+                    additionalProviders: [danglingRootProvider.standardProvider])
+            )
         }
     }
     
@@ -129,8 +116,6 @@ fileprivate extension BindingsResult {
         return Module(
             type: type,
             providers: standardProviders,
-            danglingProviders: danglingProviders,
-            referenceProviders: referenceProviders,
             includedModules: includedModules,
             subcomponents: installedSubcomponents
         )
@@ -141,8 +126,6 @@ fileprivate extension BindingsResult {
             type: type,
             rootType: rootType,
             providers: standardProviders + additionalProviders,
-            danglingProviders: danglingProviders,
-            referenceProviders: referenceProviders,
             seed: seed,
             includedModules: includedModules,
             subcomponents: installedSubcomponents,

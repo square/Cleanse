@@ -67,22 +67,6 @@ class BindingsVisitorTests: XCTestCase {
         XCTAssertEqual(result.installedSubcomponents, ["Subcomponent"])
     }
     
-    func testDanglingProviders() {
-        let node = SyntaxParser.parse(text: Fixtures.DanglingProvider).first!
-        visitor.walk(node)
-        let result = visitor.finalize()
-        XCTAssertEqual(result.danglingProviders.count, 2)
-    }
-
-    func testDanglingAndReferenceConnected() {
-        let node = SyntaxParser.parse(text: Fixtures.DanglingAndReference).first!
-        visitor.walk(node)
-        let result = visitor.finalize()
-        XCTAssertEqual(result.standardProviders.count, 0)
-        XCTAssertEqual(result.danglingProviders.count, 1)
-        XCTAssertEqual(result.referenceProviders.count, 1)
-        XCTAssertEqual(result.referenceProviders.first!.reference, result.referenceProviders.first!.reference)
-    }
 
     func testPropertyInjectorBinding() {
         let node = SyntaxParser.parse(text: Fixtures.PropertyInjection).first!
@@ -91,16 +75,6 @@ class BindingsVisitorTests: XCTestCase {
         XCTAssertEqual(result.standardProviders.count, 1)
         XCTAssertEqual(result.standardProviders.first!.type, "PropertyInjector<PropertyClass>")
         XCTAssertEqual(result.standardProviders.first!.dependencies, ["Int"])
-    }
-
-    func testPropertyInjectorRoot() {
-        let node = SyntaxParser.parse(text: Fixtures.PropertyInjectorRoot).first!
-        visitor.walk(node)
-        let result = visitor.finalize()
-        XCTAssertEqual(result.danglingProviders.count, 1)
-        XCTAssertEqual(result.referenceProviders.count, 1)
-        XCTAssertEqual(result.standardProviders.count, 0)
-        XCTAssertEqual(result.referenceProviders.first!.reference, result.referenceProviders.first!.reference)
     }
 
     func testAssistedFactoryProvider() {
@@ -135,15 +109,6 @@ class BindingsVisitorTests: XCTestCase {
         XCTAssertEqual(result.standardProviders[4].collectionType, "[[Int]]")
     }
 
-    func testDecoratedReferenceProvider() {
-        let node = SyntaxParser.parse(text: Fixtures.DecoratedReferenceProvider).first!
-        visitor.walk(node)
-        let result = visitor.finalize()
-        XCTAssertEqual(result.referenceProviders.count, 2)
-        XCTAssertEqual(result.referenceProviders.first!.scoped, "Singleton")
-        XCTAssertEqual(result.referenceProviders[1].tag, "MyTag3")
-    }
-
     func testInnerReferenceTag() {
         let node = SyntaxParser.parse(text: Fixtures.InnerTag).first!
         visitor.walk(node)
@@ -174,16 +139,6 @@ class BindingsVisitorTests: XCTestCase {
         let result = visitor.finalize()
         XCTAssertNotNil(result.standardProviders.first!.debugData.location)
         XCTAssertTrue(result.standardProviders.first!.debugData.location!.hasSuffix("ModuleWithDependencies.swift:16:10"))
-    }
-    
-    func testDebugDataReferenceAndDangling() {
-        let node = SyntaxParser.parse(text: Fixtures.DanglingAndReference).first!
-        visitor.walk(node)
-        let result = visitor.finalize()
-        XCTAssertNotNil(result.referenceProviders.first!.debugData.location)
-        XCTAssertTrue(result.referenceProviders.first!.debugData.location!.hasSuffix("DanglingAndReference.swift:20:36"))
-        XCTAssertNotNil(result.danglingProviders.first!.debugData.location)
-        XCTAssertTrue(result.danglingProviders.first!.debugData.location!.hasSuffix("DanglingAndReference.swift:14:21"))
     }
     
     func testImplicitProviderDependency() {
