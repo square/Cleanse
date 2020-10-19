@@ -82,9 +82,9 @@ class MemoryManagementTests: XCTestCase {
             binder.bind().sharedInScope().to(factory: Single2.init)
             binder.bind().sharedInScope().to(factory: SingleStruct1.init)
             
-            binder.bind().intoCollection().sharedInScope().to { SingleCollectionElement(value: 3) }
-            binder.bind().intoCollection().sharedInScope().to { SingleCollectionElement(value: 4) }
-            binder.bind().intoCollection().sharedInScope().to { SingleCollectionElement(value: 5) }
+            binder.bind().intoCollection().sharedInScope().to(value: SingleCollectionElement(value: 3))
+            binder.bind().intoCollection().sharedInScope().to(value:  SingleCollectionElement(value: 4) )
+            binder.bind().intoCollection().sharedInScope().to(value: SingleCollectionElement(value: 5))
         }
     }
     

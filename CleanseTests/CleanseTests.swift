@@ -90,8 +90,8 @@ struct APIComponent : RootComponent {
 struct BurgerModule : Module {
     static func configure(binder: Binder<Singleton>) {
         binder.bind().to(factory: Burger.init)
-        binder.bind().to { return Cheese.cheddar }
-        binder.bind().to { Roll.ciabatta }
+        binder.bind().to(value: Cheese.cheddar)
+        binder.bind().to(value: Roll.ciabatta)
         
         var singletonCountTest = 1
         binder

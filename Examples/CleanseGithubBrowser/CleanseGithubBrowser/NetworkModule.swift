@@ -16,7 +16,7 @@ struct NetworkModule : Module {
         binder
             .bind()
             .sharedInScope()
-            .to { URLSessionConfiguration.ephemeral }
+            .to(value: URLSessionConfiguration.ephemeral)
 
         binder
             .bind(URLSession.self)
