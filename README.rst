@@ -108,7 +108,7 @@ This graph starts with a root object which is connected to its immediate depende
 
 .. _`directed acyclic graph`: https://en.wikipedia.org/wiki/Directed_acyclic_graph
 
-The entry point into managing your dependencies with Cleanse starts by defining a "Root" object that is returned to you upon construction. In a Cocoa Touch application, our root object could be the ``rootViewController`` object we set on the application's ``UIWindow``. *(More logically the root object is the App Delegate, however since since we don't control construction of that we would have to use Property Injection. You can read more about this in the* `Advanced Setup`_ *guide)*
+The entry point into managing your dependencies with Cleanse starts by defining a "Root" object that is returned to you upon construction. In a Cocoa Touch application, our root object could be the ``rootViewController`` object we set on the application's ``UIWindow``. *(More logically the root object is the App Delegate, however since we don't control construction of that we would have to use Property Injection. You can read more about this in the* `Advanced Setup`_ *guide)*
 
 Let's begin by defining the ``RootComponent``:
 
