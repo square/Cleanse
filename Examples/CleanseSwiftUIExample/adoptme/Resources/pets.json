@@ -1,0 +1,112 @@
+[
+    {
+        "id": 145,
+        "name": "Crawler",
+        "type": "Cat",
+        "desc": "This large adult cat is Male.  She has a medium-length white coat with a gray spots of assorted shapes and sizes.  She has a long, broad face and is somewhat thin.  She is a picky eater, pounces anything that moves, and is very friendly.",
+        "isLiked": true,
+        "isMale":true,
+        "size": "S",
+        "location": "Bireuen, Aceh",
+        "imageName": "cat-crawler"
+    },
+    {
+        "id": 1,
+        "name": "Payton",
+        "type": "Cat",
+        "desc": "This large young cat is female.  She has a medium-length black coat with a white neck, chin, and underbody.  She has a long, narrow face and is quite heavy.  She is especially fond of chicken, is a bit lazy, and is very shy.",
+        "isLiked": false,
+        "isMale": false,
+        "size": "S",
+        "location": "Banda Aceh, Aceh",
+        "imageName": "cat-payton"
+    },
+    {
+        "id": 2,
+        "name": "Peep",
+        "type": "Cat",
+        "desc": "This small adult cat is male.  He has a short gray tabby coat.  He has a short, narrow face and is of average weight.  He is especially fond of fish, is very excitable, and is very shy.",
+        "isLiked": true,
+        "isMale":true,
+        "size": "M",
+        "location": "Kab. Malang, Jawa Timur",
+        "imageName": "cat-peep"
+    },
+    {
+        "id": 3,
+        "name": "Pine",
+        "type": "Cat",
+        "desc": "This large young cat is female.  She has a medium-length cinnamon tabby point coat with white toes and chin.  She has a short, broad face and is fairly muscular.  She is especially fond of chicken, is a bit lazy, and is cautious around strangers.",
+        "isLiked": false,
+        "isMale": false,
+        "size": "M",
+        "location": "Kota Malang, Jawa Timur",
+        "imageName": "cat-pine"
+    },
+    {
+        "id": 4,
+        "name": "Rumble",
+        "type": "Cat",
+        "desc": "This small adult cat is male.  He has a short gray tabby coat with a white neck, chin, and underbody.  He has a medium-length, broad face and is a bit pudgy.  He is especially fond of fish, pounces anything that moves, and will jump on any available lap.",
+        "isLiked": false,
+        "isMale":true,
+        "size": "S",
+        "location": "Kota Batu, Jawa Timur",
+        "imageName": "cat-rumble"
+    },
+    {
+        "id": 5,
+        "name": "Unit",
+        "type": "Cat",
+        "desc": "This small adult cat is female.  She has a short white coat.  She has a medium-length, narrow face and is of average weight.  She is especially fond of beef, is a bit excitable, and is very friendly.",
+        "isLiked": false,
+        "isMale":false,
+        "size": "S",
+        "location": "Bireuen, Aceh",
+        "imageName": "cat-unit"
+    },
+    {
+        "id": 6,
+        "name": "Wiley",
+        "type": "Cat",
+        "desc": "This small middle-aged cat is male.  He has a long white coat with a lilac point hood and tail with spotting on his back.  He has a medium-length, narrow face and is fairly muscular.  He is especially fond of beef, is a bit lazy, and is very shy.",
+        "isLiked": false,
+        "isMale":true,
+        "size": "S",
+        "location": "Bireuen, Aceh",
+        "imageName": "cat-wiley"
+    },
+    {
+        "id": 7,
+        "name": "Isaac",
+        "type": "Chameleon",
+        "desc": "This small adult chameleon is male.  He has a short white coat with small blue chinchilla spots.  He has a short, broad face and is quite heavy.  He is especially fond of chicken, is very playful, and is very friendly.",
+        "isLiked": false,
+        "isMale":true,
+        "size": "M",
+        "location": "Kota Malang, Jawa Timur",
+        "imageName": "chameleon-isaac"
+    },
+    {
+        "id": 8,
+        "name": "Link",
+        "type": "Dog",
+        "desc": "This average-sized adult dog is male.  He has a long white coat with a large chocolate chinchilla spot on his back.  He has a long, narrow face and is a bit pudgy.  He is a picky eater, is a bit lazy, and will jump on any available lap.",
+        "isLiked": true,
+        "isMale":true,
+        "size": "L",
+        "location": "Kota Batu, Jawa Timur",
+        "imageName": "dog-link"
+    },
+    {
+        "id": 9,
+        "name": "Lil Peep",
+        "type": "Dog",
+        "desc": "This large adult dog is male.  He has a short cream coat.  He has a short, average-width face and is of average weight.  He is especially fond of beef, pounces anything that moves, and prefers to be left alone.",
+        "isLiked": false,
+        "isMale":true,
+        "size": "L",
+        "location": "Indonesia",
+        "imageName": "dog-squeek"
+    }
+]
