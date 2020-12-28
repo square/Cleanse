@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "C96A3B5D248C7B2A00973E2A"
-               BuildableName = "adoptme.app"
-               BlueprintName = "adoptme"
-               ReferencedContainer = "container:adoptme.xcodeproj">
+               BuildableName = "CleanseSwiftUIExample.app"
+               BlueprintName = "CleanseSwiftUIExample"
+               ReferencedContainer = "container:CleanseSwiftUIExample.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -45,9 +45,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "C96A3B5D248C7B2A00973E2A"
-            BuildableName = "adoptme.app"
-            BlueprintName = "adoptme"
-            ReferencedContainer = "container:adoptme.xcodeproj">
+            BuildableName = "CleanseSwiftUIExample.app"
+            BlueprintName = "CleanseSwiftUIExample"
+            ReferencedContainer = "container:CleanseSwiftUIExample.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -62,9 +62,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "C96A3B5D248C7B2A00973E2A"
-            BuildableName = "adoptme.app"
-            BlueprintName = "adoptme"
-            ReferencedContainer = "container:adoptme.xcodeproj">
+            BuildableName = "CleanseSwiftUIExample.app"
+            BlueprintName = "CleanseSwiftUIExample"
+            ReferencedContainer = "container:CleanseSwiftUIExample.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

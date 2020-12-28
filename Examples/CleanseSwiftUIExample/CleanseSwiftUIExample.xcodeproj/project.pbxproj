@@ -72,7 +72,7 @@
 		C94637B4248D503F0083F7AA /* cat-peep.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "cat-peep.jpg"; sourceTree = "<group>"; };
 		C94637B5248D50400083F7AA /* cat-pine.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "cat-pine.jpg"; sourceTree = "<group>"; };
 		C94637B6248D50400083F7AA /* chameleon-isaac.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "chameleon-isaac.jpg"; sourceTree = "<group>"; };
-		C96A3B5E248C7B2A00973E2A /* adoptme.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = adoptme.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C96A3B5E248C7B2A00973E2A /* CleanseSwiftUIExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CleanseSwiftUIExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C96A3B65248C7B2A00973E2A /* HomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreen.swift; sourceTree = "<group>"; };
 		C96A3B6A248C7B3000973E2A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		C96A3B6F248C7B3000973E2A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -120,7 +120,7 @@
 		C96A3B55248C7B2A00973E2A = {
 			isa = PBXGroup;
 			children = (
-				C96A3B60248C7B2A00973E2A /* adoptme */,
+				C96A3B60248C7B2A00973E2A /* CleanseSwiftUIExample */,
 				C96A3B5F248C7B2A00973E2A /* Products */,
 			);
 			sourceTree = "<group>";
@@ -128,12 +128,12 @@
 		C96A3B5F248C7B2A00973E2A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				C96A3B5E248C7B2A00973E2A /* adoptme.app */,
+				C96A3B5E248C7B2A00973E2A /* CleanseSwiftUIExample.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		C96A3B60248C7B2A00973E2A /* adoptme */ = {
+		C96A3B60248C7B2A00973E2A /* CleanseSwiftUIExample */ = {
 			isa = PBXGroup;
 			children = (
 				C97E0F802596215F00406D7D /* DI */,
@@ -144,7 +144,7 @@
 				C97E6450248D314100BC15AC /* Resources */,
 				C96A3B69248C7B3000973E2A /* Preview Content */,
 			);
-			path = adoptme;
+			path = CleanseSwiftUIExample;
 			sourceTree = "<group>";
 		};
 		C96A3B69248C7B3000973E2A /* Preview Content */ = {
@@ -229,9 +229,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		C96A3B5D248C7B2A00973E2A /* adoptme */ = {
+		C96A3B5D248C7B2A00973E2A /* CleanseSwiftUIExample */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C96A3B72248C7B3000973E2A /* Build configuration list for PBXNativeTarget "adoptme" */;
+			buildConfigurationList = C96A3B72248C7B3000973E2A /* Build configuration list for PBXNativeTarget "CleanseSwiftUIExample" */;
 			buildPhases = (
 				C96A3B5A248C7B2A00973E2A /* Sources */,
 				C96A3B5B248C7B2A00973E2A /* Frameworks */,
@@ -242,12 +242,12 @@
 			);
 			dependencies = (
 			);
-			name = adoptme;
+			name = CleanseSwiftUIExample;
 			packageProductDependencies = (
 				C97E0F7D2596207100406D7D /* Cleanse */,
 			);
 			productName = Exam1;
-			productReference = C96A3B5E248C7B2A00973E2A /* adoptme.app */;
+			productReference = C96A3B5E248C7B2A00973E2A /* CleanseSwiftUIExample.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -265,7 +265,7 @@
 					};
 				};
 			};
-			buildConfigurationList = C96A3B59248C7B2A00973E2A /* Build configuration list for PBXProject "adoptme" */;
+			buildConfigurationList = C96A3B59248C7B2A00973E2A /* Build configuration list for PBXProject "CleanseSwiftUIExample" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -281,7 +281,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				C96A3B5D248C7B2A00973E2A /* adoptme */,
+				C96A3B5D248C7B2A00973E2A /* CleanseSwiftUIExample */,
 			);
 		};
 /* End PBXProject section */
@@ -457,15 +457,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "\"adoptme/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"CleanseSwiftUIExample/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = "$(SRCROOT)/adoptme/SupportingFiles/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/CleanseSwiftUIExample/SupportingFiles/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.chathil.Exam1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.squareup.CleanseSwiftUIExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -477,15 +477,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "\"adoptme/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"CleanseSwiftUIExample/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = "$(SRCROOT)/adoptme/SupportingFiles/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/CleanseSwiftUIExample/SupportingFiles/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.chathil.Exam1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.squareup.CleanseSwiftUIExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -495,7 +495,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		C96A3B59248C7B2A00973E2A /* Build configuration list for PBXProject "adoptme" */ = {
+		C96A3B59248C7B2A00973E2A /* Build configuration list for PBXProject "CleanseSwiftUIExample" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C96A3B70248C7B3000973E2A /* Debug */,
@@ -504,7 +504,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C96A3B72248C7B3000973E2A /* Build configuration list for PBXNativeTarget "adoptme" */ = {
+		C96A3B72248C7B3000973E2A /* Build configuration list for PBXNativeTarget "CleanseSwiftUIExample" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C96A3B73248C7B3000973E2A /* Debug */,
