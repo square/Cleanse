@@ -4,7 +4,9 @@
 
 #### Features & Updates
 
-* None
+* New Example: CleanseSwiftUIExample.
+  [Abdul Chathil](https://github.com/chathil)
+  [#176](https://github.com/square/Cleanse/pull/176)
 
 #### Bug Fixes
 

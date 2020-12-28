@@ -15,8 +15,10 @@ jobs:
     - uses: actions/checkout@v2
     - name: Test
       run: xcodebuild test -project Cleanse.xcodeproj -scheme Cleanse -enableCodeCoverage=YES -destination "platform=iOS Simulator,name=iPhone 8"
-    - name: Test Sample App
+    - name: Test CleanseGithubBrowser Sample App
       run: xcodebuild test -project Examples/CleanseGithubBrowser/CleanseGithubBrowser.xcodeproj -scheme CleanseGithubBrowser -destination "platform=iOS Simulator,name=iPhone 8"
+    - name: Test CleanseSwiftUI Sample App
+      run: xcodebuild test -project Examples/CleanseSwiftUIExample/CleanseSwiftUIExample.xcodeproj -scheme CleanseSwiftUIExample -destination "platform=iOS Simulator,name=iPhone 8"
     - name: Test cleansec
       run: xcodebuild test -workspace cleansec.xcworkspace -scheme cleansec -enableCodeCoverage=YES -destination "platform=macos"
       working-directory: cleansec
