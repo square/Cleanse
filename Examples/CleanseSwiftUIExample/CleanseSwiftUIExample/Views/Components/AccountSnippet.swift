@@ -41,6 +41,6 @@ struct AccountSnippet: View {
 
 struct HomeHeader_Previews: PreviewProvider {
     static var previews: some View {
-        AccountSnippet(user: User(firstName: "Abdul", lastName: "Chathil",photo: "me",  email: "chathil98@gmail.com"))
+        AccountSnippet(user: User(firstName: "John", lastName: "Doe",photo: "me",  email: "abcd@ef.com"))
     }
 }
