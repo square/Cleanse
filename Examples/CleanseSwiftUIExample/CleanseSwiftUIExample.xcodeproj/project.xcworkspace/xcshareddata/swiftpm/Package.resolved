@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "Cleanse",
+        "repositoryURL": "https://github.com/square/Cleanse.git",
+        "state": {
+          "branch": null,
+          "revision": "c854787f83d99527587b5387f04ccd0030e6133a",
+          "version": "4.2.6"
+        }
+      }
+    ]
+  },
+  "version": 1
+}
