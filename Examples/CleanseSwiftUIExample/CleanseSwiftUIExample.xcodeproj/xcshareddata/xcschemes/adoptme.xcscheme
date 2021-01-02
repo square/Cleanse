@@ -28,6 +28,26 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "C9140DE025A0B38B00FDF320"
+               BuildableName = "CleanseSwiftUIExampleTests.xctest"
+               BlueprintName = "CleanseSwiftUIExampleTests"
+               ReferencedContainer = "container:CleanseSwiftUIExample.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "C9140DF025A0B39600FDF320"
+               BuildableName = "CleanseSwiftUIExampleUITests.xctest"
+               BlueprintName = "CleanseSwiftUIExampleUITests"
+               ReferencedContainer = "container:CleanseSwiftUIExample.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

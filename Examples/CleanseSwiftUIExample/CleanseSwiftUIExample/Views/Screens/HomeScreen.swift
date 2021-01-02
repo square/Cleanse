@@ -44,7 +44,7 @@ struct HomeScreen: View {
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct HomeScreen_Previews: PreviewProvider {
     static var previews: some View {
         HomeScreen(currentUser: User(firstName: "John", lastName: "Doe", photo: "me", email: "abdc@fg.com")).environmentObject(UserData())
     }

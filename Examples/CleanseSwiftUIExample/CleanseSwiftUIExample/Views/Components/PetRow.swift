@@ -35,8 +35,6 @@ struct PetRow: View {
             Spacer()
         }.clipShape(RoundedRectangle(cornerRadius: 16.0))
     }
-    static let gradientStart = Color(red: 0.0 / 255, green: 150.0 / 255, blue: 136.0 / 255)
-    static let gradientEnd = Color(red: 224.0 / 255, green: 242.0 / 255, blue: 241.0 / 255)
 }
 
 struct PetRow_Previews: PreviewProvider {
