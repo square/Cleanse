@@ -1,4 +1,4 @@
-Cleanse - Swift Dependency Injection
+[Deprecated] Cleanse - Swift Dependency Injection
 ====================================
 
 .. image:: Documentation/cleanse_logo_small.png
@@ -18,6 +18,48 @@ in mind. It takes inspiration from both `Dagger`_ and `Guice`_.
 .. _dependency injection: https://en.wikipedia.org/wiki/Dependency_injection
 .. _Guice: https://github.com/google/guice
 .. _Dagger: http://google.github.io/dagger/
+
+Deprecation Notice:
+-------------------
+
+Dear Cleanse Community,
+
+**We are announcing that the Cleanse repository will be officially deprecated as of June 13th, 2024.** Over the years, Cleanse has aimed to provide a robust solution for Swift dependency injection, and we are incredibly grateful for the support and contributions from our community.
+
+This decision is based on Square's decision to use a different dependency injection framework. We believe this step will allow us to focus our efforts on other projects and innovations that better serve the needs of our users and the broader open-source ecosystem.
+
+What This Means for You
+````````````
+- **No Further Updates**: There will be no further updates, bug fixes, or new features added to Cleanse.
+- **Repository Status**: The repository will remain available in a read-only state for historical reference and for those who may still find value in the existing codebase.
+- **Support**: We will no longer provide active support or respond to issues and pull requests.
+
+Recommended Alternatives
+````````````
+We encourage you to fork this repo, or explore the following alternatives that may better meet your needs:
+
+- `Needle`_
+- `Swinject`_
+- `Weaver`_
+- `Factory`_
+- `PointFree's Dependencies`_
+
+.. _Needle: https://github.com/uber/needle
+.. _Swinject: https://github.com/Swinject/Swinject
+.. _Weaver: https://github.com/scribd/Weaver
+.. _Factory: https://github.com/hmlongco/Factory
+.. _PointFree's Dependencies: https://github.com/pointfreeco/swift-dependencies
+
+Contact us
+``````````
+If you have interest in maintaining this repo, or have any other inquiries, please reach out to us at opensource+external@squareup.com.
+
+Thank You
+````````````
+We extend our heartfelt thanks to everyone who has contributed to Cleanse, whether through code, documentation, or community support. Your efforts have been invaluable and deeply appreciated. Thank you for being a part of the Cleanse journey.
+
+Sincerely,
+The Cleanse Team at Square
 
 Getting Started
 ---------------
